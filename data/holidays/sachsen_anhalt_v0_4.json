@@ -1,0 +1,732 @@
+{
+  "datasetName": "schulferienklar_sachsen_anhalt_v0_4",
+  "version": "0.4",
+  "createdAt": "2026-05-24",
+  "dataPolicy": "Official Bundesland-level Schulferien only. School-specific dates are excluded.",
+  "notes": [
+    "endDate is inclusive for app display.",
+    "When generating ICS, convert endDate to DTEND as the following day.",
+    "The official Sachsen-Anhalt Ferienregelung PDF lists first and last holiday days.",
+    "Bewegliche Ferientage are excluded because they are listed only as counts.",
+    "Single state-level Ferientag entries are included as state_school_free_day."
+  ],
+  "sources": [
+    {
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "secondarySourceUrl": "https://mb.sachsen-anhalt.de/service/ferientermine",
+      "legalTitle": "Ferienregelung für die Schuljahre 2024/2025 bis 2029/2030",
+      "formats": [
+        "PDF",
+        "HTML overview"
+      ],
+      "trustLevel": "official",
+      "availableSchoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "lastCheckedAt": "2026-05-24",
+      "notes": "Official Sachsen-Anhalt Ferienregelung PDF lists first and last holiday days for school years 2024/25 through 2029/30. Bewegliche Ferientage are listed only as counts and are excluded. Single state-level Ferientag entries are included as state_school_free_day."
+    }
+  ],
+  "holidays": [
+    {
+      "id": "st-autumn-2025-26",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2025-10-13",
+      "endDate": "2025-10-25",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-christmas-2025-26",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2025-12-22",
+      "endDate": "2026-01-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-winter-2025-26",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Winterferien",
+        "en": "Winter holidays"
+      },
+      "startDate": "2026-01-31",
+      "endDate": "2026-02-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-easter-2025-26",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2026-03-30",
+      "endDate": "2026-04-04",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-pentecost-2025-26",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2026-05-26",
+      "endDate": "2026-05-29",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-summer-2025-26",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2026-07-04",
+      "endDate": "2026-08-14",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-autumn-2026-27",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2026-10-19",
+      "endDate": "2026-10-30",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-christmas-2026-27",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2026-12-21",
+      "endDate": "2027-01-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-winter-2026-27",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Winterferien",
+        "en": "Winter holidays"
+      },
+      "startDate": "2027-02-01",
+      "endDate": "2027-02-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-easter-2026-27",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2027-03-22",
+      "endDate": "2027-03-27",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-pentecost-2026-27",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2027-05-15",
+      "endDate": "2027-05-22",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-summer-2026-27",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2027-07-10",
+      "endDate": "2027-08-20",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-autumn-2027-28",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2027-10-18",
+      "endDate": "2027-10-23",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-christmas-2027-28",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2027-12-20",
+      "endDate": "2027-12-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-winter-2027-28",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Winterferien",
+        "en": "Winter holidays"
+      },
+      "startDate": "2028-02-07",
+      "endDate": "2028-02-12",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-easter-2027-28",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2028-04-10",
+      "endDate": "2028-04-22",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-pentecost-2027-28",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2028-06-03",
+      "endDate": "2028-06-10",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-summer-2027-28",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2028-07-22",
+      "endDate": "2028-09-01",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-school-free-2028-10-02",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2028/29",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "Ferientag",
+        "en": "School-free day"
+      },
+      "startDate": "2028-10-02",
+      "endDate": "2028-10-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official state-level Ferientag listed in the Ferienregelung."
+    },
+    {
+      "id": "st-autumn-2028-29",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2028-10-30",
+      "endDate": "2028-11-03",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-christmas-2028-29",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2028-12-21",
+      "endDate": "2029-01-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-winter-2028-29",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Winterferien",
+        "en": "Winter holidays"
+      },
+      "startDate": "2029-02-05",
+      "endDate": "2029-02-10",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-easter-2028-29",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2029-03-26",
+      "endDate": "2029-03-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-school-free-2029-04-30",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2028/29",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "Ferientag",
+        "en": "School-free day"
+      },
+      "startDate": "2029-04-30",
+      "endDate": "2029-04-30",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official state-level Ferientag listed in the Ferienregelung."
+    },
+    {
+      "id": "st-pentecost-2028-29",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2029-05-11",
+      "endDate": "2029-05-25",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-summer-2028-29",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2029-07-21",
+      "endDate": "2029-08-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-autumn-2029-30",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2029-10-29",
+      "endDate": "2029-11-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-christmas-2029-30",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2029-12-21",
+      "endDate": "2030-01-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-winter-2029-30",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Winterferien",
+        "en": "Winter holidays"
+      },
+      "startDate": "2030-02-04",
+      "endDate": "2030-02-08",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-easter-2029-30",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2030-04-08",
+      "endDate": "2030-04-20",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-school-free-2030-05-31",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2029/30",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "Ferientag",
+        "en": "School-free day"
+      },
+      "startDate": "2030-05-31",
+      "endDate": "2030-05-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official state-level Ferientag listed in the Ferienregelung."
+    },
+    {
+      "id": "st-pentecost-2029-30",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2030-06-03",
+      "endDate": "2030-06-08",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "st-summer-2029-30",
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2030-07-13",
+      "endDate": "2030-08-23",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Bildung des Landes Sachsen-Anhalt",
+      "sourceUrl": "https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    }
+  ]
+}
