@@ -478,8 +478,40 @@
       "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
       "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
       "lastCheckedAt": "2026-05-24",
-      "status": "partial_summer_only",
-      "includeInDefaultCalendar": true
+      "status": "partial",
+      "includeInDefaultCalendar": true,
+      "notes": "Legacy status partial_summer_only normalized to partial."
+    }
+  ],
+  "datasetName": "schulferienklar_nrw_v0_3",
+  "createdAt": "2026-05-24",
+  "dataPolicy": "Official Bundesland-level Schulferien only. School-specific dates are excluded.",
+  "notes": [
+    "Legacy v0.3 dataset normalized for validation compatibility.",
+    "endDate is inclusive for app display.",
+    "When generating ICS, convert endDate to DTEND as the following day."
+  ],
+  "sources": [
+    {
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "secondarySourceUrl": "https://www.schulministerium.nrw/ferien",
+      "legalTitle": "Ferienordnung für Nordrhein-Westfalen für die Schuljahre bis 2029/30",
+      "formats": [
+        "HTML"
+      ],
+      "trustLevel": "official",
+      "availableSchoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "lastCheckedAt": "2026-05-24",
+      "notes": "Legacy NRW v0.3 source metadata added during validation tooling work."
     }
   ]
 }
