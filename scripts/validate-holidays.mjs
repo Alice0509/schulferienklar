@@ -184,6 +184,7 @@ if (!fs.existsSync(holidaysDir)) {
 const jsonFiles = fs
   .readdirSync(holidaysDir)
   .filter((file) => file.endsWith(".json"))
+  .filter((file) => file !== "index.json")
   .sort();
 
 console.log(`Checking ${jsonFiles.length} JSON files in data/holidays...\n`);
