@@ -1,0 +1,31 @@
+name: Validate holiday data
+
+on:
+  pull_request:
+    paths:
+      - "data/holidays/**"
+      - "scripts/validate-holidays.mjs"
+      - ".github/workflows/validate-holiday-data.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "data/holidays/**"
+      - "scripts/validate-holidays.mjs"
+      - ".github/workflows/validate-holiday-data.yml"
+
+jobs:
+  validate-holiday-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Validate holiday data
+        run: node scripts/validate-holidays.mjs
