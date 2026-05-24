@@ -1,0 +1,370 @@
+{
+  "generatedAt": "2026-05-24",
+  "totalBundeslaender": 16,
+  "totalEvents": 486,
+  "datasets": [
+    {
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "version": "0.4",
+      "jsonFile": "baden_wuerttemberg_v0_4.json",
+      "csvFile": "baden_wuerttemberg_v0_4.csv",
+      "eventCount": 30,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30",
+        "2030/31"
+      ],
+      "dateRange": {
+        "startDate": "2025-07-31",
+        "endDate": "2030-09-07"
+      },
+      "statuses": [
+        "partial",
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "version": "0.4",
+      "jsonFile": "bayern_v0_4.json",
+      "csvFile": "bayern_v0_4.csv",
+      "eventCount": 31,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30",
+        "2030/31"
+      ],
+      "dateRange": {
+        "startDate": "2025-08-01",
+        "endDate": "2030-09-09"
+      },
+      "statuses": [
+        "partial",
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "BE",
+      "bundeslandName": "Berlin",
+      "version": "0.4",
+      "jsonFile": "berlin_v0_4.json",
+      "csvFile": "berlin_v0_4.csv",
+      "eventCount": 37,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "dateRange": {
+        "startDate": "2025-10-20",
+        "endDate": "2030-08-17"
+      },
+      "statuses": [
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "BB",
+      "bundeslandName": "Brandenburg",
+      "version": "0.4",
+      "jsonFile": "brandenburg_v0_4.json",
+      "csvFile": "brandenburg_v0_4.csv",
+      "eventCount": 28,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "dateRange": {
+        "startDate": "2025-10-20",
+        "endDate": "2030-08-17"
+      },
+      "statuses": [
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "version": "0.4",
+      "jsonFile": "bremen_v0_4.json",
+      "csvFile": "bremen_v0_4.csv",
+      "eventCount": 39,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30",
+        "2030/31"
+      ],
+      "dateRange": {
+        "startDate": "2025-07-03",
+        "endDate": "2030-08-21"
+      },
+      "statuses": [
+        "partial",
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "version": "0.4",
+      "jsonFile": "hamburg_v0_4.json",
+      "csvFile": "hamburg_v0_4.csv",
+      "eventCount": 32,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "dateRange": {
+        "startDate": "2025-10-20",
+        "endDate": "2030-08-14"
+      },
+      "statuses": [
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "HE",
+      "bundeslandName": "Hessen",
+      "version": "0.4",
+      "jsonFile": "hessen_v0_4.json",
+      "csvFile": "hessen_v0_4.csv",
+      "eventCount": 20,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "dateRange": {
+        "startDate": "2025-10-06",
+        "endDate": "2030-08-30"
+      },
+      "statuses": [
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "MV",
+      "bundeslandName": "Mecklenburg-Vorpommern",
+      "version": "0.4",
+      "jsonFile": "mecklenburg_vorpommern_v0_4.json",
+      "csvFile": "mecklenburg_vorpommern_v0_4.csv",
+      "eventCount": 44,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "dateRange": {
+        "startDate": "2025-10-02",
+        "endDate": "2030-08-10"
+      },
+      "statuses": [
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "NI",
+      "bundeslandName": "Niedersachsen",
+      "version": "0.4",
+      "jsonFile": "niedersachsen_v0_4.json",
+      "csvFile": "niedersachsen_v0_4.csv",
+      "eventCount": 39,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30",
+        "2030/31"
+      ],
+      "dateRange": {
+        "startDate": "2025-07-03",
+        "endDate": "2030-08-21"
+      },
+      "statuses": [
+        "partial",
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "version": "0.3",
+      "jsonFile": "nrw_v0_3.json",
+      "csvFile": "nrw_v0_3.csv",
+      "eventCount": 24,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30",
+        "2030/31"
+      ],
+      "dateRange": {
+        "startDate": "2025-07-14",
+        "endDate": "2030-08-06"
+      },
+      "statuses": [
+        "partial",
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "RP",
+      "bundeslandName": "Rheinland-Pfalz",
+      "version": "0.4",
+      "jsonFile": "rheinland_pfalz_v0_4.json",
+      "csvFile": "rheinland_pfalz_v0_4.csv",
+      "eventCount": 20,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "dateRange": {
+        "startDate": "2025-07-07",
+        "endDate": "2030-04-30"
+      },
+      "statuses": [
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "SL",
+      "bundeslandName": "Saarland",
+      "version": "0.4",
+      "jsonFile": "saarland_v0_4.json",
+      "csvFile": "saarland_v0_4.csv",
+      "eventCount": 26,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "dateRange": {
+        "startDate": "2025-10-13",
+        "endDate": "2030-08-30"
+      },
+      "statuses": [
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "SN",
+      "bundeslandName": "Sachsen",
+      "version": "0.4",
+      "jsonFile": "sachsen_v0_4.json",
+      "csvFile": "sachsen_v0_4.csv",
+      "eventCount": 29,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "dateRange": {
+        "startDate": "2026-05-15",
+        "endDate": "2030-08-23"
+      },
+      "statuses": [
+        "partial",
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "version": "0.4",
+      "jsonFile": "sachsen_anhalt_v0_4.json",
+      "csvFile": "sachsen_anhalt_v0_4.csv",
+      "eventCount": 33,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "dateRange": {
+        "startDate": "2025-10-13",
+        "endDate": "2030-08-23"
+      },
+      "statuses": [
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "version": "0.4",
+      "jsonFile": "schleswig_holstein_v0_4.json",
+      "csvFile": "schleswig_holstein_v0_4.csv",
+      "eventCount": 24,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "dateRange": {
+        "startDate": "2025-10-20",
+        "endDate": "2030-05-31"
+      },
+      "statuses": [
+        "verified"
+      ]
+    },
+    {
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "version": "0.4",
+      "jsonFile": "thueringen_v0_4.json",
+      "csvFile": "thueringen_v0_4.csv",
+      "eventCount": 30,
+      "schoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "dateRange": {
+        "startDate": "2025-10-06",
+        "endDate": "2030-08-23"
+      },
+      "statuses": [
+        "verified"
+      ]
+    }
+  ]
+}
