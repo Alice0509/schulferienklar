@@ -1,0 +1,694 @@
+{
+  "datasetName": "schulferienklar_bayern_v0_4",
+  "version": "0.4",
+  "createdAt": "2026-05-24",
+  "dataPolicy": "Official Bundesland-level Schulferien only. School-specific dates are excluded.",
+  "notes": [
+    "endDate is inclusive for app display.",
+    "When generating ICS, convert endDate to DTEND as the following day.",
+    "Bayern 'unterrichtsfreie Tage um Allerheiligen' are included as state_school_free_day because they are published with concrete dates in the official state holiday regulation.",
+    "School-specific deviations for Berufsschulen, Heimschulen, schulfreie Samstage and other school-level dates are excluded from the default dataset."
+  ],
+  "sources": [
+    {
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "secondarySourceUrl": "https://www.km.bayern.de/termine/ferien-und-feiertage",
+      "legalTitle": "Ferienordnung und schulfreie Samstage für die Schuljahre 2024/2025 bis 2029/2030",
+      "formats": [
+        "HTML",
+        "PDF",
+        "RTF",
+        "ZIP"
+      ],
+      "trustLevel": "official",
+      "availableSchoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "longRangePartial": [
+        "Sommerferien 2030"
+      ],
+      "lastCheckedAt": "2026-05-24",
+      "notes": "Bayern official Ferienordnung includes concrete dates for 'unterrichtsfreie Tage um Allerheiligen'; these are included as state_school_free_day."
+    }
+  ],
+  "holidays": [
+    {
+      "id": "by-summer-2025-26",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2025-08-01",
+      "endDate": "2025-09-15",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-all-saints-2025-26",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2025/26",
+      "category": "state_school_free_day",
+      "type": "all_saints",
+      "name": {
+        "de": "unterrichtsfreie Tage um Allerheiligen",
+        "en": "School-free days around All Saints' Day"
+      },
+      "startDate": "2025-11-03",
+      "endDate": "2025-11-07",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Included because Bayern publishes these as official state-level dates."
+    },
+    {
+      "id": "by-christmas-2025-26",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2025-12-22",
+      "endDate": "2026-01-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-spring-2025-26",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "spring",
+      "name": {
+        "de": "Frühjahrsferien",
+        "en": "Spring holidays"
+      },
+      "startDate": "2026-02-16",
+      "endDate": "2026-02-20",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-easter-2025-26",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2026-03-30",
+      "endDate": "2026-04-10",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-pentecost-2025-26",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2026-05-26",
+      "endDate": "2026-06-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-summer-2026-27",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2026-08-03",
+      "endDate": "2026-09-14",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-all-saints-2026-27",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2026/27",
+      "category": "state_school_free_day",
+      "type": "all_saints",
+      "name": {
+        "de": "unterrichtsfreie Tage um Allerheiligen",
+        "en": "School-free days around All Saints' Day"
+      },
+      "startDate": "2026-11-02",
+      "endDate": "2026-11-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Included because Bayern publishes these as official state-level dates."
+    },
+    {
+      "id": "by-christmas-2026-27",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2026-12-24",
+      "endDate": "2027-01-08",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-spring-2026-27",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "spring",
+      "name": {
+        "de": "Frühjahrsferien",
+        "en": "Spring holidays"
+      },
+      "startDate": "2027-02-08",
+      "endDate": "2027-02-12",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-easter-2026-27",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2027-03-22",
+      "endDate": "2027-04-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-pentecost-2026-27",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2027-05-18",
+      "endDate": "2027-05-28",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-summer-2027-28",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2027-08-02",
+      "endDate": "2027-09-13",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-all-saints-2027-28",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2027/28",
+      "category": "state_school_free_day",
+      "type": "all_saints",
+      "name": {
+        "de": "unterrichtsfreie Tage um Allerheiligen",
+        "en": "School-free days around All Saints' Day"
+      },
+      "startDate": "2027-11-02",
+      "endDate": "2027-11-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Included because Bayern publishes these as official state-level dates."
+    },
+    {
+      "id": "by-christmas-2027-28",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2027-12-24",
+      "endDate": "2028-01-07",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-spring-2027-28",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "spring",
+      "name": {
+        "de": "Frühjahrsferien",
+        "en": "Spring holidays"
+      },
+      "startDate": "2028-02-28",
+      "endDate": "2028-03-03",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-easter-2027-28",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2028-04-10",
+      "endDate": "2028-04-21",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-pentecost-2027-28",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2028-06-06",
+      "endDate": "2028-06-16",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-summer-2028-29",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2028-07-31",
+      "endDate": "2028-09-11",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-all-saints-2028-29",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2028/29",
+      "category": "state_school_free_day",
+      "type": "all_saints",
+      "name": {
+        "de": "unterrichtsfreie Tage um Allerheiligen",
+        "en": "School-free days around All Saints' Day"
+      },
+      "startDate": "2028-10-30",
+      "endDate": "2028-11-03",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Included because Bayern publishes these as official state-level dates."
+    },
+    {
+      "id": "by-christmas-2028-29",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2028-12-23",
+      "endDate": "2029-01-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-spring-2028-29",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "spring",
+      "name": {
+        "de": "Frühjahrsferien",
+        "en": "Spring holidays"
+      },
+      "startDate": "2029-02-12",
+      "endDate": "2029-02-16",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-easter-2028-29",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2029-03-26",
+      "endDate": "2029-04-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-pentecost-2028-29",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2029-05-22",
+      "endDate": "2029-06-01",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-summer-2029-30",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2029-07-30",
+      "endDate": "2029-09-10",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-all-saints-2029-30",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2029/30",
+      "category": "state_school_free_day",
+      "type": "all_saints",
+      "name": {
+        "de": "unterrichtsfreie Tage um Allerheiligen",
+        "en": "School-free days around All Saints' Day"
+      },
+      "startDate": "2029-10-29",
+      "endDate": "2029-11-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Included because Bayern publishes these as official state-level dates."
+    },
+    {
+      "id": "by-christmas-2029-30",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2029-12-24",
+      "endDate": "2030-01-04",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-spring-2029-30",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "spring",
+      "name": {
+        "de": "Frühjahrsferien",
+        "en": "Spring holidays"
+      },
+      "startDate": "2030-03-04",
+      "endDate": "2030-03-08",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-easter-2029-30",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2030-04-15",
+      "endDate": "2030-04-26",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-pentecost-2029-30",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2030-06-11",
+      "endDate": "2030-06-21",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "by-summer-2030-31",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2030/31",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2030-07-29",
+      "endDate": "2030-09-09",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht",
+      "sourceUrl": "https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true",
+      "lastCheckedAt": "2026-05-24",
+      "status": "partial",
+      "includeInDefaultCalendar": true,
+      "notes": "Sommerferien 2030 only; full 2030/31 school year is not included yet."
+    }
+  ]
+}
