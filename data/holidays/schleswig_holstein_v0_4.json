@@ -1,0 +1,548 @@
+{
+  "datasetName": "schulferienklar_schleswig_holstein_v0_4",
+  "version": "0.4",
+  "createdAt": "2026-05-24",
+  "dataPolicy": "Official Bundesland-level Schulferien only. School-specific and regional exception dates are excluded.",
+  "notes": [
+    "endDate is inclusive for app display.",
+    "When generating ICS, convert endDate to DTEND as the following day.",
+    "The official Schleswig-Holstein page provides the Ferienverordnung 2024/25 bis 2030/31.",
+    "The official table states Ferien erster Ferientag / letzter Ferientag.",
+    "Bewegliche Ferientage are excluded because §2 states they are set by Schulkonferenz after coordination.",
+    "Fallback dates for bewegliche Ferientage are also excluded because they apply only if no agreement is reached.",
+    "Island/Hallig exceptions for Sylt, Föhr, Amrum, Helgoland and Halligen are excluded from the default state-level dataset."
+  ],
+  "sources": [
+    {
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "secondarySourceUrl": "https://www.schleswig-holstein.de/DE/fachinhalte/S/schulrecht/Downloads/Verordnungen/Downloads/Ferientermine_25_26.pdf?__blob=publicationFile&v=2",
+      "legalTitle": "Ferienverordnung 2024/25 bis 2030/31",
+      "formats": [
+        "HTML",
+        "PDF"
+      ],
+      "trustLevel": "official",
+      "availableSchoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "longRangePartial": [
+        "2030/31 available in official source but not included in v0.4 scope"
+      ],
+      "lastCheckedAt": "2026-05-24",
+      "notes": "Official Schleswig-Holstein page lists Ferienverordnung 2024/25 bis 2030/31. For 2025/26, the official 2025/26 PDF currently lists Herbst, Weihnachten, Frühjahr/Ostern, Himmelfahrt and bewegliche Ferientage; Sommer is not listed in that school-year PDF. Bewegliche Ferientage are excluded because §2 states they are set by Schulkonferenz, with fallback dates only if no agreement is reached. Island/Hallig exceptions are excluded from the default state-level dataset."
+    }
+  ],
+  "holidays": [
+    {
+      "id": "sh-autumn-2025-26",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2025-10-20",
+      "endDate": "2025-10-30",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-christmas-2025-26",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2025-12-19",
+      "endDate": "2026-01-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-easter-2025-26",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Frühjahr/Ostern",
+        "en": "Spring/Easter holidays"
+      },
+      "startDate": "2026-03-26",
+      "endDate": "2026-04-10",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-ascension-2026-05-15",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2025/26",
+      "category": "state_school_free_day",
+      "type": "ascension",
+      "name": {
+        "de": "Himmelfahrt",
+        "en": "Ascension holiday"
+      },
+      "startDate": "2026-05-15",
+      "endDate": "2026-05-15",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official state-level Himmelfahrt holiday listed in the official 2025/26 PDF."
+    },
+    {
+      "id": "sh-summer-2026-27",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2026-07-04",
+      "endDate": "2026-08-15",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-autumn-2026-27",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-24",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-christmas-2026-27",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2026-12-21",
+      "endDate": "2027-01-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-easter-2026-27",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Frühjahr/Ostern",
+        "en": "Spring/Easter holidays"
+      },
+      "startDate": "2027-03-30",
+      "endDate": "2027-04-10",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-ascension-2027-05-07",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2026/27",
+      "category": "state_school_free_day",
+      "type": "ascension",
+      "name": {
+        "de": "Himmelfahrt",
+        "en": "Ascension holiday"
+      },
+      "startDate": "2027-05-07",
+      "endDate": "2027-05-07",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official state-level Himmelfahrt holiday listed in the official table."
+    },
+    {
+      "id": "sh-summer-2027-28",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2027-07-03",
+      "endDate": "2027-08-14",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-autumn-2027-28",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2027-10-11",
+      "endDate": "2027-10-23",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-christmas-2027-28",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2027-12-23",
+      "endDate": "2028-01-08",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-easter-2027-28",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Frühjahr/Ostern",
+        "en": "Spring/Easter holidays"
+      },
+      "startDate": "2028-04-03",
+      "endDate": "2028-04-15",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-ascension-2028-05-26",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2027/28",
+      "category": "state_school_free_day",
+      "type": "ascension",
+      "name": {
+        "de": "Himmelfahrt",
+        "en": "Ascension holiday"
+      },
+      "startDate": "2028-05-26",
+      "endDate": "2028-05-26",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official state-level Himmelfahrt holiday listed in the official table."
+    },
+    {
+      "id": "sh-summer-2028-29",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2028-06-24",
+      "endDate": "2028-08-04",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-autumn-2028-29",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2028-10-16",
+      "endDate": "2028-10-30",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-christmas-2028-29",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2028-12-21",
+      "endDate": "2029-01-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-easter-2028-29",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Frühjahr/Ostern",
+        "en": "Spring/Easter holidays"
+      },
+      "startDate": "2029-03-23",
+      "endDate": "2029-04-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-ascension-2029-05-11",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2028/29",
+      "category": "state_school_free_day",
+      "type": "ascension",
+      "name": {
+        "de": "Himmelfahrt",
+        "en": "Ascension holiday"
+      },
+      "startDate": "2029-05-11",
+      "endDate": "2029-05-11",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official state-level Himmelfahrt holiday listed in the official table."
+    },
+    {
+      "id": "sh-summer-2029-30",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2029-06-23",
+      "endDate": "2029-08-03",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-autumn-2029-30",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2029-10-08",
+      "endDate": "2029-10-19",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-christmas-2029-30",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2029-12-21",
+      "endDate": "2030-01-08",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-easter-2029-30",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Frühjahr/Ostern",
+        "en": "Spring/Easter holidays"
+      },
+      "startDate": "2030-04-08",
+      "endDate": "2030-04-20",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "sh-ascension-2030-05-31",
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "schoolYear": "2029/30",
+      "category": "state_school_free_day",
+      "type": "ascension",
+      "name": {
+        "de": "Himmelfahrt",
+        "en": "Ascension holiday"
+      },
+      "startDate": "2030-05-31",
+      "endDate": "2030-05-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein",
+      "sourceUrl": "https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official state-level Himmelfahrt holiday listed in the official table."
+    }
+  ]
+}
