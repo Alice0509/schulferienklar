@@ -1,0 +1,56 @@
+[
+  {
+    "bundeslandCode": "DE",
+    "bundeslandName": "Germany",
+    "sourceName": "Kultusministerkonferenz",
+    "sourceUrl": "https://www.kmk.org/service/ferienregelung.html",
+    "formats": [
+      "HTML",
+      "PDF",
+      "ICS"
+    ],
+    "trustLevel": "official",
+    "lastCheckedAt": "2026-05-24",
+    "notes": "Federal overview and KMK calendar resources."
+  },
+  {
+    "bundeslandCode": "NW",
+    "bundeslandName": "Nordrhein-Westfalen",
+    "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+    "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+    "formats": [
+      "HTML",
+      "Open Data",
+      "ICS"
+    ],
+    "trustLevel": "official",
+    "lastCheckedAt": "2026-05-24",
+    "notes": "Official NRW school holiday regulation through 2029/30."
+  },
+  {
+    "bundeslandCode": "BY",
+    "bundeslandName": "Bayern",
+    "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus",
+    "sourceUrl": "https://www.km.bayern.de/termine/ferien-und-feiertage",
+    "formats": [
+      "HTML",
+      "legal regulation"
+    ],
+    "trustLevel": "official",
+    "lastCheckedAt": "2026-05-24",
+    "notes": "Official Bayern holiday overview."
+  },
+  {
+    "bundeslandCode": "BE",
+    "bundeslandName": "Berlin",
+    "sourceName": "Senatsverwaltung für Bildung, Jugend und Familie",
+    "sourceUrl": "https://www.berlin.de/sen/bjf/service/kalender/ferien/termine/",
+    "formats": [
+      "HTML",
+      "PDF"
+    ],
+    "trustLevel": "official",
+    "lastCheckedAt": "2026-05-24",
+    "notes": "Official Berlin holiday overview and Ferienordnung PDF."
+  }
+]

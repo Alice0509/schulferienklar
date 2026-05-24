@@ -1,0 +1,5 @@
+bundeslandCode,bundeslandName,sourceName,sourceUrl,formats,trustLevel,lastCheckedAt,notes
+DE,Germany,Kultusministerkonferenz,https://www.kmk.org/service/ferienregelung.html,"['HTML', 'PDF', 'ICS']",official,2026-05-24,Federal overview and KMK calendar resources.
+NW,Nordrhein-Westfalen,Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen,https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930,"['HTML', 'Open Data', 'ICS']",official,2026-05-24,Official NRW school holiday regulation through 2029/30.
+BY,Bayern,Bayerisches Staatsministerium für Unterricht und Kultus,https://www.km.bayern.de/termine/ferien-und-feiertage,"['HTML', 'legal regulation']",official,2026-05-24,Official Bayern holiday overview.
+BE,Berlin,"Senatsverwaltung für Bildung, Jugend und Familie",https://www.berlin.de/sen/bjf/service/kalender/ferien/termine/,"['HTML', 'PDF']",official,2026-05-24,Official Berlin holiday overview and Ferienordnung PDF.

@@ -1,0 +1,30 @@
+{
+  "version": "0.4",
+  "categories": [
+    {
+      "category": "school_holiday",
+      "includeInDefaultCalendar": true,
+      "description": "Official Bundesland-level school holiday period."
+    },
+    {
+      "category": "state_school_free_day",
+      "includeInDefaultCalendar": true,
+      "description": "Official state-level school-free days with concrete dates when published in the state holiday regulation."
+    },
+    {
+      "category": "school_specific_free_day",
+      "includeInDefaultCalendar": false,
+      "description": "Dates decided by individual schools, school conferences, Schulträger, or local authorities."
+    },
+    {
+      "category": "public_holiday",
+      "includeInDefaultCalendar": false,
+      "description": "Legal public holidays. Optional future layer, not core Schulferien dataset."
+    },
+    {
+      "category": "user_custom_event",
+      "includeInDefaultCalendar": false,
+      "description": "User-entered personal or school-specific event."
+    }
+  ]
+}

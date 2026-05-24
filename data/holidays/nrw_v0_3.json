@@ -1,0 +1,485 @@
+{
+  "version": "0.3",
+  "holidays": [
+    {
+      "id": "nw-summer-2025-26",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2025-07-14",
+      "endDate": "2025-08-26",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-autumn-2025-26",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2025-10-13",
+      "endDate": "2025-10-25",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-christmas-2025-26",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2025-12-22",
+      "endDate": "2026-01-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-easter-2025-26",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2026-03-30",
+      "endDate": "2026-04-11",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-pentecost-2025-26",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingsten",
+        "en": "Pentecost holiday"
+      },
+      "startDate": "2026-05-26",
+      "endDate": "2026-05-26",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-summer-2026-27",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2026-07-20",
+      "endDate": "2026-09-01",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-autumn-2026-27",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2026-10-17",
+      "endDate": "2026-10-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-christmas-2026-27",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2026-12-23",
+      "endDate": "2027-01-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-easter-2026-27",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2027-03-22",
+      "endDate": "2027-04-03",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-pentecost-2026-27",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingsten",
+        "en": "Pentecost holiday"
+      },
+      "startDate": "2027-05-18",
+      "endDate": "2027-05-18",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-summer-2027-28",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2027-07-19",
+      "endDate": "2027-08-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-autumn-2027-28",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2027-10-23",
+      "endDate": "2027-11-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-christmas-2027-28",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2027-12-24",
+      "endDate": "2028-01-08",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-easter-2027-28",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2028-04-10",
+      "endDate": "2028-04-22",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-summer-2028-29",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2028-07-10",
+      "endDate": "2028-08-22",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-autumn-2028-29",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2028-10-23",
+      "endDate": "2028-11-04",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-christmas-2028-29",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2028-12-21",
+      "endDate": "2029-01-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-easter-2028-29",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2029-03-26",
+      "endDate": "2029-04-07",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-pentecost-2028-29",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingsten",
+        "en": "Pentecost holiday"
+      },
+      "startDate": "2029-05-22",
+      "endDate": "2029-05-22",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-summer-2029-30",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2029-07-02",
+      "endDate": "2029-08-14",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-autumn-2029-30",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2029-10-15",
+      "endDate": "2029-10-27",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-christmas-2029-30",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2029-12-20",
+      "endDate": "2030-01-04",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-easter-2029-30",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2030-04-15",
+      "endDate": "2030-04-27",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "nw-summer-2030-31",
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "schoolYear": "2030/31",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2030-06-24",
+      "endDate": "2030-08-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen",
+      "sourceUrl": "https://www.schulministerium.nrw/service/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930",
+      "lastCheckedAt": "2026-05-24",
+      "status": "partial_summer_only",
+      "includeInDefaultCalendar": true
+    }
+  ]
+}

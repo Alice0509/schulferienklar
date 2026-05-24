@@ -1,0 +1,15 @@
+{
+  "version": "0.4",
+  "snippets": {
+    "data_scope_short": {
+      "de": "Offizielle Schulferien der Bundesländer. Schul- und ortsspezifische Termine sind nicht enthalten.",
+      "en": "Official state-level school holidays only. School-specific and local dates are not included.",
+      "ko": "주별 공식 학교방학만 표시합니다. 학교별·지역별 일정은 포함되지 않습니다."
+    },
+    "data_scope_long": {
+      "de": "Schulferienklar zeigt die offiziellen Schulferien der Bundesländer. Bewegliche Ferientage, pädagogische Tage und schulspezifische Termine können je nach Schule abweichen und sind nicht enthalten.",
+      "en": "Schulferienklar shows the official school holidays of the German federal states. Movable holidays, pedagogical days and school-specific dates may vary by school and are not included.",
+      "ko": "Schulferienklar는 독일 주별 공식 학교방학만 표시합니다. 학교별 재량 휴무일, 교사 연수일, 개별 학교 일정은 학교마다 다를 수 있으며 기본 데이터에 포함되지 않습니다."
+    }
+  }
+}
