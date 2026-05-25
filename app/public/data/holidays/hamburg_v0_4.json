@@ -1,0 +1,711 @@
+{
+  "datasetName": "schulferienklar_hamburg_v0_4",
+  "version": "0.4",
+  "createdAt": "2026-05-24",
+  "dataPolicy": "Official Bundesland-level Schulferien only. School-specific dates are excluded.",
+  "notes": [
+    "endDate is inclusive for app display.",
+    "When generating ICS, convert endDate to DTEND as the following day.",
+    "The official Hamburg Ferienordnung PDF states that first and last holiday days are shown.",
+    "Halbjahrespause is listed in the official table and included as a one-day school holiday.",
+    "Brückentag entries are listed in the official table and included as state_school_free_day."
+  ],
+  "sources": [
+    {
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "secondarySourceUrl": "https://www.hamburg.de/politik-und-verwaltung/behoerden/bsfb/schulen/ferien-119492",
+      "legalTitle": "Ferienordnung für die Schuljahre 2024/25 bis 2029/30 in Hamburg",
+      "formats": [
+        "PDF",
+        "HTML overview"
+      ],
+      "trustLevel": "official",
+      "availableSchoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "lastCheckedAt": "2026-05-24",
+      "notes": "Official Hamburg Ferienordnung PDF lists first and last holiday days for school years 2024/25 through 2029/30. Halbjahrespause is listed in the official table and included. Brückentag entries are included as state_school_free_day."
+    }
+  ],
+  "holidays": [
+    {
+      "id": "hh-autumn-2025-26",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2025-10-20",
+      "endDate": "2025-10-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-christmas-2025-26",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2025-12-17",
+      "endDate": "2026-01-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-winter-2025-26",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Halbjahrespause",
+        "en": "Mid-year break"
+      },
+      "startDate": "2026-01-30",
+      "endDate": "2026-01-30",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official Hamburg Ferienordnung lists Halbjahrespause in parentheses."
+    },
+    {
+      "id": "hh-spring-2025-26",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "spring",
+      "name": {
+        "de": "Frühjahrsferien",
+        "en": "Spring holidays"
+      },
+      "startDate": "2026-03-02",
+      "endDate": "2026-03-13",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-pentecost-2025-26",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Himmelfahrt/Pfingsten",
+        "en": "Ascension/Pentecost holidays"
+      },
+      "startDate": "2026-05-11",
+      "endDate": "2026-05-15",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-summer-2025-26",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2026-07-09",
+      "endDate": "2026-08-19",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-autumn-2026-27",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2026-10-19",
+      "endDate": "2026-10-30",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-christmas-2026-27",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2026-12-21",
+      "endDate": "2027-01-01",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-winter-2026-27",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Halbjahrespause",
+        "en": "Mid-year break"
+      },
+      "startDate": "2027-01-29",
+      "endDate": "2027-01-29",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official Hamburg Ferienordnung lists Halbjahrespause in parentheses."
+    },
+    {
+      "id": "hh-spring-2026-27",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "spring",
+      "name": {
+        "de": "Frühjahrsferien",
+        "en": "Spring holidays"
+      },
+      "startDate": "2027-03-01",
+      "endDate": "2027-03-12",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-pentecost-2026-27",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Himmelfahrt/Pfingsten",
+        "en": "Ascension/Pentecost holidays"
+      },
+      "startDate": "2027-05-07",
+      "endDate": "2027-05-14",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-summer-2026-27",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2027-07-01",
+      "endDate": "2027-08-11",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-autumn-2027-28",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2027-10-11",
+      "endDate": "2027-10-22",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-christmas-2027-28",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2027-12-20",
+      "endDate": "2027-12-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-winter-2027-28",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Halbjahrespause",
+        "en": "Mid-year break"
+      },
+      "startDate": "2028-01-28",
+      "endDate": "2028-01-28",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official Hamburg Ferienordnung lists Halbjahrespause in parentheses."
+    },
+    {
+      "id": "hh-spring-2027-28",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "spring",
+      "name": {
+        "de": "Frühjahrsferien",
+        "en": "Spring holidays"
+      },
+      "startDate": "2028-03-06",
+      "endDate": "2028-03-17",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-pentecost-2027-28",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Himmelfahrt/Pfingsten",
+        "en": "Ascension/Pentecost holidays"
+      },
+      "startDate": "2028-05-22",
+      "endDate": "2028-05-26",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-summer-2027-28",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2028-07-03",
+      "endDate": "2028-08-11",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-autumn-2028-29",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2028-10-02",
+      "endDate": "2028-10-13",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-school-free-2028-10-30",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2028/29",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "Brückentag",
+        "en": "Bridge day"
+      },
+      "startDate": "2028-10-30",
+      "endDate": "2028-10-30",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official Hamburg Ferienordnung lists this Brückentag as a fixed date."
+    },
+    {
+      "id": "hh-christmas-2028-29",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2028-12-18",
+      "endDate": "2028-12-29",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-winter-2028-29",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Halbjahrespause",
+        "en": "Mid-year break"
+      },
+      "startDate": "2029-02-02",
+      "endDate": "2029-02-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official Hamburg Ferienordnung lists Halbjahrespause in parentheses."
+    },
+    {
+      "id": "hh-spring-2028-29",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "spring",
+      "name": {
+        "de": "Frühjahrsferien",
+        "en": "Spring holidays"
+      },
+      "startDate": "2029-03-05",
+      "endDate": "2029-03-16",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-pentecost-2028-29",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Himmelfahrt/Pfingsten",
+        "en": "Ascension/Pentecost holidays"
+      },
+      "startDate": "2029-05-11",
+      "endDate": "2029-05-18",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-summer-2028-29",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2029-07-02",
+      "endDate": "2029-08-10",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-autumn-2029-30",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2029-10-01",
+      "endDate": "2029-10-12",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-christmas-2029-30",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2029-12-21",
+      "endDate": "2030-01-04",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-winter-2029-30",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Halbjahrespause",
+        "en": "Mid-year break"
+      },
+      "startDate": "2030-02-01",
+      "endDate": "2030-02-01",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official Hamburg Ferienordnung lists Halbjahrespause in parentheses."
+    },
+    {
+      "id": "hh-spring-2029-30",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "spring",
+      "name": {
+        "de": "Frühjahrsferien",
+        "en": "Spring holidays"
+      },
+      "startDate": "2030-03-04",
+      "endDate": "2030-03-15",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-pentecost-2029-30",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Himmelfahrt/Pfingsten",
+        "en": "Ascension/Pentecost holidays"
+      },
+      "startDate": "2030-05-20",
+      "endDate": "2030-05-24",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hh-school-free-2030-05-31",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2029/30",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "Brückentag",
+        "en": "Bridge day"
+      },
+      "startDate": "2030-05-31",
+      "endDate": "2030-05-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official Hamburg Ferienordnung lists this Brückentag as a fixed date."
+    },
+    {
+      "id": "hh-summer-2029-30",
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2030-07-04",
+      "endDate": "2030-08-14",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Behörde für Schule, Familie und Berufsbildung Hamburg",
+      "sourceUrl": "https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    }
+  ]
+}

@@ -1,0 +1,861 @@
+{
+  "datasetName": "schulferienklar_bremen_v0_4",
+  "version": "0.4",
+  "createdAt": "2026-05-24",
+  "dataPolicy": "Official Bundesland-level Schulferien only. School-specific dates are excluded.",
+  "notes": [
+    "endDate is inclusive for app display.",
+    "When generating ICS, convert endDate to DTEND as the following day.",
+    "The official Bremen Ferienverordnung states that first and last holiday days are shown.",
+    "§1 fixed holiday entries are included.",
+    "Bewegliche Ferientage under §2 are excluded because they are set by the Schulkonferenz; fallback dates are not used in the default dataset.",
+    "Unterrichtsfreie Samstage, public holidays, vocational-school deviations, Einschulung and Zeugnis dates are excluded from the default dataset."
+  ],
+  "sources": [
+    {
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "secondarySourceUrl": "https://www.bildung.bremen.de/ferientermine-3404",
+      "legalTitle": "Verordnung über die Ferien für die Schulen der Stadtgemeinden Bremen und Bremerhaven für die Schuljahre 2024/2025 bis 2029/2030",
+      "formats": [
+        "HTML"
+      ],
+      "trustLevel": "official",
+      "availableSchoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "longRangePartial": [
+        "Sommerferien 2030"
+      ],
+      "lastCheckedAt": "2026-05-24",
+      "notes": "Official Bremen Ferienverordnung states that first and last holiday days are shown. §1 fixed holiday entries are included. Bewegliche Ferientage under §2 are excluded because they are set by the Schulkonferenz; fallback dates are not part of the default dataset."
+    }
+  ],
+  "holidays": [
+    {
+      "id": "hb-summer-2025-26",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2025-07-03",
+      "endDate": "2025-08-13",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-autumn-2025-26",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2025-10-13",
+      "endDate": "2025-10-25",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-christmas-2025-26",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2025-12-22",
+      "endDate": "2026-01-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-winter-2025-26",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Halbjahresferien",
+        "en": "Mid-year holidays"
+      },
+      "startDate": "2026-02-02",
+      "endDate": "2026-02-03",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-easter-2025-26",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2026-03-23",
+      "endDate": "2026-04-07",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-school-free-2026-05-15",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2025/26",
+      "category": "state_school_free_day",
+      "type": "ascension",
+      "name": {
+        "de": "Tag nach Himmelfahrt",
+        "en": "Day after Ascension Day"
+      },
+      "startDate": "2026-05-15",
+      "endDate": "2026-05-15",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Listed in §1 of the official Ferienverordnung."
+    },
+    {
+      "id": "hb-pentecost-2025-26",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingsten",
+        "en": "Pentecost holiday"
+      },
+      "startDate": "2026-05-26",
+      "endDate": "2026-05-26",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-summer-2026-27",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2026-07-02",
+      "endDate": "2026-08-12",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-autumn-2026-27",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-24",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-christmas-2026-27",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2026-12-23",
+      "endDate": "2027-01-09",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-winter-2026-27",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Halbjahresferien",
+        "en": "Mid-year holidays"
+      },
+      "startDate": "2027-02-01",
+      "endDate": "2027-02-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-easter-2026-27",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2027-03-22",
+      "endDate": "2027-04-03",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-school-free-2027-05-07",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2026/27",
+      "category": "state_school_free_day",
+      "type": "ascension",
+      "name": {
+        "de": "Tag nach Himmelfahrt",
+        "en": "Day after Ascension Day"
+      },
+      "startDate": "2027-05-07",
+      "endDate": "2027-05-07",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Listed in §1 of the official Ferienverordnung."
+    },
+    {
+      "id": "hb-pentecost-2026-27",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingsten",
+        "en": "Pentecost holiday"
+      },
+      "startDate": "2027-05-18",
+      "endDate": "2027-05-18",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-summer-2027-28",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2027-07-08",
+      "endDate": "2027-08-18",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-autumn-2027-28",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2027-10-18",
+      "endDate": "2027-10-30",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-christmas-2027-28",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2027-12-23",
+      "endDate": "2028-01-08",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-winter-2027-28",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Halbjahresferien",
+        "en": "Mid-year holidays"
+      },
+      "startDate": "2028-01-31",
+      "endDate": "2028-02-01",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-easter-2027-28",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2028-04-10",
+      "endDate": "2028-04-22",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-school-free-2028-05-26",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2027/28",
+      "category": "state_school_free_day",
+      "type": "ascension",
+      "name": {
+        "de": "Tag nach Himmelfahrt",
+        "en": "Day after Ascension Day"
+      },
+      "startDate": "2028-05-26",
+      "endDate": "2028-05-26",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Listed in §1 of the official Ferienverordnung."
+    },
+    {
+      "id": "hb-pentecost-2027-28",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingsten",
+        "en": "Pentecost holiday"
+      },
+      "startDate": "2028-06-06",
+      "endDate": "2028-06-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-summer-2028-29",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2028-07-20",
+      "endDate": "2028-08-30",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-school-free-2028-10-02",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2028/29",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "Tag vor dem 3. Oktober",
+        "en": "Day before German Unity Day"
+      },
+      "startDate": "2028-10-02",
+      "endDate": "2028-10-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Listed in §1 of the official Ferienverordnung."
+    },
+    {
+      "id": "hb-autumn-2028-29",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2028-10-23",
+      "endDate": "2028-11-04",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-christmas-2028-29",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2028-12-27",
+      "endDate": "2029-01-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-winter-2028-29",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Halbjahresferien",
+        "en": "Mid-year holidays"
+      },
+      "startDate": "2029-02-01",
+      "endDate": "2029-02-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-easter-2028-29",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2029-03-19",
+      "endDate": "2029-04-03",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-school-free-2029-04-30",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2028/29",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "Tag vor dem 1. Mai",
+        "en": "Day before May Day"
+      },
+      "startDate": "2029-04-30",
+      "endDate": "2029-04-30",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Listed in §1 of the official Ferienverordnung."
+    },
+    {
+      "id": "hb-school-free-2029-05-11",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2028/29",
+      "category": "state_school_free_day",
+      "type": "ascension",
+      "name": {
+        "de": "Tag nach Himmelfahrt",
+        "en": "Day after Ascension Day"
+      },
+      "startDate": "2029-05-11",
+      "endDate": "2029-05-11",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Listed in §1 of the official Ferienverordnung."
+    },
+    {
+      "id": "hb-pentecost-2028-29",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingsten",
+        "en": "Pentecost holiday"
+      },
+      "startDate": "2029-05-22",
+      "endDate": "2029-05-22",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-summer-2029-30",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2029-07-19",
+      "endDate": "2029-08-29",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-school-free-2029-10-04",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2029/30",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "Tage nach dem 3. Oktober",
+        "en": "Days after German Unity Day"
+      },
+      "startDate": "2029-10-04",
+      "endDate": "2029-10-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Listed in §1 of the official Ferienverordnung."
+    },
+    {
+      "id": "hb-autumn-2029-30",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2029-10-22",
+      "endDate": "2029-11-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-christmas-2029-30",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2029-12-21",
+      "endDate": "2030-01-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-winter-2029-30",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Halbjahresferien",
+        "en": "Mid-year holidays"
+      },
+      "startDate": "2030-01-31",
+      "endDate": "2030-02-01",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-easter-2029-30",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2030-04-08",
+      "endDate": "2030-04-23",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-school-free-2030-05-31",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2029/30",
+      "category": "state_school_free_day",
+      "type": "ascension",
+      "name": {
+        "de": "Tag nach Himmelfahrt",
+        "en": "Day after Ascension Day"
+      },
+      "startDate": "2030-05-31",
+      "endDate": "2030-05-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Listed in §1 of the official Ferienverordnung."
+    },
+    {
+      "id": "hb-pentecost-2029-30",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingsten",
+        "en": "Pentecost holiday"
+      },
+      "startDate": "2030-06-11",
+      "endDate": "2030-06-11",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "hb-summer-2030-31",
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "schoolYear": "2030/31",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2030-07-11",
+      "endDate": "2030-08-21",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen",
+      "sourceUrl": "https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d",
+      "lastCheckedAt": "2026-05-24",
+      "status": "partial",
+      "includeInDefaultCalendar": true,
+      "notes": "Sommerferien 2030 only; full 2030/31 school year is not included yet."
+    }
+  ]
+}
