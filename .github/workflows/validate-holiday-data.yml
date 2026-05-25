@@ -4,14 +4,18 @@ on:
   pull_request:
     paths:
       - "data/holidays/**"
+      - "data/public-holidays/**"
       - "scripts/validate-holidays.mjs"
+      - "scripts/validate-public-holidays.mjs"
       - ".github/workflows/validate-holiday-data.yml"
   push:
     branches:
       - main
     paths:
       - "data/holidays/**"
+      - "data/public-holidays/**"
       - "scripts/validate-holidays.mjs"
+      - "scripts/validate-public-holidays.mjs"
       - ".github/workflows/validate-holiday-data.yml"
 
 jobs:
@@ -27,5 +31,8 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Validate holiday data
+      - name: Validate school holiday data
         run: node scripts/validate-holidays.mjs
+
+      - name: Validate public holiday data
+        run: node scripts/validate-public-holidays.mjs
