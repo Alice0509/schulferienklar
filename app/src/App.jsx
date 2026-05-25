@@ -4,10 +4,16 @@ import "./App.css";
 const TODAY = new Date();
 TODAY.setHours(0, 0, 0, 0);
 
+const WEEKDAYS = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+
 function parseDate(value) {
   const date = new Date(`${value}T00:00:00`);
   date.setHours(0, 0, 0, 0);
   return date;
+}
+
+function toDateKey(date) {
+  return date.toISOString().slice(0, 10);
 }
 
 function formatDate(value) {
@@ -16,6 +22,13 @@ function formatDate(value) {
     month: "short",
     year: "numeric",
   }).format(parseDate(value));
+}
+
+function formatMonth(year, monthIndex) {
+  return new Intl.DateTimeFormat("de-DE", {
+    month: "long",
+    year: "numeric",
+  }).format(new Date(year, monthIndex, 1));
 }
 
 function daysBetween(start, end) {
@@ -56,9 +69,153 @@ function getHeroPattern(code) {
   return patterns[code] || "calendar";
 }
 
+function getHolidayTone(holiday) {
+  if (!holiday) return "";
+
+  if (holiday.category === "state_school_free_day") {
+    return "special";
+  }
+
+  const type = holiday.type || "";
+
+  if (type.includes("summer")) return "summer";
+  if (type.includes("christmas")) return "christmas";
+  if (type.includes("easter")) return "easter";
+  if (type.includes("autumn")) return "autumn";
+  if (type.includes("winter") || type.includes("spring")) return "spring";
+
+  return "holiday";
+}
+
+function getMonthKeysForHoliday(holiday) {
+  const keys = [];
+  const start = parseDate(holiday.startDate);
+  const end = parseDate(holiday.endDate);
+
+  let cursor = new Date(start.getFullYear(), start.getMonth(), 1);
+  const finalMonth = new Date(end.getFullYear(), end.getMonth(), 1);
+
+  while (cursor <= finalMonth) {
+    keys.push(`${cursor.getFullYear()}-${String(cursor.getMonth() + 1).padStart(2, "0")}`);
+    cursor = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1);
+  }
+
+  return keys;
+}
+
+function getCalendarMonthKeys(holidays) {
+  const upcoming = holidays
+    .filter((holiday) => parseDate(holiday.endDate) >= TODAY)
+    .sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate));
+
+  const keys = new Set();
+
+  for (const holiday of upcoming.slice(0, 8)) {
+    getMonthKeysForHoliday(holiday).forEach((key) => keys.add(key));
+  }
+
+  return Array.from(keys).sort().slice(0, 10);
+}
+
+function buildMonthCells(year, monthIndex) {
+  const firstDay = new Date(year, monthIndex, 1);
+  const lastDay = new Date(year, monthIndex + 1, 0);
+
+  const mondayBasedFirstDay = (firstDay.getDay() + 6) % 7;
+  const cells = [];
+
+  for (let i = 0; i < mondayBasedFirstDay; i += 1) {
+    cells.push(null);
+  }
+
+  for (let day = 1; day <= lastDay.getDate(); day += 1) {
+    cells.push(new Date(year, monthIndex, day));
+  }
+
+  while (cells.length % 7 !== 0) {
+    cells.push(null);
+  }
+
+  return cells;
+}
+
+function findHolidayForDate(date, holidays) {
+  const key = toDateKey(date);
+
+  return holidays.find((holiday) => {
+    return holiday.startDate <= key && key <= holiday.endDate;
+  });
+}
+
+function HolidayCalendar({ holidays }) {
+  const monthKeys = useMemo(() => getCalendarMonthKeys(holidays), [holidays]);
+
+  if (monthKeys.length === 0) {
+    return <p className="empty-state">Keine kommenden Ferien für die Kalenderansicht gefunden.</p>;
+  }
+
+  return (
+    <div className="calendar-view">
+      <div className="calendar-legend">
+        <span><i className="legend-swatch legend-holiday" /> Ferien</span>
+        <span><i className="legend-swatch legend-special" /> Schulfreier Tag</span>
+      </div>
+
+      <div className="calendar-grid">
+        {monthKeys.map((key) => {
+          const [yearText, monthText] = key.split("-");
+          const year = Number(yearText);
+          const monthIndex = Number(monthText) - 1;
+          const cells = buildMonthCells(year, monthIndex);
+
+          return (
+            <section className="month-card" key={key}>
+              <h3>{formatMonth(year, monthIndex)}</h3>
+
+              <div className="weekday-row">
+                {WEEKDAYS.map((day) => (
+                  <span key={day}>{day}</span>
+                ))}
+              </div>
+
+              <div className="month-days">
+                {cells.map((date, index) => {
+                  if (!date) {
+                    return <span className="calendar-day empty" key={`empty-${index}`} />;
+                  }
+
+                  const holiday = findHolidayForDate(date, holidays);
+                  const tone = getHolidayTone(holiday);
+                  const isToday = toDateKey(date) === toDateKey(TODAY);
+
+                  return (
+                    <span
+                      className={[
+                        "calendar-day",
+                        holiday ? "is-highlighted" : "",
+                        tone ? `tone-${tone}` : "",
+                        isToday ? "is-today" : "",
+                      ].join(" ")}
+                      key={toDateKey(date)}
+                      title={holiday ? getHolidayLabel(holiday) : ""}
+                    >
+                      <span>{date.getDate()}</span>
+                    </span>
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [index, setIndex] = useState(null);
   const [selectedCode, setSelectedCode] = useState("BY");
+  const [viewMode, setViewMode] = useState("list");
   const [dataset, setDataset] = useState(null);
   const [loading, setLoading] = useState(true);
   const [datasetLoading, setDatasetLoading] = useState(false);
@@ -212,56 +369,78 @@ export default function App() {
 
       <section className="content-grid">
         <section className="panel">
-          <div className="section-header">
+          <div className="section-header overview-header">
             <div>
               <p className="eyebrow">Übersicht</p>
-              <h2>Alle kommenden Termine</h2>
+              <h2>{viewMode === "list" ? "Alle kommenden Termine" : "Kalenderansicht"}</h2>
             </div>
-            <span className="small-pill">{upcomingHolidays.length} sichtbar</span>
+
+            <div className="view-controls">
+              <div className="view-toggle" aria-label="Ansicht wechseln">
+                <button
+                  className={viewMode === "list" ? "active" : ""}
+                  onClick={() => setViewMode("list")}
+                >
+                  Liste
+                </button>
+                <button
+                  className={viewMode === "calendar" ? "active" : ""}
+                  onClick={() => setViewMode("calendar")}
+                >
+                  Kalender
+                </button>
+              </div>
+              <span className="small-pill">
+                {viewMode === "list" ? `${upcomingHolidays.length} sichtbar` : "markiert"}
+              </span>
+            </div>
           </div>
 
-          <div className="holiday-list">
-            {upcomingHolidays.map((holiday) => {
-              const daysUntil = getDaysUntil(holiday);
-              const isActive =
-                parseDate(holiday.startDate) <= TODAY &&
-                parseDate(holiday.endDate) >= TODAY;
+          {viewMode === "list" ? (
+            <div className="holiday-list">
+              {upcomingHolidays.map((holiday) => {
+                const daysUntil = getDaysUntil(holiday);
+                const isActive =
+                  parseDate(holiday.startDate) <= TODAY &&
+                  parseDate(holiday.endDate) >= TODAY;
 
-              return (
-                <article className="holiday-item" key={holiday.id}>
-                  <div className="holiday-main">
-                    <span className={`type-dot type-${holiday.category}`} />
-                    <div>
-                      <h3>{getHolidayLabel(holiday)}</h3>
-                      <p>
-                        {formatDate(holiday.startDate)} – {formatDate(holiday.endDate)}
-                      </p>
+                return (
+                  <article className="holiday-item" key={holiday.id}>
+                    <div className="holiday-main">
+                      <span className={`type-dot type-${holiday.category}`} />
+                      <div>
+                        <h3>{getHolidayLabel(holiday)}</h3>
+                        <p>
+                          {formatDate(holiday.startDate)} – {formatDate(holiday.endDate)}
+                        </p>
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="holiday-meta">
-                    <span>{getHolidayDuration(holiday)} Tage</span>
-                    <strong>
-                      {isActive
-                        ? "läuft jetzt"
-                        : daysUntil === 0
-                          ? "startet heute"
-                          : `in ${daysUntil} Tagen`}
-                    </strong>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
+                    <div className="holiday-meta">
+                      <span>{getHolidayDuration(holiday)} Tage</span>
+                      <strong>
+                        {isActive
+                          ? "läuft jetzt"
+                          : daysUntil === 0
+                            ? "startet heute"
+                            : `in ${daysUntil} Tagen`}
+                      </strong>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          ) : (
+            <HolidayCalendar holidays={holidays} />
+          )}
         </section>
 
         <aside className="panel side-panel">
           <p className="eyebrow">Gut vorbereitet</p>
           <h2>Mehr Überblick für freie Tage</h2>
           <p>
-            Schulferienklar startet als klare Ferienübersicht. Später können
-            persönliche Notizen, Checklisten, Feriencamp-Ideen, Familienplanung
-            und Kalenderexporte dazukommen.
+            Sieh Ferien frühzeitig und plane Betreuung, Reisen, Lernzeiten oder
+            freie Tage entspannter. Schulferienklar hilft dir, den Überblick zu behalten.
           </p>
 
           <div className="feature-list">
