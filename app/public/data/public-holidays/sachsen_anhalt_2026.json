@@ -1,9 +1,9 @@
 {
-  "datasetName": "schulferienklar_public_holidays_bayern_2026",
+  "datasetName": "schulferienklar_public_holidays_sachsen_anhalt_2026",
   "version": "0.1",
   "createdAt": "2026-05-25",
-  "bundeslandCode": "BY",
-  "bundeslandName": "Bayern",
+  "bundeslandCode": "ST",
+  "bundeslandName": "Sachsen-Anhalt",
   "year": 2026,
   "dataPolicy": "Statutory public holidays for the Bundesland. Regional/local exceptions are marked and excluded from default calendar unless state-wide.",
   "sources": [
@@ -18,7 +18,7 @@
   ],
   "holidays": [
     {
-      "id": "by-public-2026-new-year",
+      "id": "st-public-2026-new-year",
       "name": {
         "de": "Neujahr",
         "en": "New Year's Day"
@@ -29,7 +29,7 @@
       "includeInDefaultCalendar": true
     },
     {
-      "id": "by-public-2026-epiphany",
+      "id": "st-public-2026-epiphany",
       "name": {
         "de": "Heilige Drei Könige",
         "en": "Epiphany"
@@ -40,7 +40,7 @@
       "includeInDefaultCalendar": true
     },
     {
-      "id": "by-public-2026-good-friday",
+      "id": "st-public-2026-good-friday",
       "name": {
         "de": "Karfreitag",
         "en": "Good Friday"
@@ -51,7 +51,7 @@
       "includeInDefaultCalendar": true
     },
     {
-      "id": "by-public-2026-easter-monday",
+      "id": "st-public-2026-easter-monday",
       "name": {
         "de": "Ostermontag",
         "en": "Easter Monday"
@@ -62,7 +62,7 @@
       "includeInDefaultCalendar": true
     },
     {
-      "id": "by-public-2026-labour-day",
+      "id": "st-public-2026-labour-day",
       "name": {
         "de": "Tag der Arbeit",
         "en": "Labour Day"
@@ -73,7 +73,7 @@
       "includeInDefaultCalendar": true
     },
     {
-      "id": "by-public-2026-ascension",
+      "id": "st-public-2026-ascension",
       "name": {
         "de": "Christi Himmelfahrt",
         "en": "Ascension Day"
@@ -84,7 +84,7 @@
       "includeInDefaultCalendar": true
     },
     {
-      "id": "by-public-2026-pentecost-monday",
+      "id": "st-public-2026-pentecost-monday",
       "name": {
         "de": "Pfingstmontag",
         "en": "Whit Monday"
@@ -95,42 +95,7 @@
       "includeInDefaultCalendar": true
     },
     {
-      "id": "by-public-2026-corpus-christi",
-      "name": {
-        "de": "Fronleichnam",
-        "en": "Corpus Christi"
-      },
-      "date": "2026-06-04",
-      "type": "public_holiday",
-      "scope": "statewide",
-      "includeInDefaultCalendar": true
-    },
-    {
-      "id": "by-public-2026-peace-festival-augsburg",
-      "name": {
-        "de": "Augsburger Friedensfest",
-        "en": "Augsburg Peace Festival"
-      },
-      "date": "2026-08-08",
-      "type": "public_holiday",
-      "scope": "local",
-      "includeInDefaultCalendar": false,
-      "notes": "Local public holiday in Augsburg only."
-    },
-    {
-      "id": "by-public-2026-assumption",
-      "name": {
-        "de": "Mariä Himmelfahrt",
-        "en": "Assumption Day"
-      },
-      "date": "2026-08-15",
-      "type": "public_holiday",
-      "scope": "regional",
-      "includeInDefaultCalendar": false,
-      "notes": "Public holiday only in Bavarian municipalities with predominantly Catholic population."
-    },
-    {
-      "id": "by-public-2026-german-unity",
+      "id": "st-public-2026-german-unity",
       "name": {
         "de": "Tag der Deutschen Einheit",
         "en": "German Unity Day"
@@ -141,18 +106,18 @@
       "includeInDefaultCalendar": true
     },
     {
-      "id": "by-public-2026-all-saints",
+      "id": "st-public-2026-reformation-day",
       "name": {
-        "de": "Allerheiligen",
-        "en": "All Saints' Day"
+        "de": "Reformationstag",
+        "en": "Reformation Day"
       },
-      "date": "2026-11-01",
+      "date": "2026-10-31",
       "type": "public_holiday",
       "scope": "statewide",
       "includeInDefaultCalendar": true
     },
     {
-      "id": "by-public-2026-christmas-day",
+      "id": "st-public-2026-christmas-day",
       "name": {
         "de": "1. Weihnachtsfeiertag",
         "en": "Christmas Day"
@@ -163,7 +128,7 @@
       "includeInDefaultCalendar": true
     },
     {
-      "id": "by-public-2026-second-christmas-day",
+      "id": "st-public-2026-second-christmas-day",
       "name": {
         "de": "2. Weihnachtsfeiertag",
         "en": "Second Day of Christmas"

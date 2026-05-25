@@ -5,21 +5,24 @@
   "bundeslandCode": "BY",
   "bundeslandName": "Bayern",
   "year": 2026,
-  "dataPolicy": "Statutory public holidays for Bayern. Regional/local exceptions are marked and excluded from default calendar unless state-wide.",
+  "dataPolicy": "Statutory public holidays for the Bundesland. Regional/local exceptions are marked and excluded from default calendar unless state-wide.",
   "sources": [
     {
-      "sourceName": "Bayerisches Staatsministerium des Innern, für Sport und Integration",
-      "sourceUrl": "https://www.stmi.bayern.de/staat-und-verfassung/feiertage/",
-      "secondarySourceUrl": "https://www.muenchen.de/aktuell/feiertage-bayern-2026-und-2027",
-      "trustLevel": "official",
+      "sourceName": "Consolidated German public holiday overview by Bundesland",
+      "sourceUrl": "https://www.feiertage-deutschland.de/2026/",
+      "secondarySourceUrl": "https://www.dgb.de/service/ratgeber/feiertage/",
+      "trustLevel": "reference",
       "lastCheckedAt": "2026-05-25",
-      "notes": "Bayern public holidays are regulated by the Feiertagsgesetz. Date list cross-checked with public Bayern 2026 holiday overview."
+      "notes": "Dates generated from nationwide German public holidays and Bundesland-specific statutory holiday mappings for 2026. Regional/local exceptions are marked separately."
     }
   ],
   "holidays": [
     {
       "id": "by-public-2026-new-year",
-      "name": { "de": "Neujahr", "en": "New Year's Day" },
+      "name": {
+        "de": "Neujahr",
+        "en": "New Year's Day"
+      },
       "date": "2026-01-01",
       "type": "public_holiday",
       "scope": "statewide",
@@ -27,7 +30,10 @@
     },
     {
       "id": "by-public-2026-epiphany",
-      "name": { "de": "Heilige Drei Könige", "en": "Epiphany" },
+      "name": {
+        "de": "Heilige Drei Könige",
+        "en": "Epiphany"
+      },
       "date": "2026-01-06",
       "type": "public_holiday",
       "scope": "statewide",
@@ -35,7 +41,10 @@
     },
     {
       "id": "by-public-2026-good-friday",
-      "name": { "de": "Karfreitag", "en": "Good Friday" },
+      "name": {
+        "de": "Karfreitag",
+        "en": "Good Friday"
+      },
       "date": "2026-04-03",
       "type": "public_holiday",
       "scope": "statewide",
@@ -43,7 +52,10 @@
     },
     {
       "id": "by-public-2026-easter-monday",
-      "name": { "de": "Ostermontag", "en": "Easter Monday" },
+      "name": {
+        "de": "Ostermontag",
+        "en": "Easter Monday"
+      },
       "date": "2026-04-06",
       "type": "public_holiday",
       "scope": "statewide",
@@ -51,7 +63,10 @@
     },
     {
       "id": "by-public-2026-labour-day",
-      "name": { "de": "Tag der Arbeit", "en": "Labour Day" },
+      "name": {
+        "de": "Tag der Arbeit",
+        "en": "Labour Day"
+      },
       "date": "2026-05-01",
       "type": "public_holiday",
       "scope": "statewide",
@@ -59,7 +74,10 @@
     },
     {
       "id": "by-public-2026-ascension",
-      "name": { "de": "Christi Himmelfahrt", "en": "Ascension Day" },
+      "name": {
+        "de": "Christi Himmelfahrt",
+        "en": "Ascension Day"
+      },
       "date": "2026-05-14",
       "type": "public_holiday",
       "scope": "statewide",
@@ -67,7 +85,10 @@
     },
     {
       "id": "by-public-2026-pentecost-monday",
-      "name": { "de": "Pfingstmontag", "en": "Whit Monday" },
+      "name": {
+        "de": "Pfingstmontag",
+        "en": "Whit Monday"
+      },
       "date": "2026-05-25",
       "type": "public_holiday",
       "scope": "statewide",
@@ -75,24 +96,45 @@
     },
     {
       "id": "by-public-2026-corpus-christi",
-      "name": { "de": "Fronleichnam", "en": "Corpus Christi" },
+      "name": {
+        "de": "Fronleichnam",
+        "en": "Corpus Christi"
+      },
       "date": "2026-06-04",
       "type": "public_holiday",
       "scope": "statewide",
       "includeInDefaultCalendar": true
     },
     {
+      "id": "by-public-2026-peace-festival-augsburg",
+      "name": {
+        "de": "Augsburger Friedensfest",
+        "en": "Augsburg Peace Festival"
+      },
+      "date": "2026-08-08",
+      "type": "public_holiday",
+      "scope": "local",
+      "includeInDefaultCalendar": false,
+      "notes": "Local public holiday in Augsburg only."
+    },
+    {
       "id": "by-public-2026-assumption",
-      "name": { "de": "Mariä Himmelfahrt", "en": "Assumption Day" },
+      "name": {
+        "de": "Mariä Himmelfahrt",
+        "en": "Assumption Day"
+      },
       "date": "2026-08-15",
       "type": "public_holiday",
       "scope": "regional",
       "includeInDefaultCalendar": false,
-      "notes": "Public holiday only in municipalities with predominantly Catholic population."
+      "notes": "Public holiday only in Bavarian municipalities with predominantly Catholic population."
     },
     {
       "id": "by-public-2026-german-unity",
-      "name": { "de": "Tag der Deutschen Einheit", "en": "German Unity Day" },
+      "name": {
+        "de": "Tag der Deutschen Einheit",
+        "en": "German Unity Day"
+      },
       "date": "2026-10-03",
       "type": "public_holiday",
       "scope": "statewide",
@@ -100,7 +142,10 @@
     },
     {
       "id": "by-public-2026-all-saints",
-      "name": { "de": "Allerheiligen", "en": "All Saints' Day" },
+      "name": {
+        "de": "Allerheiligen",
+        "en": "All Saints' Day"
+      },
       "date": "2026-11-01",
       "type": "public_holiday",
       "scope": "statewide",
@@ -108,7 +153,10 @@
     },
     {
       "id": "by-public-2026-christmas-day",
-      "name": { "de": "1. Weihnachtsfeiertag", "en": "Christmas Day" },
+      "name": {
+        "de": "1. Weihnachtsfeiertag",
+        "en": "Christmas Day"
+      },
       "date": "2026-12-25",
       "type": "public_holiday",
       "scope": "statewide",
@@ -116,7 +164,10 @@
     },
     {
       "id": "by-public-2026-second-christmas-day",
-      "name": { "de": "2. Weihnachtsfeiertag", "en": "Second Day of Christmas" },
+      "name": {
+        "de": "2. Weihnachtsfeiertag",
+        "en": "Second Day of Christmas"
+      },
       "date": "2026-12-26",
       "type": "public_holiday",
       "scope": "statewide",

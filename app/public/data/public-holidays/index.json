@@ -1,16 +1,199 @@
 {
   "generatedAt": "2026-05-25",
-  "totalDatasets": 1,
-  "totalEvents": 13,
+  "totalDatasets": 16,
+  "totalEvents": 178,
   "datasets": [
+    {
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "baden_wuerttemberg_2026.json",
+      "eventCount": 12,
+      "defaultCalendarEventCount": 12,
+      "scopes": [
+        "statewide"
+      ]
+    },
     {
       "bundeslandCode": "BY",
       "bundeslandName": "Bayern",
       "year": 2026,
       "version": "0.1",
       "jsonFile": "bayern_2026.json",
-      "eventCount": 13,
+      "eventCount": 14,
       "defaultCalendarEventCount": 12,
+      "scopes": [
+        "local",
+        "regional",
+        "statewide"
+      ]
+    },
+    {
+      "bundeslandCode": "BE",
+      "bundeslandName": "Berlin",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "berlin_2026.json",
+      "eventCount": 10,
+      "defaultCalendarEventCount": 10,
+      "scopes": [
+        "statewide"
+      ]
+    },
+    {
+      "bundeslandCode": "BB",
+      "bundeslandName": "Brandenburg",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "brandenburg_2026.json",
+      "eventCount": 12,
+      "defaultCalendarEventCount": 12,
+      "scopes": [
+        "statewide"
+      ]
+    },
+    {
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "bremen_2026.json",
+      "eventCount": 10,
+      "defaultCalendarEventCount": 10,
+      "scopes": [
+        "statewide"
+      ]
+    },
+    {
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "hamburg_2026.json",
+      "eventCount": 10,
+      "defaultCalendarEventCount": 10,
+      "scopes": [
+        "statewide"
+      ]
+    },
+    {
+      "bundeslandCode": "HE",
+      "bundeslandName": "Hessen",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "hessen_2026.json",
+      "eventCount": 10,
+      "defaultCalendarEventCount": 10,
+      "scopes": [
+        "statewide"
+      ]
+    },
+    {
+      "bundeslandCode": "MV",
+      "bundeslandName": "Mecklenburg-Vorpommern",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "mecklenburg_vorpommern_2026.json",
+      "eventCount": 11,
+      "defaultCalendarEventCount": 11,
+      "scopes": [
+        "statewide"
+      ]
+    },
+    {
+      "bundeslandCode": "NI",
+      "bundeslandName": "Niedersachsen",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "niedersachsen_2026.json",
+      "eventCount": 10,
+      "defaultCalendarEventCount": 10,
+      "scopes": [
+        "statewide"
+      ]
+    },
+    {
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "nordrhein_westfalen_2026.json",
+      "eventCount": 11,
+      "defaultCalendarEventCount": 11,
+      "scopes": [
+        "statewide"
+      ]
+    },
+    {
+      "bundeslandCode": "RP",
+      "bundeslandName": "Rheinland-Pfalz",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "rheinland_pfalz_2026.json",
+      "eventCount": 11,
+      "defaultCalendarEventCount": 11,
+      "scopes": [
+        "statewide"
+      ]
+    },
+    {
+      "bundeslandCode": "SL",
+      "bundeslandName": "Saarland",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "saarland_2026.json",
+      "eventCount": 12,
+      "defaultCalendarEventCount": 12,
+      "scopes": [
+        "statewide"
+      ]
+    },
+    {
+      "bundeslandCode": "SN",
+      "bundeslandName": "Sachsen",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "sachsen_2026.json",
+      "eventCount": 12,
+      "defaultCalendarEventCount": 11,
+      "scopes": [
+        "regional",
+        "statewide"
+      ]
+    },
+    {
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "sachsen_anhalt_2026.json",
+      "eventCount": 11,
+      "defaultCalendarEventCount": 11,
+      "scopes": [
+        "statewide"
+      ]
+    },
+    {
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "schleswig_holstein_2026.json",
+      "eventCount": 10,
+      "defaultCalendarEventCount": 10,
+      "scopes": [
+        "statewide"
+      ]
+    },
+    {
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "thueringen_2026.json",
+      "eventCount": 12,
+      "defaultCalendarEventCount": 11,
       "scopes": [
         "regional",
         "statewide"
