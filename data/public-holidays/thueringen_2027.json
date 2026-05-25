@@ -1,0 +1,154 @@
+{
+  "datasetName": "schulferienklar_public_holidays_thueringen_2027",
+  "version": "0.1",
+  "createdAt": "2026-05-25",
+  "bundeslandCode": "TH",
+  "bundeslandName": "Thüringen",
+  "year": 2027,
+  "dataPolicy": "Statutory public holidays for the Bundesland. Regional/local exceptions are marked and excluded from default calendar unless state-wide.",
+  "sources": [
+    {
+      "sourceName": "Consolidated German public holiday overview by Bundesland",
+      "sourceUrl": "https://www.feiertage-deutschland.de/2027/",
+      "secondarySourceUrl": "https://www.schulferien.org/deutschland/feiertage/2027/",
+      "trustLevel": "reference",
+      "lastCheckedAt": "2026-05-25",
+      "notes": "Dates generated from nationwide German public holidays and Bundesland-specific statutory holiday mappings for 2027. Regional/local exceptions are marked separately."
+    }
+  ],
+  "holidays": [
+    {
+      "id": "th-public-2027-new-year",
+      "name": {
+        "de": "Neujahr",
+        "en": "New Year's Day"
+      },
+      "date": "2027-01-01",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "th-public-2027-good-friday",
+      "name": {
+        "de": "Karfreitag",
+        "en": "Good Friday"
+      },
+      "date": "2027-03-26",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "th-public-2027-easter-monday",
+      "name": {
+        "de": "Ostermontag",
+        "en": "Easter Monday"
+      },
+      "date": "2027-03-29",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "th-public-2027-labour-day",
+      "name": {
+        "de": "Tag der Arbeit",
+        "en": "Labour Day"
+      },
+      "date": "2027-05-01",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "th-public-2027-ascension",
+      "name": {
+        "de": "Christi Himmelfahrt",
+        "en": "Ascension Day"
+      },
+      "date": "2027-05-06",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "th-public-2027-pentecost-monday",
+      "name": {
+        "de": "Pfingstmontag",
+        "en": "Whit Monday"
+      },
+      "date": "2027-05-17",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "th-public-2027-corpus-christi",
+      "name": {
+        "de": "Fronleichnam",
+        "en": "Corpus Christi"
+      },
+      "date": "2027-05-27",
+      "type": "public_holiday",
+      "scope": "regional",
+      "includeInDefaultCalendar": false,
+      "notes": "Regional public holiday only in selected Catholic municipalities/areas."
+    },
+    {
+      "id": "th-public-2027-world-childrens-day",
+      "name": {
+        "de": "Weltkindertag",
+        "en": "World Children's Day"
+      },
+      "date": "2027-09-20",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "th-public-2027-german-unity",
+      "name": {
+        "de": "Tag der Deutschen Einheit",
+        "en": "German Unity Day"
+      },
+      "date": "2027-10-03",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "th-public-2027-reformation-day",
+      "name": {
+        "de": "Reformationstag",
+        "en": "Reformation Day"
+      },
+      "date": "2027-10-31",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "th-public-2027-christmas-day",
+      "name": {
+        "de": "1. Weihnachtsfeiertag",
+        "en": "Christmas Day"
+      },
+      "date": "2027-12-25",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "th-public-2027-second-christmas-day",
+      "name": {
+        "de": "2. Weihnachtsfeiertag",
+        "en": "Second Day of Christmas"
+      },
+      "date": "2027-12-26",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    }
+  ]
+}
