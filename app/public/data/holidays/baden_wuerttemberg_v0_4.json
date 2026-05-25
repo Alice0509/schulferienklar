@@ -1,0 +1,672 @@
+{
+  "datasetName": "schulferienklar_baden_wuerttemberg_v0_4",
+  "version": "0.4",
+  "createdAt": "2026-05-24",
+  "dataPolicy": "Official Bundesland-level Schulferien only. School-specific dates are excluded.",
+  "notes": [
+    "endDate is inclusive for app display.",
+    "When generating ICS, convert endDate to DTEND as the following day.",
+    "Baden-Württemberg has no uniform Winterferien/Frühjahrsferien in this official list.",
+    "Bewegliche Ferientage are excluded from the default dataset.",
+    "Unterrichtsfreie Samstage are excluded from the default dataset.",
+    "State-wide schulfrei footnote dates outside holiday ranges are included as state_school_free_day."
+  ],
+  "sources": [
+    {
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "secondarySourceUrl": "https://www.kmk.org/service/ferienregelung.html",
+      "legalTitle": "Ferien und unterrichtsfreie Samstage in Baden-Württemberg",
+      "formats": [
+        "HTML"
+      ],
+      "trustLevel": "official",
+      "availableSchoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "longRangePartial": [
+        "Sommerferien 2030"
+      ],
+      "lastCheckedAt": "2026-05-24",
+      "notes": "Official Baden-Württemberg page lists Ferien through school year 2029/2030 and Sommerferien through 2030. Bewegliche Ferientage and unterrichtsfreie Samstage are excluded from the default dataset. State-wide schulfrei footnote dates outside holiday ranges are included as state_school_free_day."
+    }
+  ],
+  "holidays": [
+    {
+      "id": "bw-summer-2025-26",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2025-07-31",
+      "endDate": "2025-09-13",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-autumn-2025-26",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2025-10-27",
+      "endDate": "2025-10-30",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-school-free-2025-10-31",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2025/26",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "Schulfrei am Reformationsfest",
+        "en": "School-free day on Reformation Day"
+      },
+      "startDate": "2025-10-31",
+      "endDate": "2025-10-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official footnote states that 31 October 2025 is school-free."
+    },
+    {
+      "id": "bw-christmas-2025-26",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2025-12-22",
+      "endDate": "2026-01-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-easter-2025-26",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2026-03-30",
+      "endDate": "2026-04-11",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-pentecost-2025-26",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2026-05-26",
+      "endDate": "2026-06-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-summer-2026-27",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2026-07-30",
+      "endDate": "2026-09-12",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-autumn-2026-27",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2026-10-26",
+      "endDate": "2026-10-30",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-school-free-2026-10-31",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2026/27",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "Schulfrei am Reformationsfest",
+        "en": "School-free day on Reformation Day"
+      },
+      "startDate": "2026-10-31",
+      "endDate": "2026-10-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official footnote states that 31 October 2026 is school-free."
+    },
+    {
+      "id": "bw-christmas-2026-27",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2026-12-23",
+      "endDate": "2027-01-09",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-school-free-2027-03-25",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2026/27",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "Schulfrei am Gründonnerstag",
+        "en": "School-free day on Maundy Thursday"
+      },
+      "startDate": "2027-03-25",
+      "endDate": "2027-03-25",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official footnote states that 25 March 2027 is school-free."
+    },
+    {
+      "id": "bw-easter-2026-27",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2027-03-30",
+      "endDate": "2027-04-03",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-pentecost-2026-27",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2027-05-18",
+      "endDate": "2027-05-29",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-summer-2027-28",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2027-07-29",
+      "endDate": "2027-09-11",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-autumn-2027-28",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2027-11-02",
+      "endDate": "2027-11-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-christmas-2027-28",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2027-12-23",
+      "endDate": "2028-01-08",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-school-free-2028-04-13",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2027/28",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "Schulfrei am Gründonnerstag",
+        "en": "School-free day on Maundy Thursday"
+      },
+      "startDate": "2028-04-13",
+      "endDate": "2028-04-13",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official footnote states that 13 April 2028 is school-free."
+    },
+    {
+      "id": "bw-easter-2027-28",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2028-04-18",
+      "endDate": "2028-04-22",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-pentecost-2027-28",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2028-06-06",
+      "endDate": "2028-06-17",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-summer-2028-29",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2028-07-27",
+      "endDate": "2028-09-09",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-autumn-2028-29",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2028-10-30",
+      "endDate": "2028-11-03",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Includes 31 October 2028, which official footnote also marks as school-free."
+    },
+    {
+      "id": "bw-christmas-2028-29",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2028-12-23",
+      "endDate": "2029-01-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-easter-2028-29",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2029-03-26",
+      "endDate": "2029-04-07",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-pentecost-2028-29",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2029-05-22",
+      "endDate": "2029-06-01",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-summer-2029-30",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2029-07-26",
+      "endDate": "2029-09-08",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-autumn-2029-30",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2029-10-29",
+      "endDate": "2029-11-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Includes 31 October 2029, which official footnote also marks as school-free."
+    },
+    {
+      "id": "bw-christmas-2029-30",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2029-12-22",
+      "endDate": "2030-01-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-easter-2029-30",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2030-04-15",
+      "endDate": "2030-04-26",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-pentecost-2029-30",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "pentecost",
+      "name": {
+        "de": "Pfingstferien",
+        "en": "Pentecost holidays"
+      },
+      "startDate": "2030-06-11",
+      "endDate": "2030-06-21",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "bw-summer-2030-31",
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "schoolYear": "2030/31",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2030-07-25",
+      "endDate": "2030-09-07",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Ministerium für Kultus, Jugend und Sport Baden-Württemberg",
+      "sourceUrl": "https://km.baden-wuerttemberg.de/de/service/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "partial",
+      "includeInDefaultCalendar": true,
+      "notes": "Sommerferien 2030 only; full 2030/31 school year is not included yet."
+    }
+  ]
+}

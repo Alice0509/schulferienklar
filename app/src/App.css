@@ -1,0 +1,487 @@
+:root {
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #172033;
+  background: #f6f3ec;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(124, 184, 255, 0.22), transparent 36rem),
+    radial-gradient(circle at top right, rgba(255, 200, 119, 0.25), transparent 32rem),
+    #f6f3ec;
+}
+
+button,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.page {
+  width: min(1180px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+  padding: 28px;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(255, 250, 239, 0.84)),
+    #fff;
+  box-shadow: 0 24px 80px rgba(40, 55, 85, 0.12);
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -80px;
+  bottom: -90px;
+  width: 420px;
+  height: 260px;
+  opacity: 0.18;
+  background:
+    radial-gradient(circle at 20% 80%, #172033 0 8px, transparent 9px),
+    radial-gradient(circle at 45% 60%, #172033 0 12px, transparent 13px),
+    radial-gradient(circle at 70% 80%, #172033 0 9px, transparent 10px),
+    linear-gradient(135deg, transparent 45%, #172033 46% 48%, transparent 49%);
+  transform: rotate(-6deg);
+}
+
+.hero-water::after,
+.hero-waves::after,
+.hero-coast::after {
+  background:
+    repeating-radial-gradient(ellipse at center, transparent 0 16px, #172033 17px 20px);
+}
+
+.hero-city::after {
+  background:
+    linear-gradient(to top, #172033 0 34%, transparent 34%),
+    repeating-linear-gradient(to right, #172033 0 34px, transparent 34px 52px);
+}
+
+.hero-forest::after {
+  background:
+    conic-gradient(from 45deg, transparent 0 25%, #172033 0 50%, transparent 0 100%);
+}
+
+.topbar {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 64px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.brand-mark {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border-radius: 12px;
+  color: white;
+  background: #1f6f64;
+  box-shadow: 0 10px 24px rgba(31, 111, 100, 0.22);
+}
+
+.badge,
+.small-pill {
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #496070;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  font-size: 0.86rem;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 28px;
+  align-items: end;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: #1f6f64;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 720px;
+  margin-bottom: 18px;
+  font-size: clamp(2.5rem, 7vw, 5.8rem);
+  line-height: 0.92;
+  letter-spacing: -0.075em;
+}
+
+.hero-text {
+  max-width: 650px;
+  color: #52606d;
+  font-size: clamp(1.04rem, 2vw, 1.25rem);
+  line-height: 1.65;
+}
+
+.selector-card {
+  display: grid;
+  gap: 10px;
+  max-width: 440px;
+  margin-top: 32px;
+  padding: 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  box-shadow: 0 18px 48px rgba(40, 55, 85, 0.09);
+}
+
+.selector-card label {
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+select {
+  width: 100%;
+  border: 1px solid rgba(23, 32, 51, 0.13);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: white;
+  color: #172033;
+  outline: none;
+}
+
+select:focus {
+  border-color: #1f6f64;
+  box-shadow: 0 0 0 4px rgba(31, 111, 100, 0.12);
+}
+
+.next-card,
+.panel {
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 20px 60px rgba(40, 55, 85, 0.1);
+}
+
+.next-card {
+  padding: 28px;
+  backdrop-filter: blur(16px);
+}
+
+.card-label {
+  margin-bottom: 12px;
+  color: #6a7280;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.next-card h2 {
+  margin-bottom: 6px;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.state-name {
+  color: #52606d;
+}
+
+.metric-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 28px 0;
+}
+
+.metric-row > div {
+  border-radius: 20px;
+  padding: 18px;
+  background: #f5f0e6;
+}
+
+.metric-number {
+  display: block;
+  font-size: clamp(2rem, 4vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: -0.06em;
+}
+
+.metric-label {
+  display: block;
+  color: #65717d;
+  font-size: 0.9rem;
+}
+
+.date-range {
+  margin: 0;
+  color: #1f6f64;
+  font-weight: 800;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 22px;
+  margin-top: 22px;
+}
+
+.panel {
+  padding: 24px;
+}
+
+.section-header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  margin-bottom: 0;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  letter-spacing: -0.05em;
+}
+
+.holiday-list {
+  display: grid;
+  gap: 12px;
+}
+
+.holiday-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px;
+  border-radius: 20px;
+  background: #fbfaf6;
+  border: 1px solid rgba(23, 32, 51, 0.07);
+}
+
+.holiday-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.type-dot {
+  flex: 0 0 auto;
+  width: 13px;
+  height: 13px;
+  border-radius: 999px;
+  background: #1f6f64;
+}
+
+.type-state_school_free_day {
+  background: #c57a2a;
+}
+
+.holiday-item h3 {
+  margin-bottom: 4px;
+}
+
+.holiday-item p {
+  margin: 0;
+  color: #697581;
+}
+
+.holiday-meta {
+  display: grid;
+  gap: 4px;
+  text-align: right;
+  color: #697581;
+  white-space: nowrap;
+}
+
+.holiday-meta strong {
+  color: #172033;
+}
+
+.side-panel p {
+  color: #5c6874;
+  line-height: 1.65;
+}
+
+.feature-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.feature-list span {
+  border-radius: 14px;
+  padding: 12px 14px;
+  background: #f5f0e6;
+  font-weight: 700;
+}
+
+.states-section {
+  margin-top: 22px;
+  padding: 24px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(23, 32, 51, 0.08);
+}
+
+.state-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.state-card {
+  display: grid;
+  gap: 6px;
+  min-height: 118px;
+  text-align: left;
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  border-radius: 20px;
+  padding: 16px;
+  background: #fffaf0;
+  color: #172033;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
+}
+
+.state-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(40, 55, 85, 0.12);
+}
+
+.state-card.selected {
+  border-color: rgba(31, 111, 100, 0.7);
+  background: #eef8f4;
+}
+
+.state-card span {
+  width: fit-content;
+  border-radius: 999px;
+  padding: 4px 8px;
+  color: #1f6f64;
+  background: rgba(31, 111, 100, 0.1);
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.state-card strong {
+  font-size: 1rem;
+}
+
+.state-card small {
+  color: #66727d;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 28px 4px 0;
+  color: #697581;
+  font-size: 0.9rem;
+}
+
+.error {
+  margin-top: 18px;
+  border-radius: 18px;
+  padding: 14px 16px;
+  background: #fff1f1;
+  color: #a63535;
+  border: 1px solid rgba(166, 53, 53, 0.18);
+}
+
+.skeleton {
+  color: #697581;
+}
+
+@media (max-width: 860px) {
+  .hero-grid,
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar,
+  .section-header,
+  .footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .state-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .holiday-item {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .holiday-meta {
+    text-align: left;
+  }
+}
+
+@media (max-width: 560px) {
+  .page {
+    width: min(100% - 20px, 1180px);
+    padding-top: 10px;
+  }
+
+  .hero,
+  .panel,
+  .states-section {
+    border-radius: 22px;
+    padding: 18px;
+  }
+
+  .topbar {
+    margin-bottom: 40px;
+  }
+
+  .metric-row,
+  .state-grid {
+    grid-template-columns: 1fr;
+  }
+}

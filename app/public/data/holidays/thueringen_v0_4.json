@@ -1,0 +1,669 @@
+{
+  "datasetName": "schulferienklar_thueringen_v0_4",
+  "version": "0.4",
+  "createdAt": "2026-05-24",
+  "dataPolicy": "Official Bundesland-level Schulferien only. School-specific dates are excluded.",
+  "notes": [
+    "endDate is inclusive for app display.",
+    "When generating ICS, convert endDate to DTEND as the following day.",
+    "The official Thüringen page states that first and last holiday days are shown.",
+    "Ferientage zur freien Verfügung are excluded because the official page states that the Schulkonferenz decides their use.",
+    "State-wide schulfreier Tag entries are included as state_school_free_day."
+  ],
+  "sources": [
+    {
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "secondarySourceUrl": "https://www.kmk.org/service/ferienregelung.html",
+      "legalTitle": "Ferienregelung für die Schulen des Freistaats Thüringen",
+      "formats": [
+        "HTML",
+        "ICS"
+      ],
+      "trustLevel": "official",
+      "availableSchoolYears": [
+        "2025/26",
+        "2026/27",
+        "2027/28",
+        "2028/29",
+        "2029/30"
+      ],
+      "lastCheckedAt": "2026-05-24",
+      "notes": "Official Thüringen page lists first and last holiday days for school years 2025/26 through 2029/30. The page states that the use of Ferientage zur freien Verfügung is decided by the Schulkonferenz; these school-specific/free-disposition days are excluded from the default dataset. The state-wide schulfreier Tag entries are included as state_school_free_day."
+    }
+  ],
+  "holidays": [
+    {
+      "id": "th-autumn-2025-26",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2025-10-06",
+      "endDate": "2025-10-18",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-christmas-2025-26",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2025-12-22",
+      "endDate": "2026-01-03",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-winter-2025-26",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Winterferien",
+        "en": "Winter holidays"
+      },
+      "startDate": "2026-02-16",
+      "endDate": "2026-02-21",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-easter-2025-26",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2026-04-07",
+      "endDate": "2026-04-17",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-school-free-2026-05-15",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2025/26",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "schulfreier Tag",
+        "en": "School-free day"
+      },
+      "startDate": "2026-05-15",
+      "endDate": "2026-05-15",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official state-wide school-free day."
+    },
+    {
+      "id": "th-summer-2025-26",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2026-07-04",
+      "endDate": "2026-08-14",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-autumn-2026-27",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-24",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-christmas-2026-27",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2026-12-23",
+      "endDate": "2027-01-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-winter-2026-27",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Winterferien",
+        "en": "Winter holidays"
+      },
+      "startDate": "2027-02-01",
+      "endDate": "2027-02-06",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-easter-2026-27",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2027-03-22",
+      "endDate": "2027-04-03",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-school-free-2027-05-07",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2026/27",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "schulfreier Tag",
+        "en": "School-free day"
+      },
+      "startDate": "2027-05-07",
+      "endDate": "2027-05-07",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official state-wide school-free day."
+    },
+    {
+      "id": "th-summer-2026-27",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2026/27",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2027-07-10",
+      "endDate": "2027-08-20",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-autumn-2027-28",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2027-10-09",
+      "endDate": "2027-10-23",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-christmas-2027-28",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2027-12-23",
+      "endDate": "2027-12-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-winter-2027-28",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Winterferien",
+        "en": "Winter holidays"
+      },
+      "startDate": "2028-02-07",
+      "endDate": "2028-02-12",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-easter-2027-28",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2028-04-03",
+      "endDate": "2028-04-15",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-school-free-2028-05-26",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2027/28",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "schulfreier Tag",
+        "en": "School-free day"
+      },
+      "startDate": "2028-05-26",
+      "endDate": "2028-05-26",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official state-wide school-free day."
+    },
+    {
+      "id": "th-summer-2027-28",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2027/28",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2028-07-22",
+      "endDate": "2028-09-01",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-autumn-2028-29",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2028-10-23",
+      "endDate": "2028-11-03",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-christmas-2028-29",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2028-12-23",
+      "endDate": "2029-01-05",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-winter-2028-29",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Winterferien",
+        "en": "Winter holidays"
+      },
+      "startDate": "2029-02-12",
+      "endDate": "2029-02-17",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-easter-2028-29",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2029-03-26",
+      "endDate": "2029-04-07",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-school-free-2029-05-11",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2028/29",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "schulfreier Tag",
+        "en": "School-free day"
+      },
+      "startDate": "2029-05-11",
+      "endDate": "2029-05-11",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official state-wide school-free day."
+    },
+    {
+      "id": "th-summer-2028-29",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2028/29",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2029-07-21",
+      "endDate": "2029-08-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-autumn-2029-30",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2029-10-22",
+      "endDate": "2029-11-03",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-christmas-2029-30",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2029-12-22",
+      "endDate": "2030-01-04",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-winter-2029-30",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Winterferien",
+        "en": "Winter holidays"
+      },
+      "startDate": "2030-02-11",
+      "endDate": "2030-02-16",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-easter-2029-30",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2030-04-08",
+      "endDate": "2030-04-20",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    },
+    {
+      "id": "th-school-free-2030-05-31",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2029/30",
+      "category": "state_school_free_day",
+      "type": "other",
+      "name": {
+        "de": "schulfreier Tag",
+        "en": "School-free day"
+      },
+      "startDate": "2030-05-31",
+      "endDate": "2030-05-31",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Official state-wide school-free day."
+    },
+    {
+      "id": "th-summer-2029-30",
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "schoolYear": "2029/30",
+      "category": "school_holiday",
+      "type": "summer",
+      "name": {
+        "de": "Sommerferien",
+        "en": "Summer holidays"
+      },
+      "startDate": "2030-07-13",
+      "endDate": "2030-08-23",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Thüringer Ministerium für Bildung, Wissenschaft und Kultur",
+      "sourceUrl": "https://bildung.thueringen.de/schule/schulwesen/ferien",
+      "lastCheckedAt": "2026-05-24",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": ""
+    }
+  ]
+}
