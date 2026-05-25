@@ -396,18 +396,31 @@ export default function App() {
     async function loadPublicHolidays() {
       setPublicHolidayDataset(null);
 
-      if (selectedCode !== "BY") {
-        return;
-      }
-
       try {
-        const response = await fetch("/data/public-holidays/bayern_2026.json");
+        const indexResponse = await fetch("/data/public-holidays/index.json");
 
-        if (!response.ok) {
+        if (!indexResponse.ok) {
           return;
         }
 
-        const data = await response.json();
+        const publicHolidayIndex = await indexResponse.json();
+        const matchingDataset = publicHolidayIndex.datasets?.find((item) => {
+          return item.bundeslandCode === selectedCode && item.year === 2026;
+        });
+
+        if (!matchingDataset) {
+          return;
+        }
+
+        const datasetResponse = await fetch(
+          `/data/public-holidays/${matchingDataset.jsonFile}`
+        );
+
+        if (!datasetResponse.ok) {
+          return;
+        }
+
+        const data = await datasetResponse.json();
         setPublicHolidayDataset(data);
       } catch {
         setPublicHolidayDataset(null);
