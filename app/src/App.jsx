@@ -199,9 +199,7 @@ function getMonthKeysForHoliday(holiday) {
   return keys;
 }
 
-function getCalendarMonthKeys() {
-  const calendarYear = TODAY.getFullYear();
-
+function getCalendarMonthKeys(calendarYear) {
   return Array.from({ length: 12 }, (_, index) => {
     return `${calendarYear}-${String(index + 1).padStart(2, "0")}`;
   });
@@ -256,8 +254,8 @@ function findHolidayForDate(date, holidays, publicHolidays = []) {
   return null;
 }
 
-function HolidayCalendar({ holidays, publicHolidays = [] }) {
-  const monthKeys = useMemo(() => getCalendarMonthKeys(), []);
+function HolidayCalendar({ holidays, publicHolidays = [], selectedYear }) {
+  const monthKeys = useMemo(() => getCalendarMonthKeys(selectedYear), [selectedYear]);
 
   if (monthKeys.length === 0) {
     return <p className="empty-state">Keine kommenden Ferien für die Kalenderansicht gefunden.</p>;
@@ -325,6 +323,10 @@ function HolidayCalendar({ holidays, publicHolidays = [] }) {
 export default function App() {
   const [index, setIndex] = useState(null);
   const [selectedCode, setSelectedCode] = useState("BY");
+  const [selectedYear, setSelectedYear] = useState(TODAY.getFullYear());
+  const [availablePublicHolidayYears, setAvailablePublicHolidayYears] = useState([
+    TODAY.getFullYear(),
+  ]);
   const [viewMode, setViewMode] = useState("list");
   const [dataset, setDataset] = useState(null);
   const [publicHolidayDataset, setPublicHolidayDataset] = useState(null);
@@ -398,8 +400,21 @@ export default function App() {
         }
 
         const publicHolidayIndex = await indexResponse.json();
+        const years = Array.from(
+          new Set((publicHolidayIndex.datasets || []).map((item) => item.year))
+        ).sort();
+
+        if (years.length > 0) {
+          setAvailablePublicHolidayYears(years);
+
+          if (!years.includes(selectedYear)) {
+            setSelectedYear(years[0]);
+            return;
+          }
+        }
+
         const matchingDataset = publicHolidayIndex.datasets?.find((item) => {
-          return item.bundeslandCode === selectedCode && item.year === 2026;
+          return item.bundeslandCode === selectedCode && item.year === selectedYear;
         });
 
         if (!matchingDataset) {
@@ -422,7 +437,7 @@ export default function App() {
     }
 
     loadPublicHolidays();
-  }, [selectedCode]);
+  }, [selectedCode, selectedYear]);
 
   const holidays = useMemo(() => {
     return dataset?.holidays
@@ -549,10 +564,24 @@ export default function App() {
           <div className="section-header overview-header">
             <div>
               <p className="eyebrow">Übersicht</p>
-              <h2>{viewMode === "list" ? "Alle kommenden Termine" : `Kalender ${TODAY.getFullYear()}`}</h2>
+              <h2>{viewMode === "list" ? "Alle kommenden Termine" : `Kalender ${selectedYear}`}</h2>
             </div>
 
             <div className="view-controls">
+              <label className="year-select">
+                <span>Jahr</span>
+                <select
+                  value={selectedYear}
+                  onChange={(event) => setSelectedYear(Number(event.target.value))}
+                >
+                  {availablePublicHolidayYears.map((year) => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  ))}
+                </select>
+              </label>
+
               <div className="view-toggle" aria-label="Ansicht wechseln">
                 <button
                   className={viewMode === "list" ? "active" : ""}
@@ -626,6 +655,7 @@ export default function App() {
             <HolidayCalendar
               holidays={holidays}
               publicHolidays={publicHolidayDataset?.holidays || []}
+              selectedYear={selectedYear}
             />
           )}
         </section>

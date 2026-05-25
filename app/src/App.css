@@ -746,3 +746,30 @@ select:focus {
   color: #53606f;
   font-weight: 800;
 }
+
+.year-select {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 4px 4px 4px 12px;
+  color: #596676;
+  background: #f1eadf;
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  font-weight: 800;
+}
+
+.year-select span {
+  font-size: 0.9rem;
+}
+
+.year-select select {
+  width: auto;
+  min-width: 96px;
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 32px 8px 12px;
+  background: white;
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(40, 55, 85, 0.08);
+}
