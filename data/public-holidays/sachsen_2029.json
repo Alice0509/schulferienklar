@@ -1,0 +1,154 @@
+{
+  "datasetName": "schulferienklar_public_holidays_sachsen_2029",
+  "version": "0.1",
+  "createdAt": "2026-05-25",
+  "bundeslandCode": "SN",
+  "bundeslandName": "Sachsen",
+  "year": 2029,
+  "dataPolicy": "Statutory public holidays for the Bundesland. Regional/local exceptions are marked and excluded from default calendar unless state-wide.",
+  "sources": [
+    {
+      "sourceName": "Consolidated German public holiday overview by Bundesland",
+      "sourceUrl": "https://www.feiertage-deutschland.de/2029/",
+      "secondarySourceUrl": "https://ferien-deutschland.com/feiertage-2029/",
+      "trustLevel": "reference",
+      "lastCheckedAt": "2026-05-25",
+      "notes": "Dates generated from nationwide German public holidays and Bundesland-specific statutory holiday mappings for 2029. Regional/local exceptions are marked separately."
+    }
+  ],
+  "holidays": [
+    {
+      "id": "sn-public-2029-new-year",
+      "name": {
+        "de": "Neujahr",
+        "en": "New Year's Day"
+      },
+      "date": "2029-01-01",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "sn-public-2029-good-friday",
+      "name": {
+        "de": "Karfreitag",
+        "en": "Good Friday"
+      },
+      "date": "2029-03-30",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "sn-public-2029-easter-monday",
+      "name": {
+        "de": "Ostermontag",
+        "en": "Easter Monday"
+      },
+      "date": "2029-04-02",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "sn-public-2029-labour-day",
+      "name": {
+        "de": "Tag der Arbeit",
+        "en": "Labour Day"
+      },
+      "date": "2029-05-01",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "sn-public-2029-ascension",
+      "name": {
+        "de": "Christi Himmelfahrt",
+        "en": "Ascension Day"
+      },
+      "date": "2029-05-10",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "sn-public-2029-pentecost-monday",
+      "name": {
+        "de": "Pfingstmontag",
+        "en": "Whit Monday"
+      },
+      "date": "2029-05-21",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "sn-public-2029-corpus-christi",
+      "name": {
+        "de": "Fronleichnam",
+        "en": "Corpus Christi"
+      },
+      "date": "2029-05-31",
+      "type": "public_holiday",
+      "scope": "regional",
+      "includeInDefaultCalendar": false,
+      "notes": "Regional public holiday only in selected Catholic municipalities/areas."
+    },
+    {
+      "id": "sn-public-2029-german-unity",
+      "name": {
+        "de": "Tag der Deutschen Einheit",
+        "en": "German Unity Day"
+      },
+      "date": "2029-10-03",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "sn-public-2029-reformation-day",
+      "name": {
+        "de": "Reformationstag",
+        "en": "Reformation Day"
+      },
+      "date": "2029-10-31",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "sn-public-2029-repentance-day",
+      "name": {
+        "de": "Buß- und Bettag",
+        "en": "Repentance and Prayer Day"
+      },
+      "date": "2029-11-21",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "sn-public-2029-christmas-day",
+      "name": {
+        "de": "1. Weihnachtsfeiertag",
+        "en": "Christmas Day"
+      },
+      "date": "2029-12-25",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "sn-public-2029-second-christmas-day",
+      "name": {
+        "de": "2. Weihnachtsfeiertag",
+        "en": "Second Day of Christmas"
+      },
+      "date": "2029-12-26",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    }
+  ]
+}
