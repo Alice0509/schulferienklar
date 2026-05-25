@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-05-25",
+  "totalDatasets": 1,
+  "totalEvents": 13,
+  "datasets": [
+    {
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "year": 2026,
+      "version": "0.1",
+      "jsonFile": "bayern_2026.json",
+      "eventCount": 13,
+      "defaultCalendarEventCount": 12,
+      "scopes": [
+        "regional",
+        "statewide"
+      ]
+    }
+  ]
+}

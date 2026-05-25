@@ -163,6 +163,7 @@ if (!fs.existsSync(publicHolidaysDir)) {
 const jsonFiles = fs
   .readdirSync(publicHolidaysDir)
   .filter((file) => file.endsWith(".json"))
+  .filter((file) => file !== "index.json")
   .sort();
 
 console.log(`Checking ${jsonFiles.length} public holiday JSON files in data/public-holidays...\n`);
