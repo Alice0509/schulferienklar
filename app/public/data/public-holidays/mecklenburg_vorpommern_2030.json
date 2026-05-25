@@ -1,0 +1,142 @@
+{
+  "datasetName": "schulferienklar_public_holidays_mecklenburg_vorpommern_2030",
+  "version": "0.1",
+  "createdAt": "2026-05-25",
+  "bundeslandCode": "MV",
+  "bundeslandName": "Mecklenburg-Vorpommern",
+  "year": 2030,
+  "dataPolicy": "Statutory public holidays for the Bundesland. Regional/local exceptions are marked and excluded from default calendar unless state-wide.",
+  "sources": [
+    {
+      "sourceName": "Consolidated German public holiday overview by Bundesland",
+      "sourceUrl": "https://www.feiertage-deutschland.de/2030/",
+      "secondarySourceUrl": "https://date.nager.at/PublicHoliday/Germany/2030",
+      "trustLevel": "reference",
+      "lastCheckedAt": "2026-05-25",
+      "notes": "Dates generated from nationwide German public holidays and Bundesland-specific statutory holiday mappings for 2030. Regional/local exceptions are marked separately."
+    }
+  ],
+  "holidays": [
+    {
+      "id": "mv-public-2030-new-year",
+      "name": {
+        "de": "Neujahr",
+        "en": "New Year's Day"
+      },
+      "date": "2030-01-01",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "mv-public-2030-international-womens-day",
+      "name": {
+        "de": "Internationaler Frauentag",
+        "en": "International Women's Day"
+      },
+      "date": "2030-03-08",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "mv-public-2030-good-friday",
+      "name": {
+        "de": "Karfreitag",
+        "en": "Good Friday"
+      },
+      "date": "2030-04-19",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "mv-public-2030-easter-monday",
+      "name": {
+        "de": "Ostermontag",
+        "en": "Easter Monday"
+      },
+      "date": "2030-04-22",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "mv-public-2030-labour-day",
+      "name": {
+        "de": "Tag der Arbeit",
+        "en": "Labour Day"
+      },
+      "date": "2030-05-01",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "mv-public-2030-ascension",
+      "name": {
+        "de": "Christi Himmelfahrt",
+        "en": "Ascension Day"
+      },
+      "date": "2030-05-30",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "mv-public-2030-pentecost-monday",
+      "name": {
+        "de": "Pfingstmontag",
+        "en": "Whit Monday"
+      },
+      "date": "2030-06-10",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "mv-public-2030-german-unity",
+      "name": {
+        "de": "Tag der Deutschen Einheit",
+        "en": "German Unity Day"
+      },
+      "date": "2030-10-03",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "mv-public-2030-reformation-day",
+      "name": {
+        "de": "Reformationstag",
+        "en": "Reformation Day"
+      },
+      "date": "2030-10-31",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "mv-public-2030-christmas-day",
+      "name": {
+        "de": "1. Weihnachtsfeiertag",
+        "en": "Christmas Day"
+      },
+      "date": "2030-12-25",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "mv-public-2030-second-christmas-day",
+      "name": {
+        "de": "2. Weihnachtsfeiertag",
+        "en": "Second Day of Christmas"
+      },
+      "date": "2030-12-26",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    }
+  ]
+}
