@@ -199,18 +199,12 @@ function getMonthKeysForHoliday(holiday) {
   return keys;
 }
 
-function getCalendarMonthKeys(holidays) {
-  const upcoming = holidays
-    .filter((holiday) => parseDate(holiday.endDate) >= TODAY)
-    .sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate));
+function getCalendarMonthKeys() {
+  const calendarYear = TODAY.getFullYear();
 
-  const keys = new Set();
-
-  for (const holiday of upcoming.slice(0, 8)) {
-    getMonthKeysForHoliday(holiday).forEach((key) => keys.add(key));
-  }
-
-  return Array.from(keys).sort().slice(0, 10);
+  return Array.from({ length: 12 }, (_, index) => {
+    return `${calendarYear}-${String(index + 1).padStart(2, "0")}`;
+  });
 }
 
 function buildMonthCells(year, monthIndex) {
@@ -263,7 +257,7 @@ function findHolidayForDate(date, holidays, publicHolidays = []) {
 }
 
 function HolidayCalendar({ holidays, publicHolidays = [] }) {
-  const monthKeys = useMemo(() => getCalendarMonthKeys(holidays), [holidays]);
+  const monthKeys = useMemo(() => getCalendarMonthKeys(), []);
 
   if (monthKeys.length === 0) {
     return <p className="empty-state">Keine kommenden Ferien für die Kalenderansicht gefunden.</p>;
@@ -555,7 +549,7 @@ export default function App() {
           <div className="section-header overview-header">
             <div>
               <p className="eyebrow">Übersicht</p>
-              <h2>{viewMode === "list" ? "Alle kommenden Termine" : "Kalenderansicht"}</h2>
+              <h2>{viewMode === "list" ? "Alle kommenden Termine" : `Kalender ${TODAY.getFullYear()}`}</h2>
             </div>
 
             <div className="view-controls">
