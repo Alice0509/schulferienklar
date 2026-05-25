@@ -1,0 +1,153 @@
+{
+  "datasetName": "schulferienklar_public_holidays_baden_wuerttemberg_2028",
+  "version": "0.1",
+  "createdAt": "2026-05-25",
+  "bundeslandCode": "BW",
+  "bundeslandName": "Baden-Württemberg",
+  "year": 2028,
+  "dataPolicy": "Statutory public holidays for the Bundesland. Regional/local exceptions are marked and excluded from default calendar unless state-wide.",
+  "sources": [
+    {
+      "sourceName": "Consolidated German public holiday overview by Bundesland",
+      "sourceUrl": "https://www.feiertage-deutschland.de/2028/",
+      "secondarySourceUrl": "https://www.dgb.de/service/ratgeber/feiertage/",
+      "trustLevel": "reference",
+      "lastCheckedAt": "2026-05-25",
+      "notes": "Dates generated from nationwide German public holidays and Bundesland-specific statutory holiday mappings for 2028. Regional/local exceptions are marked separately."
+    }
+  ],
+  "holidays": [
+    {
+      "id": "bw-public-2028-new-year",
+      "name": {
+        "de": "Neujahr",
+        "en": "New Year's Day"
+      },
+      "date": "2028-01-01",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "bw-public-2028-epiphany",
+      "name": {
+        "de": "Heilige Drei Könige",
+        "en": "Epiphany"
+      },
+      "date": "2028-01-06",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "bw-public-2028-good-friday",
+      "name": {
+        "de": "Karfreitag",
+        "en": "Good Friday"
+      },
+      "date": "2028-04-14",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "bw-public-2028-easter-monday",
+      "name": {
+        "de": "Ostermontag",
+        "en": "Easter Monday"
+      },
+      "date": "2028-04-17",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "bw-public-2028-labour-day",
+      "name": {
+        "de": "Tag der Arbeit",
+        "en": "Labour Day"
+      },
+      "date": "2028-05-01",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "bw-public-2028-ascension",
+      "name": {
+        "de": "Christi Himmelfahrt",
+        "en": "Ascension Day"
+      },
+      "date": "2028-05-25",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "bw-public-2028-pentecost-monday",
+      "name": {
+        "de": "Pfingstmontag",
+        "en": "Whit Monday"
+      },
+      "date": "2028-06-05",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "bw-public-2028-corpus-christi",
+      "name": {
+        "de": "Fronleichnam",
+        "en": "Corpus Christi"
+      },
+      "date": "2028-06-15",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "bw-public-2028-german-unity",
+      "name": {
+        "de": "Tag der Deutschen Einheit",
+        "en": "German Unity Day"
+      },
+      "date": "2028-10-03",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "bw-public-2028-all-saints",
+      "name": {
+        "de": "Allerheiligen",
+        "en": "All Saints' Day"
+      },
+      "date": "2028-11-01",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "bw-public-2028-christmas-day",
+      "name": {
+        "de": "1. Weihnachtsfeiertag",
+        "en": "Christmas Day"
+      },
+      "date": "2028-12-25",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    },
+    {
+      "id": "bw-public-2028-second-christmas-day",
+      "name": {
+        "de": "2. Weihnachtsfeiertag",
+        "en": "Second Day of Christmas"
+      },
+      "date": "2028-12-26",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true
+    }
+  ]
+}
