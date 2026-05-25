@@ -13,7 +13,95 @@ function parseDate(value) {
 }
 
 function toDateKey(date) {
-  return date.toISOString().slice(0, 10);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+function addDays(date, amount) {
+  const next = new Date(date);
+  next.setDate(next.getDate() + amount);
+  next.setHours(0, 0, 0, 0);
+  return next;
+}
+
+function isWeekend(date) {
+  const day = date.getDay();
+  return day === 0 || day === 6;
+}
+
+function findPublicHolidayForDate(date, publicHolidays = []) {
+  const key = toDateKey(date);
+
+  return publicHolidays.find((holiday) => {
+    return holiday.includeInDefaultCalendar && holiday.date === key;
+  });
+}
+
+function isDefaultFreeDay(date, publicHolidays = []) {
+  return isWeekend(date) || Boolean(findPublicHolidayForDate(date, publicHolidays));
+}
+
+function getEffectiveFreePeriod(holiday, publicHolidays = []) {
+  if (!holiday) return null;
+
+  let start = parseDate(holiday.startDate);
+  let end = parseDate(holiday.endDate);
+
+  while (isDefaultFreeDay(addDays(start, -1), publicHolidays)) {
+    start = addDays(start, -1);
+  }
+
+  while (isDefaultFreeDay(addDays(end, 1), publicHolidays)) {
+    end = addDays(end, 1);
+  }
+
+  return {
+    startDate: toDateKey(start),
+    endDate: toDateKey(end),
+    startsBeforeOfficialHoliday: toDateKey(start) < holiday.startDate,
+    endsAfterOfficialHoliday: toDateKey(end) > holiday.endDate,
+  };
+}
+
+function getFreePeriodStatus(holiday, publicHolidays = []) {
+  const period = getEffectiveFreePeriod(holiday, publicHolidays);
+
+  if (!period) {
+    return null;
+  }
+
+  const start = parseDate(period.startDate);
+  const end = parseDate(period.endDate);
+
+  if (start <= TODAY && TODAY <= end) {
+    return {
+      value: "Heute",
+      label: "freie Zeit läuft",
+      state: "active",
+      period,
+    };
+  }
+
+  const daysUntil = daysBetween(TODAY, start);
+
+  if (daysUntil === 0) {
+    return {
+      value: "Heute",
+      label: "freie Zeit startet",
+      state: "today",
+      period,
+    };
+  }
+
+  return {
+    value: String(daysUntil),
+    label: daysUntil === 1 ? "Tag bis zur freien Zeit" : "Tage bis zur freien Zeit",
+    state: "upcoming",
+    period,
+  };
 }
 
 function formatDate(value) {
@@ -44,6 +132,10 @@ function getDaysUntil(holiday) {
   return daysBetween(TODAY, parseDate(holiday.startDate));
 }
 
+function formatDayCount(count, singular = "Tag", plural = "Tage") {
+  return `${count} ${count === 1 ? singular : plural}`;
+}
+
 function getHolidayLabel(holiday) {
   return holiday?.name?.de || holiday?.type || "Ferien";
 }
@@ -71,6 +163,10 @@ function getHeroPattern(code) {
 
 function getHolidayTone(holiday) {
   if (!holiday) return "";
+
+  if (holiday.category === "public_holiday") {
+    return "public";
+  }
 
   if (holiday.category === "state_school_free_day") {
     return "special";
@@ -139,15 +235,34 @@ function buildMonthCells(year, monthIndex) {
   return cells;
 }
 
-function findHolidayForDate(date, holidays) {
+function findHolidayForDate(date, holidays, publicHolidays = []) {
   const key = toDateKey(date);
 
-  return holidays.find((holiday) => {
+  const schoolHoliday = holidays.find((holiday) => {
     return holiday.startDate <= key && key <= holiday.endDate;
   });
+
+  if (schoolHoliday) {
+    return schoolHoliday;
+  }
+
+  const publicHoliday = publicHolidays.find((holiday) => {
+    return holiday.includeInDefaultCalendar && holiday.date === key;
+  });
+
+  if (publicHoliday) {
+    return {
+      ...publicHoliday,
+      category: "public_holiday",
+      startDate: publicHoliday.date,
+      endDate: publicHoliday.date,
+    };
+  }
+
+  return null;
 }
 
-function HolidayCalendar({ holidays }) {
+function HolidayCalendar({ holidays, publicHolidays = [] }) {
   const monthKeys = useMemo(() => getCalendarMonthKeys(holidays), [holidays]);
 
   if (monthKeys.length === 0) {
@@ -158,6 +273,7 @@ function HolidayCalendar({ holidays }) {
     <div className="calendar-view">
       <div className="calendar-legend">
         <span><i className="legend-swatch legend-holiday" /> Ferien</span>
+        <span><i className="legend-swatch legend-public" /> Feiertag</span>
         <span><i className="legend-swatch legend-special" /> Schulfreier Tag</span>
       </div>
 
@@ -184,7 +300,7 @@ function HolidayCalendar({ holidays }) {
                     return <span className="calendar-day empty" key={`empty-${index}`} />;
                   }
 
-                  const holiday = findHolidayForDate(date, holidays);
+                  const holiday = findHolidayForDate(date, holidays, publicHolidays);
                   const tone = getHolidayTone(holiday);
                   const isToday = toDateKey(date) === toDateKey(TODAY);
 
@@ -217,6 +333,7 @@ export default function App() {
   const [selectedCode, setSelectedCode] = useState("BY");
   const [viewMode, setViewMode] = useState("list");
   const [dataset, setDataset] = useState(null);
+  const [publicHolidayDataset, setPublicHolidayDataset] = useState(null);
   const [loading, setLoading] = useState(true);
   const [datasetLoading, setDatasetLoading] = useState(false);
   const [error, setError] = useState("");
@@ -275,6 +392,31 @@ export default function App() {
     loadDataset();
   }, [selectedMeta]);
 
+  useEffect(() => {
+    async function loadPublicHolidays() {
+      setPublicHolidayDataset(null);
+
+      if (selectedCode !== "BY") {
+        return;
+      }
+
+      try {
+        const response = await fetch("/data/public-holidays/bayern_2026.json");
+
+        if (!response.ok) {
+          return;
+        }
+
+        const data = await response.json();
+        setPublicHolidayDataset(data);
+      } catch {
+        setPublicHolidayDataset(null);
+      }
+    }
+
+    loadPublicHolidays();
+  }, [selectedCode]);
+
   const holidays = useMemo(() => {
     return dataset?.holidays
       ? [...dataset.holidays].sort(
@@ -288,6 +430,14 @@ export default function App() {
   const upcomingHolidays = useMemo(() => {
     return holidays.filter((holiday) => parseDate(holiday.endDate) >= TODAY).slice(0, 8);
   }, [holidays]);
+
+  const todayPublicHoliday = useMemo(() => {
+    return findPublicHolidayForDate(TODAY, publicHolidayDataset?.holidays || []);
+  }, [publicHolidayDataset]);
+
+  const nextHolidayFreeStatus = useMemo(() => {
+    return getFreePeriodStatus(nextHoliday, publicHolidayDataset?.holidays || []);
+  }, [nextHoliday, publicHolidayDataset]);
 
   const pattern = getHeroPattern(selectedCode);
 
@@ -341,22 +491,42 @@ export default function App() {
 
                 <div className="metric-row">
                   <div>
-                    <span className="metric-number">
-                      {Math.max(getDaysUntil(nextHoliday), 0)}
+                    <span className="metric-number metric-word">
+                      {nextHolidayFreeStatus?.value || Math.max(getDaysUntil(nextHoliday), 0)}
                     </span>
-                    <span className="metric-label">Tage bis zum Start</span>
+                    <span className="metric-label">
+                      {nextHolidayFreeStatus?.label ||
+                        (Math.max(getDaysUntil(nextHoliday), 0) === 1
+                          ? "Tag bis zum Start"
+                          : "Tage bis zum Start")}
+                    </span>
                   </div>
                   <div>
                     <span className="metric-number">
                       {getHolidayDuration(nextHoliday)}
                     </span>
-                    <span className="metric-label">Ferientage</span>
+                    <span className="metric-label">
+                      {getHolidayDuration(nextHoliday) === 1 ? "Ferientag" : "Ferientage"}
+                    </span>
                   </div>
                 </div>
 
                 <p className="date-range">
-                  {formatDate(nextHoliday.startDate)} – {formatDate(nextHoliday.endDate)}
+                  Offizielle Ferien: {formatDate(nextHoliday.startDate)} – {formatDate(nextHoliday.endDate)}
                 </p>
+
+                {nextHolidayFreeStatus?.period?.startsBeforeOfficialHoliday && (
+                  <p className="free-period-note">
+                    Freie Zeit: {formatDate(nextHolidayFreeStatus.period.startDate)} –{" "}
+                    {formatDate(nextHolidayFreeStatus.period.endDate)}
+                  </p>
+                )}
+
+                {todayPublicHoliday && (
+                  <p className="today-note">
+                    Heute ist Feiertag: {todayPublicHoliday.name.de}
+                  </p>
+                )}
               </>
             ) : (
               <p>Keine kommenden Ferien gefunden.</p>
@@ -417,13 +587,28 @@ export default function App() {
                     </div>
 
                     <div className="holiday-meta">
-                      <span>{getHolidayDuration(holiday)} Tage</span>
+                      <span>{formatDayCount(getHolidayDuration(holiday))}</span>
                       <strong>
-                        {isActive
-                          ? "läuft jetzt"
-                          : daysUntil === 0
-                            ? "startet heute"
-                            : `in ${daysUntil} Tagen`}
+                        {(() => {
+                          const freeStatus = getFreePeriodStatus(
+                            holiday,
+                            publicHolidayDataset?.holidays || []
+                          );
+
+                          if (isActive || freeStatus?.state === "active") {
+                            return "läuft jetzt";
+                          }
+
+                          if (freeStatus?.state === "today") {
+                            return "startet heute";
+                          }
+
+                          return freeStatus?.value && Number.isFinite(Number(freeStatus.value))
+                            ? `in ${freeStatus.value} Tagen`
+                            : daysUntil === 0
+                              ? "startet heute"
+                              : `in ${daysUntil} Tagen`;
+                        })()}
                       </strong>
                     </div>
                   </article>
@@ -431,7 +616,10 @@ export default function App() {
               })}
             </div>
           ) : (
-            <HolidayCalendar holidays={holidays} />
+            <HolidayCalendar
+              holidays={holidays}
+              publicHolidays={publicHolidayDataset?.holidays || []}
+            />
           )}
         </section>
 

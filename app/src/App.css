@@ -685,3 +685,64 @@ select:focus {
 .calendar-day.tone-special::before {
   background: rgba(255, 198, 77, 0.52);
 }
+
+.legend-public {
+  background: rgba(255, 236, 97, 0.62);
+}
+
+.calendar-day.tone-public::before {
+  background: rgba(255, 236, 97, 0.62);
+}
+
+/* Today should not hide the holiday/highlighter layer. */
+.calendar-day.is-today {
+  outline: none;
+}
+
+.calendar-day.is-today::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border: 2px solid rgba(31, 111, 100, 0.55);
+  border-radius: 14px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.calendar-day.is-today.is-highlighted::after {
+  border-color: rgba(31, 111, 100, 0.7);
+}
+
+.calendar-day.is-today span::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(31, 111, 100, 0.85);
+  transform: translateX(-50%);
+}
+
+.today-note {
+  margin: 14px 0 0;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: #675211;
+  background: rgba(255, 236, 97, 0.45);
+  font-weight: 800;
+  font-size: 0.92rem;
+}
+
+.metric-word {
+  font-size: clamp(1.7rem, 3vw, 2.7rem);
+  letter-spacing: -0.06em;
+}
+
+.free-period-note {
+  margin: 10px 0 0;
+  color: #53606f;
+  font-weight: 800;
+}
