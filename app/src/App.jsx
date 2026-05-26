@@ -296,12 +296,14 @@ function HolidayCalendar({
 
   return (
     <div className="calendar-view">
-      <div className="calendar-legend">
-        <span><i className="legend-swatch legend-holiday" /> Ferien</span>
-        <span><i className="legend-swatch legend-public" /> Feiertag</span>
-        <span><i className="legend-swatch legend-special" /> Unterrichtsfrei</span>
-        <span><i className="legend-outline" /> freie Zeit rund um Ferien</span>
-      </div>
+      {showLegend && (
+        <div className="calendar-legend">
+          <span><i className="legend-swatch legend-holiday" /> Ferien</span>
+          <span><i className="legend-swatch legend-public" /> Feiertag</span>
+          <span><i className="legend-swatch legend-special" /> Unterrichtsfrei</span>
+          <span><i className="legend-outline" /> freie Zeit rund um Ferien</span>
+        </div>
+      )}
 
       <div className="calendar-grid">
         {monthKeys.map((key) => {
