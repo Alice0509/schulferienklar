@@ -959,3 +959,39 @@ select:focus {
   color: #1f6f64;
   text-decoration: underline;
 }
+
+.site-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding-top: 34px;
+  padding-bottom: 34px;
+  text-align: center;
+}
+
+.footer-copyright,
+.footer-credit {
+  margin: 0;
+  color: #697581;
+  font-weight: 700;
+}
+
+.footer-credit {
+  font-weight: 600;
+}
+
+.site-footer .footer-links {
+  justify-content: center;
+}
+
+.site-footer .footer-links a {
+  color: #697581;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.site-footer .footer-links a:hover {
+  color: #1f6f64;
+  text-decoration: underline;
+}
