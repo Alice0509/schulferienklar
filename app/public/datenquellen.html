@@ -14,7 +14,7 @@
       }
 
       main {
-        width: min(820px, calc(100% - 32px));
+        width: min(860px, calc(100% - 32px));
         margin: 0 auto;
         padding: 48px 0;
       }
@@ -26,8 +26,8 @@
 
       .card {
         border-radius: 28px;
-        padding: 28px;
-        background: rgba(255, 255, 255, 0.82);
+        padding: 30px;
+        background: rgba(255, 255, 255, 0.84);
         border: 1px solid rgba(23, 32, 51, 0.08);
         box-shadow: 0 20px 60px rgba(40, 55, 85, 0.1);
       }
@@ -36,6 +36,10 @@
         margin-top: 0;
         letter-spacing: -0.05em;
         line-height: 1;
+      }
+
+      h2 {
+        margin-top: 2rem;
       }
 
       code {
@@ -52,6 +56,17 @@
         display: inline-block;
         margin-bottom: 20px;
       }
+
+      .note {
+        border-radius: 18px;
+        padding: 16px 18px;
+        background: rgba(232, 247, 240, 0.8);
+        border: 1px solid rgba(31, 111, 100, 0.18);
+      }
+
+      .muted {
+        color: #66717f;
+      }
     </style>
   </head>
   <body>
@@ -62,38 +77,105 @@
         <h1>Datenquellen</h1>
 
         <p>
-          Schulferienklar zeigt Schulferien, Feiertage und freie Zeiten für deutsche
-          Bundesländer. Die Daten werden im Projekt als strukturierte JSON-Dateien
-          gepflegt und vor der Veröffentlichung automatisch validiert.
+          Schulferienklar zeigt Schulferien, gesetzliche Feiertage und zusammenhängende
+          freie Zeiten für deutsche Bundesländer. Die Daten werden als strukturierte
+          JSON-Dateien gepflegt und vor der Veröffentlichung automatisch validiert.
         </p>
+
+        <div class="note">
+          <strong>Hinweis:</strong>
+          Schulferienklar ist ein Informationsangebot. Für verbindliche Auskünfte sind
+          die offiziellen Veröffentlichungen der jeweiligen Bundesländer maßgeblich.
+        </div>
 
         <h2>Schulferien</h2>
         <p>
-          Die Schulferien-Datensätze befinden sich im Repository unter
-          <code>data/holidays</code>. Zu jedem Bundesland gibt es JSON- und CSV-Dateien
-          sowie Validierungsnotizen.
+          Die Schulferien-Daten liegen im Repository unter <code>data/holidays</code>.
+          Sie enthalten Datensätze für alle 16 Bundesländer.
         </p>
+
+        <ul>
+          <li>alle 16 deutschen Bundesländer</li>
+          <li>Ferien, unterrichtsfreie Tage und landesspezifische Besonderheiten</li>
+          <li>JSON- und CSV-Dateien pro Bundesland</li>
+          <li>zusätzliche Validierungsnotizen je Datensatz</li>
+        </ul>
 
         <h2>Feiertage</h2>
         <p>
-          Die Feiertage befinden sich unter <code>data/public-holidays</code>.
-          Gesetzliche Feiertage werden nach Bundesland und Jahr gepflegt.
-          Regionale oder lokale Feiertage werden als solche markiert und standardmäßig
-          nicht in der Kalenderansicht angezeigt, wenn sie nicht für das gesamte
-          Bundesland gelten.
+          Die Feiertags-Daten liegen unter <code>data/public-holidays</code>.
+          Sie werden nach Bundesland und Jahr gepflegt.
         </p>
 
-        <h2>Hinweis</h2>
+        <ul>
+          <li>alle 16 deutschen Bundesländer</li>
+          <li>Jahre 2026 bis 2030</li>
+          <li>landesweite, regionale und lokale Feiertage</li>
+          <li>automatisch erzeugte Index-Datei für die App</li>
+        </ul>
+
+        <h2>Regionale und lokale Feiertage</h2>
         <p>
-          Schulferienklar ist ein Informationsangebot. Trotz sorgfältiger Prüfung
-          können Fehler nicht vollständig ausgeschlossen werden. Für verbindliche
-          Auskünfte sind die offiziellen Veröffentlichungen der jeweiligen Bundesländer
-          maßgeblich.
+          Nicht jeder Feiertag gilt automatisch für ein gesamtes Bundesland. Einige
+          Feiertage gelten nur regional oder lokal, zum Beispiel in bestimmten Gemeinden
+          oder Städten.
         </p>
 
-        <h2>Projekt</h2>
         <p>
-          Der Quellcode und die Datenstruktur werden auf GitHub gepflegt.
+          Solche Feiertage sind in den Daten enthalten, werden aber in der
+          Standard-Kalenderansicht nicht automatisch als Feiertag markiert, wenn sie
+          nicht für das gesamte Bundesland gelten.
+        </p>
+
+        <p>Beispiele:</p>
+        <ul>
+          <li>
+            <strong>Mariä Himmelfahrt in Bayern:</strong> regional, abhängig von der
+            Gemeinde.
+          </li>
+          <li>
+            <strong>Augsburger Friedensfest:</strong> lokal, nur in Augsburg.
+          </li>
+          <li>
+            <strong>Fronleichnam in Teilen von Sachsen und Thüringen:</strong> regional.
+          </li>
+        </ul>
+
+        <h2>Freie Zeit rund um Ferien</h2>
+        <p>
+          Schulferienklar unterscheidet zwischen offiziellen Ferien und tatsächlich
+          zusammenhängenden freien Zeiten. Wochenenden und gesetzliche Feiertage, die
+          direkt an Ferien angrenzen, können deshalb zusätzlich als freie Zeit sichtbar
+          gemacht werden.
+        </p>
+
+        <p>
+          Diese Darstellung soll bei der praktischen Planung helfen, ersetzt aber nicht
+          die offiziellen Ferien- oder Feiertagsregelungen.
+        </p>
+
+        <h2>Validierung</h2>
+        <p>
+          Vor der Veröffentlichung werden die Daten mit Validierungsskripten geprüft.
+          Dabei werden unter anderem Pflichtfelder, Datumsformate, Bundesland-Codes,
+          Duplikate und erlaubte Statuswerte kontrolliert.
+        </p>
+
+        <p>Verwendete Prüfskripte:</p>
+        <ul>
+          <li><code>scripts/validate-holidays.mjs</code></li>
+          <li><code>scripts/validate-public-holidays.mjs</code></li>
+        </ul>
+
+        <h2>Fehler melden</h2>
+        <p>
+          Wenn ein Datum fehlt oder falsch wirkt, kann ein Hinweis über die
+          <a href="https://www.leckere-koreanische-rezepte.de/de/support">Support-Seite</a>
+          gesendet werden.
+        </p>
+
+        <p class="muted">
+          Stand: MVP-Version. Die Datenstruktur und Darstellung werden weiter verbessert.
         </p>
       </section>
     </main>
