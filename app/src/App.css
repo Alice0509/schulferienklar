@@ -1203,3 +1203,28 @@ select:focus {
     padding: 13px 14px;
   }
 }
+
+.current-month-preview {
+  margin-bottom: 24px;
+}
+
+.current-month-preview .month-grid {
+  grid-template-columns: 1fr;
+}
+
+.current-month-preview .month-card {
+  border-color: rgba(31, 111, 100, 0.18);
+  background: rgba(232, 247, 240, 0.32);
+}
+
+.current-month-preview h3 {
+  margin: 0;
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  letter-spacing: -0.055em;
+}
+
+@media (max-width: 720px) {
+  .current-month-preview {
+    margin-bottom: 18px;
+  }
+}
