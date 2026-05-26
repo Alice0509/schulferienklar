@@ -934,3 +934,11 @@ select:focus {
   border-color: rgba(31, 111, 100, 0.24);
   border-width: 1.5px;
 }
+
+.legend-outline {
+  width: 22px;
+  height: 14px;
+  border: 1.5px dashed rgba(31, 111, 100, 0.28);
+  border-radius: 8px;
+  display: inline-block;
+}
