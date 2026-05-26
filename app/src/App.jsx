@@ -732,17 +732,20 @@ export default function App() {
         </div>
       </section>
 
-      <footer className="footer">
-        <span>Schulferienklar</span>
+      <footer className="footer site-footer">
+        <p className="footer-copyright">© 2026 Joan — All rights reserved.</p>
+
         <nav className="footer-links" aria-label="Rechtliche und weitere Informationen">
           <a href="/datenquellen.html">Datenquellen</a>
-          <a href="https://www.leckere-koreanische-rezepte.de/de/impressum">Impressum</a>
           <a href="https://www.leckere-koreanische-rezepte.de/de/datenschutzerklaerung">
             Datenschutz
           </a>
+          <a href="https://www.leckere-koreanische-rezepte.de/de/impressum">Impressum</a>
           <a href="https://www.leckere-koreanische-rezepte.de/de/support">Support</a>
           <a href="/ueber-uns.html">Über uns</a>
         </nav>
+
+        <p className="footer-credit">Designed &amp; developed by Joan.</p>
       </footer>
     </main>
   );
