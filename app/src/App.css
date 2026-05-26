@@ -995,3 +995,100 @@ select:focus {
   color: #1f6f64;
   text-decoration: underline;
 }
+
+@media (max-width: 720px) {
+  .hero {
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+
+  .brand-row {
+    margin-bottom: 28px;
+  }
+
+  .hero-content {
+    gap: 24px;
+  }
+
+  .hero-copy {
+    gap: 18px;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.1rem, 16vw, 5.4rem);
+    line-height: 0.9;
+    letter-spacing: -0.085em;
+  }
+
+  .hero-copy > p {
+    font-size: 1.08rem;
+    line-height: 1.55;
+  }
+
+  .selector-card {
+    margin-top: 6px;
+  }
+
+  .next-card {
+    margin-top: 8px;
+  }
+
+  .next-card .stat-grid {
+    gap: 12px;
+  }
+
+  .stat {
+    padding: 18px;
+  }
+
+  .content-grid {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-shell {
+    padding: 10px;
+  }
+
+  .hero {
+    border-radius: 28px;
+    padding: 24px 22px;
+  }
+
+  .brand-row {
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+
+  .brand-row .pill {
+    margin-top: 2px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.85rem, 15vw, 4.4rem);
+  }
+
+  .hero-copy > p {
+    font-size: 1rem;
+  }
+
+  .selector-card {
+    padding: 16px;
+    border-radius: 22px;
+  }
+
+  .selector-card select {
+    min-height: 54px;
+  }
+
+  .next-card {
+    padding: 22px;
+    border-radius: 26px;
+  }
+
+  .next-card h2 {
+    font-size: clamp(2.1rem, 12vw, 3.4rem);
+  }
+}
