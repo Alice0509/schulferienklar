@@ -734,7 +734,15 @@ export default function App() {
 
       <footer className="footer">
         <span>Schulferienklar</span>
-        <span>Offizielle Quellen · Bundesland-Daten · MVP</span>
+        <nav className="footer-links" aria-label="Rechtliche und weitere Informationen">
+          <a href="/datenquellen.html">Datenquellen</a>
+          <a href="https://www.leckere-koreanische-rezepte.de/de/impressum">Impressum</a>
+          <a href="https://www.leckere-koreanische-rezepte.de/de/datenschutzerklaerung">
+            Datenschutz
+          </a>
+          <a href="https://www.leckere-koreanische-rezepte.de/de/support">Support</a>
+          <a href="https://www.leckere-koreanische-rezepte.de/de/about-us">Über uns</a>
+        </nav>
       </footer>
     </main>
   );
