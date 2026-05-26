@@ -1,60 +1,93 @@
 # Schulferienklar
 
-Der klare Schulferienkalender für Deutschland.
+Schulferienklar ist eine kleine Web-App, die Schulferien, gesetzliche Feiertage und zusammenhängende freie Zeiten in Deutschland klar im Kalender sichtbar macht.
 
-Schulferienklar is a clean, source-transparent school holiday calendar for Germany.  
-The project starts data-first: official Bundesland-level school holiday data, clear data rules, and calendar-ready structures before the full web app.
+Website: https://www.schulferienklar.de/
 
-## Domain
+## Was macht Schulferienklar?
 
-https://schulferienklar.de
+Schulferienklar hilft Familien, Schüler:innen und allen, die freie Tage rund um Schulferien besser planen möchten.
 
-## Product goal
+Die App zeigt aktuell:
 
-Help people in Germany understand school holidays by Bundesland and use them for planning.
+- Schulferien für alle 16 Bundesländer
+- gesetzliche Feiertage für alle 16 Bundesländer von 2026 bis 2030
+- Auswahl nach Bundesland
+- Auswahl nach Jahr
+- Listenansicht und Kalenderansicht
+- visuelle Markierungen für Ferien, Feiertage, unterrichtsfreie Tage, Wochenenden und freie Zeiten rund um Ferien
 
-## MVP scope
+## Daten
 
-- Official school holidays by Bundesland
-- Source transparency
-- Data status per holiday event
-- Calendar-ready data structure for future `.ics` generation
-- German-first, English-second product direction
-- No user accounts in MVP
-- No school-specific movable holidays in the default dataset
-- No analytics or advertising in the first MVP
+Die Schulferien-Daten liegen unter:
 
-## Data principle
+```txt
+data/holidays
+```
 
-Official Bundesland-level data is the source of truth.
+Die Feiertags-Daten liegen unter:
 
-Convenience APIs may be used for comparison later, but they should not be the sole source of truth.
+```txt
+data/public-holidays
+```
 
-## Included in default dataset
+Die Feiertags-Daten unterscheiden zwischen:
 
-- Sommerferien
-- Herbstferien
-- Weihnachtsferien
-- Winterferien / Frühjahrsferien / Faschingsferien
-- Osterferien
-- Pfingstferien
-- State-wide official school-free periods listed by official state sources
+- landesweiten Feiertagen
+- regionalen Feiertagen
+- lokalen Feiertagen
 
-## Excluded from default dataset
+Regionale oder lokale Feiertage sind in den Daten enthalten, werden aber standardmäßig nicht im Kalender angezeigt, wenn sie nicht für das gesamte Bundesland gelten.
 
-- School-specific bewegliche Ferientage
-- Pädagogische Tage
-- Individual school calendar events
-- Local school closures
-- Public holidays in MVP
-- User-specific personal events
+## Validierung
 
-## Tagline
+Die Daten können mit diesen Befehlen geprüft werden:
 
-DE: Der klare Schulferienkalender für Deutschland.  
-EN: Clear school holiday planning for Germany.
+```bash
+node scripts/validate-holidays.mjs
+node scripts/validate-public-holidays.mjs
+```
 
-## Website
+## Index-Dateien erzeugen
 
+```bash
+node scripts/generate-holiday-index.mjs
+node scripts/generate-public-holidays-index.mjs
+```
+
+## Web-App
+
+Die App liegt unter:
+
+```txt
+app/
+```
+
+Lokal starten:
+
+```bash
+cd app
+npm install
+npm run dev
+```
+
+Build erstellen:
+
+```bash
+cd app
+npm run build
+```
+
+## Deployment
+
+Die App wird über GitHub Pages und GitHub Actions veröffentlicht.
+
+Produktive Website:
+
+```txt
 https://www.schulferienklar.de/
+```
 
+## Status
+
+Schulferienklar ist ein MVP und wird weiterentwickelt.
