@@ -774,11 +774,27 @@ export default function App() {
 
         <nav className="footer-links" aria-label="Rechtliche und weitere Informationen">
           <a href="/datenquellen.html">Datenquellen</a>
-          <a href="https://www.leckere-koreanische-rezepte.de/de/datenschutzerklaerung">
+          <a
+            href="https://www.leckere-koreanische-rezepte.de/de/datenschutzerklaerung"
+            target="_blank"
+            rel="noreferrer"
+          >
             Datenschutz
           </a>
-          <a href="https://www.leckere-koreanische-rezepte.de/de/impressum">Impressum</a>
-          <a href="https://www.leckere-koreanische-rezepte.de/de/support">Support</a>
+          <a
+            href="https://www.leckere-koreanische-rezepte.de/de/impressum"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Impressum
+          </a>
+          <a
+            href="https://www.leckere-koreanische-rezepte.de/de/support"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Support
+          </a>
           <a href="/ueber-uns.html">Über uns</a>
         </nav>
 
