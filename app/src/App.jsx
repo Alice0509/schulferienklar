@@ -368,6 +368,7 @@ export default function App() {
     TODAY.getFullYear(),
   ]);
   const [viewMode, setViewMode] = useState("list");
+  const [showAllStates, setShowAllStates] = useState(false);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.bundesland, selectedCode);
@@ -515,6 +516,16 @@ export default function App() {
     return getFreePeriodStatus(nextHoliday, publicHolidayDataset?.holidays || []);
   }, [nextHoliday, publicHolidayDataset]);
 
+  const selectedStateDataset = index?.datasets?.find((item) => {
+    return item.bundeslandCode === selectedCode;
+  });
+
+  const visibleStateDatasets = showAllStates
+    ? index?.datasets || []
+    : selectedStateDataset
+      ? [selectedStateDataset]
+      : [];
+
   const pattern = getHeroPattern(selectedCode);
 
   return (
@@ -550,7 +561,7 @@ export default function App() {
                   }}
                 disabled={loading || !index}
               >
-                {index?.datasets?.map((item) => (
+                {visibleStateDatasets.map((item) => (
                   <option key={item.bundeslandCode} value={item.bundeslandCode}>
                     {item.bundeslandName}
                   </option>
@@ -750,7 +761,7 @@ export default function App() {
         </div>
 
         <div className="state-grid">
-          {index?.datasets?.map((item) => (
+          {visibleStateDatasets.map((item) => (
             <button
               className={`state-card ${
                 item.bundeslandCode === selectedCode ? "selected" : ""
@@ -767,6 +778,14 @@ export default function App() {
             </button>
           ))}
         </div>
+
+        <button
+          className="state-toggle-button"
+          type="button"
+          onClick={() => setShowAllStates((current) => !current)}
+        >
+          {showAllStates ? "Bundesländer ausblenden" : "Alle Bundesländer anzeigen"}
+        </button>
       </section>
 
       <footer className="footer site-footer">

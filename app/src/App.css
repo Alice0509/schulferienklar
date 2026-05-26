@@ -1092,3 +1092,29 @@ select:focus {
     font-size: clamp(2.1rem, 12vw, 3.4rem);
   }
 }
+
+.state-toggle-button {
+  width: 100%;
+  margin-top: 18px;
+  border: 1px solid rgba(23, 32, 51, 0.1);
+  border-radius: 999px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #1f6f64;
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(40, 55, 85, 0.08);
+}
+
+.state-toggle-button:hover {
+  background: rgba(232, 247, 240, 0.9);
+  border-color: rgba(31, 111, 100, 0.26);
+}
+
+@media (min-width: 900px) {
+  .state-toggle-button {
+    width: auto;
+    min-width: 280px;
+  }
+}
