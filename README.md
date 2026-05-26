@@ -53,3 +53,8 @@ Convenience APIs may be used for comparison later, but they should not be the so
 
 DE: Der klare Schulferienkalender für Deutschland.  
 EN: Clear school holiday planning for Germany.
+
+## Website
+
+https://www.schulferienklar.de/
+
