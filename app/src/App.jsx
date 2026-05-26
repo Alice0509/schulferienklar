@@ -741,7 +741,7 @@ export default function App() {
             Datenschutz
           </a>
           <a href="https://www.leckere-koreanische-rezepte.de/de/support">Support</a>
-          <a href="https://www.leckere-koreanische-rezepte.de/de/about-us">Über uns</a>
+          <a href="/ueber-uns.html">Über uns</a>
         </nav>
       </footer>
     </main>
