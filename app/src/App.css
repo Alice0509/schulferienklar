@@ -1228,3 +1228,32 @@ select:focus {
     margin-bottom: 18px;
   }
 }
+
+.current-month-preview {
+  margin-bottom: 42px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(23, 32, 51, 0.06);
+}
+
+.current-month-preview .month-card {
+  background: linear-gradient(
+    135deg,
+    rgba(232, 247, 240, 0.62),
+    rgba(255, 255, 255, 0.9)
+  );
+  border-color: rgba(31, 111, 100, 0.24);
+  box-shadow: 0 18px 44px rgba(31, 111, 100, 0.08);
+}
+
+.current-month-preview .small-pill {
+  background: rgba(232, 247, 240, 0.78);
+  color: #1f6f64;
+  border-color: rgba(31, 111, 100, 0.16);
+}
+
+@media (max-width: 720px) {
+  .current-month-preview {
+    margin-bottom: 32px;
+    padding-bottom: 8px;
+  }
+}
