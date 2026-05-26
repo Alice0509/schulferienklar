@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
+const DATA_BASE_URL = import.meta.env.BASE_URL;
+
+function dataUrl(path) {
+  return `${DATA_BASE_URL}${path.replace(/^\//, "")}`;
+}
+
 const TODAY = new Date();
 TODAY.setHours(0, 0, 0, 0);
 
@@ -360,7 +366,7 @@ export default function App() {
     async function loadIndex() {
       try {
         setLoading(true);
-        const response = await fetch("/data/holidays/index.json");
+        const response = await fetch(dataUrl("/data/holidays/index.json"));
         if (!response.ok) {
           throw new Error("Index konnte nicht geladen werden.");
         }
@@ -394,7 +400,7 @@ export default function App() {
 
       try {
         setDatasetLoading(true);
-        const response = await fetch(`/data/holidays/${selectedMeta.jsonFile}`);
+        const response = await fetch(dataUrl(`/data/holidays/${selectedMeta.jsonFile}`));
         if (!response.ok) {
           throw new Error(`${selectedMeta.jsonFile} konnte nicht geladen werden.`);
         }
@@ -415,7 +421,7 @@ export default function App() {
       setPublicHolidayDataset(null);
 
       try {
-        const indexResponse = await fetch("/data/public-holidays/index.json");
+        const indexResponse = await fetch(dataUrl("/data/public-holidays/index.json"));
 
         if (!indexResponse.ok) {
           return;
@@ -444,7 +450,7 @@ export default function App() {
         }
 
         const datasetResponse = await fetch(
-          `/data/public-holidays/${matchingDataset.jsonFile}`
+          dataUrl(`/data/public-holidays/${matchingDataset.jsonFile}`)
         );
 
         if (!datasetResponse.ok) {
