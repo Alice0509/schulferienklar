@@ -3,6 +3,11 @@ import "./App.css";
 
 const DATA_BASE_URL = import.meta.env.BASE_URL;
 
+const STORAGE_KEYS = {
+  bundesland: "schulferienklar:selected-bundesland",
+  year: "schulferienklar:selected-year",
+};
+
 function dataUrl(path) {
   return `${DATA_BASE_URL}${path.replace(/^\//, "")}`;
 }
@@ -350,12 +355,27 @@ function HolidayCalendar({ holidays, publicHolidays = [], selectedYear }) {
 
 export default function App() {
   const [index, setIndex] = useState(null);
-  const [selectedCode, setSelectedCode] = useState("BY");
-  const [selectedYear, setSelectedYear] = useState(TODAY.getFullYear());
+  const [selectedCode, setSelectedCode] = useState(() => {
+    return localStorage.getItem(STORAGE_KEYS.bundesland) || "BY";
+  });
+  const [selectedYear, setSelectedYear] = useState(() => {
+    const storedYear = Number(localStorage.getItem(STORAGE_KEYS.year));
+    return Number.isFinite(storedYear) && storedYear > 0
+      ? storedYear
+      : TODAY.getFullYear();
+  });
   const [availablePublicHolidayYears, setAvailablePublicHolidayYears] = useState([
     TODAY.getFullYear(),
   ]);
   const [viewMode, setViewMode] = useState("list");
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEYS.bundesland, selectedCode);
+  }, [selectedCode]);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEYS.year, String(selectedYear));
+  }, [selectedYear]);
   const [dataset, setDataset] = useState(null);
   const [publicHolidayDataset, setPublicHolidayDataset] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -373,11 +393,17 @@ export default function App() {
         const data = await response.json();
         setIndex(data);
 
-        const defaultDataset =
-          data.datasets.find((item) => item.bundeslandCode === "BY") ||
-          data.datasets[0];
+        const storedCode = localStorage.getItem(STORAGE_KEYS.bundesland);
+        const hasStoredDataset = data.datasets?.some((item) => {
+          return item.bundeslandCode === storedCode;
+        });
 
-        if (defaultDataset) {
+        if (!hasStoredDataset && data.datasets?.length > 0) {
+          const defaultDataset =
+            data.datasets.find((item) => item.bundeslandCode === "BY") ||
+            data.datasets[0];
+
+          localStorage.setItem(STORAGE_KEYS.bundesland, defaultDataset.bundeslandCode);
           setSelectedCode(defaultDataset.bundeslandCode);
         }
       } catch (err) {
@@ -517,7 +543,11 @@ export default function App() {
               <select
                 id="bundesland"
                 value={selectedCode}
-                onChange={(event) => setSelectedCode(event.target.value)}
+                onChange={(event) => {
+                    const nextCode = event.target.value;
+                    localStorage.setItem(STORAGE_KEYS.bundesland, nextCode);
+                    setSelectedCode(nextCode);
+                  }}
                 disabled={loading || !index}
               >
                 {index?.datasets?.map((item) => (
@@ -600,7 +630,11 @@ export default function App() {
                 <span>Jahr</span>
                 <select
                   value={selectedYear}
-                  onChange={(event) => setSelectedYear(Number(event.target.value))}
+                  onChange={(event) => {
+                    const nextYear = Number(event.target.value);
+                    localStorage.setItem(STORAGE_KEYS.year, String(nextYear));
+                    setSelectedYear(nextYear);
+                  }}
                 >
                   {availablePublicHolidayYears.map((year) => (
                     <option key={year} value={year}>
@@ -722,7 +756,10 @@ export default function App() {
                 item.bundeslandCode === selectedCode ? "selected" : ""
               }`}
               key={item.bundeslandCode}
-              onClick={() => setSelectedCode(item.bundeslandCode)}
+              onClick={() => {
+                localStorage.setItem(STORAGE_KEYS.bundesland, item.bundeslandCode);
+                setSelectedCode(item.bundeslandCode);
+              }}
             >
               <span>{item.bundeslandCode}</span>
               <strong>{item.bundeslandName}</strong>
