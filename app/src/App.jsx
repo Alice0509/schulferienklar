@@ -279,8 +279,15 @@ function findFreePeriodForDate(date, holidays, publicHolidays = []) {
   });
 }
 
-function HolidayCalendar({ holidays, publicHolidays = [], selectedYear }) {
-  const monthKeys = useMemo(() => getCalendarMonthKeys(selectedYear), [selectedYear]);
+function HolidayCalendar({
+  holidays,
+  publicHolidays = [],
+  selectedYear,
+  customMonthKeys = null,
+}) {
+  const monthKeys = useMemo(() => {
+    return customMonthKeys || getCalendarMonthKeys(selectedYear);
+  }, [customMonthKeys, selectedYear]);
 
   if (monthKeys.length === 0) {
     return <p className="empty-state">Keine kommenden Ferien für die Kalenderansicht gefunden.</p>;
@@ -533,6 +540,12 @@ export default function App() {
     setIsStateMenuOpen(false);
   };
 
+  const currentMonthKey = `${TODAY.getFullYear()}-${String(
+    TODAY.getMonth() + 1
+  ).padStart(2, "0")}`;
+
+  const shouldShowCurrentMonthPreview = selectedYear === TODAY.getFullYear();
+
   const pattern = getHeroPattern(selectedCode);
 
   return (
@@ -748,11 +761,32 @@ export default function App() {
               })}
             </div>
           ) : (
-            <HolidayCalendar
-              holidays={holidays}
-              publicHolidays={publicHolidayDataset?.holidays || []}
-              selectedYear={selectedYear}
-            />
+            <>
+              {shouldShowCurrentMonthPreview && (
+                <section className="current-month-preview">
+                  <div className="section-header">
+                    <div>
+                      <p className="eyebrow">Heute im Blick</p>
+                      <h3>Aktueller Monat</h3>
+                    </div>
+                    <span className="small-pill">schneller Überblick</span>
+                  </div>
+
+                  <HolidayCalendar
+                    holidays={holidays}
+                    publicHolidays={publicHolidayDataset?.holidays || []}
+                    selectedYear={selectedYear}
+                    customMonthKeys={[currentMonthKey]}
+                  />
+                </section>
+              )}
+
+              <HolidayCalendar
+                holidays={holidays}
+                publicHolidays={publicHolidayDataset?.holidays || []}
+                selectedYear={selectedYear}
+              />
+            </>
           )}
         </section>
 
