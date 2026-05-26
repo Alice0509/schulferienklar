@@ -942,3 +942,20 @@ select:focus {
   border-radius: 8px;
   display: inline-block;
 }
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-links a {
+  color: #697581;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.footer-links a:hover {
+  color: #1f6f64;
+  text-decoration: underline;
+}
