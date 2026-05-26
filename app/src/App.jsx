@@ -369,6 +369,7 @@ export default function App() {
   ]);
   const [viewMode, setViewMode] = useState("list");
   const [showAllStates, setShowAllStates] = useState(false);
+  const [isStateMenuOpen, setIsStateMenuOpen] = useState(false);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.bundesland, selectedCode);
@@ -526,6 +527,12 @@ export default function App() {
       ? [selectedStateDataset]
       : [];
 
+  const selectBundesland = (nextCode) => {
+    localStorage.setItem(STORAGE_KEYS.bundesland, nextCode);
+    setSelectedCode(nextCode);
+    setIsStateMenuOpen(false);
+  };
+
   const pattern = getHeroPattern(selectedCode);
 
   return (
@@ -551,22 +558,38 @@ export default function App() {
 
             <div className="selector-card">
               <label htmlFor="bundesland">Bundesland auswählen</label>
-              <select
-                id="bundesland"
-                value={selectedCode}
-                onChange={(event) => {
-                    const nextCode = event.target.value;
-                    localStorage.setItem(STORAGE_KEYS.bundesland, nextCode);
-                    setSelectedCode(nextCode);
-                  }}
-                disabled={loading || !index}
-              >
-                {visibleStateDatasets.map((item) => (
-                  <option key={item.bundeslandCode} value={item.bundeslandCode}>
-                    {item.bundeslandName}
-                  </option>
-                ))}
-              </select>
+              <div className="state-select-wrapper">
+                <button
+                  className="state-select-button"
+                  type="button"
+                  aria-haspopup="listbox"
+                  aria-expanded={isStateMenuOpen}
+                  onClick={() => setIsStateMenuOpen((current) => !current)}
+                >
+                  <span>{selectedStateDataset?.bundeslandName || "Bundesland auswählen"}</span>
+                  <span aria-hidden="true">⌄</span>
+                </button>
+
+                {isStateMenuOpen && (
+                  <div className="state-select-menu" role="listbox">
+                    {index?.datasets?.map((item) => (
+                      <button
+                        className={`state-select-option ${
+                          item.bundeslandCode === selectedCode ? "selected" : ""
+                        }`}
+                        key={item.bundeslandCode}
+                        type="button"
+                        role="option"
+                        aria-selected={item.bundeslandCode === selectedCode}
+                        onClick={() => selectBundesland(item.bundeslandCode)}
+                      >
+                        <span>{item.bundeslandName}</span>
+                        <small>{item.bundeslandCode}</small>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           </div>
 
@@ -767,10 +790,7 @@ export default function App() {
                 item.bundeslandCode === selectedCode ? "selected" : ""
               }`}
               key={item.bundeslandCode}
-              onClick={() => {
-                localStorage.setItem(STORAGE_KEYS.bundesland, item.bundeslandCode);
-                setSelectedCode(item.bundeslandCode);
-              }}
+              onClick={() => selectBundesland(item.bundeslandCode)}
             >
               <span>{item.bundeslandCode}</span>
               <strong>{item.bundeslandName}</strong>

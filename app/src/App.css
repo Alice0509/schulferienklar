@@ -1118,3 +1118,88 @@ select:focus {
     min-width: 280px;
   }
 }
+
+.state-select-wrapper {
+  position: relative;
+}
+
+.state-select-button {
+  width: 100%;
+  min-height: 64px;
+  border: 2px solid rgba(31, 111, 100, 0.8);
+  border-radius: 18px;
+  padding: 0 22px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #172033;
+  font: inherit;
+  font-size: 1.1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.state-select-button span:last-child {
+  font-size: 1.35rem;
+  color: #1f6f64;
+}
+
+.state-select-menu {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  max-height: 340px;
+  overflow: auto;
+  border: 1px solid rgba(23, 32, 51, 0.12);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 24px 70px rgba(40, 55, 85, 0.22);
+  padding: 8px;
+}
+
+.state-select-option {
+  width: 100%;
+  border: 0;
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: transparent;
+  color: #172033;
+  font: inherit;
+  font-weight: 800;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.state-select-option small {
+  color: #1f6f64;
+  font-weight: 900;
+}
+
+.state-select-option:hover,
+.state-select-option.selected {
+  background: rgba(232, 247, 240, 0.95);
+}
+
+@media (max-width: 480px) {
+  .state-select-button {
+    min-height: 58px;
+    font-size: 1rem;
+    border-radius: 16px;
+  }
+
+  .state-select-menu {
+    max-height: 300px;
+  }
+
+  .state-select-option {
+    padding: 13px 14px;
+  }
+}
