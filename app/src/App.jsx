@@ -254,6 +254,20 @@ function findHolidayForDate(date, holidays, publicHolidays = []) {
   return null;
 }
 
+function findFreePeriodForDate(date, holidays, publicHolidays = []) {
+  const key = toDateKey(date);
+
+  return holidays.find((holiday) => {
+    const period = getEffectiveFreePeriod(holiday, publicHolidays);
+
+    if (!period) {
+      return false;
+    }
+
+    return period.startDate <= key && key <= period.endDate;
+  });
+}
+
 function HolidayCalendar({ holidays, publicHolidays = [], selectedYear }) {
   const monthKeys = useMemo(() => getCalendarMonthKeys(selectedYear), [selectedYear]);
 
@@ -293,13 +307,20 @@ function HolidayCalendar({ holidays, publicHolidays = [], selectedYear }) {
                   }
 
                   const holiday = findHolidayForDate(date, holidays, publicHolidays);
+                  const freePeriodHoliday = findFreePeriodForDate(date, holidays, publicHolidays);
                   const tone = getHolidayTone(holiday);
                   const isToday = toDateKey(date) === toDateKey(TODAY);
+                  const isSaturday = date.getDay() === 6;
+                  const isSunday = date.getDay() === 0;
+                  const isFreePeriodOnly = Boolean(freePeriodHoliday) && !holiday;
 
                   return (
                     <span
                       className={[
                         "calendar-day",
+                        isSaturday ? "is-saturday" : "",
+                        isSunday ? "is-sunday" : "",
+                        isFreePeriodOnly ? "is-free-period" : "",
                         holiday ? "is-highlighted" : "",
                         tone ? `tone-${tone}` : "",
                         isToday ? "is-today" : "",

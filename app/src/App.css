@@ -773,3 +773,164 @@ select:focus {
   font-weight: 900;
   box-shadow: 0 8px 20px rgba(40, 55, 85, 0.08);
 }
+
+.calendar-day.is-weekend {
+  background: rgba(23, 32, 51, 0.035);
+}
+
+.calendar-day.is-weekend span {
+  color: #6e7784;
+}
+
+.calendar-day.is-weekend.is-highlighted {
+  background: rgba(23, 32, 51, 0.025);
+}
+
+.calendar-day.is-weekend.is-highlighted span {
+  color: #172033;
+}
+
+/* Stronger but still subtle weekend background. */
+.calendar-day.is-weekend {
+  background: rgba(23, 32, 51, 0.075);
+}
+
+.calendar-day.is-weekend span {
+  color: #505b68;
+}
+
+.calendar-day.is-weekend.is-highlighted {
+  background: rgba(23, 32, 51, 0.055);
+}
+
+.calendar-day.is-weekend.is-highlighted::before {
+  opacity: 1;
+}
+
+/* Weekend marker should be visible as its own subtle pill,
+   not just as a barely visible cell background. */
+.calendar-day.is-weekend {
+  background: transparent;
+}
+
+.calendar-day.is-weekend:not(.is-highlighted)::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 23% 6% 18% 6%;
+  border-radius: 999px;
+  background: rgba(23, 32, 51, 0.12);
+  transform: rotate(-1deg);
+}
+
+.calendar-day.is-weekend:not(.is-highlighted) span {
+  color: #344052;
+}
+
+.calendar-day.is-weekend.is-highlighted {
+  background: transparent;
+}
+
+.calendar-day.is-weekend.is-highlighted span {
+  color: #172033;
+}
+
+/* Visible weekend marker. */
+.calendar-day.is-weekend:not(.is-highlighted)::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 23% 6% 18% 6%;
+  border-radius: 999px;
+  background: rgba(23, 32, 51, 0.16);
+  transform: rotate(-1deg);
+}
+
+.calendar-day.is-weekend:not(.is-highlighted) span {
+  color: #172033;
+}
+
+/* Weekend style: keep the calendar clean.
+   Saturdays and Sundays use text color only, without extra markers. */
+.calendar-day.is-weekend,
+.calendar-day.is-weekend.is-highlighted {
+  background: transparent;
+}
+
+.calendar-day.is-weekend::before,
+.calendar-day.is-weekend:not(.is-highlighted)::before {
+  content: none;
+}
+
+.calendar-day.is-saturday span {
+  color: #2563eb;
+}
+
+.calendar-day.is-sunday span {
+  color: #dc2626;
+}
+
+.calendar-day.is-highlighted.is-saturday span,
+.calendar-day.is-highlighted.is-sunday span {
+  color: #172033;
+}
+
+/* Weekend numbers should remain visible even on highlighted holiday days. */
+.calendar-day.is-saturday span,
+.calendar-day.is-highlighted.is-saturday span {
+  color: #2563eb;
+}
+
+.calendar-day.is-sunday span,
+.calendar-day.is-highlighted.is-sunday span {
+  color: #dc2626;
+}
+
+/* Connected free-time days:
+   weekends/public-free days that extend an official school holiday period. */
+.calendar-day.is-free-period:not(.is-highlighted)::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 2px dashed rgba(31, 111, 100, 0.32);
+  border-radius: 13px;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.calendar-day.is-free-period:not(.is-highlighted) span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Softer weekend and connected-free-time colors. */
+.calendar-day.is-saturday span,
+.calendar-day.is-highlighted.is-saturday span {
+  color: #3b6fd8;
+}
+
+.calendar-day.is-sunday span,
+.calendar-day.is-highlighted.is-sunday span {
+  color: #c94a4a;
+}
+
+.calendar-day.is-free-period:not(.is-highlighted)::after {
+  border-color: rgba(31, 111, 100, 0.24);
+  border-width: 1.5px;
+}
+
+/* Softer weekend and connected-free-time colors. */
+.calendar-day.is-saturday span,
+.calendar-day.is-highlighted.is-saturday span {
+  color: #3b6fd8;
+}
+
+.calendar-day.is-sunday span,
+.calendar-day.is-highlighted.is-sunday span {
+  color: #c94a4a;
+}
+
+.calendar-day.is-free-period:not(.is-highlighted)::after {
+  border-color: rgba(31, 111, 100, 0.24);
+  border-width: 1.5px;
+}
