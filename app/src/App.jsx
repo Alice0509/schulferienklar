@@ -284,6 +284,7 @@ function HolidayCalendar({
   publicHolidays = [],
   selectedYear,
   customMonthKeys = null,
+  showLegend = true,
 }) {
   const monthKeys = useMemo(() => {
     return customMonthKeys || getCalendarMonthKeys(selectedYear);
@@ -374,7 +375,7 @@ export default function App() {
   const [availablePublicHolidayYears, setAvailablePublicHolidayYears] = useState([
     TODAY.getFullYear(),
   ]);
-  const [viewMode, setViewMode] = useState("list");
+  const [viewMode, setViewMode] = useState("calendar");
   const [showAllStates, setShowAllStates] = useState(false);
   const [isStateMenuOpen, setIsStateMenuOpen] = useState(false);
 
@@ -777,6 +778,7 @@ export default function App() {
                     publicHolidays={publicHolidayDataset?.holidays || []}
                     selectedYear={selectedYear}
                     customMonthKeys={[currentMonthKey]}
+                    showLegend={false}
                   />
                 </section>
               )}
