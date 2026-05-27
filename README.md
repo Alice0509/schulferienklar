@@ -91,3 +91,18 @@ https://www.schulferienklar.de/
 ## Status
 
 Schulferienklar ist ein MVP und wird weiterentwickelt.
+
+## English summary
+
+Schulferienklar is a small web app for checking German school holidays, public holidays and connected free days by federal state.
+
+It is designed for families, students and international residents in Germany who want a clear school holiday calendar for planning childcare, travel, study time or free days.
+
+The app currently focuses on:
+
+- German school holidays by Bundesland
+- public holidays in Germany
+- calendar and list views
+- connected free-time periods around school holidays
+- a simple overview for planning ahead
+
