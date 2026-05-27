@@ -1257,3 +1257,63 @@ select:focus {
     padding-bottom: 8px;
   }
 }
+
+.hero {
+  overflow: visible;
+}
+
+.hero-grid,
+.hero-copy,
+.selector-card,
+.state-select-wrapper {
+  position: relative;
+}
+
+.selector-card {
+  z-index: 80;
+}
+
+.state-select-wrapper {
+  z-index: 90;
+}
+
+.state-select-menu {
+  z-index: 999;
+  max-height: 320px;
+}
+
+.content-grid,
+.panel {
+  position: relative;
+  z-index: 1;
+}
+
+@media (min-width: 900px) {
+  .state-select-menu {
+    max-height: 360px;
+  }
+}
+
+/* Keep the custom Bundesland menu in the normal document flow.
+   This prevents it from overlapping the calendar section on desktop. */
+.state-select-menu {
+  position: static;
+  margin-top: 10px;
+  max-height: 280px;
+  overflow: auto;
+  z-index: auto;
+}
+
+.selector-card {
+  overflow: visible;
+}
+
+.hero {
+  overflow: visible;
+}
+
+@media (min-width: 900px) {
+  .state-select-menu {
+    max-height: 300px;
+  }
+}
