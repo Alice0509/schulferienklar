@@ -728,13 +728,18 @@ export default function App() {
                 {viewMode === "list" ? `${upcomingHolidays.length} sichtbar` : "markiert"}
               </span>
 
-              <button
-                className="ics-export-button"
-                type="button"
-                onClick={handleDownloadIcs}
-              >
-                ICS herunterladen
-              </button>
+              <div className="ics-export-wrap">
+                <button
+                  className="ics-export-button"
+                  type="button"
+                  onClick={handleDownloadIcs}
+                >
+                  ICS herunterladen
+                </button>
+                <span className="ics-export-hint">
+                  Für Google Calendar, Apple Kalender und Outlook.
+                </span>
+              </div>
             </div>
           </div>
 
