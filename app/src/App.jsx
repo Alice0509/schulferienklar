@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
+import { downloadIcsFile, generateIcsCalendar } from "./utils/ics";
 
 const DATA_BASE_URL = import.meta.env.BASE_URL;
 
@@ -549,6 +550,21 @@ export default function App() {
 
   const shouldShowCurrentMonthPreview = selectedYear === TODAY.getFullYear();
 
+  const handleDownloadIcs = () => {
+    const content = generateIcsCalendar({
+      holidays,
+      publicHolidays: publicHolidayDataset?.holidays || [],
+      selectedCode,
+      selectedYear,
+    });
+
+    downloadIcsFile({
+      content,
+      selectedCode,
+      selectedYear,
+    });
+  };
+
   const pattern = getHeroPattern(selectedCode);
 
   return (
@@ -711,6 +727,14 @@ export default function App() {
               <span className="small-pill">
                 {viewMode === "list" ? `${upcomingHolidays.length} sichtbar` : "markiert"}
               </span>
+
+              <button
+                className="ics-export-button"
+                type="button"
+                onClick={handleDownloadIcs}
+              >
+                ICS herunterladen
+              </button>
             </div>
           </div>
 
