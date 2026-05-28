@@ -1,49 +1,21 @@
-import fs from "node:fs";
-import path from "node:path";
-
-const outputDir = path.resolve("public");
-
-const states = [
-  ["baden-wuerttemberg", "Baden-Württemberg", "Baden-Wuerttemberg", "BW"],
-  ["bayern", "Bayern", "Bavaria", "BY"],
-  ["berlin", "Berlin", "Berlin", "BE"],
-  ["brandenburg", "Brandenburg", "Brandenburg", "BB"],
-  ["bremen", "Bremen", "Bremen", "HB"],
-  ["hamburg", "Hamburg", "Hamburg", "HH"],
-  ["hessen", "Hessen", "Hesse", "HE"],
-  ["mecklenburg-vorpommern", "Mecklenburg-Vorpommern", "Mecklenburg-Western Pomerania", "MV"],
-  ["niedersachsen", "Niedersachsen", "Lower Saxony", "NI"],
-  ["nordrhein-westfalen", "Nordrhein-Westfalen", "North Rhine-Westphalia", "NW"],
-  ["rheinland-pfalz", "Rheinland-Pfalz", "Rhineland-Palatinate", "RP"],
-  ["saarland", "Saarland", "Saarland", "SL"],
-  ["sachsen", "Sachsen", "Saxony", "SN"],
-  ["sachsen-anhalt", "Sachsen-Anhalt", "Saxony-Anhalt", "ST"],
-  ["schleswig-holstein", "Schleswig-Holstein", "Schleswig-Holstein", "SH"],
-  ["thueringen", "Thüringen", "Thuringia", "TH"],
-];
-
-function pageTemplate({ slug, name, englishName, code, year }) {
-  const title = `Schulferien ${name} ${year} – Schulferienklar`;
-  const description = `Schulferien ${name} ${year}: Ferien, Feiertage und freie Zeiten im Kalender sehen. School holidays ${englishName} ${year}.`;
-
-  return `<!doctype html>
+<!doctype html>
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${title}</title>
-    <meta name="description" content="${description}" />
+    <title>Schulferien Thüringen 2027 – Schulferienklar</title>
+    <meta name="description" content="Schulferien Thüringen 2027: Ferien, Feiertage und freie Zeiten im Kalender sehen. School holidays Thuringia 2027." />
     <meta
       name="keywords"
-      content="Schulferien ${name} ${year}, Ferien ${name} ${year}, Feiertage ${name} ${year}, school holidays ${englishName} ${year}, school holidays Germany ${year}"
+      content="Schulferien Thüringen 2027, Ferien Thüringen 2027, Feiertage Thüringen 2027, school holidays Thuringia 2027, school holidays Germany 2027"
     />
-    <link rel="canonical" href="https://www.schulferienklar.de/schulferien-${slug}-${year}.html" />
+    <link rel="canonical" href="https://www.schulferienklar.de/schulferien-thueringen-2027.html" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta property="og:title" content="${title}" />
-    <meta property="og:description" content="${description}" />
-    <meta property="og:url" content="https://www.schulferienklar.de/schulferien-${slug}-${year}.html" />
+    <meta property="og:title" content="Schulferien Thüringen 2027 – Schulferienklar" />
+    <meta property="og:description" content="Schulferien Thüringen 2027: Ferien, Feiertage und freie Zeiten im Kalender sehen. School holidays Thuringia 2027." />
+    <meta property="og:url" content="https://www.schulferienklar.de/schulferien-thueringen-2027.html" />
     <meta property="og:image" content="https://www.schulferienklar.de/og-image.png" />
     <style>
       body {
@@ -121,12 +93,12 @@ function pageTemplate({ slug, name, englishName, code, year }) {
   <body>
     <main>
       <section class="card">
-        <p class="eyebrow">Schulferien ${year}</p>
-        <h1>Schulferien ${name} ${year}</h1>
+        <p class="eyebrow">Schulferien 2027</p>
+        <h1>Schulferien Thüringen 2027</h1>
 
         <p>
           Schulferienklar zeigt Schulferien, gesetzliche Feiertage und freie Zeiten
-          für ${name} übersichtlich im Kalender.
+          für Thüringen übersichtlich im Kalender.
         </p>
 
         <p>
@@ -134,13 +106,13 @@ function pageTemplate({ slug, name, englishName, code, year }) {
           Lernzeiten oder freie Tage rund um die Schulferien planen möchten.
         </p>
 
-        <h2>School holidays ${englishName} ${year}</h2>
+        <h2>School holidays Thuringia 2027</h2>
         <p>
           English note: Schulferienklar helps international residents in Germany
           check school holidays, public holidays and connected free days by federal state.
         </p>
 
-        <a class="button" href="/?state=${code}&year=${year}">Kalender öffnen</a>
+        <a class="button" href="/?state=TH&year=2027">Kalender öffnen</a>
 
         <div class="note">
           <strong>Hinweis:</strong>
@@ -150,19 +122,4 @@ function pageTemplate({ slug, name, englishName, code, year }) {
       </section>
     </main>
   </body>
-</html>`;
-}
-
-const years = [2026, 2027, 2028, 2029, 2030];
-
-for (const year of years) {
-  for (const [slug, name, englishName, code] of states) {
-    const fileName = `schulferien-${slug}-${year}.html`;
-    fs.writeFileSync(
-      path.join(outputDir, fileName),
-      pageTemplate({ slug, name, englishName, code, year }),
-      "utf8"
-    );
-    console.log(`created ${fileName}`);
-  }
-}
+</html>
