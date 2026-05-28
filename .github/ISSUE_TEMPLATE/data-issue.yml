@@ -1,0 +1,78 @@
+name: Data issue
+description: Report a possible issue with school holiday or public holiday data.
+title: "[Data] "
+labels:
+  - data
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a possible data issue.
+        Please include as much detail as possible so the date can be checked against official sources.
+
+  - type: dropdown
+    id: data-type
+    attributes:
+      label: Data type
+      description: Which type of data seems wrong?
+      options:
+        - School holidays
+        - Public holidays
+        - Unterrichtsfrei
+        - Regional/local holiday
+        - Calendar display
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: bundesland
+    attributes:
+      label: Bundesland
+      description: Which German federal state is affected?
+      placeholder: "Example: Bayern, Berlin, Nordrhein-Westfalen"
+    validations:
+      required: true
+
+  - type: input
+    id: year
+    attributes:
+      label: Year
+      placeholder: "Example: 2026"
+    validations:
+      required: true
+
+  - type: input
+    id: date-or-period
+    attributes:
+      label: Date or period
+      description: Which date or period seems wrong?
+      placeholder: "Example: 2026-05-26 to 2026-06-05"
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: What seems wrong?
+      description: Describe what you expected and what Schulferienklar currently shows.
+      placeholder: "Example: The app shows this as a statewide public holiday, but it only applies locally."
+    validations:
+      required: true
+
+  - type: input
+    id: official-source
+    attributes:
+      label: Official source
+      description: If possible, add an official source URL.
+      placeholder: "https://..."
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Any other helpful context.
+    validations:
+      required: false
