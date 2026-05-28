@@ -4,25 +4,25 @@ import path from "node:path";
 const outputDir = path.resolve("public");
 
 const states = [
-  ["baden-wuerttemberg", "Baden-Württemberg", "Baden-Wuerttemberg"],
-  ["bayern", "Bayern", "Bavaria"],
-  ["berlin", "Berlin", "Berlin"],
-  ["brandenburg", "Brandenburg", "Brandenburg"],
-  ["bremen", "Bremen", "Bremen"],
-  ["hamburg", "Hamburg", "Hamburg"],
-  ["hessen", "Hessen", "Hesse"],
-  ["mecklenburg-vorpommern", "Mecklenburg-Vorpommern", "Mecklenburg-Western Pomerania"],
-  ["niedersachsen", "Niedersachsen", "Lower Saxony"],
-  ["nordrhein-westfalen", "Nordrhein-Westfalen", "North Rhine-Westphalia"],
-  ["rheinland-pfalz", "Rheinland-Pfalz", "Rhineland-Palatinate"],
-  ["saarland", "Saarland", "Saarland"],
-  ["sachsen", "Sachsen", "Saxony"],
-  ["sachsen-anhalt", "Sachsen-Anhalt", "Saxony-Anhalt"],
-  ["schleswig-holstein", "Schleswig-Holstein", "Schleswig-Holstein"],
-  ["thueringen", "Thüringen", "Thuringia"],
+  ["baden-wuerttemberg", "Baden-Württemberg", "Baden-Wuerttemberg", "BW"],
+  ["bayern", "Bayern", "Bavaria", "BY"],
+  ["berlin", "Berlin", "Berlin", "BE"],
+  ["brandenburg", "Brandenburg", "Brandenburg", "BB"],
+  ["bremen", "Bremen", "Bremen", "HB"],
+  ["hamburg", "Hamburg", "Hamburg", "HH"],
+  ["hessen", "Hessen", "Hesse", "HE"],
+  ["mecklenburg-vorpommern", "Mecklenburg-Vorpommern", "Mecklenburg-Western Pomerania", "MV"],
+  ["niedersachsen", "Niedersachsen", "Lower Saxony", "NI"],
+  ["nordrhein-westfalen", "Nordrhein-Westfalen", "North Rhine-Westphalia", "NW"],
+  ["rheinland-pfalz", "Rheinland-Pfalz", "Rhineland-Palatinate", "RP"],
+  ["saarland", "Saarland", "Saarland", "SL"],
+  ["sachsen", "Sachsen", "Saxony", "SN"],
+  ["sachsen-anhalt", "Sachsen-Anhalt", "Saxony-Anhalt", "ST"],
+  ["schleswig-holstein", "Schleswig-Holstein", "Schleswig-Holstein", "SH"],
+  ["thueringen", "Thüringen", "Thuringia", "TH"],
 ];
 
-function pageTemplate({ slug, name, englishName, year }) {
+function pageTemplate({ slug, name, englishName, code, year }) {
   const title = `Schulferien ${name} ${year} – Schulferienklar`;
   const description = `Schulferien ${name} ${year}: Ferien, Feiertage und freie Zeiten im Kalender sehen. School holidays ${englishName} ${year}.`;
 
@@ -140,7 +140,7 @@ function pageTemplate({ slug, name, englishName, year }) {
           check school holidays, public holidays and connected free days by federal state.
         </p>
 
-        <a class="button" href="/">Kalender öffnen</a>
+        <a class="button" href="/?state=${code}&year=${year}">Kalender öffnen</a>
 
         <div class="note">
           <strong>Hinweis:</strong>
@@ -155,11 +155,11 @@ function pageTemplate({ slug, name, englishName, year }) {
 
 const year = 2026;
 
-for (const [slug, name, englishName] of states) {
+for (const [slug, name, englishName, code] of states) {
   const fileName = `schulferien-${slug}-${year}.html`;
   fs.writeFileSync(
     path.join(outputDir, fileName),
-    pageTemplate({ slug, name, englishName, year }),
+    pageTemplate({ slug, name, englishName, code, year }),
     "utf8"
   );
   console.log(`created ${fileName}`);
