@@ -81,12 +81,55 @@
         font-weight: 900;
       }
 
+      .holiday-summary-list {
+        display: grid;
+        gap: 10px;
+        padding: 0;
+        margin: 18px 0 0;
+        list-style: none;
+      }
+
+      .holiday-summary-list li {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 4px 16px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(232, 247, 240, 0.62);
+        border: 1px solid rgba(31, 111, 100, 0.14);
+      }
+
+      .holiday-summary-list strong {
+        color: #172033;
+      }
+
+      .holiday-summary-list span {
+        color: #1f6f64;
+        font-weight: 900;
+      }
+
+      .holiday-summary-list small {
+        grid-column: 1 / -1;
+        color: #66717f;
+        font-weight: 800;
+      }
+
       .note {
         margin-top: 24px;
         border-radius: 18px;
         padding: 16px 18px;
         background: rgba(232, 247, 240, 0.78);
         border: 1px solid rgba(31, 111, 100, 0.18);
+      }
+
+      @media (max-width: 640px) {
+        .card {
+          padding: 24px;
+        }
+
+        .holiday-summary-list li {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -100,6 +143,35 @@
           Schulferienklar zeigt Schulferien, gesetzliche Feiertage und freie Zeiten
           für Hessen übersichtlich im Kalender.
         </p>
+
+        <h2>Ferienübersicht Hessen 2027</h2>
+        <ul class="holiday-summary-list">
+          <li>
+            <strong>Weihnachtsferien</strong>
+            <span>23.12.2026 – 12.01.2027</span>
+            <small>Ferien</small>
+          </li>
+          <li>
+            <strong>Osterferien</strong>
+            <span>22.03.2027 – 02.04.2027</span>
+            <small>Ferien</small>
+          </li>
+          <li>
+            <strong>Sommerferien</strong>
+            <span>28.06.2027 – 06.08.2027</span>
+            <small>Ferien</small>
+          </li>
+          <li>
+            <strong>Herbstferien</strong>
+            <span>04.10.2027 – 16.10.2027</span>
+            <small>Ferien</small>
+          </li>
+          <li>
+            <strong>Weihnachtsferien</strong>
+            <span>23.12.2027 – 11.01.2028</span>
+            <small>Ferien</small>
+          </li>
+        </ul>
 
         <p>
           Die App hilft Familien, Schüler:innen und allen, die Betreuung, Reisen,

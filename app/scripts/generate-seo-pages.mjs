@@ -2,6 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 
 const outputDir = path.resolve("public");
+const holidayDataDir = path.resolve("public/data/holidays");
+const holidayIndexPath = path.join(holidayDataDir, "index.json");
+
+const years = [2026, 2027, 2028, 2029, 2030];
 
 const states = [
   ["baden-wuerttemberg", "Baden-Württemberg", "Baden-Wuerttemberg", "BW"],
@@ -22,7 +26,81 @@ const states = [
   ["thueringen", "Thüringen", "Thuringia", "TH"],
 ];
 
-function pageTemplate({ slug, name, englishName, code, year }) {
+function escapeHtml(value) {
+  return String(value || "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
+}
+
+function formatDate(dateKey) {
+  const [year, month, day] = String(dateKey).split("-");
+  return `${day}.${month}.${year}`;
+}
+
+function getHolidayName(holiday) {
+  if (typeof holiday.name === "string") {
+    return holiday.name;
+  }
+
+  return holiday.name?.de || holiday.title?.de || "Schulferien";
+}
+
+function getCategoryLabel(category) {
+  if (category === "school_free") {
+    return "Unterrichtsfrei";
+  }
+
+  return "Ferien";
+}
+
+function getEventsForStateAndYear({ holidayIndex, code, year }) {
+  const dataset = holidayIndex.datasets?.find((item) => {
+    return item.bundeslandCode === code;
+  });
+
+  if (!dataset?.jsonFile) {
+    return [];
+  }
+
+  const datasetPath = path.join(holidayDataDir, dataset.jsonFile);
+  const datasetJson = JSON.parse(fs.readFileSync(datasetPath, "utf8"));
+  const events = datasetJson.holidays || datasetJson.events || [];
+
+  const yearStart = `${year}-01-01`;
+  const yearEnd = `${year}-12-31`;
+
+  return events
+    .filter((event) => {
+      return event.startDate <= yearEnd && event.endDate >= yearStart;
+    })
+    .sort((a, b) => a.startDate.localeCompare(b.startDate));
+}
+
+function holidaySummaryHtml(events, name, year) {
+  if (events.length === 0) {
+    return `<p>Für ${escapeHtml(name)} ${year} sind in Schulferienklar aktuell keine Ferien-Einträge verfügbar.</p>`;
+  }
+
+  const items = events
+    .map((event) => {
+      const label = getCategoryLabel(event.category);
+      const eventName = getHolidayName(event);
+      return `          <li>
+            <strong>${escapeHtml(eventName)}</strong>
+            <span>${formatDate(event.startDate)} – ${formatDate(event.endDate)}</span>
+            <small>${label}</small>
+          </li>`;
+    })
+    .join("\n");
+
+  return `<ul class="holiday-summary-list">
+${items}
+        </ul>`;
+}
+
+function pageTemplate({ slug, name, englishName, code, year, events }) {
   const title = `Schulferien ${name} ${year} – Schulferienklar`;
   const description = `Schulferien ${name} ${year}: Ferien, Feiertage und freie Zeiten im Kalender sehen. School holidays ${englishName} ${year}.`;
 
@@ -109,12 +187,55 @@ function pageTemplate({ slug, name, englishName, code, year }) {
         font-weight: 900;
       }
 
+      .holiday-summary-list {
+        display: grid;
+        gap: 10px;
+        padding: 0;
+        margin: 18px 0 0;
+        list-style: none;
+      }
+
+      .holiday-summary-list li {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 4px 16px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(232, 247, 240, 0.62);
+        border: 1px solid rgba(31, 111, 100, 0.14);
+      }
+
+      .holiday-summary-list strong {
+        color: #172033;
+      }
+
+      .holiday-summary-list span {
+        color: #1f6f64;
+        font-weight: 900;
+      }
+
+      .holiday-summary-list small {
+        grid-column: 1 / -1;
+        color: #66717f;
+        font-weight: 800;
+      }
+
       .note {
         margin-top: 24px;
         border-radius: 18px;
         padding: 16px 18px;
         background: rgba(232, 247, 240, 0.78);
         border: 1px solid rgba(31, 111, 100, 0.18);
+      }
+
+      @media (max-width: 640px) {
+        .card {
+          padding: 24px;
+        }
+
+        .holiday-summary-list li {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>
@@ -128,6 +249,9 @@ function pageTemplate({ slug, name, englishName, code, year }) {
           Schulferienklar zeigt Schulferien, gesetzliche Feiertage und freie Zeiten
           für ${name} übersichtlich im Kalender.
         </p>
+
+        <h2>Ferienübersicht ${name} ${year}</h2>
+        ${holidaySummaryHtml(events, name, year)}
 
         <p>
           Die App hilft Familien, Schüler:innen und allen, die Betreuung, Reisen,
@@ -153,16 +277,19 @@ function pageTemplate({ slug, name, englishName, code, year }) {
 </html>`;
 }
 
-const years = [2026, 2027, 2028, 2029, 2030];
+const holidayIndex = JSON.parse(fs.readFileSync(holidayIndexPath, "utf8"));
 
 for (const year of years) {
   for (const [slug, name, englishName, code] of states) {
     const fileName = `schulferien-${slug}-${year}.html`;
+    const events = getEventsForStateAndYear({ holidayIndex, code, year });
+
     fs.writeFileSync(
       path.join(outputDir, fileName),
-      pageTemplate({ slug, name, englishName, code, year }),
+      pageTemplate({ slug, name, englishName, code, year, events }),
       "utf8"
     );
-    console.log(`created ${fileName}`);
+
+    console.log(`created ${fileName} (${events.length} entries)`);
   }
 }
