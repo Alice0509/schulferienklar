@@ -367,10 +367,18 @@ function HolidayCalendar({
 export default function App() {
   const [index, setIndex] = useState(null);
   const [selectedCode, setSelectedCode] = useState(() => {
-    return localStorage.getItem(STORAGE_KEYS.bundesland) || "BY";
+    const params = new URLSearchParams(window.location.search);
+    return params.get("state") || localStorage.getItem(STORAGE_KEYS.bundesland) || "BY";
   });
   const [selectedYear, setSelectedYear] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    const queryYear = Number(params.get("year"));
     const storedYear = Number(localStorage.getItem(STORAGE_KEYS.year));
+
+    if (Number.isFinite(queryYear) && queryYear > 0) {
+      return queryYear;
+    }
+
     return Number.isFinite(storedYear) && storedYear > 0
       ? storedYear
       : TODAY.getFullYear();
