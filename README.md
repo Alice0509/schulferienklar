@@ -106,3 +106,7 @@ The app currently focuses on:
 - connected free-time periods around school holidays
 - a simple overview for planning ahead
 
+
+## Datenpflege
+
+Der Datenpflege- und Update-Prozess ist dokumentiert in `docs/data-update-plan.md`.
