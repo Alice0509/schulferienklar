@@ -1,0 +1,54 @@
+name: Feature request
+description: Suggest an improvement or new feature for Schulferienklar.
+title: "[Feature] "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement for Schulferienklar.
+        Please describe the problem or need as clearly as possible.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or need
+      description: What problem would this solve?
+      placeholder: "Example: I want to export only school holidays without public holidays."
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested solution
+      description: What would you like to happen?
+      placeholder: "Example: Add export options for school holidays, public holidays and Unterrichtsfrei entries."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Which part of Schulferienklar is this about?
+      options:
+        - Calendar view
+        - List view
+        - Data
+        - ICS export
+        - SEO landing pages
+        - Mobile layout
+        - Legal/support pages
+        - Other
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives or notes
+      description: Any alternatives, examples or related ideas?
+    validations:
+      required: false
