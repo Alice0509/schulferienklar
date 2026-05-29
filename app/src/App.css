@@ -1365,3 +1365,99 @@ select:focus {
     width: 100%;
   }
 }
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.page,
+.hero,
+.panel,
+.hero-grid,
+.content-grid,
+.calendar-layout,
+.state-grid,
+.month-grid {
+  max-width: 100%;
+}
+
+img,
+svg,
+canvas {
+  max-width: 100%;
+}
+
+@media (max-width: 720px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .hero,
+  .panel {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-grid,
+  .content-grid {
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy,
+  .selector-card,
+  .next-card,
+  .calendar-panel,
+  .side-panel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .view-controls {
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .year-select,
+  .view-toggle,
+  .small-pill,
+  .ics-export-wrap {
+    max-width: 100%;
+  }
+
+  .calendar-grid,
+  .month-grid {
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: 1fr;
+  }
+
+  .month-card {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .calendar-days,
+  .calendar-weekdays {
+    width: 100%;
+    max-width: 100%;
+  }
+}
