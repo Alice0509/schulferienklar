@@ -177,6 +177,39 @@
         font-weight: 800;
       }
 
+      .holiday-guide-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin: 18px 0 28px;
+      }
+
+      .holiday-guide-grid article {
+        border-radius: 18px;
+        padding: 16px;
+        background: rgba(255, 245, 230, 0.68);
+        border: 1px solid rgba(180, 120, 50, 0.14);
+      }
+
+      .holiday-guide-grid strong {
+        display: block;
+        color: #172033;
+      }
+
+      .holiday-guide-grid span {
+        display: block;
+        margin-top: 4px;
+        color: #9a6a2d;
+        font-size: 0.88rem;
+        font-weight: 900;
+      }
+
+      .holiday-guide-grid p {
+        margin: 8px 0 0;
+        font-size: 0.95rem;
+      }
+
+
 
       .back {
         display: inline-block;
@@ -194,7 +227,8 @@
         }
 
         .info-grid,
-        .city-grid {
+        .city-grid,
+        .holiday-guide-grid {
           grid-template-columns: 1fr;
         }
 
@@ -338,6 +372,83 @@
             for Deutsche Bahn timetables and rail travel planning.
           </li>
         </ul>
+
+
+        <h2>Common German public holidays travelers should know</h2>
+        <p>
+          German public holidays can affect shopping, transport, museums,
+          restaurants and travel prices. Some holidays apply nationwide, while
+          others only apply in certain federal states or even locally.
+        </p>
+
+        <div class="holiday-guide-grid">
+          <article>
+            <strong>New Year’s Day</strong>
+            <span>January 1 · nationwide</span>
+            <p>Most shops are closed. Transport may run on a holiday schedule.</p>
+          </article>
+
+          <article>
+            <strong>Good Friday</strong>
+            <span>spring · nationwide</span>
+            <p>A quiet Christian holiday. Shops are usually closed and some events may be restricted.</p>
+          </article>
+
+          <article>
+            <strong>Easter Monday</strong>
+            <span>spring · nationwide</span>
+            <p>A public holiday after Easter Sunday. Popular for family visits and short trips.</p>
+          </article>
+
+          <article>
+            <strong>Labour Day</strong>
+            <span>May 1 · nationwide</span>
+            <p>Shops are usually closed. Demonstrations or public events may take place in some cities.</p>
+          </article>
+
+          <article>
+            <strong>Ascension Day</strong>
+            <span>spring · nationwide</span>
+            <p>A nationwide public holiday, often used for long weekends and short trips.</p>
+          </article>
+
+          <article>
+            <strong>Whit Monday</strong>
+            <span>spring · nationwide</span>
+            <p>A nationwide public holiday. Travel can be busier around the long weekend.</p>
+          </article>
+
+          <article>
+            <strong>Corpus Christi</strong>
+            <span>regional</span>
+            <p>A Christian public holiday in some federal states. It does not apply everywhere in Germany.</p>
+          </article>
+
+          <article>
+            <strong>German Unity Day</strong>
+            <span>October 3 · nationwide</span>
+            <p>Germany’s national day. Shops are usually closed and cities may host public events.</p>
+          </article>
+
+          <article>
+            <strong>All Saints’ Day</strong>
+            <span>regional</span>
+            <p>A public holiday in several federal states, but not nationwide.</p>
+          </article>
+
+          <article>
+            <strong>Christmas holidays</strong>
+            <span>December 25–26 · nationwide</span>
+            <p>Most shops are closed. Travel around Christmas can be busy and should be planned early.</p>
+          </article>
+        </div>
+
+        <p>
+          Local holidays can also matter. For example, the Augsburger Friedensfest
+          is a local public holiday in Augsburg, while Mariä Himmelfahrt applies
+          only in parts of Bavaria. Always check the federal state and city you
+          are visiting.
+        </p>
 
         <h2>Sundays, public holidays and quiet days</h2>
         <p>
