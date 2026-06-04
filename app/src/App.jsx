@@ -892,6 +892,7 @@ export default function App() {
           <a href="/impressum.html">Impressum</a>
           <a href="/support.html">Support</a>
           <a href="/ueber-uns.html">Über uns</a>
+          <a href="/travel-germany-school-holidays.html">Travel planning</a>
         </nav>
 
         <p className="footer-credit">Designed &amp; developed by Joan.</p>
