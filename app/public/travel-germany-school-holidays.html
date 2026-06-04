@@ -148,6 +148,36 @@
         border: 1px solid rgba(180, 120, 50, 0.18);
       }
 
+      .city-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin: 18px 0 28px;
+      }
+
+      .city-grid a {
+        display: block;
+        border-radius: 18px;
+        padding: 15px 16px;
+        background: rgba(232, 247, 240, 0.62);
+        border: 1px solid rgba(31, 111, 100, 0.14);
+        text-decoration: none;
+      }
+
+      .city-grid strong {
+        display: block;
+        color: #172033;
+      }
+
+      .city-grid span {
+        display: block;
+        margin-top: 4px;
+        color: #1f6f64;
+        font-size: 0.92rem;
+        font-weight: 800;
+      }
+
+
       .back {
         display: inline-block;
         margin-bottom: 20px;
@@ -163,7 +193,8 @@
           padding: 24px;
         }
 
-        .info-grid {
+        .info-grid,
+        .city-grid {
           grid-template-columns: 1fr;
         }
 
@@ -241,6 +272,49 @@
           <li>Hotels and trains may be busier around long weekends.</li>
         </ul>
 
+
+
+        <h2>Popular travel cities and their federal states</h2>
+        <p>
+          Many visitors know the city name, but not the German federal state.
+          Use these quick links to check school holidays and public holidays for
+          common travel destinations.
+        </p>
+
+        <div class="city-grid">
+          <a href="/?state=BY&year=2026">
+            <strong>Munich / Nuremberg</strong>
+            <span>Bavaria / Bayern</span>
+          </a>
+          <a href="/?state=BE&year=2026">
+            <strong>Berlin</strong>
+            <span>Berlin</span>
+          </a>
+          <a href="/?state=NW&year=2026">
+            <strong>Cologne / Düsseldorf</strong>
+            <span>North Rhine-Westphalia</span>
+          </a>
+          <a href="/?state=HH&year=2026">
+            <strong>Hamburg</strong>
+            <span>Hamburg</span>
+          </a>
+          <a href="/?state=HE&year=2026">
+            <strong>Frankfurt</strong>
+            <span>Hesse / Hessen</span>
+          </a>
+          <a href="/?state=SN&year=2026">
+            <strong>Dresden / Leipzig</strong>
+            <span>Saxony / Sachsen</span>
+          </a>
+          <a href="/?state=BW&year=2026">
+            <strong>Stuttgart / Heidelberg</strong>
+            <span>Baden-Württemberg</span>
+          </a>
+          <a href="/?state=SH&year=2026">
+            <strong>Lübeck / Kiel</strong>
+            <span>Schleswig-Holstein</span>
+          </a>
+        </div>
 
         <h2>Transport planning: use DB Navigator together with this calendar</h2>
         <p>
