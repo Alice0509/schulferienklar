@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
+import CheckTodayPreview from "./components/CheckTodayPreview.jsx";
 import { downloadIcsFile, generateIcsCalendar } from "./utils/ics";
 
 const DATA_BASE_URL = import.meta.env.BASE_URL;
@@ -846,6 +847,8 @@ export default function App() {
           </div>
         </aside>
       </section>
+
+      <CheckTodayPreview baseUrl={DATA_BASE_URL} />
 
       <section className="states-section">
         <div className="section-header">
