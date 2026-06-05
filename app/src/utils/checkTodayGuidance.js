@@ -76,15 +76,18 @@ export const NEED_GUIDANCE = {
       "Cafés, bakeries and restaurants may still be open in tourist areas, city centers, train stations and airports, but exact hours vary.",
   },
   pharmacy: {
-    title: "Pharmacies",
+    title: "Pharmacies and emergency help",
     fallbackPlaces: [
-      "official emergency pharmacy services",
+      "112 for medical emergencies",
+      "110 for police emergencies",
+      "116117 for non-emergency medical on-call help",
+      "official Notdienst-Apotheke search services",
       "Google Maps",
       "local pharmacy websites",
       "hotel reception for local guidance",
     ],
     note:
-      "Regular pharmacies may be closed on Sundays and public holidays. Emergency pharmacies vary by date and location, so travelers should check an official emergency pharmacy service or Google Maps.",
+      "If this is a medical emergency or life-threatening situation, call 112 immediately. For non-emergency medical help outside regular office hours, travelers in Germany can check 116117. Regular pharmacies may be closed on Sundays and public holidays. Emergency pharmacies change by date and location, so always verify current information with an official Notdienst-Apotheke service, Google Maps or the official pharmacy website before going.",
   },
 };
 
