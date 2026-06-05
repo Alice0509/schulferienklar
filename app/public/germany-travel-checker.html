@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Germany Travel Checker – Public Holidays, Closures and Trip Warnings</title>
+    <meta
+      name="description"
+      content="Check Germany travel dates, public holidays, Sunday closures, school holiday crowds and practical travel warnings before or during your trip."
+    />
+    <meta
+      name="keywords"
+      content="Germany travel checker, Germany public holidays travel, Germany Sunday closures, what is open in Germany on Sunday, Germany trip dates, Germany travel warnings"
+    />
+    <link rel="canonical" href="https://www.schulferienklar.de/germany-travel-checker.html" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:title" content="Germany Travel Checker" />
+    <meta
+      property="og:description"
+      content="Check public holidays, Sunday closures, busy travel periods and practical travel warnings for Germany."
+    />
+    <meta property="og:url" content="https://www.schulferienklar.de/germany-travel-checker.html" />
+    <meta property="og:image" content="https://www.schulferienklar.de/og-image.png" />
+    <style>
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #172033;
+        background: #f6f3ec;
+        line-height: 1.6;
+      }
+
+      main {
+        width: min(960px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 48px 0;
+      }
+
+      a {
+        color: #1f6f64;
+        font-weight: 800;
+      }
+
+      .back {
+        display: inline-flex;
+        margin-bottom: 18px;
+        text-decoration: none;
+      }
+
+      .card {
+        border-radius: 30px;
+        padding: 34px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(23, 32, 51, 0.08);
+        box-shadow: 0 20px 60px rgba(40, 55, 85, 0.1);
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: #1f6f64;
+        font-size: 0.82rem;
+        font-weight: 900;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.4rem, 8vw, 5rem);
+        line-height: 0.95;
+        letter-spacing: -0.065em;
+      }
+
+      h2 {
+        margin-top: 2.2rem;
+        letter-spacing: -0.035em;
+      }
+
+      h3 {
+        margin-bottom: 0.25rem;
+      }
+
+      p {
+        color: #56616f;
+        font-size: 1.08rem;
+      }
+
+      ul {
+        padding-left: 1.2rem;
+        color: #56616f;
+      }
+
+      li + li {
+        margin-top: 0.4rem;
+      }
+
+      .hero-text {
+        font-size: 1.18rem;
+      }
+
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .button {
+        display: inline-flex;
+        border-radius: 999px;
+        padding: 14px 20px;
+        background: #1f6f64;
+        color: white;
+        text-decoration: none;
+        font-weight: 900;
+      }
+
+      .button.secondary {
+        background: rgba(232, 247, 240, 0.92);
+        color: #1f6f64;
+        border: 1px solid rgba(31, 111, 100, 0.22);
+      }
+
+      .mode-grid,
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+        margin: 28px 0;
+      }
+
+      .info-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .mode-card,
+      .info-box,
+      .note {
+        border-radius: 22px;
+        padding: 20px;
+        background: #fbfaf6;
+        border: 1px solid rgba(23, 32, 51, 0.08);
+      }
+
+      .mode-card strong,
+      .info-box strong {
+        display: block;
+        color: #172033;
+        font-size: 1.02rem;
+      }
+
+      .mode-card span,
+      .info-box span {
+        display: block;
+        margin-top: 6px;
+        color: #56616f;
+      }
+
+      .question-list {
+        display: grid;
+        gap: 12px;
+        margin: 24px 0;
+      }
+
+      .question {
+        border-radius: 18px;
+        padding: 16px 18px;
+        background: rgba(232, 247, 240, 0.76);
+        color: #172033;
+        font-weight: 800;
+      }
+
+      .note {
+        margin-top: 28px;
+        color: #56616f;
+      }
+
+      .note strong {
+        color: #172033;
+      }
+
+      @media (max-width: 760px) {
+        main {
+          width: min(100% - 24px, 960px);
+          padding: 24px 0;
+        }
+
+        .card {
+          padding: 24px;
+          border-radius: 24px;
+        }
+
+        .mode-grid,
+        .info-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .button {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="/">← Open Schulferienklar</a>
+
+      <section class="card">
+        <p class="eyebrow">Germany Travel Checker</p>
+        <h1>Check Germany travel dates, closures and practical warnings.</h1>
+
+        <p class="hero-text">
+          Germany Travel Checker is a future English travel helper for visitors
+          to Germany. It helps travelers understand public holidays, Sunday
+          closures, school holiday crowds and practical fallback options before
+          or during a trip.
+        </p>
+
+        <div class="button-row">
+          <a class="button" href="/travel-germany-school-holidays.html">Open travel planning guide</a>
+          <a class="button secondary" href="/">Open Schulferienklar calendar</a>
+        </div>
+
+        <div class="mode-grid">
+          <div class="mode-card">
+            <strong>Check today</strong>
+            <span>
+              For travelers already in Germany who need to know whether shops,
+              supermarkets, cafés, bakeries or pharmacies may be affected today.
+            </span>
+          </div>
+
+          <div class="mode-card">
+            <strong>Check trip dates</strong>
+            <span>
+              For travelers planning Berlin, Munich, Hamburg, Cologne, Frankfurt
+              or multi-city Germany trips around public holidays and busy periods.
+            </span>
+          </div>
+        </div>
+
+        <h2>What travelers often need to know</h2>
+        <div class="question-list">
+          <div class="question">Are shops open in Germany on Sundays?</div>
+          <div class="question">Can I buy water on a public holiday?</div>
+          <div class="question">Can I buy cigarettes on Sundays or public holidays?</div>
+          <div class="question">Are supermarkets open at major train stations?</div>
+          <div class="question">Will my travel dates be busy because of school holidays?</div>
+        </div>
+
+        <h2>Practical travel guidance, not opening-hour listings</h2>
+        <p>
+          Germany Travel Checker should not maintain exact opening hours for
+          individual shops, supermarkets, cafés, bakeries, tobacco shops,
+          pharmacies or vending machines. Those details change too often.
+        </p>
+
+        <p>
+          Instead, the product should explain stable travel patterns: regular
+          supermarkets and many shops are usually closed on Sundays and public
+          holidays, while major train stations, airports, gas stations, kiosks,
+          cafés, bakeries, restaurants, hotels and vending machines may be useful
+          fallback options.
+        </p>
+
+        <div class="info-grid">
+          <div class="info-box">
+            <strong>Public holidays</strong>
+            <span>Some holidays are nationwide, while others only apply in certain federal states.</span>
+          </div>
+          <div class="info-box">
+            <strong>Sunday closures</strong>
+            <span>Regular shops and supermarkets are usually closed on Sundays.</span>
+          </div>
+          <div class="info-box">
+            <strong>Travel crowds</strong>
+            <span>School holiday periods may affect trains, hotels, attractions and prices.</span>
+          </div>
+        </div>
+
+        <h2>Built on Schulferienklar data</h2>
+        <p>
+          Schulferienklar remains the German-first calendar for official school
+          holidays and public holidays. Germany Travel Checker is the future
+          English traveler-facing layer that turns calendar data into practical
+          trip guidance.
+        </p>
+
+        <h2>Future product direction</h2>
+        <ul>
+          <li>City to German federal state mapping</li>
+          <li>Date checks for Sundays, public holidays and school holiday periods</li>
+          <li>Simple trip risk levels for travel dates</li>
+          <li>City survival guides for Berlin, Munich, Hamburg, Frankfurt and more</li>
+          <li>AI explanations later, after the rule-based checker is useful</li>
+        </ul>
+
+        <div class="button-row">
+          <a class="button" href="/travel-germany-school-holidays.html">Read the current travel guide</a>
+          <a class="button secondary" href="/datenquellen.html">View data sources</a>
+        </div>
+
+        <div class="note">
+          <strong>Note:</strong>
+          This page is an early concept page. Exact opening hours should always
+          be checked on Google Maps or the official business website before
+          relying on a specific shop, café, pharmacy, station or attraction.
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
