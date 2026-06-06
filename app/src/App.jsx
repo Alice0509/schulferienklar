@@ -366,6 +366,7 @@ function HolidayCalendar({
 }
 
 export default function App() {
+  const [showTravelCheckerPreview, setShowTravelCheckerPreview] = useState(false);
   const [index, setIndex] = useState(null);
   const [selectedCode, setSelectedCode] = useState(() => {
     const params = new URLSearchParams(window.location.search);
@@ -848,7 +849,37 @@ export default function App() {
         </aside>
       </section>
 
-      <CheckTodayPreview baseUrl={DATA_BASE_URL} />
+      <section className="panel travel-checker-teaser">
+        <div className="section-header">
+          <div>
+            <p className="eyebrow">Traveling in Germany?</p>
+            <h2>Germany Travel Checker</h2>
+          </div>
+          <a
+            className="travel-checker-domain-link"
+            href="https://germanytravelchecker.com/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open germanytravelchecker.com
+          </a>
+        </div>
+
+        <p>
+          For English travel help with public holidays, Sunday closures,
+          pharmacies, groceries and trip timing, use Germany Travel Checker.
+        </p>
+
+        <button
+          className="state-toggle-button travel-checker-preview-toggle"
+          type="button"
+          onClick={() => setShowTravelCheckerPreview((current) => !current)}
+        >
+          {showTravelCheckerPreview ? "Hide preview" : "Show preview"}
+        </button>
+
+        {showTravelCheckerPreview && <CheckTodayPreview baseUrl={DATA_BASE_URL} />}
+      </section>
 
       <section className="states-section">
         <div className="section-header">
