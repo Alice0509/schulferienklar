@@ -943,6 +943,27 @@ select:focus {
   display: inline-block;
 }
 
+
+.install-guide {
+  max-width: 980px;
+  margin-inline: auto;
+  padding: 22px 26px;
+  background: #fffaf2;
+  text-align: center;
+}
+
+.install-guide h2 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.install-guide p {
+  max-width: 720px;
+  margin: 8px auto 0;
+  color: #5f6b75;
+  line-height: 1.55;
+}
+
 .footer-links {
   display: flex;
   flex-wrap: wrap;
@@ -997,6 +1018,8 @@ select:focus {
 }
 
 @media (max-width: 720px) {
+
+
   .hero {
     padding-top: 28px;
     padding-bottom: 28px;
