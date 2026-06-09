@@ -917,6 +917,15 @@ export default function App() {
         </button>
       </section>
 
+      <section className="panel install-guide" aria-labelledby="install-guide-title">
+        <p className="eyebrow">Schneller wiederfinden</p>
+        <h2 id="install-guide-title">Schulferienklar als App speichern</h2>
+        <p>
+          iPhone: Teilen → „Zum Home-Bildschirm“. Android/Computer:
+          Browser-Menü → „App installieren“ oder „Zum Startbildschirm hinzufügen“.
+        </p>
+      </section>
+
       <footer className="footer site-footer">
         <p className="footer-copyright">© 2026 Joan — All rights reserved.</p>
 
