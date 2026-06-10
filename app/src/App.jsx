@@ -365,6 +365,121 @@ function HolidayCalendar({
   );
 }
 
+function MobileActiveMonthCalendar({
+  holidays,
+  publicHolidays = [],
+  selectedYear,
+}) {
+  const monthKeys = useMemo(() => getCalendarMonthKeys(selectedYear), [selectedYear]);
+
+  const initialMonthIndex = useMemo(() => {
+    const currentMonthKey = toDateKey(TODAY).slice(0, 7);
+    const currentIndex = monthKeys.indexOf(currentMonthKey);
+    return currentIndex >= 0 ? currentIndex : 0;
+  }, [monthKeys]);
+
+  const [activeMonthIndex, setActiveMonthIndex] = useState(initialMonthIndex);
+  const [touchStart, setTouchStart] = useState(null);
+
+  useEffect(() => {
+    setActiveMonthIndex(initialMonthIndex);
+  }, [initialMonthIndex]);
+
+  if (monthKeys.length === 0) {
+    return null;
+  }
+
+  const safeActiveMonthIndex = Math.min(activeMonthIndex, monthKeys.length - 1);
+  const activeMonthKey = monthKeys[safeActiveMonthIndex];
+  const [yearText, monthText] = activeMonthKey.split("-");
+  const activeMonthLabel = formatMonth(Number(yearText), Number(monthText) - 1);
+
+  const goToPreviousMonth = () => {
+    setActiveMonthIndex((current) => Math.max(0, current - 1));
+  };
+
+  const goToNextMonth = () => {
+    setActiveMonthIndex((current) => Math.min(monthKeys.length - 1, current + 1));
+  };
+
+  const handleTouchStart = (event) => {
+    const touch = event.touches[0];
+    setTouchStart({ x: touch.clientX, y: touch.clientY });
+  };
+
+  const handleTouchEnd = (event) => {
+    if (!touchStart) {
+      return;
+    }
+
+    const touch = event.changedTouches[0];
+    const deltaX = touch.clientX - touchStart.x;
+    const deltaY = touch.clientY - touchStart.y;
+
+    if (Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY) * 1.35) {
+      if (deltaX < 0) {
+        goToNextMonth();
+      } else {
+        goToPreviousMonth();
+      }
+    }
+
+    setTouchStart(null);
+  };
+
+  return (
+    <section
+      className="panel mobile-active-month-calendar"
+      aria-labelledby="mobile-month-title"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      <div className="section-header mobile-month-header">
+        <div>
+          <p className="eyebrow">Heute im Blick</p>
+          <h3 id="mobile-month-title">Aktueller Monat</h3>
+        </div>
+        <span className="small-pill">Wischen oder tippen</span>
+      </div>
+
+      <div className="mobile-month-controls" aria-label="Monat wechseln">
+        <button
+          className="month-nav-button"
+          type="button"
+          onClick={goToPreviousMonth}
+          disabled={safeActiveMonthIndex === 0}
+        >
+          ← Vorheriger
+        </button>
+
+        <div className="mobile-month-current" aria-live="polite">
+          <strong>{activeMonthLabel}</strong>
+          <span>{safeActiveMonthIndex + 1} von {monthKeys.length}</span>
+        </div>
+
+        <button
+          className="month-nav-button"
+          type="button"
+          onClick={goToNextMonth}
+          disabled={safeActiveMonthIndex === monthKeys.length - 1}
+        >
+          Nächster →
+        </button>
+      </div>
+
+      <HolidayCalendar
+        holidays={holidays}
+        publicHolidays={publicHolidays}
+        selectedYear={selectedYear}
+        customMonthKeys={[activeMonthKey]}
+        showLegend={false}
+      />
+    </section>
+  );
+}
+
+
+
 export default function App() {
   const [showTravelCheckerPreview, setShowTravelCheckerPreview] = useState(false);
   const [index, setIndex] = useState(null);
@@ -804,27 +919,35 @@ export default function App() {
             </div>
           ) : (
             <>
-              {shouldShowCurrentMonthPreview && (
-                <section className="current-month-preview">
-                  <div className="section-header">
-                    <div>
-                      <p className="eyebrow">Heute im Blick</p>
-                      <h3>Aktueller Monat</h3>
+              <div className="desktop-calendar-stack">
+                {shouldShowCurrentMonthPreview && (
+                  <section className="current-month-preview">
+                    <div className="section-header">
+                      <div>
+                        <p className="eyebrow">Heute im Blick</p>
+                        <h3>Aktueller Monat</h3>
+                      </div>
+                      <span className="small-pill">schneller Überblick</span>
                     </div>
-                    <span className="small-pill">schneller Überblick</span>
-                  </div>
 
-                  <HolidayCalendar
-                    holidays={holidays}
-                    publicHolidays={publicHolidayDataset?.holidays || []}
-                    selectedYear={selectedYear}
-                    customMonthKeys={[currentMonthKey]}
-                    showLegend={false}
-                  />
-                </section>
-              )}
+                    <HolidayCalendar
+                      holidays={holidays}
+                      publicHolidays={publicHolidayDataset?.holidays || []}
+                      selectedYear={selectedYear}
+                      customMonthKeys={[currentMonthKey]}
+                      showLegend={false}
+                    />
+                  </section>
+                )}
 
-              <HolidayCalendar
+                <HolidayCalendar
+                  holidays={holidays}
+                  publicHolidays={publicHolidayDataset?.holidays || []}
+                  selectedYear={selectedYear}
+                />
+              </div>
+
+              <MobileActiveMonthCalendar
                 holidays={holidays}
                 publicHolidays={publicHolidayDataset?.holidays || []}
                 selectedYear={selectedYear}
