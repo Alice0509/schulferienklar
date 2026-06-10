@@ -1806,3 +1806,112 @@ canvas {
     margin-top: 0;
   }
 }
+
+@media (max-width: 720px) {
+  .mobile-active-month-calendar {
+    touch-action: pan-y;
+    user-select: none;
+  }
+
+  .mobile-active-month-calendar .calendar-view,
+  .mobile-active-month-calendar .month-card {
+    touch-action: pan-y;
+  }
+}
+
+@media (max-width: 720px) {
+  .swipe-only-month-controls {
+    display: block !important;
+    margin: 12px 0 16px !important;
+    text-align: center;
+  }
+
+  .swipe-only-month-controls .mobile-month-current {
+    display: grid;
+    gap: 4px;
+  }
+
+  .swipe-only-month-controls .mobile-month-current strong {
+    font-size: 1.45rem !important;
+    letter-spacing: -0.045em;
+  }
+
+  .swipe-only-month-controls .mobile-month-current span {
+    font-size: 0.82rem !important;
+    color: #697581;
+    font-weight: 800;
+  }
+}
+
+@media (max-width: 720px) {
+  .desktop-calendar-stack {
+    display: none !important;
+  }
+
+  .mobile-active-month-calendar {
+    display: block !important;
+    margin-bottom: 32px;
+    touch-action: pan-y;
+    user-select: none;
+  }
+
+  .mobile-active-month-calendar .calendar-view,
+  .mobile-active-month-calendar .month-card {
+    touch-action: pan-y;
+  }
+
+  .compact-month-controls {
+    display: grid !important;
+    grid-template-columns: 42px minmax(0, 1fr) 42px !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 12px 0 16px !important;
+  }
+
+  .compact-month-controls .month-nav-button {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    min-height: 42px !important;
+    max-width: 42px !important;
+    padding: 0 !important;
+    display: inline-grid !important;
+    place-items: center !important;
+    border-radius: 999px !important;
+    border: 1px solid rgba(31, 111, 100, 0.18) !important;
+    background: rgba(232, 247, 240, 0.82) !important;
+    color: #1f6f64 !important;
+    font-size: 2rem !important;
+    font-weight: 800 !important;
+    line-height: 1 !important;
+    overflow: hidden !important;
+  }
+
+  .compact-month-controls .month-nav-button span {
+    display: block !important;
+    transform: translateY(-1px);
+  }
+
+  .compact-month-controls .month-nav-button:disabled {
+    opacity: 0.28 !important;
+  }
+
+  .compact-month-controls .mobile-month-current {
+    min-width: 0 !important;
+    text-align: center !important;
+  }
+
+  .compact-month-controls .mobile-month-current strong {
+    display: block !important;
+    font-size: 1.35rem !important;
+    letter-spacing: -0.045em !important;
+  }
+
+  .compact-month-controls .mobile-month-current span {
+    display: block !important;
+    margin-top: 2px !important;
+    font-size: 0.78rem !important;
+    color: #697581 !important;
+    font-weight: 800 !important;
+  }
+}
