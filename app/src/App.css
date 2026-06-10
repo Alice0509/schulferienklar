@@ -1019,6 +1019,25 @@ select:focus {
 
 @media (max-width: 720px) {
 
+  .desktop-calendar-stack {
+    display: none;
+  }
+
+  .mobile-active-month-calendar {
+    display: block;
+    margin-bottom: 32px;
+    touch-action: pan-y;
+  }
+
+  .mobile-month-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .month-nav-button {
+    width: 100%;
+  }
+
+
 
   .hero {
     padding-top: 28px;
@@ -1225,6 +1244,63 @@ select:focus {
   .state-select-option {
     padding: 13px 14px;
   }
+}
+
+
+.desktop-calendar-stack {
+  display: block;
+}
+
+.mobile-active-month-calendar {
+  display: none;
+}
+
+.mobile-month-header {
+  margin-bottom: 18px;
+}
+
+.mobile-active-month-calendar h3 {
+  margin: 0;
+}
+
+.mobile-month-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.month-nav-button {
+  min-height: 44px;
+  border: 1px solid rgba(31, 111, 100, 0.16);
+  border-radius: 999px;
+  background: rgba(232, 247, 240, 0.72);
+  color: #1f6f64;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.month-nav-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
+.mobile-month-current {
+  display: grid;
+  gap: 2px;
+  text-align: center;
+  color: #182235;
+}
+
+.mobile-month-current strong {
+  font-size: 1.08rem;
+}
+
+.mobile-month-current span {
+  color: #697581;
+  font-size: 0.84rem;
+  font-weight: 800;
 }
 
 .current-month-preview {
