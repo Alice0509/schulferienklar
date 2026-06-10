@@ -1753,3 +1753,56 @@ canvas {
     width: 100%;
   }
 }
+
+@media (max-width: 720px) {
+  .desktop-calendar-stack {
+    display: none !important;
+  }
+
+  .mobile-active-month-calendar {
+    display: block !important;
+    margin-bottom: 32px;
+    touch-action: pan-y;
+  }
+
+  .mobile-month-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .month-nav-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  .mobile-month-controls {
+    grid-template-columns: 44px minmax(0, 1fr) 44px !important;
+    gap: 10px;
+    margin: 14px 0 16px;
+  }
+
+  .month-nav-button {
+    width: 44px !important;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    border-radius: 999px;
+    font-size: 1.25rem;
+  }
+
+  .mobile-month-current strong {
+    font-size: 1.2rem;
+  }
+
+  .mobile-month-current span {
+    font-size: 0.78rem;
+  }
+
+  .mobile-active-month-calendar .calendar-view {
+    margin-top: 0;
+  }
+
+  .mobile-active-month-calendar .month-card {
+    margin-top: 0;
+  }
+}

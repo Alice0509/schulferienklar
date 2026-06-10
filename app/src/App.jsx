@@ -472,6 +472,7 @@ function MobileActiveMonthCalendar({
         publicHolidays={publicHolidays}
         selectedYear={selectedYear}
         customMonthKeys={[activeMonthKey]}
+        showLegend={false}
       />
     </section>
   );
