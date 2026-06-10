@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import CheckTodayPreview from "./components/CheckTodayPreview.jsx";
 import { downloadIcsFile, generateIcsCalendar } from "./utils/ics";
@@ -379,7 +379,7 @@ function MobileActiveMonthCalendar({
   }, [monthKeys]);
 
   const [activeMonthIndex, setActiveMonthIndex] = useState(initialMonthIndex);
-  const [touchStart, setTouchStart] = useState(null);
+  const pointerStartRef = useRef(null);
 
   useEffect(() => {
     setActiveMonthIndex(initialMonthIndex);
@@ -402,37 +402,59 @@ function MobileActiveMonthCalendar({
     setActiveMonthIndex((current) => Math.min(monthKeys.length - 1, current + 1));
   };
 
-  const handleTouchStart = (event) => {
-    const touch = event.touches[0];
-    setTouchStart({ x: touch.clientX, y: touch.clientY });
-  };
-
-  const handleTouchEnd = (event) => {
-    if (!touchStart) {
+  const handlePointerDown = (event) => {
+    if (event.pointerType === "mouse" && event.button !== 0) {
       return;
     }
 
-    const touch = event.changedTouches[0];
-    const deltaX = touch.clientX - touchStart.x;
-    const deltaY = touch.clientY - touchStart.y;
+    pointerStartRef.current = {
+      x: event.clientX,
+      y: event.clientY,
+      time: Date.now(),
+    };
+  };
 
-    if (Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY) * 1.35) {
-      if (deltaX < 0) {
-        goToNextMonth();
-      } else {
-        goToPreviousMonth();
-      }
+  const handlePointerUp = (event) => {
+    const pointerStart = pointerStartRef.current;
+
+    if (!pointerStart) {
+      return;
     }
 
-    setTouchStart(null);
+    const deltaX = event.clientX - pointerStart.x;
+    const deltaY = event.clientY - pointerStart.y;
+    const elapsed = Date.now() - pointerStart.time;
+
+    pointerStartRef.current = null;
+
+    const isHorizontalSwipe =
+      Math.abs(deltaX) >= 44 &&
+      Math.abs(deltaX) > Math.abs(deltaY) * 1.25 &&
+      elapsed <= 1000;
+
+    if (!isHorizontalSwipe) {
+      return;
+    }
+
+    if (deltaX < 0) {
+      goToNextMonth();
+    } else {
+      goToPreviousMonth();
+    }
   };
+
+  const handlePointerCancel = () => {
+    pointerStartRef.current = null;
+  };
+
 
   return (
     <section
       className="panel mobile-active-month-calendar"
       aria-labelledby="mobile-month-title"
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerCancel}
     >
       <div className="section-header mobile-month-header">
         <div>
@@ -442,19 +464,20 @@ function MobileActiveMonthCalendar({
         <span className="small-pill">Wischen oder tippen</span>
       </div>
 
-      <div className="mobile-month-controls" aria-label="Monat wechseln">
+      <div className="mobile-month-controls compact-month-controls" aria-label="Monat wechseln">
         <button
           className="month-nav-button"
           type="button"
           onClick={goToPreviousMonth}
           disabled={safeActiveMonthIndex === 0}
+          aria-label="Vorheriger Monat"
         >
-          ← Vorheriger
+          <span aria-hidden="true">‹</span>
         </button>
 
         <div className="mobile-month-current" aria-live="polite">
           <strong>{activeMonthLabel}</strong>
-          <span>{safeActiveMonthIndex + 1} von {monthKeys.length}</span>
+          <span>{safeActiveMonthIndex + 1} von {monthKeys.length} · wischen</span>
         </div>
 
         <button
@@ -462,8 +485,9 @@ function MobileActiveMonthCalendar({
           type="button"
           onClick={goToNextMonth}
           disabled={safeActiveMonthIndex === monthKeys.length - 1}
+          aria-label="Nächster Monat"
         >
-          Nächster →
+          <span aria-hidden="true">›</span>
         </button>
       </div>
 
