@@ -631,6 +631,7 @@ export default function App() {
 
     const scrollToCalendar = () => {
       document.getElementById("ferienkalender")?.scrollIntoView({
+        behavior: "smooth",
         block: "start",
       });
     };
