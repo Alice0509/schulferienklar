@@ -434,7 +434,12 @@ function MobileActiveMonthCalendar({
   const [yearText, monthText] = activeMonthKey.split("-");
   const activeMonthLabel = formatMonth(Number(yearText), Number(monthText) - 1);
   const isCurrentYear = selectedYear === TODAY.getFullYear();
-  const currentYearUrl = `/?year=${TODAY.getFullYear()}`;
+  const isViewingCurrentMonth = isCurrentYear && safeActiveMonthIndex === initialMonthIndex;
+  const currentYearUrl = `/?year=${TODAY.getFullYear()}#ferienkalender`;
+
+  const goToCurrentMonth = () => {
+    setActiveMonthIndex(initialMonthIndex);
+  };
 
   const goToPreviousMonth = () => {
     setActiveMonthIndex((current) => Math.max(0, current - 1));
@@ -507,9 +512,44 @@ function MobileActiveMonthCalendar({
       </div>
 
       {!isCurrentYear && (
-        <a className="current-year-link" href={currentYearUrl}>
+        <a
+          className="current-year-link"
+          href={currentYearUrl}
+          onPointerDown={(event) => {
+            event.stopPropagation();
+          }}
+          onPointerUp={(event) => {
+            event.stopPropagation();
+          }}
+          onClick={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+
+            localStorage.setItem(STORAGE_KEYS.year, String(TODAY.getFullYear()));
+            window.location.assign(currentYearUrl);
+          }}
+        >
           Aktuelles Jahr anzeigen
         </a>
+      )}
+
+      {isCurrentYear && !isViewingCurrentMonth && (
+        <button
+          className="current-year-link"
+          type="button"
+          onPointerDown={(event) => {
+            event.stopPropagation();
+          }}
+          onPointerUp={(event) => {
+            event.stopPropagation();
+          }}
+          onClick={(event) => {
+            event.stopPropagation();
+            goToCurrentMonth();
+          }}
+        >
+          Aktueller Monat anzeigen
+        </button>
       )}
 
       <div className="mobile-month-controls compact-month-controls" aria-label="Monat wechseln">
@@ -991,7 +1031,7 @@ export default function App() {
             </div>
           ) : (
             <>
-              <div className="desktop-calendar-stack">
+              <div className="desktop-calendar-stack" id="ferienkalender">
                 {shouldShowCurrentMonthPreview && (
                   <section className="current-month-preview">
                     <div className="section-header">

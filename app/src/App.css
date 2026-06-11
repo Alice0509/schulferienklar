@@ -1991,3 +1991,8 @@ canvas {
     font-size: 0.86rem;
   }
 }
+
+button.current-year-link {
+  font-family: inherit;
+  cursor: pointer;
+}
