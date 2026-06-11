@@ -1996,3 +1996,13 @@ button.current-year-link {
   font-family: inherit;
   cursor: pointer;
 }
+
+.calendar-anchor {
+  scroll-margin-top: 18px;
+}
+
+@media (max-width: 720px) {
+  .calendar-anchor {
+    scroll-margin-top: 12px;
+  }
+}
