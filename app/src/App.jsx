@@ -626,6 +626,19 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.year, String(selectedYear));
   }, [selectedYear]);
+  useEffect(() => {
+    if (window.location.hash !== "#ferienkalender") return;
+
+    const scrollToCalendar = () => {
+      document.getElementById("ferienkalender")?.scrollIntoView({
+        block: "start",
+      });
+    };
+
+    window.setTimeout(scrollToCalendar, 0);
+    window.setTimeout(scrollToCalendar, 250);
+  }, [selectedYear]);
+
   const [dataset, setDataset] = useState(null);
   const [publicHolidayDataset, setPublicHolidayDataset] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -1031,7 +1044,8 @@ export default function App() {
             </div>
           ) : (
             <>
-              <div className="desktop-calendar-stack" id="ferienkalender">
+              <div id="ferienkalender" className="calendar-anchor" aria-hidden="true" />
+              <div className="desktop-calendar-stack">
                 {shouldShowCurrentMonthPreview && (
                   <section className="current-month-preview">
                     <div className="section-header">
