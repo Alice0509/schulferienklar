@@ -1960,3 +1960,34 @@ canvas {
     font-size: 0.95rem;
   }
 }
+
+.current-year-link {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(31, 111, 100, 0.18);
+  border-radius: 999px;
+  background: rgba(232, 247, 240, 0.82);
+  color: #1f6f64;
+  font-size: 0.9rem;
+  font-weight: 850;
+  padding: 9px 14px;
+  margin: 4px 0 14px;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(31, 111, 100, 0.08);
+}
+
+.current-year-link:hover,
+.current-year-link:focus-visible {
+  background: rgba(232, 247, 240, 1);
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+@media (max-width: 720px) {
+  .current-year-link {
+    margin: -2px 0 14px;
+    font-size: 0.86rem;
+  }
+}

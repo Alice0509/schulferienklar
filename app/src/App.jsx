@@ -433,6 +433,8 @@ function MobileActiveMonthCalendar({
   const activeMonthKey = monthKeys[safeActiveMonthIndex];
   const [yearText, monthText] = activeMonthKey.split("-");
   const activeMonthLabel = formatMonth(Number(yearText), Number(monthText) - 1);
+  const isCurrentYear = selectedYear === TODAY.getFullYear();
+  const currentYearUrl = `/?year=${TODAY.getFullYear()}`;
 
   const goToPreviousMonth = () => {
     setActiveMonthIndex((current) => Math.max(0, current - 1));
@@ -499,10 +501,16 @@ function MobileActiveMonthCalendar({
       <div className="section-header mobile-month-header">
         <div>
           <p className="eyebrow">Heute im Blick</p>
-          <h3 id="mobile-month-title">Aktueller Monat</h3>
+          <h3 id="mobile-month-title">{isCurrentYear ? "Aktueller Monat" : "Monatsansicht"}</h3>
         </div>
         <span className="small-pill">Wischen oder tippen</span>
       </div>
+
+      {!isCurrentYear && (
+        <a className="current-year-link" href={currentYearUrl}>
+          Aktuelles Jahr anzeigen
+        </a>
+      )}
 
       <div className="mobile-month-controls compact-month-controls" aria-label="Monat wechseln">
         <button
