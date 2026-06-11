@@ -292,6 +292,12 @@ function HolidayCalendar({
     return customMonthKeys || getCalendarMonthKeys(selectedYear);
   }, [customMonthKeys, selectedYear]);
 
+  const [selectedDayDetail, setSelectedDayDetail] = useState(null);
+
+  useEffect(() => {
+    setSelectedDayDetail(null);
+  }, [selectedYear, customMonthKeys]);
+
   if (monthKeys.length === 0) {
     return <p className="empty-state">Keine kommenden Ferien für die Kalenderansicht gefunden.</p>;
   }
@@ -338,8 +344,16 @@ function HolidayCalendar({
                   const isSunday = date.getDay() === 0;
                   const isFreePeriodOnly = Boolean(freePeriodHoliday) && !holiday;
 
+                  const dayKey = toDateKey(date);
+                  const holidayLabel = holiday ? getHolidayLabel(holiday) : "";
+                  const freePeriodLabel =
+                    isFreePeriodOnly && freePeriodHoliday
+                      ? `Freie Zeit rund um ${getHolidayLabel(freePeriodHoliday)}`
+                      : "";
+                  const dayDetailLabel = holidayLabel || freePeriodLabel;
+
                   return (
-                    <span
+                    <button
                       className={[
                         "calendar-day",
                         isSaturday ? "is-saturday" : "",
@@ -348,12 +362,31 @@ function HolidayCalendar({
                         holiday ? "is-highlighted" : "",
                         tone ? `tone-${tone}` : "",
                         isToday ? "is-today" : "",
+                        dayDetailLabel ? "has-day-detail" : "",
+                        selectedDayDetail?.dateKey === dayKey ? "is-selected-detail" : "",
                       ].join(" ")}
-                      key={toDateKey(date)}
-                      title={holiday ? getHolidayLabel(holiday) : ""}
+                      key={dayKey}
+                      type="button"
+                      title={dayDetailLabel}
+                      aria-label={
+                        dayDetailLabel
+                          ? `${formatDate(dayKey)}: ${dayDetailLabel}`
+                          : formatDate(dayKey)
+                      }
+                      onClick={() => {
+                        if (!dayDetailLabel) {
+                          setSelectedDayDetail(null);
+                          return;
+                        }
+
+                        setSelectedDayDetail({
+                          dateKey: dayKey,
+                          label: dayDetailLabel,
+                        });
+                      }}
                     >
                       <span>{date.getDate()}</span>
-                    </span>
+                    </button>
                   );
                 })}
               </div>
@@ -361,6 +394,13 @@ function HolidayCalendar({
           );
         })}
       </div>
+
+      {selectedDayDetail && (
+        <div className="calendar-day-detail" role="status" aria-live="polite">
+          <strong>{formatDate(selectedDayDetail.dateKey)}</strong>
+          <span>{selectedDayDetail.label}</span>
+        </div>
+      )}
     </div>
   );
 }
