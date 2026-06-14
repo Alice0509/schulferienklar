@@ -12,7 +12,8 @@
     "build:seo": "npm run generate:seo && vite build",
     "validate:data": "cd .. && node scripts/validate-holidays.mjs && node scripts/validate-public-holidays.mjs",
     "generate:seo:checked": "npm run validate:data && npm run generate:seo",
-    "build:seo:checked": "npm run validate:data && npm run generate:seo && vite build"
+    "build:seo:checked": "npm run validate:data && npm run generate:seo && npm run validate:seo-pages && vite build",
+    "validate:seo-pages": "node scripts/validate-generated-seo-pages.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
