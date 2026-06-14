@@ -54,6 +54,21 @@ for (const file of htmlFiles) {
       errors.push(`${file}: missing ${label}`);
     }
   }
+
+  const hygieneChecks = [
+    ["heredoc prompt", /heredoc>/i],
+    ["undefined literal", /\bundefined\b/i],
+    ["null literal", /\bnull\b/i],
+    ["NaN literal", /\bNaN\b/],
+    ["markdown code fence", /```/],
+    ["markdown code fence language id", /```[a-zA-Z0-9_-]+\s+id=/],
+  ];
+
+  for (const [label, pattern] of hygieneChecks) {
+    if (pattern.test(html)) {
+      errors.push(`${file}: contains ${label}`);
+    }
+  }
 }
 
 console.log(`Checked ${htmlFiles.length} generated SEO HTML files.`);
