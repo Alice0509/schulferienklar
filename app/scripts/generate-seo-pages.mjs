@@ -452,13 +452,28 @@ ${dataTrustNoteHtml()}
 }
 
 
-function stateHubTemplate({ slug, name, englishName, code }) {
+function stateHubTemplate({ holidayIndex, slug, name, englishName, code }) {
   const title = `Schulferien ${name} – Termine, Feiertage und Kalender`;
   const description = `Schulferien in ${name}: aktuelle Ferientermine, Feiertage und freie Tage für die nächsten Jahre übersichtlich im Kalender.`;
 
   const yearLinks = years
     .map((year) => {
       return `          <li><a href="/schulferien-${slug}-${year}.html">Schulferien ${escapeHtml(name)} ${year}</a></li>`;
+    })
+    .join("\n");
+
+  const yearSummaryCards = years
+    .map((year) => {
+      const events = getEventsForStateAndYear({ holidayIndex, code, year });
+      const firstEvent = events[0];
+      const firstEventText = firstEvent
+        ? `${escapeHtml(getHolidayName(firstEvent))}: ${formatDate(firstEvent.startDate)} bis ${formatDate(firstEvent.endDate)}`
+        : "Noch keine Ferientermine verfügbar";
+
+      return `          <li>
+            <strong><a href="/schulferien-${slug}-${year}.html">Schulferien ${escapeHtml(name)} ${year}</a></strong>
+            <span>${events.length} Ferienzeiträume · ${firstEventText}</span>
+          </li>`;
     })
     .join("\n");
 
@@ -490,7 +505,17 @@ function stateHubTemplate({ slug, name, englishName, code }) {
           ${escapeHtml(name)} für die nächsten Jahre.
         </p>
 
-        <h2>Jahre für ${escapeHtml(name)}</h2>
+        <h2>Übersicht ${escapeHtml(name)} ${years[0]}–${years[years.length - 1]}</h2>
+        <p>
+          Die folgenden Jahresseiten zeigen die Ferientermine für ${escapeHtml(name)}
+          mit Ferienzeiträumen, Feiertagen und direktem Kalenderzugang.
+        </p>
+
+        <ul class="holiday-summary-list">
+${yearSummaryCards}
+        </ul>
+
+        <h2>Alle Jahre für ${escapeHtml(name)}</h2>
         <ul class="holiday-summary-list">
 ${yearLinks}
         </ul>
@@ -650,7 +675,7 @@ for (const [slug, name, englishName, code] of states) {
 
   fs.writeFileSync(
     path.join(outputDir, fileName),
-    stateHubTemplate({ slug, name, englishName, code }),
+    stateHubTemplate({ holidayIndex, slug, name, englishName, code }),
     "utf8"
   );
 
