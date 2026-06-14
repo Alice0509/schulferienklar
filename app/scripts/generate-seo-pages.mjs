@@ -254,6 +254,22 @@ ${stateLinks}
 }
 
 
+
+function dataTrustNoteHtml() {
+  const generatedAt = holidayIndex.generatedAt
+    ? formatDate(holidayIndex.generatedAt)
+    : "nicht angegeben";
+
+  return `        <div class="note">
+          <strong>Letzte Aktualisierung:</strong> ${generatedAt}<br />
+          <strong>Datenbasis:</strong> Schulferienklar nutzt die hinterlegten Ferien-Datensätze
+          der Bundesländer. Für verbindliche Auskünfte sind die offiziellen Veröffentlichungen
+          des jeweiligen Bundeslandes maßgeblich.
+          <a href="/datenquellen.html">Mehr zu den Datenquellen</a>.
+        </div>`;
+}
+
+
 function pageTemplate({ slug, name, englishName, code, year, events }) {
   const title = `Schulferien ${name} ${year} – Schulferienklar`;
   const description = `Schulferien ${name} ${year}: Ferien, Feiertage und freie Zeiten im Kalender sehen. School holidays ${englishName} ${year}.`;
@@ -422,6 +438,8 @@ ${stateYearInternalLinksHtml({ slug, name, year })}
 
         <a class="button" href="/?state=${code}&year=${year}">Kalender öffnen</a>
 
+${dataTrustNoteHtml()}
+
         <div class="note">
           <strong>Hinweis:</strong>
           Für verbindliche Auskünfte sind die offiziellen Veröffentlichungen des
@@ -484,6 +502,8 @@ ${yearLinks}
 
         <a class="button" href="/?state=${code}">Kalender für ${escapeHtml(name)} öffnen</a>
 
+${dataTrustNoteHtml()}
+
         <div class="note">
           <strong>Datenhinweis:</strong>
           Für verbindliche Auskünfte sind die offiziellen Veröffentlichungen des
@@ -539,6 +559,8 @@ ${stateLinks}
         </ul>
 
         <a class="button" href="/?year=${year}">Kalender ${year} öffnen</a>
+
+${dataTrustNoteHtml()}
 
         <div class="note">
           <strong>Datenhinweis:</strong>
