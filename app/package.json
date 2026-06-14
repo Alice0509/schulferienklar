@@ -9,7 +9,10 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "generate:seo": "node scripts/generate-seo-pages.mjs",
-    "build:seo": "npm run generate:seo && vite build"
+    "build:seo": "npm run generate:seo && vite build",
+    "validate:data": "cd .. && node scripts/validate-holidays.mjs && node scripts/validate-public-holidays.mjs",
+    "generate:seo:checked": "npm run validate:data && npm run generate:seo",
+    "build:seo:checked": "npm run validate:data && npm run generate:seo && vite build"
   },
   "dependencies": {
     "react": "^18.3.1",
