@@ -78,6 +78,39 @@ cd app
 npm run build
 ```
 
+SEO-Seiten erzeugen:
+
+```bash
+cd app
+npm run generate:seo
+```
+
+Vollständigen geprüften SEO-Build ausführen:
+
+```bash
+cd app
+npm run build:seo:checked
+```
+
+Dieser geprüfte Build führt nacheinander aus:
+
+```txt
+validate:data
+generate:seo
+validate:seo-pages
+vite build
+```
+
+Die wichtigsten App-Skripte sind:
+
+```bash
+npm run lint
+npm run validate:data
+npm run generate:seo
+npm run validate:seo-pages
+npm run build:seo:checked
+```
+
 ## Deployment
 
 Die App wird über GitHub Pages und GitHub Actions veröffentlicht.
