@@ -219,6 +219,41 @@ function sharedSeoStyles() {
     </style>`;
 }
 
+
+function stateYearInternalLinksHtml({ slug, name, year }) {
+  const yearLinks = years
+    .map((linkYear) => {
+      return `            <li><a href="/schulferien-${slug}-${linkYear}.html">Schulferien ${escapeHtml(name)} ${linkYear}</a></li>`;
+    })
+    .join("\n");
+
+  const stateLinks = states
+    .map(([stateSlug, stateName]) => {
+      return `            <li><a href="/schulferien-${stateSlug}-${year}.html">Schulferien ${escapeHtml(stateName)} ${year}</a></li>`;
+    })
+    .join("\n");
+
+  return `        <h2>Weitere Ferienseiten</h2>
+
+        <h3>Weitere Jahre für ${escapeHtml(name)}</h3>
+        <ul class="holiday-summary-list">
+${yearLinks}
+        </ul>
+
+        <h3>Andere Bundesländer ${year}</h3>
+        <ul class="holiday-summary-list">
+${stateLinks}
+        </ul>
+
+        <p>
+          Mehr Überblick findest du auf der Übersichtsseite
+          <a href="/schulferien-${slug}.html">Schulferien ${escapeHtml(name)}</a>
+          und auf der Jahresseite
+          <a href="/schulferien-${year}.html">Schulferien ${year} in Deutschland</a>.
+        </p>`;
+}
+
+
 function pageTemplate({ slug, name, englishName, code, year, events }) {
   const title = `Schulferien ${name} ${year} – Schulferienklar`;
   const description = `Schulferien ${name} ${year}: Ferien, Feiertage und freie Zeiten im Kalender sehen. School holidays ${englishName} ${year}.`;
@@ -376,6 +411,8 @@ function pageTemplate({ slug, name, englishName, code, year, events }) {
           Die App hilft Familien, Schüler:innen und allen, die Betreuung, Reisen,
           Lernzeiten oder freie Tage rund um die Schulferien planen möchten.
         </p>
+
+${stateYearInternalLinksHtml({ slug, name, year })}
 
         <h2>School holidays ${englishName} ${year}</h2>
         <p>
