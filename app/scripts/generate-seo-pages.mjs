@@ -100,6 +100,125 @@ ${items}
         </ul>`;
 }
 
+
+function sharedSeoStyles() {
+  return `    <style>
+      body {
+        margin: 0;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #172033;
+        background: #f6f3ec;
+        line-height: 1.6;
+      }
+
+      main {
+        width: min(860px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 48px 0;
+      }
+
+      .card {
+        border-radius: 28px;
+        padding: 32px;
+        background: rgba(255, 255, 255, 0.86);
+        border: 1px solid rgba(23, 32, 51, 0.08);
+        box-shadow: 0 20px 60px rgba(40, 55, 85, 0.1);
+      }
+
+      .eyebrow {
+        margin: 0 0 12px;
+        color: #1f6f64;
+        font-size: 0.82rem;
+        font-weight: 900;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.5rem, 8vw, 5rem);
+        line-height: 0.95;
+        letter-spacing: -0.065em;
+      }
+
+      h2 {
+        margin-top: 2rem;
+      }
+
+      p {
+        color: #56616f;
+        font-size: 1.08rem;
+      }
+
+      a {
+        color: #1f6f64;
+        font-weight: 800;
+      }
+
+      .button {
+        display: inline-flex;
+        margin-top: 18px;
+        border-radius: 999px;
+        padding: 14px 20px;
+        background: #1f6f64;
+        color: white;
+        text-decoration: none;
+        font-weight: 900;
+      }
+
+      .holiday-summary-list {
+        display: grid;
+        gap: 10px;
+        padding: 0;
+        margin: 18px 0 0;
+        list-style: none;
+      }
+
+      .holiday-summary-list li {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 4px 16px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(232, 247, 240, 0.62);
+        border: 1px solid rgba(31, 111, 100, 0.14);
+      }
+
+      .holiday-summary-list strong {
+        color: #172033;
+      }
+
+      .holiday-summary-list span {
+        color: #1f6f64;
+        font-weight: 900;
+      }
+
+      .holiday-summary-list small {
+        grid-column: 1 / -1;
+        color: #66717f;
+        font-weight: 800;
+      }
+
+      .note {
+        margin-top: 24px;
+        border-radius: 18px;
+        padding: 16px 18px;
+        background: rgba(232, 247, 240, 0.78);
+        border: 1px solid rgba(31, 111, 100, 0.18);
+      }
+
+      @media (max-width: 640px) {
+        .card {
+          padding: 24px;
+        }
+
+        .holiday-summary-list li {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>`;
+}
+
 function pageTemplate({ slug, name, englishName, code, year, events }) {
   const title = `Schulferien ${name} ${year} – Schulferienklar`;
   const description = `Schulferien ${name} ${year}: Ferien, Feiertage und freie Zeiten im Kalender sehen. School holidays ${englishName} ${year}.`;
@@ -277,6 +396,179 @@ function pageTemplate({ slug, name, englishName, code, year, events }) {
 </html>`;
 }
 
+
+function stateHubTemplate({ slug, name, englishName, code }) {
+  const title = `Schulferien ${name} – Termine, Feiertage und Kalender`;
+  const description = `Schulferien in ${name}: aktuelle Ferientermine, Feiertage und freie Tage für die nächsten Jahre übersichtlich im Kalender.`;
+
+  const yearLinks = years
+    .map((year) => {
+      return `          <li><a href="/schulferien-${slug}-${year}.html">Schulferien ${escapeHtml(name)} ${year}</a></li>`;
+    })
+    .join("\n");
+
+  return `<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${title}</title>
+    <meta name="description" content="${description}" />
+    <link rel="canonical" href="https://www.schulferienklar.de/schulferien-${slug}.html" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:title" content="${title}" />
+    <meta property="og:description" content="${description}" />
+    <meta property="og:url" content="https://www.schulferienklar.de/schulferien-${slug}.html" />
+    <meta property="og:image" content="https://www.schulferienklar.de/og-image.png" />
+    ${sharedSeoStyles()}
+  </head>
+  <body>
+    <main>
+      <section class="card">
+        <p class="eyebrow">Bundesland</p>
+        <h1>Schulferien ${escapeHtml(name)}</h1>
+
+        <p>
+          Hier findest du die Schulferien, Feiertage und freien Zeiten in
+          ${escapeHtml(name)} für die nächsten Jahre.
+        </p>
+
+        <h2>Jahre für ${escapeHtml(name)}</h2>
+        <ul class="holiday-summary-list">
+${yearLinks}
+        </ul>
+
+        <p>
+          Schulferienklar hilft bei der Planung von Betreuung, Reisen, Lernzeiten
+          und freien Tagen rund um die Ferien in ${escapeHtml(name)}.
+        </p>
+
+        <a class="button" href="/?state=${code}">Kalender für ${escapeHtml(name)} öffnen</a>
+
+        <div class="note">
+          <strong>Datenhinweis:</strong>
+          Für verbindliche Auskünfte sind die offiziellen Veröffentlichungen des
+          jeweiligen Bundeslandes maßgeblich. <a href="/datenquellen.html">Mehr zu den Datenquellen</a>.
+        </div>
+      </section>
+    </main>
+  </body>
+</html>`;
+}
+
+function yearHubTemplate({ year }) {
+  const title = `Schulferien ${year} in Deutschland – alle Bundesländer`;
+  const description = `Schulferien ${year} in Deutschland: Ferientermine der Bundesländer übersichtlich vergleichen und freie Tage besser planen.`;
+
+  const stateLinks = states
+    .map(([slug, name]) => {
+      return `          <li><a href="/schulferien-${slug}-${year}.html">Schulferien ${escapeHtml(name)} ${year}</a></li>`;
+    })
+    .join("\n");
+
+  return `<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${title}</title>
+    <meta name="description" content="${description}" />
+    <link rel="canonical" href="https://www.schulferienklar.de/schulferien-${year}.html" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:title" content="${title}" />
+    <meta property="og:description" content="${description}" />
+    <meta property="og:url" content="https://www.schulferienklar.de/schulferien-${year}.html" />
+    <meta property="og:image" content="https://www.schulferienklar.de/og-image.png" />
+    ${sharedSeoStyles()}
+  </head>
+  <body>
+    <main>
+      <section class="card">
+        <p class="eyebrow">Deutschland</p>
+        <h1>Schulferien ${year} in Deutschland</h1>
+
+        <p>
+          Vergleiche die Schulferien ${year} nach Bundesland und öffne die
+          Detailseiten für Kalender, Feiertage und freie Zeiten.
+        </p>
+
+        <h2>Bundesländer ${year}</h2>
+        <ul class="holiday-summary-list">
+${stateLinks}
+        </ul>
+
+        <a class="button" href="/?year=${year}">Kalender ${year} öffnen</a>
+
+        <div class="note">
+          <strong>Datenhinweis:</strong>
+          Für verbindliche Auskünfte sind die offiziellen Veröffentlichungen der
+          Bundesländer maßgeblich. <a href="/datenquellen.html">Mehr zu den Datenquellen</a>.
+        </div>
+      </section>
+    </main>
+  </body>
+</html>`;
+}
+
+
+function sitemapEntry(url, { changefreq = "monthly", priority = "0.7" } = {}) {
+  return `  <url>
+    <loc>https://www.schulferienklar.de${url}</loc>
+    <changefreq>${changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+}
+
+function writeSitemap() {
+  const staticPages = [
+    ["/", "weekly", "1.0"],
+    ["/datenquellen.html", "monthly", "0.7"],
+    ["/ueber-uns.html", "monthly", "0.6"],
+    ["/impressum.html", "yearly", "0.3"],
+    ["/datenschutz.html", "yearly", "0.3"],
+    ["/support.html", "monthly", "0.4"],
+    ["/travel-germany-school-holidays.html", "monthly", "0.6"],
+    ["/germany-travel-checker.html", "monthly", "0.6"],
+  ];
+
+  const stateHubPages = states.map(([slug]) => {
+    return [`/schulferien-${slug}.html`, "monthly", "0.75"];
+  });
+
+  const yearHubPages = years.map((year) => {
+    return [`/schulferien-${year}.html`, "monthly", "0.75"];
+  });
+
+  const stateYearPages = years.flatMap((year) => {
+    return states.map(([slug]) => {
+      return [`/schulferien-${slug}-${year}.html`, "monthly", "0.8"];
+    });
+  });
+
+  const entries = [
+    ...staticPages,
+    ...stateHubPages,
+    ...yearHubPages,
+    ...stateYearPages,
+  ]
+    .map(([url, changefreq, priority]) => sitemapEntry(url, { changefreq, priority }))
+    .join("\n");
+
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${entries}
+</urlset>
+`;
+
+  fs.writeFileSync(path.join(outputDir, "sitemap.xml"), sitemap, "utf8");
+  console.log("created sitemap.xml");
+}
+
+
 const holidayIndex = JSON.parse(fs.readFileSync(holidayIndexPath, "utf8"));
 
 for (const year of years) {
@@ -293,3 +585,29 @@ for (const year of years) {
     console.log(`created ${fileName} (${events.length} entries)`);
   }
 }
+
+for (const [slug, name, englishName, code] of states) {
+  const fileName = `schulferien-${slug}.html`;
+
+  fs.writeFileSync(
+    path.join(outputDir, fileName),
+    stateHubTemplate({ slug, name, englishName, code }),
+    "utf8"
+  );
+
+  console.log(`created ${fileName}`);
+}
+
+for (const year of years) {
+  const fileName = `schulferien-${year}.html`;
+
+  fs.writeFileSync(
+    path.join(outputDir, fileName),
+    yearHubTemplate({ year }),
+    "utf8"
+  );
+
+  console.log(`created ${fileName}`);
+}
+
+writeSitemap();
