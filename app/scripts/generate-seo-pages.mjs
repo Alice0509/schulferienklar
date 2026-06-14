@@ -540,13 +540,28 @@ ${dataTrustNoteHtml()}
 </html>`;
 }
 
-function yearHubTemplate({ year }) {
+function yearHubTemplate({ holidayIndex, year }) {
   const title = `Schulferien ${year} in Deutschland – alle Bundesländer`;
   const description = `Schulferien ${year} in Deutschland: Ferientermine der Bundesländer übersichtlich vergleichen und freie Tage besser planen.`;
 
   const stateLinks = states
     .map(([slug, name]) => {
       return `          <li><a href="/schulferien-${slug}-${year}.html">Schulferien ${escapeHtml(name)} ${year}</a></li>`;
+    })
+    .join("\n");
+
+  const stateSummaryCards = states
+    .map(([slug, name, _englishName, code]) => {
+      const events = getEventsForStateAndYear({ holidayIndex, code, year });
+      const firstEvent = events[0];
+      const firstEventText = firstEvent
+        ? `${escapeHtml(getHolidayName(firstEvent))}: ${formatDate(firstEvent.startDate)} bis ${formatDate(firstEvent.endDate)}`
+        : "Noch keine Ferientermine verfügbar";
+
+      return `          <li>
+            <strong><a href="/schulferien-${slug}-${year}.html">Schulferien ${escapeHtml(name)} ${year}</a></strong>
+            <span>${events.length} Ferienzeiträume · ${firstEventText}</span>
+          </li>`;
     })
     .join("\n");
 
@@ -578,7 +593,18 @@ function yearHubTemplate({ year }) {
           Detailseiten für Kalender, Feiertage und freie Zeiten.
         </p>
 
-        <h2>Bundesländer ${year}</h2>
+        <h2>Übersicht der Bundesländer ${year}</h2>
+        <p>
+          Die folgenden Übersichten zeigen, wie viele Ferienzeiträume je
+          Bundesland für ${year} vorliegen und welcher Ferienzeitraum zuerst
+          im Jahr beginnt.
+        </p>
+
+        <ul class="holiday-summary-list">
+${stateSummaryCards}
+        </ul>
+
+        <h2>Alle Bundesländer ${year}</h2>
         <ul class="holiday-summary-list">
 ${stateLinks}
         </ul>
@@ -687,7 +713,7 @@ for (const year of years) {
 
   fs.writeFileSync(
     path.join(outputDir, fileName),
-    yearHubTemplate({ year }),
+    yearHubTemplate({ holidayIndex, year }),
     "utf8"
   );
 
