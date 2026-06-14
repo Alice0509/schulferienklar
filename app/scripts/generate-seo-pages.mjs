@@ -245,12 +245,11 @@ ${yearLinks}
 ${stateLinks}
         </ul>
 
-        <p>
-          Mehr Überblick findest du auf der Übersichtsseite
-          <a href="/schulferien-${slug}.html">Schulferien ${escapeHtml(name)}</a>
-          und auf der Jahresseite
-          <a href="/schulferien-${year}.html">Schulferien ${year} in Deutschland</a>.
-        </p>`;
+        <h3>Übersichten</h3>
+        <ul class="holiday-summary-list">
+          <li><a href="/schulferien-${slug}.html">Übersicht Schulferien ${escapeHtml(name)}</a></li>
+          <li><a href="/schulferien-${year}.html">Übersicht Schulferien ${year} in Deutschland</a></li>
+        </ul>`;
 }
 
 
