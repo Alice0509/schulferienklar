@@ -1,8 +1,45 @@
-# React + Vite
+# Schulferienklar App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This directory contains the Vite and React app for Schulferienklar.
 
-Currently, two official plugins are available:
+## Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Install dependencies:
+
+npm install
+
+Start the local development server:
+
+npm run dev
+
+## Build
+
+Create a standard production build:
+
+npm run build
+
+## SEO build
+
+Generate static SEO pages:
+
+npm run generate:seo
+
+Run the full checked SEO build:
+
+npm run build:seo:checked
+
+The checked SEO build runs data validation, generates SEO pages, validates the generated SEO output, and then creates the Vite production build.
+
+## Validation
+
+Run linting:
+
+npm run lint
+
+Validate holiday and public holiday data:
+
+npm run validate:data
+
+Validate generated SEO pages:
+
+npm run validate:seo-pages
