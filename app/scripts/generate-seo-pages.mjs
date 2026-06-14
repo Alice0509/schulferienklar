@@ -625,15 +625,19 @@ ${dataTrustNoteHtml()}
 }
 
 
-function sitemapEntry(url, { changefreq = "monthly", priority = "0.7" } = {}) {
+function sitemapEntry(url, { changefreq = "monthly", priority = "0.7", lastmod } = {}) {
+  const lastmodTag = lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : "";
+
   return `  <url>
-    <loc>https://www.schulferienklar.de${url}</loc>
+    <loc>https://www.schulferienklar.de${url}</loc>${lastmodTag}
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`;
 }
 
 function writeSitemap() {
+  const generatedAt = new Date().toISOString().slice(0, 10);
+
   const staticPages = [
     ["/", "weekly", "1.0"],
     ["/datenquellen.html", "monthly", "0.7"],
@@ -665,7 +669,9 @@ function writeSitemap() {
     ...yearHubPages,
     ...stateYearPages,
   ]
-    .map(([url, changefreq, priority]) => sitemapEntry(url, { changefreq, priority }))
+    .map(([url, changefreq, priority]) => {
+      return sitemapEntry(url, { changefreq, priority, lastmod: generatedAt });
+    })
     .join("\n");
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
