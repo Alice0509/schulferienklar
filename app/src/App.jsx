@@ -196,21 +196,6 @@ function getHolidayTone(holiday) {
   return "holiday";
 }
 
-function getMonthKeysForHoliday(holiday) {
-  const keys = [];
-  const start = parseDate(holiday.startDate);
-  const end = parseDate(holiday.endDate);
-
-  let cursor = new Date(start.getFullYear(), start.getMonth(), 1);
-  const finalMonth = new Date(end.getFullYear(), end.getMonth(), 1);
-
-  while (cursor <= finalMonth) {
-    keys.push(`${cursor.getFullYear()}-${String(cursor.getMonth() + 1).padStart(2, "0")}`);
-    cursor = new Date(cursor.getFullYear(), cursor.getMonth() + 1, 1);
-  }
-
-  return keys;
-}
 
 function getCalendarMonthKeys(calendarYear) {
   return Array.from({ length: 12 }, (_, index) => {
