@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "generate:seo": "node scripts/generate-seo-pages.mjs",
+    "build:seo": "npm run generate:seo && vite build"
   },
   "dependencies": {
     "react": "^18.3.1",
