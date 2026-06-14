@@ -169,7 +169,32 @@
         <ul>
           <li><code>scripts/validate-holidays.mjs</code></li>
           <li><code>scripts/validate-public-holidays.mjs</code></li>
+          <li><code>app/scripts/validate-generated-seo-pages.mjs</code></li>
         </ul>
+
+        <p>
+          Zusätzlich werden die generierten SEO-Seiten geprüft. Dabei wird kontrolliert,
+          ob wichtige Seitenelemente wie Titel, Meta-Beschreibung, Canonical-Link,
+          Hauptüberschrift und Sitemap-Verweise vorhanden sind.
+        </p>
+
+        <p>
+          Der geprüfte SEO-Build kombiniert Datenvalidierung, Seitengenerierung,
+          Prüfung der erzeugten HTML-Seiten und den Produktions-Build der App.
+        </p>
+
+        <h2>Aktualisierung und Zeitraum</h2>
+        <p>
+          Die App ist aktuell auf Ferien- und Feiertagsdaten von 2026 bis 2030
+          ausgelegt. Neue Jahre können ergänzt werden, sobald belastbare Daten
+          vorliegen und die Validierung erfolgreich durchläuft.
+        </p>
+
+        <p>
+          Das Datum der letzten Datengenerierung wird auf den automatisch erzeugten
+          Ferienseiten angezeigt. Die Sitemap enthält zusätzlich ein
+          <code>lastmod</code>-Datum für die generierten Seiten.
+        </p>
 
         <h2>Fehler melden</h2>
         <p>
