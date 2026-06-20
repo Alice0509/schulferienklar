@@ -169,6 +169,74 @@ function getHolidaysForYear(holidays, year) {
     .sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate));
 }
 
+function getComparisonOverlapPeriods(comparisonSummaries, selectedYear) {
+  const dayMap = new Map();
+  const yearStart = parseDate(`${selectedYear}-01-01`);
+  const yearEnd = parseDate(`${selectedYear}-12-31`);
+
+  for (const summary of comparisonSummaries) {
+    const holidays = summary.holidaysForYear || [];
+
+    for (const holiday of holidays) {
+      let currentDate = parseDate(holiday.startDate);
+      const endDate = parseDate(holiday.endDate);
+
+      if (currentDate < yearStart) {
+        currentDate = new Date(yearStart);
+      }
+
+      const boundedEndDate = endDate > yearEnd ? yearEnd : endDate;
+
+      while (currentDate <= boundedEndDate) {
+        const dateKey = toDateKey(currentDate);
+        const existing = dayMap.get(dateKey) || new Map();
+
+        existing.set(summary.code, {
+          code: summary.code,
+          name: summary.name,
+        });
+
+        dayMap.set(dateKey, existing);
+        currentDate = addDays(currentDate, 1);
+      }
+    }
+  }
+
+  const overlapDays = [...dayMap.entries()]
+    .map(([dateKey, statesForDate]) => {
+      return {
+        dateKey,
+        states: [...statesForDate.values()],
+      };
+    })
+    .filter((item) => item.states.length >= 2)
+    .sort((a, b) => a.dateKey.localeCompare(b.dateKey));
+
+  const periods = [];
+
+  for (const day of overlapDays) {
+    const previous = periods[periods.length - 1];
+
+    if (
+      previous &&
+      toDateKey(addDays(parseDate(previous.endDate), 1)) === day.dateKey &&
+      previous.states.map((item) => item.code).sort().join(",") ===
+        day.states.map((item) => item.code).sort().join(",")
+    ) {
+      previous.endDate = day.dateKey;
+      continue;
+    }
+
+    periods.push({
+      startDate: day.dateKey,
+      endDate: day.dateKey,
+      states: day.states,
+    });
+  }
+
+  return periods;
+}
+
 function getHeroPattern(code) {
   const patterns = {
     BY: "mountains",
@@ -866,10 +934,15 @@ export default function App() {
           name: meta.bundeslandName,
           holidayCount: holidaysForYear.length,
           firstHoliday,
+          holidaysForYear,
         };
       })
       .filter(Boolean);
   }, [comparisonCodes, comparisonDatasets, index, selectedYear]);
+
+  const comparisonOverlapPeriods = useMemo(() => {
+    return getComparisonOverlapPeriods(comparisonSummaries, selectedYear).slice(0, 6);
+  }, [comparisonSummaries, selectedYear]);
 
   const toggleComparisonCode = (code) => {
     setComparisonCodes((currentCodes) => {
@@ -1285,6 +1358,40 @@ export default function App() {
               )}
             </article>
           ))}
+        </div>
+
+        <div className="overlap-panel">
+          <h3>Gemeinsame Ferienzeiträume</h3>
+          <p>
+            Diese Zeiträume zeigen, wann mindestens zwei der ausgewählten
+            Bundesländer gleichzeitig Ferien haben.
+          </p>
+
+          {comparisonOverlapPeriods.length > 0 ? (
+            <div className="overlap-list">
+              {comparisonOverlapPeriods.map((period) => (
+                <article
+                  className="overlap-card"
+                  key={`${period.startDate}-${period.endDate}-${period.states
+                    .map((item) => item.code)
+                    .join("-")}`}
+                >
+                  <strong>
+                    {formatDate(period.startDate)} bis {formatDate(period.endDate)}
+                  </strong>
+                  <span>
+                    {period.states.length} Bundesländer gleichzeitig:{" "}
+                    {period.states.map((item) => item.name).join(", ")}
+                  </span>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <p className="overlap-empty">
+              Für die aktuelle Auswahl wurden keine gemeinsamen Ferienzeiträume
+              gefunden.
+            </p>
+          )}
         </div>
       </section>
 
