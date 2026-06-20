@@ -8,6 +8,7 @@ const DATA_BASE_URL = import.meta.env.BASE_URL;
 const STORAGE_KEYS = {
   bundesland: "schulferienklar:selected-bundesland",
   year: "schulferienklar:selected-year",
+  comparisonStates: "schulferienklar:comparison-states",
 };
 
 function dataUrl(path) {
@@ -157,6 +158,15 @@ function getNextHoliday(holidays) {
   return holidays
     .filter((holiday) => parseDate(holiday.endDate) >= TODAY)
     .sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate))[0];
+}
+
+function getHolidaysForYear(holidays, year) {
+  const yearStart = `${year}-01-01`;
+  const yearEnd = `${year}-12-31`;
+
+  return holidays
+    .filter((holiday) => holiday.startDate <= yearEnd && holiday.endDate >= yearStart)
+    .sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate));
 }
 
 function getHeroPattern(code) {
@@ -603,6 +613,18 @@ export default function App() {
   const [viewMode, setViewMode] = useState("calendar");
   const [showAllStates, setShowAllStates] = useState(false);
   const [isStateMenuOpen, setIsStateMenuOpen] = useState(false);
+  const [comparisonCodes, setComparisonCodes] = useState(() => {
+    try {
+      const storedCodes = JSON.parse(
+        localStorage.getItem(STORAGE_KEYS.comparisonStates) || "[]"
+      );
+
+      return Array.isArray(storedCodes) ? storedCodes.slice(0, 4) : [];
+    } catch {
+      return [];
+    }
+  });
+  const [comparisonDatasets, setComparisonDatasets] = useState({});
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.bundesland, selectedCode);
@@ -611,6 +633,22 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.year, String(selectedYear));
   }, [selectedYear]);
+
+  useEffect(() => {
+    setComparisonCodes((currentCodes) => {
+      const nextCodes = [
+        selectedCode,
+        ...currentCodes.filter((code) => code !== selectedCode),
+      ].slice(0, 4);
+
+      localStorage.setItem(STORAGE_KEYS.comparisonStates, JSON.stringify(nextCodes));
+      return nextCodes;
+    });
+  }, [selectedCode]);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEYS.comparisonStates, JSON.stringify(comparisonCodes));
+  }, [comparisonCodes]);
   useEffect(() => {
     if (window.location.hash !== "#ferienkalender") return;
 
@@ -668,6 +706,49 @@ export default function App() {
   const selectedMeta = useMemo(() => {
     return index?.datasets?.find((item) => item.bundeslandCode === selectedCode);
   }, [index, selectedCode]);
+
+  useEffect(() => {
+    if (!index?.datasets || comparisonCodes.length === 0) {
+      setComparisonDatasets({});
+      return;
+    }
+
+    let isCancelled = false;
+
+    async function loadComparisonDatasets() {
+      const entries = await Promise.all(
+        comparisonCodes.map(async (code) => {
+          const meta = index.datasets.find((item) => item.bundeslandCode === code);
+
+          if (!meta?.jsonFile) {
+            return [code, null];
+          }
+
+          try {
+            const response = await fetch(dataUrl(`/data/holidays/${meta.jsonFile}`));
+
+            if (!response.ok) {
+              return [code, null];
+            }
+
+            return [code, await response.json()];
+          } catch {
+            return [code, null];
+          }
+        })
+      );
+
+      if (!isCancelled) {
+        setComparisonDatasets(Object.fromEntries(entries));
+      }
+    }
+
+    loadComparisonDatasets();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [index, comparisonCodes]);
 
   useEffect(() => {
     async function loadDataset() {
@@ -767,6 +848,42 @@ export default function App() {
   const selectedStateDataset = index?.datasets?.find((item) => {
     return item.bundeslandCode === selectedCode;
   });
+
+  const comparisonSummaries = useMemo(() => {
+    return comparisonCodes
+      .map((code) => {
+        const meta = index?.datasets?.find((item) => item.bundeslandCode === code);
+        const stateHolidays = comparisonDatasets[code]?.holidays || [];
+        const holidaysForYear = getHolidaysForYear(stateHolidays, selectedYear);
+        const firstHoliday = holidaysForYear[0];
+
+        if (!meta) {
+          return null;
+        }
+
+        return {
+          code,
+          name: meta.bundeslandName,
+          holidayCount: holidaysForYear.length,
+          firstHoliday,
+        };
+      })
+      .filter(Boolean);
+  }, [comparisonCodes, comparisonDatasets, index, selectedYear]);
+
+  const toggleComparisonCode = (code) => {
+    setComparisonCodes((currentCodes) => {
+      if (currentCodes.includes(code)) {
+        if (code === selectedCode) {
+          return currentCodes;
+        }
+
+        return currentCodes.filter((item) => item !== code);
+      }
+
+      return [...currentCodes, code].slice(0, 4);
+    });
+  };
 
   const visibleStateDatasets = showAllStates
     ? index?.datasets || []
@@ -1114,6 +1231,61 @@ export default function App() {
         </button>
 
         {showTravelCheckerPreview && <CheckTodayPreview baseUrl={DATA_BASE_URL} />}
+      </section>
+
+      <section className="comparison-section">
+        <div className="section-heading">
+          <p className="eyebrow">Bundesländer vergleichen</p>
+          <h2>Ferien in mehreren Bundesländern vergleichen</h2>
+          <p>
+            Wähle bis zu vier Bundesländer aus und vergleiche die ersten
+            Ferienzeiträume im Jahr {selectedYear}. Dein aktuelles Bundesland
+            bleibt automatisch enthalten.
+          </p>
+        </div>
+
+        <div className="comparison-picker" aria-label="Bundesländer für Vergleich auswählen">
+          {(index?.datasets || []).map((item) => {
+            const isSelected = comparisonCodes.includes(item.bundeslandCode);
+            const isDisabled = !isSelected && comparisonCodes.length >= 4;
+
+            return (
+              <button
+                className={`comparison-chip ${isSelected ? "selected" : ""}`}
+                disabled={isDisabled}
+                key={item.bundeslandCode}
+                onClick={() => toggleComparisonCode(item.bundeslandCode)}
+                type="button"
+              >
+                <span>{item.bundeslandCode}</span>
+                <strong>{item.bundeslandName}</strong>
+              </button>
+            );
+          })}
+        </div>
+
+        <div className="comparison-grid">
+          {comparisonSummaries.map((item) => (
+            <article className="comparison-card" key={item.code}>
+              <span className="comparison-code">{item.code}</span>
+              <h3>{item.name}</h3>
+              <p>
+                {item.holidayCount > 0
+                  ? `${item.holidayCount} Ferienzeiträume im Jahr ${selectedYear}`
+                  : `Keine Ferienzeiträume für ${selectedYear} gefunden`}
+              </p>
+              {item.firstHoliday ? (
+                <small>
+                  Erste Ferien: {getHolidayLabel(item.firstHoliday)} ·{" "}
+                  {formatDate(item.firstHoliday.startDate)} bis{" "}
+                  {formatDate(item.firstHoliday.endDate)}
+                </small>
+              ) : (
+                <small>Wähle ein anderes Jahr oder Bundesland.</small>
+              )}
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="states-section">
