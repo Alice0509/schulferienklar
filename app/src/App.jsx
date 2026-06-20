@@ -9,6 +9,7 @@ const STORAGE_KEYS = {
   bundesland: "schulferienklar:selected-bundesland",
   year: "schulferienklar:selected-year",
   comparisonStates: "schulferienklar:comparison-states",
+  comparisonRange: "schulferienklar:comparison-range",
 };
 
 function dataUrl(path) {
@@ -169,10 +170,14 @@ function getHolidaysForYear(holidays, year) {
     .sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate));
 }
 
-function getComparisonOverlapPeriods(comparisonSummaries, selectedYear) {
+function getComparisonOverlapPeriods(comparisonSummaries, selectedYear, comparisonRange) {
   const dayMap = new Map();
   const yearStart = parseDate(`${selectedYear}-01-01`);
   const yearEnd = parseDate(`${selectedYear}-12-31`);
+  const rangeStart =
+    comparisonRange === "upcoming" && selectedYear === TODAY.getFullYear()
+      ? TODAY
+      : yearStart;
 
   for (const summary of comparisonSummaries) {
     const holidays = summary.holidaysForYear || [];
@@ -181,8 +186,8 @@ function getComparisonOverlapPeriods(comparisonSummaries, selectedYear) {
       let currentDate = parseDate(holiday.startDate);
       const endDate = parseDate(holiday.endDate);
 
-      if (currentDate < yearStart) {
-        currentDate = new Date(yearStart);
+      if (currentDate < rangeStart) {
+        currentDate = new Date(rangeStart);
       }
 
       const boundedEndDate = endDate > yearEnd ? yearEnd : endDate;
@@ -693,6 +698,9 @@ export default function App() {
     }
   });
   const [comparisonDatasets, setComparisonDatasets] = useState({});
+  const [comparisonRange, setComparisonRange] = useState(() => {
+    return localStorage.getItem(STORAGE_KEYS.comparisonRange) || "upcoming";
+  });
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.bundesland, selectedCode);
@@ -717,6 +725,10 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.comparisonStates, JSON.stringify(comparisonCodes));
   }, [comparisonCodes]);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEYS.comparisonRange, comparisonRange);
+  }, [comparisonRange]);
   useEffect(() => {
     if (window.location.hash !== "#ferienkalender") return;
 
@@ -941,8 +953,12 @@ export default function App() {
   }, [comparisonCodes, comparisonDatasets, index, selectedYear]);
 
   const comparisonOverlapPeriods = useMemo(() => {
-    return getComparisonOverlapPeriods(comparisonSummaries, selectedYear).slice(0, 6);
-  }, [comparisonSummaries, selectedYear]);
+    return getComparisonOverlapPeriods(
+      comparisonSummaries,
+      selectedYear,
+      comparisonRange
+    ).slice(0, 6);
+  }, [comparisonRange, comparisonSummaries, selectedYear]);
 
   const toggleComparisonCode = (code) => {
     setComparisonCodes((currentCodes) => {
@@ -1337,6 +1353,24 @@ export default function App() {
           })}
         </div>
 
+        <div className="comparison-range" aria-label="Vergleichszeitraum auswählen">
+          <span>Vergleichszeitraum</span>
+          <button
+            className={comparisonRange === "upcoming" ? "selected" : ""}
+            onClick={() => setComparisonRange("upcoming")}
+            type="button"
+          >
+            Ab heute
+          </button>
+          <button
+            className={comparisonRange === "year" ? "selected" : ""}
+            onClick={() => setComparisonRange("year")}
+            type="button"
+          >
+            Ganzes Jahr
+          </button>
+        </div>
+
         <div className="comparison-grid">
           {comparisonSummaries.map((item) => (
             <article className="comparison-card" key={item.code}>
@@ -1364,7 +1398,8 @@ export default function App() {
           <h3>Gemeinsame Ferienzeiträume</h3>
           <p>
             Diese Zeiträume zeigen, wann mindestens zwei der ausgewählten
-            Bundesländer gleichzeitig Ferien haben.
+            Bundesländer gleichzeitig Ferien haben. Standardmäßig beginnt der
+            Vergleich im aktuellen Jahr ab heute.
           </p>
 
           {comparisonOverlapPeriods.length > 0 ? (
