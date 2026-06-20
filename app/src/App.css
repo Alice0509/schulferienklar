@@ -2163,3 +2163,49 @@ button.current-year-link {
   background: rgba(246, 243, 236, 0.88);
   border: 1px solid rgba(23, 32, 51, 0.08);
 }
+
+.comparison-range {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px;
+  border-radius: 999px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(23, 32, 51, 0.08);
+}
+
+.comparison-range span {
+  padding: 0 8px;
+  color: #66717f;
+  font-weight: 900;
+}
+
+.comparison-range button {
+  border: 0;
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: transparent;
+  color: #172033;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.comparison-range button.selected {
+  background: #1f6f64;
+  color: #fff;
+}
+
+@media (max-width: 560px) {
+  .comparison-range {
+    width: 100%;
+    border-radius: 22px;
+  }
+
+  .comparison-range span,
+  .comparison-range button {
+    width: 100%;
+    text-align: center;
+  }
+}
