@@ -2239,3 +2239,98 @@ button.current-year-link {
   color: #1f6f64;
   font-weight: 850;
 }
+
+.overlap-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+  margin: 22px 0 28px;
+}
+
+.overlap-calendar {
+  border-radius: 24px;
+  padding: 18px;
+  background: #fbfaf6;
+  border: 1px solid rgba(23, 32, 51, 0.08);
+}
+
+.overlap-calendar h4 {
+  margin: 0 0 14px;
+  color: #172033;
+  font-size: 1.1rem;
+}
+
+.overlap-weekdays,
+.overlap-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.overlap-weekdays span {
+  color: #66717f;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+.overlap-day {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 42px;
+  border-radius: 14px;
+  background: rgba(246, 243, 236, 0.8);
+  color: #66717f;
+  font-weight: 900;
+}
+
+.overlap-day.empty {
+  background: transparent;
+}
+
+.overlap-day strong {
+  position: absolute;
+  right: 5px;
+  bottom: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #172033;
+  color: #fff;
+  font-size: 0.72rem;
+}
+
+.overlap-day.level-2 {
+  background: rgba(232, 247, 240, 0.95);
+  color: #1f6f64;
+}
+
+.overlap-day.level-3 {
+  background: rgba(120, 207, 176, 0.45);
+  color: #104f48;
+}
+
+.overlap-day.level-4 {
+  background: #1f6f64;
+  color: #fff;
+}
+
+.overlap-day.level-4 strong {
+  background: #fff;
+  color: #1f6f64;
+}
+
+@media (max-width: 760px) {
+  .overlap-calendar-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .overlap-day {
+    min-height: 38px;
+    border-radius: 12px;
+  }
+}

@@ -170,7 +170,7 @@ function getHolidaysForYear(holidays, year) {
     .sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate));
 }
 
-function getComparisonOverlapPeriods(comparisonSummaries, comparisonYear) {
+function getComparisonOverlapData(comparisonSummaries, comparisonYear) {
   const dayMap = new Map();
   const yearStart = parseDate(`${comparisonYear}-01-01`);
   const yearEnd = parseDate(`${comparisonYear}-12-31`);
@@ -236,8 +236,22 @@ function getComparisonOverlapPeriods(comparisonSummaries, comparisonYear) {
     });
   }
 
-  return periods;
+  return {
+    dayMap: Object.fromEntries(
+      overlapDays.map((day) => {
+        return [day.dateKey, day.states];
+      })
+    ),
+    periods,
+  };
 }
+
+function getOverlapMonthKeys(overlapDayMap) {
+  return [...new Set(Object.keys(overlapDayMap).map((dateKey) => dateKey.slice(0, 7)))]
+    .sort()
+    .slice(0, 6);
+}
+
 
 function getHeroPattern(code) {
   const patterns = {
@@ -951,9 +965,14 @@ export default function App() {
       .filter(Boolean);
   }, [comparisonCodes, comparisonDatasets, comparisonYear, index]);
 
-  const comparisonOverlapPeriods = useMemo(() => {
-    return getComparisonOverlapPeriods(comparisonSummaries, comparisonYear).slice(0, 6);
+  const comparisonOverlapData = useMemo(() => {
+    return getComparisonOverlapData(comparisonSummaries, comparisonYear);
   }, [comparisonSummaries, comparisonYear]);
+
+  const comparisonOverlapPeriods = comparisonOverlapData.periods.slice(0, 6);
+  const comparisonOverlapMonthKeys = useMemo(() => {
+    return getOverlapMonthKeys(comparisonOverlapData.dayMap);
+  }, [comparisonOverlapData]);
 
   const toggleComparisonCode = (code) => {
     setComparisonCodes((currentCodes) => {
@@ -1372,11 +1391,7 @@ export default function App() {
                   ? `${item.holidayCount} Ferienzeiträume im Jahr ${comparisonYear}`
                   : `Keine Ferienzeiträume für ${comparisonYear} gefunden`}
               </p>
-              <small>
-                {comparisonYear === TODAY.getFullYear()
-                  ? "Overlap wird ab heute berechnet."
-                  : "Overlap wird für das ganze Jahr berechnet."}
-              </small>
+
             </article>
           ))}
         </div>
@@ -1388,6 +1403,54 @@ export default function App() {
             Bundesländer gleichzeitig Ferien haben. Im aktuellen Jahr beginnt
             die Auswertung ab heute; zukünftige Jahre werden vollständig angezeigt.
           </p>
+
+          {comparisonOverlapMonthKeys.length > 0 && (
+            <div className="overlap-calendar-grid">
+              {comparisonOverlapMonthKeys.map((monthKey) => {
+                const [yearValue, monthValue] = monthKey.split("-").map(Number);
+                const monthCells = buildMonthCells(yearValue, monthValue - 1);
+
+                return (
+                  <article className="overlap-calendar" key={monthKey}>
+                    <h4>{formatMonth(yearValue, monthValue - 1)}</h4>
+                    <div className="overlap-weekdays">
+                      {WEEKDAYS.map((weekday) => (
+                        <span key={weekday}>{weekday}</span>
+                      ))}
+                    </div>
+                    <div className="overlap-days">
+                      {monthCells.map((date, index) => {
+                        if (!date) {
+                          return <span className="overlap-day empty" key={`empty-${index}`} />;
+                        }
+
+                        const dateKey = toDateKey(date);
+                        const states = comparisonOverlapData.dayMap[dateKey] || [];
+                        const level = Math.min(states.length, 4);
+
+                        return (
+                          <span
+                            className={`overlap-day ${level > 0 ? `level-${level}` : ""}`}
+                            key={dateKey}
+                            title={
+                              states.length > 0
+                                ? `${states.length} Bundesländer: ${states
+                                    .map((item) => item.name)
+                                    .join(", ")}`
+                                : ""
+                            }
+                          >
+                            <span>{date.getDate()}</span>
+                            {states.length > 0 && <strong>{states.length}</strong>}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          )}
 
           {comparisonOverlapPeriods.length > 0 ? (
             <div className="overlap-list">
