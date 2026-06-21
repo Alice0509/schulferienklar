@@ -3158,3 +3158,17 @@ button.current-year-link {
     font-size: 1.1rem;
   }
 }
+
+.bridge-day-swipe-hint {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .bridge-day-swipe-hint {
+    display: block;
+    margin: 0.55rem 0 0;
+    color: #66717f;
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+}
