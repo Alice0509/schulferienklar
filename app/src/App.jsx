@@ -213,8 +213,7 @@ function getBridgeDaySuggestions(publicHolidays = [], selectedYear) {
     })
     .filter(Boolean)
     .filter((item) => parseDate(item.bridgeDate) >= TODAY)
-    .sort((a, b) => a.bridgeDate.localeCompare(b.bridgeDate))
-    .slice(0, 4);
+    .sort((a, b) => a.bridgeDate.localeCompare(b.bridgeDate));
 }
 
 function getNextHoliday(holidays) {
