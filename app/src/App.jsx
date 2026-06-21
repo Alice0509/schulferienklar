@@ -1406,9 +1406,7 @@ export default function App() {
           <p className="eyebrow">Bundesländer vergleichen</p>
           <h2>Ferien in mehreren Bundesländern vergleichen</h2>
           <p>
-            Wähle bis zu vier Bundesländer aus und vergleiche die ersten
-            Ferienzeiträume nach Jahr. Im aktuellen Jahr beginnt der Vergleich
-            automatisch ab heute.
+            Wähle bis zu vier Bundesländer und sieh sofort, wann sich Ferien überschneiden.
           </p>
         </div>
 
@@ -1480,9 +1478,7 @@ export default function App() {
         <div className="overlap-panel">
           <h3>Gemeinsame Ferienzeiträume</h3>
           <p>
-            Diese Zeiträume zeigen, wann mindestens zwei der ausgewählten
-            Bundesländer gleichzeitig Ferien haben. Im aktuellen Jahr beginnt
-            die Auswertung ab heute; zukünftige Jahre werden vollständig angezeigt.
+            Markierte Tage zeigen Überschneidungen von mindestens zwei ausgewählten Bundesländern.
           </p>
 
           {activeOverlapMonthKey && (() => {
