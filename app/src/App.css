@@ -2929,3 +2929,47 @@ button.current-year-link {
     padding-left: 4px;
   }
 }
+
+@media (max-width: 560px) {
+  .comparison-picker {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin: 14px 0 18px;
+  }
+
+  .comparison-picker .comparison-chip {
+    width: 100%;
+    min-height: 54px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 5px;
+    border-radius: 16px;
+    padding: 10px 11px;
+    flex-direction: column;
+  }
+
+  .comparison-picker .comparison-chip span {
+    font-size: 0.78rem;
+    line-height: 1;
+  }
+
+  .comparison-picker .comparison-chip strong {
+    font-size: 0.88rem;
+    line-height: 1.15;
+  }
+}
+
+@media (max-width: 370px) {
+  .comparison-picker {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-picker .comparison-chip {
+    min-height: 48px;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+  }
+}
