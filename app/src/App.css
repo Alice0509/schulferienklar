@@ -2678,3 +2678,29 @@ button.current-year-link {
     width: 100%;
   }
 }
+
+.overlap-details {
+  margin-top: 16px;
+}
+
+.overlap-details-toggle {
+  width: 100%;
+  border: 1px solid rgba(31, 111, 100, 0.18);
+  border-radius: 999px;
+  padding: 13px 16px;
+  background: rgba(232, 247, 240, 0.92);
+  color: #1f6f64;
+  font-weight: 950;
+  cursor: pointer;
+}
+
+.overlap-details-toggle:hover {
+  background: rgba(232, 247, 240, 1);
+}
+
+@media (max-width: 560px) {
+  .overlap-details-toggle {
+    border-radius: 18px;
+    text-align: center;
+  }
+}

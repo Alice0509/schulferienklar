@@ -712,6 +712,7 @@ export default function App() {
   });
   const [comparisonDatasets, setComparisonDatasets] = useState({});
   const [activeOverlapMonthIndex, setActiveOverlapMonthIndex] = useState(0);
+  const [showOverlapDetails, setShowOverlapDetails] = useState(false);
   const [comparisonYear, setComparisonYear] = useState(() => {
     const storedYear = Number(localStorage.getItem(STORAGE_KEYS.comparisonYear));
 
@@ -985,6 +986,7 @@ export default function App() {
 
   useEffect(() => {
     setActiveOverlapMonthIndex(0);
+    setShowOverlapDetails(false);
   }, [comparisonCodes, comparisonYear]);
 
   const toggleComparisonCode = (code) => {
@@ -1562,7 +1564,20 @@ export default function App() {
           })()}
 
           {comparisonOverlapPeriods.length > 0 ? (
-            <div className="overlap-list">
+            <div className="overlap-details">
+              <button
+                className="overlap-details-toggle"
+                type="button"
+                aria-expanded={showOverlapDetails}
+                onClick={() => setShowOverlapDetails((isOpen) => !isOpen)}
+              >
+                {showOverlapDetails
+                  ? "Details ausblenden"
+                  : `${comparisonOverlapPeriods.length} gemeinsame Zeiträume anzeigen`}
+              </button>
+
+              {showOverlapDetails && (
+                <div className="overlap-list">
               {comparisonOverlapPeriods.map((period) => (
                 <article
                   className="overlap-card"
@@ -1593,6 +1608,8 @@ export default function App() {
                   </div>
                 </article>
               ))}
+                </div>
+              )}
             </div>
           ) : (
             <p className="overlap-empty">
