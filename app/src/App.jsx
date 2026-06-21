@@ -1096,6 +1096,14 @@ export default function App() {
             <button type="button" onClick={() => scrollToSection("app-speichern")}>
               App speichern
             </button>
+            <a
+              className="site-menu-external-link"
+              href="https://germanytravelchecker.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Germany Travel Checker ↗
+            </a>
           </div>
         )}
 
