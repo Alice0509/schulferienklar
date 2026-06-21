@@ -2973,3 +2973,30 @@ button.current-year-link {
     border-radius: 999px;
   }
 }
+
+.site-menu-backdrop {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .site-menu-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 35;
+    display: block;
+    border: 0;
+    padding: 0;
+    background: rgba(23, 32, 51, 0.36);
+    backdrop-filter: blur(3px);
+  }
+
+  .site-menu {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(23, 32, 51, 0.16);
+    box-shadow: 0 28px 90px rgba(23, 32, 51, 0.34);
+  }
+
+  .site-menu button {
+    background: rgba(246, 243, 236, 0.96);
+  }
+}
