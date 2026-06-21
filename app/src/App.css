@@ -3000,3 +3000,11 @@ button.current-year-link {
     background: rgba(246, 243, 236, 0.96);
   }
 }
+
+@media (max-width: 760px) {
+  .floating-site-menu-button.is-open {
+    z-index: 45;
+    background: #172033;
+    border-color: rgba(255, 255, 255, 0.24);
+  }
+}

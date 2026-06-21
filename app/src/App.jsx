@@ -1047,13 +1047,13 @@ export default function App() {
   return (
     <main className="page">
       <button
-        className="floating-site-menu-button"
+        className={`floating-site-menu-button ${isSiteMenuOpen ? "is-open" : ""}`}
         type="button"
         aria-expanded={isSiteMenuOpen}
         aria-controls="site-menu"
         onClick={() => setIsSiteMenuOpen((isOpen) => !isOpen)}
       >
-        ☰ Menü
+        {isSiteMenuOpen ? "× Schließen" : "☰ Menü"}
       </button>
 
       <section className={`hero hero-${pattern}`}>
