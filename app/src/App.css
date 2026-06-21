@@ -3065,3 +3065,84 @@ button.current-year-link {
     font-size: 0.92rem;
   }
 }
+
+.bridge-days-section {
+  width: min(1180px, calc(100% - 32px));
+  margin: 42px auto 0;
+}
+
+.bridge-day-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.bridge-day-card {
+  display: grid;
+  gap: 10px;
+  border-radius: 22px;
+  padding: 18px;
+  background: #fffaf0;
+  border: 1px solid rgba(23, 32, 51, 0.08);
+}
+
+.bridge-day-card div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.bridge-day-card strong {
+  color: #1f6f64;
+  font-size: 1.15rem;
+}
+
+.bridge-day-card span {
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: rgba(232, 247, 240, 0.95);
+  color: #1f6f64;
+  font-size: 0.8rem;
+  font-weight: 900;
+}
+
+.bridge-day-card p {
+  margin: 0;
+  color: #172033;
+  font-size: 1.25rem;
+  font-weight: 950;
+  letter-spacing: -0.035em;
+}
+
+.bridge-day-card small,
+.bridge-day-empty {
+  color: #66717f;
+  line-height: 1.45;
+}
+
+@media (max-width: 760px) {
+  .bridge-days-section {
+    width: min(100% - 24px, 1180px);
+    margin-top: 28px;
+  }
+
+  .bridge-day-list {
+    grid-template-columns: 1fr;
+  }
+
+  .bridge-day-card {
+    border-radius: 18px;
+    padding: 15px;
+  }
+
+  .bridge-day-card div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .bridge-day-card p {
+    font-size: 1.1rem;
+  }
+}
