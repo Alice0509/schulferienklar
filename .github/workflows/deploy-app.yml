@@ -39,7 +39,7 @@ jobs:
 
       - name: Build app
         working-directory: app
-        run: npm run build
+        run: npm run build:seo:checked
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
