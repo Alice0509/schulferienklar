@@ -2514,6 +2514,7 @@ button.current-year-link {
   }
 
   .comparison-selected-list,
+  .comparison-add-wrap,
   .comparison-add-button,
   .comparison-year-select {
     width: 100%;
@@ -2898,5 +2899,33 @@ button.current-year-link {
 @media (max-width: 390px) {
   .view-controls {
     grid-template-columns: 1fr;
+  }
+}
+
+.comparison-add-wrap {
+  display: grid;
+  gap: 6px;
+}
+
+.comparison-limit-note {
+  color: #66717f;
+  font-size: 0.82rem;
+  font-weight: 850;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .comparison-add-wrap {
+    width: 100%;
+  }
+
+  .comparison-add-button {
+    min-height: 48px;
+    box-shadow: 0 12px 28px rgba(23, 32, 51, 0.12);
+  }
+
+  .comparison-limit-note {
+    text-align: left;
+    padding-left: 4px;
   }
 }
