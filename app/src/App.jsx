@@ -698,6 +698,7 @@ export default function App() {
   const [showAllStates, setShowAllStates] = useState(false);
   const [isStateMenuOpen, setIsStateMenuOpen] = useState(false);
   const [isSiteMenuOpen, setIsSiteMenuOpen] = useState(false);
+  const [isComparisonPickerOpen, setIsComparisonPickerOpen] = useState(false);
   const [comparisonCodes, setComparisonCodes] = useState(() => {
     try {
       const storedCodes = JSON.parse(
@@ -1409,54 +1410,67 @@ export default function App() {
           </p>
         </div>
 
-        <div className="comparison-picker" aria-label="Bundesländer für Vergleich auswählen">
-          {(index?.datasets || []).map((item) => {
-            const isSelected = comparisonCodes.includes(item.bundeslandCode);
-            const isDisabled = !isSelected && comparisonCodes.length >= 4;
-
-            return (
+        <div className="comparison-toolbar">
+          <div className="comparison-selected-list" aria-label="Ausgewählte Bundesländer">
+            {comparisonSummaries.map((item) => (
               <button
-                className={`comparison-chip ${isSelected ? "selected" : ""}`}
-                disabled={isDisabled}
-                key={item.bundeslandCode}
-                onClick={() => toggleComparisonCode(item.bundeslandCode)}
+                className="comparison-selected-pill"
+                key={item.code}
                 type="button"
+                onClick={() => toggleComparisonCode(item.code)}
+                title={`${item.name} aus Vergleich entfernen`}
               >
-                <span>{item.bundeslandCode}</span>
-                <strong>{item.bundeslandName}</strong>
+                <span>{item.code}</span>
+                {item.name}
+                {item.code !== selectedCode && <strong aria-hidden="true">×</strong>}
               </button>
-            );
-          })}
-        </div>
+            ))}
+          </div>
 
-        <div className="comparison-range" aria-label="Vergleichsjahr auswählen">
-          <span>Vergleichsjahr</span>
-          {availablePublicHolidayYears.map((year) => (
-            <button
-              className={comparisonYear === year ? "selected" : ""}
-              key={year}
-              onClick={() => setComparisonYear(year)}
-              type="button"
+          <button
+            className="comparison-add-button"
+            type="button"
+            onClick={() => setIsComparisonPickerOpen((isOpen) => !isOpen)}
+          >
+            {isComparisonPickerOpen ? "Auswahl schließen" : "+ Bundesland hinzufügen"}
+          </button>
+
+          <label className="comparison-year-select">
+            <span>Vergleichsjahr</span>
+            <select
+              value={comparisonYear}
+              onChange={(event) => setComparisonYear(Number(event.target.value))}
             >
-              {year}
-            </button>
-          ))}
+              {availablePublicHolidayYears.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </label>
         </div>
 
-        <div className="comparison-grid">
-          {comparisonSummaries.map((item) => (
-            <article className="comparison-card" key={item.code}>
-              <span className="comparison-code">{item.code}</span>
-              <h3>{item.name}</h3>
-              <p>
-                {item.holidayCount > 0
-                  ? `${item.holidayCount} Ferienzeiträume im Jahr ${comparisonYear}`
-                  : `Keine Ferienzeiträume für ${comparisonYear} gefunden`}
-              </p>
+        {isComparisonPickerOpen && (
+          <div className="comparison-picker" aria-label="Bundesländer für Vergleich auswählen">
+            {(index?.datasets || []).map((item) => {
+              const isSelected = comparisonCodes.includes(item.bundeslandCode);
+              const isDisabled = !isSelected && comparisonCodes.length >= 4;
 
-            </article>
-          ))}
-        </div>
+              return (
+                <button
+                  className={`comparison-chip ${isSelected ? "selected" : ""}`}
+                  disabled={isDisabled}
+                  key={item.bundeslandCode}
+                  onClick={() => toggleComparisonCode(item.bundeslandCode)}
+                  type="button"
+                >
+                  <span>{item.bundeslandCode}</span>
+                  <strong>{item.bundeslandName}</strong>
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         <div className="overlap-panel">
           <h3>Gemeinsame Ferienzeiträume</h3>
