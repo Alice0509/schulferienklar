@@ -3125,13 +3125,25 @@ button.current-year-link {
   .bridge-days-section {
     width: min(100% - 24px, 1180px);
     margin-top: 28px;
+    overflow: hidden;
   }
 
   .bridge-day-list {
-    grid-template-columns: 1fr;
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .bridge-day-list::-webkit-scrollbar {
+    display: none;
   }
 
   .bridge-day-card {
+    flex: 0 0 min(84vw, 360px);
+    scroll-snap-align: start;
     border-radius: 18px;
     padding: 15px;
   }
