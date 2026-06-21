@@ -126,6 +126,27 @@ function formatDate(value) {
   }).format(parseDate(value));
 }
 
+function formatCompactDateRange(startValue, endValue) {
+  const startDate = parseDate(startValue);
+  const endDate = parseDate(endValue);
+  const sameMonth = startDate.getMonth() === endDate.getMonth();
+  const sameYear = startDate.getFullYear() === endDate.getFullYear();
+
+  if (sameMonth && sameYear) {
+    const startDay = new Intl.DateTimeFormat("de-DE", {
+      day: "2-digit",
+    }).format(startDate);
+    const endDateLabel = new Intl.DateTimeFormat("de-DE", {
+      day: "2-digit",
+      month: "short",
+    }).format(endDate);
+
+    return `${startDay}.–${endDateLabel}`;
+  }
+
+  return `${formatDate(startValue)} – ${formatDate(endValue)}`;
+}
+
 function formatMonth(year, monthIndex) {
   return new Intl.DateTimeFormat("de-DE", {
     month: "long",
@@ -1450,8 +1471,8 @@ export default function App() {
                   {item.vacationDays} Urlaubstag → {item.freeDays} freie Tage
                 </p>
                 <small>
-                  Rund um {item.holidayName} am {formatDate(item.holidayDate)} ·{" "}
-                  {formatDate(item.freeStartDate)} – {formatDate(item.freeEndDate)}
+                  {item.holidayName} · frei{" "}
+                  {formatCompactDateRange(item.freeStartDate, item.freeEndDate)}
                 </small>
               </article>
             ))}
