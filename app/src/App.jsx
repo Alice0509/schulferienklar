@@ -1078,31 +1078,39 @@ export default function App() {
         </nav>
 
         {isSiteMenuOpen && (
-          <div className="site-menu" id="site-menu">
-            <button type="button" onClick={() => scrollToSection("ferienkalender")}>
-              Kalender
-            </button>
-            <button type="button" onClick={() => scrollToSection("bundesland-auswahl")}>
-              Bundesland wählen
-            </button>
-            <button type="button" onClick={() => scrollToSection("vergleich")}>
-              Vergleich
-            </button>
-            <button type="button" onClick={() => scrollToSection("bundeslaender")}>
-              Bundesländer
-            </button>
-            <button type="button" onClick={() => scrollToSection("app-speichern")}>
-              App speichern
-            </button>
-            <a
-              className="site-menu-external-link"
-              href="https://germanytravelchecker.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Germany Travel Checker ↗
-            </a>
-          </div>
+          <>
+            <button
+              className="site-menu-backdrop"
+              type="button"
+              aria-label="Menü schließen"
+              onClick={() => setIsSiteMenuOpen(false)}
+            />
+            <div className="site-menu" id="site-menu">
+              <button type="button" onClick={() => scrollToSection("ferienkalender")}>
+                Kalender
+              </button>
+              <button type="button" onClick={() => scrollToSection("bundesland-auswahl")}>
+                Bundesland wählen
+              </button>
+              <button type="button" onClick={() => scrollToSection("vergleich")}>
+                Vergleich
+              </button>
+              <button type="button" onClick={() => scrollToSection("bundeslaender")}>
+                Bundesländer
+              </button>
+              <button type="button" onClick={() => scrollToSection("app-speichern")}>
+                App speichern
+              </button>
+              <a
+                className="site-menu-external-link"
+                href="https://germanytravelchecker.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Germany Travel Checker ↗
+              </a>
+            </div>
+          </>
         )}
 
         <div className="hero-grid">
