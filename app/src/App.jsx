@@ -154,6 +154,48 @@ function getHolidayLabel(holiday) {
   return holiday?.name?.de || holiday?.type || "Ferien";
 }
 
+function getPublicHolidayName(holiday) {
+  return holiday?.name?.de || holiday?.name || "Feiertag";
+}
+
+function getBridgeDaySuggestions(publicHolidays = [], selectedYear) {
+  const yearStart = `${selectedYear}-01-01`;
+  const yearEnd = `${selectedYear}-12-31`;
+
+  return publicHolidays
+    .filter((holiday) => {
+      return holiday.includeInDefaultCalendar && holiday.date >= yearStart && holiday.date <= yearEnd;
+    })
+    .map((holiday) => {
+      const holidayDate = parseDate(holiday.date);
+      const day = holidayDate.getDay();
+
+      if (day !== 2 && day !== 4) {
+        return null;
+      }
+
+      const bridgeDate = day === 2 ? addDays(holidayDate, -1) : addDays(holidayDate, 1);
+      const weekendStart = day === 2 ? addDays(holidayDate, -3) : holidayDate;
+      const weekendEnd = day === 2 ? holidayDate : addDays(holidayDate, 3);
+
+      return {
+        id: `${holiday.date}-${toDateKey(bridgeDate)}`,
+        holidayName: getPublicHolidayName(holiday),
+        holidayDate: holiday.date,
+        bridgeDate: toDateKey(bridgeDate),
+        freeStartDate: toDateKey(weekendStart),
+        freeEndDate: toDateKey(weekendEnd),
+        vacationDays: 1,
+        freeDays: 4,
+        direction: day === 2 ? "vor dem Feiertag" : "nach dem Feiertag",
+      };
+    })
+    .filter(Boolean)
+    .filter((item) => parseDate(item.bridgeDate) >= TODAY)
+    .sort((a, b) => a.bridgeDate.localeCompare(b.bridgeDate))
+    .slice(0, 4);
+}
+
 function getNextHoliday(holidays) {
   return holidays
     .filter((holiday) => parseDate(holiday.endDate) >= TODAY)
@@ -942,6 +984,10 @@ export default function App() {
     return getFreePeriodStatus(nextHoliday, publicHolidayDataset?.holidays || []);
   }, [nextHoliday, publicHolidayDataset]);
 
+  const bridgeDaySuggestions = useMemo(() => {
+    return getBridgeDaySuggestions(publicHolidayDataset?.holidays || [], selectedYear);
+  }, [publicHolidayDataset, selectedYear]);
+
   const selectedStateDataset = index?.datasets?.find((item) => {
     return item.bundeslandCode === selectedCode;
   });
@@ -1381,6 +1427,41 @@ export default function App() {
             <span>✓ Erweiterbar für Planung</span>
           </div>
         </aside>
+      </section>
+
+      <section className="panel bridge-days-section" id="brueckentage">
+        <div className="section-header">
+          <div>
+            <p className="eyebrow">Brückentage</p>
+            <h2>Mehr freie Zeit mit wenig Urlaub</h2>
+          </div>
+          <span className="small-pill">{selectedYear}</span>
+        </div>
+
+        {bridgeDaySuggestions.length > 0 ? (
+          <div className="bridge-day-list">
+            {bridgeDaySuggestions.map((item) => (
+              <article className="bridge-day-card" key={item.id}>
+                <div>
+                  <strong>{formatDate(item.bridgeDate)}</strong>
+                  <span>Urlaubstag {item.direction}</span>
+                </div>
+                <p>
+                  {item.vacationDays} Urlaubstag → {item.freeDays} freie Tage
+                </p>
+                <small>
+                  Rund um {item.holidayName} am {formatDate(item.holidayDate)} ·{" "}
+                  {formatDate(item.freeStartDate)} – {formatDate(item.freeEndDate)}
+                </small>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p className="bridge-day-empty">
+            Für {selectedYear} wurden keine einfachen Brückentage nach dem
+            Dienstag/Donnerstag-Muster gefunden.
+          </p>
+        )}
       </section>
 
       <section className="comparison-section" id="vergleich">
