@@ -1722,37 +1722,10 @@ canvas {
   }
 }
 
-.travel-checker-teaser {
-  margin-top: 28px;
-}
 
-.travel-checker-domain-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  padding: 10px 14px;
-  color: #1f6f64;
-  background: rgba(232, 247, 240, 0.92);
-  border: 1px solid rgba(31, 111, 100, 0.22);
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 900;
-}
 
-.travel-checker-preview-toggle {
-  margin-top: 10px;
-}
 
-.travel-checker-teaser .check-today-preview {
-  margin-top: 22px;
-}
 
-@media (max-width: 760px) {
-  .travel-checker-domain-link {
-    width: 100%;
-  }
-}
 
 @media (max-width: 720px) {
   .desktop-calendar-stack {
@@ -2703,4 +2676,19 @@ button.current-year-link {
     padding: 15px 16px;
     justify-content: flex-start;
   }
+}
+
+
+.site-footer .footer-links a.footer-travel-link {
+  border-radius: 999px;
+  padding: 6px 10px;
+  background: rgba(232, 247, 240, 0.95);
+  color: #1f6f64;
+  border: 1px solid rgba(31, 111, 100, 0.18);
+}
+
+.site-footer .footer-links a.footer-travel-link:hover {
+  background: #1f6f64;
+  color: #fff;
+  text-decoration: none;
 }
