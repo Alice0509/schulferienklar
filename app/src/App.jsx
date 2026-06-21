@@ -1412,9 +1412,9 @@ export default function App() {
 
         <div className="comparison-toolbar">
           <div className="comparison-selected-list" aria-label="Ausgewählte Bundesländer">
-            {comparisonSummaries.map((item) => (
+            {comparisonSummaries.map((item, index) => (
               <button
-                className="comparison-selected-pill"
+                className={`comparison-selected-pill comparison-color-${index % 4}`}
                 key={item.code}
                 type="button"
                 onClick={() => toggleComparisonCode(item.code)}
@@ -1454,11 +1454,14 @@ export default function App() {
           <div className="comparison-picker" aria-label="Bundesländer für Vergleich auswählen">
             {(index?.datasets || []).map((item) => {
               const isSelected = comparisonCodes.includes(item.bundeslandCode);
+              const selectedIndex = comparisonCodes.indexOf(item.bundeslandCode);
+              const colorClass =
+                selectedIndex >= 0 ? `comparison-color-${selectedIndex % 4}` : "";
               const isDisabled = !isSelected && comparisonCodes.length >= 4;
 
               return (
                 <button
-                  className={`comparison-chip ${isSelected ? "selected" : ""}`}
+                  className={`comparison-chip ${isSelected ? "selected" : ""} ${colorClass}`}
                   disabled={isDisabled}
                   key={item.bundeslandCode}
                   onClick={() => toggleComparisonCode(item.bundeslandCode)}
@@ -1574,7 +1577,20 @@ export default function App() {
                     </strong>
                   </div>
                   <p>{formatDate(period.startDate)} bis {formatDate(period.endDate)}</p>
-                  <span>{period.states.map((item) => item.name).join(", ")}</span>
+                  <div className="overlap-state-list">
+                    {period.states.map((item) => {
+                      const selectedIndex = comparisonCodes.indexOf(item.code);
+                      const colorClass =
+                        selectedIndex >= 0 ? `comparison-color-${selectedIndex % 4}` : "";
+
+                      return (
+                        <span className={`overlap-state-pill ${colorClass}`} key={item.code}>
+                          <small>{item.code}</small>
+                          {item.name}
+                        </span>
+                      );
+                    })}
+                  </div>
                 </article>
               ))}
             </div>
