@@ -2436,3 +2436,65 @@ button.current-year-link {
     z-index: 40;
   }
 }
+
+.overlap-month-slider {
+  margin: 22px 0 28px;
+}
+
+.overlap-month-controls {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.overlap-month-controls button {
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 999px;
+  background: #1f6f64;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.overlap-month-controls button:disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+}
+
+.overlap-month-controls div {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+}
+
+.overlap-month-controls strong {
+  color: #172033;
+  font-size: 1.25rem;
+}
+
+.overlap-month-controls span {
+  color: #66717f;
+  font-weight: 900;
+}
+
+.overlap-month-slider .overlap-calendar {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+@media (max-width: 760px) {
+  .overlap-month-controls button {
+    width: 42px;
+    height: 42px;
+    font-size: 1.7rem;
+  }
+
+  .overlap-month-slider .overlap-calendar {
+    padding: 14px;
+  }
+}
