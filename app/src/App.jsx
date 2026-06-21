@@ -1460,23 +1460,26 @@ export default function App() {
         </div>
 
         {bridgeDaySuggestions.length > 0 ? (
-          <div className="bridge-day-list">
-            {bridgeDaySuggestions.map((item) => (
-              <article className="bridge-day-card" key={item.id}>
-                <div>
-                  <strong>{formatDate(item.bridgeDate)}</strong>
-                  <span>Urlaubstag {item.direction}</span>
-                </div>
-                <p>
-                  {item.vacationDays} Urlaubstag → {item.freeDays} freie Tage
-                </p>
-                <small>
-                  {item.holidayName} · frei{" "}
-                  {formatCompactDateRange(item.freeStartDate, item.freeEndDate)}
-                </small>
-              </article>
-            ))}
-          </div>
+          <>
+            <div className="bridge-day-list">
+              {bridgeDaySuggestions.map((item) => (
+                <article className="bridge-day-card" key={item.id}>
+                  <div>
+                    <strong>{formatDate(item.bridgeDate)}</strong>
+                    <span>Urlaubstag {item.direction}</span>
+                  </div>
+                  <p>
+                    {item.vacationDays} Urlaubstag → {item.freeDays} freie Tage
+                  </p>
+                  <small>
+                    {item.holidayName} · frei{" "}
+                    {formatCompactDateRange(item.freeStartDate, item.freeEndDate)}
+                  </small>
+                </article>
+              ))}
+            </div>
+            <p className="bridge-day-swipe-hint">Seitlich wischen für weitere Brückentage.</p>
+          </>
         ) : (
           <p className="bridge-day-empty">
             Für {selectedYear} wurden keine einfachen Brückentage nach dem
