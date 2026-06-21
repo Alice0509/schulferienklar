@@ -1034,6 +1034,16 @@ export default function App() {
 
   return (
     <main className="page">
+      <button
+        className="floating-site-menu-button"
+        type="button"
+        aria-expanded={isSiteMenuOpen}
+        aria-controls="site-menu"
+        onClick={() => setIsSiteMenuOpen((isOpen) => !isOpen)}
+      >
+        ☰ Menü
+      </button>
+
       <section className={`hero hero-${pattern}`}>
         <nav className="topbar">
           <div className="brand">
@@ -1060,8 +1070,8 @@ export default function App() {
             <button type="button" onClick={() => scrollToSection("ferienkalender")}>
               Kalender
             </button>
-            <button type="button" onClick={() => scrollToSection("heute")}>
-              Heute
+            <button type="button" onClick={() => scrollToSection("bundesland-auswahl")}>
+              Bundesland wählen
             </button>
             <button type="button" onClick={() => scrollToSection("vergleich")}>
               Vergleich
@@ -1085,7 +1095,7 @@ export default function App() {
               danach kommen.
             </p>
 
-            <div className="selector-card">
+            <div className="selector-card" id="bundesland-auswahl">
               <label htmlFor="bundesland">Bundesland auswählen</label>
               <div className="state-select-wrapper">
                 <button
