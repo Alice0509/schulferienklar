@@ -2828,3 +2828,75 @@ button.current-year-link {
     font-size: 0.86rem;
   }
 }
+
+@media (max-width: 720px) {
+  .section-header.overview-header {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .overview-header h2 {
+    font-size: clamp(1.8rem, 9vw, 2.5rem);
+  }
+
+  .view-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .year-select,
+  .view-toggle,
+  .ics-export-wrap {
+    width: 100%;
+  }
+
+  .year-select {
+    min-height: 48px;
+    padding: 4px 4px 4px 12px;
+  }
+
+  .year-select select {
+    min-width: 0;
+    width: 100%;
+    padding: 8px 28px 8px 10px;
+  }
+
+  .view-toggle {
+    min-height: 48px;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .view-toggle button {
+    flex: 1;
+    padding: 8px 10px;
+  }
+
+  .overview-header .small-pill {
+    display: none;
+  }
+
+  .ics-export-wrap {
+    grid-column: 1 / -1;
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .ics-export-button {
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 14px;
+  }
+
+  .ics-export-hint {
+    display: none;
+  }
+}
+
+@media (max-width: 390px) {
+  .view-controls {
+    grid-template-columns: 1fr;
+  }
+}
