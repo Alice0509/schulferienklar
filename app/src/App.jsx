@@ -1401,13 +1401,24 @@ export default function App() {
             ))}
           </div>
 
-          <button
-            className="comparison-add-button"
-            type="button"
-            onClick={() => setIsComparisonPickerOpen((isOpen) => !isOpen)}
-          >
-            {isComparisonPickerOpen ? "Auswahl schließen" : "+ Bundesland hinzufügen"}
-          </button>
+          <div className="comparison-add-wrap">
+            <button
+              className="comparison-add-button"
+              type="button"
+              onClick={() => setIsComparisonPickerOpen((isOpen) => !isOpen)}
+            >
+              {isComparisonPickerOpen
+                ? "Auswahl schließen"
+                : comparisonCodes.length >= 4
+                  ? "Auswahl bearbeiten"
+                  : "+ Bundesland hinzufügen"}
+            </button>
+            {comparisonCodes.length >= 4 && (
+              <span className="comparison-limit-note">
+                Maximal 4 Bundesländer gewählt
+              </span>
+            )}
+          </div>
 
           <label className="comparison-year-select">
             <span>Vergleichsjahr</span>
