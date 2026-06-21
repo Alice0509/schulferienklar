@@ -2698,3 +2698,51 @@ button.current-year-link {
     display: none;
   }
 }
+
+@media (max-width: 560px) {
+  .hero {
+    padding: 20px 18px 22px;
+  }
+
+  .topbar {
+    margin-bottom: 28px;
+  }
+
+  .eyebrow {
+    margin-bottom: 8px;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+  }
+
+  .hero h1 {
+    max-width: 100%;
+    margin-bottom: 14px;
+    font-size: clamp(2.8rem, 12.6vw, 4.15rem);
+    line-height: 0.9;
+    letter-spacing: -0.085em;
+  }
+
+  .hero-text {
+    font-size: 1rem;
+    line-height: 1.48;
+  }
+
+  .selector-card {
+    margin-top: 20px;
+    padding: 15px;
+  }
+
+  .state-select-button {
+    min-height: 54px;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero h1 {
+    font-size: clamp(2.55rem, 12vw, 3.55rem);
+  }
+
+  .hero-text {
+    font-size: 0.96rem;
+  }
+}
