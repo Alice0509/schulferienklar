@@ -697,6 +697,7 @@ export default function App() {
   const [viewMode, setViewMode] = useState("calendar");
   const [showAllStates, setShowAllStates] = useState(false);
   const [isStateMenuOpen, setIsStateMenuOpen] = useState(false);
+  const [isSiteMenuOpen, setIsSiteMenuOpen] = useState(false);
   const [comparisonCodes, setComparisonCodes] = useState(() => {
     try {
       const storedCodes = JSON.parse(
@@ -1006,6 +1007,14 @@ export default function App() {
 
   const shouldShowCurrentMonthPreview = selectedYear === TODAY.getFullYear();
 
+  const scrollToSection = (sectionId) => {
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    setIsSiteMenuOpen(false);
+  };
+
   const handleDownloadIcs = () => {
     const content = generateIcsCalendar({
       holidays,
@@ -1031,8 +1040,40 @@ export default function App() {
             <span className="brand-mark">S</span>
             <span>Schulferienklar</span>
           </div>
-          <span className="badge">Offizielle Bundesland-Daten</span>
+
+          <div className="topbar-actions">
+            <span className="badge">Offizielle Bundesland-Daten</span>
+            <button
+              className="site-menu-button"
+              type="button"
+              aria-expanded={isSiteMenuOpen}
+              aria-controls="site-menu"
+              onClick={() => setIsSiteMenuOpen((isOpen) => !isOpen)}
+            >
+              ☰ Menü
+            </button>
+          </div>
         </nav>
+
+        {isSiteMenuOpen && (
+          <div className="site-menu" id="site-menu">
+            <button type="button" onClick={() => scrollToSection("ferienkalender")}>
+              Kalender
+            </button>
+            <button type="button" onClick={() => scrollToSection("heute")}>
+              Heute
+            </button>
+            <button type="button" onClick={() => scrollToSection("vergleich")}>
+              Vergleich
+            </button>
+            <button type="button" onClick={() => scrollToSection("bundeslaender")}>
+              Bundesländer
+            </button>
+            <button type="button" onClick={() => scrollToSection("app-speichern")}>
+              App speichern
+            </button>
+          </div>
+        )}
 
         <div className="hero-grid">
           <div className="hero-copy">
@@ -1139,7 +1180,7 @@ export default function App() {
 
       {error && <div className="error">{error}</div>}
 
-      <section className="content-grid">
+      <section className="content-grid" id="kalender">
         <section className="panel">
           <div className="section-header overview-header">
             <div>
@@ -1253,7 +1294,7 @@ export default function App() {
               <div id="ferienkalender" className="calendar-anchor" aria-hidden="true" />
               <div className="desktop-calendar-stack">
                 {shouldShowCurrentMonthPreview && (
-                  <section className="current-month-preview">
+                  <section className="current-month-preview" id="heute">
                     <div className="section-header">
                       <div>
                         <p className="eyebrow">Heute im Blick</p>
@@ -1336,7 +1377,7 @@ export default function App() {
         {showTravelCheckerPreview && <CheckTodayPreview baseUrl={DATA_BASE_URL} />}
       </section>
 
-      <section className="comparison-section">
+      <section className="comparison-section" id="vergleich">
         <div className="section-heading">
           <p className="eyebrow">Bundesländer vergleichen</p>
           <h2>Ferien in mehreren Bundesländern vergleichen</h2>
@@ -1481,7 +1522,7 @@ export default function App() {
         </div>
       </section>
 
-      <section className="states-section">
+      <section className="states-section" id="bundeslaender">
         <div className="section-header">
           <div>
             <p className="eyebrow">Auswahl</p>
@@ -1517,7 +1558,7 @@ export default function App() {
         </button>
       </section>
 
-      <section className="panel install-guide" aria-labelledby="install-guide-title">
+      <section className="panel install-guide" id="app-speichern" aria-labelledby="install-guide-title">
         <p className="eyebrow">Schneller wiederfinden</p>
         <h2 id="install-guide-title">Schulferienklar als App speichern</h2>
         <p>
