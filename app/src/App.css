@@ -2746,3 +2746,14 @@ button.current-year-link {
     font-size: 0.96rem;
   }
 }
+
+@media (max-width: 560px) {
+  .topbar .badge {
+    display: none;
+  }
+
+  .topbar-actions {
+    width: auto;
+    margin-left: auto;
+  }
+}
