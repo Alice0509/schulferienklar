@@ -2498,3 +2498,102 @@ button.current-year-link {
     padding: 14px;
   }
 }
+
+.comparison-toolbar {
+  display: grid;
+  gap: 14px;
+  margin: 24px 0;
+  border-radius: 28px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(23, 32, 51, 0.08);
+}
+
+.comparison-selected-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.comparison-selected-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(31, 111, 100, 0.18);
+  border-radius: 999px;
+  padding: 10px 13px;
+  background: rgba(232, 247, 240, 0.9);
+  color: #172033;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.comparison-selected-pill span {
+  color: #1f6f64;
+  font-weight: 950;
+}
+
+.comparison-selected-pill strong {
+  color: #66717f;
+  font-size: 1.05rem;
+}
+
+.comparison-add-button {
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 16px;
+  background: #172033;
+  color: #fff;
+  font-weight: 950;
+  cursor: pointer;
+}
+
+.comparison-year-select {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-radius: 999px;
+  padding: 10px 14px;
+  background: rgba(246, 243, 236, 0.9);
+  color: #66717f;
+  font-weight: 900;
+}
+
+.comparison-year-select select {
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: #fff;
+  color: #172033;
+  font: inherit;
+  font-weight: 950;
+}
+
+@media (min-width: 760px) {
+  .comparison-toolbar {
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .comparison-toolbar {
+    padding: 14px;
+  }
+
+  .comparison-selected-list,
+  .comparison-add-button,
+  .comparison-year-select {
+    width: 100%;
+  }
+
+  .comparison-selected-pill {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .comparison-year-select {
+    border-radius: 22px;
+  }
+}
