@@ -2680,3 +2680,27 @@ button.current-year-link {
     line-height: 1.45;
   }
 }
+
+.site-menu-external-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 11px 14px;
+  background: #172033;
+  color: #fff;
+  font-weight: 950;
+  text-decoration: none;
+}
+
+.site-menu-external-link:hover {
+  background: #1f6f64;
+}
+
+@media (max-width: 760px) {
+  .site-menu-external-link {
+    width: 100%;
+    padding: 15px 16px;
+    justify-content: flex-start;
+  }
+}
