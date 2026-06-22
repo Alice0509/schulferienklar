@@ -1200,11 +1200,11 @@ export default function App() {
               onClick={() => setIsSiteMenuOpen(false)}
             />
             <div className="site-menu" id="site-menu">
-              <button type="button" onClick={() => scrollToSection("ferienkalender")}>
-                Kalender
-              </button>
               <button type="button" onClick={() => scrollToSection("bundesland-auswahl")}>
                 Bundesland wählen
+              </button>
+              <button type="button" onClick={() => scrollToSection("ferienkalender")}>
+                Kalender
               </button>
               <button type="button" onClick={() => scrollToSection("brueckentage")}>
                 Brückentage
