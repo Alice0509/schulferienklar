@@ -182,6 +182,11 @@ function getPublicHolidayName(holiday) {
 function getBridgeDaySuggestions(publicHolidays = [], selectedYear) {
   const yearStart = `${selectedYear}-01-01`;
   const yearEnd = `${selectedYear}-12-31`;
+  const publicHolidayDates = new Set(
+    publicHolidays
+      .filter((holiday) => holiday.includeInDefaultCalendar)
+      .map((holiday) => holiday.date)
+  );
 
   return publicHolidays
     .filter((holiday) => {
@@ -196,14 +201,20 @@ function getBridgeDaySuggestions(publicHolidays = [], selectedYear) {
       }
 
       const bridgeDate = day === 2 ? addDays(holidayDate, -1) : addDays(holidayDate, 1);
+      const bridgeDateKey = toDateKey(bridgeDate);
+
+      if (isWeekend(bridgeDate) || publicHolidayDates.has(bridgeDateKey)) {
+        return null;
+      }
+
       const weekendStart = day === 2 ? addDays(holidayDate, -3) : holidayDate;
       const weekendEnd = day === 2 ? holidayDate : addDays(holidayDate, 3);
 
       return {
-        id: `${holiday.date}-${toDateKey(bridgeDate)}`,
+        id: `${holiday.date}-${bridgeDateKey}`,
         holidayName: getPublicHolidayName(holiday),
         holidayDate: holiday.date,
-        bridgeDate: toDateKey(bridgeDate),
+        bridgeDate: bridgeDateKey,
         freeStartDate: toDateKey(weekendStart),
         freeEndDate: toDateKey(weekendEnd),
         vacationDays: 1,
