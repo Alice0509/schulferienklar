@@ -1513,10 +1513,15 @@ export default function App() {
                 <article className="bridge-day-card" key={item.id}>
                   <div>
                     <strong>{formatDate(item.bridgeDate)}</strong>
-                    <span>Urlaubstag {item.direction}</span>
+                    <span>
+                      {item.vacationDays === 1 ? "Urlaubstag" : "Urlaubstage"}{" "}
+                      {item.direction}
+                    </span>
                   </div>
                   <p>
-                    {item.vacationDays} Urlaubstag → {item.freeDays} freie Tage
+                    {item.vacationDays}{" "}
+                    {item.vacationDays === 1 ? "Urlaubstag" : "Urlaubstage"} →{" "}
+                    {item.freeDays} freie Tage
                   </p>
                   <small>
                     {item.holidayName} · frei{" "}
