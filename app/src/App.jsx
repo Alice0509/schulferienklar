@@ -188,41 +188,78 @@ function getBridgeDaySuggestions(publicHolidays = [], selectedYear) {
       .map((holiday) => holiday.date)
   );
 
+  const isValidVacationDay = (date) => {
+    const dateKey = toDateKey(date);
+    return !isWeekend(date) && !publicHolidayDates.has(dateKey);
+  };
+
   return publicHolidays
     .filter((holiday) => {
       return holiday.includeInDefaultCalendar && holiday.date >= yearStart && holiday.date <= yearEnd;
     })
-    .map((holiday) => {
+    .flatMap((holiday) => {
       const holidayDate = parseDate(holiday.date);
       const day = holidayDate.getDay();
+      const holidayName = getPublicHolidayName(holiday);
+      const suggestions = [];
 
-      if (day !== 2 && day !== 4) {
-        return null;
+      if (day === 2 || day === 4) {
+        const bridgeDate = day === 2 ? addDays(holidayDate, -1) : addDays(holidayDate, 1);
+        const bridgeDateKey = toDateKey(bridgeDate);
+
+        if (isValidVacationDay(bridgeDate)) {
+          const weekendStart = day === 2 ? addDays(holidayDate, -3) : holidayDate;
+          const weekendEnd = day === 2 ? holidayDate : addDays(holidayDate, 3);
+
+          suggestions.push({
+            id: `${holiday.date}-${bridgeDateKey}`,
+            holidayName,
+            holidayDate: holiday.date,
+            bridgeDate: bridgeDateKey,
+            freeStartDate: toDateKey(weekendStart),
+            freeEndDate: toDateKey(weekendEnd),
+            vacationDays: 1,
+            freeDays: 4,
+            direction: day === 2 ? "vor dem Feiertag" : "nach dem Feiertag",
+          });
+        }
       }
 
-      const bridgeDate = day === 2 ? addDays(holidayDate, -1) : addDays(holidayDate, 1);
-      const bridgeDateKey = toDateKey(bridgeDate);
+      if (day === 3) {
+        const beforeVacationDays = [addDays(holidayDate, -2), addDays(holidayDate, -1)];
+        const afterVacationDays = [addDays(holidayDate, 1), addDays(holidayDate, 2)];
 
-      if (isWeekend(bridgeDate) || publicHolidayDates.has(bridgeDateKey)) {
-        return null;
+        if (beforeVacationDays.every(isValidVacationDay)) {
+          suggestions.push({
+            id: `${holiday.date}-${beforeVacationDays.map(toDateKey).join("-")}`,
+            holidayName,
+            holidayDate: holiday.date,
+            bridgeDate: toDateKey(beforeVacationDays[0]),
+            freeStartDate: toDateKey(addDays(holidayDate, -4)),
+            freeEndDate: holiday.date,
+            vacationDays: 2,
+            freeDays: 5,
+            direction: "vor dem Feiertag",
+          });
+        }
+
+        if (afterVacationDays.every(isValidVacationDay)) {
+          suggestions.push({
+            id: `${holiday.date}-${afterVacationDays.map(toDateKey).join("-")}`,
+            holidayName,
+            holidayDate: holiday.date,
+            bridgeDate: toDateKey(afterVacationDays[0]),
+            freeStartDate: holiday.date,
+            freeEndDate: toDateKey(addDays(holidayDate, 4)),
+            vacationDays: 2,
+            freeDays: 5,
+            direction: "nach dem Feiertag",
+          });
+        }
       }
 
-      const weekendStart = day === 2 ? addDays(holidayDate, -3) : holidayDate;
-      const weekendEnd = day === 2 ? holidayDate : addDays(holidayDate, 3);
-
-      return {
-        id: `${holiday.date}-${bridgeDateKey}`,
-        holidayName: getPublicHolidayName(holiday),
-        holidayDate: holiday.date,
-        bridgeDate: bridgeDateKey,
-        freeStartDate: toDateKey(weekendStart),
-        freeEndDate: toDateKey(weekendEnd),
-        vacationDays: 1,
-        freeDays: 4,
-        direction: day === 2 ? "vor dem Feiertag" : "nach dem Feiertag",
-      };
+      return suggestions;
     })
-    .filter(Boolean)
     .filter((item) => parseDate(item.bridgeDate) >= TODAY)
     .sort((a, b) => a.bridgeDate.localeCompare(b.bridgeDate));
 }
