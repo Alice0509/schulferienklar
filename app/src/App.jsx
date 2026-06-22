@@ -1206,6 +1206,9 @@ export default function App() {
               <button type="button" onClick={() => scrollToSection("bundesland-auswahl")}>
                 Bundesland wählen
               </button>
+              <button type="button" onClick={() => scrollToSection("brueckentage")}>
+                Brückentage
+              </button>
               <button type="button" onClick={() => scrollToSection("vergleich")}>
                 Vergleich
               </button>
