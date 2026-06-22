@@ -1134,10 +1134,21 @@ export default function App() {
   const shouldShowCurrentMonthPreview = selectedYear === TODAY.getFullYear();
 
   const scrollToSection = (sectionId) => {
-    document.getElementById(sectionId)?.scrollIntoView({
+    const target = document.getElementById(sectionId);
+
+    if (!target) {
+      setIsSiteMenuOpen(false);
+      return;
+    }
+
+    const offset = window.innerWidth >= 900 ? 96 : 72;
+    const top = target.getBoundingClientRect().top + window.scrollY - offset;
+
+    window.scrollTo({
+      top: Math.max(top, 0),
       behavior: "smooth",
-      block: "start",
     });
+
     setIsSiteMenuOpen(false);
   };
 
@@ -1203,7 +1214,7 @@ export default function App() {
               <button type="button" onClick={() => scrollToSection("bundesland-auswahl")}>
                 Bundesland wählen
               </button>
-              <button type="button" onClick={() => scrollToSection("ferienkalender")}>
+              <button type="button" onClick={() => scrollToSection("kalender")}>
                 Kalender
               </button>
               <button type="button" onClick={() => scrollToSection("brueckentage")}>
