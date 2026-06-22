@@ -431,14 +431,6 @@ function buildMonthCells(year, monthIndex) {
 function findHolidayForDate(date, holidays, publicHolidays = []) {
   const key = toDateKey(date);
 
-  const schoolHoliday = holidays.find((holiday) => {
-    return holiday.startDate <= key && key <= holiday.endDate;
-  });
-
-  if (schoolHoliday) {
-    return schoolHoliday;
-  }
-
   const publicHoliday = publicHolidays.find((holiday) => {
     return holiday.includeInDefaultCalendar && holiday.date === key;
   });
@@ -450,6 +442,14 @@ function findHolidayForDate(date, holidays, publicHolidays = []) {
       startDate: publicHoliday.date,
       endDate: publicHoliday.date,
     };
+  }
+
+  const schoolHoliday = holidays.find((holiday) => {
+    return holiday.startDate <= key && key <= holiday.endDate;
+  });
+
+  if (schoolHoliday) {
+    return schoolHoliday;
   }
 
   return null;
