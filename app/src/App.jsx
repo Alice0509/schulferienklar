@@ -1548,8 +1548,8 @@ export default function App() {
           </>
         ) : (
           <p className="bridge-day-empty">
-            Für {selectedYear} wurden keine einfachen Brückentage nach dem
-            Dienstag/Donnerstag-Muster gefunden.
+            Für {selectedYear} wurden keine passenden Brückentage mit wenigen
+            Urlaubstagen gefunden.
           </p>
         )}
       </section>
