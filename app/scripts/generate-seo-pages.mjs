@@ -527,6 +527,16 @@ ${yearSummaryCards}
 ${yearLinks}
         </ul>
 
+        <h2>Travel planning with school holidays</h2>
+        <p>
+          Planning a trip to Germany? School holidays in ${escapeHtml(name)} can affect
+          hotels, trains and popular attractions during busy family travel periods.
+        </p>
+        <p>
+          <a href="/germany-travel-checker.html">Check your Germany travel dates</a>
+          before booking your trip.
+        </p>
+
         <p>
           Schulferienklar hilft bei der Planung von Betreuung, Reisen, Lernzeiten
           und freien Tagen rund um die Ferien in ${escapeHtml(name)}.
