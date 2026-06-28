@@ -1095,10 +1095,6 @@ export default function App() {
     ? Number(travelStartDate.slice(0, 4))
     : selectedYear;
 
-  const travelCheckState = index?.datasets?.find((item) => {
-    return item.bundeslandCode === travelCheckCode;
-  });
-
   const travelCheckStates = useMemo(() => {
     const seenCodes = new Set();
 
