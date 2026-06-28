@@ -422,6 +422,13 @@ function pageTemplate({ slug, name, englishName, code, year, events }) {
         <h2>Ferienübersicht ${name} ${year}</h2>
         ${holidaySummaryHtml(events, name, year)}
 
+        <h2>Kalender ${name} ${year}</h2>
+        <p>
+          Der kostenlose Kalender zeigt Schulferien, Feiertage und freie Zeiten
+          für ${name} ${year}. So kannst du Ferien, Brückentage und längere
+          freie Zeiträume schneller vergleichen.
+        </p>
+
         <p>
           Die App hilft Familien, Schüler:innen und allen, die Betreuung, Reisen,
           Lernzeiten oder freie Tage rund um die Schulferien planen möchten.
