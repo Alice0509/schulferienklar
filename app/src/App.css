@@ -3172,3 +3172,116 @@ button.current-year-link {
     font-weight: 800;
   }
 }
+
+.travel-check-section {
+  display: grid;
+  gap: 18px;
+}
+
+.travel-check-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.travel-check-form label {
+  display: grid;
+  gap: 8px;
+  color: rgba(23, 32, 51, 0.74);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.travel-check-form input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(23, 32, 51, 0.14);
+  border-radius: 16px;
+  padding: 12px 14px;
+  font: inherit;
+  color: #172033;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.travel-check-message {
+  margin: 0;
+  border-radius: 16px;
+  padding: 12px 14px;
+  font-weight: 700;
+}
+
+.travel-check-message.warning {
+  color: #7a3d12;
+  background: rgba(244, 171, 91, 0.2);
+}
+
+.travel-check-result {
+  border-radius: 22px;
+  padding: 18px;
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.travel-check-result > strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1.02rem;
+}
+
+.travel-check-result p {
+  margin: 0;
+  color: rgba(23, 32, 51, 0.72);
+}
+
+.travel-check-result.has-matches {
+  background: rgba(244, 171, 91, 0.14);
+}
+
+.travel-check-result.quiet {
+  background: rgba(31, 111, 100, 0.12);
+}
+
+.travel-check-match-group {
+  margin-top: 16px;
+}
+
+.travel-check-match-group h3 {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+}
+
+.travel-check-match-group ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.travel-check-match-group li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-radius: 14px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.travel-check-match-group span {
+  color: rgba(23, 32, 51, 0.68);
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .travel-check-form {
+    grid-template-columns: 1fr;
+  }
+
+  .travel-check-match-group li {
+    display: grid;
+  }
+
+  .travel-check-match-group span {
+    white-space: normal;
+  }
+}
