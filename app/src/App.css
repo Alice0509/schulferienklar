@@ -3285,3 +3285,10 @@ button.current-year-link {
     white-space: normal;
   }
 }
+
+.travel-check-context {
+  margin: -8px 0 0;
+  color: rgba(23, 32, 51, 0.58);
+  font-size: 0.95rem;
+  font-weight: 700;
+}

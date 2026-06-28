@@ -1571,6 +1571,9 @@ export default function App() {
           Feiertagen zusammenfällt. Das hilft bei Reiseplanung, Unterkunft und
           Verkehr.
         </p>
+        <p className="travel-check-context">
+          Geprüft wird der aktuell ausgewählte Kalender. Bundesland oder Jahr kannst du oben ändern.
+        </p>
 
         <div className="travel-check-form">
           <label>
