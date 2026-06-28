@@ -1571,9 +1571,14 @@ export default function App() {
           Feiertagen zusammenfällt. Das hilft bei Reiseplanung, Unterkunft und
           Verkehr.
         </p>
-        <p className="travel-check-context">
-          Geprüft wird der aktuell ausgewählte Kalender. Bundesland oder Jahr kannst du oben ändern.
-        </p>
+        <div className="travel-check-context">
+          <span>
+            Geprüft wird der aktuell ausgewählte Kalender: {selectedStateDataset?.bundeslandName} {selectedYear}.
+          </span>
+          <button type="button" onClick={() => scrollToSection("bundesland-auswahl")}>
+            Bundesland/Jahr ändern
+          </button>
+        </div>
 
         <div className="travel-check-form">
           <label>
