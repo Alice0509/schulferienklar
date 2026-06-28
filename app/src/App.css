@@ -3317,3 +3317,12 @@ button.current-year-link {
     flex-direction: column;
   }
 }
+
+.travel-check-detail-link {
+  margin-top: 10px !important;
+}
+
+.travel-check-detail-link a {
+  color: #1f6f64;
+  font-weight: 900;
+}
