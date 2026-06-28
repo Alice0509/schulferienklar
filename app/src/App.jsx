@@ -191,12 +191,25 @@ function getTravelPeriodMatches(startDate, endDate, holidays = [], publicHoliday
     };
   }
 
+  const periodStart = parseDate(startDate);
+  const periodEnd = parseDate(endDate);
+
   const schoolHolidayMatches = holidays.filter((holiday) => {
-    return rangesOverlap(startDate, endDate, holiday.startDate, holiday.endDate);
+    return rangesOverlap(
+      periodStart,
+      periodEnd,
+      parseDate(holiday.startDate),
+      parseDate(holiday.endDate),
+    );
   });
 
   const publicHolidayMatches = publicHolidays.filter((holiday) => {
-    return holiday.includeInDefaultCalendar && rangesOverlap(startDate, endDate, holiday.date, holiday.date);
+    const holidayDate = parseDate(holiday.date);
+
+    return (
+      holiday.includeInDefaultCalendar &&
+      rangesOverlap(periodStart, periodEnd, holidayDate, holidayDate)
+    );
   });
 
   return {
@@ -1144,7 +1157,7 @@ export default function App() {
 
       try {
         const travelMeta = index.datasets.find((item) => {
-          return item.bundeslandCode === travelCheckCode && item.year === travelCheckYear;
+          return item.bundeslandCode === travelCheckCode;
         });
 
         if (!travelMeta) {
@@ -1728,14 +1741,23 @@ export default function App() {
           <div className={`travel-check-result ${hasTravelPeriodMatches ? "has-matches" : "quiet"}`}>
             <strong>
               {hasTravelPeriodMatches
-                ? "Ferien oder Feiertage beachten"
-                : "Ruhiger Zeitraum"}
+                ? "Schulferien oder Feiertage im Zeitraum"
+                : "Keine Schulferien oder Feiertage gefunden"}
             </strong>
             <p>
               {hasTravelPeriodMatches
-                ? "In diesem Zeitraum gibt es Überschneidungen mit Ferien oder Feiertagen."
-                : "Für diesen Zeitraum sind keine Schulferien oder gesetzlichen Feiertage im ausgewählten Bundesland hinterlegt."}
+                ? "In deinem Zeitraum gibt es Überschneidungen mit Schulferien oder gesetzlichen Feiertagen. Rechne je nach Region mit mehr Reiseverkehr, volleren Zügen oder abweichenden Öffnungszeiten."
+                : "Für diesen Zeitraum sind im ausgewählten Bundesland keine Schulferien oder gesetzlichen Feiertage hinterlegt."}
             </p>
+            {!hasTravelPeriodMatches && (
+              <p className="travel-check-detail-link">
+                Für eine detailliertere Reiseprüfung kannst du den{" "}
+                <a href="https://germanytravelchecker.com/" target="_blank" rel="noreferrer">
+                  Germany Travel Checker
+                </a>{" "}
+                nutzen.
+              </p>
+            )}
 
             {travelPeriodMatches.schoolHolidayMatches.length > 0 && (
               <div className="travel-check-match-group">
