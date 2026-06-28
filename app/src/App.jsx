@@ -179,6 +179,32 @@ function getPublicHolidayName(holiday) {
   return holiday?.name?.de || holiday?.name || "Feiertag";
 }
 
+function rangesOverlap(startA, endA, startB, endB) {
+  return startA <= endB && endA >= startB;
+}
+
+function getTravelPeriodMatches(startDate, endDate, holidays = [], publicHolidays = []) {
+  if (!startDate || !endDate || startDate > endDate) {
+    return {
+      schoolHolidayMatches: [],
+      publicHolidayMatches: [],
+    };
+  }
+
+  const schoolHolidayMatches = holidays.filter((holiday) => {
+    return rangesOverlap(startDate, endDate, holiday.startDate, holiday.endDate);
+  });
+
+  const publicHolidayMatches = publicHolidays.filter((holiday) => {
+    return holiday.includeInDefaultCalendar && rangesOverlap(startDate, endDate, holiday.date, holiday.date);
+  });
+
+  return {
+    schoolHolidayMatches,
+    publicHolidayMatches,
+  };
+}
+
 function getBridgeDaySuggestions(publicHolidays = [], selectedYear) {
   const yearStart = `${selectedYear}-01-01`;
   const yearEnd = `${selectedYear}-12-31`;
@@ -821,6 +847,8 @@ export default function App() {
   const [comparisonDatasets, setComparisonDatasets] = useState({});
   const [activeOverlapMonthIndex, setActiveOverlapMonthIndex] = useState(0);
   const [showOverlapDetails, setShowOverlapDetails] = useState(false);
+  const [travelStartDate, setTravelStartDate] = useState("");
+  const [travelEndDate, setTravelEndDate] = useState("");
   const [comparisonYear, setComparisonYear] = useState(() => {
     const storedYear = Number(localStorage.getItem(STORAGE_KEYS.comparisonYear));
 
@@ -1056,6 +1084,21 @@ export default function App() {
     return getBridgeDaySuggestions(publicHolidayDataset?.holidays || [], selectedYear);
   }, [publicHolidayDataset, selectedYear]);
 
+  const travelPeriodMatches = useMemo(() => {
+    return getTravelPeriodMatches(
+      travelStartDate,
+      travelEndDate,
+      dataset?.holidays || [],
+      publicHolidayDataset?.holidays || [],
+    );
+  }, [dataset, publicHolidayDataset, travelStartDate, travelEndDate]);
+
+  const hasTravelPeriodInput = Boolean(travelStartDate && travelEndDate);
+  const isTravelPeriodInvalid = hasTravelPeriodInput && travelStartDate > travelEndDate;
+  const hasTravelPeriodMatches =
+    travelPeriodMatches.schoolHolidayMatches.length > 0 ||
+    travelPeriodMatches.publicHolidayMatches.length > 0;
+
   const selectedStateDataset = index?.datasets?.find((item) => {
     return item.bundeslandCode === selectedCode;
   });
@@ -1216,6 +1259,9 @@ export default function App() {
               </button>
               <button type="button" onClick={() => scrollToSection("kalender")}>
                 Kalender
+              </button>
+              <button type="button" onClick={() => scrollToSection("reisezeit")}>
+                Reisezeit prüfen
               </button>
               <button type="button" onClick={() => scrollToSection("brueckentage")}>
                 Brückentage
@@ -1509,6 +1555,91 @@ export default function App() {
             <span>✓ Erweiterbar für Planung</span>
           </div>
         </aside>
+      </section>
+
+      <section className="panel travel-check-section" id="reisezeit">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Reisezeit prüfen</p>
+            <h2>Passt dein Reisezeitraum?</h2>
+          </div>
+          <span className="small-pill">{selectedStateDataset?.bundeslandName} {selectedYear}</span>
+        </div>
+
+        <p className="section-copy">
+          Prüfe, ob dein Zeitraum in {selectedStateDataset?.bundeslandName} mit Schulferien oder
+          Feiertagen zusammenfällt. Das hilft bei Reiseplanung, Unterkunft und
+          Verkehr.
+        </p>
+
+        <div className="travel-check-form">
+          <label>
+            <span>Startdatum</span>
+            <input
+              type="date"
+              value={travelStartDate}
+              onChange={(event) => setTravelStartDate(event.target.value)}
+            />
+          </label>
+
+          <label>
+            <span>Enddatum</span>
+            <input
+              type="date"
+              value={travelEndDate}
+              onChange={(event) => setTravelEndDate(event.target.value)}
+            />
+          </label>
+        </div>
+
+        {isTravelPeriodInvalid && (
+          <p className="travel-check-message warning">
+            Das Enddatum muss nach dem Startdatum liegen.
+          </p>
+        )}
+
+        {hasTravelPeriodInput && !isTravelPeriodInvalid && (
+          <div className={`travel-check-result ${hasTravelPeriodMatches ? "has-matches" : "quiet"}`}>
+            <strong>
+              {hasTravelPeriodMatches
+                ? "Ferien oder Feiertage beachten"
+                : "Ruhiger Zeitraum"}
+            </strong>
+            <p>
+              {hasTravelPeriodMatches
+                ? "In diesem Zeitraum gibt es Überschneidungen mit Ferien oder Feiertagen."
+                : "Für diesen Zeitraum sind keine Schulferien oder gesetzlichen Feiertage im ausgewählten Bundesland hinterlegt."}
+            </p>
+
+            {travelPeriodMatches.schoolHolidayMatches.length > 0 && (
+              <div className="travel-check-match-group">
+                <h3>Schulferien</h3>
+                <ul>
+                  {travelPeriodMatches.schoolHolidayMatches.map((holiday) => (
+                    <li key={holiday.id}>
+                      <strong>{getHolidayLabel(holiday)}</strong>
+                      <span>{formatDate(holiday.startDate)} – {formatDate(holiday.endDate)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {travelPeriodMatches.publicHolidayMatches.length > 0 && (
+              <div className="travel-check-match-group">
+                <h3>Feiertage</h3>
+                <ul>
+                  {travelPeriodMatches.publicHolidayMatches.map((holiday) => (
+                    <li key={holiday.id}>
+                      <strong>{getPublicHolidayName(holiday)}</strong>
+                      <span>{formatDate(holiday.date)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
       </section>
 
       <section className="panel bridge-days-section" id="brueckentage">
