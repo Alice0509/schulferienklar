@@ -88,7 +88,7 @@ function holidaySummaryHtml(events, name, year) {
       const label = getCategoryLabel(event.category);
       const eventName = getHolidayName(event);
       return `          <li>
-            <strong>${escapeHtml(eventName)}</strong>
+            <strong>${escapeHtml(eventName)} ${escapeHtml(name)} ${year}</strong>
             <span>${formatDate(event.startDate)} – ${formatDate(event.endDate)}</span>
             <small>${label}</small>
           </li>`;
