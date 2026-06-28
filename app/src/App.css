@@ -3192,7 +3192,8 @@ button.current-year-link {
   font-weight: 700;
 }
 
-.travel-check-form input {
+.travel-check-form input,
+.travel-check-form select {
   width: 100%;
   box-sizing: border-box;
   border: 1px solid rgba(23, 32, 51, 0.14);

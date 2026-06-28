@@ -847,8 +847,15 @@ export default function App() {
   const [comparisonDatasets, setComparisonDatasets] = useState({});
   const [activeOverlapMonthIndex, setActiveOverlapMonthIndex] = useState(0);
   const [showOverlapDetails, setShowOverlapDetails] = useState(false);
+  const [travelCheckCode, setTravelCheckCode] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("state") || localStorage.getItem(STORAGE_KEYS.bundesland) || "BY";
+  });
   const [travelStartDate, setTravelStartDate] = useState("");
   const [travelEndDate, setTravelEndDate] = useState("");
+  const [travelDataset, setTravelDataset] = useState(null);
+  const [travelPublicHolidayDataset, setTravelPublicHolidayDataset] = useState(null);
+  const [travelDataLoading, setTravelDataLoading] = useState(false);
   const [comparisonYear, setComparisonYear] = useState(() => {
     const storedYear = Number(localStorage.getItem(STORAGE_KEYS.comparisonYear));
 
@@ -1084,20 +1091,123 @@ export default function App() {
     return getBridgeDaySuggestions(publicHolidayDataset?.holidays || [], selectedYear);
   }, [publicHolidayDataset, selectedYear]);
 
+  const travelCheckYear = travelStartDate
+    ? Number(travelStartDate.slice(0, 4))
+    : selectedYear;
+
+  const travelCheckStates = useMemo(() => {
+    const seenCodes = new Set();
+
+    return (index?.datasets || [])
+      .filter((item) => {
+        if (seenCodes.has(item.bundeslandCode)) {
+          return false;
+        }
+
+        seenCodes.add(item.bundeslandCode);
+        return true;
+      })
+      .map((item) => {
+        return {
+          code: item.bundeslandCode,
+          name: item.bundeslandName,
+        };
+      });
+  }, [index]);
+
   const travelPeriodMatches = useMemo(() => {
     return getTravelPeriodMatches(
       travelStartDate,
       travelEndDate,
-      dataset?.holidays || [],
-      publicHolidayDataset?.holidays || [],
+      travelDataset?.holidays || [],
+      travelPublicHolidayDataset?.holidays || [],
     );
-  }, [dataset, publicHolidayDataset, travelStartDate, travelEndDate]);
+  }, [travelDataset, travelPublicHolidayDataset, travelStartDate, travelEndDate]);
 
   const hasTravelPeriodInput = Boolean(travelStartDate && travelEndDate);
   const isTravelPeriodInvalid = hasTravelPeriodInput && travelStartDate > travelEndDate;
   const hasTravelPeriodMatches =
     travelPeriodMatches.schoolHolidayMatches.length > 0 ||
     travelPeriodMatches.publicHolidayMatches.length > 0;
+
+  useEffect(() => {
+    let isCancelled = false;
+
+    async function loadTravelCheckData() {
+      if (!index || !Number.isFinite(travelCheckYear)) {
+        setTravelDataset(null);
+        setTravelPublicHolidayDataset(null);
+        return;
+      }
+
+      setTravelDataLoading(true);
+
+      try {
+        const travelMeta = index.datasets.find((item) => {
+          return item.bundeslandCode === travelCheckCode && item.year === travelCheckYear;
+        });
+
+        if (!travelMeta) {
+          if (!isCancelled) {
+            setTravelDataset(null);
+            setTravelPublicHolidayDataset(null);
+          }
+          return;
+        }
+
+        const holidayResponse = await fetch(dataUrl(`/data/holidays/${travelMeta.jsonFile}`));
+
+        if (!holidayResponse.ok) {
+          throw new Error("Travel holiday data could not be loaded");
+        }
+
+        const holidayData = await holidayResponse.json();
+
+        const publicHolidayIndexResponse = await fetch(dataUrl("/data/public-holidays/index.json"));
+
+        if (!publicHolidayIndexResponse.ok) {
+          throw new Error("Travel public holiday index could not be loaded");
+        }
+
+        const publicHolidayIndex = await publicHolidayIndexResponse.json();
+        const publicHolidayMeta = publicHolidayIndex.datasets.find((item) => {
+          return item.bundeslandCode === travelCheckCode && item.year === travelCheckYear;
+        });
+
+        let publicHolidayData = null;
+
+        if (publicHolidayMeta) {
+          const publicHolidayResponse = await fetch(
+            dataUrl(`/data/public-holidays/${publicHolidayMeta.jsonFile}`)
+          );
+
+          if (publicHolidayResponse.ok) {
+            publicHolidayData = await publicHolidayResponse.json();
+          }
+        }
+
+        if (!isCancelled) {
+          setTravelDataset(holidayData);
+          setTravelPublicHolidayDataset(publicHolidayData);
+        }
+      } catch {
+        if (!isCancelled) {
+          setTravelDataset(null);
+          setTravelPublicHolidayDataset(null);
+        }
+      } finally {
+        if (!isCancelled) {
+          setTravelDataLoading(false);
+        }
+      }
+    }
+
+    loadTravelCheckData();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [index, travelCheckCode, travelCheckYear]);
 
   const selectedStateDataset = index?.datasets?.find((item) => {
     return item.bundeslandCode === selectedCode;
@@ -1563,24 +1673,28 @@ export default function App() {
             <p className="eyebrow">Reisezeit prüfen</p>
             <h2>Passt dein Reisezeitraum?</h2>
           </div>
-          <span className="small-pill">{selectedStateDataset?.bundeslandName} {selectedYear}</span>
         </div>
 
         <p className="section-copy">
-          Prüfe, ob dein Zeitraum in {selectedStateDataset?.bundeslandName} mit Schulferien oder
-          Feiertagen zusammenfällt. Das hilft bei Reiseplanung, Unterkunft und
-          Verkehr.
+          Wähle ein Bundesland und deinen Reisezeitraum. Schulferienklar prüft
+          die passenden Schulferien und Feiertage für das Jahr deines Startdatums.
         </p>
-        <div className="travel-check-context">
-          <span>
-            Geprüft wird der aktuell ausgewählte Kalender: {selectedStateDataset?.bundeslandName} {selectedYear}.
-          </span>
-          <button type="button" onClick={() => scrollToSection("bundesland-auswahl")}>
-            Bundesland/Jahr ändern
-          </button>
-        </div>
 
         <div className="travel-check-form">
+          <label>
+            <span>Bundesland</span>
+            <select
+              value={travelCheckCode}
+              onChange={(event) => setTravelCheckCode(event.target.value)}
+            >
+              {travelCheckStates.map((item) => (
+                <option key={item.code} value={item.code}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </label>
+
           <label>
             <span>Startdatum</span>
             <input
@@ -1606,7 +1720,11 @@ export default function App() {
           </p>
         )}
 
-        {hasTravelPeriodInput && !isTravelPeriodInvalid && (
+        {travelDataLoading && hasTravelPeriodInput && !isTravelPeriodInvalid && (
+          <p className="travel-check-message">Daten werden geladen …</p>
+        )}
+
+        {hasTravelPeriodInput && !isTravelPeriodInvalid && !travelDataLoading && (
           <div className={`travel-check-result ${hasTravelPeriodMatches ? "has-matches" : "quiet"}`}>
             <strong>
               {hasTravelPeriodMatches
