@@ -3375,3 +3375,11 @@ button.current-year-link {
     grid-template-columns: 1fr;
   }
 }
+
+@media (min-width: 900px) {
+  .bridge-day-controls {
+    grid-template-columns: minmax(260px, 420px) minmax(120px, 180px);
+    justify-content: start;
+    align-items: end;
+  }
+}
