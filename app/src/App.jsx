@@ -1912,8 +1912,9 @@ export default function App() {
                   <div>
                     <strong>{formatDate(item.bridgeDate)}</strong>
                     <span>
-                      {item.vacationDays === 1 ? "Urlaubstag" : "Urlaubstage"}{" "}
-                      {item.direction}
+                      {item.direction === "vor dem Feiertag"
+                        ? "vor Feiertag"
+                        : "nach Feiertag"}
                     </span>
                   </div>
                   <p>
