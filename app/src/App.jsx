@@ -869,6 +869,15 @@ export default function App() {
   const [travelDataset, setTravelDataset] = useState(null);
   const [travelPublicHolidayDataset, setTravelPublicHolidayDataset] = useState(null);
   const [travelDataLoading, setTravelDataLoading] = useState(false);
+  const [bridgeDayCode, setBridgeDayCode] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("state") || localStorage.getItem(STORAGE_KEYS.bundesland) || "BY";
+  });
+  const [bridgeDayYear, setBridgeDayYear] = useState(() => {
+    return Number(localStorage.getItem(STORAGE_KEYS.year)) || TODAY.getFullYear();
+  });
+  const [bridgeDayPublicHolidayDataset, setBridgeDayPublicHolidayDataset] = useState(null);
+  const [bridgeDayLoading, setBridgeDayLoading] = useState(false);
   const [comparisonYear, setComparisonYear] = useState(() => {
     const storedYear = Number(localStorage.getItem(STORAGE_KEYS.comparisonYear));
 
@@ -1101,8 +1110,67 @@ export default function App() {
   }, [nextHoliday, publicHolidayDataset]);
 
   const bridgeDaySuggestions = useMemo(() => {
-    return getBridgeDaySuggestions(publicHolidayDataset?.holidays || [], selectedYear);
-  }, [publicHolidayDataset, selectedYear]);
+    return getBridgeDaySuggestions(
+      bridgeDayPublicHolidayDataset?.holidays || [],
+      bridgeDayYear,
+    );
+  }, [bridgeDayPublicHolidayDataset, bridgeDayYear]);
+
+  useEffect(() => {
+    let isCancelled = false;
+
+    async function loadBridgeDayPublicHolidays() {
+      setBridgeDayLoading(true);
+
+      try {
+        const indexResponse = await fetch(dataUrl("/data/public-holidays/index.json"));
+
+        if (!indexResponse.ok) {
+          throw new Error("Bridge day public holiday index could not be loaded");
+        }
+
+        const publicHolidayIndex = await indexResponse.json();
+        const matchingDataset = publicHolidayIndex.datasets.find((item) => {
+          return item.bundeslandCode === bridgeDayCode && item.year === bridgeDayYear;
+        });
+
+        if (!matchingDataset) {
+          if (!isCancelled) {
+            setBridgeDayPublicHolidayDataset(null);
+          }
+          return;
+        }
+
+        const datasetResponse = await fetch(
+          dataUrl(`/data/public-holidays/${matchingDataset.jsonFile}`)
+        );
+
+        if (!datasetResponse.ok) {
+          throw new Error("Bridge day public holiday data could not be loaded");
+        }
+
+        const data = await datasetResponse.json();
+
+        if (!isCancelled) {
+          setBridgeDayPublicHolidayDataset(data);
+        }
+      } catch {
+        if (!isCancelled) {
+          setBridgeDayPublicHolidayDataset(null);
+        }
+      } finally {
+        if (!isCancelled) {
+          setBridgeDayLoading(false);
+        }
+      }
+    }
+
+    loadBridgeDayPublicHolidays();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [bridgeDayCode, bridgeDayYear]);
 
   const travelCheckYear = travelStartDate
     ? Number(travelStartDate.slice(0, 4))
@@ -1796,10 +1864,47 @@ export default function App() {
             <p className="eyebrow">Brückentage</p>
             <h2>Mehr freie Zeit mit wenig Urlaub</h2>
           </div>
-          <span className="small-pill">{selectedYear}</span>
         </div>
 
-        {bridgeDaySuggestions.length > 0 ? (
+        <p className="section-copy">
+          Wähle Bundesland und Jahr, um passende Brückentage unabhängig vom Kalender zu prüfen.
+        </p>
+
+        <div className="bridge-day-controls">
+          <label>
+            <span>Bundesland</span>
+            <select
+              value={bridgeDayCode}
+              onChange={(event) => setBridgeDayCode(event.target.value)}
+            >
+              {travelCheckStates.map((item) => (
+                <option key={item.code} value={item.code}>
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label>
+            <span>Jahr</span>
+            <select
+              value={bridgeDayYear}
+              onChange={(event) => setBridgeDayYear(Number(event.target.value))}
+            >
+              {availablePublicHolidayYears.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
+
+        {bridgeDayLoading && (
+          <p className="travel-check-message">Brückentage werden geladen …</p>
+        )}
+
+        {!bridgeDayLoading && bridgeDaySuggestions.length > 0 ? (
           <>
             <div className="bridge-day-list">
               {bridgeDaySuggestions.map((item) => (
@@ -1827,7 +1932,7 @@ export default function App() {
           </>
         ) : (
           <p className="bridge-day-empty">
-            Für {selectedYear} wurden keine passenden Brückentage mit wenigen
+            Für {bridgeDayYear} wurden keine passenden Brückentage mit wenigen
             Urlaubstagen gefunden.
           </p>
         )}
