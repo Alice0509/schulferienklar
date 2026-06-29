@@ -555,6 +555,15 @@ function stateHubTemplate({ holidayIndex, slug, name, englishName, code }) {
           mit Ferienzeiträumen, Feiertagen und direktem Kalenderzugang.
         </p>
 
+        <h2>Schulferien ${escapeHtml(name)} nach Jahr</h2>
+        <p>
+          Wähle ein Jahr, um die Schulferien ${escapeHtml(name)} ${years[0]} bis ${years[years.length - 1]} einzeln zu prüfen.
+          Besonders gesucht sind Jahresübersichten wie Ferien ${escapeHtml(name)} ${years[1]}, Schulferien ${escapeHtml(name)} ${years[1]} und Kalender ${escapeHtml(name)} ${years[1]}.
+        </p>
+        <p>
+          Die Jahresseiten zeigen auch wichtige Ferienzeiten wie Sommerferien ${escapeHtml(name)}, Osterferien, Pfingstferien, Herbstferien und Weihnachtsferien, soweit sie für das jeweilige Jahr verfügbar sind.
+        </p>
+
         <ul class="holiday-summary-list">
 ${yearSummaryCards}
         </ul>
