@@ -450,7 +450,7 @@ select:focus {
   }
 
   .state-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .holiday-item {
@@ -3355,6 +3355,23 @@ button.current-year-link {
 
 @media (max-width: 760px) {
   .bridge-day-controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+.travel-check-section .section-copy {
+  max-width: 900px;
+}
+
+@media (min-width: 900px) {
+  .travel-check-section .travel-check-form {
+    grid-template-columns: minmax(220px, 1.1fr) minmax(180px, 1fr) minmax(180px, 1fr);
+    align-items: end;
+  }
+}
+
+@media (max-width: 899px) {
+  .travel-check-section .travel-check-form {
     grid-template-columns: 1fr;
   }
 }
