@@ -656,6 +656,17 @@ function yearHubTemplate({ holidayIndex, year }) {
           Detailseiten für Kalender, Feiertage und freie Zeiten.
         </p>
 
+        <h2>Schulferien ${year} nach Bundesland</h2>
+        <p>
+          Diese Übersicht hilft dir, die Ferien ${year} in Deutschland nach Bundesland zu vergleichen.
+          Besonders häufig gesucht werden Jahreskalender wie Ferien Bayern ${year}, Schulferien Hamburg ${year}
+          oder Ferien Sachsen-Anhalt ${year}.
+        </p>
+        <p>
+          Über die Detailseiten findest du Kalender ${year} mit Schulferien, gesetzlichen Feiertagen,
+          Brückentagen und wichtigen Ferienzeiten wie Sommerferien, Osterferien, Herbstferien und Weihnachtsferien.
+        </p>
+
         <h2>Übersicht der Bundesländer ${year}</h2>
         <p>
           Die folgenden Übersichten zeigen, wie viele Ferienzeiträume je
