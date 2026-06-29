@@ -78,6 +78,34 @@ function getEventsForStateAndYear({ holidayIndex, code, year }) {
     .sort((a, b) => a.startDate.localeCompare(b.startDate));
 }
 
+function stateYearQueryIntroHtml(name, year, events) {
+  const hasSummerHoliday = events.some((event) => {
+    const label = String(event.name?.de || event.name || event.type || "").toLowerCase();
+    const type = String(event.type || "").toLowerCase();
+
+    return label.includes("sommerferien") || type.includes("summer");
+  });
+
+  return `
+        <h2>Ferien ${escapeHtml(name)} ${year} im Überblick</h2>
+        <p>
+          Hier findest du die Schulferien ${escapeHtml(name)} ${year} mit allen wichtigen Ferienterminen.
+          Der Kalender hilft dir, Ferien ${escapeHtml(name)} ${year}, gesetzliche Feiertage und mögliche Brückentage schneller zu prüfen.
+        </p>
+        <p>
+          Die Übersicht eignet sich für Familien, Schüler:innen, Reiseplanung und alle, die freie Tage im Jahr ${year} besser vergleichen möchten.
+        </p>
+        ${
+          hasSummerHoliday
+            ? `<h2>Sommerferien ${escapeHtml(name)} ${year}</h2>
+        <p>
+          Die Sommerferien ${escapeHtml(name)} ${year} gehören zu den wichtigsten Ferienzeiträumen für Urlaub, Betreuung und Reiseplanung.
+          Auf dieser Seite siehst du die offiziellen Daten im Kalender und kannst angrenzende Feiertage oder freie Zeiträume leichter einordnen.
+        </p>`
+            : ""
+        }`;
+}
+
 function holidaySummaryHtml(events, name, year) {
   if (events.length === 0) {
     return `<p>Für ${escapeHtml(name)} ${year} sind in Schulferienklar aktuell keine Ferien-Einträge verfügbar.</p>`;
@@ -418,6 +446,8 @@ function pageTemplate({ slug, name, englishName, code, year, events }) {
           Schulferienklar zeigt Schulferien, gesetzliche Feiertage und freie Zeiten
           für ${name} übersichtlich im Kalender.
         </p>
+
+${stateYearQueryIntroHtml(name, year, events)}
 
         <h2>Ferienübersicht ${name} ${year}</h2>
         ${holidaySummaryHtml(events, name, year)}
