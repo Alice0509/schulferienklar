@@ -3326,3 +3326,35 @@ button.current-year-link {
   color: #1f6f64;
   font-weight: 900;
 }
+
+.bridge-day-controls {
+  display: grid;
+  grid-template-columns: 1fr minmax(120px, 180px);
+  gap: 14px;
+  margin: 14px 0 18px;
+}
+
+.bridge-day-controls label {
+  display: grid;
+  gap: 8px;
+  color: rgba(23, 32, 51, 0.74);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.bridge-day-controls select {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid rgba(23, 32, 51, 0.14);
+  border-radius: 16px;
+  padding: 12px 14px;
+  font: inherit;
+  color: #172033;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 760px) {
+  .bridge-day-controls {
+    grid-template-columns: 1fr;
+  }
+}
