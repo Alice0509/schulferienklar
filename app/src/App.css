@@ -3437,3 +3437,16 @@ button.current-year-link {
     line-height: 24px;
   }
 }
+
+.date-input-hint {
+  margin-top: -2px;
+  color: rgba(23, 32, 51, 0.52);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+@media (min-width: 761px) {
+  .date-input-hint {
+    display: none;
+  }
+}

@@ -1783,6 +1783,7 @@ export default function App() {
               value={travelStartDate}
               onChange={(event) => setTravelStartDate(event.target.value)}
             />
+            <small className="date-input-hint">Datum antippen und auswählen</small>
           </label>
 
           <label>
@@ -1792,6 +1793,7 @@ export default function App() {
               value={travelEndDate}
               onChange={(event) => setTravelEndDate(event.target.value)}
             />
+            <small className="date-input-hint">Datum antippen und auswählen</small>
           </label>
         </div>
 
