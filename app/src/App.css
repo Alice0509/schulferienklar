@@ -3383,3 +3383,57 @@ button.current-year-link {
     align-items: end;
   }
 }
+
+.travel-check-form {
+  min-width: 0;
+}
+
+.travel-check-form label {
+  min-width: 0;
+}
+
+.travel-check-form input,
+.travel-check-form select {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.travel-check-form input[type="date"] {
+  min-height: 54px;
+  color: #172033;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.travel-check-form input[type="date"]::-webkit-date-and-time-value {
+  color: #172033;
+  text-align: left;
+}
+
+.travel-check-form input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 1;
+}
+
+@media (max-width: 760px) {
+  .travel-check-form {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .travel-check-form input,
+  .travel-check-form select {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .travel-check-form input[type="date"] {
+    min-height: 58px;
+    font-size: 1rem;
+  }
+
+  .travel-check-form input[type="date"]::-webkit-date-and-time-value {
+    min-height: 24px;
+    line-height: 24px;
+  }
+}
