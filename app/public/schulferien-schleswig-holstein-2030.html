@@ -165,6 +165,79 @@
         font-weight: 900;
       }
 
+      .quick-summary {
+        display: grid;
+        gap: 16px;
+        margin: 22px 0 26px;
+        padding: 18px;
+        border: 1px solid rgba(31, 111, 100, 0.16);
+        border-radius: 24px;
+        background: rgba(31, 111, 100, 0.06);
+      }
+
+      .quick-summary-label {
+        margin: 0 0 4px;
+        color: #1f6f64;
+        font-size: 0.78rem;
+        font-weight: 950;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .quick-summary h2 {
+        margin: 0;
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+      }
+
+      .quick-summary ul {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .quick-summary li {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: baseline;
+        padding: 10px 0;
+        border-top: 1px solid rgba(31, 111, 100, 0.12);
+      }
+
+      .quick-summary li:first-child {
+        border-top: 0;
+      }
+
+      .quick-summary li span {
+        color: rgba(23, 32, 51, 0.72);
+        font-weight: 800;
+      }
+
+      .quick-summary li strong {
+        color: #172033;
+        font-weight: 950;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 640px) {
+        .quick-summary {
+          margin: 18px 0 22px;
+          padding: 16px;
+          border-radius: 22px;
+        }
+
+        .quick-summary li {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+
+        .quick-summary li strong {
+          white-space: normal;
+        }
+      }
+
       .holiday-summary-list {
         display: grid;
         gap: 10px;
@@ -236,6 +309,27 @@
           Schulferienklar zeigt Schulferien, gesetzliche Feiertage und freie Zeiten
           für Schleswig-Holstein übersichtlich im Kalender.
         </p>
+
+        <div class="quick-summary" aria-label="Kurzübersicht Schulferien Schleswig-Holstein 2030">
+          <div>
+            <p class="quick-summary-label">Kurzübersicht</p>
+            <h2>Wichtige Ferien Schleswig-Holstein 2030</h2>
+          </div>
+          <ul>
+          <li>
+            <span>Weihnachtsferien</span>
+            <strong>21.12.2029 – 08.01.2030</strong>
+          </li>
+          <li>
+            <span>Frühjahr/Ostern</span>
+            <strong>08.04.2030 – 20.04.2030</strong>
+          </li>
+          <li>
+            <span>Himmelfahrt</span>
+            <strong>31.05.2030 – 31.05.2030</strong>
+          </li>
+          </ul>
+        </div>
 
 
         <h2>Ferien Schleswig-Holstein 2030 im Überblick</h2>
