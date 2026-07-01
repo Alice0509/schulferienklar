@@ -101,6 +101,10 @@ function stateYearQuickSummaryHtml(events, name, year) {
           <ul>
 ${items}
           </ul>
+          <p class="quick-summary-note">
+            Im Kalender kannst du Ferien, Feiertage und freie Zeiten für ${escapeHtml(name)} ${year} genauer prüfen.
+            <a href="/?state=${events[0]?.bundeslandCode || ""}&year=${year}">Kalender ${escapeHtml(name)} ${year} öffnen</a>
+          </p>
         </div>
 `;
 }
@@ -646,6 +650,20 @@ function pageTemplate({ slug, name, englishName, code, year, events }) {
         color: #172033;
         font-weight: 950;
         white-space: nowrap;
+      }
+
+      .quick-summary-note {
+        margin: 4px 0 0;
+        padding-top: 14px;
+        border-top: 1px solid rgba(31, 111, 100, 0.12);
+        color: rgba(23, 32, 51, 0.68);
+        font-size: 0.95rem;
+        font-weight: 750;
+      }
+
+      .quick-summary-note a {
+        color: #1f6f64;
+        font-weight: 950;
       }
 
       @media (max-width: 640px) {
