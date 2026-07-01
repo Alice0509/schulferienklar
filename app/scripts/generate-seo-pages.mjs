@@ -131,6 +131,56 @@ ${items}
 
 function sharedSeoStyles() {
   return `    <style>
+      .seo-top-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        max-width: 920px;
+        margin: 0 auto 16px;
+        padding: 0 2px;
+        color: rgba(23, 32, 51, 0.7);
+        font-size: 0.95rem;
+        font-weight: 800;
+      }
+
+      .seo-brand {
+        color: #1f6f64;
+        font-weight: 950;
+        text-decoration: none;
+      }
+
+      .seo-top-links {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .seo-top-links a {
+        color: #1f6f64;
+        text-decoration: none;
+      }
+
+      .seo-top-links a:hover,
+      .seo-brand:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 640px) {
+        .seo-top-nav {
+          display: grid;
+          gap: 6px;
+          margin-bottom: 12px;
+        }
+
+        .seo-top-links {
+          justify-content: start;
+          font-size: 0.9rem;
+        }
+      }
+
       body {
         margin: 0;
         font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -297,6 +347,19 @@ function dataTrustNoteHtml() {
 }
 
 
+function seoTopNavHtml({ appHref = "/" } = {}) {
+  return `      <nav class="seo-top-nav" aria-label="Schulferienklar Navigation">
+        <a class="seo-brand" href="/">Schulferienklar</a>
+        <div class="seo-top-links">
+          <a href="/">Startseite</a>
+          <span>·</span>
+          <a href="${appHref}">Kalender öffnen</a>
+        </div>
+      </nav>
+
+`;
+}
+
 function pageTemplate({ slug, name, englishName, code, year, events }) {
   const title = `Schulferien ${name} ${year} – Schulferienklar`;
   const description = `Schulferien ${name} ${year}: Ferien, Feiertage und freie Zeiten im Kalender sehen. School holidays ${englishName} ${year}.`;
@@ -438,7 +501,7 @@ function pageTemplate({ slug, name, englishName, code, year, events }) {
   </head>
   <body>
     <main>
-      <section class="card">
+${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section class="card">
         <p class="eyebrow">Schulferien ${year}</p>
         <h1>Schulferien ${name} ${year}</h1>
 
@@ -540,7 +603,7 @@ function stateHubTemplate({ holidayIndex, slug, name, englishName, code }) {
   </head>
   <body>
     <main>
-      <section class="card">
+${seoTopNavHtml({ appHref: `/?state=${code}` })}      <section class="card">
         <p class="eyebrow">Bundesland</p>
         <h1>Schulferien ${escapeHtml(name)}</h1>
 
@@ -647,7 +710,7 @@ function yearHubTemplate({ holidayIndex, year }) {
   </head>
   <body>
     <main>
-      <section class="card">
+${seoTopNavHtml({ appHref: `/?year=${year}` })}      <section class="card">
         <p class="eyebrow">Deutschland</p>
         <h1>Schulferien ${year} in Deutschland</h1>
 
