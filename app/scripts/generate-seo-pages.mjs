@@ -425,6 +425,29 @@ function seoTopNavHtml({ appHref = "/" } = {}) {
 `;
 }
 
+function schulferienklarIntroCardHtml({ code, name, year }) {
+  return `        <section class="intro-card" aria-label="Schulferienklar kurz erklärt">
+          <div>
+            <p class="intro-card-label">Schulferienklar kurz erklärt</p>
+            <h2>Ferien und Feiertage schneller planen</h2>
+            <p>
+              Schulferienklar bündelt Schulferien, gesetzliche Feiertage und freie Zeiten
+              für alle 16 Bundesländer in einer klaren Kalenderansicht.
+            </p>
+          </div>
+          <ul>
+            <li>Schulferien für alle Bundesländer</li>
+            <li>Feiertage und freie Zeiten im Kalender</li>
+            <li>Brückentage und Reisezeiten schneller prüfen</li>
+          </ul>
+          <a class="intro-card-link" href="/?state=${code}&year=${year}">
+            Kalender ${escapeHtml(name)} ${year} öffnen
+          </a>
+        </section>
+
+`;
+}
+
 function pageTemplate({ slug, name, englishName, code, year, events }) {
   const title = `Schulferien ${name} ${year} – Schulferienklar`;
   const description = `Schulferien ${name} ${year}: Ferien, Feiertage und freie Zeiten im Kalender sehen. School holidays ${englishName} ${year}.`;
@@ -716,6 +739,74 @@ function pageTemplate({ slug, name, englishName, code, year, events }) {
         font-weight: 800;
       }
 
+      .intro-card {
+        display: grid;
+        gap: 16px;
+        margin: 26px 0;
+        padding: 20px;
+        border: 1px solid rgba(31, 111, 100, 0.16);
+        border-radius: 24px;
+        background:
+          linear-gradient(135deg, rgba(31, 111, 100, 0.08), rgba(255, 255, 255, 0.88));
+      }
+
+      .intro-card-label {
+        margin: 0 0 6px;
+        color: #1f6f64;
+        font-size: 0.78rem;
+        font-weight: 950;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .intro-card h2 {
+        margin: 0 0 8px;
+      }
+
+      .intro-card p {
+        margin: 0;
+      }
+
+      .intro-card ul {
+        display: grid;
+        gap: 8px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .intro-card li {
+        position: relative;
+        padding-left: 24px;
+        color: rgba(23, 32, 51, 0.76);
+        font-weight: 800;
+      }
+
+      .intro-card li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        color: #1f6f64;
+        font-weight: 950;
+      }
+
+      .intro-card-link {
+        display: inline-flex;
+        width: fit-content;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        padding: 10px 14px;
+        color: #ffffff;
+        background: #1f6f64;
+        font-weight: 950;
+        text-decoration: none;
+      }
+
+      .intro-card-link:hover {
+        text-decoration: underline;
+      }
+
       .note {
         margin-top: 24px;
         border-radius: 18px;
@@ -761,6 +852,7 @@ ${stateYearQueryIntroHtml(name, year, events)}
           Lernzeiten oder freie Tage rund um die Schulferien planen möchten.
         </p>
 
+${schulferienklarIntroCardHtml({ code, name, year })}
 ${stateYearInternalLinksHtml({ slug, name, year })}
 
         <h2>School holidays ${englishName} ${year}</h2>
