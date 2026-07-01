@@ -78,6 +78,33 @@ function getEventsForStateAndYear({ holidayIndex, code, year }) {
     .sort((a, b) => a.startDate.localeCompare(b.startDate));
 }
 
+function stateYearQuickSummaryHtml(events, name, year) {
+  if (events.length === 0) {
+    return "";
+  }
+
+  const items = events
+    .slice(0, 7)
+    .map((event) => {
+      return `          <li>
+            <span>${escapeHtml(getHolidayName(event))}</span>
+            <strong>${formatDate(event.startDate)} – ${formatDate(event.endDate)}</strong>
+          </li>`;
+    })
+    .join("\n");
+
+  return `        <div class="quick-summary" aria-label="Kurzübersicht Schulferien ${escapeHtml(name)} ${year}">
+          <div>
+            <p class="quick-summary-label">Kurzübersicht</p>
+            <h2>Wichtige Ferien ${escapeHtml(name)} ${year}</h2>
+          </div>
+          <ul>
+${items}
+          </ul>
+        </div>
+`;
+}
+
 function stateYearQueryIntroHtml(name, year, events) {
   const hasSummerHoliday = events.some((event) => {
     const label = String(event.name?.de || event.name || event.type || "").toLowerCase();
@@ -565,6 +592,79 @@ function pageTemplate({ slug, name, englishName, code, year, events }) {
         font-weight: 900;
       }
 
+      .quick-summary {
+        display: grid;
+        gap: 16px;
+        margin: 22px 0 26px;
+        padding: 18px;
+        border: 1px solid rgba(31, 111, 100, 0.16);
+        border-radius: 24px;
+        background: rgba(31, 111, 100, 0.06);
+      }
+
+      .quick-summary-label {
+        margin: 0 0 4px;
+        color: #1f6f64;
+        font-size: 0.78rem;
+        font-weight: 950;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .quick-summary h2 {
+        margin: 0;
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+      }
+
+      .quick-summary ul {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .quick-summary li {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: baseline;
+        padding: 10px 0;
+        border-top: 1px solid rgba(31, 111, 100, 0.12);
+      }
+
+      .quick-summary li:first-child {
+        border-top: 0;
+      }
+
+      .quick-summary li span {
+        color: rgba(23, 32, 51, 0.72);
+        font-weight: 800;
+      }
+
+      .quick-summary li strong {
+        color: #172033;
+        font-weight: 950;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 640px) {
+        .quick-summary {
+          margin: 18px 0 22px;
+          padding: 16px;
+          border-radius: 22px;
+        }
+
+        .quick-summary li {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+
+        .quick-summary li strong {
+          white-space: normal;
+        }
+      }
+
       .holiday-summary-list {
         display: grid;
         gap: 10px;
@@ -628,6 +728,7 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
           für ${name} übersichtlich im Kalender.
         </p>
 
+${stateYearQuickSummaryHtml(events, name, year)}
 ${stateYearQueryIntroHtml(name, year, events)}
 
         <h2>Ferienübersicht ${name} ${year}</h2>

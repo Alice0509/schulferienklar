@@ -165,6 +165,79 @@
         font-weight: 900;
       }
 
+      .quick-summary {
+        display: grid;
+        gap: 16px;
+        margin: 22px 0 26px;
+        padding: 18px;
+        border: 1px solid rgba(31, 111, 100, 0.16);
+        border-radius: 24px;
+        background: rgba(31, 111, 100, 0.06);
+      }
+
+      .quick-summary-label {
+        margin: 0 0 4px;
+        color: #1f6f64;
+        font-size: 0.78rem;
+        font-weight: 950;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .quick-summary h2 {
+        margin: 0;
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+      }
+
+      .quick-summary ul {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .quick-summary li {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 12px;
+        align-items: baseline;
+        padding: 10px 0;
+        border-top: 1px solid rgba(31, 111, 100, 0.12);
+      }
+
+      .quick-summary li:first-child {
+        border-top: 0;
+      }
+
+      .quick-summary li span {
+        color: rgba(23, 32, 51, 0.72);
+        font-weight: 800;
+      }
+
+      .quick-summary li strong {
+        color: #172033;
+        font-weight: 950;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 640px) {
+        .quick-summary {
+          margin: 18px 0 22px;
+          padding: 16px;
+          border-radius: 22px;
+        }
+
+        .quick-summary li {
+          grid-template-columns: 1fr;
+          gap: 4px;
+        }
+
+        .quick-summary li strong {
+          white-space: normal;
+        }
+      }
+
       .holiday-summary-list {
         display: grid;
         gap: 10px;
@@ -236,6 +309,43 @@
           Schulferienklar zeigt Schulferien, gesetzliche Feiertage und freie Zeiten
           für Baden-Württemberg übersichtlich im Kalender.
         </p>
+
+        <div class="quick-summary" aria-label="Kurzübersicht Schulferien Baden-Württemberg 2026">
+          <div>
+            <p class="quick-summary-label">Kurzübersicht</p>
+            <h2>Wichtige Ferien Baden-Württemberg 2026</h2>
+          </div>
+          <ul>
+          <li>
+            <span>Weihnachtsferien</span>
+            <strong>22.12.2025 – 05.01.2026</strong>
+          </li>
+          <li>
+            <span>Osterferien</span>
+            <strong>30.03.2026 – 11.04.2026</strong>
+          </li>
+          <li>
+            <span>Pfingstferien</span>
+            <strong>26.05.2026 – 05.06.2026</strong>
+          </li>
+          <li>
+            <span>Sommerferien</span>
+            <strong>30.07.2026 – 12.09.2026</strong>
+          </li>
+          <li>
+            <span>Herbstferien</span>
+            <strong>26.10.2026 – 30.10.2026</strong>
+          </li>
+          <li>
+            <span>Schulfrei am Reformationsfest</span>
+            <strong>31.10.2026 – 31.10.2026</strong>
+          </li>
+          <li>
+            <span>Weihnachtsferien</span>
+            <strong>23.12.2026 – 09.01.2027</strong>
+          </li>
+          </ul>
+        </div>
 
 
         <h2>Ferien Baden-Württemberg 2026 im Überblick</h2>
