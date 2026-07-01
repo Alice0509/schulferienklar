@@ -3450,3 +3450,12 @@ button.current-year-link {
     display: none;
   }
 }
+
+.brand {
+  color: inherit;
+  text-decoration: none;
+}
+
+.brand:hover {
+  text-decoration: none;
+}

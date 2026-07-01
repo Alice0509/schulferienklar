@@ -1417,10 +1417,10 @@ export default function App() {
 
       <section className={`hero hero-${pattern}`}>
         <nav className="topbar">
-          <div className="brand">
+          <a className="brand" href="/" aria-label="Schulferienklar Startseite">
             <span className="brand-mark">S</span>
             <span>Schulferienklar</span>
-          </div>
+          </a>
 
           <div className="topbar-actions">
             <span className="badge">Offizielle Bundesland-Daten</span>
