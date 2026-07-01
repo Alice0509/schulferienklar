@@ -749,9 +749,6 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
 ${stateYearQuickSummaryHtml(events, name, year)}
 ${stateYearQueryIntroHtml(name, year, events)}
 
-        <h2>Ferienübersicht ${name} ${year}</h2>
-        ${holidaySummaryHtml(events, name, year)}
-
         <h2>Kalender ${name} ${year}</h2>
         <p>
           Der kostenlose Kalender zeigt Schulferien, Feiertage und freie Zeiten
