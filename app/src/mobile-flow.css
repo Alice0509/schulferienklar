@@ -1,0 +1,287 @@
+/*
+ * Mobile home flow
+ * Keep every tool available while reducing the default vertical length.
+ */
+
+.mobile-disclosure-toggle,
+.bridge-mobile-summary {
+  display: none;
+}
+
+@media (min-width: 761px) {
+  .mobile-disclosure-body,
+  .bridge-controls-mobile {
+    display: block !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .side-panel {
+    display: none;
+  }
+
+  .content-grid {
+    display: block;
+  }
+
+  .mobile-disclosure {
+    scroll-margin-top: 12px;
+  }
+
+  .mobile-disclosure-heading {
+    display: grid;
+    gap: 14px;
+    margin-bottom: 0;
+  }
+
+  .mobile-disclosure-heading > div {
+    min-width: 0;
+  }
+
+  .mobile-disclosure-heading h2 {
+    margin-bottom: 0;
+  }
+
+  .mobile-disclosure-heading p:last-child {
+    margin-bottom: 0;
+  }
+
+  .mobile-disclosure-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    min-height: 46px;
+    border: 1px solid #aacbc5;
+    border-radius: 8px;
+    padding: 10px 13px;
+    color: #17675d;
+    background: #f1f8f6;
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 850;
+    text-align: left;
+  }
+
+  .mobile-disclosure-toggle::after {
+    content: "+";
+    margin-left: 14px;
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .mobile-disclosure.is-mobile-open .mobile-disclosure-toggle::after {
+    content: "−";
+  }
+
+  .mobile-disclosure-body {
+    display: none;
+    margin-top: 18px;
+  }
+
+  .mobile-disclosure.is-mobile-open .mobile-disclosure-body {
+    display: block;
+  }
+
+  .travel-check-section,
+  .bridge-days-section,
+  .states-section {
+    border-radius: 14px;
+    padding: 18px;
+    background: #ffffff;
+    box-shadow: none;
+  }
+
+  .travel-check-section .section-copy {
+    margin: 12px 0 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .travel-check-form {
+    gap: 14px;
+  }
+
+  .bridge-days-section .section-copy {
+    margin-bottom: 14px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .bridge-mobile-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0 0 16px;
+    border-top: 1px solid #dfe5e8;
+    padding-top: 13px;
+  }
+
+  .bridge-mobile-summary span {
+    color: #536171;
+    font-size: 0.88rem;
+    font-weight: 800;
+  }
+
+  .bridge-mobile-summary button {
+    border: 0;
+    padding: 5px 0;
+    color: #176f64;
+    background: transparent;
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 850;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .bridge-controls-mobile {
+    display: none;
+  }
+
+  .bridge-controls-mobile.is-mobile-open {
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  .bridge-day-controls {
+    gap: 12px;
+  }
+
+  .bridge-day-card {
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
+  .comparison-section {
+    width: min(100% - 28px, 1180px);
+    margin-top: 22px;
+    border: 1px solid #dfe5e8;
+    border-radius: 14px;
+    padding: 18px;
+    background: #ffffff;
+  }
+
+  .comparison-section .section-heading {
+    margin-bottom: 0;
+  }
+
+  .comparison-section .section-heading > div > p:last-child {
+    margin: 10px 0 0;
+    color: #536171;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .comparison-toolbar,
+  .overlap-panel {
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
+  .comparison-toolbar {
+    margin-top: 0;
+  }
+
+  .states-section {
+    margin-top: 22px;
+  }
+
+  .states-section .section-header {
+    margin-bottom: 14px;
+  }
+
+  .states-section .small-pill {
+    display: none;
+  }
+
+  .state-card {
+    min-height: 96px;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
+  .state-toggle-button {
+    min-height: 44px;
+    border-radius: 8px;
+    padding: 10px 14px;
+    box-shadow: none;
+  }
+
+  .install-guide {
+    display: grid;
+    gap: 4px;
+    margin-top: 18px;
+    border: 1px solid #dfe5e8;
+    border-left: 4px solid #176f64;
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: #ffffff;
+    text-align: left;
+    box-shadow: none;
+  }
+
+  .install-guide .eyebrow {
+    display: none;
+  }
+
+  .install-guide h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    letter-spacing: -0.025em;
+  }
+
+  .install-guide p {
+    margin: 2px 0 0;
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .site-menu {
+    left: 14px;
+    right: 14px;
+    top: 14px;
+    gap: 0;
+    max-height: calc(100vh - 28px);
+    overflow-y: auto;
+    border: 1px solid #d8e0e3;
+    border-radius: 14px;
+    padding: 10px 14px;
+    background: #ffffff;
+    box-shadow: 0 18px 48px rgba(23, 32, 51, 0.2);
+  }
+
+  .site-menu button {
+    min-height: 48px;
+    border: 0;
+    border-bottom: 1px solid #e4e8ea;
+    border-radius: 0;
+    padding: 12px 4px;
+    color: #172033;
+    background: #ffffff;
+    text-align: left;
+  }
+
+  .site-menu button:hover,
+  .site-menu button:focus-visible {
+    color: #176f64;
+    background: #f7faf9;
+  }
+
+  .site-menu .site-menu-external-link {
+    min-height: 48px;
+    margin-top: 10px;
+    border-radius: 8px;
+    padding: 12px 14px;
+    background: #172033;
+  }
+
+  .floating-site-menu-button {
+    bottom: 14px;
+  }
+
+  .site-footer {
+    padding-bottom: 78px;
+  }
+}

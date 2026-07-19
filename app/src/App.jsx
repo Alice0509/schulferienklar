@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import "./home-refresh.css";
+import "./mobile-flow.css";
 import { downloadIcsFile, generateIcsCalendar } from "./utils/ics";
 
 const DATA_BASE_URL = import.meta.env.BASE_URL;
@@ -846,6 +847,9 @@ export default function App() {
   const [showAllStates, setShowAllStates] = useState(false);
   const [isStateMenuOpen, setIsStateMenuOpen] = useState(false);
   const [isSiteMenuOpen, setIsSiteMenuOpen] = useState(false);
+  const [isTravelSectionOpen, setIsTravelSectionOpen] = useState(false);
+  const [isBridgeControlsOpen, setIsBridgeControlsOpen] = useState(false);
+  const [isComparisonSectionOpen, setIsComparisonSectionOpen] = useState(false);
   const [isComparisonPickerOpen, setIsComparisonPickerOpen] = useState(false);
   const [comparisonCodes, setComparisonCodes] = useState(() => {
     try {
@@ -1369,6 +1373,18 @@ export default function App() {
   const shouldShowCurrentMonthPreview = selectedYear === TODAY.getFullYear();
 
   const scrollToSection = (sectionId) => {
+    if (sectionId === "reisezeit") {
+      setIsTravelSectionOpen(true);
+    }
+
+    if (sectionId === "brueckentage") {
+      setIsBridgeControlsOpen(true);
+    }
+
+    if (sectionId === "vergleich") {
+      setIsComparisonSectionOpen(true);
+    }
+
     const target = document.getElementById(sectionId);
 
     if (!target) {
@@ -1763,12 +1779,26 @@ export default function App() {
         </aside>
       </section>
 
-      <section className="panel travel-check-section" id="reisezeit">
-        <div className="section-heading">
+      <section
+        className={`panel travel-check-section mobile-disclosure ${
+          isTravelSectionOpen ? "is-mobile-open" : ""
+        }`}
+        id="reisezeit"
+      >
+        <div className="section-heading mobile-disclosure-heading">
           <div>
             <p className="eyebrow">Reisezeit prüfen</p>
             <h2>Passt dein Reisezeitraum?</h2>
           </div>
+          <button
+            className="mobile-disclosure-toggle"
+            type="button"
+            aria-expanded={isTravelSectionOpen}
+            aria-controls="reisezeit-inhalt"
+            onClick={() => setIsTravelSectionOpen((isOpen) => !isOpen)}
+          >
+            {isTravelSectionOpen ? "Schließen" : "Reisezeit prüfen"}
+          </button>
         </div>
 
         <p className="section-copy">
@@ -1776,7 +1806,8 @@ export default function App() {
           die passenden Schulferien und Feiertage für das Jahr deines Startdatums.
         </p>
 
-        <div className="travel-check-form">
+        <div className="mobile-disclosure-body" id="reisezeit-inhalt">
+          <div className="travel-check-form">
           <label>
             <span>Bundesland</span>
             <select
@@ -1873,10 +1904,11 @@ export default function App() {
             )}
           </div>
         )}
+        </div>
       </section>
 
       <section className="panel bridge-days-section" id="brueckentage">
-        <div className="section-header">
+        <div className="section-header bridge-days-header">
           <div>
             <p className="eyebrow">Brückentage</p>
             <h2>Mehr freie Zeit mit wenig Urlaub</h2>
@@ -1887,7 +1919,25 @@ export default function App() {
           Wähle Bundesland und Jahr, um passende Brückentage unabhängig vom Kalender zu prüfen.
         </p>
 
-        <div className="bridge-day-controls">
+        <div className="bridge-mobile-summary">
+          <span>
+            {bridgeDayCode} · {bridgeDayYear}
+          </span>
+          <button
+            type="button"
+            aria-expanded={isBridgeControlsOpen}
+            aria-controls="brueckentage-auswahl"
+            onClick={() => setIsBridgeControlsOpen((isOpen) => !isOpen)}
+          >
+            {isBridgeControlsOpen ? "Auswahl schließen" : "Bundesland und Jahr ändern"}
+          </button>
+        </div>
+
+        <div
+          className={`bridge-controls-mobile ${isBridgeControlsOpen ? "is-mobile-open" : ""}`}
+          id="brueckentage-auswahl"
+        >
+          <div className="bridge-day-controls">
           <label>
             <span>Bundesland</span>
             <select
@@ -1915,6 +1965,7 @@ export default function App() {
               ))}
             </select>
           </label>
+          </div>
         </div>
 
         {bridgeDayLoading && (
@@ -1956,16 +2007,33 @@ export default function App() {
         )}
       </section>
 
-      <section className="comparison-section" id="vergleich">
-        <div className="section-heading">
-          <p className="eyebrow">Bundesländer vergleichen</p>
-          <h2>Ferien in mehreren Bundesländern vergleichen</h2>
-          <p>
-            Wähle bis zu vier Bundesländer und sieh sofort, wann sich Ferien überschneiden.
-          </p>
+      <section
+        className={`comparison-section mobile-disclosure ${
+          isComparisonSectionOpen ? "is-mobile-open" : ""
+        }`}
+        id="vergleich"
+      >
+        <div className="section-heading mobile-disclosure-heading">
+          <div>
+            <p className="eyebrow">Bundesländer vergleichen</p>
+            <h2>Ferien in mehreren Bundesländern vergleichen</h2>
+            <p>
+              Wähle bis zu vier Bundesländer und sieh sofort, wann sich Ferien überschneiden.
+            </p>
+          </div>
+          <button
+            className="mobile-disclosure-toggle"
+            type="button"
+            aria-expanded={isComparisonSectionOpen}
+            aria-controls="vergleich-inhalt"
+            onClick={() => setIsComparisonSectionOpen((isOpen) => !isOpen)}
+          >
+            {isComparisonSectionOpen ? "Vergleich schließen" : "Vergleich öffnen"}
+          </button>
         </div>
 
-        <div className="comparison-toolbar">
+        <div className="mobile-disclosure-body" id="vergleich-inhalt">
+          <div className="comparison-toolbar">
           <div className="comparison-selected-list" aria-label="Ausgewählte Bundesländer">
             {comparisonSummaries.map((item, index) => (
               <button
@@ -2179,6 +2247,7 @@ export default function App() {
               gefunden.
             </p>
           )}
+          </div>
         </div>
       </section>
 
