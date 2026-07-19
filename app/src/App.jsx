@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
+import "./home-refresh.css";
 import { downloadIcsFile, generateIcsCalendar } from "./utils/ics";
 
 const DATA_BASE_URL = import.meta.env.BASE_URL;
@@ -1423,7 +1424,9 @@ export default function App() {
           </a>
 
           <div className="topbar-actions">
-            <span className="badge">Offizielle Bundesland-Daten</span>
+            <a className="badge" href="/datenquellen.html">
+              Datenquellen &amp; Prüfung
+            </a>
             <button
               className="site-menu-button"
               type="button"
@@ -1481,11 +1484,10 @@ export default function App() {
         <div className="hero-grid">
           <div className="hero-copy">
             <p className="eyebrow">Schulferien in Deutschland</p>
-            <h1>Schulferien klar sehen. Besser planen.</h1>
+            <h1>Schulferien auf einen Blick.</h1>
             <p className="hero-text">
-              Wähle dein Bundesland und sieh sofort, wann die nächsten
-              Schulferien beginnen, wie lange sie dauern und welche Termine
-              danach kommen.
+              Ferien, Feiertage und zusammenhängende freie Tage für dein
+              Bundesland – übersichtlich und kostenlos im Kalender.
             </p>
 
             <div className="selector-card" id="bundesland-auswahl">
@@ -1522,6 +1524,19 @@ export default function App() {
                   </div>
                 )}
               </div>
+            </div>
+
+            <div className="hero-actions">
+              <button
+                className="hero-primary-action"
+                type="button"
+                onClick={() => scrollToSection("kalender")}
+              >
+                Zum Ferienkalender
+              </button>
+              <a className="hero-source-link" href="/datenquellen.html">
+                Datenquellen ansehen
+              </a>
             </div>
           </div>
 
