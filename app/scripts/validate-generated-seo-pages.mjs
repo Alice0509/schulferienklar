@@ -6,6 +6,7 @@ const sitemapPath = path.join(publicDir, "sitemap.xml");
 
 const requiredFiles = [
   "sitemap.xml",
+  "seo-pages.css",
   "schulferien-2026.html",
   "schulferien-bayern.html",
   "schulferien-bayern-2026.html",
@@ -46,6 +47,7 @@ for (const file of htmlFiles) {
     ["title", /<title>.+<\/title>/s],
     ["meta description", /<meta name="description" content="[^"]+"/],
     ["canonical", /<link rel="canonical" href="https:\/\/www\.schulferienklar\.de\/[^"]+"/],
+    ["shared stylesheet", /<link rel="stylesheet" href="\/seo-pages\.css" \/>/],
     ["h1", /<h1>.+<\/h1>/s],
   ];
 
