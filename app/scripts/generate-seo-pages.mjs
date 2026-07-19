@@ -161,205 +161,7 @@ ${items}
 
 
 function sharedSeoStyles() {
-  return `    <style>
-      .seo-top-nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        max-width: 920px;
-        margin: 0 auto 14px;
-        padding: 10px 14px;
-        border: 1px solid rgba(31, 111, 100, 0.16);
-        border-radius: 999px;
-        color: rgba(23, 32, 51, 0.7);
-        background: rgba(255, 255, 255, 0.78);
-        box-shadow: 0 12px 30px rgba(23, 32, 51, 0.06);
-        font-size: 0.9rem;
-        font-weight: 800;
-      }
-
-      .seo-brand {
-        color: #172033;
-        font-weight: 950;
-        text-decoration: none;
-      }
-
-      .seo-brand::before {
-        content: "S";
-        display: inline-grid;
-        place-items: center;
-        width: 24px;
-        height: 24px;
-        margin-right: 8px;
-        border-radius: 8px;
-        color: #ffffff;
-        background: #1f6f64;
-        font-size: 0.78rem;
-        font-weight: 950;
-      }
-
-      .seo-top-links {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-      }
-
-      .seo-top-links a {
-        color: #1f6f64;
-        text-decoration: none;
-      }
-
-      .seo-top-links a:last-child {
-        padding: 6px 10px;
-        border-radius: 999px;
-        background: rgba(31, 111, 100, 0.1);
-      }
-
-      .seo-top-links a:hover,
-      .seo-brand:hover {
-        text-decoration: underline;
-      }
-
-      @media (max-width: 640px) {
-        .seo-top-nav {
-          align-items: flex-start;
-          border-radius: 22px;
-          padding: 12px 14px;
-          margin-bottom: 12px;
-          font-size: 0.84rem;
-        }
-
-        .seo-brand {
-          white-space: nowrap;
-        }
-
-        .seo-top-links {
-          gap: 6px;
-          justify-content: flex-end;
-        }
-
-        .seo-top-links a:last-child {
-          padding: 5px 9px;
-        }
-      }
-
-      body {
-        margin: 0;
-        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        color: #172033;
-        background: #f6f3ec;
-        line-height: 1.6;
-      }
-
-      main {
-        width: min(860px, calc(100% - 32px));
-        margin: 0 auto;
-        padding: 48px 0;
-      }
-
-      .card {
-        border-radius: 28px;
-        padding: 32px;
-        background: rgba(255, 255, 255, 0.86);
-        border: 1px solid rgba(23, 32, 51, 0.08);
-        box-shadow: 0 20px 60px rgba(40, 55, 85, 0.1);
-      }
-
-      .eyebrow {
-        margin: 0 0 12px;
-        color: #1f6f64;
-        font-size: 0.82rem;
-        font-weight: 900;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: clamp(2.5rem, 8vw, 5rem);
-        line-height: 0.95;
-        letter-spacing: -0.065em;
-      }
-
-      h2 {
-        margin-top: 2rem;
-      }
-
-      p {
-        color: #56616f;
-        font-size: 1.08rem;
-      }
-
-      a {
-        color: #1f6f64;
-        font-weight: 800;
-      }
-
-      .button {
-        display: inline-flex;
-        margin-top: 18px;
-        border-radius: 999px;
-        padding: 14px 20px;
-        background: #1f6f64;
-        color: white;
-        text-decoration: none;
-        font-weight: 900;
-      }
-
-      .holiday-summary-list {
-        display: grid;
-        gap: 10px;
-        padding: 0;
-        margin: 18px 0 0;
-        list-style: none;
-      }
-
-      .holiday-summary-list li {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 4px 16px;
-        padding: 14px 16px;
-        border-radius: 18px;
-        background: rgba(232, 247, 240, 0.62);
-        border: 1px solid rgba(31, 111, 100, 0.14);
-      }
-
-      .holiday-summary-list strong {
-        color: #172033;
-      }
-
-      .holiday-summary-list span {
-        color: #1f6f64;
-        font-weight: 900;
-      }
-
-      .holiday-summary-list small {
-        grid-column: 1 / -1;
-        color: #66717f;
-        font-weight: 800;
-      }
-
-      .note {
-        margin-top: 24px;
-        border-radius: 18px;
-        padding: 16px 18px;
-        background: rgba(232, 247, 240, 0.78);
-        border: 1px solid rgba(31, 111, 100, 0.18);
-      }
-
-      @media (max-width: 640px) {
-        .card {
-          padding: 24px;
-        }
-
-        .holiday-summary-list li {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>`;
+  return `    <link rel="stylesheet" href="/seo-pages.css" />`;
 }
 
 
@@ -379,17 +181,17 @@ function stateYearInternalLinksHtml({ slug, name, year }) {
   return `        <h2>Weitere Ferienseiten</h2>
 
         <h3>Weitere Jahre für ${escapeHtml(name)}</h3>
-        <ul class="holiday-summary-list">
+        <ul class="holiday-summary-list seo-link-list">
 ${yearLinks}
         </ul>
 
         <h3>Andere Bundesländer ${year}</h3>
-        <ul class="holiday-summary-list">
+        <ul class="holiday-summary-list seo-link-list">
 ${stateLinks}
         </ul>
 
         <h3>Übersichten</h3>
-        <ul class="holiday-summary-list">
+        <ul class="holiday-summary-list seo-link-list">
           <li><a href="/schulferien-${slug}.html">Übersicht Schulferien ${escapeHtml(name)}</a></li>
           <li><a href="/schulferien-${year}.html">Übersicht Schulferien ${year} in Deutschland</a></li>
         </ul>`;
@@ -424,6 +226,19 @@ function seoTopNavHtml({ appHref = "/" } = {}) {
 
 `;
 }
+
+function seoFooterHtml() {
+  return `      <footer class="seo-footer" aria-label="Weitere Informationen">
+        <a href="/datenquellen.html">Datenquellen</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="/impressum.html">Impressum</a>
+        <a href="/support.html">Support</a>
+        <a href="/ueber-uns.html">Über uns</a>
+      </footer>
+
+`;
+}
+
 
 function schulferienklarIntroCardHtml({ code, name, year }) {
   return `        <section class="intro-card intro-card-visual" aria-label="Schulferienklar kurz erklärt">
@@ -477,372 +292,9 @@ function pageTemplate({ slug, name, englishName, code, year, events }) {
     <meta property="og:description" content="${description}" />
     <meta property="og:url" content="https://www.schulferienklar.de/schulferien-${slug}-${year}.html" />
     <meta property="og:image" content="https://www.schulferienklar.de/og-image.png" />
-    <style>
-      .seo-top-nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        max-width: 920px;
-        margin: 0 auto 14px;
-        padding: 10px 14px;
-        border: 1px solid rgba(31, 111, 100, 0.16);
-        border-radius: 999px;
-        color: rgba(23, 32, 51, 0.7);
-        background: rgba(255, 255, 255, 0.78);
-        box-shadow: 0 12px 30px rgba(23, 32, 51, 0.06);
-        font-size: 0.9rem;
-        font-weight: 800;
-      }
-
-      .seo-brand {
-        color: #172033;
-        font-weight: 950;
-        text-decoration: none;
-      }
-
-      .seo-brand::before {
-        content: "S";
-        display: inline-grid;
-        place-items: center;
-        width: 24px;
-        height: 24px;
-        margin-right: 8px;
-        border-radius: 8px;
-        color: #ffffff;
-        background: #1f6f64;
-        font-size: 0.78rem;
-        font-weight: 950;
-      }
-
-      .seo-top-links {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-      }
-
-      .seo-top-links a {
-        color: #1f6f64;
-        text-decoration: none;
-      }
-
-      .seo-top-links a:last-child {
-        padding: 6px 10px;
-        border-radius: 999px;
-        background: rgba(31, 111, 100, 0.1);
-      }
-
-      .seo-top-links a:hover,
-      .seo-brand:hover {
-        text-decoration: underline;
-      }
-
-      @media (max-width: 640px) {
-        .seo-top-nav {
-          align-items: flex-start;
-          border-radius: 22px;
-          padding: 12px 14px;
-          margin-bottom: 12px;
-          font-size: 0.84rem;
-        }
-
-        .seo-brand {
-          white-space: nowrap;
-        }
-
-        .seo-top-links {
-          gap: 6px;
-          justify-content: flex-end;
-        }
-
-        .seo-top-links a:last-child {
-          padding: 5px 9px;
-        }
-      }
-
-      body {
-        margin: 0;
-        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        color: #172033;
-        background: #f6f3ec;
-        line-height: 1.6;
-      }
-
-      main {
-        width: min(860px, calc(100% - 32px));
-        margin: 0 auto;
-        padding: 48px 0;
-      }
-
-      .card {
-        border-radius: 28px;
-        padding: 32px;
-        background: rgba(255, 255, 255, 0.86);
-        border: 1px solid rgba(23, 32, 51, 0.08);
-        box-shadow: 0 20px 60px rgba(40, 55, 85, 0.1);
-      }
-
-      .eyebrow {
-        margin: 0 0 12px;
-        color: #1f6f64;
-        font-size: 0.82rem;
-        font-weight: 900;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: clamp(2.5rem, 8vw, 5rem);
-        line-height: 0.95;
-        letter-spacing: -0.065em;
-      }
-
-      h2 {
-        margin-top: 2rem;
-      }
-
-      p {
-        color: #56616f;
-        font-size: 1.08rem;
-      }
-
-      a {
-        color: #1f6f64;
-        font-weight: 800;
-      }
-
-      .button {
-        display: inline-flex;
-        margin-top: 18px;
-        border-radius: 999px;
-        padding: 14px 20px;
-        background: #1f6f64;
-        color: white;
-        text-decoration: none;
-        font-weight: 900;
-      }
-
-      .quick-summary {
-        display: grid;
-        gap: 16px;
-        margin: 22px 0 26px;
-        padding: 18px;
-        border: 1px solid rgba(31, 111, 100, 0.16);
-        border-radius: 24px;
-        background: rgba(31, 111, 100, 0.06);
-      }
-
-      .quick-summary-label {
-        margin: 0 0 4px;
-        color: #1f6f64;
-        font-size: 0.78rem;
-        font-weight: 950;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .quick-summary h2 {
-        margin: 0;
-        font-size: clamp(1.25rem, 4vw, 1.75rem);
-      }
-
-      .quick-summary ul {
-        display: grid;
-        gap: 10px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      .quick-summary li {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        gap: 12px;
-        align-items: baseline;
-        padding: 10px 0;
-        border-top: 1px solid rgba(31, 111, 100, 0.12);
-      }
-
-      .quick-summary li:first-child {
-        border-top: 0;
-      }
-
-      .quick-summary li span {
-        color: rgba(23, 32, 51, 0.72);
-        font-weight: 800;
-      }
-
-      .quick-summary li strong {
-        color: #172033;
-        font-weight: 950;
-        white-space: nowrap;
-      }
-
-      .quick-summary-note {
-        margin: 4px 0 0;
-        padding-top: 14px;
-        border-top: 1px solid rgba(31, 111, 100, 0.12);
-        color: rgba(23, 32, 51, 0.68);
-        font-size: 0.95rem;
-        font-weight: 750;
-      }
-
-      .quick-summary-note a {
-        color: #1f6f64;
-        font-weight: 950;
-      }
-
-      @media (max-width: 640px) {
-        .quick-summary {
-          margin: 18px 0 22px;
-          padding: 16px;
-          border-radius: 22px;
-        }
-
-        .quick-summary li {
-          grid-template-columns: 1fr;
-          gap: 4px;
-        }
-
-        .quick-summary li strong {
-          white-space: normal;
-        }
-      }
-
-      .holiday-summary-list {
-        display: grid;
-        gap: 10px;
-        padding: 0;
-        margin: 18px 0 0;
-        list-style: none;
-      }
-
-      .holiday-summary-list li {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 4px 16px;
-        padding: 14px 16px;
-        border-radius: 18px;
-        background: rgba(232, 247, 240, 0.62);
-        border: 1px solid rgba(31, 111, 100, 0.14);
-      }
-
-      .holiday-summary-list strong {
-        color: #172033;
-      }
-
-      .holiday-summary-list span {
-        color: #1f6f64;
-        font-weight: 900;
-      }
-
-      .holiday-summary-list small {
-        grid-column: 1 / -1;
-        color: #66717f;
-        font-weight: 800;
-      }
-
-      .intro-card {
-        display: grid;
-        gap: 18px;
-        margin: 28px 0 34px;
-        padding: 18px;
-        border: 1px solid rgba(31, 111, 100, 0.16);
-        border-radius: 26px;
-        background:
-          linear-gradient(135deg, rgba(31, 111, 100, 0.07), rgba(255, 255, 255, 0.9));
-      }
-
-      .intro-card-visual {
-        overflow: hidden;
-      }
-
-      .intro-card-image-link {
-        display: block;
-        overflow: hidden;
-        border-radius: 20px;
-        border: 1px solid rgba(31, 111, 100, 0.14);
-        background: #f6f2e9;
-      }
-
-      .intro-card-image-link img {
-        display: block;
-        width: 100%;
-        height: auto;
-      }
-
-      .intro-card-footer {
-        display: flex;
-        align-items: end;
-        justify-content: space-between;
-        gap: 20px;
-        padding: 2px 4px 2px;
-      }
-
-      .intro-card-label {
-        margin: 0 0 6px;
-        color: #1f6f64;
-        font-size: 0.78rem;
-        font-weight: 950;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .intro-card h2 {
-        margin: 0 0 8px;
-      }
-
-      .intro-card p {
-        margin: 0;
-      }
-
-      .intro-card-link {
-        display: inline-flex;
-        flex: 0 0 auto;
-        width: fit-content;
-        align-items: center;
-        justify-content: center;
-        border-radius: 999px;
-        padding: 10px 14px;
-        color: #ffffff;
-        background: #1f6f64;
-        font-weight: 950;
-        text-decoration: none;
-      }
-
-      .intro-card-link:hover {
-        text-decoration: underline;
-      }
-
-
-      .note {
-        margin-top: 24px;
-        border-radius: 18px;
-        padding: 16px 18px;
-        background: rgba(232, 247, 240, 0.78);
-        border: 1px solid rgba(31, 111, 100, 0.18);
-      }
-
-      @media (max-width: 640px) {
-        .card {
-          padding: 24px;
-        }
-
-        .holiday-summary-list li {
-          grid-template-columns: 1fr;
-        }
-
-        .intro-card-footer {
-          display: grid;
-          align-items: start;
-        }
-      }
-    </style>
+    ${sharedSeoStyles()}
   </head>
-  <body>
+  <body class="seo-page">
     <main>
 ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section class="card">
         <p class="eyebrow">Schulferien ${year}</p>
@@ -888,14 +340,8 @@ ${stateYearInternalLinksHtml({ slug, name, year })}
         <a class="button" href="/?state=${code}&year=${year}">Kalender öffnen</a>
 
 ${dataTrustNoteHtml()}
-
-        <div class="note">
-          <strong>Hinweis:</strong>
-          Für verbindliche Auskünfte sind die offiziellen Veröffentlichungen des
-          jeweiligen Bundeslandes maßgeblich.
-        </div>
       </section>
-    </main>
+${seoFooterHtml()}    </main>
   </body>
 </html>`;
 }
@@ -905,16 +351,12 @@ function stateHubTemplate({ holidayIndex, slug, name, englishName, code }) {
   const title = `Schulferien ${name} – Termine, Feiertage und Kalender`;
   const description = `Schulferien in ${name}: aktuelle Ferientermine, Feiertage und freie Tage für die nächsten Jahre übersichtlich im Kalender.`;
 
-  const yearLinks = years
-    .map((year) => {
-      return `          <li><a href="/schulferien-${slug}-${year}.html">Schulferien ${escapeHtml(name)} ${year}</a></li>`;
-    })
-    .join("\n");
 
   const yearSummaryCards = years
     .map((year) => {
       const events = getEventsForStateAndYear({ holidayIndex, code, year });
-      const firstEvent = events[0];
+      const firstEvent =
+        events.find((event) => event.startDate >= `${year}-01-01`) || events[0];
       const firstEventText = firstEvent
         ? `${escapeHtml(getHolidayName(firstEvent))}: ${formatDate(firstEvent.startDate)} bis ${formatDate(firstEvent.endDate)}`
         : "Noch keine Ferientermine verfügbar";
@@ -943,7 +385,7 @@ function stateHubTemplate({ holidayIndex, slug, name, englishName, code }) {
     <meta property="og:image" content="https://www.schulferienklar.de/og-image.png" />
     ${sharedSeoStyles()}
   </head>
-  <body>
+  <body class="seo-page">
     <main>
 ${seoTopNavHtml({ appHref: `/?state=${code}` })}      <section class="card">
         <p class="eyebrow">Bundesland</p>
@@ -973,19 +415,14 @@ ${seoTopNavHtml({ appHref: `/?state=${code}` })}      <section class="card">
 ${yearSummaryCards}
         </ul>
 
-        <h2>Alle Jahre für ${escapeHtml(name)}</h2>
-        <ul class="holiday-summary-list">
-${yearLinks}
-        </ul>
-
-        <h2>Travel planning with school holidays</h2>
+        <h2>Reiseplanung auf Englisch</h2>
         <p>
-          Planning a trip to Germany? School holidays in ${escapeHtml(name)} can affect
-          hotels, trains and popular attractions during busy family travel periods.
+          Ferienzeiten können die Nachfrage nach Hotels, Zügen und beliebten
+          Ausflugszielen erhöhen. Für eine englischsprachige Reiseplanung gibt es
+          den Germany Travel Checker.
         </p>
         <p>
-          <a href="/germany-travel-checker.html">Check your Germany travel dates</a>
-          before booking your trip.
+          <a href="/germany-travel-checker.html">Germany Travel Checker öffnen</a>
         </p>
 
         <p>
@@ -996,14 +433,8 @@ ${yearLinks}
         <a class="button" href="/?state=${code}">Kalender für ${escapeHtml(name)} öffnen</a>
 
 ${dataTrustNoteHtml()}
-
-        <div class="note">
-          <strong>Datenhinweis:</strong>
-          Für verbindliche Auskünfte sind die offiziellen Veröffentlichungen des
-          jeweiligen Bundeslandes maßgeblich. <a href="/datenquellen.html">Mehr zu den Datenquellen</a>.
-        </div>
       </section>
-    </main>
+${seoFooterHtml()}    </main>
   </body>
 </html>`;
 }
@@ -1012,16 +443,12 @@ function yearHubTemplate({ holidayIndex, year }) {
   const title = `Schulferien ${year} in Deutschland – alle Bundesländer`;
   const description = `Schulferien ${year} in Deutschland: Ferientermine der Bundesländer übersichtlich vergleichen und freie Tage besser planen.`;
 
-  const stateLinks = states
-    .map(([slug, name]) => {
-      return `          <li><a href="/schulferien-${slug}-${year}.html">Schulferien ${escapeHtml(name)} ${year}</a></li>`;
-    })
-    .join("\n");
 
   const stateSummaryCards = states
     .map(([slug, name, _englishName, code]) => {
       const events = getEventsForStateAndYear({ holidayIndex, code, year });
-      const firstEvent = events[0];
+      const firstEvent =
+        events.find((event) => event.startDate >= `${year}-01-01`) || events[0];
       const firstEventText = firstEvent
         ? `${escapeHtml(getHolidayName(firstEvent))}: ${formatDate(firstEvent.startDate)} bis ${formatDate(firstEvent.endDate)}`
         : "Noch keine Ferientermine verfügbar";
@@ -1050,7 +477,7 @@ function yearHubTemplate({ holidayIndex, year }) {
     <meta property="og:image" content="https://www.schulferienklar.de/og-image.png" />
     ${sharedSeoStyles()}
   </head>
-  <body>
+  <body class="seo-page">
     <main>
 ${seoTopNavHtml({ appHref: `/?year=${year}` })}      <section class="card">
         <p class="eyebrow">Deutschland</p>
@@ -1083,22 +510,11 @@ ${seoTopNavHtml({ appHref: `/?year=${year}` })}      <section class="card">
 ${stateSummaryCards}
         </ul>
 
-        <h2>Alle Bundesländer ${year}</h2>
-        <ul class="holiday-summary-list">
-${stateLinks}
-        </ul>
-
         <a class="button" href="/?year=${year}">Kalender ${year} öffnen</a>
 
 ${dataTrustNoteHtml()}
-
-        <div class="note">
-          <strong>Datenhinweis:</strong>
-          Für verbindliche Auskünfte sind die offiziellen Veröffentlichungen der
-          Bundesländer maßgeblich. <a href="/datenquellen.html">Mehr zu den Datenquellen</a>.
-        </div>
       </section>
-    </main>
+${seoFooterHtml()}    </main>
   </body>
 </html>`;
 }
