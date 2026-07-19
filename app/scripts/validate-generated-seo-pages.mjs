@@ -10,6 +10,7 @@ const requiredFiles = [
   "schulferien-2026.html",
   "schulferien-bayern.html",
   "schulferien-bayern-2026.html",
+  "schulferien-bayern-2027.html",
 ];
 
 const htmlFiles = fs
@@ -54,6 +55,34 @@ for (const file of htmlFiles) {
   for (const [label, pattern] of checks) {
     if (!pattern.test(html)) {
       errors.push(`${file}: missing ${label}`);
+    }
+  }
+}
+
+
+const bayern2027Path = path.join(
+  publicDir,
+  "schulferien-bayern-2027.html"
+);
+
+if (fs.existsSync(bayern2027Path)) {
+  const bayern2027Html = fs.readFileSync(bayern2027Path, "utf8");
+  const goldPageChecks = [
+    ["Gold Page marker", /data-gold-page="bayern-2027"/],
+    ["direct answer section", /id="termine"/],
+    ["connected free-time explanation", /Zusammenhängend frei/],
+    ["Faschingsferien terminology", /Faschingsferien/],
+    ["Allerheiligen terminology", /unterrichtsfreie Tage um Allerheiligen/],
+    ["official Bayern source", /Bayerisches Staatsministerium/],
+    ["Bayern.Recht source link", /gesetze-bayern\.de/],
+    ["FAQ structured data", /FAQPage/],
+    ["breadcrumb structured data", /BreadcrumbList/],
+    ["visible FAQ section", /id="fragen"/],
+  ];
+
+  for (const [label, pattern] of goldPageChecks) {
+    if (!pattern.test(bayern2027Html)) {
+      errors.push(`schulferien-bayern-2027.html: missing ${label}`);
     }
   }
 }
