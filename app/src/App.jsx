@@ -1772,9 +1772,9 @@ export default function App() {
           </p>
 
           <div className="feature-list">
-            <span>✓ Schüler:innen & Familien</span>
-            <span>✓ Offizielle Bundesland-Daten</span>
-            <span>✓ Erweiterbar für Planung</span>
+            <span>✓ Für Schüler:innen & Familien</span>
+            <span>✓ Ferien und Feiertage nach Bundesland</span>
+            <span>✓ Kalenderexport und Planung</span>
           </div>
         </aside>
       </section>
@@ -1862,7 +1862,7 @@ export default function App() {
             </strong>
             <p>
               {hasTravelPeriodMatches
-                ? "In deinem Zeitraum gibt es Überschneidungen mit Schulferien oder gesetzlichen Feiertagen. Rechne je nach Region mit mehr Reiseverkehr, volleren Zügen oder abweichenden Öffnungszeiten."
+                ? "Im gewählten Zeitraum liegen Schulferien oder gesetzliche Feiertage. Das kann regional die Nachfrage erhöhen oder Öffnungszeiten beeinflussen. Prüfe aktuelle Verbindungen und Öffnungszeiten zusätzlich bei den jeweiligen Anbietern."
                 : "Für diesen Zeitraum sind im ausgewählten Bundesland keine Schulferien oder gesetzlichen Feiertage hinterlegt."}
             </p>
             {!hasTravelPeriodMatches && (
@@ -2297,7 +2297,7 @@ export default function App() {
       </section>
 
       <footer className="footer site-footer">
-        <p className="footer-copyright">© 2026 Joan — All rights reserved.</p>
+        <p className="footer-copyright">© 2026 Joan — Alle Rechte vorbehalten.</p>
 
         <nav className="footer-links" aria-label="Rechtliche und weitere Informationen">
           <a href="/datenquellen.html">Datenquellen</a>
@@ -2306,10 +2306,10 @@ export default function App() {
           <a href="/support.html">Support</a>
           <a href="/ueber-uns.html">Über uns</a>
           <a className="footer-travel-link" href="/germany-travel-checker.html">Germany Travel Checker</a>
-          <a href="/travel-germany-school-holidays.html">Travel planning</a>
+          <a href="/travel-germany-school-holidays.html">Reiseplanung (Englisch)</a>
         </nav>
 
-        <p className="footer-credit">Designed &amp; developed by Joan.</p>
+        <p className="footer-credit">Gestaltung und Entwicklung: Joan.</p>
       </footer>
     </main>
   );
