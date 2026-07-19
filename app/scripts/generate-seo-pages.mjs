@@ -4,6 +4,8 @@ import path from "node:path";
 const outputDir = path.resolve("public");
 const holidayDataDir = path.resolve("public/data/holidays");
 const holidayIndexPath = path.join(holidayDataDir, "index.json");
+const publicHolidayDataDir = path.resolve("public/data/public-holidays");
+const publicHolidayIndexPath = path.join(publicHolidayDataDir, "index.json");
 
 const years = [2026, 2027, 2028, 2029, 2030];
 
@@ -34,9 +36,44 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;");
 }
 
+function cleanGeneratedHtml(html) {
+  return html.replace(/[ \t]+$/gm, "");
+}
+
 function formatDate(dateKey) {
   const [year, month, day] = String(dateKey).split("-");
   return `${day}.${month}.${year}`;
+}
+
+function parseDateKey(dateKey) {
+  const [year, month, day] = String(dateKey).split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day));
+}
+
+function toDateKey(date) {
+  return date.toISOString().slice(0, 10);
+}
+
+function addDaysToDateKey(dateKey, amount) {
+  const date = parseDateKey(dateKey);
+  date.setUTCDate(date.getUTCDate() + amount);
+  return toDateKey(date);
+}
+
+function daysInclusive(startDate, endDate) {
+  const millisecondsPerDay = 24 * 60 * 60 * 1000;
+  return Math.round(
+    (parseDateKey(endDate) - parseDateKey(startDate)) / millisecondsPerDay
+  ) + 1;
+}
+
+function isWeekendDateKey(dateKey) {
+  const day = parseDateKey(dateKey).getUTCDay();
+  return day === 0 || day === 6;
+}
+
+function formatCalendarDayCount(count) {
+  return `${count} ${count === 1 ? "Kalendertag" : "Kalendertage"}`;
 }
 
 function getHolidayName(holiday) {
@@ -76,6 +113,91 @@ function getEventsForStateAndYear({ holidayIndex, code, year }) {
       return event.startDate <= yearEnd && event.endDate >= yearStart;
     })
     .sort((a, b) => a.startDate.localeCompare(b.startDate));
+}
+
+function getSchoolHolidaySourceForState({ holidayIndex, code }) {
+  const dataset = holidayIndex.datasets?.find((item) => {
+    return item.bundeslandCode === code;
+  });
+
+  if (!dataset?.jsonFile) {
+    return null;
+  }
+
+  const datasetPath = path.join(holidayDataDir, dataset.jsonFile);
+  const datasetJson = JSON.parse(fs.readFileSync(datasetPath, "utf8"));
+
+  return datasetJson.sources?.[0] || null;
+}
+
+function getPublicHolidaysForStateAndYear({
+  publicHolidayIndex,
+  code,
+  year,
+}) {
+  const dataset = publicHolidayIndex.datasets?.find((item) => {
+    return item.bundeslandCode === code && item.year === year;
+  });
+
+  if (!dataset?.jsonFile) {
+    return [];
+  }
+
+  const datasetPath = path.join(publicHolidayDataDir, dataset.jsonFile);
+  const datasetJson = JSON.parse(fs.readFileSync(datasetPath, "utf8"));
+
+  return datasetJson.holidays || datasetJson.events || [];
+}
+
+function getPublicHolidaysAroundYear({
+  publicHolidayIndex,
+  code,
+  year,
+}) {
+  return [year - 1, year, year + 1].flatMap((itemYear) => {
+    return getPublicHolidaysForStateAndYear({
+      publicHolidayIndex,
+      code,
+      year: itemYear,
+    });
+  });
+}
+
+function isConnectedFreeDate(dateKey, publicHolidays) {
+  if (isWeekendDateKey(dateKey)) {
+    return true;
+  }
+
+  return publicHolidays.some((holiday) => {
+    return (
+      holiday.date === dateKey &&
+      holiday.includeInDefaultCalendar === true &&
+      holiday.scope === "statewide"
+    );
+  });
+}
+
+function getConnectedFreePeriod(event, publicHolidays) {
+  let startDate = event.startDate;
+  let endDate = event.endDate;
+
+  while (
+    isConnectedFreeDate(addDaysToDateKey(startDate, -1), publicHolidays)
+  ) {
+    startDate = addDaysToDateKey(startDate, -1);
+  }
+
+  while (
+    isConnectedFreeDate(addDaysToDateKey(endDate, 1), publicHolidays)
+  ) {
+    endDate = addDaysToDateKey(endDate, 1);
+  }
+
+  return {
+    startDate,
+    endDate,
+    dayCount: daysInclusive(startDate, endDate),
+  };
 }
 
 function stateYearQuickSummaryHtml(events, name, year) {
@@ -159,6 +281,385 @@ ${items}
         </ul>`;
 }
 
+
+
+function getBayern2027DisplayName(event) {
+  if (event.type === "spring") {
+    return "Frühjahrsferien (oft Faschingsferien)";
+  }
+
+  if (event.type === "all_saints") {
+    return "Unterrichtsfreie Tage um Allerheiligen";
+  }
+
+  return getHolidayName(event);
+}
+
+function getBayern2027PeriodNote(event) {
+  if (event.startDate < "2027-01-01") {
+    return "Beginnt im Dezember 2026 und reicht in das Kalenderjahr 2027.";
+  }
+
+  if (event.endDate > "2027-12-31") {
+    return "Beginnt im Dezember 2027 und reicht in das Kalenderjahr 2028.";
+  }
+
+  if (event.type === "spring") {
+    return "Die offizielle Bezeichnung lautet Frühjahrsferien.";
+  }
+
+  if (event.type === "all_saints") {
+    return "Offizielle bayerische Bezeichnung; häufig als Herbstferien gesucht.";
+  }
+
+  return "";
+}
+
+function bayern2027PeriodRowsHtml(events, publicHolidays) {
+  return events
+    .map((event) => {
+      const connectedPeriod = getConnectedFreePeriod(event, publicHolidays);
+      const officialDayCount = daysInclusive(event.startDate, event.endDate);
+      const periodNote = getBayern2027PeriodNote(event);
+      const eventId = `termin-${String(event.id || event.type)
+        .toLowerCase()
+        .replace(/[^a-z0-9-]+/g, "-")}`;
+
+      return `            <li class="gold-period-row" id="${eventId}">
+              <div class="gold-period-name">
+                <strong>${escapeHtml(getBayern2027DisplayName(event))}</strong>
+                ${
+                  periodNote
+                    ? `<small>${escapeHtml(periodNote)}</small>`
+                    : ""
+                }
+              </div>
+              <div class="gold-period-value">
+                <span>Offizieller Zeitraum</span>
+                <strong>${formatDate(event.startDate)} – ${formatDate(event.endDate)}</strong>
+                <small>${formatCalendarDayCount(officialDayCount)}</small>
+              </div>
+              <div class="gold-period-value gold-period-connected">
+                <span>Zusammenhängend frei</span>
+                <strong>${formatDate(connectedPeriod.startDate)} – ${formatDate(connectedPeriod.endDate)}</strong>
+                <small>${formatCalendarDayCount(connectedPeriod.dayCount)}</small>
+              </div>
+            </li>`;
+    })
+    .join("\n");
+}
+
+function findBayern2027Event(events, type) {
+  return events.find((event) => {
+    return event.type === type && event.startDate.startsWith("2027");
+  });
+}
+
+function createBayern2027FaqItems(events) {
+  const summer = findBayern2027Event(events, "summer");
+  const spring = findBayern2027Event(events, "spring");
+  const easter = findBayern2027Event(events, "easter");
+  const pentecost = findBayern2027Event(events, "pentecost");
+  const allSaints = findBayern2027Event(events, "all_saints");
+
+  const rangeText = (event) => {
+    if (!event) {
+      return "Für diesen Zeitraum liegt aktuell kein Eintrag vor.";
+    }
+
+    return `${formatDate(event.startDate)} bis ${formatDate(event.endDate)}`;
+  };
+
+  return [
+    {
+      question: "Wann sind die Sommerferien in Bayern 2027?",
+      answer: `Die Sommerferien in Bayern 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question: "Wann sind die Osterferien in Bayern 2027?",
+      answer: `Die Osterferien in Bayern 2027 dauern vom ${rangeText(easter)}.`,
+    },
+    {
+      question: "Wann sind die Pfingstferien in Bayern 2027?",
+      answer: `Die Pfingstferien in Bayern 2027 dauern vom ${rangeText(pentecost)}.`,
+    },
+    {
+      question: "Wann sind die Faschingsferien in Bayern 2027?",
+      answer: `Die häufig als Faschingsferien bezeichneten Frühjahrsferien dauern vom ${rangeText(spring)}. Die offizielle Bezeichnung in Bayern lautet Frühjahrsferien.`,
+    },
+    {
+      question: "Gibt es Herbstferien in Bayern 2027?",
+      answer: `Bayern veröffentlicht dafür die Bezeichnung „unterrichtsfreie Tage um Allerheiligen“. 2027 liegen diese Tage vom ${rangeText(allSaints)}.`,
+    },
+    {
+      question: "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen Ferienzeitraum nur um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Regionale und lokale Feiertage werden dabei nicht eingerechnet.",
+    },
+  ];
+}
+
+function bayern2027FaqHtml(faqItems) {
+  const items = faqItems
+    .map((item) => {
+      return `          <article class="gold-faq-item">
+            <h3>${escapeHtml(item.question)}</h3>
+            <p>${escapeHtml(item.answer)}</p>
+          </article>`;
+    })
+    .join("\n");
+
+  return `        <section id="fragen" class="gold-section">
+          <p class="eyebrow">Direkte Antworten</p>
+          <h2>Häufige Fragen zu den Schulferien Bayern 2027</h2>
+          <div class="gold-faq-list">
+${items}
+          </div>
+        </section>`;
+}
+
+function bayern2027StructuredDataHtml(faqItems) {
+  const data = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Schulferienklar",
+            item: "https://www.schulferienklar.de/",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Schulferien Bayern",
+            item: "https://www.schulferienklar.de/schulferien-bayern.html",
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: "Schulferien Bayern 2027",
+            item: "https://www.schulferienklar.de/schulferien-bayern-2027.html",
+          },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqItems.map((item) => {
+          return {
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: item.answer,
+            },
+          };
+        }),
+      },
+    ],
+  };
+
+  const json = JSON.stringify(data).replaceAll("<", "\\u003c");
+
+  return `    <script type="application/ld+json">${json}</script>`;
+}
+
+function bayern2027SourceHtml(source) {
+  if (!source) {
+    return `        <section id="quelle" class="gold-section">
+          <h2>Quelle und Datenstand</h2>
+          <p>
+            Die Schulferiendaten stammen aus dem hinterlegten Bayern-Datensatz.
+            Für verbindliche Auskünfte ist die offizielle Veröffentlichung des
+            Freistaats Bayern maßgeblich.
+          </p>
+        </section>`;
+  }
+
+  return `        <section id="quelle" class="gold-section">
+          <p class="eyebrow">Nachvollziehbare Daten</p>
+          <h2>Offizielle Quelle und Datenstand</h2>
+          <div class="gold-source-card">
+            <p>
+              <strong>Quelle für die Schulferien:</strong><br />
+              ${escapeHtml(source.sourceName)}
+            </p>
+            <p>
+              <strong>Rechtsgrundlage:</strong><br />
+              ${escapeHtml(source.legalTitle || "Offizielle Ferienordnung des Freistaats Bayern")}
+            </p>
+            <p>
+              <strong>Zuletzt im Datensatz geprüft:</strong><br />
+              ${formatDate(source.lastCheckedAt)}
+            </p>
+            <div class="gold-source-links">
+              <a href="${escapeHtml(source.sourceUrl)}">Ferienordnung bei Bayern.Recht</a>
+              ${
+                source.secondarySourceUrl
+                  ? `<a href="${escapeHtml(source.secondarySourceUrl)}">Übersicht des Kultusministeriums</a>`
+                  : ""
+              }
+            </div>
+          </div>
+          <p class="gold-source-note">
+            Schul- oder schulartspezifische Abweichungen sind nicht Bestandteil
+            dieser landesweiten Standardübersicht. Für verbindliche Auskünfte
+            bleibt die offizielle Veröffentlichung maßgeblich.
+          </p>
+        </section>`;
+}
+
+function bayern2027RelatedLinksHtml() {
+  return `        <section class="gold-section">
+          <h2>Passende Ferienübersichten</h2>
+          <ul class="holiday-summary-list seo-link-list gold-related-links">
+            <li><a href="/schulferien-bayern-2026.html">Schulferien Bayern 2026</a></li>
+            <li><a href="/schulferien-bayern-2028.html">Schulferien Bayern 2028</a></li>
+            <li><a href="/schulferien-bayern.html">Alle Jahre für Bayern</a></li>
+            <li><a href="/schulferien-2027.html">Alle Bundesländer 2027</a></li>
+            <li><a href="/schulferien-baden-wuerttemberg-2027.html">Baden-Württemberg 2027</a></li>
+            <li><a href="/schulferien-hessen-2027.html">Hessen 2027</a></li>
+            <li><a href="/schulferien-sachsen-2027.html">Sachsen 2027</a></li>
+            <li><a href="/schulferien-thueringen-2027.html">Thüringen 2027</a></li>
+          </ul>
+        </section>`;
+}
+
+function bayern2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const title = "Schulferien Bayern 2027: Termine und freie Zeit";
+  const description =
+    "Schulferien Bayern 2027 mit allen Terminen: Frühjahrs-, Oster-, Pfingst-, Sommer- und Weihnachtsferien, freie Zeit inklusive Wochenenden und Quelle.";
+  const publicHolidays = getPublicHolidaysAroundYear({
+    publicHolidayIndex,
+    code,
+    year,
+  });
+  const source = getSchoolHolidaySourceForState({
+    holidayIndex,
+    code,
+  });
+  const faqItems = createBayern2027FaqItems(events);
+
+  return `<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${title}</title>
+    <meta name="description" content="${description}" />
+    <link rel="canonical" href="https://www.schulferienklar.de/schulferien-${slug}-${year}.html" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:title" content="${title}" />
+    <meta property="og:description" content="${description}" />
+    <meta property="og:url" content="https://www.schulferienklar.de/schulferien-${slug}-${year}.html" />
+    <meta property="og:image" content="https://www.schulferienklar.de/og-image.png" />
+    ${sharedSeoStyles()}
+${bayern2027StructuredDataHtml(faqItems)}
+  </head>
+  <body class="seo-page">
+    <main>
+${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section class="card gold-page" data-gold-page="bayern-2027">
+        <p class="eyebrow">Bayern · Kalenderjahr 2027</p>
+        <h1>Schulferien Bayern 2027</h1>
+
+        <p class="gold-page-intro">
+          Hier stehen zuerst die offiziellen Ferientermine. Zusätzlich zeigt
+          Schulferienklar, wie lange die freie Zeit direkt am Stück dauert,
+          wenn unmittelbar angrenzende Wochenenden oder landesweite Feiertage
+          anschließen.
+        </p>
+
+        <nav class="gold-page-nav" aria-label="Inhalt dieser Seite">
+          <a href="#termine">Alle Termine</a>
+          <a href="#berechnung">Freie Zeit</a>
+          <a href="#bezeichnungen">Bezeichnungen</a>
+          <a href="#quelle">Quelle</a>
+          <a href="#fragen">Fragen</a>
+        </nav>
+
+        <section id="termine" class="gold-section gold-answer-section">
+          <p class="eyebrow">Direkte Übersicht</p>
+          <h2>Alle Ferienzeiten in Bayern 2027</h2>
+          <p>
+            Die Liste berücksichtigt auch Weihnachtsferien, die aus dem
+            Vorjahr in 2027 hineinreichen oder bis 2028 dauern.
+          </p>
+          <ul class="gold-period-list">
+${bayern2027PeriodRowsHtml(events, publicHolidays)}
+          </ul>
+        </section>
+
+        <section id="berechnung" class="gold-section">
+          <p class="eyebrow">Planung statt bloßer Datumsliste</p>
+          <h2>Was „zusammenhängend frei“ bedeutet</h2>
+          <div class="gold-explanation-grid">
+            <div>
+              <strong>Offizieller Zeitraum</strong>
+              <p>
+                Exakt der im bayerischen Ferien-Datensatz veröffentlichte
+                Beginn und das veröffentlichte Ende.
+              </p>
+            </div>
+            <div>
+              <strong>Zusammenhängend frei</strong>
+              <p>
+                Der offizielle Zeitraum plus direkt anschließende Samstage,
+                Sonntage und landesweit geltende gesetzliche Feiertage.
+              </p>
+            </div>
+          </div>
+          <p class="gold-calculation-note">
+            Angegeben werden Kalendertage, nicht die Zahl der ausgefallenen
+            Unterrichtstage. Regionale und lokale Feiertage werden für diese
+            Standardberechnung nicht berücksichtigt.
+          </p>
+        </section>
+
+        <section id="bezeichnungen" class="gold-section">
+          <p class="eyebrow">Bayerische Besonderheiten</p>
+          <h2>Faschingsferien und Herbstferien: die offiziellen Namen</h2>
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>Faschingsferien</h3>
+              <p>
+                Viele Familien suchen nach „Faschingsferien Bayern 2027“.
+                In der offiziellen Ferienordnung heißen diese Tage
+                <strong>Frühjahrsferien</strong>.
+              </p>
+            </div>
+            <div>
+              <h3>Herbstferien</h3>
+              <p>
+                Bayern verwendet für den Zeitraum im November die Bezeichnung
+                <strong>unterrichtsfreie Tage um Allerheiligen</strong>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+${bayern2027SourceHtml(source)}
+${bayern2027FaqHtml(faqItems)}
+${schulferienklarIntroCardHtml({ code, name, year })}
+${bayern2027RelatedLinksHtml()}
+
+        <a class="button" href="/?state=${code}&year=${year}">
+          Bayern 2027 im Kalender öffnen
+        </a>
+      </section>
+${seoFooterHtml()}    </main>
+  </body>
+</html>`;
+}
 
 function sharedSeoStyles() {
   return `    <link rel="stylesheet" href="/seo-pages.css" />`;
@@ -270,6 +771,16 @@ function schulferienklarIntroCardHtml({ code, name, year }) {
 }
 
 function pageTemplate({ slug, name, englishName, code, year, events }) {
+  if (code === "BY" && year === 2027) {
+    return bayern2027GoldPageTemplate({
+      slug,
+      name,
+      code,
+      year,
+      events,
+    });
+  }
+
   const title = `Schulferien ${name} ${year} – Schulferienklar`;
   const description = `Schulferien ${name} ${year}: Ferien, Feiertage und freie Zeiten im Kalender sehen. School holidays ${englishName} ${year}.`;
 
@@ -581,6 +1092,9 @@ ${entries}
 
 
 const holidayIndex = JSON.parse(fs.readFileSync(holidayIndexPath, "utf8"));
+const publicHolidayIndex = JSON.parse(
+  fs.readFileSync(publicHolidayIndexPath, "utf8")
+);
 
 for (const year of years) {
   for (const [slug, name, englishName, code] of states) {
@@ -589,7 +1103,9 @@ for (const year of years) {
 
     fs.writeFileSync(
       path.join(outputDir, fileName),
-      pageTemplate({ slug, name, englishName, code, year, events }),
+      cleanGeneratedHtml(
+        pageTemplate({ slug, name, englishName, code, year, events })
+      ),
       "utf8"
     );
 
@@ -602,7 +1118,9 @@ for (const [slug, name, englishName, code] of states) {
 
   fs.writeFileSync(
     path.join(outputDir, fileName),
-    stateHubTemplate({ holidayIndex, slug, name, englishName, code }),
+    cleanGeneratedHtml(
+      stateHubTemplate({ holidayIndex, slug, name, englishName, code })
+    ),
     "utf8"
   );
 
@@ -614,7 +1132,7 @@ for (const year of years) {
 
   fs.writeFileSync(
     path.join(outputDir, fileName),
-    yearHubTemplate({ holidayIndex, year }),
+    cleanGeneratedHtml(yearHubTemplate({ holidayIndex, year })),
     "utf8"
   );
 
