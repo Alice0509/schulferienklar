@@ -8,76 +8,19 @@
       content="Datenquellen von Schulferienklar: Informationen zu Schulferien, gesetzlichen Feiertagen, regionalen Feiertagen und Validierung der Daten."
     />
     <title>Datenquellen – Schulferienklar</title>
-    <style>
-      body {
-        margin: 0;
-        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        color: #172033;
-        background: #f6f3ec;
-        line-height: 1.6;
-      }
-
-      main {
-        width: min(860px, calc(100% - 32px));
-        margin: 0 auto;
-        padding: 48px 0;
-      }
-
-      a {
-        color: #1f6f64;
-        font-weight: 700;
-      }
-
-      .card {
-        border-radius: 28px;
-        padding: 30px;
-        background: rgba(255, 255, 255, 0.84);
-        border: 1px solid rgba(23, 32, 51, 0.08);
-        box-shadow: 0 20px 60px rgba(40, 55, 85, 0.1);
-      }
-
-      h1 {
-        margin-top: 0;
-        letter-spacing: -0.05em;
-        line-height: 1;
-      }
-
-      h2 {
-        margin-top: 2rem;
-      }
-
-      code {
-        border-radius: 8px;
-        padding: 2px 6px;
-        background: #f1eadf;
-      }
-
-      ul {
-        padding-left: 1.2rem;
-      }
-
-      .back {
-        display: inline-block;
-        margin-bottom: 20px;
-      }
-
-      .note {
-        border-radius: 18px;
-        padding: 16px 18px;
-        background: rgba(232, 247, 240, 0.8);
-        border: 1px solid rgba(31, 111, 100, 0.18);
-      }
-
-      .muted {
-        color: #66717f;
-      }
-    </style>
+      <link rel="stylesheet" href="/static-pages.css" />
   </head>
-  <body>
+  <body class="static-page">
     <main>
-      <a class="back" href="/">← Zurück zu Schulferienklar</a>
+      <header class="static-header">
+        <a class="static-brand" href="/">
+          <span class="static-brand-mark" aria-hidden="true">S</span>
+          <span>Schulferienklar</span>
+        </a>
+        <a class="back" href="/">← Zurück zu Schulferienklar</a>
+      </header>
 
-      <section class="card">
+<section class="card">
         <h1>Datenquellen</h1>
 
         <p>
@@ -203,10 +146,6 @@
           gesendet werden.
         </p>
 
-        <p class="muted">
-          Stand: MVP-Version. Die Datenstruktur und Darstellung werden weiter verbessert.
-        </p>
-
         <h2>English note</h2>
 
         <p>
@@ -217,6 +156,14 @@
         </p>
 
       </section>
+
+      <footer class="static-footer" aria-label="Weitere Informationen">
+        <a href="/datenquellen.html">Datenquellen</a>
+        <a href="/datenschutz.html">Datenschutz</a>
+        <a href="/impressum.html">Impressum</a>
+        <a href="/support.html">Support</a>
+        <a href="/ueber-uns.html">Über uns</a>
+      </footer>
     </main>
   </body>
 </html>
