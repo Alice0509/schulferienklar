@@ -11,6 +11,9 @@ const requiredFiles = [
   "schulferien-bayern.html",
   "schulferien-bayern-2026.html",
   "schulferien-bayern-2027.html",
+  "jahreskalender.css",
+  "downloads/jahreskalender-bayern-2027.html",
+  "downloads/schulferien-bayern-2027.ics",
 ];
 
 const htmlFiles = fs
@@ -78,11 +81,67 @@ if (fs.existsSync(bayern2027Path)) {
     ["FAQ structured data", /FAQPage/],
     ["breadcrumb structured data", /BreadcrumbList/],
     ["visible FAQ section", /id="fragen"/],
+    ["Jahreskalender section", /id="jahreskalender"/],
+    ["Jahreskalender preview link", /downloads\/jahreskalender-bayern-2027\.html/],
+    ["Jahreskalender ICS link", /downloads\/schulferien-bayern-2027\.ics/],
   ];
 
   for (const [label, pattern] of goldPageChecks) {
     if (!pattern.test(bayern2027Html)) {
       errors.push(`schulferien-bayern-2027.html: missing ${label}`);
+    }
+  }
+}
+
+
+const bayern2027CalendarPath = path.join(
+  publicDir,
+  "downloads",
+  "jahreskalender-bayern-2027.html"
+);
+const bayern2027IcsPath = path.join(
+  publicDir,
+  "downloads",
+  "schulferien-bayern-2027.ics"
+);
+
+if (fs.existsSync(bayern2027CalendarPath)) {
+  const calendarHtml = fs.readFileSync(bayern2027CalendarPath, "utf8");
+  const calendarChecks = [
+    ["noindex directive", /name="robots" content="noindex,follow"/],
+    ["Gold Page canonical", /canonical[^>]+schulferien-bayern-2027\.html/],
+    ["January month", />Januar<\/h2>/],
+    ["December month", />Dezember<\/h2>/],
+    ["calendar weeks", /class="week-number"/],
+    ["holiday legend", /Schulferien<\/span>/],
+    ["public holiday legend", /Gesetzlicher Feiertag<\/span>/],
+    ["connected free legend", /Zusammenhängend frei<\/span>/],
+    ["print action", /window\.print\(\)/],
+    ["official source", /Bayerisches Staatsministerium/],
+  ];
+
+  for (const [label, pattern] of calendarChecks) {
+    if (!pattern.test(calendarHtml)) {
+      errors.push(`downloads/jahreskalender-bayern-2027.html: missing ${label}`);
+    }
+  }
+}
+
+if (fs.existsSync(bayern2027IcsPath)) {
+  const ics = fs.readFileSync(bayern2027IcsPath, "utf8");
+  const unfoldedIcs = ics.replace(/\r?\n[ \t]/g, "");
+  const icsChecks = [
+    ["VCALENDAR start", /BEGIN:VCALENDAR/],
+    ["VCALENDAR end", /END:VCALENDAR/],
+    ["Frühjahrsferien event", /Frühjahrsferien/],
+    ["Sommerferien event", /Sommerferien/],
+    ["public holiday event", /\(Feiertag\)/],
+    ["exclusive DTEND", /DTEND;VALUE=DATE:/],
+  ];
+
+  for (const [label, pattern] of icsChecks) {
+    if (!pattern.test(unfoldedIcs)) {
+      errors.push(`downloads/schulferien-bayern-2027.ics: missing ${label}`);
     }
   }
 }

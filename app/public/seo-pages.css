@@ -751,3 +751,67 @@ p {
     padding-left: 0;
   }
 }
+
+
+/* Bayern 2027 Jahreskalender */
+
+.gold-jahreskalender { margin-top: 2.5rem; }
+.gold-jahreskalender-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+.gold-jahreskalender-card {
+  display: grid;
+  gap: 7px;
+  min-height: 145px;
+  align-content: start;
+  border: 1px solid #c6d9d5;
+  border-radius: 9px;
+  padding: 17px;
+  background: #f7faf9;
+  text-decoration: none;
+}
+.gold-jahreskalender-card:hover {
+  border-color: #176f64;
+  background: #eff8f5;
+  text-decoration: none;
+}
+.gold-jahreskalender-primary {
+  border-color: #9fc9c1;
+  background: #edf7f4;
+}
+.gold-jahreskalender-card span {
+  width: fit-content;
+  border: 1px solid #b3d2cc;
+  border-radius: 999px;
+  padding: 3px 8px;
+  color: #176f64;
+  background: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.gold-jahreskalender-card strong {
+  color: #172033;
+  font-size: 1.03rem;
+}
+.gold-jahreskalender-card small {
+  color: #536171;
+  line-height: 1.45;
+}
+.gold-jahreskalender-note {
+  margin-top: 13px;
+  border-left: 3px solid #176f64;
+  padding-left: 12px;
+  font-size: 0.9rem;
+}
+@media (max-width: 560px) {
+  .gold-jahreskalender-grid { grid-template-columns: 1fr; }
+  .gold-jahreskalender-card {
+    min-height: 0;
+    padding: 14px;
+  }
+}

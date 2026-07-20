@@ -206,3 +206,11 @@ Avoid purchased links, automated directory submissions, and mass guest-post camp
 - [ ] Deploy and request indexing for the Gold Page
 - [ ] Record the deployment date
 - [ ] Measure before expanding
+
+
+## Implementation status
+
+- 2026-07-19: Bayern 2027 Gold Page deployed.
+- 2026-08-16: First four-week SEO performance review scheduled.
+- Phase 2A started: Bayern 2027 one-page Jahreskalender with A4 print/PDF workflow and ICS.
+- Direct PNG and pre-generated PDF files remain pending until the layout is reviewed.
