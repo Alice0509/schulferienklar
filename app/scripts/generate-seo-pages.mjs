@@ -524,6 +524,7 @@ function bayern2027JahreskalenderHtml() {
             <a
               class="gold-jahreskalender-card gold-jahreskalender-primary"
               href="/downloads/jahreskalender-bayern-2027.html"
+              data-download-action="open-jahreskalender-bayern-2027"
             >
               <span>Jahresansicht · PDF</span>
               <strong>Jahreskalender öffnen</strong>
@@ -535,6 +536,7 @@ function bayern2027JahreskalenderHtml() {
               class="gold-jahreskalender-card"
               href="/downloads/schulferien-bayern-2027.ics"
               download
+              data-download-action="download-ics-bayern-2027"
             >
               <span>ICS</span>
               <strong>Kalenderdatei herunterladen</strong>
@@ -705,7 +707,8 @@ ${seoFooterHtml()}    </main>
 }
 
 function sharedSeoStyles() {
-  return `    <link rel="stylesheet" href="/seo-pages.css" />`;
+  return `    <link rel="stylesheet" href="/seo-pages.css" />
+    <script defer src="/privacy-analytics.js"></script>`;
 }
 
 

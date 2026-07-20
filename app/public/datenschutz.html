@@ -12,6 +12,7 @@
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       <link rel="stylesheet" href="/static-pages.css" />
+      <script defer src="/privacy-analytics.js"></script>
   </head>
   <body class="static-page">
     <main>
@@ -42,6 +43,27 @@
           Die zuletzt ausgewählten Werte für Bundesland und Jahr können lokal im Browser
           gespeichert werden. Diese Speicherung erfolgt über <code>localStorage</code>
           und bleibt auf deinem Gerät.
+        </p>
+
+        <h2>Optionale Nutzungsanalyse mit Microsoft Clarity</h2>
+        <p>
+          Nach deiner ausdrücklichen Zustimmung lädt Schulferienklar
+          Microsoft Clarity. Damit können zusammengefasste Informationen
+          darüber ausgewertet werden, wie Kalender-, Druck- und
+          Downloadfunktionen verwendet werden. Ohne Zustimmung wird das
+          Clarity-Skript nicht geladen.
+        </p>
+        <p>
+          Du kannst deine Entscheidung jederzeit über
+          <button
+            type="button"
+            class="sf-privacy-settings"
+            onclick="window.schulferienklarPrivacy?.open()"
+          >
+            Datenschutz-Einstellungen
+          </button>
+          ändern. Bei einer Ablehnung bleiben alle notwendigen
+          Websitefunktionen verfügbar.
         </p>
 
         <h2>Hosting</h2>

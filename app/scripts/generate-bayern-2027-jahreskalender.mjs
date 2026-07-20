@@ -291,6 +291,7 @@ function generateHtml(schoolEvents, publicHolidays, connectedDates, source) {
     <meta name="robots" content="noindex,follow" />
     <link rel="canonical" href="https://www.schulferienklar.de/schulferien-bayern-2027.html" />
     <link rel="stylesheet" href="/jahreskalender.css" />
+    <script defer src="/privacy-analytics.js"></script>
     <title>Jahreskalender Bayern 2027 · Schulferienklar</title>
   </head>
   <body>
@@ -305,10 +306,18 @@ function generateHtml(schoolEvents, publicHolidays, connectedDates, source) {
           </p>
         </div>
         <div class="actions">
-          <button type="button" onclick="window.print()">
+          <button
+            type="button"
+            onclick="window.print()"
+            data-download-action="print-pdf-bayern-2027"
+          >
             Drucken / PDF (Querformat)
           </button>
-          <a href="/downloads/schulferien-bayern-2027.ics" download>
+          <a
+            href="/downloads/schulferien-bayern-2027.ics"
+            download
+            data-download-action="download-ics-bayern-2027"
+          >
             ICS herunterladen
           </a>
           <span class="print-hint">

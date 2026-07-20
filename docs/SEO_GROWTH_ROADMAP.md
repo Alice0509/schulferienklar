@@ -214,3 +214,5 @@ Avoid purchased links, automated directory submissions, and mass guest-post camp
 - 2026-08-16: First four-week SEO performance review scheduled.
 - Phase 2A started: Bayern 2027 one-page Jahreskalender with A4 print/PDF workflow and ICS.
 - Direct PNG and pre-generated PDF files remain pending until the layout is reviewed.
+
+- Phase 2B started: consent-gated Microsoft Clarity measurement for annual-calendar, PDF-print and ICS actions.
