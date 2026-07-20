@@ -511,6 +511,46 @@ function bayern2027SourceHtml(source) {
         </section>`;
 }
 
+
+function bayern2027JahreskalenderHtml() {
+  return `        <section id="jahreskalender" class="gold-section gold-jahreskalender">
+          <p class="eyebrow">Zwölf Monate auf einer Seite</p>
+          <h2>Jahreskalender Bayern 2027</h2>
+          <p>
+            Öffne die vollständige Jahresansicht mit Kalenderwochen,
+            Schulferien, Feiertagen und direkt zusammenhängender freier Zeit.
+          </p>
+          <div class="gold-jahreskalender-grid">
+            <a
+              class="gold-jahreskalender-card gold-jahreskalender-primary"
+              href="/downloads/jahreskalender-bayern-2027.html"
+            >
+              <span>Jahresansicht · PDF</span>
+              <strong>Jahreskalender öffnen</strong>
+              <small>
+                A4-Querformat ansehen, drucken oder im Browser als PDF speichern.
+              </small>
+            </a>
+            <a
+              class="gold-jahreskalender-card"
+              href="/downloads/schulferien-bayern-2027.ics"
+              download
+            >
+              <span>ICS</span>
+              <strong>Kalenderdatei herunterladen</strong>
+              <small>
+                Schulferien und landesweite Feiertage für Kalender-Apps.
+              </small>
+            </a>
+          </div>
+          <p class="gold-jahreskalender-note">
+            Die Jahresansicht unterscheidet offizielle Schulferien,
+            unterrichtsfreie Tage, gesetzliche Feiertage und die von
+            Schulferienklar berechnete direkt zusammenhängende freie Zeit.
+          </p>
+        </section>`;
+}
+
 function bayern2027RelatedLinksHtml() {
   return `        <section class="gold-section">
           <h2>Passende Ferienübersichten</h2>
@@ -582,6 +622,7 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
         <nav class="gold-page-nav" aria-label="Inhalt dieser Seite">
           <a href="#termine">Alle Termine</a>
           <a href="#berechnung">Freie Zeit</a>
+          <a href="#jahreskalender">Jahreskalender</a>
           <a href="#bezeichnungen">Bezeichnungen</a>
           <a href="#quelle">Quelle</a>
           <a href="#fragen">Fragen</a>
@@ -624,6 +665,8 @@ ${bayern2027PeriodRowsHtml(events, publicHolidays)}
             Standardberechnung nicht berücksichtigt.
           </p>
         </section>
+
+${bayern2027JahreskalenderHtml()}
 
         <section id="bezeichnungen" class="gold-section">
           <p class="eyebrow">Bayerische Besonderheiten</p>

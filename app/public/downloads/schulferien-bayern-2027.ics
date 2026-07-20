@@ -1,0 +1,230 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Schulferienklar//Bayern 2027 Jahreskalender//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Schulferien Bayern 2027
+BEGIN:VEVENT
+UID:by-christmas-2026-27@schulferienklar.de
+DTSTAMP:20260524
+ T000000Z
+DTSTART;VALUE=DATE:20261224
+DTEND;VALUE=DATE:20270109
+SUMMARY:W
+ eihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Bayern 2027
+  · Quelle: Bayerisches Staatsm
+ inisterium für Unterricht und Kultus /
+  Bayern.Recht
+END:VEVENT
+BEGIN:VEVENT
+UID:by-spring-2026-27@schulferienklar.de
+DTSTAMP:20260524T00
+ 0000Z
+DTSTART;VALUE=DATE:20270208
+DTEND;VALUE=DATE:20270213
+SUMMARY:Frü
+ hjahrsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Bayern 2027 ·
+  Quelle: Bayerisches Staatsm
+ inisterium für Unterricht und Kultus / Ba
+ yern.Recht
+END:VEVENT
+BEGIN:VEVENT
+UID:by-easter-2026-27@schulferienklar.de
+DTSTAMP:20260524T00
+ 0000Z
+DTSTART;VALUE=DATE:20270322
+DTEND;VALUE=DATE:20270403
+SUMMARY:Oste
+ rferien (Schulferien)
+DESCRIPTION:Schulferienklar · Bayern 2027 · Quel
+ le: Bayerisches Staatsm
+ inisterium für Unterricht und Kultus / Bayern.
+ Recht
+END:VEVENT
+BEGIN:VEVENT
+UID:by-pentecost-2026-27@schulferienklar.de
+DTSTAMP:20260524
+ T000000Z
+DTSTART;VALUE=DATE:20270518
+DTEND;VALUE=DATE:20270529
+SUMMARY:P
+ fingstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Bayern 2027 ·
+  Quelle: Bayerisches Staatsm
+ inisterium für Unterricht und Kultus / Ba
+ yern.Recht
+END:VEVENT
+BEGIN:VEVENT
+UID:by-summer-2027-28@schulferienklar.de
+DTSTAMP:20260524T00
+ 0000Z
+DTSTART;VALUE=DATE:20270802
+DTEND;VALUE=DATE:20270914
+SUMMARY:Somm
+ erferien (Schulferien)
+DESCRIPTION:Schulferienklar · Bayern 2027 · Que
+ lle: Bayerisches Staatsm
+ inisterium für Unterricht und Kultus / Bayern
+ .Recht
+END:VEVENT
+BEGIN:VEVENT
+UID:by-all-saints-2027-28@schulferienklar.de
+DTSTAMP:2026052
+ 4T000000Z
+DTSTART;VALUE=DATE:20271102
+DTEND;VALUE=DATE:20271106
+SUMMARY:
+ Unterrichtsfreie Tage um Allerheiligen (Unterrichtsfrei)
+DESCRIPTION:Sch
+ ulferienklar · Bayern 2027 · Quelle: Bayerisches Staatsm
+ inisterium f
+ ür Unterricht und Kultus / Bayern.Recht
+END:VEVENT
+BEGIN:VEVENT
+UID:by-christmas-2027-28@schulferienklar.de
+DTSTAMP:20260524
+ T000000Z
+DTSTART;VALUE=DATE:20271224
+DTEND;VALUE=DATE:20280108
+SUMMARY:W
+ eihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Bayern 2027
+  · Quelle: Bayerisches Staatsm
+ inisterium für Unterricht und Kultus /
+  Bayern.Recht
+END:VEVENT
+BEGIN:VEVENT
+UID:by-public-2027-new-year@schulferienklar.de
+DTSTAMP:20260
+ 524T000000Z
+DTSTART;VALUE=DATE:20270101
+DTEND;VALUE=DATE:20270102
+SUMMAR
+ Y:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feierta
+ g · Bayern
+END:VEVENT
+BEGIN:VEVENT
+UID:by-public-2027-epiphany@schulferienklar.de
+DTSTAMP:20260
+ 524T000000Z
+DTSTART;VALUE=DATE:20270106
+DTEND;VALUE=DATE:20270107
+SUMMAR
+ Y:Heilige Drei Könige (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzl
+ icher Feiertag · Bayern
+END:VEVENT
+BEGIN:VEVENT
+UID:by-public-2027-good-friday@schulferienklar.de
+DTSTAMP:20
+ 260524T000000Z
+DTSTART;VALUE=DATE:20270326
+DTEND;VALUE=DATE:20270327
+SUM
+ MARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher F
+ eiertag · Bayern
+END:VEVENT
+BEGIN:VEVENT
+UID:by-public-2027-easter-monday@schulferienklar.de
+DTSTAMP:
+ 20260524T000000Z
+DTSTART;VALUE=DATE:20270329
+DTEND;VALUE=DATE:20270330
+S
+ UMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzliche
+ r Feiertag · Bayern
+END:VEVENT
+BEGIN:VEVENT
+UID:by-public-2027-labour-day@schulferienklar.de
+DTSTAMP:202
+ 60524T000000Z
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270502
+SUMM
+ ARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzliche
+ r Feiertag · Bayern
+END:VEVENT
+BEGIN:VEVENT
+UID:by-public-2027-ascension@schulferienklar.de
+DTSTAMP:2026
+ 0524T000000Z
+DTSTART;VALUE=DATE:20270506
+DTEND;VALUE=DATE:20270507
+SUMMA
+ RY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzl
+ icher Feiertag · Bayern
+END:VEVENT
+BEGIN:VEVENT
+UID:by-public-2027-pentecost-monday@schulferienklar.de
+DTSTA
+ MP:20260524T000000Z
+DTSTART;VALUE=DATE:20270517
+DTEND;VALUE=DATE:2027051
+ 8
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetz
+ licher Feiertag · Bayern
+END:VEVENT
+BEGIN:VEVENT
+UID:by-public-2027-corpus-christi@schulferienklar.de
+DTSTAMP
+ :20260524T000000Z
+DTSTART;VALUE=DATE:20270527
+DTEND;VALUE=DATE:20270528
+
+ SUMMARY:Fronleichnam (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlic
+ her Feiertag · Bayern
+END:VEVENT
+BEGIN:VEVENT
+UID:by-public-2027-german-unity@schulferienklar.de
+DTSTAMP:2
+ 0260524T000000Z
+DTSTART;VALUE=DATE:20271003
+DTEND;VALUE=DATE:20271004
+SU
+ MMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar
+  · Gesetzlicher Feiertag · Bayern
+END:VEVENT
+BEGIN:VEVENT
+UID:by-public-2027-all-saints@schulferienklar.de
+DTSTAMP:202
+ 60524T000000Z
+DTSTART;VALUE=DATE:20271101
+DTEND;VALUE=DATE:20271102
+SUMM
+ ARY:Allerheiligen (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher
+  Feiertag · Bayern
+END:VEVENT
+BEGIN:VEVENT
+UID:by-public-2027-christmas-day@schulferienklar.de
+DTSTAMP:
+ 20260524T000000Z
+DTSTART;VALUE=DATE:20271225
+DTEND;VALUE=DATE:20271226
+S
+ UMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · G
+ esetzlicher Feiertag · Bayern
+END:VEVENT
+BEGIN:VEVENT
+UID:by-public-2027-second-christmas-day@schulferienklar.de
+D
+ TSTAMP:20260524T000000Z
+DTSTART;VALUE=DATE:20271226
+DTEND;VALUE=DATE:202
+ 71227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienkl
+ ar · Gesetzlicher Feiertag · Bayern
+END:VEVENT
+END:VCALENDAR
