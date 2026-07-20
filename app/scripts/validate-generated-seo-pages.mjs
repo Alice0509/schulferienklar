@@ -117,6 +117,9 @@ if (fs.existsSync(bayern2027CalendarPath)) {
     ["public holiday legend", /Gesetzlicher Feiertag<\/span>/],
     ["connected free legend", /Zusammenhängend frei<\/span>/],
     ["print action", /window\.print\(\)/],
+    ["privacy analytics script", /privacy-analytics\.js/],
+    ["print tracking", /data-download-action="print-pdf-bayern-2027"/],
+    ["ICS tracking", /data-download-action="download-ics-bayern-2027"/],
     ["official source", /Bayerisches Staatsministerium/],
   ];
 
