@@ -391,3 +391,35 @@ code {
     display: none;
   }
 }
+
+/* Germany Travel Checker redirect page */
+
+.germany-travel-checker-page .static-brand {
+  flex: 1 1 auto;
+}
+
+.germany-travel-checker-page .back {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.gtc-header-link-short {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .germany-travel-checker-page .back {
+    min-height: 34px;
+    padding: 6px 9px;
+    font-size: 0.76rem;
+  }
+
+  .gtc-header-link-full {
+    display: none;
+  }
+
+  .gtc-header-link-short {
+    display: inline;
+  }
+}
+
