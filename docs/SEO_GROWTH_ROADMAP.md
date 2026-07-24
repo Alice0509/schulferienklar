@@ -1,5 +1,11 @@
 # Schulferienklar SEO Growth Roadmap
 
+> [!IMPORTANT]
+> 제품·기술·API·수익화의 최상위 기준은
+> [`PRODUCT_NORTH_STAR.md`](./PRODUCT_NORTH_STAR.md)를 따른다.
+> SEO 작업은 North Star의 사용자 가치와 데이터 자산을 강화하는 범위에서 진행한다.
+
+
 Updated: 2026-07-19
 
 ## Goal
