@@ -25,3 +25,4 @@ pnpm-debug.log*
 
 # temporary files
 tmp/
+app/public/api/
