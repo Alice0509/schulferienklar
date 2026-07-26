@@ -3524,14 +3524,17 @@ button.current-year-link {
 }
 
 .vacation-optimizer-card.is-best {
-  border-color: rgba(31, 111, 100, 0.52);
-  background:
-    linear-gradient(
-      145deg,
-      rgba(238, 248, 244, 0.9),
-      rgba(255, 255, 255, 0.96)
-    );
-  box-shadow: 0 16px 38px rgba(31, 111, 100, 0.1);
+  border-color: rgba(23, 32, 51, 0.09);
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.vacation-optimizer-card.is-best header span {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 5px 9px;
+  background: #eaf6f2;
 }
 
 .vacation-optimizer-card header {
@@ -3686,4 +3689,10 @@ button.current-year-link {
   margin: 5px 0 0;
   color: #66717f;
   font-size: 0.9rem;
+}
+
+.vacation-calculation-note a {
+  color: #1f6f64;
+  font-weight: 900;
+  text-underline-offset: 3px;
 }

@@ -7,6 +7,8 @@ const sitemapPath = path.join(publicDir, "sitemap.xml");
 const requiredFiles = [
   "sitemap.xml",
   "seo-pages.css",
+  "urlaubsplaner.css",
+  "urlaubsplaner-2027.html",
   "schulferien-2026.html",
   "schulferien-bayern.html",
   "schulferien-bayern-2026.html",
@@ -19,7 +21,12 @@ const requiredFiles = [
 const htmlFiles = fs
   .readdirSync(publicDir)
   .filter((file) => file.endsWith(".html"))
-  .filter((file) => file.startsWith("schulferien-"));
+  .filter((file) => {
+    return (
+      file.startsWith("schulferien-") ||
+      file.startsWith("urlaubsplaner-")
+    );
+  });
 
 const errors = [];
 
@@ -50,7 +57,10 @@ for (const file of htmlFiles) {
   const checks = [
     ["title", /<title>.+<\/title>/s],
     ["meta description", /<meta name="description" content="[^"]+"/],
-    ["canonical", /<link rel="canonical" href="https:\/\/www\.schulferienklar\.de\/[^"]+"/],
+    [
+      "canonical",
+      /<link\b(?=[^>]*\brel="canonical")(?=[^>]*\bhref="https:\/\/www\.schulferienklar\.de\/[^"]+")[^>]*>/,
+    ],
     ["shared stylesheet", /<link rel="stylesheet" href="\/seo-pages\.css" \/>/],
     ["h1", /<h1>.+<\/h1>/s],
   ];
@@ -59,6 +69,56 @@ for (const file of htmlFiles) {
     if (!pattern.test(html)) {
       errors.push(`${file}: missing ${label}`);
     }
+  }
+}
+
+
+const urlaubsplaner2027Path = path.join(
+  publicDir,
+  "urlaubsplaner-2027.html",
+);
+
+if (fs.existsSync(urlaubsplaner2027Path)) {
+  const plannerHtml = fs.readFileSync(
+    urlaubsplaner2027Path,
+    "utf8",
+  );
+
+  const plannerChecks = [
+    ["planner page marker", /data-page="urlaubsplaner-2027"/],
+    ["planner stylesheet", /href="\/urlaubsplaner\.css"/],
+    ["planner canonical", /canonical[^>]+urlaubsplaner-2027\.html/],
+    [
+      "calculator anchor",
+      /year=2027&vacationDays=[1-5]#brueckentage/,
+    ],
+    ["budget 1 example", /data-budget="1"/],
+    ["budget 5 example", /data-budget="5"/],
+    ["scope limitation", /lokale Feiertage/i],
+    ["FAQ structured data", /FAQPage/],
+    ["breadcrumb structured data", /BreadcrumbList/],
+  ];
+
+  for (const [label, pattern] of plannerChecks) {
+    if (!pattern.test(plannerHtml)) {
+      errors.push(
+        `urlaubsplaner-2027.html: missing ${label}`,
+      );
+    }
+  }
+
+  const statePlannerLinks =
+    plannerHtml.match(
+      /\/\?state=[A-Z]{2}&year=2027&vacationDays=4#brueckentage/g,
+    ) || [];
+
+  const uniqueStatePlannerLinks =
+    new Set(statePlannerLinks);
+
+  if (uniqueStatePlannerLinks.size < 16) {
+    errors.push(
+      "urlaubsplaner-2027.html: expected planner links for 16 states",
+    );
   }
 }
 
