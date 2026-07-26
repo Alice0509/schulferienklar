@@ -1,30 +1,8 @@
-function parseDateKey(dateKey) {
-  const [year, month, day] = String(dateKey).split("-").map(Number);
-
-  if (!year || !month || !day) {
-    throw new Error(`Invalid date key: ${dateKey}`);
-  }
-
-  return new Date(year, month - 1, day);
-}
-
-function formatDate(date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-
-  return `${year}${month}${day}`;
-}
-
-function addDays(dateKey, days) {
-  const date = parseDateKey(dateKey);
-  date.setDate(date.getDate() + days);
-  return formatDate(date);
-}
-
-function formatDateKey(dateKey) {
-  return formatDate(parseDateKey(dateKey));
-}
+import {
+  addDaysToDateKey,
+  formatBasicDate,
+} from "../domain/date.js";
+import { getSchoolEventCategoryLabel } from "../domain/event-types.js";
 
 function formatTimestamp(date = new Date()) {
   const year = date.getUTCFullYear();
@@ -50,8 +28,8 @@ function createEvent({ uid, title, startDate, endDate, description }) {
     "BEGIN:VEVENT",
     `UID:${escapeText(uid)}`,
     `DTSTAMP:${formatTimestamp()}`,
-    `DTSTART;VALUE=DATE:${formatDateKey(startDate)}`,
-    `DTEND;VALUE=DATE:${addDays(endDate, 1)}`,
+    `DTSTART;VALUE=DATE:${formatBasicDate(startDate)}`,
+    `DTEND;VALUE=DATE:${formatBasicDate(addDaysToDateKey(endDate, 1))}`,
     `SUMMARY:${escapeText(title)}`,
     `DESCRIPTION:${escapeText(description)}`,
     "END:VEVENT",
@@ -73,8 +51,7 @@ export function generateIcsCalendar({
     })
     .map((holiday) => {
       const name = holiday.name?.de || holiday.name || "Schulferien";
-      const category =
-        holiday.category === "school_free" ? "Unterrichtsfrei" : "Schulferien";
+      const category = getSchoolEventCategoryLabel(holiday, "de");
 
       return createEvent({
         uid: `${holiday.id || `${selectedCode}-${holiday.startDate}-${holiday.endDate}`}@schulferienklar.de`,
