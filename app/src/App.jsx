@@ -1916,8 +1916,8 @@ export default function App() {
                 Berechnet mit Wochenenden und landesweiten gesetzlichen
                 Feiertagen. Persönliche Arbeitszeiten, Betriebsferien und
                 regionale Sonderregelungen sind nicht berücksichtigt.{" "}
-                <a href="/urlaubsplaner-2027.html">
-                  Urlaubsplaner 2027 für alle Bundesländer ansehen
+                <a href={`/urlaubsplaner-${bridgeDayYear}.html`}>
+                  Urlaubsplaner {bridgeDayYear} für alle Bundesländer ansehen
                 </a>
               </p>
             </div>
