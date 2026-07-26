@@ -1108,7 +1108,11 @@ function writeSitemap() {
 
   const staticPages = [
     ["/", "weekly", "1.0"],
-    ["/urlaubsplaner-2027.html", "monthly", "0.85"],
+    ...years.map((year) => [
+      `/urlaubsplaner-${year}.html`,
+      "monthly",
+      "0.85",
+    ]),
     ["/datenquellen.html", "monthly", "0.7"],
     ["/ueber-uns.html", "monthly", "0.6"],
     ["/impressum.html", "yearly", "0.3"],

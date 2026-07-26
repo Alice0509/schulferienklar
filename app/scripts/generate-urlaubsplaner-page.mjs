@@ -8,7 +8,7 @@ import {
   nodeHolidayRepository,
 } from "./lib/node-data-repository.mjs";
 
-const YEAR = 2027;
+const YEARS = [2026, 2027, 2028, 2029, 2030];
 const DEFAULT_STATE_CODE = "BY";
 const outputDir = path.resolve("public");
 
@@ -58,16 +58,16 @@ function stateSlug(name) {
     .replace(/^-+|-+$/g, "");
 }
 
-function getStateData(publicHolidayIndex) {
+function getStateData(publicHolidayIndex, year) {
   return (publicHolidayIndex.datasets || [])
-    .filter((meta) => Number(meta.year) === YEAR)
+    .filter((meta) => Number(meta.year) === year)
     .map((meta) => {
       const dataset =
         nodeHolidayRepository.loadPublicHolidayDatasetByMeta(meta);
 
       if (!dataset) {
         throw new Error(
-          `Public holiday dataset missing: ${meta.bundeslandCode} ${YEAR}`,
+          `Public holiday dataset missing: ${meta.bundeslandCode} ${year}`,
         );
       }
 
@@ -79,7 +79,7 @@ function getStateData(publicHolidayIndex) {
       const bestSuggestion =
         getVacationOptimizerSuggestions(
           holidays,
-          YEAR,
+          year,
           4,
           {
             limit: 1,
@@ -102,13 +102,13 @@ function getStateData(publicHolidayIndex) {
     });
 }
 
-function budgetExamplesHtml(defaultState) {
+function budgetExamplesHtml(defaultState, year) {
   return [1, 2, 3, 4, 5]
     .map((budget) => {
       const suggestion =
         getVacationOptimizerSuggestions(
           defaultState.holidays,
-          YEAR,
+          year,
           budget,
           {
             limit: 1,
@@ -134,7 +134,7 @@ function budgetExamplesHtml(defaultState) {
               Dafür werden ${suggestion.vacationDays}
               ${vacationDayLabel(suggestion.vacationDays)} benötigt.
             </p>
-            <a href="/?state=${defaultState.code}&year=${YEAR}&vacationDays=${budget}#brueckentage">
+            <a href="/?state=${defaultState.code}&year=${year}&vacationDays=${budget}#brueckentage">
               Diese Planung im Rechner öffnen
             </a>
           </article>`;
@@ -142,7 +142,7 @@ function budgetExamplesHtml(defaultState) {
     .join("\n");
 }
 
-function stateCardsHtml(states) {
+function stateCardsHtml(states, year) {
   return states
     .map((state) => {
       const suggestion = state.bestSuggestion;
@@ -171,11 +171,11 @@ function stateCardsHtml(states) {
               ${resultHtml}
             </p>
             <div class="planner-state-links">
-              <a href="/?state=${escapeHtml(state.code)}&year=${YEAR}&vacationDays=4#brueckentage">
+              <a href="/?state=${escapeHtml(state.code)}&year=${year}&vacationDays=4#brueckentage">
                 Urlaubsplaner öffnen
               </a>
-              <a href="/schulferien-${escapeHtml(state.slug)}-${YEAR}.html">
-                Schulferien ${YEAR}
+              <a href="/schulferien-${escapeHtml(state.slug)}-${year}.html">
+                Schulferien ${year}
               </a>
             </div>
           </article>`;
@@ -183,10 +183,10 @@ function stateCardsHtml(states) {
     .join("\n");
 }
 
-function structuredDataHtml() {
+function structuredDataHtml(year) {
   const faqItems = [
     {
-      question: "Wie funktioniert der Urlaubsplaner 2027?",
+      question: `Wie funktioniert der Urlaubsplaner ${year}?`,
       answer:
         "Der Urlaubsplaner verbindet Wochenenden und landesweit geltende gesetzliche Feiertage mit ausgewählten Urlaubstagen und sucht nach langen zusammenhängenden freien Zeiträumen.",
     },
@@ -222,9 +222,9 @@ function structuredDataHtml() {
           {
             "@type": "ListItem",
             position: 2,
-            name: `Urlaubsplaner ${YEAR}`,
+            name: `Urlaubsplaner ${year}`,
             item:
-              `https://www.schulferienklar.de/urlaubsplaner-${YEAR}.html`,
+              `https://www.schulferienklar.de/urlaubsplaner-${year}.html`,
           },
         ],
       },
@@ -253,7 +253,10 @@ function structuredDataHtml() {
 function pageTemplate({
   states,
   generatedAt,
+  year,
 }) {
+  const YEAR = year;
+
   const defaultState =
     states.find((state) => {
       return state.code === DEFAULT_STATE_CODE;
@@ -300,7 +303,7 @@ function pageTemplate({
       property="og:image"
       content="https://www.schulferienklar.de/og-image.png"
     />
-    ${structuredDataHtml()}
+    ${structuredDataHtml(YEAR)}
   </head>
   <body class="seo-page planner-body" data-page="urlaubsplaner-${YEAR}">
     <main class="planner-page">
@@ -345,7 +348,7 @@ function pageTemplate({
           Im Rechner kannst du Bundesland, Jahr und Budget selbst ändern.
         </p>
         <div class="planner-budget-grid">
-${budgetExamplesHtml(defaultState)}
+${budgetExamplesHtml(defaultState, YEAR)}
         </div>
       </section>
 
@@ -358,7 +361,7 @@ ${budgetExamplesHtml(defaultState)}
           um dein eigenes Urlaubstage-Budget festzulegen.
         </p>
         <div class="planner-state-grid">
-${stateCardsHtml(states)}
+${stateCardsHtml(states, YEAR)}
         </div>
       </section>
 
@@ -456,25 +459,29 @@ ${stateCardsHtml(states)}
 const publicHolidayIndex =
   nodeHolidayRepository.loadPublicHolidayIndex();
 
-const states = getStateData(
-  publicHolidayIndex,
-);
+for (const year of YEARS) {
+  const states = getStateData(
+    publicHolidayIndex,
+    year,
+  );
 
-const fileName =
-  `urlaubsplaner-${YEAR}.html`;
+  const fileName =
+    `urlaubsplaner-${year}.html`;
 
-fs.writeFileSync(
-  path.join(outputDir, fileName),
-  `${pageTemplate({
-    states,
-    generatedAt:
-      publicHolidayIndex.generatedAt ||
-      null,
-  }).replace(/[ \t]+$/gm, "")}\n`,
-  "utf8",
-);
+  fs.writeFileSync(
+    path.join(outputDir, fileName),
+    `${pageTemplate({
+      states,
+      year,
+      generatedAt:
+        publicHolidayIndex.generatedAt ||
+        null,
+    }).replace(/[ \\t]+$/gm, "")}\n`,
+    "utf8",
+  );
 
-console.log(
-  `created ${fileName} ` +
-    `(${states.length} states)`,
-);
+  console.log(
+    `created ${fileName} ` +
+      `(${states.length} states)`,
+  );
+}
