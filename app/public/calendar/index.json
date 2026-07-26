@@ -1,0 +1,251 @@
+{
+  "version": "1.0",
+  "generatedAt": "2026-05-25",
+  "totalStates": 16,
+  "coverage": {
+    "startYear": 2026,
+    "endYear": 2030
+  },
+  "feeds": [
+    {
+      "bundeslandCode": "BW",
+      "bundeslandName": "Baden-Württemberg",
+      "file": "bw.ics",
+      "url": "/calendar/bw.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/bw.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 27,
+      "publicHolidayCount": 60,
+      "eventCount": 87
+    },
+    {
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "file": "by.ics",
+      "url": "/calendar/by.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/by.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 29,
+      "publicHolidayCount": 60,
+      "eventCount": 89
+    },
+    {
+      "bundeslandCode": "BE",
+      "bundeslandName": "Berlin",
+      "file": "be.ics",
+      "url": "/calendar/be.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/be.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 36,
+      "publicHolidayCount": 50,
+      "eventCount": 86
+    },
+    {
+      "bundeslandCode": "BB",
+      "bundeslandName": "Brandenburg",
+      "file": "bb.ics",
+      "url": "/calendar/bb.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/bb.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 27,
+      "publicHolidayCount": 60,
+      "eventCount": 87
+    },
+    {
+      "bundeslandCode": "HB",
+      "bundeslandName": "Bremen",
+      "file": "hb.ics",
+      "url": "/calendar/hb.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/hb.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 37,
+      "publicHolidayCount": 50,
+      "eventCount": 87
+    },
+    {
+      "bundeslandCode": "HH",
+      "bundeslandName": "Hamburg",
+      "file": "hh.ics",
+      "url": "/calendar/hh.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/hh.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 31,
+      "publicHolidayCount": 50,
+      "eventCount": 81
+    },
+    {
+      "bundeslandCode": "HE",
+      "bundeslandName": "Hessen",
+      "file": "he.ics",
+      "url": "/calendar/he.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/he.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 19,
+      "publicHolidayCount": 50,
+      "eventCount": 69
+    },
+    {
+      "bundeslandCode": "MV",
+      "bundeslandName": "Mecklenburg-Vorpommern",
+      "file": "mv.ics",
+      "url": "/calendar/mv.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/mv.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 41,
+      "publicHolidayCount": 55,
+      "eventCount": 96
+    },
+    {
+      "bundeslandCode": "NI",
+      "bundeslandName": "Niedersachsen",
+      "file": "ni.ics",
+      "url": "/calendar/ni.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/ni.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 37,
+      "publicHolidayCount": 50,
+      "eventCount": 87
+    },
+    {
+      "bundeslandCode": "NW",
+      "bundeslandName": "Nordrhein-Westfalen",
+      "file": "nw.ics",
+      "url": "/calendar/nw.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/nw.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 22,
+      "publicHolidayCount": 55,
+      "eventCount": 77
+    },
+    {
+      "bundeslandCode": "RP",
+      "bundeslandName": "Rheinland-Pfalz",
+      "file": "rp.ics",
+      "url": "/calendar/rp.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/rp.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 18,
+      "publicHolidayCount": 55,
+      "eventCount": 73
+    },
+    {
+      "bundeslandCode": "SL",
+      "bundeslandName": "Saarland",
+      "file": "sl.ics",
+      "url": "/calendar/sl.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/sl.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 25,
+      "publicHolidayCount": 60,
+      "eventCount": 85
+    },
+    {
+      "bundeslandCode": "SN",
+      "bundeslandName": "Sachsen",
+      "file": "sn.ics",
+      "url": "/calendar/sn.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/sn.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 29,
+      "publicHolidayCount": 55,
+      "eventCount": 84
+    },
+    {
+      "bundeslandCode": "ST",
+      "bundeslandName": "Sachsen-Anhalt",
+      "file": "st.ics",
+      "url": "/calendar/st.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/st.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 32,
+      "publicHolidayCount": 55,
+      "eventCount": 87
+    },
+    {
+      "bundeslandCode": "SH",
+      "bundeslandName": "Schleswig-Holstein",
+      "file": "sh.ics",
+      "url": "/calendar/sh.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/sh.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 23,
+      "publicHolidayCount": 50,
+      "eventCount": 73
+    },
+    {
+      "bundeslandCode": "TH",
+      "bundeslandName": "Thüringen",
+      "file": "th.ics",
+      "url": "/calendar/th.ics",
+      "subscriptionUrl": "https://www.schulferienklar.de/calendar/th.ics",
+      "coverage": {
+        "startYear": 2026,
+        "endYear": 2030
+      },
+      "updatedAt": "2026-05-25",
+      "schoolEventCount": 29,
+      "publicHolidayCount": 55,
+      "eventCount": 84
+    }
+  ]
+}

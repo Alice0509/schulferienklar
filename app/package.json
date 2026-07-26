@@ -10,15 +10,17 @@
     "test": "node --test tests/*.test.js",
     "preview": "vite preview",
     "generate:seo": "node scripts/generate-seo-pages.mjs && npm run generate:urlaubsplaner",
-    "build:seo": "npm run generate:jahreskalender && npm run generate:seo && npm run generate:api && vite build",
+    "build:seo": "npm run generate:jahreskalender && npm run generate:seo && npm run generate:api && npm run generate:subscriptions && vite build",
     "validate:data": "cd .. && node scripts/validate-holidays.mjs && node scripts/validate-public-holidays.mjs",
-    "generate:seo:checked": "npm run validate:data && npm run generate:jahreskalender && npm run generate:seo && npm run generate:api && npm run validate:api",
-    "build:seo:checked": "npm run validate:data && npm run generate:jahreskalender && npm run generate:seo && npm run generate:api && npm run validate:seo-pages && npm run validate:api && vite build",
+    "generate:seo:checked": "npm run validate:data && npm run generate:jahreskalender && npm run generate:seo && npm run generate:api && npm run generate:subscriptions && npm run validate:api && npm run validate:subscriptions",
+    "build:seo:checked": "npm run validate:data && npm run generate:jahreskalender && npm run generate:seo && npm run generate:api && npm run generate:subscriptions && npm run validate:seo-pages && npm run validate:api && npm run validate:subscriptions && vite build",
     "validate:seo-pages": "node scripts/validate-generated-seo-pages.mjs",
     "generate:jahreskalender": "node scripts/generate-bayern-2027-jahreskalender.mjs",
     "generate:api": "node scripts/generate-static-api.mjs",
     "validate:api": "node scripts/validate-static-api.mjs",
-    "generate:urlaubsplaner": "node scripts/generate-urlaubsplaner-page.mjs"
+    "generate:urlaubsplaner": "node scripts/generate-urlaubsplaner-page.mjs",
+    "generate:subscriptions": "node scripts/generate-subscription-calendars.mjs",
+    "validate:subscriptions": "node scripts/validate-subscription-calendars.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",

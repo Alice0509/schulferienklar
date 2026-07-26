@@ -1,0 +1,1231 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Schulferienklar//Subscription Calendar//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Schulferien und Feiertage Sachsen-Anhalt
+X-WR-CALDESC:Automatisch aktualisierter Kalender für Sachsen-Anhalt. Enth
+ ält landesweite Schulferien\, unterrichtsfreie Tage und landesweit gelten
+ de gesetzliche Feiertage.
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+URL:https://www.schulferienklar.de/calendar/st.ics
+BEGIN:VEVENT
+UID:st-christmas-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20251222
+DTEND;VALUE=DATE:20260106
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2025
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2026-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260101
+DTEND;VALUE=DATE:20260102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2026-epiphany@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260106
+DTEND;VALUE=DATE:20260107
+SUMMARY:Heilige Drei Könige (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-winter-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260131
+DTEND;VALUE=DATE:20260207
+SUMMARY:Winterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-easter-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260330
+DTEND;VALUE=DATE:20260405
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2026-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260403
+DTEND;VALUE=DATE:20260404
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2026-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260406
+DTEND;VALUE=DATE:20260407
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2026-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260501
+DTEND;VALUE=DATE:20260502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2026-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260514
+DTEND;VALUE=DATE:20260515
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2026-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260525
+DTEND;VALUE=DATE:20260526
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-pentecost-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260526
+DTEND;VALUE=DATE:20260530
+SUMMARY:Pfingstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-summer-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260704
+DTEND;VALUE=DATE:20260815
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2026-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261003
+DTEND;VALUE=DATE:20261004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-autumn-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20261019
+DTEND;VALUE=DATE:20261031
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2026-reformation-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261031
+DTEND;VALUE=DATE:20261101
+SUMMARY:Reformationstag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-christmas-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20261221
+DTEND;VALUE=DATE:20270103
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2026-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261225
+DTEND;VALUE=DATE:20261226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2026-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261226
+DTEND;VALUE=DATE:20261227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2027-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270101
+DTEND;VALUE=DATE:20270102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2027-epiphany@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270106
+DTEND;VALUE=DATE:20270107
+SUMMARY:Heilige Drei Könige (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-winter-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270207
+SUMMARY:Winterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-easter-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270322
+DTEND;VALUE=DATE:20270328
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2027-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270326
+DTEND;VALUE=DATE:20270327
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2027-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270329
+DTEND;VALUE=DATE:20270330
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2027-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2027-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270506
+DTEND;VALUE=DATE:20270507
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-pentecost-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270515
+DTEND;VALUE=DATE:20270523
+SUMMARY:Pfingstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2027-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270517
+DTEND;VALUE=DATE:20270518
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-summer-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270710
+DTEND;VALUE=DATE:20270821
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2027-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271003
+DTEND;VALUE=DATE:20271004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-autumn-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20271018
+DTEND;VALUE=DATE:20271024
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2027-reformation-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271031
+DTEND;VALUE=DATE:20271101
+SUMMARY:Reformationstag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-christmas-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20271220
+DTEND;VALUE=DATE:20280101
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2027-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271225
+DTEND;VALUE=DATE:20271226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2027-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271226
+DTEND;VALUE=DATE:20271227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2028-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280101
+DTEND;VALUE=DATE:20280102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2028-epiphany@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280106
+DTEND;VALUE=DATE:20280107
+SUMMARY:Heilige Drei Könige (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-winter-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20280207
+DTEND;VALUE=DATE:20280213
+SUMMARY:Winterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-easter-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20280410
+DTEND;VALUE=DATE:20280423
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2028-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280414
+DTEND;VALUE=DATE:20280415
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2028-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280417
+DTEND;VALUE=DATE:20280418
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2028-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280501
+DTEND;VALUE=DATE:20280502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2028-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280525
+DTEND;VALUE=DATE:20280526
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-pentecost-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20280603
+DTEND;VALUE=DATE:20280611
+SUMMARY:Pfingstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2028-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280605
+DTEND;VALUE=DATE:20280606
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-summer-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20280722
+DTEND;VALUE=DATE:20280902
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-school-free-2028-10-02@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20281002
+DTEND;VALUE=DATE:20281003
+SUMMARY:Ferientag (Unterrichtsfrei)
+DESCRIPTION:Schulferienklar · Unterrichtsfrei · Sachsen-Anhalt · Quelle:
+  Ministerium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2028-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20281003
+DTEND;VALUE=DATE:20281004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-autumn-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20281030
+DTEND;VALUE=DATE:20281104
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2028-reformation-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20281031
+DTEND;VALUE=DATE:20281101
+SUMMARY:Reformationstag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-christmas-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20281221
+DTEND;VALUE=DATE:20290103
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2028-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20281225
+DTEND;VALUE=DATE:20281226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2028-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20281226
+DTEND;VALUE=DATE:20281227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2029-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290101
+DTEND;VALUE=DATE:20290102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2029-epiphany@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290106
+DTEND;VALUE=DATE:20290107
+SUMMARY:Heilige Drei Könige (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-winter-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290205
+DTEND;VALUE=DATE:20290211
+SUMMARY:Winterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-easter-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290326
+DTEND;VALUE=DATE:20290401
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2029-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290330
+DTEND;VALUE=DATE:20290331
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2029-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290402
+DTEND;VALUE=DATE:20290403
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-school-free-2029-04-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290430
+DTEND;VALUE=DATE:20290501
+SUMMARY:Ferientag (Unterrichtsfrei)
+DESCRIPTION:Schulferienklar · Unterrichtsfrei · Sachsen-Anhalt · Quelle:
+  Ministerium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2029-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290501
+DTEND;VALUE=DATE:20290502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2029-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290510
+DTEND;VALUE=DATE:20290511
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-pentecost-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290511
+DTEND;VALUE=DATE:20290526
+SUMMARY:Pfingstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2029-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290521
+DTEND;VALUE=DATE:20290522
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-summer-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290721
+DTEND;VALUE=DATE:20290901
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2029-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20291003
+DTEND;VALUE=DATE:20291004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-autumn-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20291029
+DTEND;VALUE=DATE:20291103
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2029-reformation-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20291031
+DTEND;VALUE=DATE:20291101
+SUMMARY:Reformationstag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-christmas-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20291221
+DTEND;VALUE=DATE:20300106
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2029-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20291225
+DTEND;VALUE=DATE:20291226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2029-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20291226
+DTEND;VALUE=DATE:20291227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2030-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300101
+DTEND;VALUE=DATE:20300102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2030-epiphany@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300106
+DTEND;VALUE=DATE:20300107
+SUMMARY:Heilige Drei Könige (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-winter-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20300204
+DTEND;VALUE=DATE:20300209
+SUMMARY:Winterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-easter-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20300408
+DTEND;VALUE=DATE:20300421
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2030-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300419
+DTEND;VALUE=DATE:20300420
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2030-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300422
+DTEND;VALUE=DATE:20300423
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2030-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300501
+DTEND;VALUE=DATE:20300502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2030-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300530
+DTEND;VALUE=DATE:20300531
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-school-free-2030-05-31@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20300531
+DTEND;VALUE=DATE:20300601
+SUMMARY:Ferientag (Unterrichtsfrei)
+DESCRIPTION:Schulferienklar · Unterrichtsfrei · Sachsen-Anhalt · Quelle:
+  Ministerium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-pentecost-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20300603
+DTEND;VALUE=DATE:20300609
+SUMMARY:Pfingstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2030-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300610
+DTEND;VALUE=DATE:20300611
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-summer-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20300713
+DTEND;VALUE=DATE:20300824
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Sachsen-Anhalt · Quelle: Min
+ isterium für Bildung des Landes Sachsen-Anhalt
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2030-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20301003
+DTEND;VALUE=DATE:20301004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2030-reformation-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20301031
+DTEND;VALUE=DATE:20301101
+SUMMARY:Reformationstag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2030-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20301225
+DTEND;VALUE=DATE:20301226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:st-public-2030-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20301226
+DTEND;VALUE=DATE:20301227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Sachsen-Anhalt · l
+ andesweit
+URL:https://www.schulferienklar.de/?state=ST&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
