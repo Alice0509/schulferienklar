@@ -2,6 +2,7 @@ import {
   addDaysToDateKey,
   daysBetween,
   isWeekend,
+  rangesOverlap,
 } from "./date.js";
 
 function getPublicHolidayName(holiday) {
@@ -108,6 +109,37 @@ function rankSuggestions(a, b) {
     b.efficiency - a.efficiency ||
     a.startDate.localeCompare(b.startDate)
   );
+}
+
+function selectDistinctSuggestions(
+  suggestions,
+  limit,
+) {
+  const selected = [];
+
+  for (const suggestion of suggestions) {
+    const overlapsSelected =
+      selected.some((existing) => {
+        return rangesOverlap(
+          suggestion.startDate,
+          suggestion.endDate,
+          existing.startDate,
+          existing.endDate,
+        );
+      });
+
+    if (overlapsSelected) {
+      continue;
+    }
+
+    selected.push(suggestion);
+
+    if (selected.length >= limit) {
+      break;
+    }
+  }
+
+  return selected;
 }
 
 export function getVacationOptimizerSuggestions(
@@ -281,7 +313,8 @@ export function getVacationOptimizerSuggestions(
     }
   }
 
-  return suggestions
-    .sort(rankSuggestions)
-    .slice(0, limit);
+  return selectDistinctSuggestions(
+    suggestions.sort(rankSuggestions),
+    limit,
+  );
 }
