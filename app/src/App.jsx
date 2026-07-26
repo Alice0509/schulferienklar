@@ -9,6 +9,9 @@ import {
 } from "./domain/date.js";
 import { getBridgeDaySuggestions } from "./domain/bridge-days.js";
 import {
+  getVacationOptimizerSuggestions,
+} from "./domain/vacation-optimizer.js";
+import {
   getComparisonOverlapData,
   getOverlapMonthKeys,
 } from "./domain/overlaps.js";
@@ -28,6 +31,7 @@ const STORAGE_KEYS = {
   year: "schulferienklar:selected-year",
   comparisonStates: "schulferienklar:comparison-states",
   comparisonYear: "schulferienklar:comparison-year",
+  vacationBudget: "schulferienklar:vacation-budget",
 };
 
 const TODAY = new Date();
@@ -609,6 +613,19 @@ export default function App() {
   const [bridgeDayYear, setBridgeDayYear] = useState(() => {
     return Number(localStorage.getItem(STORAGE_KEYS.year)) || TODAY.getFullYear();
   });
+  const [vacationDayBudget, setVacationDayBudget] = useState(() => {
+    const storedBudget = Number(
+      localStorage.getItem(STORAGE_KEYS.vacationBudget),
+    );
+
+    return (
+      Number.isInteger(storedBudget) &&
+      storedBudget >= 1 &&
+      storedBudget <= 30
+    )
+      ? storedBudget
+      : 4;
+  });
   const [bridgeDayPublicHolidayDataset, setBridgeDayPublicHolidayDataset] = useState(null);
   const [bridgeDayLoading, setBridgeDayLoading] = useState(false);
   const [comparisonYear, setComparisonYear] = useState(() => {
@@ -626,6 +643,13 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.year, String(selectedYear));
   }, [selectedYear]);
+
+  useEffect(() => {
+    localStorage.setItem(
+      STORAGE_KEYS.vacationBudget,
+      String(vacationDayBudget),
+    );
+  }, [vacationDayBudget]);
 
   useEffect(() => {
     setComparisonCodes((currentCodes) => {
@@ -837,6 +861,31 @@ export default function App() {
       TODAY,
     );
   }, [bridgeDayPublicHolidayDataset, bridgeDayYear]);
+
+  const vacationOptimizerSuggestions = useMemo(() => {
+    if (!bridgeDayPublicHolidayDataset) {
+      return [];
+    }
+
+    const minStartDate =
+      bridgeDayYear === TODAY.getFullYear()
+        ? toDateKey(TODAY)
+        : null;
+
+    return getVacationOptimizerSuggestions(
+      bridgeDayPublicHolidayDataset.holidays || [],
+      bridgeDayYear,
+      vacationDayBudget,
+      {
+        limit: 4,
+        minStartDate,
+      },
+    );
+  }, [
+    bridgeDayPublicHolidayDataset,
+    bridgeDayYear,
+    vacationDayBudget,
+  ]);
 
   useEffect(() => {
     let isCancelled = false;
@@ -1620,18 +1669,21 @@ export default function App() {
       <section className="panel bridge-days-section" id="brueckentage">
         <div className="section-header bridge-days-header">
           <div>
-            <p className="eyebrow">Brückentage</p>
+            <p className="eyebrow">Urlaubsplaner & Brückentage</p>
             <h2>Mehr freie Zeit mit wenig Urlaub</h2>
           </div>
         </div>
 
         <p className="section-copy">
-          Wähle Bundesland und Jahr, um passende Brückentage unabhängig vom Kalender zu prüfen.
+          Wähle Bundesland, Jahr und verfügbare Urlaubstage. Schulferienklar
+          sucht nach langen zusammenhängenden freien Zeiträumen und zeigt
+          zusätzlich klassische Brückentage.
         </p>
 
         <div className="bridge-mobile-summary">
           <span>
-            {bridgeDayCode} · {bridgeDayYear}
+            {bridgeDayCode} · {bridgeDayYear} · {vacationDayBudget}{" "}
+            {vacationDayBudget === 1 ? "Urlaubstag" : "Urlaubstage"}
           </span>
           <button
             type="button"
@@ -1639,82 +1691,240 @@ export default function App() {
             aria-controls="brueckentage-auswahl"
             onClick={() => setIsBridgeControlsOpen((isOpen) => !isOpen)}
           >
-            {isBridgeControlsOpen ? "Auswahl schließen" : "Bundesland und Jahr ändern"}
+            {isBridgeControlsOpen ? "Auswahl schließen" : "Planung ändern"}
           </button>
         </div>
 
         <div
-          className={`bridge-controls-mobile ${isBridgeControlsOpen ? "is-mobile-open" : ""}`}
+          className={`bridge-controls-mobile ${
+            isBridgeControlsOpen ? "is-mobile-open" : ""
+          }`}
           id="brueckentage-auswahl"
         >
           <div className="bridge-day-controls">
-          <label>
-            <span>Bundesland</span>
-            <select
-              value={bridgeDayCode}
-              onChange={(event) => setBridgeDayCode(event.target.value)}
-            >
-              {travelCheckStates.map((item) => (
-                <option key={item.code} value={item.code}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </label>
+            <label>
+              <span>Bundesland</span>
+              <select
+                value={bridgeDayCode}
+                onChange={(event) => setBridgeDayCode(event.target.value)}
+              >
+                {travelCheckStates.map((item) => (
+                  <option key={item.code} value={item.code}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </label>
 
-          <label>
-            <span>Jahr</span>
-            <select
-              value={bridgeDayYear}
-              onChange={(event) => setBridgeDayYear(Number(event.target.value))}
-            >
-              {availablePublicHolidayYears.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
-            </select>
-          </label>
+            <label>
+              <span>Jahr</span>
+              <select
+                value={bridgeDayYear}
+                onChange={(event) =>
+                  setBridgeDayYear(Number(event.target.value))
+                }
+              >
+                {availablePublicHolidayYears.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label>
+              <span>Verfügbare Urlaubstage</span>
+              <select
+                value={vacationDayBudget}
+                onChange={(event) =>
+                  setVacationDayBudget(Number(event.target.value))
+                }
+              >
+                {Array.from(
+                  {
+                    length: 30,
+                  },
+                  (_, index) => index + 1,
+                ).map((days) => (
+                  <option key={days} value={days}>
+                    {days} {days === 1 ? "Tag" : "Tage"}
+                  </option>
+                ))}
+              </select>
+            </label>
           </div>
         </div>
 
         {bridgeDayLoading && (
-          <p className="travel-check-message">Brückentage werden geladen …</p>
-        )}
-
-        {!bridgeDayLoading && bridgeDaySuggestions.length > 0 ? (
-          <>
-            <div className="bridge-day-list">
-              {bridgeDaySuggestions.map((item) => (
-                <article className="bridge-day-card" key={item.id}>
-                  <div>
-                    <strong>{formatDate(item.bridgeDate)}</strong>
-                    <span>
-                      {item.direction === "vor dem Feiertag"
-                        ? "vor Feiertag"
-                        : "nach Feiertag"}
-                    </span>
-                  </div>
-                  <p>
-                    {item.vacationDays}{" "}
-                    {item.vacationDays === 1 ? "Urlaubstag" : "Urlaubstage"} →{" "}
-                    {item.freeDays} freie Tage
-                  </p>
-                  <small>
-                    {item.holidayName} · frei{" "}
-                    {formatCompactDateRange(item.freeStartDate, item.freeEndDate)}
-                  </small>
-                </article>
-              ))}
-            </div>
-            <p className="bridge-day-swipe-hint">Seitlich wischen für weitere Brückentage.</p>
-          </>
-        ) : (
-          <p className="bridge-day-empty">
-            Für {bridgeDayYear} wurden keine passenden Brückentage mit wenigen
-            Urlaubstagen gefunden.
+          <p className="travel-check-message">
+            Urlaubsmöglichkeiten werden geladen …
           </p>
         )}
+
+        {!bridgeDayLoading &&
+          vacationOptimizerSuggestions.length > 0 && (
+            <div className="vacation-optimizer-block">
+              <div className="vacation-results-heading">
+                <div>
+                  <p className="vacation-results-kicker">
+                    Beste Kombinationen
+                  </p>
+                  <h3>
+                    Bis zu {vacationOptimizerSuggestions[0].freeDays} freie Tage
+                  </h3>
+                </div>
+                <span>
+                  mit höchstens {vacationDayBudget}{" "}
+                  {vacationDayBudget === 1
+                    ? "Urlaubstag"
+                    : "Urlaubstagen"}
+                </span>
+              </div>
+
+              <div className="vacation-optimizer-list">
+                {vacationOptimizerSuggestions.map((item, index) => (
+                  <article
+                    className={`vacation-optimizer-card ${
+                      index === 0 ? "is-best" : ""
+                    }`}
+                    key={item.id}
+                  >
+                    <header>
+                      <div>
+                        <span>
+                          {index === 0 ? "Beste Option" : `Option ${index + 1}`}
+                        </span>
+                        <strong>{item.freeDays} freie Tage</strong>
+                      </div>
+                      <p>
+                        {item.vacationDays}{" "}
+                        {item.vacationDays === 1
+                          ? "Urlaubstag"
+                          : "Urlaubstage"}
+                      </p>
+                    </header>
+
+                    <p className="vacation-optimizer-period">
+                      {formatCompactDateRange(
+                        item.startDate,
+                        item.endDate,
+                      )}
+                    </p>
+
+                    <div className="vacation-optimizer-metrics">
+                      <span>
+                        <strong>{item.efficiency}</strong>
+                        freie Tage je Urlaubstag
+                      </span>
+                      <span>
+                        <strong>{item.naturalFreeDays}</strong>
+                        Wochenend- und Feiertage
+                      </span>
+                    </div>
+
+                    <details>
+                      <summary>
+                        Urlaubstage und Feiertage anzeigen
+                      </summary>
+
+                      <div className="vacation-detail-group">
+                        <strong>Urlaub eintragen</strong>
+                        <ul className="vacation-date-list">
+                          {item.vacationDates.map((date) => (
+                            <li key={date}>{formatDate(date)}</li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {item.publicHolidays.length > 0 && (
+                        <div className="vacation-detail-group">
+                          <strong>Enthaltene Feiertage</strong>
+                          <ul className="vacation-holiday-list">
+                            {item.publicHolidays.map((holiday) => (
+                              <li key={holiday.id}>
+                                <span>{holiday.name}</span>
+                                <small>{formatDate(holiday.date)}</small>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </details>
+                  </article>
+                ))}
+              </div>
+
+              <p className="vacation-optimizer-swipe-hint">
+                Seitlich wischen für weitere Kombinationen.
+              </p>
+
+              <p className="vacation-calculation-note">
+                Berechnet mit Wochenenden und landesweiten gesetzlichen
+                Feiertagen. Persönliche Arbeitszeiten, Betriebsferien und
+                regionale Sonderregelungen sind nicht berücksichtigt.
+              </p>
+            </div>
+          )}
+
+        {!bridgeDayLoading &&
+          vacationOptimizerSuggestions.length === 0 && (
+            <p className="bridge-day-empty">
+              Für diese Auswahl wurden keine passenden längeren freien
+              Zeiträume gefunden.
+            </p>
+          )}
+
+        <div className="classic-bridge-days">
+          <div className="classic-bridge-heading">
+            <h3>Klassische Brückentage</h3>
+            <p>
+              Einfache Empfehlungen rund um einzelne Feiertage.
+            </p>
+          </div>
+
+          {!bridgeDayLoading && bridgeDaySuggestions.length > 0 ? (
+            <>
+              <div className="bridge-day-list">
+                {bridgeDaySuggestions.map((item) => (
+                  <article className="bridge-day-card" key={item.id}>
+                    <div>
+                      <strong>{formatDate(item.bridgeDate)}</strong>
+                      <span>
+                        {item.direction === "vor dem Feiertag"
+                          ? "vor Feiertag"
+                          : "nach Feiertag"}
+                      </span>
+                    </div>
+                    <p>
+                      {item.vacationDays}{" "}
+                      {item.vacationDays === 1
+                        ? "Urlaubstag"
+                        : "Urlaubstage"}{" "}
+                      → {item.freeDays} freie Tage
+                    </p>
+                    <small>
+                      {item.holidayName} · frei{" "}
+                      {formatCompactDateRange(
+                        item.freeStartDate,
+                        item.freeEndDate,
+                      )}
+                    </small>
+                  </article>
+                ))}
+              </div>
+              <p className="bridge-day-swipe-hint">
+                Seitlich wischen für weitere Brückentage.
+              </p>
+            </>
+          ) : (
+            !bridgeDayLoading && (
+              <p className="bridge-day-empty">
+                Für {bridgeDayYear} wurden keine klassischen Brückentage
+                mit wenigen Urlaubstagen gefunden.
+              </p>
+            )
+          )}
+        </div>
       </section>
 
       <section

@@ -3329,7 +3329,10 @@ button.current-year-link {
 
 .bridge-day-controls {
   display: grid;
-  grid-template-columns: 1fr minmax(120px, 180px);
+  grid-template-columns:
+    minmax(220px, 1.4fr)
+    minmax(120px, 180px)
+    minmax(150px, 210px);
   gap: 14px;
   margin: 14px 0 18px;
 }
@@ -3378,7 +3381,10 @@ button.current-year-link {
 
 @media (min-width: 900px) {
   .bridge-day-controls {
-    grid-template-columns: minmax(260px, 420px) minmax(120px, 180px);
+    grid-template-columns:
+      minmax(260px, 420px)
+      minmax(120px, 180px)
+      minmax(150px, 210px);
     justify-content: start;
     align-items: end;
   }
@@ -3458,4 +3464,226 @@ button.current-year-link {
 
 .brand:hover {
   text-decoration: none;
+}
+
+/* Vacation optimizer UI */
+
+.vacation-optimizer-block {
+  margin: 8px 0 30px;
+}
+
+.vacation-results-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+  border-radius: 20px;
+  padding: 18px 20px;
+  background: #eef8f4;
+  border: 1px solid rgba(31, 111, 100, 0.16);
+}
+
+.vacation-results-heading h3,
+.classic-bridge-heading h3 {
+  margin: 0;
+  color: #172033;
+  font-size: 1.35rem;
+  letter-spacing: -0.035em;
+}
+
+.vacation-results-heading > span {
+  color: #1f6f64;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.vacation-results-kicker {
+  margin: 0 0 5px;
+  color: #1f6f64;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.vacation-optimizer-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.vacation-optimizer-card {
+  display: grid;
+  gap: 15px;
+  min-width: 0;
+  border: 1px solid rgba(23, 32, 51, 0.09);
+  border-radius: 22px;
+  padding: 19px;
+  background: #ffffff;
+}
+
+.vacation-optimizer-card.is-best {
+  border-color: rgba(31, 111, 100, 0.52);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(238, 248, 244, 0.9),
+      rgba(255, 255, 255, 0.96)
+    );
+  box-shadow: 0 16px 38px rgba(31, 111, 100, 0.1);
+}
+
+.vacation-optimizer-card header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.vacation-optimizer-card header > div {
+  display: grid;
+  gap: 5px;
+}
+
+.vacation-optimizer-card header span {
+  color: #1f6f64;
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.vacation-optimizer-card header strong {
+  color: #172033;
+  font-size: 1.55rem;
+  letter-spacing: -0.045em;
+}
+
+.vacation-optimizer-card header p {
+  margin: 0;
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: #7b551f;
+  background: #fff4dc;
+  font-size: 0.82rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.vacation-optimizer-period {
+  margin: 0;
+  color: #1f6f64;
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.vacation-optimizer-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.vacation-optimizer-metrics span {
+  display: grid;
+  gap: 3px;
+  border-radius: 14px;
+  padding: 11px 12px;
+  color: #66717f;
+  background: #f7f5ef;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.vacation-optimizer-metrics strong {
+  color: #172033;
+  font-size: 1.05rem;
+}
+
+.vacation-optimizer-card details {
+  border-top: 1px solid rgba(23, 32, 51, 0.09);
+  padding-top: 12px;
+}
+
+.vacation-optimizer-card summary {
+  color: #1f6f64;
+  font-size: 0.88rem;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.vacation-detail-group {
+  display: grid;
+  gap: 9px;
+  margin-top: 14px;
+}
+
+.vacation-detail-group > strong {
+  color: #536171;
+  font-size: 0.82rem;
+}
+
+.vacation-date-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vacation-date-list li {
+  border-radius: 999px;
+  padding: 6px 9px;
+  color: #172033;
+  background: #fff4dc;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.vacation-holiday-list {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vacation-holiday-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: #536171;
+  font-size: 0.84rem;
+}
+
+.vacation-holiday-list small {
+  white-space: nowrap;
+}
+
+.vacation-calculation-note {
+  margin: 14px 0 0;
+  color: #66717f;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.vacation-optimizer-swipe-hint {
+  display: none;
+}
+
+.classic-bridge-days {
+  margin-top: 26px;
+  border-top: 1px solid rgba(23, 32, 51, 0.1);
+  padding-top: 24px;
+}
+
+.classic-bridge-heading {
+  margin-bottom: 14px;
+}
+
+.classic-bridge-heading p {
+  margin: 5px 0 0;
+  color: #66717f;
+  font-size: 0.9rem;
 }

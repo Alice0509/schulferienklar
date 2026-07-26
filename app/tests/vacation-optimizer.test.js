@@ -222,3 +222,62 @@ test("optimizer rejects invalid vacation budgets", () => {
     /between 1 and 30/,
   );
 });
+
+test("optimizer removes overlapping alternatives from the final ranking", () => {
+  const suggestions =
+    getVacationOptimizerSuggestions(
+      [
+        publicHoliday(
+          "new-year",
+          "2027-01-01",
+          "Neujahr",
+        ),
+        publicHoliday(
+          "epiphany",
+          "2027-01-06",
+          "Heilige Drei Könige",
+        ),
+        publicHoliday(
+          "good-friday",
+          "2027-03-26",
+          "Karfreitag",
+        ),
+        publicHoliday(
+          "easter-monday",
+          "2027-03-29",
+          "Ostermontag",
+        ),
+      ],
+      2027,
+      3,
+      {
+        limit: 10,
+      },
+    );
+
+  for (
+    let firstIndex = 0;
+    firstIndex < suggestions.length;
+    firstIndex += 1
+  ) {
+    for (
+      let secondIndex = firstIndex + 1;
+      secondIndex < suggestions.length;
+      secondIndex += 1
+    ) {
+      const first = suggestions[firstIndex];
+      const second = suggestions[secondIndex];
+
+      const overlaps =
+        first.startDate <= second.endDate &&
+        first.endDate >= second.startDate;
+
+      assert.equal(
+        overlaps,
+        false,
+        `${first.startDate}–${first.endDate} overlaps ` +
+          `${second.startDate}–${second.endDate}`,
+      );
+    }
+  }
+});
