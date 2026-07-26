@@ -1,0 +1,1231 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Schulferienklar//Subscription Calendar//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Schulferien und Feiertage Niedersachsen
+X-WR-CALDESC:Automatisch aktualisierter Kalender für Niedersachsen. Enthä
+ lt landesweite Schulferien\, unterrichtsfreie Tage und landesweit geltende
+  gesetzliche Feiertage.
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+URL:https://www.schulferienklar.de/calendar/ni.ics
+BEGIN:VEVENT
+UID:ni-christmas-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20251222
+DTEND;VALUE=DATE:20260106
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2025
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2026-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260101
+DTEND;VALUE=DATE:20260102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-winter-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260202
+DTEND;VALUE=DATE:20260204
+SUMMARY:Halbjahresferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-easter-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260323
+DTEND;VALUE=DATE:20260408
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2026-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260403
+DTEND;VALUE=DATE:20260404
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2026-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260406
+DTEND;VALUE=DATE:20260407
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2026-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260501
+DTEND;VALUE=DATE:20260502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2026-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260514
+DTEND;VALUE=DATE:20260515
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-school-free-2026-05-15@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260515
+DTEND;VALUE=DATE:20260516
+SUMMARY:Tag nach Himmelfahrt (Unterrichtsfrei)
+DESCRIPTION:Schulferienklar · Unterrichtsfrei · Niedersachsen · Quelle: 
+ Niedersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2026-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260525
+DTEND;VALUE=DATE:20260526
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-pentecost-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260526
+DTEND;VALUE=DATE:20260527
+SUMMARY:Pfingsten (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-summer-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260702
+DTEND;VALUE=DATE:20260813
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2026-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261003
+DTEND;VALUE=DATE:20261004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-autumn-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20261012
+DTEND;VALUE=DATE:20261025
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2026-reformation-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261031
+DTEND;VALUE=DATE:20261101
+SUMMARY:Reformationstag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-christmas-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20261223
+DTEND;VALUE=DATE:20270110
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2026-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261225
+DTEND;VALUE=DATE:20261226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2026-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261226
+DTEND;VALUE=DATE:20261227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2027-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270101
+DTEND;VALUE=DATE:20270102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-winter-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270203
+SUMMARY:Halbjahresferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-easter-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270322
+DTEND;VALUE=DATE:20270404
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2027-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270326
+DTEND;VALUE=DATE:20270327
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2027-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270329
+DTEND;VALUE=DATE:20270330
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2027-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2027-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270506
+DTEND;VALUE=DATE:20270507
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-school-free-2027-05-07@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270507
+DTEND;VALUE=DATE:20270508
+SUMMARY:Tag nach Himmelfahrt (Unterrichtsfrei)
+DESCRIPTION:Schulferienklar · Unterrichtsfrei · Niedersachsen · Quelle: 
+ Niedersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2027-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270517
+DTEND;VALUE=DATE:20270518
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-pentecost-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270518
+DTEND;VALUE=DATE:20270519
+SUMMARY:Pfingsten (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-summer-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270708
+DTEND;VALUE=DATE:20270819
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2027-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271003
+DTEND;VALUE=DATE:20271004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-autumn-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20271016
+DTEND;VALUE=DATE:20271031
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2027-reformation-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271031
+DTEND;VALUE=DATE:20271101
+SUMMARY:Reformationstag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-christmas-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20271223
+DTEND;VALUE=DATE:20280109
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2027-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271225
+DTEND;VALUE=DATE:20271226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2027-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271226
+DTEND;VALUE=DATE:20271227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2028-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280101
+DTEND;VALUE=DATE:20280102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-winter-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20280131
+DTEND;VALUE=DATE:20280202
+SUMMARY:Halbjahresferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-easter-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20280410
+DTEND;VALUE=DATE:20280423
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2028-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280414
+DTEND;VALUE=DATE:20280415
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2028-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280417
+DTEND;VALUE=DATE:20280418
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2028-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280501
+DTEND;VALUE=DATE:20280502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2028-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280525
+DTEND;VALUE=DATE:20280526
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-school-free-2028-05-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20280526
+DTEND;VALUE=DATE:20280527
+SUMMARY:Tag nach Himmelfahrt (Unterrichtsfrei)
+DESCRIPTION:Schulferienklar · Unterrichtsfrei · Niedersachsen · Quelle: 
+ Niedersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2028-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280605
+DTEND;VALUE=DATE:20280606
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-pentecost-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20280606
+DTEND;VALUE=DATE:20280607
+SUMMARY:Pfingsten (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-summer-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20280720
+DTEND;VALUE=DATE:20280831
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-school-free-2028-10-02@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20281002
+DTEND;VALUE=DATE:20281003
+SUMMARY:Tag vor dem 3. Oktober (Unterrichtsfrei)
+DESCRIPTION:Schulferienklar · Unterrichtsfrei · Niedersachsen · Quelle: 
+ Niedersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2028-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20281003
+DTEND;VALUE=DATE:20281004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-autumn-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20281023
+DTEND;VALUE=DATE:20281105
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2028-reformation-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20281031
+DTEND;VALUE=DATE:20281101
+SUMMARY:Reformationstag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2028-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20281225
+DTEND;VALUE=DATE:20281226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2028-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20281226
+DTEND;VALUE=DATE:20281227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-christmas-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20281227
+DTEND;VALUE=DATE:20290107
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2029-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290101
+DTEND;VALUE=DATE:20290102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-winter-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290201
+DTEND;VALUE=DATE:20290203
+SUMMARY:Halbjahresferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-easter-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290319
+DTEND;VALUE=DATE:20290404
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2029-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290330
+DTEND;VALUE=DATE:20290331
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2029-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290402
+DTEND;VALUE=DATE:20290403
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-school-free-2029-04-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290430
+DTEND;VALUE=DATE:20290501
+SUMMARY:Tag vor dem 1. Mai (Unterrichtsfrei)
+DESCRIPTION:Schulferienklar · Unterrichtsfrei · Niedersachsen · Quelle: 
+ Niedersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2029-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290501
+DTEND;VALUE=DATE:20290502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2029-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290510
+DTEND;VALUE=DATE:20290511
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-school-free-2029-05-11@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290511
+DTEND;VALUE=DATE:20290512
+SUMMARY:Tag nach Himmelfahrt (Unterrichtsfrei)
+DESCRIPTION:Schulferienklar · Unterrichtsfrei · Niedersachsen · Quelle: 
+ Niedersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2029-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290521
+DTEND;VALUE=DATE:20290522
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-pentecost-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290522
+DTEND;VALUE=DATE:20290523
+SUMMARY:Pfingsten (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-summer-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290719
+DTEND;VALUE=DATE:20290830
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2029-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20291003
+DTEND;VALUE=DATE:20291004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-school-free-2029-10-04@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20291004
+DTEND;VALUE=DATE:20291006
+SUMMARY:Tage nach dem 3. Oktober (Unterrichtsfrei)
+DESCRIPTION:Schulferienklar · Unterrichtsfrei · Niedersachsen · Quelle: 
+ Niedersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-autumn-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20291022
+DTEND;VALUE=DATE:20291103
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2029-reformation-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20291031
+DTEND;VALUE=DATE:20291101
+SUMMARY:Reformationstag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-christmas-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20291221
+DTEND;VALUE=DATE:20300106
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2029-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20291225
+DTEND;VALUE=DATE:20291226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2029-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20291226
+DTEND;VALUE=DATE:20291227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2030-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300101
+DTEND;VALUE=DATE:20300102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-winter-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20300131
+DTEND;VALUE=DATE:20300202
+SUMMARY:Halbjahresferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-easter-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20300408
+DTEND;VALUE=DATE:20300424
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2030-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300419
+DTEND;VALUE=DATE:20300420
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2030-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300422
+DTEND;VALUE=DATE:20300423
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2030-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300501
+DTEND;VALUE=DATE:20300502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2030-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300530
+DTEND;VALUE=DATE:20300531
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-school-free-2030-05-31@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20300531
+DTEND;VALUE=DATE:20300601
+SUMMARY:Tag nach Himmelfahrt (Unterrichtsfrei)
+DESCRIPTION:Schulferienklar · Unterrichtsfrei · Niedersachsen · Quelle: 
+ Niedersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2030-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300610
+DTEND;VALUE=DATE:20300611
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-pentecost-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20300611
+DTEND;VALUE=DATE:20300612
+SUMMARY:Pfingsten (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-summer-2030-31@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20300711
+DTEND;VALUE=DATE:20300822
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Niedersachsen · Quelle: Nied
+ ersächsisches Kultusministerium
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2030-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20301003
+DTEND;VALUE=DATE:20301004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2030-reformation-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20301031
+DTEND;VALUE=DATE:20301101
+SUMMARY:Reformationstag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2030-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20301225
+DTEND;VALUE=DATE:20301226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:ni-public-2030-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20301226
+DTEND;VALUE=DATE:20301227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Niedersachsen · la
+ ndesweit
+URL:https://www.schulferienklar.de/?state=NI&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

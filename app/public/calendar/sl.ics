@@ -1,0 +1,1203 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Schulferienklar//Subscription Calendar//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Schulferien und Feiertage Saarland
+X-WR-CALDESC:Automatisch aktualisierter Kalender für Saarland. Enthält la
+ ndesweite Schulferien\, unterrichtsfreie Tage und landesweit geltende gese
+ tzliche Feiertage.
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+URL:https://www.schulferienklar.de/calendar/sl.ics
+BEGIN:VEVENT
+UID:sl-christmas-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20251222
+DTEND;VALUE=DATE:20260103
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2025
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2026-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260101
+DTEND;VALUE=DATE:20260102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-winter-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260216
+DTEND;VALUE=DATE:20260221
+SUMMARY:Fastnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2026-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260403
+DTEND;VALUE=DATE:20260404
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2026-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260406
+DTEND;VALUE=DATE:20260407
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-easter-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260407
+DTEND;VALUE=DATE:20260418
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2026-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260501
+DTEND;VALUE=DATE:20260502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2026-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260514
+DTEND;VALUE=DATE:20260515
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2026-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260525
+DTEND;VALUE=DATE:20260526
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2026-corpus-christi@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260604
+DTEND;VALUE=DATE:20260605
+SUMMARY:Fronleichnam (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-summer-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260629
+DTEND;VALUE=DATE:20260808
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2026-assumption@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260815
+DTEND;VALUE=DATE:20260816
+SUMMARY:Mariä Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2026-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261003
+DTEND;VALUE=DATE:20261004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-autumn-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20261005
+DTEND;VALUE=DATE:20261017
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2026-all-saints@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
+SUMMARY:Allerheiligen (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-christmas-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20261221
+DTEND;VALUE=DATE:20270101
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2026-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261225
+DTEND;VALUE=DATE:20261226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2026-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261226
+DTEND;VALUE=DATE:20261227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2026
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2027-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270101
+DTEND;VALUE=DATE:20270102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-winter-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270208
+DTEND;VALUE=DATE:20270213
+SUMMARY:Fastnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2027-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270326
+DTEND;VALUE=DATE:20270327
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2027-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270329
+DTEND;VALUE=DATE:20270330
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-easter-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270330
+DTEND;VALUE=DATE:20270410
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2027-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2027-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270506
+DTEND;VALUE=DATE:20270507
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2027-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270517
+DTEND;VALUE=DATE:20270518
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2027-corpus-christi@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270527
+DTEND;VALUE=DATE:20270528
+SUMMARY:Fronleichnam (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-summer-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270628
+DTEND;VALUE=DATE:20270807
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2027-assumption@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270815
+DTEND;VALUE=DATE:20270816
+SUMMARY:Mariä Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2027-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271003
+DTEND;VALUE=DATE:20271004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-autumn-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20271004
+DTEND;VALUE=DATE:20271016
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2027-all-saints@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271101
+DTEND;VALUE=DATE:20271102
+SUMMARY:Allerheiligen (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-christmas-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20271220
+DTEND;VALUE=DATE:20280101
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2027-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271225
+DTEND;VALUE=DATE:20271226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2027-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271226
+DTEND;VALUE=DATE:20271227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2027
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2028-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280101
+DTEND;VALUE=DATE:20280102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-winter-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20280221
+DTEND;VALUE=DATE:20280301
+SUMMARY:Fastnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-easter-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20280412
+DTEND;VALUE=DATE:20280422
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2028-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280414
+DTEND;VALUE=DATE:20280415
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2028-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280417
+DTEND;VALUE=DATE:20280418
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2028-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280501
+DTEND;VALUE=DATE:20280502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2028-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280525
+DTEND;VALUE=DATE:20280526
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2028-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280605
+DTEND;VALUE=DATE:20280606
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2028-corpus-christi@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280615
+DTEND;VALUE=DATE:20280616
+SUMMARY:Fronleichnam (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-summer-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20280703
+DTEND;VALUE=DATE:20280812
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2028-assumption@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20280815
+DTEND;VALUE=DATE:20280816
+SUMMARY:Mariä Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2028-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20281003
+DTEND;VALUE=DATE:20281004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-autumn-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20281009
+DTEND;VALUE=DATE:20281021
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2028-all-saints@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20281101
+DTEND;VALUE=DATE:20281102
+SUMMARY:Allerheiligen (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-christmas-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20281220
+DTEND;VALUE=DATE:20290103
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2028-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20281225
+DTEND;VALUE=DATE:20281226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2028-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20281226
+DTEND;VALUE=DATE:20281227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2028
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2029-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290101
+DTEND;VALUE=DATE:20290102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-winter-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290212
+DTEND;VALUE=DATE:20290217
+SUMMARY:Fastnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-easter-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290326
+DTEND;VALUE=DATE:20290407
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2029-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290330
+DTEND;VALUE=DATE:20290331
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2029-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290402
+DTEND;VALUE=DATE:20290403
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2029-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290501
+DTEND;VALUE=DATE:20290502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2029-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290510
+DTEND;VALUE=DATE:20290511
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2029-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290521
+DTEND;VALUE=DATE:20290522
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-pentecost-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290522
+DTEND;VALUE=DATE:20290526
+SUMMARY:Pfingstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2029-corpus-christi@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290531
+DTEND;VALUE=DATE:20290601
+SUMMARY:Fronleichnam (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-summer-2028-29@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20290716
+DTEND;VALUE=DATE:20290825
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2029-assumption@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20290815
+DTEND;VALUE=DATE:20290816
+SUMMARY:Mariä Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2029-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20291003
+DTEND;VALUE=DATE:20291004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-autumn-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20291022
+DTEND;VALUE=DATE:20291103
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2029-all-saints@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20291101
+DTEND;VALUE=DATE:20291102
+SUMMARY:Allerheiligen (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-christmas-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20291221
+DTEND;VALUE=DATE:20300105
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2029-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20291225
+DTEND;VALUE=DATE:20291226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2029-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20291226
+DTEND;VALUE=DATE:20291227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2029
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2030-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300101
+DTEND;VALUE=DATE:20300102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-winter-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20300225
+DTEND;VALUE=DATE:20300306
+SUMMARY:Fastnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-easter-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20300415
+DTEND;VALUE=DATE:20300427
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2030-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300419
+DTEND;VALUE=DATE:20300420
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2030-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300422
+DTEND;VALUE=DATE:20300423
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2030-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300501
+DTEND;VALUE=DATE:20300502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2030-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300530
+DTEND;VALUE=DATE:20300531
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2030-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300610
+DTEND;VALUE=DATE:20300611
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2030-corpus-christi@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300620
+DTEND;VALUE=DATE:20300621
+SUMMARY:Fronleichnam (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-summer-2029-30@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20300722
+DTEND;VALUE=DATE:20300831
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Saarland · Quelle: Ministeri
+ um für Bildung und Kultur Saarland
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2030-assumption@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20300815
+DTEND;VALUE=DATE:20300816
+SUMMARY:Mariä Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2030-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20301003
+DTEND;VALUE=DATE:20301004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2030-all-saints@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20301101
+DTEND;VALUE=DATE:20301102
+SUMMARY:Allerheiligen (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2030-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20301225
+DTEND;VALUE=DATE:20301226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:sl-public-2030-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20301226
+DTEND;VALUE=DATE:20301227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Saarland · landesw
+ eit
+URL:https://www.schulferienklar.de/?state=SL&year=2030
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
