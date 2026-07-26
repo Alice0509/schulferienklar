@@ -1,11 +1,11 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import {
+  nodeHolidayRepository,
+} from "./lib/node-data-repository.mjs";
+
 const outputDir = path.resolve("public");
-const holidayDataDir = path.resolve("public/data/holidays");
-const holidayIndexPath = path.join(holidayDataDir, "index.json");
-const publicHolidayDataDir = path.resolve("public/data/public-holidays");
-const publicHolidayIndexPath = path.join(publicHolidayDataDir, "index.json");
 
 const years = [2026, 2027, 2028, 2029, 2030];
 
@@ -101,9 +101,17 @@ function getEventsForStateAndYear({ holidayIndex, code, year }) {
     return [];
   }
 
-  const datasetPath = path.join(holidayDataDir, dataset.jsonFile);
-  const datasetJson = JSON.parse(fs.readFileSync(datasetPath, "utf8"));
-  const events = datasetJson.holidays || datasetJson.events || [];
+  const datasetJson =
+    nodeHolidayRepository.loadSchoolHolidayDatasetByMeta(
+      dataset,
+    );
+
+  if (!datasetJson) {
+    return [];
+  }
+
+  const events =
+    datasetJson.holidays || datasetJson.events || [];
 
   const yearStart = `${year}-01-01`;
   const yearEnd = `${year}-12-31`;
@@ -124,10 +132,12 @@ function getSchoolHolidaySourceForState({ holidayIndex, code }) {
     return null;
   }
 
-  const datasetPath = path.join(holidayDataDir, dataset.jsonFile);
-  const datasetJson = JSON.parse(fs.readFileSync(datasetPath, "utf8"));
+  const datasetJson =
+    nodeHolidayRepository.loadSchoolHolidayDatasetByMeta(
+      dataset,
+    );
 
-  return datasetJson.sources?.[0] || null;
+  return datasetJson?.sources?.[0] || null;
 }
 
 function getPublicHolidaysForStateAndYear({
@@ -143,10 +153,16 @@ function getPublicHolidaysForStateAndYear({
     return [];
   }
 
-  const datasetPath = path.join(publicHolidayDataDir, dataset.jsonFile);
-  const datasetJson = JSON.parse(fs.readFileSync(datasetPath, "utf8"));
+  const datasetJson =
+    nodeHolidayRepository.loadPublicHolidayDatasetByMeta(
+      dataset,
+    );
 
-  return datasetJson.holidays || datasetJson.events || [];
+  return (
+    datasetJson?.holidays ||
+    datasetJson?.events ||
+    []
+  );
 }
 
 function getPublicHolidaysAroundYear({
@@ -1137,10 +1153,11 @@ ${entries}
 }
 
 
-const holidayIndex = JSON.parse(fs.readFileSync(holidayIndexPath, "utf8"));
-const publicHolidayIndex = JSON.parse(
-  fs.readFileSync(publicHolidayIndexPath, "utf8")
-);
+const holidayIndex =
+  nodeHolidayRepository.loadSchoolHolidayIndex();
+
+const publicHolidayIndex =
+  nodeHolidayRepository.loadPublicHolidayIndex();
 
 for (const year of years) {
   for (const [slug, name, englishName, code] of states) {

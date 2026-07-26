@@ -20,9 +20,8 @@ import {
   getHolidaysForYear,
   getTravelPeriodMatches,
 } from "./domain/travel-check.js";
+import { holidayRepository } from "./data/holiday-repository.js";
 import { downloadIcsFile, generateIcsCalendar } from "./utils/ics";
-
-const DATA_BASE_URL = import.meta.env.BASE_URL;
 
 const STORAGE_KEYS = {
   bundesland: "schulferienklar:selected-bundesland",
@@ -30,10 +29,6 @@ const STORAGE_KEYS = {
   comparisonStates: "schulferienklar:comparison-states",
   comparisonYear: "schulferienklar:comparison-year",
 };
-
-function dataUrl(path) {
-  return `${DATA_BASE_URL}${path.replace(/^\//, "")}`;
-}
 
 const TODAY = new Date();
 TODAY.setHours(0, 0, 0, 0);
@@ -675,11 +670,7 @@ export default function App() {
     async function loadIndex() {
       try {
         setLoading(true);
-        const response = await fetch(dataUrl("/data/holidays/index.json"));
-        if (!response.ok) {
-          throw new Error("Index konnte nicht geladen werden.");
-        }
-        const data = await response.json();
+        const data = await holidayRepository.loadSchoolHolidayIndex();
         setIndex(data);
 
         const storedCode = localStorage.getItem(STORAGE_KEYS.bundesland);
@@ -727,13 +718,10 @@ export default function App() {
           }
 
           try {
-            const response = await fetch(dataUrl(`/data/holidays/${meta.jsonFile}`));
+            const data =
+              await holidayRepository.loadSchoolHolidayDatasetByMeta(meta);
 
-            if (!response.ok) {
-              return [code, null];
-            }
-
-            return [code, await response.json()];
+            return [code, data];
           } catch {
             return [code, null];
           }
@@ -758,11 +746,12 @@ export default function App() {
 
       try {
         setDatasetLoading(true);
-        const response = await fetch(dataUrl(`/data/holidays/${selectedMeta.jsonFile}`));
-        if (!response.ok) {
+        const data =
+          await holidayRepository.loadSchoolHolidayDatasetByMeta(selectedMeta);
+
+        if (!data) {
           throw new Error(`${selectedMeta.jsonFile} konnte nicht geladen werden.`);
         }
-        const data = await response.json();
         setDataset(data);
       } catch (err) {
         setError(err.message);
@@ -779,13 +768,8 @@ export default function App() {
       setPublicHolidayDataset(null);
 
       try {
-        const indexResponse = await fetch(dataUrl("/data/public-holidays/index.json"));
-
-        if (!indexResponse.ok) {
-          return;
-        }
-
-        const publicHolidayIndex = await indexResponse.json();
+        const publicHolidayIndex =
+          await holidayRepository.loadPublicHolidayIndex();
         const years = Array.from(
           new Set((publicHolidayIndex.datasets || []).map((item) => item.year))
         ).sort();
@@ -807,15 +791,14 @@ export default function App() {
           return;
         }
 
-        const datasetResponse = await fetch(
-          dataUrl(`/data/public-holidays/${matchingDataset.jsonFile}`)
-        );
+        const data =
+          await holidayRepository.loadPublicHolidayDatasetByMeta(
+            matchingDataset,
+          );
 
-        if (!datasetResponse.ok) {
+        if (!data) {
           return;
         }
-
-        const data = await datasetResponse.json();
         setPublicHolidayDataset(data);
       } catch {
         setPublicHolidayDataset(null);
@@ -862,13 +845,8 @@ export default function App() {
       setBridgeDayLoading(true);
 
       try {
-        const indexResponse = await fetch(dataUrl("/data/public-holidays/index.json"));
-
-        if (!indexResponse.ok) {
-          throw new Error("Bridge day public holiday index could not be loaded");
-        }
-
-        const publicHolidayIndex = await indexResponse.json();
+        const publicHolidayIndex =
+          await holidayRepository.loadPublicHolidayIndex();
         const matchingDataset = publicHolidayIndex.datasets.find((item) => {
           return item.bundeslandCode === bridgeDayCode && item.year === bridgeDayYear;
         });
@@ -880,15 +858,16 @@ export default function App() {
           return;
         }
 
-        const datasetResponse = await fetch(
-          dataUrl(`/data/public-holidays/${matchingDataset.jsonFile}`)
-        );
+        const data =
+          await holidayRepository.loadPublicHolidayDatasetByMeta(
+            matchingDataset,
+          );
 
-        if (!datasetResponse.ok) {
-          throw new Error("Bridge day public holiday data could not be loaded");
+        if (!data) {
+          throw new Error(
+            "Bridge day public holiday data could not be loaded",
+          );
         }
-
-        const data = await datasetResponse.json();
 
         if (!isCancelled) {
           setBridgeDayPublicHolidayDataset(data);
@@ -975,21 +954,17 @@ export default function App() {
           return;
         }
 
-        const holidayResponse = await fetch(dataUrl(`/data/holidays/${travelMeta.jsonFile}`));
+        const holidayData =
+          await holidayRepository.loadSchoolHolidayDatasetByMeta(
+            travelMeta,
+          );
 
-        if (!holidayResponse.ok) {
+        if (!holidayData) {
           throw new Error("Travel holiday data could not be loaded");
         }
 
-        const holidayData = await holidayResponse.json();
-
-        const publicHolidayIndexResponse = await fetch(dataUrl("/data/public-holidays/index.json"));
-
-        if (!publicHolidayIndexResponse.ok) {
-          throw new Error("Travel public holiday index could not be loaded");
-        }
-
-        const publicHolidayIndex = await publicHolidayIndexResponse.json();
+        const publicHolidayIndex =
+          await holidayRepository.loadPublicHolidayIndex();
         const publicHolidayMeta = publicHolidayIndex.datasets.find((item) => {
           return item.bundeslandCode === travelCheckCode && item.year === travelCheckYear;
         });
@@ -997,13 +972,10 @@ export default function App() {
         let publicHolidayData = null;
 
         if (publicHolidayMeta) {
-          const publicHolidayResponse = await fetch(
-            dataUrl(`/data/public-holidays/${publicHolidayMeta.jsonFile}`)
-          );
-
-          if (publicHolidayResponse.ok) {
-            publicHolidayData = await publicHolidayResponse.json();
-          }
+          publicHolidayData =
+            await holidayRepository.loadPublicHolidayDatasetByMeta(
+              publicHolidayMeta,
+            );
         }
 
         if (!isCancelled) {

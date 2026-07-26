@@ -1,11 +1,12 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import {
+  nodeHolidayRepository,
+} from "./lib/node-data-repository.mjs";
+
 const publicDir = path.resolve("public");
 const downloadsDir = path.join(publicDir, "downloads");
-const holidayDir = path.join(publicDir, "data", "holidays");
-const publicHolidayDir = path.join(publicDir, "data", "public-holidays");
-
 const code = "BY";
 const year = 2027;
 const months = [
@@ -15,7 +16,6 @@ const months = [
 ];
 const weekdays = ["KW", "Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
-const readJson = (file) => JSON.parse(fs.readFileSync(file, "utf8"));
 const clean = (text) => String(text).replace(/[ \t]+$/gm, "");
 
 function escapeHtml(value) {
@@ -71,20 +71,25 @@ function eventName(event) {
 }
 
 function loadSchoolData() {
-  const index = readJson(path.join(holidayDir, "index.json"));
-  const item = index.datasets.find((entry) => entry.bundeslandCode === code);
-  if (!item?.jsonFile) throw new Error("Bayern-Schulferien-Datensatz fehlt.");
-  return readJson(path.join(holidayDir, item.jsonFile));
+  const data =
+    nodeHolidayRepository.loadSchoolHolidayDataset(code);
+
+  if (!data) {
+    throw new Error(
+      "Bayern-Schulferien-Datensatz fehlt.",
+    );
+  }
+
+  return data;
 }
 
 function loadPublicData(targetYear) {
-  const index = readJson(path.join(publicHolidayDir, "index.json"));
-  const item = index.datasets.find((entry) => {
-    return entry.bundeslandCode === code && entry.year === targetYear;
-  });
-  return item?.jsonFile
-    ? readJson(path.join(publicHolidayDir, item.jsonFile))
-    : { holidays: [] };
+  return (
+    nodeHolidayRepository.loadPublicHolidayDataset(
+      code,
+      targetYear,
+    ) || { holidays: [] }
+  );
 }
 
 function isConnectedDay(dateKey, publicHolidays) {
