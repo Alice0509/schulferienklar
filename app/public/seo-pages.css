@@ -815,3 +815,42 @@ p {
     padding: 14px;
   }
 }
+
+.seo-subscription-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 5px 12px;
+  margin-top: 14px;
+  color: #697581;
+  font-size: 0.86rem;
+}
+
+.seo-subscription-link {
+  font-weight: 850;
+}
+
+.seo-subscription-help {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 0.82rem;
+}
+
+.seo-subscription-help summary {
+  width: fit-content;
+  cursor: pointer;
+  color: #536171;
+  font-weight: 750;
+}
+
+.seo-subscription-help p {
+  margin: 6px 0 0;
+}
+
+.seo-subscription-help code {
+  display: block;
+  margin-top: 5px;
+  color: #31424a;
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}

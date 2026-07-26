@@ -528,6 +528,34 @@ function bayern2027SourceHtml(source) {
 }
 
 
+function subscriptionCtaHtml({ code, name }) {
+  const normalizedCode = String(code).toLowerCase();
+  const httpsUrl =
+    `https://www.schulferienklar.de/calendar/${normalizedCode}.ics`;
+  const webcalUrl =
+    `webcal://www.schulferienklar.de/calendar/${normalizedCode}.ics`;
+
+  return `        <div class="seo-subscription-cta">
+          <a
+            class="seo-subscription-link"
+            href="${webcalUrl}"
+            aria-label="Kalender ${escapeHtml(name)} abonnieren"
+            data-download-action="subscribe-calendar-${normalizedCode}"
+          >
+            Kalender abonnieren
+          </a>
+          <span>2026–2030 · automatisch aktualisiert</span>
+          <details class="seo-subscription-help">
+            <summary>Google-Hilfe</summary>
+            <p>
+              Unter „Weitere Kalender → Per URL“ einfügen:
+              <code>${httpsUrl}</code>
+            </p>
+          </details>
+        </div>`;
+}
+
+
 function bayern2027JahreskalenderHtml() {
   return `        <section id="jahreskalender" class="gold-section gold-jahreskalender">
           <p class="eyebrow">Zwölf Monate auf einer Seite</p>
@@ -561,6 +589,7 @@ function bayern2027JahreskalenderHtml() {
               </small>
             </a>
           </div>
+${subscriptionCtaHtml({ code: "BY", name: "Bayern" })}
           <p class="gold-jahreskalender-note">
             Die Jahresansicht unterscheidet offizielle Schulferien,
             unterrichtsfreie Tage, gesetzliche Feiertage und die von
@@ -894,6 +923,7 @@ ${stateYearQueryIntroHtml(name, year, events)}
         </p>
 
 ${schulferienklarIntroCardHtml({ code, name, year })}
+${subscriptionCtaHtml({ code, name })}
 ${stateYearInternalLinksHtml({ slug, name, year })}
 
         <h2>School holidays ${englishName} ${year}</h2>
