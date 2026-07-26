@@ -144,22 +144,32 @@ Use a hybrid model, not a full migration:
 - Later embed selected dynamic components into static pages.
 - Use an edge backend only for subscriptions, alerts, accounts and paid API access.
 
-High-value dynamic candidates:
+Existing dynamic foundation:
 
-1. Multi-state overlap finder
-2. Vacation-day optimizer
-3. Personal calendar builder
-4. Calendar subscription setup
-5. Change alerts
+1. State and year selection
+2. Travel-period checking
+3. Brückentage suggestions
+4. Multi-state comparison for up to four states
+5. Shared school-holiday period detection
+
+Next high-value dynamic candidates:
+
+1. Vacation-day optimizer
+2. Personal calendar builder
+3. Calendar subscription setup
+4. Change alerts
+5. Low-holiday travel-window finder
 
 ## Implementation order
 
 1. Fix the ICS category mismatch.
 2. Extract date and event-classification helpers.
 3. Extract connected-period, bridge-day and overlap calculations.
-4. Add unit tests.
+4. Add unit tests that preserve the current production results.
 5. Add browser and Node data repositories.
 6. Refactor React and Jahreskalender to consume the shared engine.
-7. Generate API v1 JSON files.
-8. Build the first dynamic differentiator: shared school-free periods for two states.
-9. Measure use before selecting a runtime API platform.
+7. Generate API v1 JSON files, including overlap and calculated-period outputs.
+8. Move the existing multi-state comparison onto the shared engine without changing its current UX.
+9. Build the first new dynamic differentiator: the vacation-day optimizer.
+10. Add stable calendar subscription URLs and a personal calendar builder.
+11. Measure use before selecting a runtime API platform.
