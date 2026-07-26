@@ -611,12 +611,32 @@ export default function App() {
     return params.get("state") || localStorage.getItem(STORAGE_KEYS.bundesland) || "BY";
   });
   const [bridgeDayYear, setBridgeDayYear] = useState(() => {
-    return Number(localStorage.getItem(STORAGE_KEYS.year)) || TODAY.getFullYear();
+    const params = new URLSearchParams(window.location.search);
+    const queryYear = Number(params.get("year"));
+    const storedYear = Number(localStorage.getItem(STORAGE_KEYS.year));
+
+    if (Number.isInteger(queryYear) && queryYear > 0) {
+      return queryYear;
+    }
+
+    return Number.isInteger(storedYear) && storedYear > 0
+      ? storedYear
+      : TODAY.getFullYear();
   });
   const [vacationDayBudget, setVacationDayBudget] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    const queryBudget = Number(params.get("vacationDays"));
     const storedBudget = Number(
       localStorage.getItem(STORAGE_KEYS.vacationBudget),
     );
+
+    if (
+      Number.isInteger(queryBudget) &&
+      queryBudget >= 1 &&
+      queryBudget <= 30
+    ) {
+      return queryBudget;
+    }
 
     return (
       Number.isInteger(storedBudget) &&
@@ -642,6 +662,14 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.year, String(selectedYear));
+  }, [selectedYear]);
+
+  useEffect(() => {
+    setBridgeDayCode(selectedCode);
+  }, [selectedCode]);
+
+  useEffect(() => {
+    setBridgeDayYear(selectedYear);
   }, [selectedYear]);
 
   useEffect(() => {
@@ -683,6 +711,24 @@ export default function App() {
     window.setTimeout(scrollToCalendar, 0);
     window.setTimeout(scrollToCalendar, 250);
   }, [selectedYear]);
+
+  useEffect(() => {
+    if (window.location.hash !== "#brueckentage") {
+      return;
+    }
+
+    setIsBridgeControlsOpen(true);
+
+    const scrollToPlanner = () => {
+      document.getElementById("brueckentage")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    };
+
+    window.setTimeout(scrollToPlanner, 0);
+    window.setTimeout(scrollToPlanner, 250);
+  }, []);
 
   const [dataset, setDataset] = useState(null);
   const [publicHolidayDataset, setPublicHolidayDataset] = useState(null);
@@ -1233,7 +1279,7 @@ export default function App() {
                 Reisezeit prüfen
               </button>
               <button type="button" onClick={() => scrollToSection("brueckentage")}>
-                Brückentage
+                Urlaubsplaner
               </button>
               <button type="button" onClick={() => scrollToSection("vergleich")}>
                 Vergleich
@@ -1706,7 +1752,12 @@ export default function App() {
               <span>Bundesland</span>
               <select
                 value={bridgeDayCode}
-                onChange={(event) => setBridgeDayCode(event.target.value)}
+                onChange={(event) => {
+                  const nextCode = event.target.value;
+
+                  setBridgeDayCode(nextCode);
+                  setSelectedCode(nextCode);
+                }}
               >
                 {travelCheckStates.map((item) => (
                   <option key={item.code} value={item.code}>
@@ -1720,9 +1771,12 @@ export default function App() {
               <span>Jahr</span>
               <select
                 value={bridgeDayYear}
-                onChange={(event) =>
-                  setBridgeDayYear(Number(event.target.value))
-                }
+                onChange={(event) => {
+                  const nextYear = Number(event.target.value);
+
+                  setBridgeDayYear(nextYear);
+                  setSelectedYear(nextYear);
+                }}
               >
                 {availablePublicHolidayYears.map((year) => (
                   <option key={year} value={year}>
@@ -1861,7 +1915,10 @@ export default function App() {
               <p className="vacation-calculation-note">
                 Berechnet mit Wochenenden und landesweiten gesetzlichen
                 Feiertagen. Persönliche Arbeitszeiten, Betriebsferien und
-                regionale Sonderregelungen sind nicht berücksichtigt.
+                regionale Sonderregelungen sind nicht berücksichtigt.{" "}
+                <a href="/urlaubsplaner-2027.html">
+                  Urlaubsplaner 2027 für alle Bundesländer ansehen
+                </a>
               </p>
             </div>
           )}
