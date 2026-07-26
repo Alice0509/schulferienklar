@@ -1223,6 +1223,11 @@ export default function App() {
     });
   };
 
+  const subscriptionCalendarUrl =
+    `https://www.schulferienklar.de/calendar/${selectedCode.toLowerCase()}.ics`;
+  const subscriptionCalendarWebcalUrl =
+    subscriptionCalendarUrl.replace(/^https:/, "webcal:");
+
   const pattern = getHeroPattern(selectedCode);
 
   return (
@@ -1465,16 +1470,36 @@ export default function App() {
               </span>
 
               <div className="ics-export-wrap">
-                <button
-                  className="ics-export-button"
-                  type="button"
-                  onClick={handleDownloadIcs}
-                >
-                  ICS herunterladen
-                </button>
+                <div className="calendar-action-row">
+                  <button
+                    className="ics-export-button"
+                    type="button"
+                    onClick={handleDownloadIcs}
+                  >
+                    ICS herunterladen
+                  </button>
+
+                  <a
+                    className="ics-subscribe-button"
+                    href={subscriptionCalendarWebcalUrl}
+                    data-download-action={`subscribe-calendar-${selectedCode.toLowerCase()}`}
+                  >
+                    Kalender abonnieren
+                  </a>
+                </div>
+
                 <span className="ics-export-hint">
-                  Für Google Calendar, Apple Kalender und Outlook.
+                  Download: nur {selectedYear}. Abo: 2026–2030 mit fester URL.
                 </span>
+
+                <details className="calendar-subscription-help">
+                  <summary>Abo-Hilfe für Apple, Google und Outlook</summary>
+                  <p>
+                    Apple Kalender und Outlook können den Abo-Button direkt öffnen.
+                    In Google Calendar unter „Weitere Kalender → Per URL“ diesen Link einfügen:
+                  </p>
+                  <code>{subscriptionCalendarUrl}</code>
+                </details>
               </div>
             </div>
           </div>

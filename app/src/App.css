@@ -3696,3 +3696,78 @@ button.current-year-link {
   font-weight: 900;
   text-underline-offset: 3px;
 }
+
+.calendar-action-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ics-subscribe-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #1f6f64;
+  border-radius: 999px;
+  padding: 11px 16px;
+  background: #1f6f64;
+  color: #ffffff;
+  font-weight: 900;
+  text-decoration: none;
+  box-shadow: 0 10px 22px rgba(40, 55, 85, 0.08);
+}
+
+.ics-subscribe-button:hover {
+  background: #195d54;
+}
+
+.calendar-subscription-help {
+  max-width: 560px;
+  color: #697581;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.calendar-subscription-help summary {
+  cursor: pointer;
+  color: #1f6f64;
+  font-weight: 800;
+}
+
+.calendar-subscription-help p {
+  margin: 7px 0;
+}
+
+.calendar-subscription-help code {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #f3f6f6;
+  color: #31424a;
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 720px) {
+  .calendar-action-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+  }
+
+  .ics-subscribe-button {
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 14px;
+  }
+
+  .calendar-subscription-help {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 390px) {
+  .calendar-action-row {
+    grid-template-columns: 1fr;
+  }
+}
