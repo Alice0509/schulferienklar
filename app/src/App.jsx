@@ -2,6 +2,24 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import "./home-refresh.css";
 import "./mobile-flow.css";
+import {
+  daysBetween,
+  parseDateKey as parseDate,
+  toDateKey,
+} from "./domain/date.js";
+import { getBridgeDaySuggestions } from "./domain/bridge-days.js";
+import {
+  getComparisonOverlapData,
+  getOverlapMonthKeys,
+} from "./domain/overlaps.js";
+import {
+  findPublicHolidayForDate,
+  getEffectiveFreePeriod,
+} from "./domain/periods.js";
+import {
+  getHolidaysForYear,
+  getTravelPeriodMatches,
+} from "./domain/travel-check.js";
 import { downloadIcsFile, generateIcsCalendar } from "./utils/ics";
 
 const DATA_BASE_URL = import.meta.env.BASE_URL;
@@ -21,66 +39,6 @@ const TODAY = new Date();
 TODAY.setHours(0, 0, 0, 0);
 
 const WEEKDAYS = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
-
-function parseDate(value) {
-  const date = new Date(`${value}T00:00:00`);
-  date.setHours(0, 0, 0, 0);
-  return date;
-}
-
-function toDateKey(date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-
-  return `${year}-${month}-${day}`;
-}
-
-function addDays(date, amount) {
-  const next = new Date(date);
-  next.setDate(next.getDate() + amount);
-  next.setHours(0, 0, 0, 0);
-  return next;
-}
-
-function isWeekend(date) {
-  const day = date.getDay();
-  return day === 0 || day === 6;
-}
-
-function findPublicHolidayForDate(date, publicHolidays = []) {
-  const key = toDateKey(date);
-
-  return publicHolidays.find((holiday) => {
-    return holiday.includeInDefaultCalendar && holiday.date === key;
-  });
-}
-
-function isDefaultFreeDay(date, publicHolidays = []) {
-  return isWeekend(date) || Boolean(findPublicHolidayForDate(date, publicHolidays));
-}
-
-function getEffectiveFreePeriod(holiday, publicHolidays = []) {
-  if (!holiday) return null;
-
-  let start = parseDate(holiday.startDate);
-  let end = parseDate(holiday.endDate);
-
-  while (isDefaultFreeDay(addDays(start, -1), publicHolidays)) {
-    start = addDays(start, -1);
-  }
-
-  while (isDefaultFreeDay(addDays(end, 1), publicHolidays)) {
-    end = addDays(end, 1);
-  }
-
-  return {
-    startDate: toDateKey(start),
-    endDate: toDateKey(end),
-    startsBeforeOfficialHoliday: toDateKey(start) < holiday.startDate,
-    endsAfterOfficialHoliday: toDateKey(end) > holiday.endDate,
-  };
-}
 
 function getFreePeriodStatus(holiday, publicHolidays = []) {
   const period = getEffectiveFreePeriod(holiday, publicHolidays);
@@ -156,11 +114,6 @@ function formatMonth(year, monthIndex) {
   }).format(new Date(year, monthIndex, 1));
 }
 
-function daysBetween(start, end) {
-  const msPerDay = 24 * 60 * 60 * 1000;
-  return Math.round((end - start) / msPerDay);
-}
-
 function getHolidayDuration(holiday) {
   return daysBetween(parseDate(holiday.startDate), parseDate(holiday.endDate)) + 1;
 }
@@ -181,227 +134,11 @@ function getPublicHolidayName(holiday) {
   return holiday?.name?.de || holiday?.name || "Feiertag";
 }
 
-function rangesOverlap(startA, endA, startB, endB) {
-  return startA <= endB && endA >= startB;
-}
-
-function getTravelPeriodMatches(startDate, endDate, holidays = [], publicHolidays = []) {
-  if (!startDate || !endDate || startDate > endDate) {
-    return {
-      schoolHolidayMatches: [],
-      publicHolidayMatches: [],
-    };
-  }
-
-  const periodStart = parseDate(startDate);
-  const periodEnd = parseDate(endDate);
-
-  const schoolHolidayMatches = holidays.filter((holiday) => {
-    return rangesOverlap(
-      periodStart,
-      periodEnd,
-      parseDate(holiday.startDate),
-      parseDate(holiday.endDate),
-    );
-  });
-
-  const publicHolidayMatches = publicHolidays.filter((holiday) => {
-    const holidayDate = parseDate(holiday.date);
-
-    return (
-      holiday.includeInDefaultCalendar &&
-      rangesOverlap(periodStart, periodEnd, holidayDate, holidayDate)
-    );
-  });
-
-  return {
-    schoolHolidayMatches,
-    publicHolidayMatches,
-  };
-}
-
-function getBridgeDaySuggestions(publicHolidays = [], selectedYear) {
-  const yearStart = `${selectedYear}-01-01`;
-  const yearEnd = `${selectedYear}-12-31`;
-  const publicHolidayDates = new Set(
-    publicHolidays
-      .filter((holiday) => holiday.includeInDefaultCalendar)
-      .map((holiday) => holiday.date)
-  );
-
-  const isValidVacationDay = (date) => {
-    const dateKey = toDateKey(date);
-    return !isWeekend(date) && !publicHolidayDates.has(dateKey);
-  };
-
-  return publicHolidays
-    .filter((holiday) => {
-      return holiday.includeInDefaultCalendar && holiday.date >= yearStart && holiday.date <= yearEnd;
-    })
-    .flatMap((holiday) => {
-      const holidayDate = parseDate(holiday.date);
-      const day = holidayDate.getDay();
-      const holidayName = getPublicHolidayName(holiday);
-      const suggestions = [];
-
-      if (day === 2 || day === 4) {
-        const bridgeDate = day === 2 ? addDays(holidayDate, -1) : addDays(holidayDate, 1);
-        const bridgeDateKey = toDateKey(bridgeDate);
-
-        if (isValidVacationDay(bridgeDate)) {
-          const weekendStart = day === 2 ? addDays(holidayDate, -3) : holidayDate;
-          const weekendEnd = day === 2 ? holidayDate : addDays(holidayDate, 3);
-
-          suggestions.push({
-            id: `${holiday.date}-${bridgeDateKey}`,
-            holidayName,
-            holidayDate: holiday.date,
-            bridgeDate: bridgeDateKey,
-            freeStartDate: toDateKey(weekendStart),
-            freeEndDate: toDateKey(weekendEnd),
-            vacationDays: 1,
-            freeDays: 4,
-            direction: day === 2 ? "vor dem Feiertag" : "nach dem Feiertag",
-          });
-        }
-      }
-
-      if (day === 3) {
-        const beforeVacationDays = [addDays(holidayDate, -2), addDays(holidayDate, -1)];
-        const afterVacationDays = [addDays(holidayDate, 1), addDays(holidayDate, 2)];
-
-        if (beforeVacationDays.every(isValidVacationDay)) {
-          suggestions.push({
-            id: `${holiday.date}-${beforeVacationDays.map(toDateKey).join("-")}`,
-            holidayName,
-            holidayDate: holiday.date,
-            bridgeDate: toDateKey(beforeVacationDays[0]),
-            freeStartDate: toDateKey(addDays(holidayDate, -4)),
-            freeEndDate: holiday.date,
-            vacationDays: 2,
-            freeDays: 5,
-            direction: "vor dem Feiertag",
-          });
-        }
-
-        if (afterVacationDays.every(isValidVacationDay)) {
-          suggestions.push({
-            id: `${holiday.date}-${afterVacationDays.map(toDateKey).join("-")}`,
-            holidayName,
-            holidayDate: holiday.date,
-            bridgeDate: toDateKey(afterVacationDays[0]),
-            freeStartDate: holiday.date,
-            freeEndDate: toDateKey(addDays(holidayDate, 4)),
-            vacationDays: 2,
-            freeDays: 5,
-            direction: "nach dem Feiertag",
-          });
-        }
-      }
-
-      return suggestions;
-    })
-    .filter((item) => parseDate(item.bridgeDate) >= TODAY)
-    .sort((a, b) => a.bridgeDate.localeCompare(b.bridgeDate));
-}
-
 function getNextHoliday(holidays) {
   return holidays
     .filter((holiday) => parseDate(holiday.endDate) >= TODAY)
     .sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate))[0];
 }
-
-function getHolidaysForYear(holidays, year) {
-  const yearStart = `${year}-01-01`;
-  const yearEnd = `${year}-12-31`;
-
-  return holidays
-    .filter((holiday) => holiday.startDate <= yearEnd && holiday.endDate >= yearStart)
-    .sort((a, b) => parseDate(a.startDate) - parseDate(b.startDate));
-}
-
-function getComparisonOverlapData(comparisonSummaries, comparisonYear) {
-  const dayMap = new Map();
-  const yearStart = parseDate(`${comparisonYear}-01-01`);
-  const yearEnd = parseDate(`${comparisonYear}-12-31`);
-  const rangeStart = comparisonYear === TODAY.getFullYear() ? TODAY : yearStart;
-
-  for (const summary of comparisonSummaries) {
-    const holidays = summary.holidaysForYear || [];
-
-    for (const holiday of holidays) {
-      let currentDate = parseDate(holiday.startDate);
-      const endDate = parseDate(holiday.endDate);
-
-      if (currentDate < rangeStart) {
-        currentDate = new Date(rangeStart);
-      }
-
-      const boundedEndDate = endDate > yearEnd ? yearEnd : endDate;
-
-      while (currentDate <= boundedEndDate) {
-        const dateKey = toDateKey(currentDate);
-        const existing = dayMap.get(dateKey) || new Map();
-
-        existing.set(summary.code, {
-          code: summary.code,
-          name: summary.name,
-        });
-
-        dayMap.set(dateKey, existing);
-        currentDate = addDays(currentDate, 1);
-      }
-    }
-  }
-
-  const overlapDays = [...dayMap.entries()]
-    .map(([dateKey, statesForDate]) => {
-      return {
-        dateKey,
-        states: [...statesForDate.values()],
-      };
-    })
-    .filter((item) => item.states.length >= 2)
-    .sort((a, b) => a.dateKey.localeCompare(b.dateKey));
-
-  const periods = [];
-
-  for (const day of overlapDays) {
-    const previous = periods[periods.length - 1];
-
-    if (
-      previous &&
-      toDateKey(addDays(parseDate(previous.endDate), 1)) === day.dateKey &&
-      previous.states.map((item) => item.code).sort().join(",") ===
-        day.states.map((item) => item.code).sort().join(",")
-    ) {
-      previous.endDate = day.dateKey;
-      continue;
-    }
-
-    periods.push({
-      startDate: day.dateKey,
-      endDate: day.dateKey,
-      states: day.states,
-    });
-  }
-
-  return {
-    dayMap: Object.fromEntries(
-      overlapDays.map((day) => {
-        return [day.dateKey, day.states];
-      })
-    ),
-    periods,
-  };
-}
-
-function getOverlapMonthKeys(overlapDayMap) {
-  return [...new Set(Object.keys(overlapDayMap).map((dateKey) => dateKey.slice(0, 7)))]
-    .sort()
-    .slice(0, 6);
-}
-
 
 function getHeroPattern(code) {
   const patterns = {
@@ -439,7 +176,6 @@ function getHolidayTone(holiday) {
 
   return "holiday";
 }
-
 
 function getCalendarMonthKeys(calendarYear) {
   return Array.from({ length: 12 }, (_, index) => {
@@ -723,7 +459,6 @@ function MobileActiveMonthCalendar({
     pointerStartRef.current = null;
   };
 
-
   return (
     <section
       className="panel mobile-active-month-calendar"
@@ -818,8 +553,6 @@ function MobileActiveMonthCalendar({
     </section>
   );
 }
-
-
 
 export default function App() {
   const [index, setIndex] = useState(null);
@@ -1118,6 +851,7 @@ export default function App() {
     return getBridgeDaySuggestions(
       bridgeDayPublicHolidayDataset?.holidays || [],
       bridgeDayYear,
+      TODAY,
     );
   }, [bridgeDayPublicHolidayDataset, bridgeDayYear]);
 
@@ -1321,7 +1055,11 @@ export default function App() {
   }, [comparisonCodes, comparisonDatasets, comparisonYear, index]);
 
   const comparisonOverlapData = useMemo(() => {
-    return getComparisonOverlapData(comparisonSummaries, comparisonYear);
+    return getComparisonOverlapData(
+      comparisonSummaries,
+      comparisonYear,
+      TODAY,
+    );
   }, [comparisonSummaries, comparisonYear]);
 
   const comparisonOverlapPeriods = comparisonOverlapData.periods.slice(0, 6);
