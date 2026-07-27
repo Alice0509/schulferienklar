@@ -137,6 +137,16 @@ for (const year of plannerYears) {
     ["scope limitation", /lokale Feiertage/i],
     ["FAQ structured data", /FAQPage/],
     ["breadcrumb structured data", /BreadcrumbList/],
+    [
+      "related planning tools",
+      /class="planner-section planner-related-tools"/,
+    ],
+    [
+      "Germany Travel Checker referral",
+      new RegExp(
+        `germanytravelchecker\\.com/\\?utm_source=schulferienklar&amp;utm_medium=referral&amp;utm_campaign=urlaubsplaner-${year}`,
+      ),
+    ],
   ];
 
   for (const [label, pattern] of plannerChecks) {
@@ -159,6 +169,27 @@ for (const year of plannerYears) {
   if (uniqueStatePlannerLinks.size < 16) {
     errors.push(
       `${plannerFile}: expected planner links for 16 states`,
+    );
+  }
+
+  const plannerYearLinks =
+    plannerHtml.match(
+      /class="planner-year-link(?: is-current)?" href="\/urlaubsplaner-20(?:26|27|28|29|30)\.html"/g,
+    ) || [];
+
+  if (plannerYearLinks.length !== plannerYears.length) {
+    errors.push(
+      `${plannerFile}: expected links for all planner years`,
+    );
+  }
+
+  const currentPlannerYearLink = new RegExp(
+    `class="planner-year-link is-current" href="/urlaubsplaner-${year}\\.html" aria-current="page"`,
+  );
+
+  if (!currentPlannerYearLink.test(plannerHtml)) {
+    errors.push(
+      `${plannerFile}: missing current planner year marker`,
     );
   }
 }

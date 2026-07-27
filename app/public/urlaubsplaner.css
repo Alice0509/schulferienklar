@@ -270,6 +270,69 @@
   line-height: 1.6;
 }
 
+.planner-related-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.planner-related-card {
+  border: 1px solid #dfe7e4;
+  border-radius: 17px;
+  padding: 20px;
+  background: #fbfdfc;
+}
+
+.planner-related-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+}
+
+.planner-related-card > p:not(.planner-card-label) {
+  margin: 0;
+  color: #62717b;
+  line-height: 1.55;
+}
+
+.planner-related-external {
+  background: #f5f8fb;
+}
+
+.planner-year-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.planner-year-link {
+  display: inline-flex;
+  min-width: 52px;
+  justify-content: center;
+  border: 1px solid #bfd2ce;
+  border-radius: 999px;
+  padding: 7px 10px;
+  color: #1f6f64;
+  background: #ffffff;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.planner-year-link.is-current {
+  border-color: #1f6f64;
+  color: #ffffff;
+  background: #1f6f64;
+}
+
+.planner-related-link {
+  display: inline-flex;
+  margin-top: 16px;
+  color: #1f6f64;
+  font-weight: 900;
+  text-underline-offset: 3px;
+}
+
 .planner-footer {
   display: flex;
   flex-wrap: wrap;
@@ -327,7 +390,8 @@
 
   .planner-budget-grid,
   .planner-state-grid,
-  .planner-method-grid {
+  .planner-method-grid,
+  .planner-related-grid {
     grid-template-columns: 1fr;
   }
 
