@@ -1,5 +1,8 @@
 # Schulferienklar Product North Star
 
+> 수익화와 시장 검증의 현재 실행 기준은
+> [`MONETIZATION_STRATEGY.md`](./MONETIZATION_STRATEGY.md)를 따른다.
+
 > 이 문서는 Schulferienklar의 제품·기술·데이터·수익화 방향을 판단하는 최상위 기준이다.
 >
 > 개별 페이지 개선, 디자인 수정, SEO 작업, 다운로드 기능을 진행하더라도
