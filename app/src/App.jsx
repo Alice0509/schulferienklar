@@ -1366,6 +1366,42 @@ export default function App() {
             </div>
           </div>
 
+          <section
+            className="hero-mobile-calendar-preview"
+            aria-label={`Kalendervorschau ${
+              selectedMeta?.bundeslandName || ""
+            } ${selectedYear}`}
+          >
+            <div className="hero-calendar-preview-header">
+              <div>
+                <p className="card-label">Kalender im Blick</p>
+                <h2>
+                  {selectedMeta?.bundeslandName || "Bundesland"} {selectedYear}
+                </h2>
+              </div>
+
+              <button
+                className="hero-calendar-preview-action"
+                type="button"
+                onClick={() => scrollToSection("kalender")}
+              >
+                Alle Monate
+              </button>
+            </div>
+
+            <HolidayCalendar
+              holidays={holidays}
+              publicHolidays={publicHolidayDataset?.holidays || []}
+              selectedYear={selectedYear}
+              customMonthKeys={[
+                selectedYear === TODAY.getFullYear()
+                  ? currentMonthKey
+                  : `${selectedYear}-01`,
+              ]}
+              showLegend={false}
+            />
+          </section>
+
           <div className="next-card">
             <p className="card-label">Nächste Ferien</p>
 
