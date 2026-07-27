@@ -562,15 +562,12 @@ export default function App() {
   const [selectedYear, setSelectedYear] = useState(() => {
     const params = new URLSearchParams(window.location.search);
     const queryYear = Number(params.get("year"));
-    const storedYear = Number(localStorage.getItem(STORAGE_KEYS.year));
 
     if (Number.isFinite(queryYear) && queryYear > 0) {
       return queryYear;
     }
 
-    return Number.isFinite(storedYear) && storedYear > 0
-      ? storedYear
-      : TODAY.getFullYear();
+    return TODAY.getFullYear();
   });
   const [availablePublicHolidayYears, setAvailablePublicHolidayYears] = useState([
     TODAY.getFullYear(),
