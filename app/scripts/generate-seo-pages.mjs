@@ -666,7 +666,9 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
           anschließen.
         </p>
 
-${schulferienklarIntroCardHtml({ code, name, year })}
+${schulferienklarIntroCardHtml({
+  appHref: `/?state=${code}&year=${year}`,
+})}
 
         <nav class="gold-page-nav" aria-label="Inhalt dieser Seite">
           <a href="#termine">Alle Termine</a>
@@ -833,9 +835,9 @@ function seoFooterHtml() {
 }
 
 
-function schulferienklarIntroCardHtml({ code, name, year }) {
+function schulferienklarIntroCardHtml({ appHref }) {
   return `        <section class="intro-card intro-card-visual" aria-label="Schulferienklar kurz erklärt">
-          <a class="intro-card-image-link" href="/?state=${code}&year=${year}" aria-label="Kalender öffnen">
+          <a class="intro-card-image-link" href="${appHref}" aria-label="Kalender öffnen">
             <img
               src="/og-image.png"
               alt="Schulferienklar Kalenderansicht mit Ferien und Feiertagen"
@@ -855,7 +857,7 @@ function schulferienklarIntroCardHtml({ code, name, year }) {
                 für alle Bundesländer in einer klaren Kalenderansicht.
               </p>
             </div>
-            <a class="intro-card-link" href="/?state=${code}&year=${year}">
+            <a class="intro-card-link" href="${appHref}">
               Kalender öffnen
             </a>
           </div>
@@ -910,7 +912,9 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
           für ${name} übersichtlich im Kalender.
         </p>
 
-${schulferienklarIntroCardHtml({ code, name, year })}
+${schulferienklarIntroCardHtml({
+  appHref: `/?state=${code}&year=${year}`,
+})}
 ${stateYearQuickSummaryHtml(events, name, year)}
 ${stateYearQueryIntroHtml(name, year, events)}
 
@@ -1002,6 +1006,9 @@ ${seoTopNavHtml({ appHref: `/?state=${code}` })}      <section class="card">
           ${escapeHtml(name)} für die nächsten Jahre.
         </p>
 
+${schulferienklarIntroCardHtml({
+  appHref: `/?state=${code}`,
+})}
         <h2>Übersicht ${escapeHtml(name)} ${years[0]}–${years[years.length - 1]}</h2>
         <p>
           Die folgenden Jahresseiten zeigen die Ferientermine für ${escapeHtml(name)}
@@ -1094,6 +1101,9 @@ ${seoTopNavHtml({ appHref: `/?year=${year}` })}      <section class="card">
           Detailseiten für Kalender, Feiertage und freie Zeiten.
         </p>
 
+${schulferienklarIntroCardHtml({
+  appHref: `/?year=${year}`,
+})}
         <h2>Schulferien ${year} nach Bundesland</h2>
         <p>
           Diese Übersicht hilft dir, die Ferien ${year} in Deutschland nach Bundesland zu vergleichen.

@@ -74,6 +74,30 @@ for (const file of htmlFiles) {
 }
 
 
+const schoolHolidayHtmlFiles = htmlFiles.filter((file) => {
+  return file.startsWith("schulferien-");
+});
+
+for (const file of schoolHolidayHtmlFiles) {
+  const html = fs.readFileSync(
+    path.join(publicDir, file),
+    "utf8",
+  );
+
+  if (!html.includes('class="intro-card intro-card-visual"')) {
+    errors.push(`${file}: missing calendar promo card`);
+  }
+
+  if (!html.includes('class="intro-card-image-link"')) {
+    errors.push(`${file}: missing calendar promo image link`);
+  }
+
+  if (!html.includes('class="intro-card-link"')) {
+    errors.push(`${file}: missing calendar promo CTA`);
+  }
+}
+
+
 for (const year of plannerYears) {
   const plannerFile = `urlaubsplaner-${year}.html`;
   const plannerPath = path.join(
