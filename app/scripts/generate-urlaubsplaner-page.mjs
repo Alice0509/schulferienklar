@@ -25,8 +25,27 @@ function formatDate(dateKey) {
   return `${day}.${month}.${year}`;
 }
 
-function formatRange(startDate, endDate) {
-  return `${formatDate(startDate)} – ${formatDate(endDate)}`;
+function formatWeekdayDate(dateKey, includeYear = true) {
+  const [year, month, day] = String(dateKey).split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day, 12));
+
+  return new Intl.DateTimeFormat("de-DE", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    ...(includeYear ? { year: "numeric" } : {}),
+    timeZone: "UTC",
+  }).format(date);
+}
+
+function formatWeekdayRange(startDate, endDate) {
+  const sameYear =
+    String(startDate).slice(0, 4) === String(endDate).slice(0, 4);
+
+  return `${formatWeekdayDate(
+    startDate,
+    !sameYear,
+  )} – ${formatWeekdayDate(endDate)}`;
 }
 
 function vacationDayLabel(count) {
@@ -41,10 +60,6 @@ function formatDatasetDate(value) {
   return /^\d{4}-\d{2}-\d{2}$/.test(String(value))
     ? formatDate(value)
     : String(value || "nicht angegeben");
-}
-
-function freeDayLabel(count) {
-  return count === 1 ? "freier Tag" : "freie Tage";
 }
 
 function stateSlug(name) {
@@ -125,8 +140,8 @@ function budgetExamplesHtml(defaultState, year) {
 
       return `          <article class="planner-budget-card" data-budget="${budget}">
             <p class="planner-card-label">Bis zu ${budget} ${vacationDayLabel(budget)}</p>
-            <h3>${suggestion.freeDays} ${freeDayLabel(suggestion.freeDays)}</h3>
-            <p class="planner-period">${formatRange(
+            <h3>${suggestion.freeDays} Tage am Stück frei</h3>
+            <p class="planner-period">${formatWeekdayRange(
               suggestion.startDate,
               suggestion.endDate,
             )}</p>
@@ -148,13 +163,11 @@ function stateCardsHtml(states, year) {
       const suggestion = state.bestSuggestion;
 
       const resultHtml = suggestion
-        ? `<strong>${suggestion.freeDays} ${freeDayLabel(
-            suggestion.freeDays,
-          )}</strong>
+        ? `<strong>${suggestion.freeDays} Tage am Stück frei</strong>
               <span>
                 mit ${suggestion.vacationDays}
                 ${vacationDayDativeLabel(suggestion.vacationDays)}
-                · ${formatRange(
+                · ${formatWeekdayRange(
                   suggestion.startDate,
                   suggestion.endDate,
                 )}
