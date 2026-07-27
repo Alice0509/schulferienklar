@@ -854,3 +854,40 @@ p {
   font-size: 0.76rem;
   overflow-wrap: anywhere;
 }
+
+/* Put the visual calendar answer near the top without making mobile pages noisy. */
+@media (max-width: 640px) {
+  .intro-card {
+    gap: 10px;
+    margin: 17px 0 24px;
+    padding: 10px;
+  }
+
+  .intro-card-footer {
+    gap: 8px;
+    padding: 2px 2px 0;
+  }
+
+  .intro-card-footer > div > p:not(.intro-card-label) {
+    display: none;
+  }
+
+  .intro-card-label {
+    margin-bottom: 4px;
+  }
+
+  .intro-card h2 {
+    margin: 0;
+    font-size: 1.22rem;
+    line-height: 1.15;
+  }
+
+  .intro-card-link {
+    min-height: 42px;
+  }
+
+  .gold-page > .intro-card {
+    margin-bottom: 22px;
+  }
+}
+

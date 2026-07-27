@@ -3771,3 +3771,124 @@ button.current-year-link {
     grid-template-columns: 1fr;
   }
 }
+
+/* Mobile-first calendar preview: show the product before the next-holiday card. */
+.hero-mobile-calendar-preview {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .hero {
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+
+  .hero-grid {
+    gap: 16px;
+    align-items: start;
+  }
+
+  .hero-copy {
+    gap: 14px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.65rem, 13vw, 4rem);
+  }
+
+  .hero-copy > p {
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+
+  .hero-mobile-calendar-preview {
+    display: block;
+    padding: 14px;
+    border: 1px solid rgba(23, 32, 51, 0.1);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 16px 40px rgba(40, 55, 85, 0.09);
+  }
+
+  .hero-calendar-preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .hero-calendar-preview-header .card-label {
+    margin-bottom: 3px;
+  }
+
+  .hero-calendar-preview-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+  }
+
+  .hero-calendar-preview-action {
+    flex: 0 0 auto;
+    min-height: 38px;
+    border: 1px solid rgba(31, 111, 100, 0.25);
+    border-radius: 999px;
+    padding: 7px 11px;
+    color: #1f6f64;
+    background: #eef8f4;
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 850;
+    cursor: pointer;
+  }
+
+  .hero-mobile-calendar-preview .calendar-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-mobile-calendar-preview .month-card {
+    padding: 13px;
+    border-radius: 18px;
+  }
+
+  .hero-mobile-calendar-preview .month-card h3 {
+    margin-bottom: 9px;
+    font-size: 1rem;
+  }
+
+  .hero-mobile-calendar-preview .weekday-row,
+  .hero-mobile-calendar-preview .month-days {
+    gap: 3px;
+  }
+
+  .hero-mobile-calendar-preview .calendar-day {
+    min-height: 34px;
+    font-size: 0.82rem;
+  }
+
+  .next-card {
+    margin-top: 0;
+    padding: 18px;
+  }
+
+  .next-card h2 {
+    font-size: 1.7rem;
+  }
+
+  .next-card .metric-row {
+    gap: 10px;
+    margin: 16px 0;
+  }
+
+  .next-card .metric-row > div {
+    padding: 13px;
+    border-radius: 16px;
+  }
+
+  .next-card .metric-number,
+  .next-card .metric-word {
+    font-size: 1.7rem;
+  }
+}
+

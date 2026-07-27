@@ -666,6 +666,8 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
           anschließen.
         </p>
 
+${schulferienklarIntroCardHtml({ code, name, year })}
+
         <nav class="gold-page-nav" aria-label="Inhalt dieser Seite">
           <a href="#termine">Alle Termine</a>
           <a href="#berechnung">Freie Zeit</a>
@@ -739,7 +741,6 @@ ${bayern2027JahreskalenderHtml()}
 
 ${bayern2027SourceHtml(source)}
 ${bayern2027FaqHtml(faqItems)}
-${schulferienklarIntroCardHtml({ code, name, year })}
 ${bayern2027RelatedLinksHtml()}
 
         <a class="button" href="/?state=${code}&year=${year}">
@@ -838,7 +839,9 @@ function schulferienklarIntroCardHtml({ code, name, year }) {
             <img
               src="/og-image.png"
               alt="Schulferienklar Kalenderansicht mit Ferien und Feiertagen"
-              loading="lazy"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
               width="1200"
               height="630"
             />
@@ -907,6 +910,7 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
           für ${name} übersichtlich im Kalender.
         </p>
 
+${schulferienklarIntroCardHtml({ code, name, year })}
 ${stateYearQuickSummaryHtml(events, name, year)}
 ${stateYearQueryIntroHtml(name, year, events)}
 
@@ -922,7 +926,6 @@ ${stateYearQueryIntroHtml(name, year, events)}
           Lernzeiten oder freie Tage rund um die Schulferien planen möchten.
         </p>
 
-${schulferienklarIntroCardHtml({ code, name, year })}
 ${subscriptionCtaHtml({ code, name })}
 ${stateYearInternalLinksHtml({ slug, name, year })}
 
