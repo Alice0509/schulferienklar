@@ -8,9 +8,7 @@ import {
   toDateKey,
 } from "./domain/date.js";
 import { getBridgeDaySuggestions } from "./domain/bridge-days.js";
-import {
-  getVacationOptimizerSuggestions,
-} from "./domain/vacation-optimizer.js";
+import { getVacationOptimizerSuggestions } from "./domain/vacation-optimizer.js";
 import {
   getComparisonOverlapData,
   getOverlapMonthKeys,
@@ -71,7 +69,8 @@ function getFreePeriodStatus(holiday, publicHolidays = []) {
 
   return {
     value: String(daysUntil),
-    label: daysUntil === 1 ? "Tag bis zur freien Zeit" : "Tage bis zur freien Zeit",
+    label:
+      daysUntil === 1 ? "Tag bis zur freien Zeit" : "Tage bis zur freien Zeit",
     state: "upcoming",
     period,
   };
@@ -106,6 +105,37 @@ function formatCompactDateRange(startValue, endValue) {
   return `${formatDate(startValue)} – ${formatDate(endValue)}`;
 }
 
+function formatWeekdayDate(value) {
+  return new Intl.DateTimeFormat("de-DE", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(parseDate(value));
+}
+
+function formatWeekdayCompactDateRange(startValue, endValue) {
+  const startDate = parseDate(startValue);
+  const endDate = parseDate(endValue);
+  const sameYear = startDate.getFullYear() === endDate.getFullYear();
+
+  const startLabel = new Intl.DateTimeFormat("de-DE", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    ...(sameYear ? {} : { year: "numeric" }),
+  }).format(startDate);
+
+  const endLabel = new Intl.DateTimeFormat("de-DE", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(endDate);
+
+  return `${startLabel} – ${endLabel}`;
+}
+
 function formatMonth(year, monthIndex) {
   return new Intl.DateTimeFormat("de-DE", {
     month: "long",
@@ -114,7 +144,9 @@ function formatMonth(year, monthIndex) {
 }
 
 function getHolidayDuration(holiday) {
-  return daysBetween(parseDate(holiday.startDate), parseDate(holiday.endDate)) + 1;
+  return (
+    daysBetween(parseDate(holiday.startDate), parseDate(holiday.endDate)) + 1
+  );
 }
 
 function getDaysUntil(holiday) {
@@ -263,17 +295,29 @@ function HolidayCalendar({
   }, [selectedYear, customMonthKeys]);
 
   if (monthKeys.length === 0) {
-    return <p className="empty-state">Keine kommenden Ferien für die Kalenderansicht gefunden.</p>;
+    return (
+      <p className="empty-state">
+        Keine kommenden Ferien für die Kalenderansicht gefunden.
+      </p>
+    );
   }
 
   return (
     <div className="calendar-view">
       {showLegend && (
         <div className="calendar-legend">
-          <span><i className="legend-swatch legend-holiday" /> Ferien</span>
-          <span><i className="legend-swatch legend-public" /> Feiertag</span>
-          <span><i className="legend-swatch legend-special" /> Unterrichtsfrei</span>
-          <span><i className="legend-outline" /> freie Zeit rund um Ferien</span>
+          <span>
+            <i className="legend-swatch legend-holiday" /> Ferien
+          </span>
+          <span>
+            <i className="legend-swatch legend-public" /> Feiertag
+          </span>
+          <span>
+            <i className="legend-swatch legend-special" /> Unterrichtsfrei
+          </span>
+          <span>
+            <i className="legend-outline" /> freie Zeit rund um Ferien
+          </span>
         </div>
       )}
 
@@ -297,16 +341,30 @@ function HolidayCalendar({
               <div className="month-days">
                 {cells.map((date, index) => {
                   if (!date) {
-                    return <span className="calendar-day empty" key={`empty-${index}`} />;
+                    return (
+                      <span
+                        className="calendar-day empty"
+                        key={`empty-${index}`}
+                      />
+                    );
                   }
 
-                  const holiday = findHolidayForDate(date, holidays, publicHolidays);
-                  const freePeriodHoliday = findFreePeriodForDate(date, holidays, publicHolidays);
+                  const holiday = findHolidayForDate(
+                    date,
+                    holidays,
+                    publicHolidays,
+                  );
+                  const freePeriodHoliday = findFreePeriodForDate(
+                    date,
+                    holidays,
+                    publicHolidays,
+                  );
                   const tone = getHolidayTone(holiday);
                   const isToday = toDateKey(date) === toDateKey(TODAY);
                   const isSaturday = date.getDay() === 6;
                   const isSunday = date.getDay() === 0;
-                  const isFreePeriodOnly = Boolean(freePeriodHoliday) && !holiday;
+                  const isFreePeriodOnly =
+                    Boolean(freePeriodHoliday) && !holiday;
 
                   const dayKey = toDateKey(date);
                   const holidayLabel = holiday ? getHolidayLabel(holiday) : "";
@@ -327,7 +385,9 @@ function HolidayCalendar({
                         tone ? `tone-${tone}` : "",
                         isToday ? "is-today" : "",
                         dayDetailLabel ? "has-day-detail" : "",
-                        selectedDayDetail?.dateKey === dayKey ? "is-selected-detail" : "",
+                        selectedDayDetail?.dateKey === dayKey
+                          ? "is-selected-detail"
+                          : "",
                       ].join(" ")}
                       key={dayKey}
                       type="button"
@@ -374,7 +434,10 @@ function MobileActiveMonthCalendar({
   publicHolidays = [],
   selectedYear,
 }) {
-  const monthKeys = useMemo(() => getCalendarMonthKeys(selectedYear), [selectedYear]);
+  const monthKeys = useMemo(
+    () => getCalendarMonthKeys(selectedYear),
+    [selectedYear],
+  );
 
   const initialMonthIndex = useMemo(() => {
     const currentMonthKey = toDateKey(TODAY).slice(0, 7);
@@ -398,7 +461,8 @@ function MobileActiveMonthCalendar({
   const [yearText, monthText] = activeMonthKey.split("-");
   const activeMonthLabel = formatMonth(Number(yearText), Number(monthText) - 1);
   const isCurrentYear = selectedYear === TODAY.getFullYear();
-  const isViewingCurrentMonth = isCurrentYear && safeActiveMonthIndex === initialMonthIndex;
+  const isViewingCurrentMonth =
+    isCurrentYear && safeActiveMonthIndex === initialMonthIndex;
   const currentYearUrl = `/?year=${TODAY.getFullYear()}#ferienkalender`;
 
   const goToCurrentMonth = () => {
@@ -410,7 +474,9 @@ function MobileActiveMonthCalendar({
   };
 
   const goToNextMonth = () => {
-    setActiveMonthIndex((current) => Math.min(monthKeys.length - 1, current + 1));
+    setActiveMonthIndex((current) =>
+      Math.min(monthKeys.length - 1, current + 1),
+    );
   };
 
   const handlePointerDown = (event) => {
@@ -469,7 +535,9 @@ function MobileActiveMonthCalendar({
       <div className="section-header mobile-month-header">
         <div>
           <p className="eyebrow">Heute im Blick</p>
-          <h3 id="mobile-month-title">{isCurrentYear ? "Aktueller Monat" : "Monatsansicht"}</h3>
+          <h3 id="mobile-month-title">
+            {isCurrentYear ? "Aktueller Monat" : "Monatsansicht"}
+          </h3>
         </div>
         <span className="small-pill">Wischen oder tippen</span>
       </div>
@@ -488,7 +556,10 @@ function MobileActiveMonthCalendar({
             event.preventDefault();
             event.stopPropagation();
 
-            localStorage.setItem(STORAGE_KEYS.year, String(TODAY.getFullYear()));
+            localStorage.setItem(
+              STORAGE_KEYS.year,
+              String(TODAY.getFullYear()),
+            );
             window.location.assign(currentYearUrl);
           }}
         >
@@ -515,7 +586,10 @@ function MobileActiveMonthCalendar({
         </button>
       )}
 
-      <div className="mobile-month-controls compact-month-controls" aria-label="Monat wechseln">
+      <div
+        className="mobile-month-controls compact-month-controls"
+        aria-label="Monat wechseln"
+      >
         <button
           className="month-nav-button"
           type="button"
@@ -528,7 +602,9 @@ function MobileActiveMonthCalendar({
 
         <div className="mobile-month-current" aria-live="polite">
           <strong>{activeMonthLabel}</strong>
-          <span>{safeActiveMonthIndex + 1} von {monthKeys.length} · wischen</span>
+          <span>
+            {safeActiveMonthIndex + 1} von {monthKeys.length} · wischen
+          </span>
         </div>
 
         <button
@@ -557,7 +633,11 @@ export default function App() {
   const [index, setIndex] = useState(null);
   const [selectedCode, setSelectedCode] = useState(() => {
     const params = new URLSearchParams(window.location.search);
-    return params.get("state") || localStorage.getItem(STORAGE_KEYS.bundesland) || "BY";
+    return (
+      params.get("state") ||
+      localStorage.getItem(STORAGE_KEYS.bundesland) ||
+      "BY"
+    );
   });
   const [selectedYear, setSelectedYear] = useState(() => {
     const params = new URLSearchParams(window.location.search);
@@ -569,9 +649,8 @@ export default function App() {
 
     return TODAY.getFullYear();
   });
-  const [availablePublicHolidayYears, setAvailablePublicHolidayYears] = useState([
-    TODAY.getFullYear(),
-  ]);
+  const [availablePublicHolidayYears, setAvailablePublicHolidayYears] =
+    useState([TODAY.getFullYear()]);
   const [viewMode, setViewMode] = useState("calendar");
   const [showAllStates, setShowAllStates] = useState(false);
   const [isStateMenuOpen, setIsStateMenuOpen] = useState(false);
@@ -583,7 +662,7 @@ export default function App() {
   const [comparisonCodes, setComparisonCodes] = useState(() => {
     try {
       const storedCodes = JSON.parse(
-        localStorage.getItem(STORAGE_KEYS.comparisonStates) || "[]"
+        localStorage.getItem(STORAGE_KEYS.comparisonStates) || "[]",
       );
 
       return Array.isArray(storedCodes) ? storedCodes.slice(0, 4) : [];
@@ -596,16 +675,25 @@ export default function App() {
   const [showOverlapDetails, setShowOverlapDetails] = useState(false);
   const [travelCheckCode, setTravelCheckCode] = useState(() => {
     const params = new URLSearchParams(window.location.search);
-    return params.get("state") || localStorage.getItem(STORAGE_KEYS.bundesland) || "BY";
+    return (
+      params.get("state") ||
+      localStorage.getItem(STORAGE_KEYS.bundesland) ||
+      "BY"
+    );
   });
   const [travelStartDate, setTravelStartDate] = useState("");
   const [travelEndDate, setTravelEndDate] = useState("");
   const [travelDataset, setTravelDataset] = useState(null);
-  const [travelPublicHolidayDataset, setTravelPublicHolidayDataset] = useState(null);
+  const [travelPublicHolidayDataset, setTravelPublicHolidayDataset] =
+    useState(null);
   const [travelDataLoading, setTravelDataLoading] = useState(false);
   const [bridgeDayCode, setBridgeDayCode] = useState(() => {
     const params = new URLSearchParams(window.location.search);
-    return params.get("state") || localStorage.getItem(STORAGE_KEYS.bundesland) || "BY";
+    return (
+      params.get("state") ||
+      localStorage.getItem(STORAGE_KEYS.bundesland) ||
+      "BY"
+    );
   });
   const [bridgeDayYear, setBridgeDayYear] = useState(() => {
     const params = new URLSearchParams(window.location.search);
@@ -635,18 +723,19 @@ export default function App() {
       return queryBudget;
     }
 
-    return (
-      Number.isInteger(storedBudget) &&
+    return Number.isInteger(storedBudget) &&
       storedBudget >= 1 &&
       storedBudget <= 30
-    )
       ? storedBudget
       : 4;
   });
-  const [bridgeDayPublicHolidayDataset, setBridgeDayPublicHolidayDataset] = useState(null);
+  const [bridgeDayPublicHolidayDataset, setBridgeDayPublicHolidayDataset] =
+    useState(null);
   const [bridgeDayLoading, setBridgeDayLoading] = useState(false);
   const [comparisonYear, setComparisonYear] = useState(() => {
-    const storedYear = Number(localStorage.getItem(STORAGE_KEYS.comparisonYear));
+    const storedYear = Number(
+      localStorage.getItem(STORAGE_KEYS.comparisonYear),
+    );
 
     return Number.isFinite(storedYear) && storedYear > 0
       ? storedYear
@@ -683,13 +772,19 @@ export default function App() {
         ...currentCodes.filter((code) => code !== selectedCode),
       ].slice(0, 4);
 
-      localStorage.setItem(STORAGE_KEYS.comparisonStates, JSON.stringify(nextCodes));
+      localStorage.setItem(
+        STORAGE_KEYS.comparisonStates,
+        JSON.stringify(nextCodes),
+      );
       return nextCodes;
     });
   }, [selectedCode]);
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEYS.comparisonStates, JSON.stringify(comparisonCodes));
+    localStorage.setItem(
+      STORAGE_KEYS.comparisonStates,
+      JSON.stringify(comparisonCodes),
+    );
   }, [comparisonCodes]);
 
   useEffect(() => {
@@ -750,7 +845,10 @@ export default function App() {
             data.datasets.find((item) => item.bundeslandCode === "BY") ||
             data.datasets[0];
 
-          localStorage.setItem(STORAGE_KEYS.bundesland, defaultDataset.bundeslandCode);
+          localStorage.setItem(
+            STORAGE_KEYS.bundesland,
+            defaultDataset.bundeslandCode,
+          );
           setSelectedCode(defaultDataset.bundeslandCode);
         }
       } catch (err) {
@@ -764,7 +862,9 @@ export default function App() {
   }, []);
 
   const selectedMeta = useMemo(() => {
-    return index?.datasets?.find((item) => item.bundeslandCode === selectedCode);
+    return index?.datasets?.find(
+      (item) => item.bundeslandCode === selectedCode,
+    );
   }, [index, selectedCode]);
 
   useEffect(() => {
@@ -778,7 +878,9 @@ export default function App() {
     async function loadComparisonDatasets() {
       const entries = await Promise.all(
         comparisonCodes.map(async (code) => {
-          const meta = index.datasets.find((item) => item.bundeslandCode === code);
+          const meta = index.datasets.find(
+            (item) => item.bundeslandCode === code,
+          );
 
           if (!meta?.jsonFile) {
             return [code, null];
@@ -792,7 +894,7 @@ export default function App() {
           } catch {
             return [code, null];
           }
-        })
+        }),
       );
 
       if (!isCancelled) {
@@ -817,7 +919,9 @@ export default function App() {
           await holidayRepository.loadSchoolHolidayDatasetByMeta(selectedMeta);
 
         if (!data) {
-          throw new Error(`${selectedMeta.jsonFile} konnte nicht geladen werden.`);
+          throw new Error(
+            `${selectedMeta.jsonFile} konnte nicht geladen werden.`,
+          );
         }
         setDataset(data);
       } catch (err) {
@@ -838,7 +942,7 @@ export default function App() {
         const publicHolidayIndex =
           await holidayRepository.loadPublicHolidayIndex();
         const years = Array.from(
-          new Set((publicHolidayIndex.datasets || []).map((item) => item.year))
+          new Set((publicHolidayIndex.datasets || []).map((item) => item.year)),
         ).sort();
 
         if (years.length > 0) {
@@ -851,7 +955,9 @@ export default function App() {
         }
 
         const matchingDataset = publicHolidayIndex.datasets?.find((item) => {
-          return item.bundeslandCode === selectedCode && item.year === selectedYear;
+          return (
+            item.bundeslandCode === selectedCode && item.year === selectedYear
+          );
         });
 
         if (!matchingDataset) {
@@ -878,7 +984,7 @@ export default function App() {
   const holidays = useMemo(() => {
     return dataset?.holidays
       ? [...dataset.holidays].sort(
-          (a, b) => parseDate(a.startDate) - parseDate(b.startDate)
+          (a, b) => parseDate(a.startDate) - parseDate(b.startDate),
         )
       : [];
   }, [dataset]);
@@ -886,15 +992,23 @@ export default function App() {
   const nextHoliday = useMemo(() => getNextHoliday(holidays), [holidays]);
 
   const upcomingHolidays = useMemo(() => {
-    return holidays.filter((holiday) => parseDate(holiday.endDate) >= TODAY).slice(0, 8);
+    return holidays
+      .filter((holiday) => parseDate(holiday.endDate) >= TODAY)
+      .slice(0, 8);
   }, [holidays]);
 
   const todayPublicHoliday = useMemo(() => {
-    return findPublicHolidayForDate(TODAY, publicHolidayDataset?.holidays || []);
+    return findPublicHolidayForDate(
+      TODAY,
+      publicHolidayDataset?.holidays || [],
+    );
   }, [publicHolidayDataset]);
 
   const nextHolidayFreeStatus = useMemo(() => {
-    return getFreePeriodStatus(nextHoliday, publicHolidayDataset?.holidays || []);
+    return getFreePeriodStatus(
+      nextHoliday,
+      publicHolidayDataset?.holidays || [],
+    );
   }, [nextHoliday, publicHolidayDataset]);
 
   const bridgeDaySuggestions = useMemo(() => {
@@ -911,9 +1025,7 @@ export default function App() {
     }
 
     const minStartDate =
-      bridgeDayYear === TODAY.getFullYear()
-        ? toDateKey(TODAY)
-        : null;
+      bridgeDayYear === TODAY.getFullYear() ? toDateKey(TODAY) : null;
 
     return getVacationOptimizerSuggestions(
       bridgeDayPublicHolidayDataset.holidays || [],
@@ -924,11 +1036,7 @@ export default function App() {
         minStartDate,
       },
     );
-  }, [
-    bridgeDayPublicHolidayDataset,
-    bridgeDayYear,
-    vacationDayBudget,
-  ]);
+  }, [bridgeDayPublicHolidayDataset, bridgeDayYear, vacationDayBudget]);
 
   useEffect(() => {
     let isCancelled = false;
@@ -940,7 +1048,9 @@ export default function App() {
         const publicHolidayIndex =
           await holidayRepository.loadPublicHolidayIndex();
         const matchingDataset = publicHolidayIndex.datasets.find((item) => {
-          return item.bundeslandCode === bridgeDayCode && item.year === bridgeDayYear;
+          return (
+            item.bundeslandCode === bridgeDayCode && item.year === bridgeDayYear
+          );
         });
 
         if (!matchingDataset) {
@@ -956,9 +1066,7 @@ export default function App() {
           );
 
         if (!data) {
-          throw new Error(
-            "Bridge day public holiday data could not be loaded",
-          );
+          throw new Error("Bridge day public holiday data could not be loaded");
         }
 
         if (!isCancelled) {
@@ -1013,10 +1121,16 @@ export default function App() {
       travelDataset?.holidays || [],
       travelPublicHolidayDataset?.holidays || [],
     );
-  }, [travelDataset, travelPublicHolidayDataset, travelStartDate, travelEndDate]);
+  }, [
+    travelDataset,
+    travelPublicHolidayDataset,
+    travelStartDate,
+    travelEndDate,
+  ]);
 
   const hasTravelPeriodInput = Boolean(travelStartDate && travelEndDate);
-  const isTravelPeriodInvalid = hasTravelPeriodInput && travelStartDate > travelEndDate;
+  const isTravelPeriodInvalid =
+    hasTravelPeriodInput && travelStartDate > travelEndDate;
   const hasTravelPeriodMatches =
     travelPeriodMatches.schoolHolidayMatches.length > 0 ||
     travelPeriodMatches.publicHolidayMatches.length > 0;
@@ -1047,9 +1161,7 @@ export default function App() {
         }
 
         const holidayData =
-          await holidayRepository.loadSchoolHolidayDatasetByMeta(
-            travelMeta,
-          );
+          await holidayRepository.loadSchoolHolidayDatasetByMeta(travelMeta);
 
         if (!holidayData) {
           throw new Error("Travel holiday data could not be loaded");
@@ -1058,7 +1170,10 @@ export default function App() {
         const publicHolidayIndex =
           await holidayRepository.loadPublicHolidayIndex();
         const publicHolidayMeta = publicHolidayIndex.datasets.find((item) => {
-          return item.bundeslandCode === travelCheckCode && item.year === travelCheckYear;
+          return (
+            item.bundeslandCode === travelCheckCode &&
+            item.year === travelCheckYear
+          );
         });
 
         let publicHolidayData = null;
@@ -1100,9 +1215,14 @@ export default function App() {
   const comparisonSummaries = useMemo(() => {
     return comparisonCodes
       .map((code) => {
-        const meta = index?.datasets?.find((item) => item.bundeslandCode === code);
+        const meta = index?.datasets?.find(
+          (item) => item.bundeslandCode === code,
+        );
         const stateHolidays = comparisonDatasets[code]?.holidays || [];
-        const holidaysForYear = getHolidaysForYear(stateHolidays, comparisonYear);
+        const holidaysForYear = getHolidaysForYear(
+          stateHolidays,
+          comparisonYear,
+        );
 
         if (!meta) {
           return null;
@@ -1119,11 +1239,7 @@ export default function App() {
   }, [comparisonCodes, comparisonDatasets, comparisonYear, index]);
 
   const comparisonOverlapData = useMemo(() => {
-    return getComparisonOverlapData(
-      comparisonSummaries,
-      comparisonYear,
-      TODAY,
-    );
+    return getComparisonOverlapData(comparisonSummaries, comparisonYear, TODAY);
   }, [comparisonSummaries, comparisonYear]);
 
   const comparisonOverlapPeriods = comparisonOverlapData.periods.slice(0, 6);
@@ -1135,7 +1251,8 @@ export default function App() {
     comparisonOverlapMonthKeys.length > 0
       ? Math.min(activeOverlapMonthIndex, comparisonOverlapMonthKeys.length - 1)
       : 0;
-  const activeOverlapMonthKey = comparisonOverlapMonthKeys[safeActiveOverlapMonthIndex];
+  const activeOverlapMonthKey =
+    comparisonOverlapMonthKeys[safeActiveOverlapMonthIndex];
 
   useEffect(() => {
     setActiveOverlapMonthIndex(0);
@@ -1169,7 +1286,7 @@ export default function App() {
   };
 
   const currentMonthKey = `${TODAY.getFullYear()}-${String(
-    TODAY.getMonth() + 1
+    TODAY.getMonth() + 1,
   ).padStart(2, "0")}`;
 
   const shouldShowCurrentMonthPreview = selectedYear === TODAY.getFullYear();
@@ -1220,10 +1337,11 @@ export default function App() {
     });
   };
 
-  const subscriptionCalendarUrl =
-    `https://www.schulferienklar.de/calendar/${selectedCode.toLowerCase()}.ics`;
-  const subscriptionCalendarWebcalUrl =
-    subscriptionCalendarUrl.replace(/^https:/, "webcal:");
+  const subscriptionCalendarUrl = `https://www.schulferienklar.de/calendar/${selectedCode.toLowerCase()}.ics`;
+  const subscriptionCalendarWebcalUrl = subscriptionCalendarUrl.replace(
+    /^https:/,
+    "webcal:",
+  );
 
   const pattern = getHeroPattern(selectedCode);
 
@@ -1271,25 +1389,43 @@ export default function App() {
               onClick={() => setIsSiteMenuOpen(false)}
             />
             <div className="site-menu" id="site-menu">
-              <button type="button" onClick={() => scrollToSection("bundesland-auswahl")}>
+              <button
+                type="button"
+                onClick={() => scrollToSection("bundesland-auswahl")}
+              >
                 Bundesland wählen
               </button>
               <button type="button" onClick={() => scrollToSection("kalender")}>
                 Kalender
               </button>
-              <button type="button" onClick={() => scrollToSection("reisezeit")}>
+              <button
+                type="button"
+                onClick={() => scrollToSection("reisezeit")}
+              >
                 Reisezeit prüfen
               </button>
-              <button type="button" onClick={() => scrollToSection("brueckentage")}>
+              <button
+                type="button"
+                onClick={() => scrollToSection("brueckentage")}
+              >
                 Urlaubsplaner
               </button>
-              <button type="button" onClick={() => scrollToSection("vergleich")}>
+              <button
+                type="button"
+                onClick={() => scrollToSection("vergleich")}
+              >
                 Vergleich
               </button>
-              <button type="button" onClick={() => scrollToSection("bundeslaender")}>
+              <button
+                type="button"
+                onClick={() => scrollToSection("bundeslaender")}
+              >
                 Bundesländer
               </button>
-              <button type="button" onClick={() => scrollToSection("app-speichern")}>
+              <button
+                type="button"
+                onClick={() => scrollToSection("app-speichern")}
+              >
                 App speichern
               </button>
               <a
@@ -1323,7 +1459,10 @@ export default function App() {
                   aria-expanded={isStateMenuOpen}
                   onClick={() => setIsStateMenuOpen((current) => !current)}
                 >
-                  <span>{selectedStateDataset?.bundeslandName || "Bundesland auswählen"}</span>
+                  <span>
+                    {selectedStateDataset?.bundeslandName ||
+                      "Bundesland auswählen"}
+                  </span>
                   <span aria-hidden="true">⌄</span>
                 </button>
 
@@ -1412,7 +1551,8 @@ export default function App() {
                 <div className="metric-row">
                   <div>
                     <span className="metric-number metric-word">
-                      {nextHolidayFreeStatus?.value || Math.max(getDaysUntil(nextHoliday), 0)}
+                      {nextHolidayFreeStatus?.value ||
+                        Math.max(getDaysUntil(nextHoliday), 0)}
                     </span>
                     <span className="metric-label">
                       {nextHolidayFreeStatus?.label ||
@@ -1426,18 +1566,22 @@ export default function App() {
                       {getHolidayDuration(nextHoliday)}
                     </span>
                     <span className="metric-label">
-                      {getHolidayDuration(nextHoliday) === 1 ? "Ferientag" : "Ferientage"}
+                      {getHolidayDuration(nextHoliday) === 1
+                        ? "Ferientag"
+                        : "Ferientage"}
                     </span>
                   </div>
                 </div>
 
                 <p className="date-range">
-                  Offizielle Ferien: {formatDate(nextHoliday.startDate)} – {formatDate(nextHoliday.endDate)}
+                  Offizielle Ferien: {formatDate(nextHoliday.startDate)} –{" "}
+                  {formatDate(nextHoliday.endDate)}
                 </p>
 
                 {nextHolidayFreeStatus?.period?.startsBeforeOfficialHoliday && (
                   <p className="free-period-note">
-                    Freie Zeit: {formatDate(nextHolidayFreeStatus.period.startDate)} –{" "}
+                    Freie Zeit:{" "}
+                    {formatDate(nextHolidayFreeStatus.period.startDate)} –{" "}
                     {formatDate(nextHolidayFreeStatus.period.endDate)}
                   </p>
                 )}
@@ -1462,7 +1606,11 @@ export default function App() {
           <div className="section-header overview-header">
             <div>
               <p className="eyebrow">Übersicht</p>
-              <h2>{viewMode === "list" ? "Alle kommenden Termine" : `Kalender ${selectedYear}`}</h2>
+              <h2>
+                {viewMode === "list"
+                  ? "Alle kommenden Termine"
+                  : `Kalender ${selectedYear}`}
+              </h2>
             </div>
 
             <div className="view-controls">
@@ -1499,7 +1647,9 @@ export default function App() {
                 </button>
               </div>
               <span className="small-pill">
-                {viewMode === "list" ? `${upcomingHolidays.length} sichtbar` : "markiert"}
+                {viewMode === "list"
+                  ? `${upcomingHolidays.length} sichtbar`
+                  : "markiert"}
               </span>
 
               <div className="ics-export-wrap">
@@ -1528,8 +1678,9 @@ export default function App() {
                 <details className="calendar-subscription-help">
                   <summary>Abo-Hilfe für Apple, Google und Outlook</summary>
                   <p>
-                    Apple Kalender und Outlook können den Abo-Button direkt öffnen.
-                    In Google Calendar unter „Weitere Kalender → Per URL“ diesen Link einfügen:
+                    Apple Kalender und Outlook können den Abo-Button direkt
+                    öffnen. In Google Calendar unter „Weitere Kalender → Per
+                    URL“ diesen Link einfügen:
                   </p>
                   <code>{subscriptionCalendarUrl}</code>
                 </details>
@@ -1552,7 +1703,8 @@ export default function App() {
                       <div>
                         <h3>{getHolidayLabel(holiday)}</h3>
                         <p>
-                          {formatDate(holiday.startDate)} – {formatDate(holiday.endDate)}
+                          {formatDate(holiday.startDate)} –{" "}
+                          {formatDate(holiday.endDate)}
                         </p>
                       </div>
                     </div>
@@ -1563,7 +1715,7 @@ export default function App() {
                         {(() => {
                           const freeStatus = getFreePeriodStatus(
                             holiday,
-                            publicHolidayDataset?.holidays || []
+                            publicHolidayDataset?.holidays || [],
                           );
 
                           if (isActive || freeStatus?.state === "active") {
@@ -1574,7 +1726,8 @@ export default function App() {
                             return "startet heute";
                           }
 
-                          return freeStatus?.value && Number.isFinite(Number(freeStatus.value))
+                          return freeStatus?.value &&
+                            Number.isFinite(Number(freeStatus.value))
                             ? `in ${freeStatus.value} Tagen`
                             : daysUntil === 0
                               ? "startet heute"
@@ -1588,7 +1741,11 @@ export default function App() {
             </div>
           ) : (
             <>
-              <div id="ferienkalender" className="calendar-anchor" aria-hidden="true" />
+              <div
+                id="ferienkalender"
+                className="calendar-anchor"
+                aria-hidden="true"
+              />
               <div className="desktop-calendar-stack">
                 {shouldShowCurrentMonthPreview && (
                   <section className="current-month-preview" id="heute">
@@ -1631,7 +1788,8 @@ export default function App() {
           <h2>Mehr Überblick für freie Tage</h2>
           <p>
             Sieh Ferien frühzeitig und plane Betreuung, Reisen, Lernzeiten oder
-            freie Tage entspannter. Schulferienklar hilft dir, den Überblick zu behalten.
+            freie Tage entspannter. Schulferienklar hilft dir, den Überblick zu
+            behalten.
           </p>
 
           <div className="feature-list">
@@ -1666,107 +1824,129 @@ export default function App() {
 
         <p className="section-copy">
           Wähle ein Bundesland und deinen Reisezeitraum. Schulferienklar prüft
-          die passenden Schulferien und Feiertage für das Jahr deines Startdatums.
+          die passenden Schulferien und Feiertage für das Jahr deines
+          Startdatums.
         </p>
 
         <div className="mobile-disclosure-body" id="reisezeit-inhalt">
           <div className="travel-check-form">
-          <label>
-            <span>Bundesland</span>
-            <select
-              value={travelCheckCode}
-              onChange={(event) => setTravelCheckCode(event.target.value)}
-            >
-              {travelCheckStates.map((item) => (
-                <option key={item.code} value={item.code}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </label>
+            <label>
+              <span>Bundesland</span>
+              <select
+                value={travelCheckCode}
+                onChange={(event) => setTravelCheckCode(event.target.value)}
+              >
+                {travelCheckStates.map((item) => (
+                  <option key={item.code} value={item.code}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
+            </label>
 
-          <label>
-            <span>Startdatum</span>
-            <input
-              type="date"
-              value={travelStartDate}
-              onChange={(event) => setTravelStartDate(event.target.value)}
-            />
-            <small className="date-input-hint">Datum antippen und auswählen</small>
-          </label>
+            <label>
+              <span>Startdatum</span>
+              <input
+                type="date"
+                value={travelStartDate}
+                onChange={(event) => setTravelStartDate(event.target.value)}
+              />
+              <small className="date-input-hint">
+                Datum antippen und auswählen
+              </small>
+            </label>
 
-          <label>
-            <span>Enddatum</span>
-            <input
-              type="date"
-              value={travelEndDate}
-              onChange={(event) => setTravelEndDate(event.target.value)}
-            />
-            <small className="date-input-hint">Datum antippen und auswählen</small>
-          </label>
-        </div>
-
-        {isTravelPeriodInvalid && (
-          <p className="travel-check-message warning">
-            Das Enddatum muss nach dem Startdatum liegen.
-          </p>
-        )}
-
-        {travelDataLoading && hasTravelPeriodInput && !isTravelPeriodInvalid && (
-          <p className="travel-check-message">Daten werden geladen …</p>
-        )}
-
-        {hasTravelPeriodInput && !isTravelPeriodInvalid && !travelDataLoading && (
-          <div className={`travel-check-result ${hasTravelPeriodMatches ? "has-matches" : "quiet"}`}>
-            <strong>
-              {hasTravelPeriodMatches
-                ? "Schulferien oder Feiertage im Zeitraum"
-                : "Keine Schulferien oder Feiertage gefunden"}
-            </strong>
-            <p>
-              {hasTravelPeriodMatches
-                ? "Im gewählten Zeitraum liegen Schulferien oder gesetzliche Feiertage. Das kann regional die Nachfrage erhöhen oder Öffnungszeiten beeinflussen. Prüfe aktuelle Verbindungen und Öffnungszeiten zusätzlich bei den jeweiligen Anbietern."
-                : "Für diesen Zeitraum sind im ausgewählten Bundesland keine Schulferien oder gesetzlichen Feiertage hinterlegt."}
-            </p>
-            {!hasTravelPeriodMatches && (
-              <p className="travel-check-detail-link">
-                Für eine detailliertere Reiseprüfung kannst du den{" "}
-                <a href="https://germanytravelchecker.com/" target="_blank" rel="noreferrer">
-                  Germany Travel Checker
-                </a>{" "}
-                nutzen.
-              </p>
-            )}
-
-            {travelPeriodMatches.schoolHolidayMatches.length > 0 && (
-              <div className="travel-check-match-group">
-                <h3>Schulferien</h3>
-                <ul>
-                  {travelPeriodMatches.schoolHolidayMatches.map((holiday) => (
-                    <li key={holiday.id}>
-                      <strong>{getHolidayLabel(holiday)}</strong>
-                      <span>{formatDate(holiday.startDate)} – {formatDate(holiday.endDate)}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {travelPeriodMatches.publicHolidayMatches.length > 0 && (
-              <div className="travel-check-match-group">
-                <h3>Feiertage</h3>
-                <ul>
-                  {travelPeriodMatches.publicHolidayMatches.map((holiday) => (
-                    <li key={holiday.id}>
-                      <strong>{getPublicHolidayName(holiday)}</strong>
-                      <span>{formatDate(holiday.date)}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+            <label>
+              <span>Enddatum</span>
+              <input
+                type="date"
+                value={travelEndDate}
+                onChange={(event) => setTravelEndDate(event.target.value)}
+              />
+              <small className="date-input-hint">
+                Datum antippen und auswählen
+              </small>
+            </label>
           </div>
-        )}
+
+          {isTravelPeriodInvalid && (
+            <p className="travel-check-message warning">
+              Das Enddatum muss nach dem Startdatum liegen.
+            </p>
+          )}
+
+          {travelDataLoading &&
+            hasTravelPeriodInput &&
+            !isTravelPeriodInvalid && (
+              <p className="travel-check-message">Daten werden geladen …</p>
+            )}
+
+          {hasTravelPeriodInput &&
+            !isTravelPeriodInvalid &&
+            !travelDataLoading && (
+              <div
+                className={`travel-check-result ${hasTravelPeriodMatches ? "has-matches" : "quiet"}`}
+              >
+                <strong>
+                  {hasTravelPeriodMatches
+                    ? "Schulferien oder Feiertage im Zeitraum"
+                    : "Keine Schulferien oder Feiertage gefunden"}
+                </strong>
+                <p>
+                  {hasTravelPeriodMatches
+                    ? "Im gewählten Zeitraum liegen Schulferien oder gesetzliche Feiertage. Das kann regional die Nachfrage erhöhen oder Öffnungszeiten beeinflussen. Prüfe aktuelle Verbindungen und Öffnungszeiten zusätzlich bei den jeweiligen Anbietern."
+                    : "Für diesen Zeitraum sind im ausgewählten Bundesland keine Schulferien oder gesetzlichen Feiertage hinterlegt."}
+                </p>
+                {!hasTravelPeriodMatches && (
+                  <p className="travel-check-detail-link">
+                    Für eine detailliertere Reiseprüfung kannst du den{" "}
+                    <a
+                      href="https://germanytravelchecker.com/"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Germany Travel Checker
+                    </a>{" "}
+                    nutzen.
+                  </p>
+                )}
+
+                {travelPeriodMatches.schoolHolidayMatches.length > 0 && (
+                  <div className="travel-check-match-group">
+                    <h3>Schulferien</h3>
+                    <ul>
+                      {travelPeriodMatches.schoolHolidayMatches.map(
+                        (holiday) => (
+                          <li key={holiday.id}>
+                            <strong>{getHolidayLabel(holiday)}</strong>
+                            <span>
+                              {formatDate(holiday.startDate)} –{" "}
+                              {formatDate(holiday.endDate)}
+                            </span>
+                          </li>
+                        ),
+                      )}
+                    </ul>
+                  </div>
+                )}
+
+                {travelPeriodMatches.publicHolidayMatches.length > 0 && (
+                  <div className="travel-check-match-group">
+                    <h3>Feiertage</h3>
+                    <ul>
+                      {travelPeriodMatches.publicHolidayMatches.map(
+                        (holiday) => (
+                          <li key={holiday.id}>
+                            <strong>{getPublicHolidayName(holiday)}</strong>
+                            <span>{formatDate(holiday.date)}</span>
+                          </li>
+                        ),
+                      )}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
         </div>
       </section>
 
@@ -1873,128 +2053,114 @@ export default function App() {
           </p>
         )}
 
-        {!bridgeDayLoading &&
-          vacationOptimizerSuggestions.length > 0 && (
-            <div className="vacation-optimizer-block">
-              <div className="vacation-results-heading">
-                <div>
-                  <p className="vacation-results-kicker">
-                    Beste Kombinationen
-                  </p>
-                  <h3>
-                    Bis zu {vacationOptimizerSuggestions[0].freeDays} freie Tage
-                  </h3>
-                </div>
-                <span>
-                  mit höchstens {vacationDayBudget}{" "}
-                  {vacationDayBudget === 1
-                    ? "Urlaubstag"
-                    : "Urlaubstagen"}
-                </span>
+        {!bridgeDayLoading && vacationOptimizerSuggestions.length > 0 && (
+          <div className="vacation-optimizer-block">
+            <div className="vacation-results-heading">
+              <div>
+                <p className="vacation-results-kicker">Beste Kombinationen</p>
+                <h3>
+                  Bis zu {vacationOptimizerSuggestions[0].freeDays} freie Tage
+                </h3>
               </div>
+              <span>
+                mit höchstens {vacationDayBudget}{" "}
+                {vacationDayBudget === 1 ? "Urlaubstag" : "Urlaubstagen"}
+              </span>
+            </div>
 
-              <div className="vacation-optimizer-list">
-                {vacationOptimizerSuggestions.map((item, index) => (
-                  <article
-                    className={`vacation-optimizer-card ${
-                      index === 0 ? "is-best" : ""
-                    }`}
-                    key={item.id}
-                  >
-                    <header>
-                      <div>
-                        <span>
-                          {index === 0 ? "Beste Option" : `Option ${index + 1}`}
-                        </span>
-                        <strong>{item.freeDays} freie Tage</strong>
-                      </div>
-                      <p>
-                        {item.vacationDays}{" "}
-                        {item.vacationDays === 1
-                          ? "Urlaubstag"
-                          : "Urlaubstage"}
-                      </p>
-                    </header>
-
-                    <p className="vacation-optimizer-period">
-                      {formatCompactDateRange(
-                        item.startDate,
-                        item.endDate,
-                      )}
-                    </p>
-
-                    <div className="vacation-optimizer-metrics">
+            <div className="vacation-optimizer-list">
+              {vacationOptimizerSuggestions.map((item, index) => (
+                <article
+                  className={`vacation-optimizer-card ${
+                    index === 0 ? "is-best" : ""
+                  }`}
+                  key={item.id}
+                >
+                  <header>
+                    <div>
                       <span>
-                        <strong>{item.efficiency}</strong>
-                        freie Tage je Urlaubstag
+                        {index === 0 ? "Beste Option" : `Option ${index + 1}`}
                       </span>
-                      <span>
-                        <strong>{item.naturalFreeDays}</strong>
-                        Wochenend- und Feiertage
-                      </span>
+                      <strong>{item.freeDays} Tage am Stück frei</strong>
+                    </div>
+                  </header>
+
+                  <p className="vacation-optimizer-period">
+                    {formatWeekdayCompactDateRange(
+                      item.startDate,
+                      item.endDate,
+                    )}
+                  </p>
+
+                  <div className="vacation-optimizer-metrics">
+                    <span>
+                      <strong>{item.vacationDays}</strong>
+                      {item.vacationDays === 1
+                        ? "Urlaubstag einsetzen"
+                        : "Urlaubstage einsetzen"}
+                    </span>
+                    <span>
+                      <strong>{item.naturalFreeDays}</strong>
+                      Wochenend- und Feiertage
+                    </span>
+                  </div>
+
+                  <details>
+                    <summary>Urlaubstage und Feiertage anzeigen</summary>
+
+                    <div className="vacation-detail-group">
+                      <strong>Urlaub eintragen</strong>
+                      <ul className="vacation-date-list">
+                        {item.vacationDates.map((date) => (
+                          <li key={date}>{formatWeekdayDate(date)}</li>
+                        ))}
+                      </ul>
                     </div>
 
-                    <details>
-                      <summary>
-                        Urlaubstage und Feiertage anzeigen
-                      </summary>
-
+                    {item.publicHolidays.length > 0 && (
                       <div className="vacation-detail-group">
-                        <strong>Urlaub eintragen</strong>
-                        <ul className="vacation-date-list">
-                          {item.vacationDates.map((date) => (
-                            <li key={date}>{formatDate(date)}</li>
+                        <strong>Enthaltene Feiertage</strong>
+                        <ul className="vacation-holiday-list">
+                          {item.publicHolidays.map((holiday) => (
+                            <li key={holiday.id}>
+                              <span>{holiday.name}</span>
+                              <small>{formatWeekdayDate(holiday.date)}</small>
+                            </li>
                           ))}
                         </ul>
                       </div>
-
-                      {item.publicHolidays.length > 0 && (
-                        <div className="vacation-detail-group">
-                          <strong>Enthaltene Feiertage</strong>
-                          <ul className="vacation-holiday-list">
-                            {item.publicHolidays.map((holiday) => (
-                              <li key={holiday.id}>
-                                <span>{holiday.name}</span>
-                                <small>{formatDate(holiday.date)}</small>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      )}
-                    </details>
-                  </article>
-                ))}
-              </div>
-
-              <p className="vacation-optimizer-swipe-hint">
-                Seitlich wischen für weitere Kombinationen.
-              </p>
-
-              <p className="vacation-calculation-note">
-                Berechnet mit Wochenenden und landesweiten gesetzlichen
-                Feiertagen. Persönliche Arbeitszeiten, Betriebsferien und
-                regionale Sonderregelungen sind nicht berücksichtigt.{" "}
-                <a href={`/urlaubsplaner-${bridgeDayYear}.html`}>
-                  Urlaubsplaner {bridgeDayYear} für alle Bundesländer ansehen
-                </a>
-              </p>
+                    )}
+                  </details>
+                </article>
+              ))}
             </div>
-          )}
 
-        {!bridgeDayLoading &&
-          vacationOptimizerSuggestions.length === 0 && (
-            <p className="bridge-day-empty">
-              Für diese Auswahl wurden keine passenden längeren freien
-              Zeiträume gefunden.
+            <p className="vacation-optimizer-swipe-hint">
+              Seitlich wischen für weitere Kombinationen.
             </p>
-          )}
+
+            <p className="vacation-calculation-note">
+              Berechnet mit Wochenenden und landesweiten gesetzlichen
+              Feiertagen. Persönliche Arbeitszeiten, Betriebsferien und
+              regionale Sonderregelungen sind nicht berücksichtigt.{" "}
+              <a href={`/urlaubsplaner-${bridgeDayYear}.html`}>
+                Urlaubsplaner {bridgeDayYear} für alle Bundesländer ansehen
+              </a>
+            </p>
+          </div>
+        )}
+
+        {!bridgeDayLoading && vacationOptimizerSuggestions.length === 0 && (
+          <p className="bridge-day-empty">
+            Für diese Auswahl wurden keine passenden längeren freien Zeiträume
+            gefunden.
+          </p>
+        )}
 
         <div className="classic-bridge-days">
           <div className="classic-bridge-heading">
             <h3>Klassische Brückentage</h3>
-            <p>
-              Einfache Empfehlungen rund um einzelne Feiertage.
-            </p>
+            <p>Einfache Empfehlungen rund um einzelne Feiertage.</p>
           </div>
 
           {!bridgeDayLoading && bridgeDaySuggestions.length > 0 ? (
@@ -2012,10 +2178,8 @@ export default function App() {
                     </div>
                     <p>
                       {item.vacationDays}{" "}
-                      {item.vacationDays === 1
-                        ? "Urlaubstag"
-                        : "Urlaubstage"}{" "}
-                      → {item.freeDays} freie Tage
+                      {item.vacationDays === 1 ? "Urlaubstag" : "Urlaubstage"} →{" "}
+                      {item.freeDays} freie Tage
                     </p>
                     <small>
                       {item.holidayName} · frei{" "}
@@ -2034,8 +2198,8 @@ export default function App() {
           ) : (
             !bridgeDayLoading && (
               <p className="bridge-day-empty">
-                Für {bridgeDayYear} wurden keine klassischen Brückentage
-                mit wenigen Urlaubstagen gefunden.
+                Für {bridgeDayYear} wurden keine klassischen Brückentage mit
+                wenigen Urlaubstagen gefunden.
               </p>
             )
           )}
@@ -2053,7 +2217,8 @@ export default function App() {
             <p className="eyebrow">Bundesländer vergleichen</p>
             <h2>Ferien in mehreren Bundesländern vergleichen</h2>
             <p>
-              Wähle bis zu vier Bundesländer und sieh sofort, wann sich Ferien überschneiden.
+              Wähle bis zu vier Bundesländer und sieh sofort, wann sich Ferien
+              überschneiden.
             </p>
           </div>
           <button
@@ -2063,225 +2228,281 @@ export default function App() {
             aria-controls="vergleich-inhalt"
             onClick={() => setIsComparisonSectionOpen((isOpen) => !isOpen)}
           >
-            {isComparisonSectionOpen ? "Vergleich schließen" : "Vergleich öffnen"}
+            {isComparisonSectionOpen
+              ? "Vergleich schließen"
+              : "Vergleich öffnen"}
           </button>
         </div>
 
         <div className="mobile-disclosure-body" id="vergleich-inhalt">
           <div className="comparison-toolbar">
-          <div className="comparison-selected-list" aria-label="Ausgewählte Bundesländer">
-            {comparisonSummaries.map((item, index) => (
-              <button
-                className={`comparison-selected-pill comparison-color-${index % 4}`}
-                key={item.code}
-                type="button"
-                onClick={() => toggleComparisonCode(item.code)}
-                title={`${item.name} aus Vergleich entfernen`}
-              >
-                <span>{item.code}</span>
-                {item.name}
-                {item.code !== selectedCode && <strong aria-hidden="true">×</strong>}
-              </button>
-            ))}
-          </div>
-
-          <div className="comparison-add-wrap">
-            <button
-              className="comparison-add-button"
-              type="button"
-              onClick={() => setIsComparisonPickerOpen((isOpen) => !isOpen)}
+            <div
+              className="comparison-selected-list"
+              aria-label="Ausgewählte Bundesländer"
             >
-              {isComparisonPickerOpen
-                ? "Auswahl schließen"
-                : comparisonCodes.length >= 4
-                  ? "Auswahl bearbeiten"
-                  : "+ Bundesland hinzufügen"}
-            </button>
-            {comparisonCodes.length >= 4 && (
-              <span className="comparison-limit-note">
-                Maximal 4 Bundesländer gewählt
-              </span>
-            )}
-          </div>
-
-          <label className="comparison-year-select">
-            <span>Vergleichsjahr</span>
-            <select
-              value={comparisonYear}
-              onChange={(event) => setComparisonYear(Number(event.target.value))}
-            >
-              {availablePublicHolidayYears.map((year) => (
-                <option key={year} value={year}>
-                  {year}
-                </option>
-              ))}
-            </select>
-          </label>
-        </div>
-
-        {isComparisonPickerOpen && (
-          <div className="comparison-picker" aria-label="Bundesländer für Vergleich auswählen">
-            {(index?.datasets || []).map((item) => {
-              const isSelected = comparisonCodes.includes(item.bundeslandCode);
-              const selectedIndex = comparisonCodes.indexOf(item.bundeslandCode);
-              const colorClass =
-                selectedIndex >= 0 ? `comparison-color-${selectedIndex % 4}` : "";
-              const isDisabled = !isSelected && comparisonCodes.length >= 4;
-
-              return (
+              {comparisonSummaries.map((item, index) => (
                 <button
-                  className={`comparison-chip ${isSelected ? "selected" : ""} ${colorClass}`}
-                  disabled={isDisabled}
-                  key={item.bundeslandCode}
-                  onClick={() => toggleComparisonCode(item.bundeslandCode)}
+                  className={`comparison-selected-pill comparison-color-${index % 4}`}
+                  key={item.code}
                   type="button"
+                  onClick={() => toggleComparisonCode(item.code)}
+                  title={`${item.name} aus Vergleich entfernen`}
                 >
-                  <span>{item.bundeslandCode}</span>
-                  <strong>{item.bundeslandName}</strong>
+                  <span>{item.code}</span>
+                  {item.name}
+                  {item.code !== selectedCode && (
+                    <strong aria-hidden="true">×</strong>
+                  )}
                 </button>
-              );
-            })}
-          </div>
-        )}
-
-        <div className="overlap-panel">
-          <h3>Gemeinsame Ferienzeiträume</h3>
-          <p>
-            Markierte Tage zeigen Überschneidungen von mindestens zwei ausgewählten Bundesländern.
-          </p>
-
-          {activeOverlapMonthKey && (() => {
-            const [yearValue, monthValue] = activeOverlapMonthKey.split("-").map(Number);
-            const monthCells = buildMonthCells(yearValue, monthValue - 1);
-
-            return (
-              <div className="overlap-month-slider">
-                <div className="overlap-month-controls">
-                  <button
-                    type="button"
-                    disabled={safeActiveOverlapMonthIndex === 0}
-                    onClick={() =>
-                      setActiveOverlapMonthIndex((current) => Math.max(0, current - 1))
-                    }
-                    aria-label="Vorherigen Overlap-Monat anzeigen"
-                  >
-                    ‹
-                  </button>
-
-                  <div>
-                    <strong>{formatMonth(yearValue, monthValue - 1)}</strong>
-                    <span>
-                      {safeActiveOverlapMonthIndex + 1} von {comparisonOverlapMonthKeys.length}
-                    </span>
-                  </div>
-
-                  <button
-                    type="button"
-                    disabled={safeActiveOverlapMonthIndex === comparisonOverlapMonthKeys.length - 1}
-                    onClick={() =>
-                      setActiveOverlapMonthIndex((current) =>
-                        Math.min(comparisonOverlapMonthKeys.length - 1, current + 1)
-                      )
-                    }
-                    aria-label="Nächsten Overlap-Monat anzeigen"
-                  >
-                    ›
-                  </button>
-                </div>
-
-                <article className="overlap-calendar" key={activeOverlapMonthKey}>
-                  <div className="overlap-weekdays">
-                    {WEEKDAYS.map((weekday) => (
-                      <span key={weekday}>{weekday}</span>
-                    ))}
-                  </div>
-                  <div className="overlap-days">
-                    {monthCells.map((date, index) => {
-                      if (!date) {
-                        return <span className="overlap-day empty" key={`empty-${index}`} />;
-                      }
-
-                      const dateKey = toDateKey(date);
-                      const states = comparisonOverlapData.dayMap[dateKey] || [];
-                      const level = Math.min(states.length, 4);
-
-                      return (
-                        <span
-                          className={`overlap-day ${level > 0 ? `level-${level}` : ""}`}
-                          key={dateKey}
-                          title={
-                            states.length > 0
-                              ? `${states.length} Bundesländer: ${states
-                                  .map((item) => item.name)
-                                  .join(", ")}`
-                              : ""
-                          }
-                        >
-                          <span>{date.getDate()}</span>
-                          {states.length > 0 && <strong>{states.length}</strong>}
-                        </span>
-                      );
-                    })}
-                  </div>
-                </article>
-              </div>
-            );
-          })()}
-
-          {comparisonOverlapPeriods.length > 0 ? (
-            <div className="overlap-details">
-              <button
-                className="overlap-details-toggle"
-                type="button"
-                aria-expanded={showOverlapDetails}
-                onClick={() => setShowOverlapDetails((isOpen) => !isOpen)}
-              >
-                {showOverlapDetails
-                  ? "Details ausblenden"
-                  : `${comparisonOverlapPeriods.length} gemeinsame Zeiträume anzeigen`}
-              </button>
-
-              {showOverlapDetails && (
-                <div className="overlap-list">
-              {comparisonOverlapPeriods.map((period) => (
-                <article
-                  className="overlap-card"
-                  key={`${period.startDate}-${period.endDate}-${period.states
-                    .map((item) => item.code)
-                    .join("-")}`}
-                >
-                  <div className="overlap-card-header">
-                    <span className="overlap-count">{period.states.length}</span>
-                    <strong>
-                      {period.states.length} Bundesländer gleichzeitig
-                    </strong>
-                  </div>
-                  <p>{formatDate(period.startDate)} bis {formatDate(period.endDate)}</p>
-                  <div className="overlap-state-list">
-                    {period.states.map((item) => {
-                      const selectedIndex = comparisonCodes.indexOf(item.code);
-                      const colorClass =
-                        selectedIndex >= 0 ? `comparison-color-${selectedIndex % 4}` : "";
-
-                      return (
-                        <span className={`overlap-state-pill ${colorClass}`} key={item.code}>
-                          <small>{item.code}</small>
-                          {item.name}
-                        </span>
-                      );
-                    })}
-                  </div>
-                </article>
               ))}
-                </div>
+            </div>
+
+            <div className="comparison-add-wrap">
+              <button
+                className="comparison-add-button"
+                type="button"
+                onClick={() => setIsComparisonPickerOpen((isOpen) => !isOpen)}
+              >
+                {isComparisonPickerOpen
+                  ? "Auswahl schließen"
+                  : comparisonCodes.length >= 4
+                    ? "Auswahl bearbeiten"
+                    : "+ Bundesland hinzufügen"}
+              </button>
+              {comparisonCodes.length >= 4 && (
+                <span className="comparison-limit-note">
+                  Maximal 4 Bundesländer gewählt
+                </span>
               )}
             </div>
-          ) : (
-            <p className="overlap-empty">
-              Für die aktuelle Auswahl wurden keine gemeinsamen Ferienzeiträume
-              gefunden.
-            </p>
+
+            <label className="comparison-year-select">
+              <span>Vergleichsjahr</span>
+              <select
+                value={comparisonYear}
+                onChange={(event) =>
+                  setComparisonYear(Number(event.target.value))
+                }
+              >
+                {availablePublicHolidayYears.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+
+          {isComparisonPickerOpen && (
+            <div
+              className="comparison-picker"
+              aria-label="Bundesländer für Vergleich auswählen"
+            >
+              {(index?.datasets || []).map((item) => {
+                const isSelected = comparisonCodes.includes(
+                  item.bundeslandCode,
+                );
+                const selectedIndex = comparisonCodes.indexOf(
+                  item.bundeslandCode,
+                );
+                const colorClass =
+                  selectedIndex >= 0
+                    ? `comparison-color-${selectedIndex % 4}`
+                    : "";
+                const isDisabled = !isSelected && comparisonCodes.length >= 4;
+
+                return (
+                  <button
+                    className={`comparison-chip ${isSelected ? "selected" : ""} ${colorClass}`}
+                    disabled={isDisabled}
+                    key={item.bundeslandCode}
+                    onClick={() => toggleComparisonCode(item.bundeslandCode)}
+                    type="button"
+                  >
+                    <span>{item.bundeslandCode}</span>
+                    <strong>{item.bundeslandName}</strong>
+                  </button>
+                );
+              })}
+            </div>
           )}
+
+          <div className="overlap-panel">
+            <h3>Gemeinsame Ferienzeiträume</h3>
+            <p>
+              Markierte Tage zeigen Überschneidungen von mindestens zwei
+              ausgewählten Bundesländern.
+            </p>
+
+            {activeOverlapMonthKey &&
+              (() => {
+                const [yearValue, monthValue] = activeOverlapMonthKey
+                  .split("-")
+                  .map(Number);
+                const monthCells = buildMonthCells(yearValue, monthValue - 1);
+
+                return (
+                  <div className="overlap-month-slider">
+                    <div className="overlap-month-controls">
+                      <button
+                        type="button"
+                        disabled={safeActiveOverlapMonthIndex === 0}
+                        onClick={() =>
+                          setActiveOverlapMonthIndex((current) =>
+                            Math.max(0, current - 1),
+                          )
+                        }
+                        aria-label="Vorherigen Overlap-Monat anzeigen"
+                      >
+                        ‹
+                      </button>
+
+                      <div>
+                        <strong>
+                          {formatMonth(yearValue, monthValue - 1)}
+                        </strong>
+                        <span>
+                          {safeActiveOverlapMonthIndex + 1} von{" "}
+                          {comparisonOverlapMonthKeys.length}
+                        </span>
+                      </div>
+
+                      <button
+                        type="button"
+                        disabled={
+                          safeActiveOverlapMonthIndex ===
+                          comparisonOverlapMonthKeys.length - 1
+                        }
+                        onClick={() =>
+                          setActiveOverlapMonthIndex((current) =>
+                            Math.min(
+                              comparisonOverlapMonthKeys.length - 1,
+                              current + 1,
+                            ),
+                          )
+                        }
+                        aria-label="Nächsten Overlap-Monat anzeigen"
+                      >
+                        ›
+                      </button>
+                    </div>
+
+                    <article
+                      className="overlap-calendar"
+                      key={activeOverlapMonthKey}
+                    >
+                      <div className="overlap-weekdays">
+                        {WEEKDAYS.map((weekday) => (
+                          <span key={weekday}>{weekday}</span>
+                        ))}
+                      </div>
+                      <div className="overlap-days">
+                        {monthCells.map((date, index) => {
+                          if (!date) {
+                            return (
+                              <span
+                                className="overlap-day empty"
+                                key={`empty-${index}`}
+                              />
+                            );
+                          }
+
+                          const dateKey = toDateKey(date);
+                          const states =
+                            comparisonOverlapData.dayMap[dateKey] || [];
+                          const level = Math.min(states.length, 4);
+
+                          return (
+                            <span
+                              className={`overlap-day ${level > 0 ? `level-${level}` : ""}`}
+                              key={dateKey}
+                              title={
+                                states.length > 0
+                                  ? `${states.length} Bundesländer: ${states
+                                      .map((item) => item.name)
+                                      .join(", ")}`
+                                  : ""
+                              }
+                            >
+                              <span>{date.getDate()}</span>
+                              {states.length > 0 && (
+                                <strong>{states.length}</strong>
+                              )}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </article>
+                  </div>
+                );
+              })()}
+
+            {comparisonOverlapPeriods.length > 0 ? (
+              <div className="overlap-details">
+                <button
+                  className="overlap-details-toggle"
+                  type="button"
+                  aria-expanded={showOverlapDetails}
+                  onClick={() => setShowOverlapDetails((isOpen) => !isOpen)}
+                >
+                  {showOverlapDetails
+                    ? "Details ausblenden"
+                    : `${comparisonOverlapPeriods.length} gemeinsame Zeiträume anzeigen`}
+                </button>
+
+                {showOverlapDetails && (
+                  <div className="overlap-list">
+                    {comparisonOverlapPeriods.map((period) => (
+                      <article
+                        className="overlap-card"
+                        key={`${period.startDate}-${period.endDate}-${period.states
+                          .map((item) => item.code)
+                          .join("-")}`}
+                      >
+                        <div className="overlap-card-header">
+                          <span className="overlap-count">
+                            {period.states.length}
+                          </span>
+                          <strong>
+                            {period.states.length} Bundesländer gleichzeitig
+                          </strong>
+                        </div>
+                        <p>
+                          {formatDate(period.startDate)} bis{" "}
+                          {formatDate(period.endDate)}
+                        </p>
+                        <div className="overlap-state-list">
+                          {period.states.map((item) => {
+                            const selectedIndex = comparisonCodes.indexOf(
+                              item.code,
+                            );
+                            const colorClass =
+                              selectedIndex >= 0
+                                ? `comparison-color-${selectedIndex % 4}`
+                                : "";
+
+                            return (
+                              <span
+                                className={`overlap-state-pill ${colorClass}`}
+                                key={item.code}
+                              >
+                                <small>{item.code}</small>
+                                {item.name}
+                              </span>
+                            );
+                          })}
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              <p className="overlap-empty">
+                Für die aktuelle Auswahl wurden keine gemeinsamen
+                Ferienzeiträume gefunden.
+              </p>
+            )}
           </div>
         </div>
       </section>
@@ -2293,7 +2514,8 @@ export default function App() {
             <h2>Alle Bundesländer</h2>
           </div>
           <span className="small-pill">
-            {index?.totalBundeslaender || 0} Bundesländer · {index?.totalEvents || 0} Termine
+            {index?.totalBundeslaender || 0} Bundesländer ·{" "}
+            {index?.totalEvents || 0} Termine
           </span>
         </div>
 
@@ -2318,30 +2540,45 @@ export default function App() {
           type="button"
           onClick={() => setShowAllStates((current) => !current)}
         >
-          {showAllStates ? "Bundesländer ausblenden" : "Alle Bundesländer anzeigen"}
+          {showAllStates
+            ? "Bundesländer ausblenden"
+            : "Alle Bundesländer anzeigen"}
         </button>
       </section>
 
-      <section className="panel install-guide" id="app-speichern" aria-labelledby="install-guide-title">
+      <section
+        className="panel install-guide"
+        id="app-speichern"
+        aria-labelledby="install-guide-title"
+      >
         <p className="eyebrow">Schneller wiederfinden</p>
         <h2 id="install-guide-title">Schulferienklar als App speichern</h2>
         <p>
-          iPhone: Teilen → „Zum Home-Bildschirm“. Android/Computer:
-          Browser-Menü → „App installieren“ oder „Zum Startbildschirm hinzufügen“.
+          iPhone: Teilen → „Zum Home-Bildschirm“. Android/Computer: Browser-Menü
+          → „App installieren“ oder „Zum Startbildschirm hinzufügen“.
         </p>
       </section>
 
       <footer className="footer site-footer">
-        <p className="footer-copyright">© 2026 Joan — Alle Rechte vorbehalten.</p>
+        <p className="footer-copyright">
+          © 2026 Joan — Alle Rechte vorbehalten.
+        </p>
 
-        <nav className="footer-links" aria-label="Rechtliche und weitere Informationen">
+        <nav
+          className="footer-links"
+          aria-label="Rechtliche und weitere Informationen"
+        >
           <a href="/datenquellen.html">Datenquellen</a>
           <a href="/datenschutz.html">Datenschutz</a>
           <a href="/impressum.html">Impressum</a>
           <a href="/support.html">Support</a>
           <a href="/ueber-uns.html">Über uns</a>
-          <a className="footer-travel-link" href="/germany-travel-checker.html">Germany Travel Checker</a>
-          <a href="/travel-germany-school-holidays.html">Reiseplanung (Englisch)</a>
+          <a className="footer-travel-link" href="/germany-travel-checker.html">
+            Germany Travel Checker
+          </a>
+          <a href="/travel-germany-school-holidays.html">
+            Reiseplanung (Englisch)
+          </a>
         </nav>
 
         <p className="footer-credit">Gestaltung und Entwicklung: Joan.</p>
