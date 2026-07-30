@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+    <meta
+      name="robots"
+      content="noindex, nofollow"
+    />
+    <meta name="theme-color" content="#f6f3ec" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="/favicon-48x48.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="/apple-touch-icon.png"
+    />
+
+    <title>
+      Nächste Schulferien – Schulferienklar
+    </title>
+
+    <link
+      rel="stylesheet"
+      href="./naechste-schulferien.css"
+    />
+  </head>
+
+  <body data-theme="light">
+    <main
+      class="widget-card"
+      aria-live="polite"
+      aria-busy="true"
+    >
+      <div
+        id="widget-loading"
+        class="widget-loading"
+      >
+        <span
+          class="loading-dot"
+          aria-hidden="true"
+        ></span>
+
+        <span>
+          Ferientermine werden geladen …
+        </span>
+      </div>
+
+      <section
+        id="widget-content"
+        hidden
+      >
+        <header class="widget-header">
+          <p class="widget-eyebrow">
+            Schulferienkalender
+          </p>
+
+          <h1 id="widget-title">
+            Nächste Schulferien
+          </h1>
+        </header>
+
+        <div
+          id="widget-holiday-list"
+          class="holiday-list"
+        ></div>
+
+        <footer class="widget-footer">
+          <div class="source-row">
+            <span id="widget-checked"></span>
+
+            <a
+              id="widget-source"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Offizielle Quelle
+            </a>
+          </div>
+
+          <a
+            id="widget-attribution"
+            class="attribution-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Daten von Schulferienklar
+          </a>
+        </footer>
+      </section>
+
+      <section
+        id="widget-error"
+        class="widget-error"
+        hidden
+      >
+        <strong>
+          Ferientermine konnten nicht geladen werden.
+        </strong>
+
+        <p id="widget-error-message">
+          Bitte öffne Schulferienklar direkt.
+        </p>
+
+        <a
+          href="https://www.schulferienklar.de/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Schulferienklar öffnen
+        </a>
+      </section>
+    </main>
+
+    <script
+      type="module"
+      src="./naechste-schulferien.js"
+    ></script>
+  </body>
+</html>

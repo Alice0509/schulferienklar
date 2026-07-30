@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
+
+    <meta name="theme-color" content="#f6f3ec" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="/favicon-48x48.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="/apple-touch-icon.png"
+    />
+
+    <title>
+      Kostenloses Schulferien-Widget | Schulferienklar
+    </title>
+
+    <meta
+      name="description"
+      content="Erstelle kostenlos ein Widget mit den nächsten Schulferien für dein Bundesland. Ohne Werbung, Cookies oder Nutzerkonto."
+    />
+
+    <link
+      rel="canonical"
+      href="https://www.schulferienklar.de/widget.html"
+    />
+
+    <link
+      rel="stylesheet"
+      href="/widget-demo.css"
+    />
+  </head>
+
+  <body>
+    <header class="site-header">
+      <a
+        class="brand-link"
+        href="/"
+        aria-label="Zur Startseite von Schulferienklar"
+      >
+        <img
+          class="brand-mark"
+          src="/favicon.svg"
+          alt=""
+          width="28"
+          height="28"
+          aria-hidden="true"
+        />
+
+        <span>Schulferienklar</span>
+      </a>
+
+      <a
+        class="header-link"
+        href="/"
+      >
+        Kalender öffnen
+      </a>
+    </header>
+
+    <main class="page-shell">
+      <section class="hero">
+        <p class="eyebrow">
+          Kostenlos einbinden
+        </p>
+
+        <h1>
+          Nächste Schulferien Widget
+        </h1>
+
+        <p class="hero-copy">
+          Zeige die nächsten Schulferien deines
+          Bundeslandes automatisch auf deiner Website.
+          Ohne Werbung, Cookies oder Nutzerkonto.
+        </p>
+      </section>
+
+      <div class="builder-layout">
+        <section class="panel config-panel">
+          <div>
+            <p class="section-label">
+              1. Widget einstellen
+            </p>
+
+            <h2>
+              Bundesland und Darstellung
+            </h2>
+          </div>
+
+          <form
+            id="widget-form"
+            class="widget-form"
+          >
+            <label>
+              <span>Bundesland</span>
+
+              <select
+                id="widget-state"
+                name="state"
+              >
+                <option value="BY">
+                  Bayern
+                </option>
+              </select>
+            </label>
+
+            <label>
+              <span>Darstellung</span>
+
+              <select
+                id="widget-theme"
+                name="theme"
+              >
+                <option value="light">
+                  Hell
+                </option>
+
+                <option value="dark">
+                  Dunkel
+                </option>
+              </select>
+            </label>
+
+            <label>
+              <span>
+                Anzahl der Ferientermine
+              </span>
+
+              <select
+                id="widget-count"
+                name="count"
+              >
+                <option value="1">
+                  1 Termin
+                </option>
+
+                <option value="2">
+                  2 Termine
+                </option>
+
+                <option
+                  value="3"
+                  selected
+                >
+                  3 Termine
+                </option>
+              </select>
+            </label>
+          </form>
+
+          <div class="privacy-note">
+            <strong>
+              Datenschutzfreundlich
+            </strong>
+
+            <p>
+              Das Widget setzt keine Cookies,
+              speichert keine persönlichen Daten
+              und lädt keine Werbe- oder
+              Analyse-Skripte.
+            </p>
+          </div>
+        </section>
+
+        <section class="panel preview-panel">
+          <div>
+            <p class="section-label">
+              2. Vorschau
+            </p>
+
+            <h2>
+              So sieht dein Widget aus
+            </h2>
+          </div>
+
+          <div class="iframe-frame">
+            <iframe
+              id="widget-preview"
+              title="Vorschau des Schulferien-Widgets"
+              loading="eager"
+              referrerpolicy="strict-origin"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+            ></iframe>
+          </div>
+        </section>
+      </div>
+
+      <section class="panel embed-panel">
+        <div>
+          <p class="section-label">
+            3. Code kopieren
+          </p>
+
+          <h2>
+            Auf deiner Website einfügen
+          </h2>
+
+          <p>
+            Kopiere den Code und füge ihn an der
+            gewünschten Stelle in den HTML-Bereich
+            deiner Website ein.
+          </p>
+        </div>
+
+        <textarea
+          id="widget-code"
+          rows="11"
+          readonly
+          aria-label="Iframe-Code für das Schulferien-Widget"
+        ></textarea>
+
+        <button
+          id="copy-widget-code"
+          type="button"
+        >
+          Code kopieren
+        </button>
+
+        <p
+          id="copy-status"
+          class="copy-status"
+          aria-live="polite"
+        ></p>
+      </section>
+
+      <section class="panel details-panel">
+        <h2>
+          Was das Widget zeigt
+        </h2>
+
+        <div class="details-grid">
+          <article>
+            <h3>
+              Offizielle Ferientermine
+            </h3>
+
+            <p>
+              Die Termine stammen aus den
+              geprüften Schulferienklar-Datensätzen.
+            </p>
+          </article>
+
+          <article>
+            <h3>
+              Zusammenhängend frei
+            </h3>
+
+            <p>
+              Direkt angrenzende Wochenenden und
+              landesweite Feiertage werden getrennt
+              berechnet.
+            </p>
+          </article>
+
+          <article>
+            <h3>
+              Automatische Aktualisierung
+            </h3>
+
+            <p>
+              Das eingebundene Widget verwendet
+              immer die aktuell veröffentlichte
+              Datenversion.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <a href="/">
+        Schulferienkalender
+      </a>
+
+      <a href="/ueber-uns.html">
+        Über Schulferienklar
+      </a>
+    </footer>
+
+    <script
+      type="module"
+      src="/widget-demo.js"
+    ></script>
+  </body>
+</html>
