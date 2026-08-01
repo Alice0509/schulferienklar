@@ -32,6 +32,25 @@ const STORAGE_KEYS = {
   vacationBudget: "schulferienklar:vacation-budget",
 };
 
+const STATE_DOWNLOAD_SLUGS = Object.freeze({
+  BW: "baden-wuerttemberg",
+  BY: "bayern",
+  BE: "berlin",
+  BB: "brandenburg",
+  HB: "bremen",
+  HH: "hamburg",
+  HE: "hessen",
+  MV: "mecklenburg-vorpommern",
+  NI: "niedersachsen",
+  NW: "nordrhein-westfalen",
+  RP: "rheinland-pfalz",
+  SL: "saarland",
+  SN: "sachsen",
+  ST: "sachsen-anhalt",
+  SH: "schleswig-holstein",
+  TH: "thueringen",
+});
+
 const TODAY = new Date();
 TODAY.setHours(0, 0, 0, 0);
 
@@ -1343,6 +1362,11 @@ export default function App() {
     "webcal:",
   );
 
+  const selectedStateSlug = STATE_DOWNLOAD_SLUGS[selectedCode];
+  const annualCalendarPdfUrl = selectedStateSlug
+    ? `/downloads/schulferien-${selectedStateSlug}-${selectedYear}.pdf`
+    : null;
+
   const pattern = getHeroPattern(selectedCode);
 
   return (
@@ -1398,6 +1422,17 @@ export default function App() {
               <button type="button" onClick={() => scrollToSection("kalender")}>
                 Kalender
               </button>
+              {annualCalendarPdfUrl && (
+                <a
+                  className="site-menu-download-link"
+                  href={annualCalendarPdfUrl}
+                  download
+                  data-download-action={`download-pdf-${selectedStateSlug}-${selectedYear}`}
+                  onClick={() => setIsSiteMenuOpen(false)}
+                >
+                  Jahreskalender als PDF
+                </a>
+              )}
               <button
                 type="button"
                 onClick={() => scrollToSection("reisezeit")}
@@ -1654,9 +1689,22 @@ export default function App() {
 
               <div className="ics-export-wrap">
                 <div className="calendar-action-row">
+                  {annualCalendarPdfUrl && (
+                    <a
+                      className="calendar-pdf-button"
+                      href={annualCalendarPdfUrl}
+                      download
+                      aria-label={`Jahreskalender ${selectedMeta?.bundeslandName || selectedCode} ${selectedYear} als PDF herunterladen`}
+                      data-download-action={`download-pdf-${selectedStateSlug}-${selectedYear}`}
+                    >
+                      PDF herunterladen
+                    </a>
+                  )}
+
                   <button
                     className="ics-export-button"
                     type="button"
+                    data-download-action={`download-ics-${selectedStateSlug}-${selectedYear}`}
                     onClick={handleDownloadIcs}
                   >
                     ICS herunterladen
