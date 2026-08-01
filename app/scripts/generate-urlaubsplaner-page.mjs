@@ -7,9 +7,10 @@ import {
 import {
   nodeHolidayRepository,
 } from "./lib/node-data-repository.mjs";
+import {
+  YEARS,
+} from "./lib/site-config.mjs";
 
-const YEARS = [2026, 2027, 2028, 2029, 2030];
-const DEFAULT_STATE_CODE = "BY";
 const outputDir = path.resolve("public");
 
 function escapeHtml(value) {
@@ -117,29 +118,83 @@ function getStateData(publicHolidayIndex, year) {
     });
 }
 
-function budgetExamplesHtml(defaultState, year) {
+function budgetExamplesHtml(states, year) {
+  const usedStateCodes = new Set();
+
   return [1, 2, 3, 4, 5]
     .map((budget) => {
-      const suggestion =
-        getVacationOptimizerSuggestions(
-          defaultState.holidays,
-          year,
-          budget,
-          {
-            limit: 1,
-          },
-        )[0] || null;
+      const candidates = states
+        .map((state) => {
+          const suggestion =
+            getVacationOptimizerSuggestions(
+              state.holidays,
+              year,
+              budget,
+              {
+                limit: 1,
+              },
+            )[0] || null;
 
-      if (!suggestion) {
-        return `          <article class="planner-budget-card" data-budget="${budget}">
-            <p class="planner-card-label">Bis zu ${budget} ${vacationDayLabel(budget)}</p>
+          return {
+            state,
+            suggestion,
+          };
+        })
+        .filter(({ suggestion }) => {
+          return Boolean(suggestion);
+        })
+        .sort((a, b) => {
+          return (
+            b.suggestion.freeDays -
+              a.suggestion.freeDays ||
+            a.suggestion.vacationDays -
+              b.suggestion.vacationDays ||
+            a.state.name.localeCompare(
+              b.state.name,
+              "de-DE",
+            )
+          );
+        });
+
+      const selected =
+        candidates.find(({ state }) => {
+          return !usedStateCodes.has(state.code);
+        }) ||
+        candidates[0] ||
+        null;
+
+      if (!selected) {
+        return `          <article
+            class="planner-budget-card"
+            data-budget="${budget}"
+          >
+            <p class="planner-card-label">
+              Bis zu ${budget} ${vacationDayLabel(budget)}
+            </p>
             <h3>Keine Kombination gefunden</h3>
-            <p>Für diese Beispielrechnung liegt aktuell keine passende Kombination vor.</p>
+            <p>
+              Für diese Beispielrechnung liegt aktuell
+              keine passende Kombination vor.
+            </p>
           </article>`;
       }
 
-      return `          <article class="planner-budget-card" data-budget="${budget}">
-            <p class="planner-card-label">Bis zu ${budget} ${vacationDayLabel(budget)}</p>
+      const {
+        state,
+        suggestion,
+      } = selected;
+
+      usedStateCodes.add(state.code);
+
+      return `          <article
+            class="planner-budget-card"
+            data-budget="${budget}"
+            data-example-state="${escapeHtml(state.code)}"
+          >
+            <p class="planner-card-label">
+              Bis zu ${budget} ${vacationDayLabel(budget)}
+              · ${escapeHtml(state.name)}
+            </p>
             <h3>${suggestion.freeDays} Tage am Stück frei</h3>
             <p class="planner-period">${formatWeekdayRange(
               suggestion.startDate,
@@ -147,9 +202,10 @@ function budgetExamplesHtml(defaultState, year) {
             )}</p>
             <p>
               Dafür werden ${suggestion.vacationDays}
-              ${vacationDayLabel(suggestion.vacationDays)} benötigt.
+              ${vacationDayLabel(suggestion.vacationDays)}
+              benötigt.
             </p>
-            <a href="/?state=${defaultState.code}&year=${year}&vacationDays=${budget}#brueckentage">
+            <a href="/?state=${escapeHtml(state.code)}&year=${year}&vacationDays=${budget}#brueckentage">
               Diese Planung im Rechner öffnen
             </a>
           </article>`;
@@ -326,12 +382,7 @@ function pageTemplate({
 }) {
   const YEAR = year;
 
-  const defaultState =
-    states.find((state) => {
-      return state.code === DEFAULT_STATE_CODE;
-    }) || states[0];
-
-  if (!defaultState) {
+  if (states.length === 0) {
     throw new Error(
       `No public holiday states available for ${YEAR}`,
     );
@@ -398,7 +449,7 @@ function pageTemplate({
         <div class="planner-actions">
           <a
             class="button"
-            href="/?state=${defaultState.code}&year=${YEAR}&vacationDays=4#brueckentage"
+            href="/?year=${YEAR}&vacationDays=4#brueckentage"
           >
             Interaktiven Urlaubsplaner öffnen
           </a>
@@ -409,15 +460,16 @@ function pageTemplate({
       </section>
 
       <section class="planner-section" id="beispiele">
-        <p class="eyebrow">Beispielrechnung Bayern</p>
+        <p class="eyebrow">Beispiele aus verschiedenen Bundesländern</p>
         <h2>Was bringen 1 bis 5 Urlaubstage?</h2>
         <p>
-          Die folgenden Beispiele zeigen jeweils die bestbewertete
-          Kombination mit höchstens der angegebenen Zahl an Urlaubstagen.
-          Im Rechner kannst du Bundesland, Jahr und Budget selbst ändern.
+          Die Beispiele stammen aus verschiedenen Bundesländern und
+          zeigen jeweils eine gut bewertete Kombination mit höchstens der
+          angegebenen Zahl an Urlaubstagen. Im Rechner kannst du Bundesland,
+          Jahr und Budget selbst ändern.
         </p>
         <div class="planner-budget-grid">
-${budgetExamplesHtml(defaultState, YEAR)}
+${budgetExamplesHtml(states, YEAR)}
         </div>
       </section>
 

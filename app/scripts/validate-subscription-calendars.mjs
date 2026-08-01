@@ -1,18 +1,84 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import {
+  nodeHolidayRepository,
+} from "./lib/node-data-repository.mjs";
+import {
+  STATES,
+  YEARS,
+} from "./lib/site-config.mjs";
+
 const publicDir = path.resolve("public");
 const calendarDir = path.join(publicDir, "calendar");
 const indexPath = path.join(calendarDir, "index.json");
 
-const expectedCodes = [
-  "BB", "BE", "BW", "BY",
-  "HB", "HE", "HH", "MV",
-  "NI", "NW", "RP", "SH",
-  "SL", "SN", "ST", "TH",
-];
+const expectedCodes = STATES
+  .map(([, , , code]) => code)
+  .sort();
+
 
 const errors = [];
+
+const publicHolidayIndex =
+  nodeHolidayRepository.loadPublicHolidayIndex();
+
+function validatePublicHolidayScope({
+  code,
+  fileName,
+  content,
+}) {
+  const metas = (publicHolidayIndex.datasets || [])
+    .filter((meta) => {
+      return (
+        meta.bundeslandCode === code &&
+        YEARS.includes(Number(meta.year))
+      );
+    });
+
+  for (const meta of metas) {
+    const dataset =
+      nodeHolidayRepository
+        .loadPublicHolidayDatasetByMeta(meta);
+
+    if (!dataset) {
+      errors.push(
+        `${fileName}: missing source dataset ${code} ${meta.year}`,
+      );
+      continue;
+    }
+
+    for (const holiday of dataset.holidays || []) {
+      const uidValue =
+        holiday.id ||
+        `${code}-${holiday.date}`;
+      const uidLine =
+        `UID:${uidValue}@schulferienklar.de`;
+
+      const shouldBeIncluded =
+        holiday.scope === "statewide" &&
+        holiday.includeInDefaultCalendar === true;
+
+      if (
+        shouldBeIncluded &&
+        !content.includes(uidLine)
+      ) {
+        errors.push(
+          `${fileName}: missing statewide holiday ${uidValue}`,
+        );
+      }
+
+      if (
+        !shouldBeIncluded &&
+        content.includes(uidLine)
+      ) {
+        errors.push(
+          `${fileName}: regional or local holiday included ${uidValue}`,
+        );
+      }
+    }
+  }
+}
 
 function countMatches(value, pattern) {
   return (value.match(pattern) || []).length;
@@ -123,8 +189,8 @@ if (!fs.existsSync(indexPath)) {
   }
 
   if (
-    manifest.coverage?.startYear !== 2026 ||
-    manifest.coverage?.endYear !== 2030
+    manifest.coverage?.startYear !== YEARS[0] ||
+    manifest.coverage?.endYear !== YEARS.at(-1)
   ) {
     errors.push("Unexpected subscription feed coverage");
   }
@@ -174,23 +240,14 @@ if (!fs.existsSync(indexPath)) {
 
     validateCrLfAndLineLength(label, content);
     validateEvents(label, content, feed.eventCount);
+    validatePublicHolidayScope({
+      code: feed.bundeslandCode,
+      fileName: label,
+      content,
+    });
   }
 
-  const bayernPath = path.join(calendarDir, "by.ics");
 
-  if (fs.existsSync(bayernPath)) {
-    const bayern = fs.readFileSync(bayernPath, "utf8");
-
-    if (
-      /Augsburger Friedensfest|Mariä Himmelfahrt/.test(
-        bayern,
-      )
-    ) {
-      errors.push(
-        "calendar/by.ics: regional or local holiday included",
-      );
-    }
-  }
 }
 
 if (errors.length > 0) {
