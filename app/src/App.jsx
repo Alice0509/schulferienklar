@@ -1427,6 +1427,8 @@ export default function App() {
                   className="site-menu-download-link"
                   href={annualCalendarPdfUrl}
                   download
+                  target="_blank"
+                  rel="noopener noreferrer"
                   data-download-action={`download-pdf-${selectedStateSlug}-${selectedYear}`}
                   onClick={() => setIsSiteMenuOpen(false)}
                 >
@@ -1701,6 +1703,8 @@ export default function App() {
                       className="calendar-pdf-button"
                       href={annualCalendarPdfUrl}
                       download
+                      target="_blank"
+                      rel="noopener noreferrer"
                       aria-label={`Jahreskalender ${selectedMeta?.bundeslandName || selectedCode} ${selectedYear} als PDF herunterladen`}
                       data-download-action={`download-pdf-${selectedStateSlug}-${selectedYear}`}
                     >
