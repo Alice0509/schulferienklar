@@ -422,3 +422,115 @@ button {
     line-height: 1.25;
   }
 }
+
+/* Download and subscription actions */
+
+.actions .primary-action {
+  border-color: #176f64;
+  color: #ffffff;
+  background: #176f64;
+}
+
+.download-options {
+  position: relative;
+}
+
+.download-options summary {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #b8cfca;
+  border-radius: 8px;
+  padding: 9px 13px;
+  color: #176f64;
+  background: #ffffff;
+  font: inherit;
+  font-weight: 850;
+  cursor: pointer;
+  list-style: none;
+}
+
+.download-options summary::-webkit-details-marker {
+  display: none;
+}
+
+.download-options summary::after {
+  margin-left: 8px;
+  content: "▾";
+  font-size: 0.8em;
+}
+
+.download-options[open] {
+  flex-basis: 100%;
+}
+
+.download-options[open] summary::after {
+  content: "▴";
+}
+
+.download-options-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 8px;
+}
+
+.download-options-panel .secondary-action {
+  border-color: #b8cfca;
+  color: #176f64;
+  background: #f4faf8;
+}
+
+@media screen and (max-width: 620px) {
+  .download-options {
+    width: 100%;
+  }
+
+  .download-options summary {
+    width: 100%;
+  }
+
+  .download-options-panel {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .download-options-panel > * {
+    width: 100%;
+  }
+
+  .print-hint {
+    text-align: left;
+  }
+}
+
+@media print {
+  .download-options {
+    display: none !important;
+  }
+}
+
+/* A4 landscape vertical fill */
+
+@media print {
+  .year-grid {
+    height: 154mm !important;
+    grid-template-rows:
+      repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .month {
+    display: grid !important;
+    grid-template-rows:
+      auto
+      auto
+      repeat(6, minmax(0, 1fr));
+  }
+
+  .calendar-row {
+    min-height: 0 !important;
+  }
+}
+

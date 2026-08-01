@@ -1,0 +1,265 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Schulferienklar//HB 2026 Jahreskalender//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Schulferien und Feiertage Bremen 2026
+X-WR-CALDESC:Einmaliger Kalenderdownload für Bremen 2026. Enthält landesw
+ eite Schulferien\, unterrichtsfreie Tage und landesweit geltende gesetzlic
+ he Feiertage.
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+URL:https://www.schulferienklar.de/downloads/schulferien-bremen-2026.ics
+BEGIN:VEVENT
+UID:school-hb-christmas-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20251222
+DTEND;VALUE=DATE:20260106
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Bremen · Quelle: Der Senator
+  für Kinder und Bildung Bremen / Transparenzportal Bremen
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-hb-public-2026-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260101
+DTEND;VALUE=DATE:20260102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Bremen · landeswei
+ t
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:school-hb-winter-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260202
+DTEND;VALUE=DATE:20260204
+SUMMARY:Halbjahresferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Bremen · Quelle: Der Senator
+  für Kinder und Bildung Bremen / Transparenzportal Bremen
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:school-hb-easter-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260323
+DTEND;VALUE=DATE:20260408
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Bremen · Quelle: Der Senator
+  für Kinder und Bildung Bremen / Transparenzportal Bremen
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-hb-public-2026-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260403
+DTEND;VALUE=DATE:20260404
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Bremen · landeswei
+ t
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-hb-public-2026-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260406
+DTEND;VALUE=DATE:20260407
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Bremen · landeswei
+ t
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-hb-public-2026-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260501
+DTEND;VALUE=DATE:20260502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Bremen · landeswei
+ t
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-hb-public-2026-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260514
+DTEND;VALUE=DATE:20260515
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Bremen · landeswei
+ t
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:school-hb-school-free-2026-05-15@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260515
+DTEND;VALUE=DATE:20260516
+SUMMARY:Tag nach Himmelfahrt (Unterrichtsfrei)
+DESCRIPTION:Schulferienklar · Unterrichtsfrei · Bremen · Quelle: Der Sen
+ ator für Kinder und Bildung Bremen / Transparenzportal Bremen
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-hb-public-2026-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20260525
+DTEND;VALUE=DATE:20260526
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Bremen · landeswei
+ t
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:school-hb-pentecost-2025-26@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260526
+DTEND;VALUE=DATE:20260527
+SUMMARY:Pfingsten (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Bremen · Quelle: Der Senator
+  für Kinder und Bildung Bremen / Transparenzportal Bremen
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:school-hb-summer-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20260702
+DTEND;VALUE=DATE:20260813
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Bremen · Quelle: Der Senator
+  für Kinder und Bildung Bremen / Transparenzportal Bremen
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-hb-public-2026-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261003
+DTEND;VALUE=DATE:20261004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Bremen · landeswei
+ t
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:school-hb-autumn-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20261012
+DTEND;VALUE=DATE:20261025
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Bremen · Quelle: Der Senator
+  für Kinder und Bildung Bremen / Transparenzportal Bremen
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-hb-public-2026-reformation-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261031
+DTEND;VALUE=DATE:20261101
+SUMMARY:Reformationstag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Bremen · landeswei
+ t
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:school-hb-christmas-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20261223
+DTEND;VALUE=DATE:20270110
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Bremen · Quelle: Der Senator
+  für Kinder und Bildung Bremen / Transparenzportal Bremen
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-hb-public-2026-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261225
+DTEND;VALUE=DATE:20261226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Bremen · landeswei
+ t
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-hb-public-2026-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20261226
+DTEND;VALUE=DATE:20261227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Bremen · landeswei
+ t
+URL:https://www.schulferienklar.de/schulferien-bremen-2026.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

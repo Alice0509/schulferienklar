@@ -4,29 +4,12 @@ import path from "node:path";
 import {
   nodeHolidayRepository,
 } from "./lib/node-data-repository.mjs";
+import {
+  STATES as states,
+  YEARS as years,
+} from "./lib/site-config.mjs";
 
 const outputDir = path.resolve("public");
-
-const years = [2026, 2027, 2028, 2029, 2030];
-
-const states = [
-  ["baden-wuerttemberg", "Baden-Württemberg", "Baden-Wuerttemberg", "BW"],
-  ["bayern", "Bayern", "Bavaria", "BY"],
-  ["berlin", "Berlin", "Berlin", "BE"],
-  ["brandenburg", "Brandenburg", "Brandenburg", "BB"],
-  ["bremen", "Bremen", "Bremen", "HB"],
-  ["hamburg", "Hamburg", "Hamburg", "HH"],
-  ["hessen", "Hessen", "Hesse", "HE"],
-  ["mecklenburg-vorpommern", "Mecklenburg-Vorpommern", "Mecklenburg-Western Pomerania", "MV"],
-  ["niedersachsen", "Niedersachsen", "Lower Saxony", "NI"],
-  ["nordrhein-westfalen", "Nordrhein-Westfalen", "North Rhine-Westphalia", "NW"],
-  ["rheinland-pfalz", "Rheinland-Pfalz", "Rhineland-Palatinate", "RP"],
-  ["saarland", "Saarland", "Saarland", "SL"],
-  ["sachsen", "Sachsen", "Saxony", "SN"],
-  ["sachsen-anhalt", "Sachsen-Anhalt", "Saxony-Anhalt", "ST"],
-  ["schleswig-holstein", "Schleswig-Holstein", "Schleswig-Holstein", "SH"],
-  ["thueringen", "Thüringen", "Thuringia", "TH"],
-];
 
 function escapeHtml(value) {
   return String(value || "")
@@ -556,44 +539,89 @@ function subscriptionCtaHtml({ code, name }) {
 }
 
 
-function bayern2027JahreskalenderHtml() {
-  return `        <section id="jahreskalender" class="gold-section gold-jahreskalender">
-          <p class="eyebrow">Zwölf Monate auf einer Seite</p>
-          <h2>Jahreskalender Bayern 2027</h2>
-          <p>
-            Öffne die vollständige Jahresansicht mit Kalenderwochen,
-            Schulferien, Feiertagen und direkt zusammenhängender freier Zeit.
+function jahreskalenderHtml({
+  slug,
+  name,
+  code,
+  year,
+}) {
+  const calendarCode =
+    String(code).toLowerCase();
+
+  const htmlUrl =
+    `/downloads/jahreskalender-${slug}-${year}.html`;
+
+  const pdfUrl =
+    `/downloads/schulferien-${slug}-${year}.pdf`;
+
+  const icsUrl =
+    `/downloads/schulferien-${slug}-${year}.ics`;
+
+  return `        <section
+          id="jahreskalender"
+          class="gold-section gold-jahreskalender"
+        >
+          <p class="eyebrow">
+            Zwölf Monate auf einer Seite
           </p>
+          <h2>
+            Jahreskalender ${escapeHtml(name)} ${year}
+          </h2>
+          <p>
+            Öffne die vollständige Jahresansicht mit
+            Kalenderwochen, Schulferien, Feiertagen und
+            direkt zusammenhängender freier Zeit.
+          </p>
+
           <div class="gold-jahreskalender-grid">
             <a
               class="gold-jahreskalender-card gold-jahreskalender-primary"
-              href="/downloads/jahreskalender-bayern-2027.html"
-              data-download-action="open-jahreskalender-bayern-2027"
+              href="${htmlUrl}"
+              data-download-action="open-jahreskalender-${slug}-${year}"
             >
-              <span>Jahresansicht · PDF</span>
+              <span>Jahresansicht</span>
               <strong>Jahreskalender öffnen</strong>
               <small>
-                A4-Querformat ansehen, drucken oder im Browser als PDF speichern.
+                Alle zwölf Monate direkt im Browser ansehen.
               </small>
             </a>
+
             <a
               class="gold-jahreskalender-card"
-              href="/downloads/schulferien-bayern-2027.ics"
+              href="${pdfUrl}"
               download
-              data-download-action="download-ics-bayern-2027"
+              data-download-action="download-pdf-${slug}-${year}"
             >
-              <span>ICS</span>
-              <strong>Kalenderdatei herunterladen</strong>
+              <span>PDF · A4 Querformat</span>
+              <strong>PDF herunterladen</strong>
               <small>
-                Schulferien und landesweite Feiertage für Kalender-Apps.
+                Druckfertige Jahresübersicht auf einer Seite.
+              </small>
+            </a>
+
+            <a
+              class="gold-jahreskalender-card"
+              href="${icsUrl}"
+              download
+              data-download-action="download-ics-${slug}-${year}"
+            >
+              <span>ICS · ${year}</span>
+              <strong>ICS-Datei herunterladen</strong>
+              <small>
+                Einmaliger Import der Termine für ${year}.
               </small>
             </a>
           </div>
-${subscriptionCtaHtml({ code: "BY", name: "Bayern" })}
+
+${subscriptionCtaHtml({
+  code: calendarCode,
+  name,
+})}
+
           <p class="gold-jahreskalender-note">
-            Die Jahresansicht unterscheidet offizielle Schulferien,
-            unterrichtsfreie Tage, gesetzliche Feiertage und die von
-            Schulferienklar berechnete direkt zusammenhängende freie Zeit.
+            Das Kalender-Abo enthält die Jahre 2026–2030
+            und wird automatisch aktualisiert. PDF und
+            ICS-Datei gelten nur für ${year}.
           </p>
         </section>`;
 }
@@ -717,7 +745,7 @@ ${bayern2027PeriodRowsHtml(events, publicHolidays)}
           </p>
         </section>
 
-${bayern2027JahreskalenderHtml()}
+${jahreskalenderHtml({ slug, name, code, year })}
 
         <section id="bezeichnungen" class="gold-section">
           <p class="eyebrow">Bayerische Besonderheiten</p>
@@ -930,7 +958,7 @@ ${stateYearQueryIntroHtml(name, year, events)}
           Lernzeiten oder freie Tage rund um die Schulferien planen möchten.
         </p>
 
-${subscriptionCtaHtml({ code, name })}
+${jahreskalenderHtml({ slug, name, code, year })}
 ${stateYearInternalLinksHtml({ slug, name, year })}
 
         <h2>School holidays ${englishName} ${year}</h2>

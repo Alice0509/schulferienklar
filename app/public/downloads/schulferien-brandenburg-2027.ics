@@ -1,0 +1,280 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Schulferienklar//BB 2027 Jahreskalender//DE
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Schulferien und Feiertage Brandenburg 2027
+X-WR-CALDESC:Einmaliger Kalenderdownload für Brandenburg 2027. Enthält la
+ ndesweite Schulferien\, unterrichtsfreie Tage und landesweit geltende gese
+ tzliche Feiertage.
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+URL:https://www.schulferienklar.de/downloads/schulferien-brandenburg-2027.i
+ cs
+BEGIN:VEVENT
+UID:school-bb-christmas-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20261223
+DTEND;VALUE=DATE:20270103
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Brandenburg · Quelle: Minist
+ erium für Bildung\, Jugend und Sport des Landes Brandenburg
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-bb-public-2027-new-year@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270101
+DTEND;VALUE=DATE:20270102
+SUMMARY:Neujahr (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Brandenburg · land
+ esweit
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:school-bb-winter-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270201
+DTEND;VALUE=DATE:20270207
+SUMMARY:Winterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Brandenburg · Quelle: Minist
+ erium für Bildung\, Jugend und Sport des Landes Brandenburg
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:school-bb-easter-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270322
+DTEND;VALUE=DATE:20270404
+SUMMARY:Osterferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Brandenburg · Quelle: Minist
+ erium für Bildung\, Jugend und Sport des Landes Brandenburg
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-bb-public-2027-good-friday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270326
+DTEND;VALUE=DATE:20270327
+SUMMARY:Karfreitag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Brandenburg · land
+ esweit
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-bb-public-2027-easter-sunday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270328
+DTEND;VALUE=DATE:20270329
+SUMMARY:Ostersonntag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Brandenburg · land
+ esweit
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-bb-public-2027-easter-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270329
+DTEND;VALUE=DATE:20270330
+SUMMARY:Ostermontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Brandenburg · land
+ esweit
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-bb-public-2027-labour-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270501
+DTEND;VALUE=DATE:20270502
+SUMMARY:Tag der Arbeit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Brandenburg · land
+ esweit
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-bb-public-2027-ascension@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270506
+DTEND;VALUE=DATE:20270507
+SUMMARY:Christi Himmelfahrt (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Brandenburg · land
+ esweit
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-bb-public-2027-whit-sunday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270516
+DTEND;VALUE=DATE:20270517
+SUMMARY:Pfingstsonntag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Brandenburg · land
+ esweit
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-bb-public-2027-pentecost-monday@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20270517
+DTEND;VALUE=DATE:20270518
+SUMMARY:Pfingstmontag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Brandenburg · land
+ esweit
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:school-bb-pentecost-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270518
+DTEND;VALUE=DATE:20270519
+SUMMARY:Pfingsten (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Brandenburg · Quelle: Minist
+ erium für Bildung\, Jugend und Sport des Landes Brandenburg
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:school-bb-summer-2026-27@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20270701
+DTEND;VALUE=DATE:20270815
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Brandenburg · Quelle: Minist
+ erium für Bildung\, Jugend und Sport des Landes Brandenburg
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-bb-public-2027-german-unity@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271003
+DTEND;VALUE=DATE:20271004
+SUMMARY:Tag der Deutschen Einheit (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Brandenburg · land
+ esweit
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:school-bb-autumn-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20271011
+DTEND;VALUE=DATE:20271024
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Brandenburg · Quelle: Minist
+ erium für Bildung\, Jugend und Sport des Landes Brandenburg
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-bb-public-2027-reformation-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271031
+DTEND;VALUE=DATE:20271101
+SUMMARY:Reformationstag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Brandenburg · land
+ esweit
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:school-bb-christmas-2027-28@schulferienklar.de
+DTSTAMP:20260524T000000Z
+LAST-MODIFIED:20260524T000000Z
+SEQUENCE:20260524
+DTSTART;VALUE=DATE:20271223
+DTEND;VALUE=DATE:20280101
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Brandenburg · Quelle: Minist
+ erium für Bildung\, Jugend und Sport des Landes Brandenburg
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-bb-public-2027-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271225
+DTEND;VALUE=DATE:20271226
+SUMMARY:1. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Brandenburg · land
+ esweit
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:public-bb-public-2027-second-christmas-day@schulferienklar.de
+DTSTAMP:20260525T000000Z
+LAST-MODIFIED:20260525T000000Z
+SEQUENCE:20260525
+DTSTART;VALUE=DATE:20271226
+DTEND;VALUE=DATE:20271227
+SUMMARY:2. Weihnachtsfeiertag (Feiertag)
+DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Brandenburg · land
+ esweit
+URL:https://www.schulferienklar.de/schulferien-brandenburg-2027.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
