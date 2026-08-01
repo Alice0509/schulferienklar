@@ -758,7 +758,7 @@ p {
 .gold-jahreskalender { margin-top: 2.5rem; }
 .gold-jahreskalender-grid {
   display: grid;
-  grid-template-columns: 1.35fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
   margin-top: 16px;
 }
