@@ -1479,9 +1479,6 @@ export default function App() {
 
       await navigator.share({
         files: [annualPdfShareFile],
-        title: `Schulferien ${
-          selectedMeta?.bundeslandName || selectedCode
-        } ${selectedYear}`,
       });
     } catch (error) {
       if (error?.name !== "AbortError") {
