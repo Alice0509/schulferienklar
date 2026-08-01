@@ -3892,3 +3892,72 @@ button.current-year-link {
   }
 }
 
+
+/* Main calendar PDF action and mobile button alignment */
+
+.calendar-pdf-button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(31, 111, 100, 0.34);
+  border-radius: 999px;
+  padding: 11px 16px;
+  color: #1f6f64;
+  background: #ffffff;
+  font-weight: 900;
+  line-height: 1.15;
+  text-align: center;
+  text-decoration: none;
+  box-shadow: 0 10px 22px rgba(40, 55, 85, 0.08);
+}
+
+.calendar-pdf-button:hover {
+  border-color: #1f6f64;
+  background: rgba(232, 247, 240, 0.72);
+}
+
+.ics-subscribe-button {
+  line-height: 1.15;
+  text-align: center;
+}
+
+.site-menu-download-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 11px 14px;
+  color: #1f6f64;
+  background: rgba(232, 247, 240, 0.96);
+  font-weight: 900;
+  text-align: center;
+  text-decoration: none;
+}
+
+.site-menu-download-link:hover {
+  color: #ffffff;
+  background: #1f6f64;
+}
+
+@media (max-width: 720px) {
+  .calendar-pdf-button {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-height: 48px;
+    padding: 10px 14px;
+  }
+
+  .ics-subscribe-button {
+    text-align: center;
+  }
+}
+
+@media (max-width: 760px) {
+  .site-menu-download-link {
+    width: 100%;
+    padding: 15px 16px;
+    justify-content: flex-start;
+    text-align: left;
+  }
+}
