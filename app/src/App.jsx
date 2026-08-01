@@ -648,6 +648,13 @@ function MobileActiveMonthCalendar({
   );
 }
 
+function isStandaloneAppMode() {
+  return (
+    window.matchMedia?.("(display-mode: standalone)").matches === true ||
+    window.navigator.standalone === true
+  );
+}
+
 export default function App() {
   const [index, setIndex] = useState(null);
   const [selectedCode, setSelectedCode] = useState(() => {
@@ -1366,6 +1373,125 @@ export default function App() {
   const annualCalendarPdfUrl = selectedStateSlug
     ? `/downloads/schulferien-${selectedStateSlug}-${selectedYear}.pdf`
     : null;
+  const annualCalendarPdfFileName = selectedStateSlug
+    ? `schulferien-${selectedStateSlug}-${selectedYear}.pdf`
+    : null;
+
+  const [isStandaloneApp] = useState(isStandaloneAppMode);
+  const [annualPdfShareFile, setAnnualPdfShareFile] = useState(null);
+  const [annualPdfShareStatus, setAnnualPdfShareStatus] = useState("idle");
+  const [annualPdfActionMessage, setAnnualPdfActionMessage] = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    setAnnualPdfShareFile(null);
+    setAnnualPdfShareStatus("idle");
+
+    if (!isStandaloneApp) {
+      return () => controller.abort();
+    }
+
+    if (
+      !annualCalendarPdfUrl ||
+      !annualCalendarPdfFileName ||
+      typeof File !== "function" ||
+      typeof navigator.share !== "function" ||
+      typeof navigator.canShare !== "function"
+    ) {
+      setAnnualPdfShareStatus("unsupported");
+      return () => controller.abort();
+    }
+
+    setAnnualPdfShareStatus("loading");
+
+    fetch(annualCalendarPdfUrl, {
+      cache: "force-cache",
+      signal: controller.signal,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`PDF request failed: ${response.status}`);
+        }
+
+        return response.blob();
+      })
+      .then((blob) => {
+        const file = new File([blob], annualCalendarPdfFileName, {
+          type: "application/pdf",
+        });
+
+        if (navigator.canShare({ files: [file] })) {
+          setAnnualPdfShareFile(file);
+          setAnnualPdfShareStatus("ready");
+          return;
+        }
+
+        setAnnualPdfShareStatus("unsupported");
+      })
+      .catch((error) => {
+        if (error.name !== "AbortError") {
+          console.error("PDF preparation failed", error);
+          setAnnualPdfShareStatus("error");
+        }
+      });
+
+    return () => controller.abort();
+  }, [
+    annualCalendarPdfFileName,
+    annualCalendarPdfUrl,
+    isStandaloneApp,
+  ]);
+
+  const handleAnnualPdfClick = async (event) => {
+    setIsSiteMenuOpen(false);
+
+    if (!isStandaloneApp) {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (
+      annualPdfShareStatus === "unsupported" ||
+      annualPdfShareStatus === "error"
+    ) {
+      setAnnualPdfActionMessage(
+        "PDF-Dateien können in dieser installierten App nicht gespeichert werden. Öffne Schulferienklar bitte in Chrome.",
+      );
+      return;
+    }
+
+    if (
+      annualPdfShareStatus !== "ready" ||
+      !annualPdfShareFile ||
+      typeof navigator.share !== "function" ||
+      !navigator.canShare({ files: [annualPdfShareFile] })
+    ) {
+      setAnnualPdfActionMessage(
+        "Die PDF wird vorbereitet. Bitte tippe gleich noch einmal auf „PDF speichern / teilen“.",
+      );
+      return;
+    }
+
+    try {
+      setAnnualPdfActionMessage("");
+
+      await navigator.share({
+        files: [annualPdfShareFile],
+        title: `Schulferien ${
+          selectedMeta?.bundeslandName || selectedCode
+        } ${selectedYear}`,
+      });
+    } catch (error) {
+      if (error?.name !== "AbortError") {
+        console.error("PDF sharing failed", error);
+        setAnnualPdfActionMessage(
+          "Die PDF konnte in der installierten App nicht geteilt werden. Öffne Schulferienklar bitte einmal in Chrome.",
+        );
+      }
+    }
+  };
 
   const pattern = getHeroPattern(selectedCode);
 
@@ -1380,6 +1506,18 @@ export default function App() {
       >
         {isSiteMenuOpen ? "× Schließen" : "☰ Menü"}
       </button>
+
+      {annualPdfActionMessage && (
+        <div className="pdf-action-toast" role="status">
+          <span>{annualPdfActionMessage}</span>
+          <button
+            type="button"
+            onClick={() => setAnnualPdfActionMessage("")}
+          >
+            Schließen
+          </button>
+        </div>
+      )}
 
       <section className={`hero hero-${pattern}`}>
         <nav className="topbar">
@@ -1430,9 +1568,11 @@ export default function App() {
                   target="_blank"
                   rel="noopener noreferrer"
                   data-download-action={`download-pdf-${selectedStateSlug}-${selectedYear}`}
-                  onClick={() => setIsSiteMenuOpen(false)}
+                  onClick={handleAnnualPdfClick}
                 >
-                  Jahreskalender als PDF
+                  {isStandaloneApp
+                    ? "Jahreskalender speichern / teilen"
+                    : "Jahreskalender als PDF"}
                 </a>
               )}
               <button
@@ -1470,7 +1610,7 @@ export default function App() {
                 href={`/widget.html?state=${selectedCode}`}
                 onClick={() => setIsSiteMenuOpen(false)}
               >
-                Ferien-Widget
+                Website-Widget erstellen
               </a>
               <a
                 className="site-menu-external-link"
@@ -1707,8 +1847,11 @@ export default function App() {
                       rel="noopener noreferrer"
                       aria-label={`Jahreskalender ${selectedMeta?.bundeslandName || selectedCode} ${selectedYear} als PDF herunterladen`}
                       data-download-action={`download-pdf-${selectedStateSlug}-${selectedYear}`}
+                      onClick={handleAnnualPdfClick}
                     >
-                      PDF herunterladen
+                      {isStandaloneApp
+                        ? "PDF speichern / teilen"
+                        : "PDF herunterladen"}
                     </a>
                   )}
 
@@ -2626,7 +2769,7 @@ export default function App() {
             className="widget-discovery-link"
             href={`/widget.html?state=${selectedCode}`}
           >
-            Ferien-Widget erstellen
+            Website-Widget erstellen
           </a>
           <small>
             Ohne Werbung, Cookies im eingebetteten Widget oder Nutzerkonto.
