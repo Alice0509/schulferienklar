@@ -702,6 +702,7 @@ ${schulferienklarIntroCardHtml({
           <a href="#termine">Alle Termine</a>
           <a href="#berechnung">Freie Zeit</a>
           <a href="#jahreskalender">Jahreskalender</a>
+          <a href="#widget">Widget</a>
           <a href="#bezeichnungen">Bezeichnungen</a>
           <a href="#quelle">Quelle</a>
           <a href="#fragen">Fragen</a>
@@ -746,6 +747,7 @@ ${bayern2027PeriodRowsHtml(events, publicHolidays)}
         </section>
 
 ${jahreskalenderHtml({ slug, name, code, year })}
+${widgetPromoHtml({ code, name })}
 
         <section id="bezeichnungen" class="gold-section">
           <p class="eyebrow">Bayerische Besonderheiten</p>
@@ -894,6 +896,38 @@ function schulferienklarIntroCardHtml({ appHref }) {
 `;
 }
 
+function widgetPromoHtml({ code, name }) {
+  return `        <section
+          class="widget-promo"
+          id="widget"
+          aria-label="Schulferien-Widget für ${escapeHtml(name)}"
+        >
+          <div>
+            <p class="widget-promo-label">Kostenlos für Websites</p>
+            <h2>Schulferien-Widget für ${escapeHtml(name)}</h2>
+            <p>
+              Zeige die nächsten Schulferien für ${escapeHtml(name)}
+              automatisch auf deiner Website. Bundesland, Darstellung und
+              Anzahl der Termine kannst du selbst auswählen.
+            </p>
+          </div>
+          <div class="widget-promo-actions">
+            <a
+              class="widget-promo-link"
+              href="/widget.html?state=${escapeHtml(code)}"
+            >
+              Widget für ${escapeHtml(name)} erstellen
+            </a>
+            <small>
+              Ohne Werbung, Cookies im eingebetteten Widget oder Nutzerkonto.
+            </small>
+          </div>
+        </section>
+
+`;
+}
+
+
 function pageTemplate({ slug, name, englishName, code, year, events }) {
   if (code === "BY" && year === 2027) {
     return bayern2027GoldPageTemplate({
@@ -959,6 +993,7 @@ ${stateYearQueryIntroHtml(name, year, events)}
         </p>
 
 ${jahreskalenderHtml({ slug, name, code, year })}
+${widgetPromoHtml({ code, name })}
 ${stateYearInternalLinksHtml({ slug, name, year })}
 
         <h2>School holidays ${englishName} ${year}</h2>
@@ -1179,6 +1214,7 @@ function writeSitemap() {
 
   const staticPages = [
     ["/", "weekly", "1.0"],
+    ["/widget.html", "monthly", "0.7"],
     ...years.map((year) => [
       `/urlaubsplaner-${year}.html`,
       "monthly",

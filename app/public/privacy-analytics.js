@@ -299,22 +299,41 @@
     footer.appendChild(button);
   }
 
-  function trackDownloadAction(element) {
-    const action = element.dataset.downloadAction;
+  function trackConsentAction(element) {
+    const action =
+      element.dataset.analyticsAction ||
+      element.dataset.downloadAction;
+
     if (!action || getConsent() !== ACCEPTED) {
       return;
     }
 
     loadClarity();
     queueClarity();
+
     window.clarity("event", action);
-    window.clarity("set", "download_page", window.location.pathname);
+    window.clarity(
+      "set",
+      "interaction_page",
+      window.location.pathname,
+    );
+
+    if (element.dataset.downloadAction) {
+      window.clarity(
+        "set",
+        "download_page",
+        window.location.pathname,
+      );
+    }
   }
 
   document.addEventListener("click", (event) => {
-    const element = event.target.closest("[data-download-action]");
+    const element = event.target.closest(
+      "[data-analytics-action], [data-download-action]",
+    );
+
     if (element) {
-      trackDownloadAction(element);
+      trackConsentAction(element);
     }
   });
 

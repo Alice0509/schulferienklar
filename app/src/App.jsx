@@ -1464,6 +1464,13 @@ export default function App() {
                 App speichern
               </button>
               <a
+                className="site-menu-widget-link"
+                href={`/widget.html?state=${selectedCode}`}
+                onClick={() => setIsSiteMenuOpen(false)}
+              >
+                Ferien-Widget
+              </a>
+              <a
                 className="site-menu-external-link"
                 href="https://germanytravelchecker.com/"
                 target="_blank"
@@ -2592,6 +2599,35 @@ export default function App() {
             ? "Bundesländer ausblenden"
             : "Alle Bundesländer anzeigen"}
         </button>
+      </section>
+
+      <section
+        className="panel widget-discovery"
+        aria-labelledby="widget-discovery-title"
+      >
+        <div>
+          <p className="eyebrow">Kostenlos einbinden</p>
+          <h2 id="widget-discovery-title">
+            Schulferien auf deiner Website anzeigen
+          </h2>
+          <p>
+            Erstelle ein Widget mit den nächsten Schulferien deines
+            Bundeslands – für Schulen, Vereine, Unternehmen oder
+            Familienseiten.
+          </p>
+        </div>
+
+        <div className="widget-discovery-actions">
+          <a
+            className="widget-discovery-link"
+            href={`/widget.html?state=${selectedCode}`}
+          >
+            Ferien-Widget erstellen
+          </a>
+          <small>
+            Ohne Werbung, Cookies im eingebetteten Widget oder Nutzerkonto.
+          </small>
+        </div>
       </section>
 
       <section

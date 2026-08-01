@@ -251,6 +251,7 @@ for (const {
     `/${annualPdf}`,
     `/${annualIcs}`,
     `webcal://www.schulferienklar.de/calendar/${normalizedCode}.ics`,
+    `/widget.html?state=${code}`,
     `?state=${code}&year=${year}`,
   ];
 
@@ -430,8 +431,54 @@ expectPublicFile(
   "widgets/naechste-schulferien.html",
 );
 
+const widgetPage =
+  readPublicText("widget.html");
+
 const widgetDemo =
   readPublicText("widget-demo.js");
+
+const embeddedWidget =
+  readPublicText(
+    "widgets/naechste-schulferien.html",
+  );
+
+if (
+  widgetPage &&
+  !widgetPage.includes(
+    'data-analytics-action="copy-widget-code"',
+  )
+) {
+  errors.push(
+    "widget.html: missing copy tracking action",
+  );
+}
+
+if (
+  widgetPage &&
+  !widgetPage.includes(
+    'src="/privacy-analytics.js"',
+  )
+) {
+  errors.push(
+    "widget.html: missing consent analytics script",
+  );
+}
+
+if (
+  embeddedWidget &&
+  (
+    embeddedWidget.includes(
+      "privacy-analytics.js",
+    ) ||
+    embeddedWidget.includes(
+      "clarity.ms",
+    )
+  )
+) {
+  errors.push(
+    "Embedded widget must remain analytics-free",
+  );
+}
 
 if (
   widgetDemo &&

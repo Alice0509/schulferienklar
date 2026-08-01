@@ -14,6 +14,8 @@ const requiredFiles = [
   "sitemap.xml",
   "seo-pages.css",
   "urlaubsplaner.css",
+  "widget.html",
+  "widget-demo.js",
   ...plannerYears.map((year) => `urlaubsplaner-${year}.html`),
   "schulferien-2026.html",
   "schulferien-bayern.html",
@@ -267,6 +269,14 @@ for (const [
         "subscription button label",
         "Kalender abonnieren",
       ],
+      [
+        "Widget CTA",
+        `/widget.html?state=${code}`,
+      ],
+      [
+        "Widget heading",
+        `Schulferien-Widget für ${name}`,
+      ],
     ];
 
     for (const [label, value] of checks) {
@@ -276,6 +286,57 @@ for (const [
         );
       }
     }
+  }
+}
+
+
+
+const widgetPagePath = path.join(
+  publicDir,
+  "widget.html",
+);
+
+if (fs.existsSync(widgetPagePath)) {
+  const widgetHtml = fs.readFileSync(
+    widgetPagePath,
+    "utf8",
+  );
+
+  if (
+    !widgetHtml.includes(
+      'data-analytics-action="copy-widget-code"',
+    )
+  ) {
+    errors.push(
+      "widget.html: missing consent-based copy tracking action",
+    );
+  }
+
+  if (
+    !widgetHtml.includes(
+      'src="/privacy-analytics.js"',
+    )
+  ) {
+    errors.push(
+      "widget.html: missing privacy analytics script",
+    );
+  }
+}
+
+if (fs.existsSync(sitemapPath)) {
+  const sitemap = fs.readFileSync(
+    sitemapPath,
+    "utf8",
+  );
+
+  if (
+    !sitemap.includes(
+      "https://www.schulferienklar.de/widget.html",
+    )
+  ) {
+    errors.push(
+      "sitemap.xml: missing widget.html URL",
+    );
   }
 }
 
