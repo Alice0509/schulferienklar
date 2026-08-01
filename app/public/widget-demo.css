@@ -379,3 +379,47 @@ a {
     font-size: 0.72rem;
   }
 }
+
+/* Website widget purpose and mobile shortcut */
+
+.hero-note {
+  max-width: 680px;
+  margin: 16px 0 0;
+  border-left: 4px solid #1f756a;
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #526870;
+  background: #edf7f4;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.hero-code-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 18px;
+  border-radius: 999px;
+  padding: 10px 16px;
+  color: #ffffff;
+  background: #1f756a;
+  font-size: 0.9rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.hero-code-link:hover {
+  background: #195f57;
+}
+
+#einbettungscode {
+  scroll-margin-top: 18px;
+}
+
+@media (max-width: 760px) {
+  .hero-code-link {
+    width: 100%;
+  }
+}
