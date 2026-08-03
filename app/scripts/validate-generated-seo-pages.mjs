@@ -314,6 +314,26 @@ if (fs.existsSync(widgetPagePath)) {
 
   if (
     !widgetHtml.includes(
+      'data-analytics-action="register-widget-website"',
+    )
+  ) {
+    errors.push(
+      "widget.html: missing website registration action",
+    );
+  }
+
+  if (
+    !widgetHtml.includes(
+      'data-analytics-action="request-widget-customization"',
+    )
+  ) {
+    errors.push(
+      "widget.html: missing customization enquiry action",
+    );
+  }
+
+  if (
+    !widgetHtml.includes(
       'src="/privacy-analytics.js"',
     )
   ) {
