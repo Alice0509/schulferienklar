@@ -423,3 +423,77 @@ a {
     width: 100%;
   }
 }
+
+/* Widget validation and partner enquiry */
+
+.validation-panel {
+  margin-top: 20px;
+  padding: 26px;
+}
+
+.validation-panel > div:first-child > p:not(.section-label) {
+  max-width: 720px;
+  margin: 9px 0 0;
+  color: #62737b;
+  line-height: 1.6;
+}
+
+.validation-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.validation-action {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 10px 17px;
+  font-size: 0.9rem;
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.validation-action.primary {
+  color: #ffffff;
+  background: #1f756a;
+}
+
+.validation-action.primary:hover {
+  background: #195f57;
+}
+
+.validation-action.secondary {
+  border: 1px solid #bfd4cf;
+  color: #1f675f;
+  background: #ffffff;
+}
+
+.validation-action.secondary:hover {
+  background: #edf7f4;
+}
+
+.validation-action:focus-visible {
+  outline: 3px solid rgba(31, 117, 106, 0.28);
+  outline-offset: 3px;
+}
+
+.validation-note {
+  margin: 13px 0 0;
+  color: #718087;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 560px) {
+  .validation-actions {
+    display: grid;
+  }
+
+  .validation-action {
+    width: 100%;
+  }
+}

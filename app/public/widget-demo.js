@@ -29,6 +29,16 @@ const copyStatus = document.querySelector(
   "#copy-status",
 );
 
+const websiteRegistrationLink =
+  document.querySelector(
+    "#register-widget-website",
+  );
+
+const customizationLink =
+  document.querySelector(
+    "#request-widget-customization",
+  );
+
 let states = [];
 
 function getInitialOptions() {
@@ -106,6 +116,89 @@ function getSelectedState() {
       name: stateSelect.value,
     }
   );
+}
+
+function buildMailtoUrl(
+  subject,
+  body,
+) {
+  return (
+    "mailto:joan.app.dd@gmail.com" +
+    `?subject=${encodeURIComponent(subject)}` +
+    `&body=${encodeURIComponent(body)}`
+  );
+}
+
+function updateContactLinks(
+  state,
+  options,
+) {
+  const themeLabel =
+    options.theme === "dark"
+      ? "Dunkel"
+      : "Hell";
+
+  const configurationUrl =
+    window.location.href;
+
+  websiteRegistrationLink.href =
+    buildMailtoUrl(
+      `Website für Schulferien-Widget einreichen: ${state.name}`,
+      [
+        "Hallo Schulferienklar,",
+        "",
+        "ich habe das kostenlose Schulferien-Widget eingebaut",
+        "und möchte meine Website zur Prüfung einreichen.",
+        "",
+        "Name der Website / Organisation:",
+        "",
+        "Website-Adresse:",
+        "",
+        "Seite mit eingebautem Widget:",
+        "",
+        "Kategorie, z. B. Verein, Schule, Feriencamp oder Familienportal:",
+        "",
+        `Bundesland: ${state.name} (${state.code})`,
+        `Darstellung: ${themeLabel}`,
+        `Anzahl Termine: ${options.count}`,
+        `Konfiguration: ${configurationUrl}`,
+        "",
+        "Freigabe zur Veröffentlichung:",
+        "[ ] Ich bin damit einverstanden, dass der Name",
+        "und der Link meiner Website nach Prüfung auf",
+        "Schulferienklar veröffentlicht werden.",
+        "",
+        "Optionaler Hinweis:",
+        "",
+      ].join("\n"),
+    );
+
+  customizationLink.href =
+    buildMailtoUrl(
+      `Anfrage zum Schulferien-Widget: ${state.name}`,
+      [
+        "Hallo Schulferienklar,",
+        "",
+        "ich interessiere mich für eine individuelle",
+        "Widget- oder Datenlösung.",
+        "",
+        "Organisation / Website:",
+        "",
+        `Bundesland: ${state.name} (${state.code})`,
+        `Aktuelle Darstellung: ${themeLabel}`,
+        `Anzahl Termine: ${options.count}`,
+        `Konfiguration: ${configurationUrl}`,
+        "",
+        "Gewünschte Funktion:",
+        "- eigene Farben oder Schrift",
+        "- mehrere Bundesländer",
+        "- anderes Layout",
+        "- angepasste Attribution",
+        "- API oder eigener Kalender-Feed",
+        "- anderes:",
+        "",
+      ].join("\n"),
+    );
 }
 
 function createEmbedCode(
@@ -190,6 +283,10 @@ function updateWidget() {
     );
 
   updatePageUrl(options);
+  updateContactLinks(
+    state,
+    options,
+  );
 
   copyStatus.textContent = "";
 }
@@ -256,7 +353,7 @@ async function copyCode() {
   }
 
   copyStatus.textContent =
-    "Der Widget-Code wurde kopiert.";
+    "Der Widget-Code wurde kopiert. Nach dem Einbau kannst du deine Website unten kostenlos zur Vorstellung einreichen.";
 }
 
 async function initialize() {
