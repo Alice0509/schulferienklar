@@ -323,12 +323,12 @@ if (fs.existsSync(widgetPagePath)) {
   }
 
   if (
-    !widgetHtml.includes(
+    widgetHtml.includes(
       'data-analytics-action="request-widget-customization"',
     )
   ) {
     errors.push(
-      "widget.html: missing customization enquiry action",
+      "widget.html: unexpected commercial customization enquiry action",
     );
   }
 

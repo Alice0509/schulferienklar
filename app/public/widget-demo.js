@@ -34,11 +34,6 @@ const websiteRegistrationLink =
     "#register-widget-website",
   );
 
-const customizationLink =
-  document.querySelector(
-    "#request-widget-customization",
-  );
-
 let states = [];
 
 function getInitialOptions() {
@@ -129,7 +124,7 @@ function buildMailtoUrl(
   );
 }
 
-function updateContactLinks(
+function updateWebsiteRegistrationLink(
   state,
   options,
 ) {
@@ -173,32 +168,6 @@ function updateContactLinks(
       ].join("\n"),
     );
 
-  customizationLink.href =
-    buildMailtoUrl(
-      `Anfrage zum Schulferien-Widget: ${state.name}`,
-      [
-        "Hallo Schulferienklar,",
-        "",
-        "ich interessiere mich für eine individuelle",
-        "Widget- oder Datenlösung.",
-        "",
-        "Organisation / Website:",
-        "",
-        `Bundesland: ${state.name} (${state.code})`,
-        `Aktuelle Darstellung: ${themeLabel}`,
-        `Anzahl Termine: ${options.count}`,
-        `Konfiguration: ${configurationUrl}`,
-        "",
-        "Gewünschte Funktion:",
-        "- eigene Farben oder Schrift",
-        "- mehrere Bundesländer",
-        "- anderes Layout",
-        "- angepasste Attribution",
-        "- API oder eigener Kalender-Feed",
-        "- anderes:",
-        "",
-      ].join("\n"),
-    );
 }
 
 function createEmbedCode(
@@ -283,7 +252,7 @@ function updateWidget() {
     );
 
   updatePageUrl(options);
-  updateContactLinks(
+  updateWebsiteRegistrationLink(
     state,
     options,
   );
