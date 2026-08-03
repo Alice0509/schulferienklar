@@ -4110,3 +4110,95 @@ button.current-year-link {
     bottom: max(12px, env(safe-area-inset-bottom));
   }
 }
+
+/* Desktop calendar layout cleanup */
+
+@media (min-width: 861px) {
+  .content-grid {
+    align-items: start;
+  }
+
+  .content-grid > .panel,
+  .side-panel {
+    align-self: start;
+  }
+
+  .side-panel {
+    height: fit-content;
+  }
+
+  .overview-header {
+    display: grid;
+    grid-template-columns: minmax(170px, 0.55fr) minmax(0, 1.45fr);
+    align-items: start;
+    gap: 18px 24px;
+    margin-bottom: 24px;
+  }
+
+  .overview-header > div:first-child {
+    min-width: 0;
+  }
+
+  .overview-header .view-controls {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-items: center;
+    justify-content: end;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .overview-header .ics-export-wrap {
+    grid-column: 1 / -1;
+    width: 100%;
+    align-items: flex-end;
+    justify-self: stretch;
+  }
+
+  .overview-header .calendar-action-row {
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+  }
+
+  .overview-header .calendar-pdf-button,
+  .overview-header .ics-export-button,
+  .overview-header .ics-subscribe-button {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 46px;
+    padding-inline: 14px;
+  }
+
+  .overview-header .ics-export-hint {
+    width: 100%;
+    text-align: right;
+  }
+
+  .overview-header .calendar-subscription-help {
+    width: min(100%, 560px);
+    text-align: left;
+  }
+}
+
+@media (min-width: 861px) and (max-width: 1080px) {
+  .overview-header {
+    grid-template-columns: 1fr;
+  }
+
+  .overview-header .view-controls {
+    justify-content: start;
+  }
+
+  .overview-header .ics-export-wrap {
+    align-items: flex-start;
+  }
+
+  .overview-header .calendar-action-row {
+    justify-content: flex-start;
+  }
+
+  .overview-header .ics-export-hint {
+    text-align: left;
+  }
+}
