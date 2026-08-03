@@ -4,21 +4,27 @@ Updated: 2026-08-03
 
 ## Purpose
 
-The free Nächste-Schulferien Widget is a distribution and demand-validation
-experiment. It is not yet a paid product.
+The Nächste-Schulferien Widget is a free distribution experiment for
+Schulferienklar.
 
-The Widget remains free to use without prior approval or an account.
+The Widget remains free to use without prior approval, payment or an account.
 
-## Validation period
+Current traffic and usage are not yet high enough to justify commercial
+outreach, paid infrastructure or professional service offers.
 
-The initial validation period is approximately 90 days.
+## Current observation phase
 
-Signals supporting further investment include:
+The observation period remains open-ended until the Widget receives meaningful
+organic traffic and real external usage.
 
-- at least 5 confirmed external installations
-- at least 3 organisation enquiries
-- at least 2 requests for professional or customised Widget features
-- at least 1 API, custom-feed or organisation-data enquiry
+Current signals are:
+
+- Widget code copies
+- voluntarily submitted websites
+- confirmed external installations
+- referrals from embedded Widget attribution links
+
+There is currently no fixed 90-day commercial validation deadline.
 
 ## Website registration
 
@@ -79,23 +85,37 @@ The public Widget builder may record these actions only after analytics consent:
 
 - `copy-widget-code`
 - `register-widget-website`
-- `request-widget-customization`
 
 The embedded Widget itself contains no analytics scripts, cookies, advertising
 or behavioural tracking.
 
 Its Schulferienklar attribution link uses aggregate UTM referral parameters.
 
+## Commercial features currently paused
+
+The public Widget page does not currently offer:
+
+- custom Widget development
+- paid Widget plans
+- paid APIs
+- custom calendar or data feeds
+- pricing or commercial contracts
+- direct sales outreach
+
+These topics may be reconsidered only after meaningful organic demand exists
+and the appropriate business setup is in place.
+
 ## Manual validation log
 
 | Date | Organisation / website | Signal | Bundesland | Verified | Follow-up |
 | --- | --- | --- | --- | --- | --- |
-|  |  | Installation |  |  |  |
-|  |  | Organisation enquiry |  |  |  |
-|  |  | Custom feature request |  |  |  |
-|  |  | API / feed enquiry |  |  |  |
+|  |  | Code copy |  |  |  |
+|  |  | Website registration |  |  |  |
+|  |  | Confirmed installation |  |  |  |
 
 ## Decision rule
 
-Do not build accounts, payment infrastructure, Widget Pro or a paid API until
-real external demand is visible.
+Continue improving the free product and organic reach.
+
+Do not build accounts, payments, Widget Pro, paid APIs or commercial service
+flows until traffic, usage and the appropriate business setup support them.

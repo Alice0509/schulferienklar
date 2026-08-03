@@ -466,16 +466,6 @@ a {
   background: #195f57;
 }
 
-.validation-action.secondary {
-  border: 1px solid #bfd4cf;
-  color: #1f675f;
-  background: #ffffff;
-}
-
-.validation-action.secondary:hover {
-  background: #edf7f4;
-}
-
 .validation-action:focus-visible {
   outline: 3px solid rgba(31, 117, 106, 0.28);
   outline-offset: 3px;
