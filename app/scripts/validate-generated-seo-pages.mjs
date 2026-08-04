@@ -393,6 +393,94 @@ if (fs.existsSync(bayern2027Path)) {
 }
 
 
+const nrw2027Path = path.join(
+  publicDir,
+  "schulferien-nordrhein-westfalen-2027.html",
+);
+
+if (fs.existsSync(nrw2027Path)) {
+  const nrw2027Html =
+    fs.readFileSync(
+      nrw2027Path,
+      "utf8",
+    );
+
+  const nrwGoldPageChecks = [
+    [
+      "Gold Page marker",
+      /data-gold-page="nrw-2027"/,
+    ],
+    [
+      "direct answer section",
+      /id="termine"/,
+    ],
+    [
+      "connected free-time explanation",
+      /Zusammenhängend frei/,
+    ],
+    [
+      "movable holiday explanation",
+      /bewegliche Ferientage/i,
+    ],
+    [
+      "Rosenmontag limitation",
+      /Rosenmontag ist kein landesweit einheitlicher Ferientermin/,
+    ],
+    [
+      "Pfingsten terminology",
+      /Pfingsten 2027/,
+    ],
+    [
+      "official NRW ministry source",
+      /Ministerium für Schule und Bildung/,
+    ],
+    [
+      "official NRW source link",
+      /schulministerium\.nrw/,
+    ],
+    [
+      "FAQ structured data",
+      /FAQPage/,
+    ],
+    [
+      "breadcrumb structured data",
+      /BreadcrumbList/,
+    ],
+    [
+      "visible FAQ section",
+      /id="fragen"/,
+    ],
+    [
+      "Jahreskalender section",
+      /id="jahreskalender"/,
+    ],
+    [
+      "Jahreskalender preview link",
+      /downloads\/jahreskalender-nordrhein-westfalen-2027\.html/,
+    ],
+    [
+      "Jahreskalender PDF link",
+      /downloads\/schulferien-nordrhein-westfalen-2027\.pdf/,
+    ],
+    [
+      "Jahreskalender ICS link",
+      /downloads\/schulferien-nordrhein-westfalen-2027\.ics/,
+    ],
+  ];
+
+  for (
+    const [label, pattern]
+    of nrwGoldPageChecks
+  ) {
+    if (!pattern.test(nrw2027Html)) {
+      errors.push(
+        `schulferien-nordrhein-westfalen-2027.html: missing ${label}`,
+      );
+    }
+  }
+}
+
+
 console.log(`Checked ${htmlFiles.length} generated SEO HTML files.`);
 
 if (errors.length > 0) {
