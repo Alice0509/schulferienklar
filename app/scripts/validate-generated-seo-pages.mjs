@@ -481,6 +481,106 @@ if (fs.existsSync(nrw2027Path)) {
 }
 
 
+const bw2027Path = path.join(
+  publicDir,
+  "schulferien-baden-wuerttemberg-2027.html",
+);
+
+if (fs.existsSync(bw2027Path)) {
+  const bw2027Html =
+    fs.readFileSync(
+      bw2027Path,
+      "utf8",
+    );
+
+  const bwGoldPageChecks = [
+    [
+      "Gold Page marker",
+      /data-gold-page="bw-2027"/,
+    ],
+    [
+      "direct answer section",
+      /id="termine"/,
+    ],
+    [
+      "connected free-time explanation",
+      /Zusammenhängend frei/,
+    ],
+    [
+      "Maundy Thursday school-free date",
+      /25\. März 2027/,
+    ],
+    [
+      "Maundy Thursday terminology",
+      /Gründonnerstag/,
+    ],
+    [
+      "connected Easter period",
+      /25\. März bis 4\. April 2027/,
+    ],
+    [
+      "Pentecost holidays",
+      /Pfingstferien/,
+    ],
+    [
+      "movable holiday limitation",
+      /Bewegliche Ferientage/,
+    ],
+    [
+      "school-free Saturdays limitation",
+      /unterrichtsfreie Samstage/,
+    ],
+    [
+      "official ministry source",
+      /Ministerium für Kultus, Jugend und Sport/,
+    ],
+    [
+      "official ministry source link",
+      /km\.baden-wuerttemberg\.de/,
+    ],
+    [
+      "FAQ structured data",
+      /FAQPage/,
+    ],
+    [
+      "breadcrumb structured data",
+      /BreadcrumbList/,
+    ],
+    [
+      "visible FAQ section",
+      /id="fragen"/,
+    ],
+    [
+      "Jahreskalender section",
+      /id="jahreskalender"/,
+    ],
+    [
+      "Jahreskalender preview link",
+      /downloads\/jahreskalender-baden-wuerttemberg-2027\.html/,
+    ],
+    [
+      "Jahreskalender PDF link",
+      /downloads\/schulferien-baden-wuerttemberg-2027\.pdf/,
+    ],
+    [
+      "Jahreskalender ICS link",
+      /downloads\/schulferien-baden-wuerttemberg-2027\.ics/,
+    ],
+  ];
+
+  for (
+    const [label, pattern]
+    of bwGoldPageChecks
+  ) {
+    if (!pattern.test(bw2027Html)) {
+      errors.push(
+        `schulferien-baden-wuerttemberg-2027.html: missing ${label}`,
+      );
+    }
+  }
+}
+
+
 console.log(`Checked ${htmlFiles.length} generated SEO HTML files.`);
 
 if (errors.length > 0) {

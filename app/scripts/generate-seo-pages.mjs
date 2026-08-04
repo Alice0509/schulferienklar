@@ -546,12 +546,88 @@ function getStateYearCrossingNote(
   return "";
 }
 
+function isSchoolFreeDate(
+  dateKey,
+  schoolEvents,
+) {
+  return schoolEvents.some((event) => {
+    return (
+      event.includeInDefaultCalendar !== false &&
+      event.startDate <= dateKey &&
+      event.endDate >= dateKey
+    );
+  });
+}
+
+function getConnectedFreePeriodWithSchoolEvents(
+  event,
+  publicHolidays,
+  schoolEvents,
+) {
+  let startDate = event.startDate;
+  let endDate = event.endDate;
+
+  const isFreeDate = (dateKey) => {
+    return (
+      isConnectedFreeDate(
+        dateKey,
+        publicHolidays,
+      ) ||
+      isSchoolFreeDate(
+        dateKey,
+        schoolEvents,
+      )
+    );
+  };
+
+  while (
+    isFreeDate(
+      addDaysToDateKey(
+        startDate,
+        -1,
+      ),
+    )
+  ) {
+    startDate =
+      addDaysToDateKey(
+        startDate,
+        -1,
+      );
+  }
+
+  while (
+    isFreeDate(
+      addDaysToDateKey(
+        endDate,
+        1,
+      ),
+    )
+  ) {
+    endDate =
+      addDaysToDateKey(
+        endDate,
+        1,
+      );
+  }
+
+  return {
+    startDate,
+    endDate,
+    dayCount:
+      daysInclusive(
+        startDate,
+        endDate,
+      ),
+  };
+}
+
 function stateYearGoldPeriodRowsHtml({
   events,
   publicHolidays,
   year,
   getDisplayName,
   getPeriodNote,
+  getConnectedPeriod,
 }) {
   const displayName =
     getDisplayName || getHolidayName;
@@ -565,12 +641,20 @@ function stateYearGoldPeriodRowsHtml({
       );
     });
 
+  const connectedPeriodForEvent =
+    getConnectedPeriod ||
+    ((event) => {
+      return getConnectedFreePeriod(
+        event,
+        publicHolidays,
+      );
+    });
+
   return events
     .map((event) => {
       const connectedPeriod =
-        getConnectedFreePeriod(
+        connectedPeriodForEvent(
           event,
-          publicHolidays,
         );
 
       const officialDayCount =
@@ -894,6 +978,165 @@ function createNrw2027FaqItems(events) {
         "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
       answer:
         "Schulferienklar erweitert einen offiziellen Ferienzeitraum nur um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Schulabhängige bewegliche Ferientage werden nicht automatisch eingerechnet.",
+    },
+  ];
+}
+
+
+function getBw2027DisplayName(event) {
+  if (
+    event.category ===
+    "state_school_free_day"
+  ) {
+    return "Schulfrei am Gründonnerstag";
+  }
+
+  return getHolidayName(event);
+}
+
+function getBw2027PeriodNote(event) {
+  const crossingNote =
+    getStateYearCrossingNote(
+      event,
+      2027,
+    );
+
+  if (crossingNote) {
+    return crossingNote;
+  }
+
+  if (
+    event.category ===
+    "state_school_free_day"
+  ) {
+    return "Landesweit schulfrei laut Fußnote der offiziellen Ferienübersicht.";
+  }
+
+  return "";
+}
+
+function findBw2027SchoolFreeDay(
+  events,
+) {
+  return events.find((event) => {
+    return (
+      event.category ===
+        "state_school_free_day" &&
+      event.startDate ===
+        "2027-03-25"
+    );
+  });
+}
+
+function createBw2027FaqItems(events) {
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const easter =
+    findStateYearGoldEvent(
+      events,
+      "easter",
+      2027,
+    );
+
+  const pentecost =
+    findStateYearGoldEvent(
+      events,
+      "pentecost",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    findStateYearGoldEvent(
+      events,
+      "christmas",
+      2027,
+    );
+
+  const schoolFreeDay =
+    findBw2027SchoolFreeDay(
+      events,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return (
+        "Für diesen Zeitraum liegt " +
+        "aktuell kein Eintrag vor."
+      );
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Wann sind die Sommerferien in Baden-Württemberg 2027?",
+      answer:
+        `Die Sommerferien in Baden-Württemberg 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question:
+        "Wann sind die Osterferien in Baden-Württemberg 2027?",
+      answer:
+        `Die Osterferien dauern vom ${rangeText(easter)}. Zusätzlich ist Gründonnerstag, der ${schoolFreeDay ? formatDate(schoolFreeDay.startDate) : "25.03.2027"}, landesweit schulfrei.`,
+    },
+    {
+      question:
+        "Ist Gründonnerstag 2027 in Baden-Württemberg schulfrei?",
+      answer:
+        `Ja. Die offizielle Ferienübersicht weist Donnerstag, den ${schoolFreeDay ? formatDate(schoolFreeDay.startDate) : "25.03.2027"}, ausdrücklich als schulfrei aus.`,
+    },
+    {
+      question:
+        "Wann sind die Pfingstferien in Baden-Württemberg 2027?",
+      answer:
+        `Die Pfingstferien in Baden-Württemberg 2027 dauern vom ${rangeText(pentecost)}.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien in Baden-Württemberg 2027?",
+      answer:
+        `Die Herbstferien in Baden-Württemberg 2027 dauern vom ${rangeText(autumn)}.`,
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien in Baden-Württemberg 2027?",
+      answer:
+        `Die Weihnachtsferien beginnen am ${christmas ? formatDate(christmas.startDate) : "nicht angegeben"} und enden am ${christmas ? formatDate(christmas.endDate) : "nicht angegeben"}.`,
+    },
+    {
+      question:
+        "Sind bewegliche Ferientage und unterrichtsfreie Samstage enthalten?",
+      answer:
+        "Nein. Bewegliche Ferientage und unterrichtsfreie Samstage sind im landesweiten Standarddatensatz von Schulferienklar nicht enthalten. Konkrete zusätzliche schulfreie Termine sollten bei der eigenen Schule beziehungsweise in der offiziellen Ferienübersicht geprüft werden.",
+    },
+    {
+      question:
+        "Gibt es landesweite Fastnachtsferien in Baden-Württemberg 2027?",
+      answer:
+        "Der landesweite Standarddatensatz enthält keinen einheitlichen Ferienzeitraum mit der Bezeichnung Fastnachtsferien. Zusätzliche freie Tage können je nach Schule abweichen und werden deshalb nicht automatisch eingerechnet.",
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar verbindet offizielle Ferienzeiten mit unmittelbar angrenzenden Wochenenden, landesweiten Feiertagen und ausdrücklich landesweit ausgewiesenen schulfreien Tagen. Bewegliche Ferientage und unterrichtsfreie Samstage werden nicht automatisch eingerechnet.",
     },
   ];
 }
@@ -1465,6 +1708,389 @@ ${seoFooterHtml()}    </main>
 </html>`;
 }
 
+
+function bw2027SpecialSectionHtml() {
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Wichtig für Baden-Württemberg
+          </p>
+          <h2>
+            Gründonnerstag, bewegliche Ferientage
+            und Samstage
+          </h2>
+
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>
+                Schulfrei am Gründonnerstag
+              </h3>
+              <p>
+                Die offizielle Ferienübersicht weist
+                <strong>Donnerstag, den 25. März 2027</strong>,
+                ausdrücklich als schulfrei aus.
+              </p>
+              <p>
+                Zusammen mit Karfreitag, dem Wochenende,
+                Ostermontag und den anschließenden
+                Osterferien entsteht eine durchgehende
+                freie Zeit vom
+                <strong>25. März bis 4. April 2027</strong>.
+              </p>
+            </div>
+
+            <div>
+              <h3>
+                Nicht automatisch enthalten
+              </h3>
+              <p>
+                <strong>Bewegliche Ferientage</strong>
+                und
+                <strong>unterrichtsfreie Samstage</strong>
+                sind im landesweiten Standarddatensatz
+                nicht enthalten.
+              </p>
+              <p>
+                Zusätzliche schulfreie Termine sollten
+                deshalb in der offiziellen Übersicht
+                beziehungsweise direkt bei der eigenen
+                Schule geprüft werden.
+              </p>
+            </div>
+          </div>
+        </section>`;
+}
+
+function bw2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-baden-wuerttemberg-2026.html",
+      label:
+        "Schulferien Baden-Württemberg 2026",
+    },
+    {
+      href:
+        "/schulferien-baden-wuerttemberg-2028.html",
+      label:
+        "Schulferien Baden-Württemberg 2028",
+    },
+    {
+      href:
+        "/schulferien-baden-wuerttemberg.html",
+      label:
+        "Alle Jahre für Baden-Württemberg",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-bayern-2027.html",
+      label:
+        "Bayern 2027",
+    },
+    {
+      href:
+        "/schulferien-hessen-2027.html",
+      label:
+        "Hessen 2027",
+    },
+    {
+      href:
+        "/schulferien-rheinland-pfalz-2027.html",
+      label:
+        "Rheinland-Pfalz 2027",
+    },
+    {
+      href:
+        "/schulferien-nordrhein-westfalen-2027.html",
+      label:
+        "Nordrhein-Westfalen 2027",
+    },
+  ]);
+}
+
+function bw2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const title =
+    "Schulferien Baden-Württemberg 2027: Termine und freie Zeit";
+
+  const description =
+    "Schulferien Baden-Württemberg 2027 mit allen Terminen, Pfingstferien, schulfreiem Gründonnerstag, zusammenhängender freier Zeit, PDF, ICS und offizieller Quelle.";
+
+  const publicHolidays =
+    getPublicHolidaysAroundYear({
+      publicHolidayIndex,
+      code,
+      year,
+    });
+
+  const source =
+    getSchoolHolidaySourceForState({
+      holidayIndex,
+      code,
+    });
+
+  const faqItems =
+    createBw2027FaqItems(
+      events,
+    );
+
+  return `<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>${title}</title>
+    <meta name="description" content="${description}" />
+    <link
+      rel="canonical"
+      href="https://www.schulferienklar.de/schulferien-${slug}-${year}.html"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="/favicon-48x48.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="/apple-touch-icon.png"
+    />
+    <meta
+      property="og:title"
+      content="${title}"
+    />
+    <meta
+      property="og:description"
+      content="${description}"
+    />
+    <meta
+      property="og:url"
+      content="https://www.schulferienklar.de/schulferien-${slug}-${year}.html"
+    />
+    <meta
+      property="og:image"
+      content="https://www.schulferienklar.de/og-image.png"
+    />
+    ${sharedSeoStyles()}
+${stateYearGoldStructuredDataHtml({
+  faqItems,
+  slug,
+  name,
+  year,
+})}
+  </head>
+
+  <body class="seo-page">
+    <main>
+${seoTopNavHtml({
+  appHref:
+    `/?state=${code}&year=${year}`,
+})}      <section
+        class="card gold-page"
+        data-gold-page="bw-2027"
+      >
+        <p class="eyebrow">
+          Baden-Württemberg · Kalenderjahr 2027
+        </p>
+
+        <h1>
+          Schulferien Baden-Württemberg 2027
+        </h1>
+
+        <p class="gold-page-intro">
+          Hier stehen zuerst die landesweit
+          veröffentlichten Ferien und schulfreien Tage.
+          Zusätzlich zeigt Schulferienklar, wie lange die
+          freie Zeit direkt am Stück dauert, wenn
+          Wochenenden, Feiertage oder weitere
+          landesweite schulfreie Tage direkt anschließen.
+        </p>
+
+${schulferienklarIntroCardHtml({
+  appHref:
+    `/?state=${code}&year=${year}`,
+})}
+
+        <nav
+          class="gold-page-nav"
+          aria-label="Inhalt dieser Seite"
+        >
+          <a href="#termine">
+            Alle Termine
+          </a>
+          <a href="#berechnung">
+            Freie Zeit
+          </a>
+          <a href="#jahreskalender">
+            Jahreskalender
+          </a>
+          <a href="#widget">
+            Widget
+          </a>
+          <a href="#besonderheiten">
+            BW-Hinweise
+          </a>
+          <a href="#quelle">
+            Quelle
+          </a>
+          <a href="#fragen">
+            Fragen
+          </a>
+        </nav>
+
+        <section
+          id="termine"
+          class="gold-section gold-answer-section"
+        >
+          <p class="eyebrow">
+            Direkte Übersicht
+          </p>
+
+          <h2>
+            Alle Ferienzeiten und schulfreien Tage
+            in Baden-Württemberg 2027
+          </h2>
+
+          <p>
+            Die Liste berücksichtigt Weihnachtsferien,
+            die aus 2026 in das Kalenderjahr 2027
+            hineinreichen oder bis 2028 dauern. Außerdem
+            enthält sie den offiziell ausgewiesenen
+            schulfreien Gründonnerstag.
+          </p>
+
+          <ul class="gold-period-list">
+${stateYearGoldPeriodRowsHtml({
+  events,
+  publicHolidays,
+  year,
+  getDisplayName:
+    getBw2027DisplayName,
+  getPeriodNote:
+    getBw2027PeriodNote,
+  getConnectedPeriod:
+    (event) => {
+      return getConnectedFreePeriodWithSchoolEvents(
+        event,
+        publicHolidays,
+        events,
+      );
+    },
+})}
+          </ul>
+        </section>
+
+        <section
+          id="berechnung"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Planung statt bloßer Datumsliste
+          </p>
+
+          <h2>
+            Was „zusammenhängend frei“ bedeutet
+          </h2>
+
+          <div class="gold-explanation-grid">
+            <div>
+              <strong>
+                Offizieller Zeitraum
+              </strong>
+              <p>
+                Exakt der im baden-württembergischen
+                Datensatz veröffentlichte Beginn und das
+                veröffentlichte Ende eines Ferienzeitraums
+                oder eines landesweit schulfreien Tages.
+              </p>
+            </div>
+
+            <div>
+              <strong>
+                Zusammenhängend frei
+              </strong>
+              <p>
+                Der offizielle Zeitraum plus direkt
+                anschließende Wochenenden, landesweite
+                Feiertage und weitere landesweit
+                ausgewiesene schulfreie Tage.
+              </p>
+            </div>
+          </div>
+
+          <p class="gold-calculation-note">
+            Angegeben werden Kalendertage, nicht die Zahl
+            der ausgefallenen Unterrichtstage.
+            Bewegliche Ferientage und unterrichtsfreie
+            Samstage werden nicht automatisch eingerechnet.
+          </p>
+        </section>
+
+${jahreskalenderHtml({
+  slug,
+  name,
+  code,
+  year,
+})}
+
+${widgetPromoHtml({
+  code,
+  name,
+})}
+
+${bw2027SpecialSectionHtml()}
+
+${stateYearGoldSourceHtml({
+  source,
+  name,
+  sourceLinkLabel:
+    "Ferienübersicht des Kultusministeriums",
+  secondaryLinkLabel:
+    "Ferienregelung der Kultusministerkonferenz",
+})}
+
+${stateYearGoldFaqHtml({
+  faqItems,
+  name,
+  year,
+})}
+
+${bw2027RelatedLinksHtml()}
+
+        <a
+          class="button"
+          href="/?state=${code}&year=${year}"
+        >
+          Baden-Württemberg 2027 im Kalender öffnen
+        </a>
+      </section>
+
+${seoFooterHtml()}    </main>
+  </body>
+</html>`;
+}
+
 function sharedSeoStyles() {
   return `    <link rel="stylesheet" href="/seo-pages.css" />
     <script defer src="/privacy-analytics.js"></script>`;
@@ -1610,6 +2236,16 @@ function widgetPromoHtml({ code, name }) {
 
 
 function pageTemplate({ slug, name, englishName, code, year, events }) {
+  if (code === "BW" && year === 2027) {
+    return bw2027GoldPageTemplate({
+      slug,
+      name,
+      code,
+      year,
+      events,
+    });
+  }
+
   if (code === "NW" && year === 2027) {
     return nrw2027GoldPageTemplate({
       slug,
