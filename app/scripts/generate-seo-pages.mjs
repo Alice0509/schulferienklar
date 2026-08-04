@@ -511,6 +511,393 @@ function bayern2027SourceHtml(source) {
 }
 
 
+
+function findStateYearGoldEvent(
+  events,
+  type,
+  year,
+) {
+  return events.find((event) => {
+    return (
+      event.type === type &&
+      event.startDate.startsWith(String(year))
+    );
+  });
+}
+
+function getStateYearCrossingNote(
+  event,
+  year,
+) {
+  if (
+    event.startDate <
+    `${year}-01-01`
+  ) {
+    return `Beginnt im Vorjahr und reicht in das Kalenderjahr ${year}.`;
+  }
+
+  if (
+    event.endDate >
+    `${year}-12-31`
+  ) {
+    return `Beginnt im Kalenderjahr ${year} und reicht in das Folgejahr.`;
+  }
+
+  return "";
+}
+
+function stateYearGoldPeriodRowsHtml({
+  events,
+  publicHolidays,
+  year,
+  getDisplayName,
+  getPeriodNote,
+}) {
+  const displayName =
+    getDisplayName || getHolidayName;
+
+  const periodNote =
+    getPeriodNote ||
+    ((event) => {
+      return getStateYearCrossingNote(
+        event,
+        year,
+      );
+    });
+
+  return events
+    .map((event) => {
+      const connectedPeriod =
+        getConnectedFreePeriod(
+          event,
+          publicHolidays,
+        );
+
+      const officialDayCount =
+        daysInclusive(
+          event.startDate,
+          event.endDate,
+        );
+
+      const note =
+        periodNote(event);
+
+      const eventId =
+        `termin-${String(event.id || event.type)
+          .toLowerCase()
+          .replace(/[^a-z0-9-]+/g, "-")}`;
+
+      return `            <li class="gold-period-row" id="${eventId}">
+              <div class="gold-period-name">
+                <strong>${escapeHtml(displayName(event))}</strong>
+                ${
+                  note
+                    ? `<small>${escapeHtml(note)}</small>`
+                    : ""
+                }
+              </div>
+              <div class="gold-period-value">
+                <span>Offizieller Zeitraum</span>
+                <strong>${formatDate(event.startDate)} – ${formatDate(event.endDate)}</strong>
+                <small>${formatCalendarDayCount(officialDayCount)}</small>
+              </div>
+              <div class="gold-period-value gold-period-connected">
+                <span>Zusammenhängend frei</span>
+                <strong>${formatDate(connectedPeriod.startDate)} – ${formatDate(connectedPeriod.endDate)}</strong>
+                <small>${formatCalendarDayCount(connectedPeriod.dayCount)}</small>
+              </div>
+            </li>`;
+    })
+    .join("\n");
+}
+
+function stateYearGoldFaqHtml({
+  faqItems,
+  name,
+  year,
+}) {
+  const items = faqItems
+    .map((item) => {
+      return `          <article class="gold-faq-item">
+            <h3>${escapeHtml(item.question)}</h3>
+            <p>${escapeHtml(item.answer)}</p>
+          </article>`;
+    })
+    .join("\n");
+
+  return `        <section id="fragen" class="gold-section">
+          <p class="eyebrow">Direkte Antworten</p>
+          <h2>Häufige Fragen zu den Schulferien ${escapeHtml(name)} ${year}</h2>
+          <div class="gold-faq-list">
+${items}
+          </div>
+        </section>`;
+}
+
+function stateYearGoldStructuredDataHtml({
+  faqItems,
+  slug,
+  name,
+  year,
+}) {
+  const data = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Schulferienklar",
+            item: "https://www.schulferienklar.de/",
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: `Schulferien ${name}`,
+            item:
+              `https://www.schulferienklar.de/schulferien-${slug}.html`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: `Schulferien ${name} ${year}`,
+            item:
+              `https://www.schulferienklar.de/schulferien-${slug}-${year}.html`,
+          },
+        ],
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqItems.map(
+          (item) => {
+            return {
+              "@type": "Question",
+              name: item.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: item.answer,
+              },
+            };
+          },
+        ),
+      },
+    ],
+  };
+
+  const json =
+    JSON.stringify(data)
+      .replaceAll("<", "\\u003c");
+
+  return `    <script type="application/ld+json">${json}</script>`;
+}
+
+function stateYearGoldSourceHtml({
+  source,
+  name,
+  sourceLinkLabel,
+  secondaryLinkLabel,
+}) {
+  if (!source) {
+    return `        <section id="quelle" class="gold-section">
+          <h2>Quelle und Datenstand</h2>
+          <p>
+            Die Schulferiendaten stammen aus dem hinterlegten
+            Datensatz für ${escapeHtml(name)}. Für verbindliche
+            Auskünfte ist die offizielle Veröffentlichung des
+            Bundeslandes maßgeblich.
+          </p>
+        </section>`;
+  }
+
+  const checkedAt =
+    source.lastCheckedAt
+      ? formatDate(source.lastCheckedAt)
+      : "nicht angegeben";
+
+  return `        <section id="quelle" class="gold-section">
+          <p class="eyebrow">Nachvollziehbare Daten</p>
+          <h2>Offizielle Quelle und Datenstand</h2>
+          <div class="gold-source-card">
+            <p>
+              <strong>Quelle für die Schulferien:</strong><br />
+              ${escapeHtml(source.sourceName)}
+            </p>
+            <p>
+              <strong>Rechtsgrundlage:</strong><br />
+              ${escapeHtml(
+                source.legalTitle ||
+                `Offizielle Ferienordnung für ${name}`,
+              )}
+            </p>
+            <p>
+              <strong>Zuletzt im Datensatz geprüft:</strong><br />
+              ${checkedAt}
+            </p>
+            <div class="gold-source-links">
+              <a href="${escapeHtml(source.sourceUrl)}">
+                ${escapeHtml(sourceLinkLabel)}
+              </a>
+              ${
+                source.secondarySourceUrl
+                  ? `<a href="${escapeHtml(source.secondarySourceUrl)}">${escapeHtml(secondaryLinkLabel)}</a>`
+                  : ""
+              }
+            </div>
+          </div>
+          <p class="gold-source-note">
+            Schul- oder ortsspezifische Abweichungen sind nicht
+            Bestandteil dieser landesweiten Standardübersicht.
+            Für verbindliche Auskünfte bleibt die offizielle
+            Veröffentlichung beziehungsweise die eigene Schule
+            maßgeblich.
+          </p>
+        </section>`;
+}
+
+function stateYearGoldRelatedLinksHtml(
+  links,
+) {
+  const items = links
+    .map((link) => {
+      return `            <li><a href="${link.href}">${escapeHtml(link.label)}</a></li>`;
+    })
+    .join("\n");
+
+  return `        <section class="gold-section">
+          <h2>Passende Ferienübersichten</h2>
+          <ul class="holiday-summary-list seo-link-list gold-related-links">
+${items}
+          </ul>
+        </section>`;
+}
+
+function getNrw2027DisplayName(event) {
+  if (event.type === "pentecost") {
+    return "Pfingsten (ein Ferientag)";
+  }
+
+  return getHolidayName(event);
+}
+
+function getNrw2027PeriodNote(event) {
+  const crossingNote =
+    getStateYearCrossingNote(
+      event,
+      2027,
+    );
+
+  if (crossingNote) {
+    return crossingNote;
+  }
+
+  if (event.type === "pentecost") {
+    return "Die Ferienordnung nennt Dienstag, den 18. Mai 2027.";
+  }
+
+  return "";
+}
+
+function createNrw2027FaqItems(events) {
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const easter =
+    findStateYearGoldEvent(
+      events,
+      "easter",
+      2027,
+    );
+
+  const pentecost =
+    findStateYearGoldEvent(
+      events,
+      "pentecost",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    findStateYearGoldEvent(
+      events,
+      "christmas",
+      2027,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return "Für diesen Zeitraum liegt aktuell kein Eintrag vor.";
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Wann sind die Sommerferien in NRW 2027?",
+      answer:
+        `Die Sommerferien in Nordrhein-Westfalen 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question:
+        "Wann sind die Osterferien in NRW 2027?",
+      answer:
+        `Die Osterferien in Nordrhein-Westfalen 2027 dauern vom ${rangeText(easter)}.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien in NRW 2027?",
+      answer:
+        `Die Herbstferien in Nordrhein-Westfalen 2027 dauern vom ${rangeText(autumn)}.`,
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien in NRW 2027?",
+      answer:
+        `Die Weihnachtsferien beginnen am ${christmas ? formatDate(christmas.startDate) : "nicht angegeben"} und enden am ${christmas ? formatDate(christmas.endDate) : "nicht angegeben"}.`,
+    },
+    {
+      question:
+        "Gibt es Pfingstferien in NRW 2027?",
+      answer:
+        `Die offizielle Ferienordnung nennt für 2027 Dienstag, den ${pentecost ? formatDate(pentecost.startDate) : "18.05.2027"}, als Ferientag zu Pfingsten. Der landesweit festgelegte Ferienzeitraum umfasst einen Tag.`,
+    },
+    {
+      question:
+        "Wie viele bewegliche Ferientage gibt es in NRW 2027?",
+      answer:
+        "In den Schuljahren 2026/27 und 2027/28 gibt es jeweils drei bewegliche Ferientage. Die Schulkonferenz legt die Termine im Einvernehmen mit dem Schulträger fest. Eltern erfahren die konkreten Termine direkt bei ihrer Schule.",
+    },
+    {
+      question:
+        "Ist Rosenmontag 2027 in NRW überall schulfrei?",
+      answer:
+        "Rosenmontag ist kein landesweit einheitlicher Ferientermin. Je nach örtlicher Entscheidung kann er als beweglicher Ferientag festgelegt werden. Maßgeblich ist die Information der jeweiligen Schule.",
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen Ferienzeitraum nur um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Schulabhängige bewegliche Ferientage werden nicht automatisch eingerechnet.",
+    },
+  ];
+}
+
 function subscriptionCtaHtml({ code, name }) {
   const normalizedCode = String(code).toLowerCase();
   const httpsUrl =
@@ -784,6 +1171,300 @@ ${seoFooterHtml()}    </main>
 </html>`;
 }
 
+
+function nrw2027SpecialSectionHtml() {
+  return `        <section id="besonderheiten" class="gold-section">
+          <p class="eyebrow">Wichtig für NRW</p>
+          <h2>Bewegliche Ferientage und Pfingsten 2027</h2>
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>Bewegliche Ferientage</h3>
+              <p>
+                Zusätzlich zu den landesweit einheitlichen Ferien
+                gibt es in den Schuljahren 2026/27 und 2027/28
+                jeweils <strong>drei bewegliche Ferientage</strong>.
+                Die konkreten Termine legt die Schulkonferenz im
+                Einvernehmen mit dem Schulträger fest.
+              </p>
+              <p>
+                Rosenmontag oder andere örtliche Brauchtumstage
+                können deshalb je nach Schule frei sein, sind aber
+                keine landesweit einheitlichen Ferientermine.
+              </p>
+            </div>
+            <div>
+              <h3>Pfingsten 2027</h3>
+              <p>
+                Die offizielle Ferienordnung nennt
+                <strong>Dienstag, den 18. Mai 2027</strong>,
+                als Ferientag zu Pfingsten.
+              </p>
+              <p>
+                Die Tabelle oben zeigt zusätzlich, wie sich dieser
+                einzelne Ferientag direkt mit Wochenende und
+                Pfingstmontag zu zusammenhängender freier Zeit
+                verbindet.
+              </p>
+            </div>
+          </div>
+        </section>`;
+}
+
+function nrw2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-nordrhein-westfalen-2026.html",
+      label:
+        "Schulferien Nordrhein-Westfalen 2026",
+    },
+    {
+      href:
+        "/schulferien-nordrhein-westfalen-2028.html",
+      label:
+        "Schulferien Nordrhein-Westfalen 2028",
+    },
+    {
+      href:
+        "/schulferien-nordrhein-westfalen.html",
+      label:
+        "Alle Jahre für Nordrhein-Westfalen",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-niedersachsen-2027.html",
+      label:
+        "Niedersachsen 2027",
+    },
+    {
+      href:
+        "/schulferien-hessen-2027.html",
+      label:
+        "Hessen 2027",
+    },
+    {
+      href:
+        "/schulferien-rheinland-pfalz-2027.html",
+      label:
+        "Rheinland-Pfalz 2027",
+    },
+    {
+      href:
+        "/schulferien-bayern-2027.html",
+      label:
+        "Bayern 2027",
+    },
+  ]);
+}
+
+function nrw2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const title =
+    "Schulferien NRW 2027: Termine & bewegliche Ferientage";
+
+  const description =
+    "Schulferien NRW 2027 mit allen Terminen, Pfingsten, beweglichen Ferientagen, zusammenhängender freier Zeit, Jahreskalender, PDF und offizieller Quelle.";
+
+  const publicHolidays =
+    getPublicHolidaysAroundYear({
+      publicHolidayIndex,
+      code,
+      year,
+    });
+
+  const source =
+    getSchoolHolidaySourceForState({
+      holidayIndex,
+      code,
+    });
+
+  const faqItems =
+    createNrw2027FaqItems(events);
+
+  return `<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${title}</title>
+    <meta name="description" content="${description}" />
+    <link rel="canonical" href="https://www.schulferienklar.de/schulferien-${slug}-${year}.html" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:title" content="${title}" />
+    <meta property="og:description" content="${description}" />
+    <meta property="og:url" content="https://www.schulferienklar.de/schulferien-${slug}-${year}.html" />
+    <meta property="og:image" content="https://www.schulferienklar.de/og-image.png" />
+    ${sharedSeoStyles()}
+${stateYearGoldStructuredDataHtml({
+  faqItems,
+  slug,
+  name,
+  year,
+})}
+  </head>
+  <body class="seo-page">
+    <main>
+${seoTopNavHtml({
+  appHref:
+    `/?state=${code}&year=${year}`,
+})}      <section
+        class="card gold-page"
+        data-gold-page="nrw-2027"
+      >
+        <p class="eyebrow">
+          Nordrhein-Westfalen · Kalenderjahr 2027
+        </p>
+        <h1>Schulferien Nordrhein-Westfalen 2027</h1>
+
+        <p class="gold-page-intro">
+          Hier stehen zuerst die landesweit einheitlichen
+          Ferientermine. Zusätzlich zeigt Schulferienklar,
+          wie lange die freie Zeit direkt am Stück dauert,
+          wenn unmittelbar angrenzende Wochenenden oder
+          landesweite Feiertage anschließen.
+        </p>
+
+${schulferienklarIntroCardHtml({
+  appHref:
+    `/?state=${code}&year=${year}`,
+})}
+
+        <nav
+          class="gold-page-nav"
+          aria-label="Inhalt dieser Seite"
+        >
+          <a href="#termine">Alle Termine</a>
+          <a href="#berechnung">Freie Zeit</a>
+          <a href="#jahreskalender">Jahreskalender</a>
+          <a href="#widget">Widget</a>
+          <a href="#besonderheiten">NRW-Hinweise</a>
+          <a href="#quelle">Quelle</a>
+          <a href="#fragen">Fragen</a>
+        </nav>
+
+        <section
+          id="termine"
+          class="gold-section gold-answer-section"
+        >
+          <p class="eyebrow">
+            Direkte Übersicht
+          </p>
+          <h2>
+            Alle Ferienzeiten in Nordrhein-Westfalen 2027
+          </h2>
+          <p>
+            Die Liste berücksichtigt auch Weihnachtsferien,
+            die aus 2026 in das Kalenderjahr 2027 hineinreichen
+            oder bis 2028 dauern.
+          </p>
+          <ul class="gold-period-list">
+${stateYearGoldPeriodRowsHtml({
+  events,
+  publicHolidays,
+  year,
+  getDisplayName:
+    getNrw2027DisplayName,
+  getPeriodNote:
+    getNrw2027PeriodNote,
+})}
+          </ul>
+        </section>
+
+        <section
+          id="berechnung"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Planung statt bloßer Datumsliste
+          </p>
+          <h2>
+            Was „zusammenhängend frei“ bedeutet
+          </h2>
+          <div class="gold-explanation-grid">
+            <div>
+              <strong>
+                Offizieller Zeitraum
+              </strong>
+              <p>
+                Exakt der im NRW-Feriendatensatz
+                veröffentlichte Beginn und das
+                veröffentlichte Ende.
+              </p>
+            </div>
+            <div>
+              <strong>
+                Zusammenhängend frei
+              </strong>
+              <p>
+                Der offizielle Zeitraum plus direkt
+                anschließende Samstage, Sonntage und
+                landesweit geltende gesetzliche Feiertage.
+              </p>
+            </div>
+          </div>
+          <p class="gold-calculation-note">
+            Angegeben werden Kalendertage, nicht die Zahl
+            der ausgefallenen Unterrichtstage. Bewegliche
+            Ferientage werden nicht eingerechnet, weil ihre
+            Termine von der jeweiligen Schule abhängen.
+          </p>
+        </section>
+
+${jahreskalenderHtml({
+  slug,
+  name,
+  code,
+  year,
+})}
+${widgetPromoHtml({
+  code,
+  name,
+})}
+
+${nrw2027SpecialSectionHtml()}
+
+${stateYearGoldSourceHtml({
+  source,
+  name,
+  sourceLinkLabel:
+    "Ferienordnung des Schulministeriums",
+  secondaryLinkLabel:
+    "Weitere Ferieninformationen für NRW",
+})}
+
+${stateYearGoldFaqHtml({
+  faqItems,
+  name,
+  year,
+})}
+
+${nrw2027RelatedLinksHtml()}
+
+        <a
+          class="button"
+          href="/?state=${code}&year=${year}"
+        >
+          Nordrhein-Westfalen 2027 im Kalender öffnen
+        </a>
+      </section>
+${seoFooterHtml()}    </main>
+  </body>
+</html>`;
+}
+
 function sharedSeoStyles() {
   return `    <link rel="stylesheet" href="/seo-pages.css" />
     <script defer src="/privacy-analytics.js"></script>`;
@@ -929,6 +1610,16 @@ function widgetPromoHtml({ code, name }) {
 
 
 function pageTemplate({ slug, name, englishName, code, year, events }) {
+  if (code === "NW" && year === 2027) {
+    return nrw2027GoldPageTemplate({
+      slug,
+      name,
+      code,
+      year,
+      events,
+    });
+  }
+
   if (code === "BY" && year === 2027) {
     return bayern2027GoldPageTemplate({
       slug,
