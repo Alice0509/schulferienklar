@@ -1446,19 +1446,47 @@ function nrw2027RelatedLinksHtml() {
   ]);
 }
 
-function nrw2027GoldPageTemplate({
+function indentGoldText(
+  text,
+  spaces,
+) {
+  const prefix =
+    " ".repeat(spaces);
+
+  return String(text)
+    .split("\n")
+    .map((line) => {
+      return `${prefix}${line}`;
+    })
+    .join("\n");
+}
+
+function stateYearGoldPageTemplate({
   slug,
   name,
   code,
   year,
   events,
+  title,
+  description,
+  marker,
+  eyebrow,
+  h1,
+  introText,
+  specialNavLabel,
+  termHeadingText,
+  termIntroText,
+  renderPeriodRows,
+  officialPeriodText,
+  connectedPeriodText,
+  calculationNoteText,
+  specialSectionHtml,
+  sourceLinkLabel,
+  secondaryLinkLabel,
+  faqItems,
+  relatedLinksHtml,
+  buttonText,
 }) {
-  const title =
-    "Schulferien NRW 2027: Termine & bewegliche Ferientage";
-
-  const description =
-    "Schulferien NRW 2027 mit allen Terminen, Pfingsten, beweglichen Ferientagen, zusammenhängender freier Zeit, Jahreskalender, PDF und offizieller Quelle.";
-
   const publicHolidays =
     getPublicHolidaysAroundYear({
       publicHolidayIndex,
@@ -1472,8 +1500,12 @@ function nrw2027GoldPageTemplate({
       code,
     });
 
-  const faqItems =
-    createNrw2027FaqItems(events);
+  const periodRowsHtml =
+    renderPeriodRows({
+      events,
+      publicHolidays,
+      year,
+    });
 
   return `<!doctype html>
 <html lang="de">
@@ -1505,19 +1537,18 @@ ${seoTopNavHtml({
     `/?state=${code}&year=${year}`,
 })}      <section
         class="card gold-page"
-        data-gold-page="nrw-2027"
+        data-gold-page="${marker}"
       >
         <p class="eyebrow">
-          Nordrhein-Westfalen · Kalenderjahr 2027
+          ${eyebrow}
         </p>
-        <h1>Schulferien Nordrhein-Westfalen 2027</h1>
+        <h1>${h1}</h1>
 
         <p class="gold-page-intro">
-          Hier stehen zuerst die landesweit einheitlichen
-          Ferientermine. Zusätzlich zeigt Schulferienklar,
-          wie lange die freie Zeit direkt am Stück dauert,
-          wenn unmittelbar angrenzende Wochenenden oder
-          landesweite Feiertage anschließen.
+${indentGoldText(
+  introText,
+  10,
+)}
         </p>
 
 ${schulferienklarIntroCardHtml({
@@ -1533,7 +1564,7 @@ ${schulferienklarIntroCardHtml({
           <a href="#berechnung">Freie Zeit</a>
           <a href="#jahreskalender">Jahreskalender</a>
           <a href="#widget">Widget</a>
-          <a href="#besonderheiten">NRW-Hinweise</a>
+          <a href="#besonderheiten">${specialNavLabel}</a>
           <a href="#quelle">Quelle</a>
           <a href="#fragen">Fragen</a>
         </nav>
@@ -1546,23 +1577,19 @@ ${schulferienklarIntroCardHtml({
             Direkte Übersicht
           </p>
           <h2>
-            Alle Ferienzeiten in Nordrhein-Westfalen 2027
+${indentGoldText(
+  termHeadingText,
+  12,
+)}
           </h2>
           <p>
-            Die Liste berücksichtigt auch Weihnachtsferien,
-            die aus 2026 in das Kalenderjahr 2027 hineinreichen
-            oder bis 2028 dauern.
+${indentGoldText(
+  termIntroText,
+  12,
+)}
           </p>
           <ul class="gold-period-list">
-${stateYearGoldPeriodRowsHtml({
-  events,
-  publicHolidays,
-  year,
-  getDisplayName:
-    getNrw2027DisplayName,
-  getPeriodNote:
-    getNrw2027PeriodNote,
-})}
+${periodRowsHtml}
           </ul>
         </section>
 
@@ -1582,9 +1609,10 @@ ${stateYearGoldPeriodRowsHtml({
                 Offizieller Zeitraum
               </strong>
               <p>
-                Exakt der im NRW-Feriendatensatz
-                veröffentlichte Beginn und das
-                veröffentlichte Ende.
+${indentGoldText(
+  officialPeriodText,
+  16,
+)}
               </p>
             </div>
             <div>
@@ -1592,17 +1620,18 @@ ${stateYearGoldPeriodRowsHtml({
                 Zusammenhängend frei
               </strong>
               <p>
-                Der offizielle Zeitraum plus direkt
-                anschließende Samstage, Sonntage und
-                landesweit geltende gesetzliche Feiertage.
+${indentGoldText(
+  connectedPeriodText,
+  16,
+)}
               </p>
             </div>
           </div>
           <p class="gold-calculation-note">
-            Angegeben werden Kalendertage, nicht die Zahl
-            der ausgefallenen Unterrichtstage. Bewegliche
-            Ferientage werden nicht eingerechnet, weil ihre
-            Termine von der jeweiligen Schule abhängen.
+${indentGoldText(
+  calculationNoteText,
+  12,
+)}
           </p>
         </section>
 
@@ -1617,15 +1646,13 @@ ${widgetPromoHtml({
   name,
 })}
 
-${nrw2027SpecialSectionHtml()}
+${specialSectionHtml}
 
 ${stateYearGoldSourceHtml({
   source,
   name,
-  sourceLinkLabel:
-    "Ferienordnung des Schulministeriums",
-  secondaryLinkLabel:
-    "Weitere Ferieninformationen für NRW",
+  sourceLinkLabel,
+  secondaryLinkLabel,
 })}
 
 ${stateYearGoldFaqHtml({
@@ -1634,13 +1661,13 @@ ${stateYearGoldFaqHtml({
   year,
 })}
 
-${nrw2027RelatedLinksHtml()}
+${relatedLinksHtml}
 
         <a
           class="button"
           href="/?state=${code}&year=${year}"
         >
-          Nordrhein-Westfalen 2027 im Kalender öffnen
+          ${buttonText}
         </a>
       </section>
 ${seoFooterHtml()}    </main>
@@ -1648,6 +1675,90 @@ ${seoFooterHtml()}    </main>
 </html>`;
 }
 
+function nrw2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createNrw2027FaqItems(
+      events,
+    );
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      "Schulferien NRW 2027: Termine & bewegliche Ferientage",
+    description:
+      "Schulferien NRW 2027 mit allen Terminen, Pfingsten, beweglichen Ferientagen, zusammenhängender freier Zeit, Jahreskalender, PDF und offizieller Quelle.",
+    marker:
+      "nrw-2027",
+    eyebrow:
+      "Nordrhein-Westfalen · Kalenderjahr 2027",
+    h1:
+      "Schulferien Nordrhein-Westfalen 2027",
+    introText:
+      `Hier stehen zuerst die landesweit einheitlichen
+Ferientermine. Zusätzlich zeigt Schulferienklar,
+wie lange die freie Zeit direkt am Stück dauert,
+wenn unmittelbar angrenzende Wochenenden oder
+landesweite Feiertage anschließen.`,
+    specialNavLabel:
+      "NRW-Hinweise",
+    termHeadingText:
+      "Alle Ferienzeiten in Nordrhein-Westfalen 2027",
+    termIntroText:
+      `Die Liste berücksichtigt auch Weihnachtsferien,
+die aus 2026 in das Kalenderjahr 2027 hineinreichen
+oder bis 2028 dauern.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+          getDisplayName:
+            getNrw2027DisplayName,
+          getPeriodNote:
+            getNrw2027PeriodNote,
+        });
+      },
+    officialPeriodText:
+      `Exakt der im NRW-Feriendatensatz
+veröffentlichte Beginn und das
+veröffentlichte Ende.`,
+    connectedPeriodText:
+      `Der offizielle Zeitraum plus direkt
+anschließende Samstage, Sonntage und
+landesweit geltende gesetzliche Feiertage.`,
+    calculationNoteText:
+      `Angegeben werden Kalendertage, nicht die Zahl
+der ausgefallenen Unterrichtstage. Bewegliche
+Ferientage werden nicht eingerechnet, weil ihre
+Termine von der jeweiligen Schule abhängen.`,
+    specialSectionHtml:
+      nrw2027SpecialSectionHtml(),
+    sourceLinkLabel:
+      "Ferienordnung des Schulministeriums",
+    secondaryLinkLabel:
+      "Weitere Ferieninformationen für NRW",
+    faqItems,
+    relatedLinksHtml:
+      nrw2027RelatedLinksHtml(),
+    buttonText:
+      "Nordrhein-Westfalen 2027 im Kalender öffnen",
+  });
+}
 
 function bw2027SpecialSectionHtml() {
   return `        <section
