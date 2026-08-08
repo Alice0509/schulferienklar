@@ -1634,6 +1634,176 @@ function createSachsen2027FaqItems(events) {
   ];
 }
 
+
+function getThueringen2027DisplayName(event) {
+  if (
+    event.category ===
+    "state_school_free_day"
+  ) {
+    return "Schulfreier Tag";
+  }
+
+  return getHolidayName(event);
+}
+
+function getThueringen2027PeriodNote(event) {
+  const crossingNote =
+    getStateYearCrossingNote(
+      event,
+      2027,
+    );
+
+  if (crossingNote) {
+    return crossingNote;
+  }
+
+  if (
+    event.category ===
+      "state_school_free_day" &&
+    event.startDate ===
+      "2027-05-07"
+  ) {
+    return (
+      "Landesweit schulfreier Tag: " +
+      "Freitag, 7. Mai 2027."
+    );
+  }
+
+  return "";
+}
+
+function findThueringen2027SchoolFreeDay(
+  events,
+) {
+  return events.find((event) => {
+    return (
+      event.category ===
+        "state_school_free_day" &&
+      event.startDate ===
+        "2027-05-07"
+    );
+  });
+}
+
+function createThueringen2027FaqItems(events) {
+  const winter =
+    findStateYearGoldEvent(
+      events,
+      "winter",
+      2027,
+    );
+
+  const easter =
+    findStateYearGoldEvent(
+      events,
+      "easter",
+      2027,
+    );
+
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    findStateYearGoldEvent(
+      events,
+      "christmas",
+      2027,
+    );
+
+  const schoolFreeDay =
+    findThueringen2027SchoolFreeDay(
+      events,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return (
+        "Für diesen Zeitraum liegt " +
+        "aktuell kein Eintrag vor."
+      );
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Wann sind die Winterferien in Thüringen 2027?",
+      answer:
+        `Die Winterferien in Thüringen 2027 dauern vom ${rangeText(winter)}.`,
+    },
+    {
+      question:
+        "Wann sind die Osterferien in Thüringen 2027?",
+      answer:
+        `Die Osterferien in Thüringen 2027 dauern vom ${rangeText(easter)}.`,
+    },
+    {
+      question:
+        "Ist der 7. Mai 2027 in Thüringen schulfrei?",
+      answer:
+        `Ja. Freitag, der ${schoolFreeDay ? formatDate(schoolFreeDay.startDate) : "07.05.2027"}, ist landesweit schulfrei. Mit Christi Himmelfahrt und dem Wochenende ergibt sich freie Zeit vom 06.05. bis 09.05.2027.`,
+    },
+    {
+      question:
+        "Wann sind die Sommerferien in Thüringen 2027?",
+      answer:
+        `Die Sommerferien in Thüringen 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien in Thüringen 2027?",
+      answer:
+        `Die Herbstferien in Thüringen 2027 dauern vom ${rangeText(autumn)}.`,
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien in Thüringen 2027?",
+      answer:
+        `Die Weihnachtsferien beginnen am ${christmas ? formatDate(christmas.startDate) : "nicht angegeben"} und enden am ${christmas ? formatDate(christmas.endDate) : "nicht angegeben"}.`,
+    },
+    {
+      question:
+        "Wann sind die Ferientage zur freien Verfügung in Thüringen 2027?",
+      answer:
+        "Die Verwendung der Ferientage zur freien Verfügung entscheidet die jeweilige Schulkonferenz. Deshalb werden diese schulbezogenen Termine nicht automatisch in die landesweite Standardübersicht eingerechnet.",
+    },
+    {
+      question:
+        "Ist der Weltkindertag 2027 in Thüringen ein Feiertag?",
+      answer:
+        "Ja. Montag, der 20. September 2027, ist in Thüringen ein landesweit geltender gesetzlicher Feiertag.",
+    },
+    {
+      question:
+        "Ist Fronleichnam 2027 überall in Thüringen ein Feiertag?",
+      answer:
+        "Nein. Fronleichnam gilt in Thüringen nur in bestimmten Regionen und wird deshalb nicht als landesweiter Feiertag in die Standardberechnung einbezogen.",
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen Ferienzeitraum oder landesweit schulfreien Tag nur um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Schulbezogene Ferientage zur freien Verfügung und regionale Feiertage werden nicht automatisch eingerechnet.",
+    },
+  ];
+}
+
 function subscriptionCtaHtml({ code, name }) {
   const normalizedCode = String(code).toLowerCase();
   const httpsUrl =
@@ -2315,6 +2485,204 @@ Termine von der jeweiligen Schule abhängen.`,
 
 
 
+
+
+function thueringen2027SpecialSectionHtml() {
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Wichtig für Thüringen
+          </p>
+          <h2>
+            Schulfreier Tag und Ferientage zur freien Verfügung 2027
+          </h2>
+
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>7. Mai: landesweit schulfrei</h3>
+              <p>
+                Freitag, der
+                <strong>7. Mai 2027</strong>,
+                ist in Thüringen landesweit
+                <strong>schulfrei</strong>.
+              </p>
+              <p>
+                Mit Christi Himmelfahrt am Donnerstag
+                und dem Wochenende entstehen
+                <strong>4 freie Tage vom 6. bis
+                9. Mai 2027</strong>.
+              </p>
+            </div>
+
+            <div>
+              <h3>Ferientage zur freien Verfügung</h3>
+              <p>
+                Zusätzlich gibt es
+                <strong>Ferientage zur freien
+                Verfügung</strong>.
+              </p>
+              <p>
+                Über deren Verwendung entscheidet die
+                jeweilige Schulkonferenz. Deshalb werden
+                diese schulbezogenen Termine nicht
+                automatisch in die landesweite
+                Standardübersicht eingerechnet.
+              </p>
+            </div>
+          </div>
+
+          <p class="gold-source-note">
+            <strong>Feiertage in Thüringen:</strong>
+            Der Weltkindertag am 20. September 2027
+            gilt landesweit. Fronleichnam gilt dagegen
+            nur in bestimmten Regionen und wird deshalb
+            nicht als landesweiter Feiertag in die
+            Standardberechnung einbezogen.
+          </p>
+        </section>`;
+}
+
+function thueringen2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-thueringen-2026.html",
+      label:
+        "Schulferien Thüringen 2026",
+    },
+    {
+      href:
+        "/schulferien-thueringen-2028.html",
+      label:
+        "Schulferien Thüringen 2028",
+    },
+    {
+      href:
+        "/schulferien-thueringen.html",
+      label:
+        "Alle Jahre für Thüringen",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-sachsen-2027.html",
+      label:
+        "Sachsen 2027",
+    },
+    {
+      href:
+        "/schulferien-sachsen-anhalt-2027.html",
+      label:
+        "Sachsen-Anhalt 2027",
+    },
+    {
+      href:
+        "/schulferien-bayern-2027.html",
+      label:
+        "Bayern 2027",
+    },
+    {
+      href:
+        "/schulferien-hessen-2027.html",
+      label:
+        "Hessen 2027",
+    },
+  ]);
+}
+
+function thueringen2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createThueringen2027FaqItems(
+      events,
+    );
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      "Schulferien Thüringen 2027: Termine und freie Tage",
+    description:
+      "Schulferien Thüringen 2027 mit Winterferien, Osterferien, schulfreier Zeit am 7. Mai, Sommerferien, Herbstferien, PDF, ICS und offizieller Quelle.",
+    marker:
+      "thueringen-2027",
+    eyebrow:
+      "Thüringen · Kalenderjahr 2027",
+    h1:
+      "Schulferien Thüringen 2027",
+    introText:
+      `Hier stehen zuerst die landesweit festgelegten
+Ferientermine und schulfreien Tage. Zusätzlich zeigt
+Schulferienklar, wie lange die freie Zeit direkt am
+Stück dauert, wenn Wochenenden oder landesweite
+Feiertage unmittelbar anschließen.`,
+    specialNavLabel:
+      "Thüringen-Hinweise",
+    termHeadingText:
+      "Alle Ferienzeiten und schulfreien Tage in Thüringen 2027",
+    termIntroText:
+      `Die Liste berücksichtigt auch Weihnachtsferien,
+die aus 2026 in das Kalenderjahr 2027 hineinreichen.
+Zusätzlich ist der landesweit festgelegte schulfreie
+Tag am 7. Mai enthalten.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+          getDisplayName:
+            getThueringen2027DisplayName,
+          getPeriodNote:
+            getThueringen2027PeriodNote,
+        });
+      },
+    officialPeriodText:
+      `Exakt der vom Thüringer Bildungsministerium
+veröffentlichte Beginn und das veröffentlichte Ende
+beziehungsweise der landesweit festgelegte
+schulfreie Tag.`,
+    connectedPeriodText:
+      `Der offizielle Zeitraum plus direkt
+anschließende Samstage, Sonntage und
+landesweit geltende gesetzliche Feiertage.`,
+    calculationNoteText:
+      `Angegeben werden Kalendertage, nicht die Zahl
+der ausgefallenen Unterrichtstage. Ferientage zur
+freien Verfügung und nur regional geltende Feiertage
+werden nicht automatisch eingerechnet.`,
+    specialSectionHtml:
+      thueringen2027SpecialSectionHtml(),
+    sourceLinkLabel:
+      "Ferienregelung des Bildungsministeriums",
+    secondaryLinkLabel:
+      "Ferienregelung der Kultusministerkonferenz",
+    faqItems,
+    relatedLinksHtml:
+      thueringen2027RelatedLinksHtml(),
+    buttonText:
+      "Thüringen 2027 im Kalender öffnen",
+  });
+}
 
 function sachsen2027SpecialSectionHtml() {
   return `        <section
@@ -3450,6 +3818,10 @@ const GOLD_PAGE_TEMPLATES = new Map([
   [
     "SN-2027",
     sachsen2027GoldPageTemplate,
+  ],
+  [
+    "TH-2027",
+    thueringen2027GoldPageTemplate,
   ],
   [
     "NW-2027",

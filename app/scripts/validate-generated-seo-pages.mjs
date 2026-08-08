@@ -391,6 +391,77 @@ const commonGoldPageChecks = [
 const goldPageValidations = [
   {
     file:
+      "schulferien-thueringen-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="thueringen-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Winterferien",
+        /Winterferien/,
+      ],
+      [
+        "school-free day",
+        /Schulfreier Tag/,
+      ],
+      [
+        "school-free date",
+        /7\. Mai 2027/,
+      ],
+      [
+        "Ascension connected period",
+        /6\. bis[\s\S]*9\. Mai 2027/,
+      ],
+      [
+        "free-disposition holiday explanation",
+        /Ferientage zur freien Verfügung/,
+      ],
+      [
+        "school conference limitation",
+        /Schulkonferenz/,
+      ],
+      [
+        "World Children's Day",
+        /Weltkindertag/,
+      ],
+      [
+        "World Children's Day date",
+        /20\. September 2027/,
+      ],
+      [
+        "regional Corpus Christi",
+        /Fronleichnam/,
+      ],
+      [
+        "Corpus Christi limitation",
+        /nur in bestimmten Regionen/,
+      ],
+      [
+        "official Thüringen source",
+        /Thüringer Ministerium für Bildung, Wissenschaft und Kultur/,
+      ],
+      [
+        "official Thüringen source link",
+        /bildung\.thueringen\.de/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-thueringen-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-thueringen-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-thueringen-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
       "schulferien-sachsen-2027.html",
     checks: [
       [
