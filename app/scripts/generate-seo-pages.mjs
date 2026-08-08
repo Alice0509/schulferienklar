@@ -314,44 +314,30 @@ function getBayern2027PeriodNote(event) {
   return "";
 }
 
-function bayern2027PeriodRowsHtml(events, publicHolidays) {
-  return events
-    .map((event) => {
-      const connectedPeriod = getConnectedFreePeriod(event, publicHolidays);
-      const officialDayCount = daysInclusive(event.startDate, event.endDate);
-      const periodNote = getBayern2027PeriodNote(event);
-      const eventId = `termin-${String(event.id || event.type)
-        .toLowerCase()
-        .replace(/[^a-z0-9-]+/g, "-")}`;
-
-      return `            <li class="gold-period-row" id="${eventId}">
-              <div class="gold-period-name">
-                <strong>${escapeHtml(getBayern2027DisplayName(event))}</strong>
-                ${
-                  periodNote
-                    ? `<small>${escapeHtml(periodNote)}</small>`
-                    : ""
-                }
-              </div>
-              <div class="gold-period-value">
-                <span>Offizieller Zeitraum</span>
-                <strong>${formatDate(event.startDate)} – ${formatDate(event.endDate)}</strong>
-                <small>${formatCalendarDayCount(officialDayCount)}</small>
-              </div>
-              <div class="gold-period-value gold-period-connected">
-                <span>Zusammenhängend frei</span>
-                <strong>${formatDate(connectedPeriod.startDate)} – ${formatDate(connectedPeriod.endDate)}</strong>
-                <small>${formatCalendarDayCount(connectedPeriod.dayCount)}</small>
-              </div>
-            </li>`;
-    })
-    .join("\n");
+function bayern2027PeriodRowsHtml(
+  events,
+  publicHolidays,
+) {
+  return stateYearGoldPeriodRowsHtml({
+    events,
+    publicHolidays,
+    year: 2027,
+    getDisplayName:
+      getBayern2027DisplayName,
+    getPeriodNote:
+      getBayern2027PeriodNote,
+  });
 }
 
-function findBayern2027Event(events, type) {
-  return events.find((event) => {
-    return event.type === type && event.startDate.startsWith("2027");
-  });
+function findBayern2027Event(
+  events,
+  type,
+) {
+  return findStateYearGoldEvent(
+    events,
+    type,
+    2027,
+  );
 }
 
 function createBayern2027FaqItems(events) {
@@ -398,71 +384,25 @@ function createBayern2027FaqItems(events) {
   ];
 }
 
-function bayern2027FaqHtml(faqItems) {
-  const items = faqItems
-    .map((item) => {
-      return `          <article class="gold-faq-item">
-            <h3>${escapeHtml(item.question)}</h3>
-            <p>${escapeHtml(item.answer)}</p>
-          </article>`;
-    })
-    .join("\n");
-
-  return `        <section id="fragen" class="gold-section">
-          <p class="eyebrow">Direkte Antworten</p>
-          <h2>Häufige Fragen zu den Schulferien Bayern 2027</h2>
-          <div class="gold-faq-list">
-${items}
-          </div>
-        </section>`;
+function bayern2027FaqHtml(
+  faqItems,
+) {
+  return stateYearGoldFaqHtml({
+    faqItems,
+    name: "Bayern",
+    year: 2027,
+  });
 }
 
-function bayern2027StructuredDataHtml(faqItems) {
-  const data = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "Schulferienklar",
-            item: "https://www.schulferienklar.de/",
-          },
-          {
-            "@type": "ListItem",
-            position: 2,
-            name: "Schulferien Bayern",
-            item: "https://www.schulferienklar.de/schulferien-bayern.html",
-          },
-          {
-            "@type": "ListItem",
-            position: 3,
-            name: "Schulferien Bayern 2027",
-            item: "https://www.schulferienklar.de/schulferien-bayern-2027.html",
-          },
-        ],
-      },
-      {
-        "@type": "FAQPage",
-        mainEntity: faqItems.map((item) => {
-          return {
-            "@type": "Question",
-            name: item.question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: item.answer,
-            },
-          };
-        }),
-      },
-    ],
-  };
-
-  const json = JSON.stringify(data).replaceAll("<", "\\u003c");
-
-  return `    <script type="application/ld+json">${json}</script>`;
+function bayern2027StructuredDataHtml(
+  faqItems,
+) {
+  return stateYearGoldStructuredDataHtml({
+    faqItems,
+    slug: "bayern",
+    name: "Bayern",
+    year: 2027,
+  });
 }
 
 function bayern2027SourceHtml(source) {
@@ -2235,29 +2175,36 @@ function widgetPromoHtml({ code, name }) {
 }
 
 
-function pageTemplate({ slug, name, englishName, code, year, events }) {
-  if (code === "BW" && year === 2027) {
-    return bw2027GoldPageTemplate({
-      slug,
-      name,
-      code,
-      year,
-      events,
-    });
-  }
+const GOLD_PAGE_TEMPLATES = new Map([
+  [
+    "BY-2027",
+    bayern2027GoldPageTemplate,
+  ],
+  [
+    "NW-2027",
+    nrw2027GoldPageTemplate,
+  ],
+  [
+    "BW-2027",
+    bw2027GoldPageTemplate,
+  ],
+]);
 
-  if (code === "NW" && year === 2027) {
-    return nrw2027GoldPageTemplate({
-      slug,
-      name,
-      code,
-      year,
-      events,
-    });
-  }
+function pageTemplate({
+  slug,
+  name,
+  englishName,
+  code,
+  year,
+  events,
+}) {
+  const goldPageTemplate =
+    GOLD_PAGE_TEMPLATES.get(
+      `${code}-${year}`,
+    );
 
-  if (code === "BY" && year === 2027) {
-    return bayern2027GoldPageTemplate({
+  if (goldPageTemplate) {
+    return goldPageTemplate({
       slug,
       name,
       code,
