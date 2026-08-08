@@ -391,6 +391,73 @@ const commonGoldPageChecks = [
 const goldPageValidations = [
   {
     file:
+      "schulferien-sachsen-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="sachsen-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Winterferien",
+        /Winterferien/,
+      ],
+      [
+        "school-free day",
+        /Unterrichtsfreier Tag/,
+      ],
+      [
+        "school-free date",
+        /7\. Mai 2027/,
+      ],
+      [
+        "Ascension connected period",
+        /6\. bis[\s\S]*9\. Mai 2027/,
+      ],
+      [
+        "Pentecost holidays",
+        /Pfingstferien/,
+      ],
+      [
+        "movable holiday explanation",
+        /frei beweglichen Ferientag/i,
+      ],
+      [
+        "regional Corpus Christi",
+        /Fronleichnam/,
+      ],
+      [
+        "Corpus Christi limitation",
+        /nur in bestimmten Regionen/,
+      ],
+      [
+        "Repentance Day",
+        /Buß- und Bettag/,
+      ],
+      [
+        "official Sachsen source",
+        /Sächsisches Staatsministerium für Kultus/,
+      ],
+      [
+        "official Sachsen source link",
+        /schule\.sachsen\.de/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-sachsen-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-sachsen-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-sachsen-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
       "schulferien-berlin-2027.html",
     checks: [
       [

@@ -1456,6 +1456,184 @@ function createBerlin2027FaqItems(events) {
   ];
 }
 
+
+function getSachsen2027DisplayName(event) {
+  if (
+    event.category ===
+    "state_school_free_day"
+  ) {
+    return "Unterrichtsfreier Tag (schulfrei)";
+  }
+
+  return getHolidayName(event);
+}
+
+function getSachsen2027PeriodNote(event) {
+  const crossingNote =
+    getStateYearCrossingNote(
+      event,
+      2027,
+    );
+
+  if (crossingNote) {
+    return crossingNote;
+  }
+
+  if (
+    event.category ===
+      "state_school_free_day" &&
+    event.startDate ===
+      "2027-05-07"
+  ) {
+    return (
+      "Vom Kultusministerium festgelegter " +
+      "unterrichtsfreier Tag: " +
+      "Freitag, 7. Mai 2027."
+    );
+  }
+
+  return "";
+}
+
+function findSachsen2027SchoolFreeDay(
+  events,
+) {
+  return events.find((event) => {
+    return (
+      event.category ===
+        "state_school_free_day" &&
+      event.startDate ===
+        "2027-05-07"
+    );
+  });
+}
+
+function createSachsen2027FaqItems(events) {
+  const winter =
+    findStateYearGoldEvent(
+      events,
+      "winter",
+      2027,
+    );
+
+  const easter =
+    findStateYearGoldEvent(
+      events,
+      "easter",
+      2027,
+    );
+
+  const pentecost =
+    findStateYearGoldEvent(
+      events,
+      "pentecost",
+      2027,
+    );
+
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    findStateYearGoldEvent(
+      events,
+      "christmas",
+      2027,
+    );
+
+  const schoolFreeDay =
+    findSachsen2027SchoolFreeDay(
+      events,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return (
+        "Für diesen Zeitraum liegt " +
+        "aktuell kein Eintrag vor."
+      );
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Wann sind die Winterferien in Sachsen 2027?",
+      answer:
+        `Die Winterferien in Sachsen 2027 dauern vom ${rangeText(winter)}.`,
+    },
+    {
+      question:
+        "Wann sind die Osterferien in Sachsen 2027?",
+      answer:
+        `Die Osterferien in Sachsen 2027 dauern vom ${rangeText(easter)}.`,
+    },
+    {
+      question:
+        "Ist der 7. Mai 2027 in Sachsen schulfrei?",
+      answer:
+        `Ja. Freitag, der ${schoolFreeDay ? formatDate(schoolFreeDay.startDate) : "07.05.2027"}, ist ein vom Kultusministerium festgelegter unterrichtsfreier Tag. Mit Christi Himmelfahrt und dem Wochenende ergibt sich freie Zeit vom 06.05. bis 09.05.2027.`,
+    },
+    {
+      question:
+        "Wann sind die Pfingstferien in Sachsen 2027?",
+      answer:
+        `Die Pfingstferien in Sachsen 2027 dauern vom ${rangeText(pentecost)}.`,
+    },
+    {
+      question:
+        "Wann sind die Sommerferien in Sachsen 2027?",
+      answer:
+        `Die Sommerferien in Sachsen 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien in Sachsen 2027?",
+      answer:
+        `Die Herbstferien in Sachsen 2027 dauern vom ${rangeText(autumn)}.`,
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien in Sachsen 2027?",
+      answer:
+        `Die Weihnachtsferien beginnen am ${christmas ? formatDate(christmas.startDate) : "nicht angegeben"} und enden am ${christmas ? formatDate(christmas.endDate) : "nicht angegeben"}.`,
+    },
+    {
+      question:
+        "Wann ist der frei bewegliche Ferientag in Sachsen 2027?",
+      answer:
+        "Für das Schuljahr 2026/27 gibt es einen frei beweglichen Ferientag. Den konkreten Termin kann jede Schule in Abstimmung mit der Schulverwaltung selbst festlegen. Deshalb wird er in der landesweiten Standardübersicht nicht automatisch eingerechnet.",
+    },
+    {
+      question:
+        "Ist Fronleichnam 2027 überall in Sachsen ein Feiertag?",
+      answer:
+        "Nein. Fronleichnam ist in Sachsen nur in bestimmten Regionen gesetzlicher Feiertag und wird deshalb nicht als landesweit freier Tag in die Standardberechnung einbezogen. Der Buß- und Bettag gilt dagegen landesweit in Sachsen.",
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen Ferienzeitraum oder landesweit unterrichtsfreien Tag nur um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Frei bewegliche Ferientage und regionale Feiertage werden nicht automatisch eingerechnet.",
+    },
+  ];
+}
+
 function subscriptionCtaHtml({ code, name }) {
   const normalizedCode = String(code).toLowerCase();
   const httpsUrl =
@@ -2136,6 +2314,205 @@ Termine von der jeweiligen Schule abhängen.`,
 }
 
 
+
+
+function sachsen2027SpecialSectionHtml() {
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Wichtig für Sachsen
+          </p>
+          <h2>
+            Unterrichtsfreier Tag und frei beweglicher Ferientag 2027
+          </h2>
+
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>7. Mai: unterrichtsfrei</h3>
+              <p>
+                Freitag, der
+                <strong>7. Mai 2027</strong>,
+                ist ein vom Kultusministerium
+                festgelegter
+                <strong>unterrichtsfreier Tag</strong>.
+              </p>
+              <p>
+                Mit Christi Himmelfahrt am Donnerstag
+                und dem Wochenende entstehen
+                <strong>4 freie Tage vom 6. bis
+                9. Mai 2027</strong>.
+              </p>
+            </div>
+
+            <div>
+              <h3>1 frei beweglicher Ferientag</h3>
+              <p>
+                Im Schuljahr 2026/27 gibt es zusätzlich
+                <strong>einen frei beweglichen
+                Ferientag</strong>.
+              </p>
+              <p>
+                Den konkreten Termin kann jede Schule
+                in Abstimmung mit der Schulverwaltung
+                selbst festlegen. Deshalb wird dieser
+                Tag hier nicht automatisch eingerechnet.
+              </p>
+            </div>
+          </div>
+
+          <p class="gold-source-note">
+            <strong>Feiertage in Sachsen:</strong>
+            Fronleichnam gilt nur in bestimmten Regionen
+            und wird deshalb nicht als landesweiter
+            Feiertag in die Standardberechnung
+            einbezogen. Der Buß- und Bettag gilt dagegen
+            landesweit in Sachsen.
+          </p>
+        </section>`;
+}
+
+function sachsen2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-sachsen-2026.html",
+      label:
+        "Schulferien Sachsen 2026",
+    },
+    {
+      href:
+        "/schulferien-sachsen-2028.html",
+      label:
+        "Schulferien Sachsen 2028",
+    },
+    {
+      href:
+        "/schulferien-sachsen.html",
+      label:
+        "Alle Jahre für Sachsen",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-berlin-2027.html",
+      label:
+        "Berlin 2027",
+    },
+    {
+      href:
+        "/schulferien-brandenburg-2027.html",
+      label:
+        "Brandenburg 2027",
+    },
+    {
+      href:
+        "/schulferien-sachsen-anhalt-2027.html",
+      label:
+        "Sachsen-Anhalt 2027",
+    },
+    {
+      href:
+        "/schulferien-thueringen-2027.html",
+      label:
+        "Thüringen 2027",
+    },
+  ]);
+}
+
+function sachsen2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createSachsen2027FaqItems(
+      events,
+    );
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      "Schulferien Sachsen 2027: Termine und freie Tage",
+    description:
+      "Schulferien Sachsen 2027 mit Winterferien, Osterferien, Pfingstferien, unterrichtsfreiem Tag, beweglichem Ferientag, PDF, ICS und offizieller Quelle.",
+    marker:
+      "sachsen-2027",
+    eyebrow:
+      "Sachsen · Kalenderjahr 2027",
+    h1:
+      "Schulferien Sachsen 2027",
+    introText:
+      `Hier stehen zuerst die landesweit festgelegten
+Ferientermine und schulfreien Tage. Zusätzlich zeigt
+Schulferienklar, wie lange die freie Zeit direkt am
+Stück dauert, wenn Wochenenden oder landesweite
+Feiertage unmittelbar anschließen.`,
+    specialNavLabel:
+      "Sachsen-Hinweise",
+    termHeadingText:
+      "Alle Ferienzeiten und schulfreien Tage in Sachsen 2027",
+    termIntroText:
+      `Die Liste berücksichtigt auch Weihnachtsferien,
+die aus 2026 in das Kalenderjahr 2027 hineinreichen
+oder bis 2028 dauern. Zusätzlich ist der vom
+Kultusministerium festgelegte unterrichtsfreie Tag
+enthalten.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+          getDisplayName:
+            getSachsen2027DisplayName,
+          getPeriodNote:
+            getSachsen2027PeriodNote,
+        });
+      },
+    officialPeriodText:
+      `Exakt der vom Sächsischen Staatsministerium
+für Kultus veröffentlichte Beginn und das
+veröffentlichte Ende beziehungsweise der
+landesweit festgelegte unterrichtsfreie Tag.`,
+    connectedPeriodText:
+      `Der offizielle Zeitraum plus direkt
+anschließende Samstage, Sonntage und
+landesweit geltende gesetzliche Feiertage.`,
+    calculationNoteText:
+      `Angegeben werden Kalendertage, nicht die Zahl
+der ausgefallenen Unterrichtstage. Frei bewegliche
+Ferientage und nur regional geltende Feiertage werden
+nicht automatisch eingerechnet.`,
+    specialSectionHtml:
+      sachsen2027SpecialSectionHtml(),
+    sourceLinkLabel:
+      "Schuljahrestermine des Kultusministeriums",
+    secondaryLinkLabel:
+      "Ferienregelung der Kultusministerkonferenz",
+    faqItems,
+    relatedLinksHtml:
+      sachsen2027RelatedLinksHtml(),
+    buttonText:
+      "Sachsen 2027 im Kalender öffnen",
+  });
+}
 
 function berlin2027SpecialSectionHtml() {
   return `        <section
@@ -3069,6 +3446,10 @@ const GOLD_PAGE_TEMPLATES = new Map([
   [
     "NI-2027",
     niedersachsen2027GoldPageTemplate,
+  ],
+  [
+    "SN-2027",
+    sachsen2027GoldPageTemplate,
   ],
   [
     "NW-2027",
