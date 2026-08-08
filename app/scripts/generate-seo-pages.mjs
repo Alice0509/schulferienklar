@@ -1267,6 +1267,195 @@ function createNi2027FaqItems(events) {
   ];
 }
 
+
+function getBerlin2027DisplayName(event) {
+  if (
+    event.category ===
+    "state_school_free_day"
+  ) {
+    return (
+      "Unterrichtsfreier Tag nach AZVO " +
+      "(schulfrei)"
+    );
+  }
+
+  return getHolidayName(event);
+}
+
+function getBerlin2027PeriodNote(event) {
+  const crossingNote =
+    getStateYearCrossingNote(
+      event,
+      2027,
+    );
+
+  if (crossingNote) {
+    return crossingNote;
+  }
+
+  if (
+    event.category ===
+      "state_school_free_day" &&
+    event.startDate ===
+      "2027-05-07"
+  ) {
+    return (
+      "Landesweit unterrichtsfrei laut " +
+      "Berliner Ferienordnung: " +
+      "Freitag, 7. Mai 2027."
+    );
+  }
+
+  if (event.type === "pentecost") {
+    return (
+      "Die Pfingstferien umfassen " +
+      "Dienstag und Mittwoch, " +
+      "18.–19. Mai 2027."
+    );
+  }
+
+  return "";
+}
+
+function findBerlin2027SchoolFreeDay(
+  events,
+) {
+  return events.find((event) => {
+    return (
+      event.category ===
+        "state_school_free_day" &&
+      event.startDate ===
+        "2027-05-07"
+    );
+  });
+}
+
+function createBerlin2027FaqItems(events) {
+  const winter =
+    findStateYearGoldEvent(
+      events,
+      "winter",
+      2027,
+    );
+
+  const easter =
+    findStateYearGoldEvent(
+      events,
+      "easter",
+      2027,
+    );
+
+  const pentecost =
+    findStateYearGoldEvent(
+      events,
+      "pentecost",
+      2027,
+    );
+
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    findStateYearGoldEvent(
+      events,
+      "christmas",
+      2027,
+    );
+
+  const schoolFreeDay =
+    findBerlin2027SchoolFreeDay(
+      events,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return (
+        "Für diesen Zeitraum liegt " +
+        "aktuell kein Eintrag vor."
+      );
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Wann sind die Winterferien in Berlin 2027?",
+      answer:
+        `Die Winterferien in Berlin 2027 dauern vom ${rangeText(winter)}.`,
+    },
+    {
+      question:
+        "Wann sind die Osterferien in Berlin 2027?",
+      answer:
+        `Die Osterferien in Berlin 2027 dauern vom ${rangeText(easter)}.`,
+    },
+    {
+      question:
+        "Ist der 7. Mai 2027 in Berlin schulfrei?",
+      answer:
+        `Ja. Die Berliner Ferienordnung weist Freitag, den ${schoolFreeDay ? formatDate(schoolFreeDay.startDate) : "07.05.2027"}, als unterrichtsfreien Tag nach AZVO aus. Mit Christi Himmelfahrt und dem Wochenende ergibt sich freie Zeit vom 06.05. bis 09.05.2027.`,
+    },
+    {
+      question:
+        "Wann sind die Pfingstferien in Berlin 2027?",
+      answer:
+        `Die Pfingstferien in Berlin 2027 dauern vom ${rangeText(pentecost)}. Mit dem Wochenende und Pfingstmontag ergibt sich freie Zeit vom 15.05. bis 19.05.2027.`,
+    },
+    {
+      question:
+        "Wann sind die Sommerferien in Berlin 2027?",
+      answer:
+        `Die Sommerferien in Berlin 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien in Berlin 2027?",
+      answer:
+        `Die Herbstferien in Berlin 2027 dauern vom ${rangeText(autumn)}.`,
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien in Berlin 2027?",
+      answer:
+        `Die Weihnachtsferien beginnen am ${christmas ? formatDate(christmas.startDate) : "nicht angegeben"} und enden am ${christmas ? formatDate(christmas.endDate) : "nicht angegeben"}.`,
+    },
+    {
+      question:
+        "Ist der Internationale Frauentag 2027 in Berlin ein Feiertag?",
+      answer:
+        "Ja. Montag, der 8. März 2027, ist in Berlin ein gesetzlicher Feiertag.",
+    },
+    {
+      question:
+        "Gelten die Ferientermine für alle Berliner Schulen?",
+      answer:
+        "Nicht ausnahmslos. Berlin veröffentlicht für einzelne Schulen eigene Ferienordnungen, unter anderem für die John-F.-Kennedy-Schule, die Staatliche Ballettschule Berlin und Schule für Artistik, das Französische Gymnasium und die Staatliche Technikerschule. Diese Sonderkalender sind nicht Bestandteil der landesweiten Standardübersicht.",
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen Ferienzeitraum oder landesweit schulfreien Tag nur um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Sonderkalender einzelner Schulen und religiöse Unterrichtsbefreiungen werden nicht automatisch eingerechnet.",
+    },
+  ];
+}
+
 function subscriptionCtaHtml({ code, name }) {
   const normalizedCode = String(code).toLowerCase();
   const httpsUrl =
@@ -1946,6 +2135,204 @@ Termine von der jeweiligen Schule abhängen.`,
   });
 }
 
+
+
+function berlin2027SpecialSectionHtml() {
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Berliner Besonderheiten
+          </p>
+          <h2>
+            Unterrichtsfreier Tag und Pfingstferien 2027
+          </h2>
+
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>7. Mai: unterrichtsfrei</h3>
+              <p>
+                Freitag, der
+                <strong>7. Mai 2027</strong>,
+                ist als
+                <strong>Unterrichtsfreier Tag nach AZVO</strong>
+                ausgewiesen.
+              </p>
+              <p>
+                Mit Christi Himmelfahrt am Donnerstag
+                und dem Wochenende entstehen
+                <strong>4 freie Tage vom 6. bis
+                9. Mai 2027</strong>.
+              </p>
+            </div>
+
+            <div>
+              <h3>Pfingstferien</h3>
+              <p>
+                Die Berliner Pfingstferien liegen am
+                <strong>18. und 19. Mai 2027</strong>.
+              </p>
+              <p>
+                Mit dem Wochenende und Pfingstmontag
+                entstehen
+                <strong>5 freie Tage vom 15. bis
+                19. Mai 2027</strong>.
+              </p>
+            </div>
+          </div>
+
+          <p class="gold-source-note">
+            <strong>Weitere Berlin-Hinweise:</strong>
+            Der Internationale Frauentag am
+            8. März 2027 ist in Berlin ein gesetzlicher
+            Feiertag. Für einzelne Berliner Schulen
+            gelten außerdem eigene Ferienordnungen;
+            diese Sonderkalender sind hier nicht
+            automatisch enthalten.
+          </p>
+        </section>`;
+}
+
+function berlin2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-berlin-2026.html",
+      label:
+        "Schulferien Berlin 2026",
+    },
+    {
+      href:
+        "/schulferien-berlin-2028.html",
+      label:
+        "Schulferien Berlin 2028",
+    },
+    {
+      href:
+        "/schulferien-berlin.html",
+      label:
+        "Alle Jahre für Berlin",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-brandenburg-2027.html",
+      label:
+        "Brandenburg 2027",
+    },
+    {
+      href:
+        "/schulferien-sachsen-2027.html",
+      label:
+        "Sachsen 2027",
+    },
+    {
+      href:
+        "/schulferien-thueringen-2027.html",
+      label:
+        "Thüringen 2027",
+    },
+    {
+      href:
+        "/schulferien-niedersachsen-2027.html",
+      label:
+        "Niedersachsen 2027",
+    },
+  ]);
+}
+
+function berlin2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createBerlin2027FaqItems(
+      events,
+    );
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      "Schulferien Berlin 2027: Termine und freie Tage",
+    description:
+      "Schulferien Berlin 2027 mit Winterferien, Osterferien, unterrichtsfreiem AZVO-Tag, Pfingstferien, Sommerferien, PDF, ICS und offizieller Quelle.",
+    marker:
+      "berlin-2027",
+    eyebrow:
+      "Berlin · Kalenderjahr 2027",
+    h1:
+      "Schulferien Berlin 2027",
+    introText:
+      `Hier stehen zuerst die landesweit festgelegten
+Ferientermine und schulfreien Tage. Zusätzlich zeigt
+Schulferienklar, wie lange die freie Zeit direkt am
+Stück dauert, wenn Wochenenden oder Berliner
+Feiertage unmittelbar anschließen.`,
+    specialNavLabel:
+      "Berlin-Hinweise",
+    termHeadingText:
+      "Alle Ferienzeiten und schulfreien Tage in Berlin 2027",
+    termIntroText:
+      `Die Liste berücksichtigt auch Weihnachtsferien,
+die aus 2026 in das Kalenderjahr 2027 hineinreichen.
+Zusätzlich ist der offiziell festgelegte
+unterrichtsfreie Tag nach AZVO enthalten.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+          getDisplayName:
+            getBerlin2027DisplayName,
+          getPeriodNote:
+            getBerlin2027PeriodNote,
+        });
+      },
+    officialPeriodText:
+      `Exakt der in der Berliner Ferienordnung
+veröffentlichte Beginn und das veröffentlichte Ende
+beziehungsweise der landesweit ausgewiesene
+unterrichtsfreie Tag.`,
+    connectedPeriodText:
+      `Der offizielle Zeitraum plus direkt
+anschließende Samstage, Sonntage und
+landesweit geltende gesetzliche Feiertage.`,
+    calculationNoteText:
+      `Angegeben werden Kalendertage, nicht die Zahl
+der ausgefallenen Unterrichtstage. Sonderkalender
+einzelner Schulen und religiöse Unterrichtsbefreiungen
+werden nicht automatisch eingerechnet.`,
+    specialSectionHtml:
+      berlin2027SpecialSectionHtml(),
+    sourceLinkLabel:
+      "Ferienordnung der Senatsverwaltung",
+    secondaryLinkLabel:
+      "Ferientermine auf Berlin.de",
+    faqItems,
+    relatedLinksHtml:
+      berlin2027RelatedLinksHtml(),
+    buttonText:
+      "Berlin 2027 im Kalender öffnen",
+  });
+}
 
 function niedersachsen2027SpecialSectionHtml() {
   return `        <section
@@ -2674,6 +3061,10 @@ const GOLD_PAGE_TEMPLATES = new Map([
   [
     "BY-2027",
     bayern2027GoldPageTemplate,
+  ],
+  [
+    "BE-2027",
+    berlin2027GoldPageTemplate,
   ],
   [
     "NI-2027",

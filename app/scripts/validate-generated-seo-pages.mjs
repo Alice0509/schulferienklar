@@ -391,6 +391,81 @@ const commonGoldPageChecks = [
 const goldPageValidations = [
   {
     file:
+      "schulferien-berlin-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="berlin-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Winterferien terminology",
+        /Winterferien/,
+      ],
+      [
+        "AZVO school-free day",
+        /Unterrichtsfreier Tag nach AZVO/,
+      ],
+      [
+        "AZVO date",
+        /7\. Mai 2027/,
+      ],
+      [
+        "Ascension connected period",
+        /6\. bis[\s\S]*9\. Mai 2027/,
+      ],
+      [
+        "Pentecost holidays",
+        /Pfingstferien/,
+      ],
+      [
+        "Pentecost dates",
+        /18\. und 19\. Mai 2027/,
+      ],
+      [
+        "Pentecost connected period",
+        /15\. bis[\s\S]*19\. Mai 2027/,
+      ],
+      [
+        "International Women's Day",
+        /Internationale(?:r)? Frauentag/,
+      ],
+      [
+        "Women's Day date",
+        /8\. März 2027/,
+      ],
+      [
+        "special school exception",
+        /John-F\.-Kennedy-Schule/,
+      ],
+      [
+        "religious exemption limitation",
+        /religiöse Unterrichtsbefreiungen/,
+      ],
+      [
+        "official Berlin source",
+        /Senatsverwaltung für Bildung, Jugend und Familie Berlin/,
+      ],
+      [
+        "official Berlin source link",
+        /berlin\.de/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-berlin-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-berlin-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-berlin-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
       "schulferien-bayern-2027.html",
     checks: [
       [
