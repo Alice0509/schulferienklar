@@ -361,225 +361,206 @@ if (fs.existsSync(sitemapPath)) {
 }
 
 
-const bayern2027Path = path.join(
-  publicDir,
-  "schulferien-bayern-2027.html"
-);
+const commonGoldPageChecks = [
+  [
+    "direct answer section",
+    /id="termine"/,
+  ],
+  [
+    "connected free-time explanation",
+    /Zusammenhängend frei/,
+  ],
+  [
+    "FAQ structured data",
+    /FAQPage/,
+  ],
+  [
+    "breadcrumb structured data",
+    /BreadcrumbList/,
+  ],
+  [
+    "visible FAQ section",
+    /id="fragen"/,
+  ],
+  [
+    "Jahreskalender section",
+    /id="jahreskalender"/,
+  ],
+];
 
-if (fs.existsSync(bayern2027Path)) {
-  const bayern2027Html = fs.readFileSync(bayern2027Path, "utf8");
-  const goldPageChecks = [
-    ["Gold Page marker", /data-gold-page="bayern-2027"/],
-    ["direct answer section", /id="termine"/],
-    ["connected free-time explanation", /Zusammenhängend frei/],
-    ["Faschingsferien terminology", /Faschingsferien/],
-    ["Allerheiligen terminology", /unterrichtsfreie Tage um Allerheiligen/],
-    ["official Bayern source", /Bayerisches Staatsministerium/],
-    ["Bayern.Recht source link", /gesetze-bayern\.de/],
-    ["FAQ structured data", /FAQPage/],
-    ["breadcrumb structured data", /BreadcrumbList/],
-    ["visible FAQ section", /id="fragen"/],
-    ["Jahreskalender section", /id="jahreskalender"/],
-    ["Jahreskalender preview link", /downloads\/jahreskalender-bayern-2027\.html/],
-    ["Jahreskalender PDF link", /downloads\/schulferien-bayern-2027\.pdf/],
-    ["Jahreskalender ICS link", /downloads\/schulferien-bayern-2027\.ics/],
-  ];
+const goldPageValidations = [
+  {
+    file:
+      "schulferien-bayern-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="bayern-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Faschingsferien terminology",
+        /Faschingsferien/,
+      ],
+      [
+        "Allerheiligen terminology",
+        /unterrichtsfreie Tage um Allerheiligen/,
+      ],
+      [
+        "official Bayern source",
+        /Bayerisches Staatsministerium/,
+      ],
+      [
+        "Bayern.Recht source link",
+        /gesetze-bayern\.de/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-bayern-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-bayern-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-bayern-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
+      "schulferien-nordrhein-westfalen-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="nrw-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "movable holiday explanation",
+        /bewegliche Ferientage/i,
+      ],
+      [
+        "Rosenmontag limitation",
+        /Rosenmontag ist kein landesweit einheitlicher Ferientermin/,
+      ],
+      [
+        "Pfingsten terminology",
+        /Pfingsten 2027/,
+      ],
+      [
+        "official NRW ministry source",
+        /Ministerium für Schule und Bildung/,
+      ],
+      [
+        "official NRW source link",
+        /schulministerium\.nrw/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-nordrhein-westfalen-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-nordrhein-westfalen-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-nordrhein-westfalen-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
+      "schulferien-baden-wuerttemberg-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="bw-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Maundy Thursday school-free date",
+        /25\. März 2027/,
+      ],
+      [
+        "Maundy Thursday terminology",
+        /Gründonnerstag/,
+      ],
+      [
+        "connected Easter period",
+        /25\. März bis 4\. April 2027/,
+      ],
+      [
+        "Pentecost holidays",
+        /Pfingstferien/,
+      ],
+      [
+        "movable holiday limitation",
+        /Bewegliche Ferientage/,
+      ],
+      [
+        "school-free Saturdays limitation",
+        /unterrichtsfreie Samstage/,
+      ],
+      [
+        "official ministry source",
+        /Ministerium für Kultus, Jugend und Sport/,
+      ],
+      [
+        "official ministry source link",
+        /km\.baden-wuerttemberg\.de/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-baden-wuerttemberg-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-baden-wuerttemberg-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-baden-wuerttemberg-2027\.ics/,
+      ],
+    ],
+  },
+];
 
-  for (const [label, pattern] of goldPageChecks) {
-    if (!pattern.test(bayern2027Html)) {
-      errors.push(`schulferien-bayern-2027.html: missing ${label}`);
-    }
+for (
+  const {
+    file,
+    checks,
+  } of goldPageValidations
+) {
+  const fullPath =
+    path.join(
+      publicDir,
+      file,
+    );
+
+  if (!fs.existsSync(fullPath)) {
+    continue;
   }
-}
 
-
-const nrw2027Path = path.join(
-  publicDir,
-  "schulferien-nordrhein-westfalen-2027.html",
-);
-
-if (fs.existsSync(nrw2027Path)) {
-  const nrw2027Html =
+  const html =
     fs.readFileSync(
-      nrw2027Path,
+      fullPath,
       "utf8",
     );
 
-  const nrwGoldPageChecks = [
-    [
-      "Gold Page marker",
-      /data-gold-page="nrw-2027"/,
-    ],
-    [
-      "direct answer section",
-      /id="termine"/,
-    ],
-    [
-      "connected free-time explanation",
-      /Zusammenhängend frei/,
-    ],
-    [
-      "movable holiday explanation",
-      /bewegliche Ferientage/i,
-    ],
-    [
-      "Rosenmontag limitation",
-      /Rosenmontag ist kein landesweit einheitlicher Ferientermin/,
-    ],
-    [
-      "Pfingsten terminology",
-      /Pfingsten 2027/,
-    ],
-    [
-      "official NRW ministry source",
-      /Ministerium für Schule und Bildung/,
-    ],
-    [
-      "official NRW source link",
-      /schulministerium\.nrw/,
-    ],
-    [
-      "FAQ structured data",
-      /FAQPage/,
-    ],
-    [
-      "breadcrumb structured data",
-      /BreadcrumbList/,
-    ],
-    [
-      "visible FAQ section",
-      /id="fragen"/,
-    ],
-    [
-      "Jahreskalender section",
-      /id="jahreskalender"/,
-    ],
-    [
-      "Jahreskalender preview link",
-      /downloads\/jahreskalender-nordrhein-westfalen-2027\.html/,
-    ],
-    [
-      "Jahreskalender PDF link",
-      /downloads\/schulferien-nordrhein-westfalen-2027\.pdf/,
-    ],
-    [
-      "Jahreskalender ICS link",
-      /downloads\/schulferien-nordrhein-westfalen-2027\.ics/,
-    ],
-  ];
-
   for (
     const [label, pattern]
-    of nrwGoldPageChecks
+    of checks
   ) {
-    if (!pattern.test(nrw2027Html)) {
+    if (!pattern.test(html)) {
       errors.push(
-        `schulferien-nordrhein-westfalen-2027.html: missing ${label}`,
+        `${file}: missing ${label}`,
       );
     }
   }
 }
-
-
-const bw2027Path = path.join(
-  publicDir,
-  "schulferien-baden-wuerttemberg-2027.html",
-);
-
-if (fs.existsSync(bw2027Path)) {
-  const bw2027Html =
-    fs.readFileSync(
-      bw2027Path,
-      "utf8",
-    );
-
-  const bwGoldPageChecks = [
-    [
-      "Gold Page marker",
-      /data-gold-page="bw-2027"/,
-    ],
-    [
-      "direct answer section",
-      /id="termine"/,
-    ],
-    [
-      "connected free-time explanation",
-      /Zusammenhängend frei/,
-    ],
-    [
-      "Maundy Thursday school-free date",
-      /25\. März 2027/,
-    ],
-    [
-      "Maundy Thursday terminology",
-      /Gründonnerstag/,
-    ],
-    [
-      "connected Easter period",
-      /25\. März bis 4\. April 2027/,
-    ],
-    [
-      "Pentecost holidays",
-      /Pfingstferien/,
-    ],
-    [
-      "movable holiday limitation",
-      /Bewegliche Ferientage/,
-    ],
-    [
-      "school-free Saturdays limitation",
-      /unterrichtsfreie Samstage/,
-    ],
-    [
-      "official ministry source",
-      /Ministerium für Kultus, Jugend und Sport/,
-    ],
-    [
-      "official ministry source link",
-      /km\.baden-wuerttemberg\.de/,
-    ],
-    [
-      "FAQ structured data",
-      /FAQPage/,
-    ],
-    [
-      "breadcrumb structured data",
-      /BreadcrumbList/,
-    ],
-    [
-      "visible FAQ section",
-      /id="fragen"/,
-    ],
-    [
-      "Jahreskalender section",
-      /id="jahreskalender"/,
-    ],
-    [
-      "Jahreskalender preview link",
-      /downloads\/jahreskalender-baden-wuerttemberg-2027\.html/,
-    ],
-    [
-      "Jahreskalender PDF link",
-      /downloads\/schulferien-baden-wuerttemberg-2027\.pdf/,
-    ],
-    [
-      "Jahreskalender ICS link",
-      /downloads\/schulferien-baden-wuerttemberg-2027\.ics/,
-    ],
-  ];
-
-  for (
-    const [label, pattern]
-    of bwGoldPageChecks
-  ) {
-    if (!pattern.test(bw2027Html)) {
-      errors.push(
-        `schulferien-baden-wuerttemberg-2027.html: missing ${label}`,
-      );
-    }
-  }
-}
-
 
 console.log(`Checked ${htmlFiles.length} generated SEO HTML files.`);
 
