@@ -1081,6 +1081,192 @@ function createBw2027FaqItems(events) {
   ];
 }
 
+
+function getNi2027DisplayName(event) {
+  if (
+    event.category ===
+    "state_school_free_day"
+  ) {
+    return "Tag nach Himmelfahrt (schulfrei)";
+  }
+
+  if (event.type === "pentecost") {
+    return "Pfingsten (ein Ferientag)";
+  }
+
+  if (event.type === "winter") {
+    return "Halbjahresferien";
+  }
+
+  return getHolidayName(event);
+}
+
+function getNi2027PeriodNote(event) {
+  const crossingNote =
+    getStateYearCrossingNote(
+      event,
+      2027,
+    );
+
+  if (crossingNote) {
+    return crossingNote;
+  }
+
+  if (
+    event.category ===
+      "state_school_free_day" &&
+    event.startDate ===
+      "2027-05-07"
+  ) {
+    return (
+      "Landesweit schulfreier Tag laut " +
+      "Ferienordnung: Freitag, 7. Mai 2027."
+    );
+  }
+
+  if (event.type === "pentecost") {
+    return (
+      "Die Ferienordnung nennt Dienstag, " +
+      "den 18. Mai 2027."
+    );
+  }
+
+  return "";
+}
+
+function findNi2027SchoolFreeDay(
+  events,
+) {
+  return events.find((event) => {
+    return (
+      event.category ===
+        "state_school_free_day" &&
+      event.startDate ===
+        "2027-05-07"
+    );
+  });
+}
+
+function createNi2027FaqItems(events) {
+  const winter =
+    findStateYearGoldEvent(
+      events,
+      "winter",
+      2027,
+    );
+
+  const easter =
+    findStateYearGoldEvent(
+      events,
+      "easter",
+      2027,
+    );
+
+  const pentecost =
+    findStateYearGoldEvent(
+      events,
+      "pentecost",
+      2027,
+    );
+
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    findStateYearGoldEvent(
+      events,
+      "christmas",
+      2027,
+    );
+
+  const schoolFreeDay =
+    findNi2027SchoolFreeDay(
+      events,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return (
+        "Für diesen Zeitraum liegt " +
+        "aktuell kein Eintrag vor."
+      );
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Wann sind die Halbjahresferien in Niedersachsen 2027?",
+      answer:
+        `Die Halbjahresferien in Niedersachsen 2027 dauern vom ${rangeText(winter)}.`,
+    },
+    {
+      question:
+        "Wann sind die Osterferien in Niedersachsen 2027?",
+      answer:
+        `Die Osterferien in Niedersachsen 2027 dauern vom ${rangeText(easter)}.`,
+    },
+    {
+      question:
+        "Ist der Tag nach Himmelfahrt 2027 in Niedersachsen schulfrei?",
+      answer:
+        `Ja. Die Ferienordnung nennt Freitag, den ${schoolFreeDay ? formatDate(schoolFreeDay.startDate) : "07.05.2027"}, als landesweit schulfreien Tag. Zusammen mit Christi Himmelfahrt und dem Wochenende ergibt sich freie Zeit vom 06.05. bis 09.05.2027.`,
+    },
+    {
+      question:
+        "Gibt es Pfingstferien in Niedersachsen 2027?",
+      answer:
+        `Die Ferienordnung nennt Dienstag, den ${pentecost ? formatDate(pentecost.startDate) : "18.05.2027"}, als Ferientag zu Pfingsten. Zusammen mit dem Wochenende und Pfingstmontag ergibt sich freie Zeit vom 15.05. bis 18.05.2027.`,
+    },
+    {
+      question:
+        "Wann sind die Sommerferien in Niedersachsen 2027?",
+      answer:
+        `Die Sommerferien in Niedersachsen 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien in Niedersachsen 2027?",
+      answer:
+        `Die Herbstferien in Niedersachsen 2027 dauern vom ${rangeText(autumn)}.`,
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien in Niedersachsen 2027?",
+      answer:
+        `Die Weihnachtsferien beginnen am ${christmas ? formatDate(christmas.startDate) : "nicht angegeben"} und enden am ${christmas ? formatDate(christmas.endDate) : "nicht angegeben"}.`,
+    },
+    {
+      question:
+        "Gelten die Ferientermine für alle Schulen in Niedersachsen?",
+      answer:
+        "Nicht ausnahmslos. Für bestimmte ausdrücklich genannte Schulen gelten abweichende Regelungen, darunter Schulen auf den Ostfriesischen Inseln. Schulferienklar zeigt die landesweite Standardregelung; bei einer betroffenen Schule ist deren eigener Ferienplan maßgeblich.",
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen Ferienzeitraum oder landesweit schulfreien Tag nur um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Schul- oder ortsspezifische Abweichungen werden nicht automatisch eingerechnet.",
+    },
+  ];
+}
+
 function subscriptionCtaHtml({ code, name }) {
   const normalizedCode = String(code).toLowerCase();
   const httpsUrl =
@@ -1760,6 +1946,204 @@ Termine von der jeweiligen Schule abhängen.`,
   });
 }
 
+
+function niedersachsen2027SpecialSectionHtml() {
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Wichtig für Niedersachsen
+          </p>
+          <h2>
+            Halbjahresferien und freie Tage im Mai 2027
+          </h2>
+
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>Halbjahresferien</h3>
+              <p>
+                Die Halbjahresferien liegen 2027 am
+                <strong>1. und 2. Februar</strong>.
+                Sie sind ein eigener landesweit
+                festgelegter Ferienzeitraum.
+              </p>
+            </div>
+
+            <div>
+              <h3>Freie Tage im Mai</h3>
+
+              <p>
+                <strong>Tag nach Himmelfahrt:</strong><br />
+                Freitag, der 7. Mai 2027, ist landesweit
+                schulfrei. Zusammen mit Christi
+                Himmelfahrt und dem Wochenende entstehen
+                <strong>4 freie Tage vom 6. bis
+                9. Mai 2027</strong>.
+              </p>
+
+              <p>
+                <strong>Pfingsten:</strong><br />
+                Dienstag, der 18. Mai 2027, ist als
+                Ferientag ausgewiesen. Mit dem Wochenende
+                und Pfingstmontag entstehen
+                <strong>4 freie Tage vom 15. bis
+                18. Mai 2027</strong>.
+              </p>
+            </div>
+          </div>
+
+          <div class="gold-source-note">
+            <strong>Abweichende Regelungen:</strong>
+            Für bestimmte Schulen gelten eigene
+            Ferientermine. Dazu gehören unter anderem
+            Schulen auf den Ostfriesischen Inseln.
+            Schulferienklar zeigt hier die landesweite
+            Standardregelung.
+          </div>
+        </section>`;
+}
+
+function niedersachsen2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-niedersachsen-2026.html",
+      label:
+        "Schulferien Niedersachsen 2026",
+    },
+    {
+      href:
+        "/schulferien-niedersachsen-2028.html",
+      label:
+        "Schulferien Niedersachsen 2028",
+    },
+    {
+      href:
+        "/schulferien-niedersachsen.html",
+      label:
+        "Alle Jahre für Niedersachsen",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-nordrhein-westfalen-2027.html",
+      label:
+        "Nordrhein-Westfalen 2027",
+    },
+    {
+      href:
+        "/schulferien-bremen-2027.html",
+      label:
+        "Bremen 2027",
+    },
+    {
+      href:
+        "/schulferien-hamburg-2027.html",
+      label:
+        "Hamburg 2027",
+    },
+    {
+      href:
+        "/schulferien-hessen-2027.html",
+      label:
+        "Hessen 2027",
+    },
+  ]);
+}
+
+function niedersachsen2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createNi2027FaqItems(
+      events,
+    );
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      "Schulferien Niedersachsen 2027: Termine und freie Tage",
+    description:
+      "Schulferien Niedersachsen 2027 mit Halbjahresferien, Osterferien, Tag nach Himmelfahrt, Pfingsten, Sommerferien, Herbstferien, Weihnachtsferien, PDF und offizieller Quelle.",
+    marker:
+      "ni-2027",
+    eyebrow:
+      "Niedersachsen · Kalenderjahr 2027",
+    h1:
+      "Schulferien Niedersachsen 2027",
+    introText:
+      `Hier stehen zuerst die landesweit festgelegten
+Ferientermine und schulfreien Tage. Zusätzlich zeigt
+Schulferienklar, wie lange die freie Zeit direkt am
+Stück dauert, wenn Wochenenden oder landesweite
+Feiertage unmittelbar anschließen.`,
+    specialNavLabel:
+      "NI-Hinweise",
+    termHeadingText:
+      "Alle Ferienzeiten und schulfreien Tage in Niedersachsen 2027",
+    termIntroText:
+      `Die Liste berücksichtigt auch Weihnachtsferien,
+die aus 2026 in das Kalenderjahr 2027 hineinreichen
+oder bis 2028 dauern. Zusätzlich sind die landesweit
+festgelegten einzelnen freien Tage enthalten.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+          getDisplayName:
+            getNi2027DisplayName,
+          getPeriodNote:
+            getNi2027PeriodNote,
+        });
+      },
+    officialPeriodText:
+      `Exakt der in der niedersächsischen
+Ferienordnung veröffentlichte Beginn und das
+veröffentlichte Ende beziehungsweise der einzelne
+landesweit festgelegte schulfreie Tag.`,
+    connectedPeriodText:
+      `Der offizielle Zeitraum plus direkt
+anschließende Samstage, Sonntage und
+landesweit geltende gesetzliche Feiertage.`,
+    calculationNoteText:
+      `Angegeben werden Kalendertage, nicht die Zahl
+der ausgefallenen Unterrichtstage. Abweichende
+Regelungen einzelner Schulen werden nicht
+automatisch eingerechnet.`,
+    specialSectionHtml:
+      niedersachsen2027SpecialSectionHtml(),
+    sourceLinkLabel:
+      "Ferienordnung des Kultusministeriums",
+    secondaryLinkLabel:
+      "Schulferien beim Kultusministerium",
+    faqItems,
+    relatedLinksHtml:
+      niedersachsen2027RelatedLinksHtml(),
+    buttonText:
+      "Niedersachsen 2027 im Kalender öffnen",
+  });
+}
+
 function bw2027SpecialSectionHtml() {
   return `        <section
           id="besonderheiten"
@@ -2290,6 +2674,10 @@ const GOLD_PAGE_TEMPLATES = new Map([
   [
     "BY-2027",
     bayern2027GoldPageTemplate,
+  ],
+  [
+    "NI-2027",
+    niedersachsen2027GoldPageTemplate,
   ],
   [
     "NW-2027",

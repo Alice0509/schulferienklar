@@ -430,6 +430,65 @@ const goldPageValidations = [
   },
   {
     file:
+      "schulferien-niedersachsen-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="ni-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Halbjahresferien terminology",
+        /Halbjahresferien/,
+      ],
+      [
+        "Ascension school-free day",
+        /Tag nach Himmelfahrt/,
+      ],
+      [
+        "Ascension school-free date",
+        /7\. Mai 2027/,
+      ],
+      [
+        "Ascension connected period",
+        /6\. bis[\s\S]*9\. Mai 2027/,
+      ],
+      [
+        "Pentecost date",
+        /18\. Mai 2027/,
+      ],
+      [
+        "Pentecost connected period",
+        /15\. bis[\s\S]*18\. Mai 2027/,
+      ],
+      [
+        "school exception explanation",
+        /Ostfriesischen Inseln/,
+      ],
+      [
+        "official Niedersachsen source",
+        /Niedersächsisches Kultusministerium/,
+      ],
+      [
+        "official Niedersachsen source link",
+        /mk\.niedersachsen\.de/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-niedersachsen-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-niedersachsen-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-niedersachsen-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
       "schulferien-nordrhein-westfalen-2027.html",
     checks: [
       [
