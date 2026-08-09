@@ -1804,6 +1804,137 @@ function createThueringen2027FaqItems(events) {
   ];
 }
 
+
+function getSachsenAnhalt2027PeriodNote(event) {
+  return getStateYearCrossingNote(
+    event,
+    2027,
+  );
+}
+
+function createSachsenAnhalt2027FaqItems(
+  events,
+) {
+  const winter =
+    findStateYearGoldEvent(
+      events,
+      "winter",
+      2027,
+    );
+
+  const easter =
+    findStateYearGoldEvent(
+      events,
+      "easter",
+      2027,
+    );
+
+  const pentecost =
+    findStateYearGoldEvent(
+      events,
+      "pentecost",
+      2027,
+    );
+
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    findStateYearGoldEvent(
+      events,
+      "christmas",
+      2027,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return (
+        "Für diesen Zeitraum liegt " +
+        "aktuell kein Eintrag vor."
+      );
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Wann sind die Winterferien in Sachsen-Anhalt 2027?",
+      answer:
+        `Die Winterferien in Sachsen-Anhalt 2027 dauern vom ${rangeText(winter)}.`,
+    },
+    {
+      question:
+        "Wann sind die Osterferien in Sachsen-Anhalt 2027?",
+      answer:
+        `Die Osterferien in Sachsen-Anhalt 2027 dauern vom ${rangeText(easter)}.`,
+    },
+    {
+      question:
+        "Wie lange ist rund um Ostern 2027 am Stück frei?",
+      answer:
+        "Die offiziellen Osterferien dauern vom 22. bis 27. März 2027. Mit dem Wochenende davor, dem Sonntag nach Ferienende und Ostermontag ergibt sich eine zusammenhängende freie Zeit vom 20. bis 29. März 2027 – insgesamt 10 Kalendertage.",
+    },
+    {
+      question:
+        "Wann sind die Pfingstferien in Sachsen-Anhalt 2027?",
+      answer:
+        `Die Pfingstferien in Sachsen-Anhalt 2027 dauern vom ${rangeText(pentecost)}.`,
+    },
+    {
+      question:
+        "Wann sind die Sommerferien in Sachsen-Anhalt 2027?",
+      answer:
+        `Die Sommerferien in Sachsen-Anhalt 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien in Sachsen-Anhalt 2027?",
+      answer:
+        `Die Herbstferien in Sachsen-Anhalt 2027 dauern vom ${rangeText(autumn)}.`,
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien in Sachsen-Anhalt 2027?",
+      answer:
+        `Die Weihnachtsferien beginnen am ${christmas ? formatDate(christmas.startDate) : "nicht angegeben"} und enden am ${christmas ? formatDate(christmas.endDate) : "nicht angegeben"}.`,
+    },
+    {
+      question:
+        "Wann sind die beweglichen Ferientage in Sachsen-Anhalt 2027?",
+      answer:
+        "Die Ferienregelung weist bewegliche Ferientage nur als Anzahl aus. Da ihre konkreten Termine nicht landesweit festgelegt sind, werden sie nicht automatisch in die landesweite Standardübersicht eingerechnet.",
+    },
+    {
+      question:
+        "Ist Heilige Drei Könige 2027 in Sachsen-Anhalt ein Feiertag?",
+      answer:
+        "Ja. Der 6. Januar 2027 ist in Sachsen-Anhalt ein landesweit geltender gesetzlicher Feiertag. Er verlängert die Weihnachtsferien jedoch nicht zu einem zusammenhängenden Zeitraum, weil der 4. und 5. Januar nicht zum offiziellen Ferienzeitraum gehören.",
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen Ferienzeitraum nur um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Bewegliche Ferientage ohne landesweit festgelegtes Datum werden nicht automatisch eingerechnet.",
+    },
+  ];
+}
+
 function subscriptionCtaHtml({ code, name }) {
   const normalizedCode = String(code).toLowerCase();
   const httpsUrl =
@@ -2486,6 +2617,199 @@ Termine von der jeweiligen Schule abhängen.`,
 
 
 
+
+
+function sachsenAnhalt2027SpecialSectionHtml() {
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Wichtig für Sachsen-Anhalt
+          </p>
+          <h2>
+            Ostern und bewegliche Ferientage 2027
+          </h2>
+
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>Ostern: 10 Tage am Stück</h3>
+              <p>
+                Die offiziellen Osterferien dauern vom
+                <strong>22. bis 27. März 2027</strong>.
+              </p>
+              <p>
+                Mit den angrenzenden Wochenendtagen
+                und Ostermontag entstehen
+                <strong>10 freie Tage vom 20. bis
+                29. März 2027</strong>.
+              </p>
+            </div>
+
+            <div>
+              <h3>Bewegliche Ferientage</h3>
+              <p>
+                Die Ferienregelung weist zusätzlich
+                <strong>bewegliche Ferientage</strong>
+                aus.
+              </p>
+              <p>
+                Die konkreten Termine sind nicht
+                landesweit festgelegt. Deshalb werden
+                sie hier nicht automatisch in die
+                Standardübersicht eingerechnet.
+              </p>
+            </div>
+          </div>
+
+          <p class="gold-source-note">
+            <strong>6. Januar in Sachsen-Anhalt:</strong>
+            Heilige Drei Könige ist 2027 ein
+            landesweiter gesetzlicher Feiertag.
+            Er verlängert die Weihnachtsferien nicht
+            zusammenhängend, weil der 4. und 5. Januar
+            nicht zum offiziellen Ferienzeitraum
+            gehören.
+          </p>
+        </section>`;
+}
+
+function sachsenAnhalt2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-sachsen-anhalt-2026.html",
+      label:
+        "Schulferien Sachsen-Anhalt 2026",
+    },
+    {
+      href:
+        "/schulferien-sachsen-anhalt-2028.html",
+      label:
+        "Schulferien Sachsen-Anhalt 2028",
+    },
+    {
+      href:
+        "/schulferien-sachsen-anhalt.html",
+      label:
+        "Alle Jahre für Sachsen-Anhalt",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-sachsen-2027.html",
+      label:
+        "Sachsen 2027",
+    },
+    {
+      href:
+        "/schulferien-thueringen-2027.html",
+      label:
+        "Thüringen 2027",
+    },
+    {
+      href:
+        "/schulferien-brandenburg-2027.html",
+      label:
+        "Brandenburg 2027",
+    },
+    {
+      href:
+        "/schulferien-niedersachsen-2027.html",
+      label:
+        "Niedersachsen 2027",
+    },
+  ]);
+}
+
+function sachsenAnhalt2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createSachsenAnhalt2027FaqItems(
+      events,
+    );
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      "Schulferien Sachsen-Anhalt 2027: Termine und freie Tage",
+    description:
+      "Schulferien Sachsen-Anhalt 2027 mit Winterferien, Osterferien, Pfingstferien, Sommerferien, Herbstferien, PDF, ICS und offizieller Quelle.",
+    marker:
+      "sachsen-anhalt-2027",
+    eyebrow:
+      "Sachsen-Anhalt · Kalenderjahr 2027",
+    h1:
+      "Schulferien Sachsen-Anhalt 2027",
+    introText:
+      `Hier stehen zuerst die landesweit festgelegten
+Ferientermine. Zusätzlich zeigt Schulferienklar,
+wie lange die freie Zeit direkt am Stück dauert,
+wenn Wochenenden oder landesweite Feiertage
+unmittelbar anschließen.`,
+    specialNavLabel:
+      "Sachsen-Anhalt-Hinweise",
+    termHeadingText:
+      "Alle Ferienzeiten in Sachsen-Anhalt 2027",
+    termIntroText:
+      `Die Liste berücksichtigt auch Weihnachtsferien,
+die aus 2026 in das Kalenderjahr 2027 hineinreichen.
+Bewegliche Ferientage ohne landesweit festgelegtes
+Datum werden nicht automatisch eingerechnet.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+          getPeriodNote:
+            getSachsenAnhalt2027PeriodNote,
+        });
+      },
+    officialPeriodText:
+      `Exakt der vom Ministerium für Bildung des
+Landes Sachsen-Anhalt veröffentlichte Beginn und
+das veröffentlichte Ende des Ferienzeitraums.`,
+    connectedPeriodText:
+      `Der offizielle Zeitraum plus direkt
+anschließende Samstage, Sonntage und
+landesweit geltende gesetzliche Feiertage.`,
+    calculationNoteText:
+      `Angegeben werden Kalendertage, nicht die Zahl
+der ausgefallenen Unterrichtstage. Bewegliche
+Ferientage ohne landesweit festgelegtes Datum
+werden nicht automatisch eingerechnet.`,
+    specialSectionHtml:
+      sachsenAnhalt2027SpecialSectionHtml(),
+    sourceLinkLabel:
+      "Ferienregelung 2024/25 bis 2029/30",
+    secondaryLinkLabel:
+      "Ferientermine des Bildungsministeriums",
+    faqItems,
+    relatedLinksHtml:
+      sachsenAnhalt2027RelatedLinksHtml(),
+    buttonText:
+      "Sachsen-Anhalt 2027 im Kalender öffnen",
+  });
+}
 
 function thueringen2027SpecialSectionHtml() {
   return `        <section
@@ -3818,6 +4142,10 @@ const GOLD_PAGE_TEMPLATES = new Map([
   [
     "SN-2027",
     sachsen2027GoldPageTemplate,
+  ],
+  [
+    "ST-2027",
+    sachsenAnhalt2027GoldPageTemplate,
   ],
   [
     "TH-2027",
