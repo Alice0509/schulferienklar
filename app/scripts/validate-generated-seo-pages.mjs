@@ -391,6 +391,69 @@ const commonGoldPageChecks = [
 const goldPageValidations = [
   {
     file:
+      "schulferien-sachsen-anhalt-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="sachsen-anhalt-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Winterferien",
+        /Winterferien/,
+      ],
+      [
+        "Osterferien",
+        /Osterferien/,
+      ],
+      [
+        "Easter connected period",
+        /20\. bis[\s\S]*29\. März 2027/,
+      ],
+      [
+        "Pfingstferien",
+        /Pfingstferien/,
+      ],
+      [
+        "movable holiday explanation",
+        /Bewegliche Ferientage/,
+      ],
+      [
+        "movable holiday limitation",
+        /nicht landesweit festgelegt/,
+      ],
+      [
+        "Epiphany",
+        /Heilige Drei Könige/,
+      ],
+      [
+        "Epiphany date",
+        /6\. Januar 2027/,
+      ],
+      [
+        "official Sachsen-Anhalt source",
+        /Ministerium für Bildung des Landes Sachsen-Anhalt/,
+      ],
+      [
+        "official source link",
+        /mb\.sachsen-anhalt\.de/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-sachsen-anhalt-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-sachsen-anhalt-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-sachsen-anhalt-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
       "schulferien-thueringen-2027.html",
     checks: [
       [
