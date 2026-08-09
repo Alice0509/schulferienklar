@@ -1935,6 +1935,157 @@ function createSachsenAnhalt2027FaqItems(
   ];
 }
 
+
+function getHamburg2027PeriodNote(event) {
+  const crossingNote =
+    getStateYearCrossingNote(
+      event,
+      2027,
+    );
+
+  if (crossingNote) {
+    return crossingNote;
+  }
+
+  if (
+    event.type === "winter" &&
+    event.startDate === "2027-01-29"
+  ) {
+    return (
+      "Die offizielle Hamburger Ferienordnung " +
+      "führt diesen einzelnen Tag als " +
+      "Halbjahrespause."
+    );
+  }
+
+  if (
+    event.type === "pentecost" &&
+    event.startDate === "2027-05-07"
+  ) {
+    return (
+      "Die offizielle Ferienordnung bezeichnet " +
+      "diesen Zeitraum als Himmelfahrt/Pfingsten."
+    );
+  }
+
+  return "";
+}
+
+function createHamburg2027FaqItems(events) {
+  const winter =
+    findStateYearGoldEvent(
+      events,
+      "winter",
+      2027,
+    );
+
+  const spring =
+    findStateYearGoldEvent(
+      events,
+      "spring",
+      2027,
+    );
+
+  const pentecost =
+    findStateYearGoldEvent(
+      events,
+      "pentecost",
+      2027,
+    );
+
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    findStateYearGoldEvent(
+      events,
+      "christmas",
+      2027,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return (
+        "Für diesen Zeitraum liegt " +
+        "aktuell kein Eintrag vor."
+      );
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Wann ist die Halbjahrespause in Hamburg 2027?",
+      answer:
+        `Die Halbjahrespause in Hamburg ist am ${winter ? formatDate(winter.startDate) : "29.01.2027"}. Mit dem anschließenden Wochenende ergeben sich drei freie Kalendertage vom 29. bis 31. Januar 2027.`,
+    },
+    {
+      question:
+        "Warum heißt es in Hamburg Halbjahrespause statt Winterferien?",
+      answer:
+        "Die offizielle Hamburger Ferienordnung verwendet für den einzelnen freien Tag Ende Januar die Bezeichnung Halbjahrespause. Schulferienklar übernimmt diese offizielle Bezeichnung.",
+    },
+    {
+      question:
+        "Wann sind die Frühjahrsferien in Hamburg 2027?",
+      answer:
+        `Die Frühjahrsferien in Hamburg 2027 dauern vom ${rangeText(spring)}.`,
+    },
+    {
+      question:
+        "Wann sind Himmelfahrt/Pfingsten in Hamburg 2027?",
+      answer:
+        `Der offizielle Ferienzeitraum Himmelfahrt/Pfingsten dauert vom ${rangeText(pentecost)}.`,
+    },
+    {
+      question:
+        "Wie lange ist rund um Himmelfahrt und Pfingsten 2027 am Stück frei?",
+      answer:
+        "Mit Christi Himmelfahrt am 6. Mai, dem offiziellen Ferienzeitraum vom 7. bis 14. Mai, dem anschließenden Wochenende und Pfingstmontag ergibt sich eine zusammenhängende freie Zeit vom 6. bis 17. Mai 2027 – insgesamt 12 Kalendertage.",
+    },
+    {
+      question:
+        "Wann sind die Sommerferien in Hamburg 2027?",
+      answer:
+        `Die Sommerferien in Hamburg 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien in Hamburg 2027?",
+      answer:
+        `Die Herbstferien in Hamburg 2027 dauern vom ${rangeText(autumn)}.`,
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien in Hamburg 2027?",
+      answer:
+        `Die Weihnachtsferien beginnen am ${christmas ? formatDate(christmas.startDate) : "nicht angegeben"} und enden am ${christmas ? formatDate(christmas.endDate) : "nicht angegeben"}.`,
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen Ferienzeitraum nur um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage.",
+    },
+  ];
+}
+
 function subscriptionCtaHtml({ code, name }) {
   const normalizedCode = String(code).toLowerCase();
   const httpsUrl =
@@ -2618,6 +2769,202 @@ Termine von der jeweiligen Schule abhängen.`,
 
 
 
+
+
+function hamburg2027SpecialSectionHtml() {
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Wichtig für Hamburg
+          </p>
+          <h2>
+            Halbjahrespause und Himmelfahrt/Pfingsten 2027
+          </h2>
+
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>Halbjahrespause: 3 Tage frei</h3>
+              <p>
+                Die offizielle Ferienordnung nennt
+                <strong>Freitag, den
+                29. Januar 2027</strong>,
+                als Halbjahrespause.
+              </p>
+              <p>
+                Mit Samstag und Sonntag entstehen
+                <strong>3 freie Tage vom 29. bis
+                31. Januar 2027</strong>.
+              </p>
+            </div>
+
+            <div>
+              <h3>Himmelfahrt/Pfingsten: 12 Tage</h3>
+              <p>
+                Der offizielle Ferienzeitraum läuft vom
+                <strong>7. bis 14. Mai 2027</strong>.
+              </p>
+              <p>
+                Christi Himmelfahrt davor sowie
+                Wochenende und Pfingstmontag danach
+                verlängern die freie Zeit auf
+                <strong>6. bis 17. Mai 2027 –
+                insgesamt 12 Tage</strong>.
+              </p>
+            </div>
+          </div>
+
+          <p class="gold-source-note">
+            <strong>Hamburger Bezeichnungen:</strong>
+            Die Ferienordnung verwendet ausdrücklich
+            die Begriffe Halbjahrespause,
+            Frühjahrsferien und
+            Himmelfahrt/Pfingsten. Schulferienklar
+            übernimmt diese offiziellen Bezeichnungen.
+          </p>
+        </section>`;
+}
+
+function hamburg2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-hamburg-2026.html",
+      label:
+        "Schulferien Hamburg 2026",
+    },
+    {
+      href:
+        "/schulferien-hamburg-2028.html",
+      label:
+        "Schulferien Hamburg 2028",
+    },
+    {
+      href:
+        "/schulferien-hamburg.html",
+      label:
+        "Alle Jahre für Hamburg",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-schleswig-holstein-2027.html",
+      label:
+        "Schleswig-Holstein 2027",
+    },
+    {
+      href:
+        "/schulferien-niedersachsen-2027.html",
+      label:
+        "Niedersachsen 2027",
+    },
+    {
+      href:
+        "/schulferien-bremen-2027.html",
+      label:
+        "Bremen 2027",
+    },
+    {
+      href:
+        "/schulferien-mecklenburg-vorpommern-2027.html",
+      label:
+        "Mecklenburg-Vorpommern 2027",
+    },
+  ]);
+}
+
+function hamburg2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createHamburg2027FaqItems(
+      events,
+    );
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      "Schulferien Hamburg 2027: Termine und freie Tage",
+    description:
+      "Schulferien Hamburg 2027 mit Halbjahrespause, Frühjahrsferien, Himmelfahrt/Pfingsten, Sommerferien, Herbstferien, PDF, ICS und offizieller Quelle.",
+    marker:
+      "hamburg-2027",
+    eyebrow:
+      "Hamburg · Kalenderjahr 2027",
+    h1:
+      "Schulferien Hamburg 2027",
+    introText:
+      `Hier stehen zuerst die offiziell festgelegten
+Ferientermine für Hamburg. Zusätzlich zeigt
+Schulferienklar, wie lange die freie Zeit direkt am
+Stück dauert, wenn Wochenenden oder landesweite
+Feiertage unmittelbar anschließen.`,
+    specialNavLabel:
+      "Hamburg-Hinweise",
+    termHeadingText:
+      "Alle Ferienzeiten in Hamburg 2027",
+    termIntroText:
+      `Die Übersicht übernimmt die Hamburger
+Bezeichnungen aus der offiziellen Ferienordnung,
+darunter Halbjahrespause, Frühjahrsferien und
+Himmelfahrt/Pfingsten. Weihnachtsferien, die aus
+2026 in das Kalenderjahr 2027 hineinreichen, sind
+ebenfalls enthalten.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+          getPeriodNote:
+            getHamburg2027PeriodNote,
+        });
+      },
+    officialPeriodText:
+      `Exakt der von der Hamburger Schulbehörde
+veröffentlichte Beginn und das veröffentlichte Ende
+des jeweiligen Ferienzeitraums beziehungsweise der
+offiziell aufgeführten Halbjahrespause.`,
+    connectedPeriodText:
+      `Der offizielle Zeitraum plus direkt
+anschließende Samstage, Sonntage und
+landesweit geltende gesetzliche Feiertage.`,
+    calculationNoteText:
+      `Angegeben werden Kalendertage, nicht die Zahl
+der ausgefallenen Unterrichtstage. Erweiterungen
+erfolgen nur bei unmittelbar angrenzenden
+Wochenenden oder landesweiten Feiertagen.`,
+    specialSectionHtml:
+      hamburg2027SpecialSectionHtml(),
+    sourceLinkLabel:
+      "Ferienordnung Hamburg 2024/25 bis 2029/30",
+    secondaryLinkLabel:
+      "Ferientermine der Hamburger Schulbehörde",
+    faqItems,
+    relatedLinksHtml:
+      hamburg2027RelatedLinksHtml(),
+    buttonText:
+      "Hamburg 2027 im Kalender öffnen",
+  });
+}
 
 function sachsenAnhalt2027SpecialSectionHtml() {
   return `        <section
@@ -4134,6 +4481,10 @@ const GOLD_PAGE_TEMPLATES = new Map([
   [
     "BE-2027",
     berlin2027GoldPageTemplate,
+  ],
+  [
+    "HH-2027",
+    hamburg2027GoldPageTemplate,
   ],
   [
     "NI-2027",

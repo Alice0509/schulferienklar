@@ -391,6 +391,69 @@ const commonGoldPageChecks = [
 const goldPageValidations = [
   {
     file:
+      "schulferien-hamburg-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="hamburg-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Halbjahrespause",
+        /Halbjahrespause/,
+      ],
+      [
+        "Halbjahrespause date",
+        /29\. Januar 2027/,
+      ],
+      [
+        "Halbjahrespause connected period",
+        /29\. bis[\s\S]*31\. Januar 2027/,
+      ],
+      [
+        "Frühjahrsferien",
+        /Frühjahrsferien/,
+      ],
+      [
+        "Himmelfahrt/Pfingsten",
+        /Himmelfahrt\/Pfingsten/,
+      ],
+      [
+        "Ascension Pentecost official dates",
+        /7\. bis[\s\S]*14\. Mai 2027/,
+      ],
+      [
+        "Ascension Pentecost connected period",
+        /6\. bis[\s\S]*17\. Mai 2027/,
+      ],
+      [
+        "12 connected days",
+        /insgesamt 12 Tage/,
+      ],
+      [
+        "official Hamburg source",
+        /Behörde für Schule, Familie und Berufsbildung Hamburg/,
+      ],
+      [
+        "official Hamburg source link",
+        /hamburg\.de/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-hamburg-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-hamburg-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-hamburg-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
       "schulferien-sachsen-anhalt-2027.html",
     checks: [
       [
