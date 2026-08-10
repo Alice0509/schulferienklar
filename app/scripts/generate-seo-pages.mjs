@@ -2201,6 +2201,123 @@ function createHessen2027FaqItems(events) {
   ];
 }
 
+
+function getRheinlandPfalz2027PeriodNote(event) {
+  return getStateYearCrossingNote(
+    event,
+    2027,
+  );
+}
+
+function createRheinlandPfalz2027FaqItems(
+  events,
+) {
+  const easter =
+    findStateYearGoldEvent(
+      events,
+      "easter",
+      2027,
+    );
+
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    findStateYearGoldEvent(
+      events,
+      "christmas",
+      2027,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return (
+        "Für diesen Zeitraum liegt " +
+        "aktuell kein Eintrag vor."
+      );
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Gibt es in Rheinland-Pfalz 2027 Winterferien?",
+      answer:
+        "Nein. Die offizielle Ferienübersicht für Rheinland-Pfalz weist für diese Schuljahre keine landesweit einheitlichen Winterferien aus.",
+    },
+    {
+      question:
+        "Gibt es in Rheinland-Pfalz 2027 Pfingstferien?",
+      answer:
+        "Nein. In der offiziellen landesweiten Ferienübersicht sind für 2027 keine Pfingstferien ausgewiesen.",
+    },
+    {
+      question:
+        "Wann sind die Osterferien in Rheinland-Pfalz 2027?",
+      answer:
+        `Die Osterferien in Rheinland-Pfalz 2027 dauern vom ${rangeText(easter)}.`,
+    },
+    {
+      question:
+        "Wie lange ist rund um Ostern 2027 am Stück frei?",
+      answer:
+        "Die offiziellen Osterferien dauern vom 22. März bis 2. April 2027. Mit den direkt angrenzenden Wochenenden ergibt sich eine zusammenhängende freie Zeit vom 20. März bis 4. April 2027 – insgesamt 16 Kalendertage.",
+    },
+    {
+      question:
+        "Wann sind die Sommerferien in Rheinland-Pfalz 2027?",
+      answer:
+        `Die Sommerferien in Rheinland-Pfalz 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien in Rheinland-Pfalz 2027?",
+      answer:
+        `Die Herbstferien in Rheinland-Pfalz 2027 dauern vom ${rangeText(autumn)}.`,
+    },
+    {
+      question:
+        "Wie lange ist rund um die Herbstferien 2027 am Stück frei?",
+      answer:
+        "Die Herbstferien beginnen am 4. Oktober 2027. Mit dem Wochenende und dem Tag der Deutschen Einheit unmittelbar davor sowie dem Wochenende nach Ferienende ergibt sich eine zusammenhängende freie Zeit vom 2. bis 17. Oktober 2027 – insgesamt 16 Kalendertage.",
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien in Rheinland-Pfalz 2027?",
+      answer:
+        `Die Weihnachtsferien beginnen am ${christmas ? formatDate(christmas.startDate) : "nicht angegeben"} und enden am ${christmas ? formatDate(christmas.endDate) : "nicht angegeben"}.`,
+    },
+    {
+      question:
+        "Wann sind die beweglichen Ferientage in Rheinland-Pfalz 2027?",
+      answer:
+        "Jede Schule kann pro Schuljahr zusätzlich über sechs bewegliche Ferientage verfügen. Die konkreten Termine legt die jeweilige Schule fest. Deshalb werden sie nicht automatisch in die landesweite Standardübersicht eingerechnet.",
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen Ferienzeitraum nur um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Bewegliche Ferientage ohne landesweit festgelegtes Datum werden nicht automatisch eingerechnet.",
+    },
+  ];
+}
+
 function subscriptionCtaHtml({ code, name }) {
   const normalizedCode = String(code).toLowerCase();
   const httpsUrl =
@@ -2886,6 +3003,207 @@ Termine von der jeweiligen Schule abhängen.`,
 
 
 
+
+
+function rheinlandPfalz2027SpecialSectionHtml() {
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Wichtig für Rheinland-Pfalz
+          </p>
+          <h2>
+            Winterferien, Pfingstferien und bewegliche Ferientage 2027
+          </h2>
+
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>Keine Winter- oder Pfingstferien</h3>
+              <p>
+                Die offizielle Ferienübersicht für
+                Rheinland-Pfalz weist 2027
+                <strong>keine landesweit
+                einheitlichen Winterferien oder
+                Pfingstferien</strong> aus.
+              </p>
+              <p>
+                Deshalb erscheinen diese Zeiträume
+                nicht als Ferienblöcke in der
+                landesweiten Standardübersicht.
+              </p>
+            </div>
+
+            <div>
+              <h3>Bewegliche Ferientage</h3>
+              <p>
+                Jede Schule kann pro Schuljahr
+                zusätzlich über
+                <strong>sechs bewegliche
+                Ferientage</strong> verfügen.
+              </p>
+              <p>
+                Die konkreten Termine legt die
+                jeweilige Schule fest. Deshalb
+                werden sie hier nicht automatisch
+                eingerechnet.
+              </p>
+            </div>
+          </div>
+
+          <p class="gold-source-note">
+            <strong>Herbst 2027:</strong>
+            Die Herbstferien beginnen am
+            4. Oktober. Mit dem Wochenende und dem
+            Tag der Deutschen Einheit unmittelbar
+            davor sowie dem Wochenende nach
+            Ferienende ergibt sich eine freie Zeit
+            vom
+            <strong>2. bis 17. Oktober 2027 –
+            insgesamt 16 Kalendertage</strong>.
+          </p>
+        </section>`;
+}
+
+function rheinlandPfalz2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-rheinland-pfalz-2026.html",
+      label:
+        "Schulferien Rheinland-Pfalz 2026",
+    },
+    {
+      href:
+        "/schulferien-rheinland-pfalz-2028.html",
+      label:
+        "Schulferien Rheinland-Pfalz 2028",
+    },
+    {
+      href:
+        "/schulferien-rheinland-pfalz.html",
+      label:
+        "Alle Jahre für Rheinland-Pfalz",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-hessen-2027.html",
+      label:
+        "Hessen 2027",
+    },
+    {
+      href:
+        "/schulferien-saarland-2027.html",
+      label:
+        "Saarland 2027",
+    },
+    {
+      href:
+        "/schulferien-nordrhein-westfalen-2027.html",
+      label:
+        "Nordrhein-Westfalen 2027",
+    },
+    {
+      href:
+        "/schulferien-baden-wuerttemberg-2027.html",
+      label:
+        "Baden-Württemberg 2027",
+    },
+  ]);
+}
+
+function rheinlandPfalz2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createRheinlandPfalz2027FaqItems(
+      events,
+    );
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      "Schulferien Rheinland-Pfalz 2027: Termine und freie Tage",
+    description:
+      "Schulferien Rheinland-Pfalz 2027 mit Osterferien, Sommerferien, Herbstferien, Weihnachtsferien, beweglichen Ferientagen, PDF, ICS und offizieller Quelle.",
+    marker:
+      "rheinland-pfalz-2027",
+    eyebrow:
+      "Rheinland-Pfalz · Kalenderjahr 2027",
+    h1:
+      "Schulferien Rheinland-Pfalz 2027",
+    introText:
+      `Hier stehen zuerst die landesweit festgelegten
+Ferientermine für Rheinland-Pfalz. Zusätzlich zeigt
+Schulferienklar, wie lange die freie Zeit direkt am
+Stück dauert, wenn Wochenenden oder landesweite
+Feiertage unmittelbar anschließen.`,
+    specialNavLabel:
+      "Rheinland-Pfalz-Hinweise",
+    termHeadingText:
+      "Alle Ferienzeiten in Rheinland-Pfalz 2027",
+    termIntroText:
+      `Die offizielle Ferienübersicht führt
+Osterferien, Sommerferien, Herbstferien und
+Weihnachtsferien. Winterferien und Pfingstferien
+sind für 2027 nicht ausgewiesen. Bewegliche
+Ferientage ohne landesweit einheitliches Datum
+werden nicht automatisch eingerechnet.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+          getPeriodNote:
+            getRheinlandPfalz2027PeriodNote,
+        });
+      },
+    officialPeriodText:
+      `Exakt der vom Ministerium für Bildung
+Rheinland-Pfalz veröffentlichte Beginn und das
+veröffentlichte Ende des jeweiligen
+Ferienzeitraums.`,
+    connectedPeriodText:
+      `Der offizielle Zeitraum plus direkt
+anschließende Samstage, Sonntage und
+landesweit geltende gesetzliche Feiertage.`,
+    calculationNoteText:
+      `Angegeben werden Kalendertage, nicht die Zahl
+der ausgefallenen Unterrichtstage. Bewegliche
+Ferientage ohne landesweit festgelegtes Datum
+werden nicht automatisch eingerechnet.`,
+    specialSectionHtml:
+      rheinlandPfalz2027SpecialSectionHtml(),
+    sourceLinkLabel:
+      "Ferientermine des Bildungsministeriums",
+    secondaryLinkLabel:
+      "Ferienregelung der KMK",
+    faqItems,
+    relatedLinksHtml:
+      rheinlandPfalz2027RelatedLinksHtml(),
+    buttonText:
+      "Rheinland-Pfalz 2027 im Kalender öffnen",
+  });
+}
 
 function hessen2027SpecialSectionHtml() {
   return `        <section
@@ -4824,6 +5142,10 @@ const GOLD_PAGE_TEMPLATES = new Map([
   [
     "NW-2027",
     nrw2027GoldPageTemplate,
+  ],
+  [
+    "RP-2027",
+    rheinlandPfalz2027GoldPageTemplate,
   ],
   [
     "BW-2027",

@@ -391,6 +391,77 @@ const commonGoldPageChecks = [
 const goldPageValidations = [
   {
     file:
+      "schulferien-rheinland-pfalz-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="rheinland-pfalz-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Osterferien",
+        /Osterferien/,
+      ],
+      [
+        "Easter connected period",
+        /20\. März bis 4\. April 2027/,
+      ],
+      [
+        "Sommerferien",
+        /Sommerferien/,
+      ],
+      [
+        "Herbstferien",
+        /Herbstferien/,
+      ],
+      [
+        "Autumn connected period",
+        /2\. bis 17\. Oktober 2027/,
+      ],
+      [
+        "no uniform Winterferien",
+        /keine landesweit[\s\S]*Winterferien/,
+      ],
+      [
+        "no Pfingstferien",
+        /Pfingstferien/,
+      ],
+      [
+        "movable holidays",
+        /bewegliche Ferientage/,
+      ],
+      [
+        "six movable holidays",
+        /sechs bewegliche[\s\S]*Ferientage/,
+      ],
+      [
+        "movable holiday limitation",
+        /konkreten Termine legt die[\s\S]*jeweilige Schule fest/,
+      ],
+      [
+        "official Rheinland-Pfalz source",
+        /Ministerium für Bildung Rheinland-Pfalz/,
+      ],
+      [
+        "official source link",
+        /bm\.rlp\.de/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-rheinland-pfalz-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-rheinland-pfalz-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-rheinland-pfalz-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
       "schulferien-hessen-2027.html",
     checks: [
       [
