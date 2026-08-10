@@ -391,6 +391,73 @@ const commonGoldPageChecks = [
 const goldPageValidations = [
   {
     file:
+      "schulferien-hessen-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="hessen-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Osterferien",
+        /Osterferien/,
+      ],
+      [
+        "Easter connected period",
+        /20\. März bis 4\. April 2027/,
+      ],
+      [
+        "Sommerferien",
+        /Sommerferien/,
+      ],
+      [
+        "Herbstferien",
+        /Herbstferien/,
+      ],
+      [
+        "Autumn connected period",
+        /2\. bis 17\. Oktober 2027/,
+      ],
+      [
+        "no uniform winter holidays",
+        /keine landesweit[\s\S]*Winterferien/,
+      ],
+      [
+        "no uniform Pentecost holidays",
+        /Pfingstferien/,
+      ],
+      [
+        "movable holidays",
+        /bewegliche Ferientage/,
+      ],
+      [
+        "movable holiday limitation",
+        /nicht landesweit einheitlich festgelegt/,
+      ],
+      [
+        "official Hessen source",
+        /Hessisches Ministerium für Kultus, Bildung und Chancen/,
+      ],
+      [
+        "official Hessen source link",
+        /kultus\.hessen\.de/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-hessen-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-hessen-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-hessen-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
       "schulferien-hamburg-2027.html",
     checks: [
       [

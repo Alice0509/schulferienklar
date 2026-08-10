@@ -2086,6 +2086,121 @@ function createHamburg2027FaqItems(events) {
   ];
 }
 
+
+function getHessen2027PeriodNote(event) {
+  return getStateYearCrossingNote(
+    event,
+    2027,
+  );
+}
+
+function createHessen2027FaqItems(events) {
+  const easter =
+    findStateYearGoldEvent(
+      events,
+      "easter",
+      2027,
+    );
+
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    findStateYearGoldEvent(
+      events,
+      "christmas",
+      2027,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return (
+        "Für diesen Zeitraum liegt " +
+        "aktuell kein Eintrag vor."
+      );
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Gibt es in Hessen 2027 Winterferien?",
+      answer:
+        "Nein. Die offizielle hessische Ferienübersicht weist für diese Schuljahre keine einheitlichen Winterferien aus.",
+    },
+    {
+      question:
+        "Gibt es in Hessen 2027 Pfingstferien?",
+      answer:
+        "Nein. In der landesweiten hessischen Ferienübersicht sind für 2027 keine einheitlichen Pfingstferien aufgeführt.",
+    },
+    {
+      question:
+        "Wann sind die Osterferien in Hessen 2027?",
+      answer:
+        `Die Osterferien in Hessen 2027 dauern vom ${rangeText(easter)}.`,
+    },
+    {
+      question:
+        "Wie lange ist rund um die Osterferien 2027 am Stück frei?",
+      answer:
+        "Die offiziellen Osterferien dauern vom 22. März bis 2. April 2027. Mit den direkt angrenzenden Wochenenden ergibt sich eine zusammenhängende freie Zeit vom 20. März bis 4. April 2027 – insgesamt 16 Kalendertage.",
+    },
+    {
+      question:
+        "Wann sind die Sommerferien in Hessen 2027?",
+      answer:
+        `Die Sommerferien in Hessen 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien in Hessen 2027?",
+      answer:
+        `Die Herbstferien in Hessen 2027 dauern vom ${rangeText(autumn)}.`,
+    },
+    {
+      question:
+        "Wie lange ist rund um die Herbstferien 2027 am Stück frei?",
+      answer:
+        "Die Herbstferien beginnen am 4. Oktober 2027. Da der Tag der Deutschen Einheit am 3. Oktober direkt davor liegt und auf einen Sonntag fällt, ergibt sich zusammen mit den angrenzenden Wochenenden eine freie Zeit vom 2. bis 17. Oktober 2027 – insgesamt 16 Kalendertage.",
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien in Hessen 2027?",
+      answer:
+        `Die Weihnachtsferien beginnen am ${christmas ? formatDate(christmas.startDate) : "nicht angegeben"} und enden am ${christmas ? formatDate(christmas.endDate) : "nicht angegeben"}.`,
+    },
+    {
+      question:
+        "Wann sind die beweglichen Ferientage in Hessen 2027?",
+      answer:
+        "Die offizielle Übersicht nennt bewegliche Ferientage nur als Anzahl. Da ihre konkreten Termine nicht landesweit einheitlich festgelegt sind, werden sie nicht automatisch in die landesweite Standardübersicht eingerechnet.",
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen Ferienzeitraum nur um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Bewegliche Ferientage ohne landesweit festgelegtes Datum werden nicht automatisch eingerechnet.",
+    },
+  ];
+}
+
 function subscriptionCtaHtml({ code, name }) {
   const normalizedCode = String(code).toLowerCase();
   const httpsUrl =
@@ -2770,6 +2885,206 @@ Termine von der jeweiligen Schule abhängen.`,
 
 
 
+
+
+function hessen2027SpecialSectionHtml() {
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Wichtig für Hessen
+          </p>
+          <h2>
+            Winterferien, Pfingstferien und bewegliche Ferientage 2027
+          </h2>
+
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>Keine einheitlichen Winter- oder Pfingstferien</h3>
+              <p>
+                Die offizielle hessische
+                Ferienübersicht führt für 2027
+                <strong>keine landesweit
+                einheitlichen Winterferien oder
+                Pfingstferien</strong> auf.
+              </p>
+              <p>
+                Deshalb erscheinen diese Zeiträume
+                nicht als Ferienblöcke in der
+                landesweiten Standardübersicht.
+              </p>
+            </div>
+
+            <div>
+              <h3>Bewegliche Ferientage</h3>
+              <p>
+                Die offizielle Übersicht weist
+                zusätzlich
+                <strong>bewegliche Ferientage</strong>
+                aus.
+              </p>
+              <p>
+                Ihre konkreten Termine sind nicht
+                landesweit einheitlich festgelegt.
+                Deshalb werden sie hier nicht
+                automatisch eingerechnet.
+              </p>
+            </div>
+          </div>
+
+          <p class="gold-source-note">
+            <strong>Herbst 2027:</strong>
+            Die Herbstferien beginnen am
+            4. Oktober. Mit dem Wochenende und dem
+            Tag der Deutschen Einheit unmittelbar
+            davor ergibt sich eine zusammenhängende
+            freie Zeit vom
+            <strong>2. bis 17. Oktober 2027 –
+            insgesamt 16 Kalendertage</strong>.
+          </p>
+        </section>`;
+}
+
+function hessen2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-hessen-2026.html",
+      label:
+        "Schulferien Hessen 2026",
+    },
+    {
+      href:
+        "/schulferien-hessen-2028.html",
+      label:
+        "Schulferien Hessen 2028",
+    },
+    {
+      href:
+        "/schulferien-hessen.html",
+      label:
+        "Alle Jahre für Hessen",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-nordrhein-westfalen-2027.html",
+      label:
+        "Nordrhein-Westfalen 2027",
+    },
+    {
+      href:
+        "/schulferien-rheinland-pfalz-2027.html",
+      label:
+        "Rheinland-Pfalz 2027",
+    },
+    {
+      href:
+        "/schulferien-bayern-2027.html",
+      label:
+        "Bayern 2027",
+    },
+    {
+      href:
+        "/schulferien-thueringen-2027.html",
+      label:
+        "Thüringen 2027",
+    },
+  ]);
+}
+
+function hessen2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createHessen2027FaqItems(
+      events,
+    );
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      "Schulferien Hessen 2027: Termine und freie Tage",
+    description:
+      "Schulferien Hessen 2027 mit Osterferien, Sommerferien, Herbstferien, Weihnachtsferien, beweglichen Ferientagen, PDF, ICS und offizieller Quelle.",
+    marker:
+      "hessen-2027",
+    eyebrow:
+      "Hessen · Kalenderjahr 2027",
+    h1:
+      "Schulferien Hessen 2027",
+    introText:
+      `Hier stehen zuerst die landesweit festgelegten
+Ferientermine für Hessen. Zusätzlich zeigt
+Schulferienklar, wie lange die freie Zeit direkt am
+Stück dauert, wenn Wochenenden oder landesweite
+Feiertage unmittelbar anschließen.`,
+    specialNavLabel:
+      "Hessen-Hinweise",
+    termHeadingText:
+      "Alle Ferienzeiten in Hessen 2027",
+    termIntroText:
+      `Die offizielle hessische Ferienübersicht führt
+Osterferien, Sommerferien, Herbstferien und
+Weihnachtsferien. Einheitliche Winterferien oder
+Pfingstferien sind für 2027 nicht ausgewiesen.
+Bewegliche Ferientage ohne landesweit einheitliches
+Datum werden nicht automatisch eingerechnet.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+          getPeriodNote:
+            getHessen2027PeriodNote,
+        });
+      },
+    officialPeriodText:
+      `Exakt der vom Hessischen Ministerium für
+Kultus, Bildung und Chancen veröffentlichte Beginn
+und das veröffentlichte Ende des jeweiligen
+Ferienzeitraums.`,
+    connectedPeriodText:
+      `Der offizielle Zeitraum plus direkt
+anschließende Samstage, Sonntage und
+landesweit geltende gesetzliche Feiertage.`,
+    calculationNoteText:
+      `Angegeben werden Kalendertage, nicht die Zahl
+der ausgefallenen Unterrichtstage. Bewegliche
+Ferientage ohne landesweit festgelegtes Datum
+werden nicht automatisch eingerechnet.`,
+    specialSectionHtml:
+      hessen2027SpecialSectionHtml(),
+    sourceLinkLabel:
+      "Ferientermine des Hessischen Kultusministeriums",
+    secondaryLinkLabel:
+      "Ferienregelung der KMK",
+    faqItems,
+    relatedLinksHtml:
+      hessen2027RelatedLinksHtml(),
+    buttonText:
+      "Hessen 2027 im Kalender öffnen",
+  });
+}
 
 function hamburg2027SpecialSectionHtml() {
   return `        <section
@@ -4485,6 +4800,10 @@ const GOLD_PAGE_TEMPLATES = new Map([
   [
     "HH-2027",
     hamburg2027GoldPageTemplate,
+  ],
+  [
+    "HE-2027",
+    hessen2027GoldPageTemplate,
   ],
   [
     "NI-2027",
