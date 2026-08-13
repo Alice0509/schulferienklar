@@ -2318,6 +2318,141 @@ function createRheinlandPfalz2027FaqItems(
   ];
 }
 
+
+function getBrandenburg2027PeriodNote(event) {
+  return getStateYearCrossingNote(
+    event,
+    2027,
+  );
+}
+
+function createBrandenburg2027FaqItems(
+  events,
+) {
+  const winter =
+    findStateYearGoldEvent(
+      events,
+      "winter",
+      2027,
+    );
+
+  const easter =
+    findStateYearGoldEvent(
+      events,
+      "easter",
+      2027,
+    );
+
+  const pentecost =
+    findStateYearGoldEvent(
+      events,
+      "pentecost",
+      2027,
+    );
+
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    findStateYearGoldEvent(
+      events,
+      "christmas",
+      2027,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return (
+        "Für diesen Zeitraum liegt " +
+        "aktuell kein Eintrag vor."
+      );
+    }
+
+    if (event.startDate === event.endDate) {
+      return formatDate(event.startDate);
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Wann sind die Winterferien in Brandenburg 2027?",
+      answer:
+        `Die Winterferien in Brandenburg 2027 dauern vom ${rangeText(winter)}.`,
+    },
+    {
+      question:
+        "Wann sind die Osterferien in Brandenburg 2027?",
+      answer:
+        `Die Osterferien in Brandenburg 2027 dauern vom ${rangeText(easter)}.`,
+    },
+    {
+      question:
+        "Wann ist Pfingsten in Brandenburg 2027 schulfrei?",
+      answer:
+        `Der offizielle Ferientag zu Pfingsten ist ${rangeText(pentecost)}.`,
+    },
+    {
+      question:
+        "Wie lange ist rund um Pfingsten 2027 am Stück frei?",
+      answer:
+        "Der offizielle Ferientag ist Dienstag, der 18. Mai 2027. Zusammen mit dem direkt davorliegenden Wochenende, Pfingstsonntag und Pfingstmontag ergibt sich eine zusammenhängende freie Zeit vom 15. bis 18. Mai 2027 – insgesamt 4 Kalendertage.",
+    },
+    {
+      question:
+        "Wann sind die Sommerferien in Brandenburg 2027?",
+      answer:
+        `Die Sommerferien in Brandenburg 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien in Brandenburg 2027?",
+      answer:
+        `Die Herbstferien in Brandenburg 2027 dauern vom ${rangeText(autumn)}.`,
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien in Brandenburg 2027?",
+      answer:
+        `Die Weihnachtsferien beginnen am ${christmas ? formatDate(christmas.startDate) : "nicht angegeben"} und enden am ${christmas ? formatDate(christmas.endDate) : "nicht angegeben"}.`,
+    },
+    {
+      question:
+        "Ist der 7. Mai 2027 in Brandenburg ein variabler Ferientag?",
+      answer:
+        "Die offizielle Anlage 1 der VV Schulbetrieb führt Freitag, den 7. Mai 2027, als variablen Ferientag für das Schuljahr 2026/27 auf.",
+    },
+    {
+      question:
+        "Gilt der variable Ferientag am 7. Mai 2027 für jede Schule?",
+      answer:
+        "Nicht zwingend. Die Schulkonferenz kann nach den brandenburgischen Regelungen eine abweichende Festlegung treffen. Deshalb wird der variable Ferientag nicht automatisch in die landesweite Standardübersicht eingerechnet.",
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen landesweiten Ferienzeitraum nur um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Variable Ferientage, die von einer Schulkonferenz abweichend festgelegt werden können, werden nicht automatisch eingerechnet.",
+    },
+  ];
+}
+
 function subscriptionCtaHtml({ code, name }) {
   const normalizedCode = String(code).toLowerCase();
   const httpsUrl =
@@ -3004,6 +3139,211 @@ Termine von der jeweiligen Schule abhängen.`,
 
 
 
+
+
+function brandenburg2027SpecialSectionHtml() {
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Wichtig für Brandenburg
+          </p>
+          <h2>
+            Variabler Ferientag und Pfingsten 2027
+          </h2>
+
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>Variabler Ferientag am 7. Mai</h3>
+              <p>
+                Die offizielle Anlage 1 der
+                VV Schulbetrieb führt für das
+                Schuljahr 2026/27
+                <strong>Freitag, den 7. Mai
+                2027</strong>, als variablen
+                Ferientag auf.
+              </p>
+              <p>
+                Eine Schulkonferenz kann jedoch
+                eine abweichende Festlegung
+                treffen. Deshalb wird dieser Tag
+                nicht automatisch in die
+                landesweite Standardübersicht
+                eingerechnet.
+              </p>
+            </div>
+
+            <div>
+              <h3>Vier freie Tage rund um Pfingsten</h3>
+              <p>
+                Der offizielle schulfreie Tag
+                zu Pfingsten ist
+                <strong>Dienstag, der
+                18. Mai 2027</strong>.
+              </p>
+              <p>
+                Mit dem Wochenende,
+                Pfingstsonntag und Pfingstmontag
+                unmittelbar davor ergibt sich
+                eine freie Zeit vom
+                <strong>15. bis 18. Mai 2027 –
+                insgesamt 4 Kalendertage</strong>.
+              </p>
+            </div>
+          </div>
+
+          <p class="gold-source-note">
+            <strong>Wichtig:</strong>
+            Variable Ferientage können in
+            Brandenburg auf Beschluss der
+            Schulkonferenz anders festgelegt
+            werden. Für die konkrete Schule ist
+            deshalb deren eigene Veröffentlichung
+            maßgeblich.
+          </p>
+        </section>`;
+}
+
+function brandenburg2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-brandenburg-2026.html",
+      label:
+        "Schulferien Brandenburg 2026",
+    },
+    {
+      href:
+        "/schulferien-brandenburg-2028.html",
+      label:
+        "Schulferien Brandenburg 2028",
+    },
+    {
+      href:
+        "/schulferien-brandenburg.html",
+      label:
+        "Alle Jahre für Brandenburg",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-berlin-2027.html",
+      label:
+        "Berlin 2027",
+    },
+    {
+      href:
+        "/schulferien-sachsen-anhalt-2027.html",
+      label:
+        "Sachsen-Anhalt 2027",
+    },
+    {
+      href:
+        "/schulferien-sachsen-2027.html",
+      label:
+        "Sachsen 2027",
+    },
+    {
+      href:
+        "/schulferien-mecklenburg-vorpommern-2027.html",
+      label:
+        "Mecklenburg-Vorpommern 2027",
+    },
+  ]);
+}
+
+function brandenburg2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createBrandenburg2027FaqItems(
+      events,
+    );
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      "Schulferien Brandenburg 2027: Termine und freie Tage",
+    description:
+      "Schulferien Brandenburg 2027 mit Winterferien, Osterferien, Pfingsten, Sommerferien, Herbstferien, Weihnachtsferien, variablem Ferientag, PDF, ICS und offizieller Quelle.",
+    marker:
+      "brandenburg-2027",
+    eyebrow:
+      "Brandenburg · Kalenderjahr 2027",
+    h1:
+      "Schulferien Brandenburg 2027",
+    introText:
+      `Hier stehen zuerst die landesweit festgelegten
+Ferientermine für Brandenburg. Zusätzlich zeigt
+Schulferienklar, wie lange die freie Zeit direkt am
+Stück dauert, wenn Wochenenden oder landesweite
+Feiertage unmittelbar anschließen.`,
+    specialNavLabel:
+      "Brandenburg-Hinweise",
+    termHeadingText:
+      "Alle Ferienzeiten in Brandenburg 2027",
+    termIntroText:
+      `Die landesweite Übersicht enthält
+Weihnachtsferien, Winterferien, Osterferien,
+Pfingsten, Sommerferien und Herbstferien.
+Variable Ferientage werden getrennt behandelt,
+weil Schulen abweichende Festlegungen treffen
+können.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+          getPeriodNote:
+            getBrandenburg2027PeriodNote,
+        });
+      },
+    officialPeriodText:
+      `Exakt der in Anlage 1 der VV Schulbetrieb
+veröffentlichte Beginn und das veröffentlichte Ende
+des jeweiligen landesweiten Ferienzeitraums.`,
+    connectedPeriodText:
+      `Der offizielle Zeitraum plus direkt
+anschließende Samstage, Sonntage und
+landesweit geltende gesetzliche Feiertage.`,
+    calculationNoteText:
+      `Angegeben werden Kalendertage, nicht die Zahl
+der ausgefallenen Unterrichtstage. Variable
+Ferientage, die auf Schulebene abweichend
+festgelegt werden können, werden nicht automatisch
+eingerechnet.`,
+    specialSectionHtml:
+      brandenburg2027SpecialSectionHtml(),
+    sourceLinkLabel:
+      "Anlage 1 der VV Schulbetrieb",
+    secondaryLinkLabel:
+      "Schulferien Brandenburg beim MBJS",
+    faqItems,
+    relatedLinksHtml:
+      brandenburg2027RelatedLinksHtml(),
+    buttonText:
+      "Brandenburg 2027 im Kalender öffnen",
+  });
+}
 
 function rheinlandPfalz2027SpecialSectionHtml() {
   return `        <section
@@ -5114,6 +5454,10 @@ const GOLD_PAGE_TEMPLATES = new Map([
   [
     "BE-2027",
     berlin2027GoldPageTemplate,
+  ],
+  [
+    "BB-2027",
+    brandenburg2027GoldPageTemplate,
   ],
   [
     "HH-2027",
