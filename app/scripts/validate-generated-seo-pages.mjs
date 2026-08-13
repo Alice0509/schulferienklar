@@ -391,6 +391,81 @@ const commonGoldPageChecks = [
 const goldPageValidations = [
   {
     file:
+      "schulferien-brandenburg-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="brandenburg-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Winterferien",
+        /Winterferien/,
+      ],
+      [
+        "Osterferien",
+        /Osterferien/,
+      ],
+      [
+        "Pfingsten",
+        /Pfingsten/,
+      ],
+      [
+        "Pentecost connected period",
+        /15\. bis 18\. Mai 2027/,
+      ],
+      [
+        "four connected Pentecost days",
+        /insgesamt 4 Kalendertage/,
+      ],
+      [
+        "Sommerferien",
+        /Sommerferien/,
+      ],
+      [
+        "Herbstferien",
+        /Herbstferien/,
+      ],
+      [
+        "variable holiday",
+        /variablen Ferientag/,
+      ],
+      [
+        "variable holiday date",
+        /7\. Mai 2027/,
+      ],
+      [
+        "school conference limitation",
+        /Schulkonferenz/,
+      ],
+      [
+        "variable holiday exclusion",
+        /nicht automatisch[\s\S]*landesweite Standardübersicht[\s\S]*eingerechnet/,
+      ],
+      [
+        "official Brandenburg source",
+        /Ministerium für Bildung, Jugend und Sport des Landes Brandenburg/,
+      ],
+      [
+        "official Brandenburg source link",
+        /bravors\.brandenburg\.de/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-brandenburg-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-brandenburg-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-brandenburg-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
       "schulferien-rheinland-pfalz-2027.html",
     checks: [
       [
