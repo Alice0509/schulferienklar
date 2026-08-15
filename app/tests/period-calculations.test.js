@@ -7,6 +7,7 @@ import {
   getOverlapMonthKeys,
 } from "../src/domain/overlaps.js";
 import {
+  findCalendarPublicHolidayForDate,
   findPublicHolidayForDate,
   getEffectiveFreePeriod,
 } from "../src/domain/periods.js";
@@ -44,6 +45,47 @@ test("effective free period connects weekends and public holidays", () => {
       publicHolidays,
     )?.date,
     "2027-05-17",
+  );
+});
+
+test("calendar lookup shows regional and local holidays without making them default free days", () => {
+  const publicHolidays = [
+    {
+      id: "regional-assumption",
+      date: "2026-08-15",
+      scope: "regional",
+      includeInDefaultCalendar: false,
+    },
+    {
+      id: "local-friedensfest",
+      date: "2026-08-08",
+      scope: "local",
+      includeInDefaultCalendar: false,
+    },
+  ];
+
+  assert.equal(
+    findCalendarPublicHolidayForDate(
+      "2026-08-15",
+      publicHolidays,
+    )?.id,
+    "regional-assumption",
+  );
+
+  assert.equal(
+    findCalendarPublicHolidayForDate(
+      "2026-08-08",
+      publicHolidays,
+    )?.id,
+    "local-friedensfest",
+  );
+
+  assert.equal(
+    findPublicHolidayForDate(
+      "2026-08-15",
+      publicHolidays,
+    ),
+    undefined,
   );
 });
 

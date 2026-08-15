@@ -14,7 +14,7 @@ import {
   getOverlapMonthKeys,
 } from "./domain/overlaps.js";
 import {
-  findPublicHolidayForDate,
+  findCalendarPublicHolidayForDate,
   getEffectiveFreePeriod,
 } from "./domain/periods.js";
 import {
@@ -184,6 +184,36 @@ function getPublicHolidayName(holiday) {
   return holiday?.name?.de || holiday?.name || "Feiertag";
 }
 
+function isLimitedScopePublicHoliday(holiday) {
+  return (
+    (holiday?.category === "public_holiday" ||
+      holiday?.type === "public_holiday") &&
+    (holiday.scope === "regional" || holiday.scope === "local")
+  );
+}
+
+function getPublicHolidayScopeText(holiday) {
+  if (holiday?.scope === "regional") {
+    return "regional (gilt nur in bestimmten Gemeinden)";
+  }
+
+  if (holiday?.scope === "local") {
+    return "nur lokal";
+  }
+
+  return "";
+}
+
+function getCalendarHolidayLabel(holiday) {
+  const label = getHolidayLabel(holiday);
+
+  if (!isLimitedScopePublicHoliday(holiday)) {
+    return label;
+  }
+
+  return `${label} · ${getPublicHolidayScopeText(holiday)}`;
+}
+
 function getNextHoliday(holidays) {
   return holidays
     .filter((holiday) => parseDate(holiday.endDate) >= TODAY)
@@ -258,9 +288,10 @@ function buildMonthCells(year, monthIndex) {
 function findHolidayForDate(date, holidays, publicHolidays = []) {
   const key = toDateKey(date);
 
-  const publicHoliday = publicHolidays.find((holiday) => {
-    return holiday.includeInDefaultCalendar && holiday.date === key;
-  });
+  const publicHoliday = findCalendarPublicHolidayForDate(
+    date,
+    publicHolidays,
+  );
 
   if (publicHoliday) {
     return {
@@ -332,6 +363,9 @@ function HolidayCalendar({
             <i className="legend-swatch legend-public" /> Feiertag
           </span>
           <span>
+            <i className="legend-swatch legend-public legend-limited" /> regional/lokal
+          </span>
+          <span>
             <i className="legend-swatch legend-special" /> Unterrichtsfrei
           </span>
           <span>
@@ -386,7 +420,9 @@ function HolidayCalendar({
                     Boolean(freePeriodHoliday) && !holiday;
 
                   const dayKey = toDateKey(date);
-                  const holidayLabel = holiday ? getHolidayLabel(holiday) : "";
+                  const holidayLabel = holiday
+                    ? getCalendarHolidayLabel(holiday)
+                    : "";
                   const freePeriodLabel =
                     isFreePeriodOnly && freePeriodHoliday
                       ? `Freie Zeit rund um ${getHolidayLabel(freePeriodHoliday)}`
@@ -402,6 +438,9 @@ function HolidayCalendar({
                         isFreePeriodOnly ? "is-free-period" : "",
                         holiday ? "is-highlighted" : "",
                         tone ? `tone-${tone}` : "",
+                        isLimitedScopePublicHoliday(holiday)
+                          ? "is-limited-scope"
+                          : "",
                         isToday ? "is-today" : "",
                         dayDetailLabel ? "has-day-detail" : "",
                         selectedDayDetail?.dateKey === dayKey
@@ -1024,7 +1063,7 @@ export default function App() {
   }, [holidays]);
 
   const todayPublicHoliday = useMemo(() => {
-    return findPublicHolidayForDate(
+    return findCalendarPublicHolidayForDate(
       TODAY,
       publicHolidayDataset?.holidays || [],
     );
@@ -1769,7 +1808,9 @@ export default function App() {
 
                 {todayPublicHoliday && (
                   <p className="today-note">
-                    Heute ist Feiertag: {todayPublicHoliday.name.de}
+                    {isLimitedScopePublicHoliday(todayPublicHoliday)
+                      ? `Heute: ${getPublicHolidayName(todayPublicHoliday)} · ${getPublicHolidayScopeText(todayPublicHoliday)}`
+                      : `Heute ist Feiertag: ${getPublicHolidayName(todayPublicHoliday)}`}
                   </p>
                 )}
               </>

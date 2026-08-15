@@ -690,8 +690,16 @@ select:focus {
   background: rgba(255, 236, 97, 0.62);
 }
 
+.legend-limited {
+  border: 1px dashed rgba(126, 102, 0, 0.72);
+}
+
 .calendar-day.tone-public::before {
   background: rgba(255, 236, 97, 0.62);
+}
+
+.calendar-day.is-limited-scope::before {
+  border: 1px dashed rgba(126, 102, 0, 0.72);
 }
 
 /* Today should not hide the holiday/highlighter layer. */

@@ -5,6 +5,17 @@ import {
   toDateKey,
 } from "./date.js";
 
+export function findCalendarPublicHolidayForDate(
+  date,
+  publicHolidays = [],
+) {
+  const dateKey = toDateKey(date);
+
+  return publicHolidays.find((holiday) => {
+    return holiday.date === dateKey;
+  });
+}
+
 export function findPublicHolidayForDate(date, publicHolidays = []) {
   const dateKey = toDateKey(date);
 
