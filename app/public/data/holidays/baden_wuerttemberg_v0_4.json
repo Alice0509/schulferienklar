@@ -3,6 +3,29 @@
   "version": "0.4",
   "createdAt": "2026-05-24",
   "dataPolicy": "Official Bundesland-level Schulferien only. School-specific dates are excluded.",
+  "goldPagePolicy": {
+    "navLabel": "BW-Hinweise",
+    "eyebrow": "Wichtig für Baden-Württemberg",
+    "heading": "Schulfreie Tage und bewegliche Ferientage",
+    "intro": "Die Standardübersicht übernimmt die landesweit veröffentlichten Ferien und ausdrücklich landesweit ausgewiesenen schulfreien Tage.",
+    "calculationNote": "Angegeben werden Kalendertage. Bewegliche Ferientage und unterrichtsfreie Samstage werden nicht automatisch in die landesweite Standardberechnung aufgenommen.",
+    "highlights": [
+      {
+        "title": "Keine einheitlichen Winter- oder Frühjahrsferien",
+        "paragraphs": [
+          "Die offizielle landesweite Ferienübersicht weist keine einheitlichen Winter- oder Frühjahrsferien als eigenen Ferienzeitraum aus."
+        ]
+      },
+      {
+        "title": "Bewegliche Ferientage und Samstage",
+        "paragraphs": [
+          "Bewegliche Ferientage werden nicht als landesweit feste Termine eingetragen.",
+          "Auch unterrichtsfreie Samstage gehören nicht zum landesweiten Standarddatensatz."
+        ]
+      }
+    ],
+    "footerNote": "Ausdrücklich landesweit ausgewiesene schulfreie Tage außerhalb regulärer Ferienzeiträume werden dagegen als landesweite schulfreie Tage berücksichtigt."
+  },
   "notes": [
     "endDate is inclusive for app display.",
     "When generating ICS, convert endDate to DTEND as the following day.",

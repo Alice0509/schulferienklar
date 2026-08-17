@@ -712,6 +712,75 @@ for (
       }
     }
 
+    const policy =
+      dataset.goldPagePolicy;
+
+    if (policy) {
+      if (
+        policy.navLabel &&
+        !html.includes(
+          escapeHtml(
+            policy.navLabel,
+          ),
+        )
+      ) {
+        fail(
+          `${code}: Gold Page policy nav label missing`,
+        );
+      }
+
+      if (
+        policy.heading &&
+        !html.includes(
+          escapeHtml(
+            policy.heading,
+          ),
+        )
+      ) {
+        fail(
+          `${code}: Gold Page policy heading missing`,
+        );
+      }
+
+      const highlights =
+        Array.isArray(
+          policy.highlights,
+        )
+          ? policy.highlights
+          : [];
+
+      for (
+        const highlight
+        of highlights
+      ) {
+        if (
+          highlight.title &&
+          !html.includes(
+            escapeHtml(
+              highlight.title,
+            ),
+          )
+        ) {
+          fail(
+            `${code}: Gold Page policy highlight missing: ${highlight.title}`,
+          );
+        }
+      }
+
+      if (
+        policy.footerNote &&
+        !html.includes(
+          escapeHtml(
+            policy.footerNote,
+          ),
+        )
+      ) {
+        fail(
+          `${code}: Gold Page policy footer note missing`,
+        );
+      }
+    }
+
     const source =
       dataset.sources?.[0];
 
@@ -903,6 +972,6 @@ if (
 } else {
   console.log("");
   console.log(
-    "✅ 2027 Gold Page audit passed.",
+    `✅ ${YEAR} Gold Page audit passed.`,
   );
 }

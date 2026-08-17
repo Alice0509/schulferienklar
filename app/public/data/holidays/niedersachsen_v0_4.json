@@ -3,6 +3,28 @@
   "version": "0.4",
   "createdAt": "2026-05-24",
   "dataPolicy": "Official Bundesland-level Schulferien only. School-specific dates are excluded.",
+  "goldPagePolicy": {
+    "navLabel": "NI-Hinweise",
+    "eyebrow": "Wichtig für Niedersachsen",
+    "heading": "Landesweite Termine und abweichende Regelungen",
+    "intro": "Die Standardübersicht enthält die landesweit festgelegten Ferientermine und ausdrücklich landesweit ausgewiesenen schulfreien Tage.",
+    "calculationNote": "Angegeben werden Kalendertage. Schul- oder ortsspezifische Abweichungen werden nicht automatisch in die landesweite Standardberechnung aufgenommen.",
+    "highlights": [
+      {
+        "title": "Landesweit schulfreie Tage",
+        "paragraphs": [
+          "Zusätzliche schulfreie Tage, die in der Ferienordnung landesweit festgelegt sind, werden als eigene Termine berücksichtigt."
+        ]
+      },
+      {
+        "title": "Abweichende Regelungen",
+        "paragraphs": [
+          "Für bestimmte Schulen können ausdrücklich abweichende Regelungen gelten. Diese schulbezogenen Ausnahmen sind nicht Bestandteil des landesweiten Standarddatensatzes."
+        ]
+      }
+    ],
+    "footerNote": "Gesetzliche Feiertage und religiöse Freistellungsregelungen werden als eigene Ebenen behandelt und nicht als zusätzliche Schulferien gespeichert."
+  },
   "notes": [
     "endDate is inclusive for app display.",
     "When generating ICS, convert endDate to DTEND as the following day.",

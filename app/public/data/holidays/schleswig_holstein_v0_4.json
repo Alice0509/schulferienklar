@@ -3,6 +3,29 @@
   "version": "0.4",
   "createdAt": "2026-05-24",
   "dataPolicy": "Official Bundesland-level Schulferien only. School-specific and regional exception dates are excluded.",
+  "goldPagePolicy": {
+    "navLabel": "SH-Hinweise",
+    "eyebrow": "Wichtig für Schleswig-Holstein",
+    "heading": "Inselregelungen und bewegliche Ferientage",
+    "intro": "Die landesweite Standardübersicht enthält die allgemein geltenden Ferientermine und ausdrücklich landesweit festgelegten schulfreien Tage.",
+    "calculationNote": "Angegeben werden Kalendertage. Regionale Insel- und Hallig-Regelungen, bewegliche Ferientage sowie schulbezogene Abweichungen werden im Standardkalender nicht automatisch eingerechnet.",
+    "highlights": [
+      {
+        "title": "Sylt, Föhr, Amrum, Helgoland und Halligen",
+        "paragraphs": [
+          "Für diese Inseln und Halligen gelten abweichende Ferienregelungen. Die Sommerferien enden grundsätzlich eine Woche früher und die Herbstferien beginnen eine Woche früher als nach der landesweiten Standardregelung."
+        ]
+      },
+      {
+        "title": "Bewegliche Ferientage",
+        "paragraphs": [
+          "Bewegliche Ferientage werden nach der Ferienverordnung von der Schulkonferenz nach Abstimmung festgelegt. Sie sind deshalb nicht als allgemeine landesweite Termine eingetragen.",
+          "Auch vorgesehene Ersatztermine gelten nicht automatisch für jede Schule, sondern nur unter den in der Ferienverordnung genannten Bedingungen."
+        ]
+      }
+    ],
+    "footerNote": "Für berufsbildende Schulen und Landesförderzentren mit Internat können abweichende Ferien festgelegt werden. Im Zweifel ist der Ferienplan der eigenen Schule maßgeblich."
+  },
   "notes": [
     "endDate is inclusive for app display.",
     "When generating ICS, convert endDate to DTEND as the following day.",

@@ -123,6 +123,29 @@ function getSchoolHolidaySourceForState({ holidayIndex, code }) {
   return datasetJson?.sources?.[0] || null;
 }
 
+
+function getSchoolHolidayDatasetForState({
+  holidayIndex,
+  code,
+}) {
+  const dataset =
+    holidayIndex.datasets?.find((item) => {
+      return item.bundeslandCode === code;
+    });
+
+  if (!dataset?.jsonFile) {
+    return null;
+  }
+
+  return (
+    nodeHolidayRepository
+      .loadSchoolHolidayDatasetByMeta(
+        dataset,
+      ) ||
+    null
+  );
+}
+
 function getPublicHolidaysForStateAndYear({
   publicHolidayIndex,
   code,
@@ -7018,6 +7041,500 @@ function widgetPromoHtml({ code, name }) {
 }
 
 
+
+const GOLD_PAGE_READY_YEARS =
+  new Set([
+    2028,
+  ]);
+
+
+function getDefaultGoldMarker({
+  slug,
+  code,
+  year,
+}) {
+  const legacyMarkerBase = {
+    BW: "bw",
+    NI: "ni",
+    NW: "nrw",
+  };
+
+  const markerBase =
+    legacyMarkerBase[code] ||
+    slug;
+
+  return `${markerBase}-${year}`;
+}
+
+function createDefaultStateYearGoldFaqItems({
+  events,
+  name,
+  year,
+}) {
+  const nameCounts =
+    new Map();
+
+  for (const event of events) {
+    const holidayName =
+      getHolidayName(event);
+
+    nameCounts.set(
+      holidayName,
+      (
+        nameCounts.get(holidayName) ||
+        0
+      ) + 1,
+    );
+  }
+
+  const eventItems =
+    events.map((event) => {
+      const holidayName =
+        getHolidayName(event);
+
+      const hasDuplicateName =
+        nameCounts.get(
+          holidayName,
+        ) > 1;
+
+      const questionLabel =
+        hasDuplicateName
+          ? (
+              `${holidayName} ` +
+              `(${formatDate(event.startDate)}–` +
+              `${formatDate(event.endDate)})`
+            )
+          : holidayName;
+
+      const isSingleDay =
+        event.startDate ===
+        event.endDate;
+
+      const answer =
+        isSingleDay
+          ? (
+              `Der offizielle Termin für ` +
+              `„${holidayName}“ ist der ` +
+              `${formatDate(event.startDate)}.`
+            )
+          : (
+              `Der offizielle Zeitraum für ` +
+              `„${holidayName}“ dauert vom ` +
+              `${formatDate(event.startDate)} bis ` +
+              `${formatDate(event.endDate)}.`
+            );
+
+      return {
+        question:
+          `Welche Termine gelten für „${questionLabel}“ ` +
+          `in ${name} ${year}?`,
+        answer,
+      };
+    });
+
+  return [
+    ...eventItems,
+    {
+      question:
+        `Was bedeutet „zusammenhängend frei“ ` +
+        `für ${name} ${year}?`,
+      answer:
+        `Schulferienklar erweitert einen offiziellen ` +
+        `landesweiten Ferienzeitraum um direkt ` +
+        `angrenzende Samstage, Sonntage und ` +
+        `landesweit geltende gesetzliche Feiertage.`,
+    },
+    {
+      question:
+        `Sind schul- oder ortsspezifische freie Tage ` +
+        `in ${name} automatisch enthalten?`,
+      answer:
+        `Nein. Schul- oder ortsspezifische ` +
+        `Abweichungen, bewegliche Ferientage und ` +
+        `andere nicht landesweit einheitliche Termine ` +
+        `werden nicht automatisch eingerechnet. ` +
+        `Maßgeblich bleibt die offizielle ` +
+        `Veröffentlichung beziehungsweise die eigene Schule.`,
+    },
+  ];
+}
+
+
+function stateYearGoldPolicySectionHtml({
+  dataset,
+  events,
+  name,
+  year,
+}) {
+  const policy =
+    dataset?.goldPagePolicy;
+
+  const highlights =
+    Array.isArray(
+      policy?.highlights,
+    )
+      ? policy.highlights
+      : [];
+
+  if (
+    !policy ||
+    highlights.length === 0
+  ) {
+    return "";
+  }
+
+  const schoolFreeEvents =
+    events.filter((event) => {
+      return (
+        event.category ===
+          "state_school_free_day" ||
+        event.category ===
+          "school_free_day"
+      );
+    });
+
+  const schoolFreeHtml =
+    schoolFreeEvents.length > 0
+      ? `          <div>
+            <h3>Landesweit ausgewiesene schulfreie Tage</h3>
+            <ul class="holiday-summary-list">
+${schoolFreeEvents
+  .map((event) => {
+    const range =
+      event.startDate ===
+      event.endDate
+        ? formatDate(
+            event.startDate,
+          )
+        : (
+            `${formatDate(event.startDate)} – ` +
+            `${formatDate(event.endDate)}`
+          );
+
+    return (
+      `              <li>` +
+      `<strong>${escapeHtml(getHolidayName(event))}</strong>` +
+      `<span>${range}</span>` +
+      `</li>`
+    );
+  })
+  .join("\n")}
+            </ul>
+          </div>`
+      : "";
+
+  const highlightsHtml =
+    highlights
+      .map((highlight) => {
+        const paragraphs =
+          Array.isArray(
+            highlight.paragraphs,
+          )
+            ? highlight.paragraphs
+            : [];
+
+        return `            <div>
+              <h3>${escapeHtml(highlight.title)}</h3>
+${paragraphs
+  .map((paragraph) => {
+    return (
+      `              <p>` +
+      `${escapeHtml(paragraph)}` +
+      `</p>`
+    );
+  })
+  .join("\n")}
+            </div>`;
+      })
+      .join("\n");
+
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            ${escapeHtml(
+              policy.eyebrow ||
+              `Wichtig für ${name}`,
+            )}
+          </p>
+
+          <h2>
+            ${escapeHtml(
+              policy.heading ||
+              `Besonderheiten ${name} ${year}`,
+            )}
+          </h2>
+
+          ${
+            policy.intro
+              ? `<p>${escapeHtml(policy.intro)}</p>`
+              : ""
+          }
+
+${schoolFreeHtml}
+
+          <div class="gold-terminology-grid">
+${highlightsHtml}
+          </div>
+
+          ${
+            policy.footerNote
+              ? `<p class="gold-source-note">${escapeHtml(
+                  policy.footerNote,
+                )}</p>`
+              : ""
+          }
+        </section>`;
+}
+
+function defaultStateYearGoldSpecialSectionHtml({
+  events,
+  name,
+  year,
+}) {
+  const schoolFreeEvents =
+    events.filter((event) => {
+      return (
+        event.category ===
+          "state_school_free_day" ||
+        event.category ===
+          "school_free_day"
+      );
+    });
+
+  const schoolFreeHtml =
+    schoolFreeEvents.length > 0
+      ? `          <ul class="holiday-summary-list">
+${schoolFreeEvents
+  .map((event) => {
+    const range =
+      event.startDate === event.endDate
+        ? formatDate(event.startDate)
+        : (
+            `${formatDate(event.startDate)} – ` +
+            `${formatDate(event.endDate)}`
+          );
+
+    return (
+      `            <li>` +
+      `<strong>${escapeHtml(getHolidayName(event))}</strong>` +
+      `<span>${range}</span>` +
+      `</li>`
+    );
+  })
+  .join("\n")}
+          </ul>`
+      : `          <p>
+            Der landesweite Standarddatensatz enthält für
+            ${escapeHtml(name)} ${year} keine zusätzlich
+            ausgewiesenen landesweiten schulfreien Tage
+            außerhalb der erfassten Ferienzeiträume.
+          </p>`;
+
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Hinweise für ${escapeHtml(name)}
+          </p>
+
+          <h2>
+            Landesweite und schulbezogene Besonderheiten
+          </h2>
+
+          <p>
+            Neben den regulären Ferien werden hier auch
+            ausdrücklich landesweit ausgewiesene
+            schulfreie Tage angezeigt, soweit sie im
+            offiziellen Bundesland-Datensatz enthalten sind.
+          </p>
+
+${schoolFreeHtml}
+
+          <p class="gold-source-note">
+            <strong>Wichtig:</strong>
+            Bewegliche Ferientage sowie schul-, orts- oder
+            schulartspezifische Abweichungen werden nicht
+            automatisch als landesweit freie Tage behandelt.
+            Für solche Termine ist die eigene Schule
+            beziehungsweise die offizielle Veröffentlichung
+            maßgeblich.
+          </p>
+        </section>`;
+}
+
+function defaultStateYearGoldRelatedLinksHtml({
+  slug,
+  name,
+  year,
+}) {
+  const links = [];
+
+  if (years.includes(year - 1)) {
+    links.push({
+      href:
+        `/schulferien-${slug}-${year - 1}.html`,
+      label:
+        `Schulferien ${name} ${year - 1}`,
+    });
+  }
+
+  if (years.includes(year + 1)) {
+    links.push({
+      href:
+        `/schulferien-${slug}-${year + 1}.html`,
+      label:
+        `Schulferien ${name} ${year + 1}`,
+    });
+  }
+
+  links.push(
+    {
+      href:
+        `/schulferien-${slug}.html`,
+      label:
+        `Alle Jahre für ${name}`,
+    },
+    {
+      href:
+        `/schulferien-${year}.html`,
+      label:
+        `Alle Bundesländer ${year}`,
+    },
+  );
+
+  return stateYearGoldRelatedLinksHtml(
+    links,
+  );
+}
+
+function defaultStateYearGoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createDefaultStateYearGoldFaqItems({
+      events,
+      name,
+      year,
+    });
+
+  const dataset =
+    getSchoolHolidayDatasetForState({
+      holidayIndex,
+      code,
+    });
+
+  const policy =
+    dataset?.goldPagePolicy ||
+    null;
+
+  const specialNavLabel =
+    policy?.navLabel ||
+    "Hinweise";
+
+  const calculationNoteText =
+    policy?.calculationNote ||
+    `Angegeben werden Kalendertage.
+Schul-, orts- oder schulartspezifische Abweichungen
+und bewegliche Ferientage werden nicht automatisch
+eingerechnet.`;
+
+  const policySectionHtml =
+    stateYearGoldPolicySectionHtml({
+      dataset,
+      events,
+      name,
+      year,
+    });
+
+  const specialSectionHtml =
+    policySectionHtml ||
+    defaultStateYearGoldSpecialSectionHtml({
+      events,
+      name,
+      year,
+    });
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      `Schulferien ${name} ${year}: Termine und freie Tage`,
+    description:
+      `Schulferien ${name} ${year} mit allen landesweit ` +
+      `erfassten Terminen, zusammenhängender freier Zeit, ` +
+      `Jahreskalender, PDF, ICS und offizieller Quelle.`,
+    marker:
+      getDefaultGoldMarker({
+        slug,
+        code,
+        year,
+      }),
+    eyebrow:
+      `${name} · Kalenderjahr ${year}`,
+    h1:
+      `Schulferien ${name} ${year}`,
+    introText:
+      `Hier findest du die landesweit erfassten
+Schulferien und schulfreien Tage für ${name} ${year}.
+Zusätzlich zeigt Schulferienklar die direkt
+zusammenhängende freie Zeit rund um Wochenenden
+und landesweit geltende Feiertage.`,
+    specialNavLabel,
+    termHeadingText:
+      `Alle Ferien- und schulfreien Termine ${name} ${year}`,
+    termIntroText:
+      `Die Übersicht übernimmt alle landesweit im
+Datensatz erfassten Termine, die das Kalenderjahr ${year}
+berühren. Schul-, orts- oder schulartspezifische
+Abweichungen werden nicht automatisch ergänzt.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+        });
+      },
+    officialPeriodText:
+      `Der im landesweiten Datensatz hinterlegte
+offizielle erste und letzte Ferientag.`,
+    connectedPeriodText:
+      `Der offizielle Zeitraum plus direkt
+angrenzende Samstage, Sonntage und landesweit
+geltende gesetzliche Feiertage.`,
+    calculationNoteText,
+    specialSectionHtml,
+    sourceLinkLabel:
+      `Offizielle Ferientermine ${name}`,
+    secondaryLinkLabel:
+      "Weitere offizielle Quelle",
+    faqItems,
+    relatedLinksHtml:
+      defaultStateYearGoldRelatedLinksHtml({
+        slug,
+        name,
+        year,
+      }),
+    buttonText:
+      `${name} ${year} im Kalender öffnen`,
+  });
+}
+
+
 const GOLD_PAGE_TEMPLATES = new Map([
   [
     "BY-2027",
@@ -7100,6 +7617,20 @@ function pageTemplate({
 
   if (goldPageTemplate) {
     return goldPageTemplate({
+      slug,
+      name,
+      code,
+      year,
+      events,
+    });
+  }
+
+  if (
+    GOLD_PAGE_READY_YEARS.has(
+      year,
+    )
+  ) {
+    return defaultStateYearGoldPageTemplate({
       slug,
       name,
       code,
