@@ -5718,6 +5718,401 @@ Standardberechnung nicht gesondert modelliert.`,
 }
 
 
+
+function getMecklenburgVorpommern2027DisplayName(event) {
+  if (
+    event.category ===
+    "state_school_free_day"
+  ) {
+    return "Zusätzlicher feststehender Ferientag";
+  }
+
+  return getHolidayName(event);
+}
+
+function getMecklenburgVorpommern2027PeriodNote(event) {
+  const crossingNote =
+    getStateYearCrossingNote(
+      event,
+      2027,
+    );
+
+  if (crossingNote) {
+    return crossingNote;
+  }
+
+  if (
+    event.category ===
+      "state_school_free_day" &&
+    event.startDate ===
+      "2027-05-07"
+  ) {
+    return (
+      "Landesweit feststehender Ferientag für " +
+      "allgemein bildende Schulen."
+    );
+  }
+
+  return "";
+}
+
+function findMecklenburgVorpommern2027SchoolFreeDay(
+  events,
+) {
+  return events.find((event) => {
+    return (
+      event.category ===
+        "state_school_free_day" &&
+      event.startDate ===
+        "2027-05-07"
+    );
+  });
+}
+
+function createMecklenburgVorpommern2027FaqItems(
+  events,
+) {
+  const winter =
+    findStateYearGoldEvent(
+      events,
+      "winter",
+      2027,
+    );
+
+  const easter =
+    findStateYearGoldEvent(
+      events,
+      "easter",
+      2027,
+    );
+
+  const pentecost =
+    findStateYearGoldEvent(
+      events,
+      "pentecost",
+      2027,
+    );
+
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    findStateYearGoldEvent(
+      events,
+      "christmas",
+      2027,
+    );
+
+  const schoolFreeDay =
+    findMecklenburgVorpommern2027SchoolFreeDay(
+      events,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return (
+        "Für diesen Zeitraum liegt " +
+        "aktuell kein Eintrag vor."
+      );
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Wann sind die Winterferien in Mecklenburg-Vorpommern 2027?",
+      answer:
+        `Die Winterferien in Mecklenburg-Vorpommern 2027 dauern vom ${rangeText(winter)}.`,
+    },
+    {
+      question:
+        "Wann sind die Osterferien in Mecklenburg-Vorpommern 2027?",
+      answer:
+        `Die Osterferien in Mecklenburg-Vorpommern 2027 dauern vom ${rangeText(easter)}.`,
+    },
+    {
+      question:
+        "Ist der 7. Mai 2027 in Mecklenburg-Vorpommern schulfrei?",
+      answer:
+        `Ja. Freitag, der ${schoolFreeDay ? formatDate(schoolFreeDay.startDate) : "07.05.2027"}, ist für allgemein bildende Schulen als zusätzlicher feststehender Ferientag ausgewiesen.`,
+    },
+    {
+      question:
+        "Wann sind die Pfingstferien in Mecklenburg-Vorpommern 2027?",
+      answer:
+        `Die Pfingstferien in Mecklenburg-Vorpommern 2027 dauern vom ${rangeText(pentecost)}.`,
+    },
+    {
+      question:
+        "Wann sind die Sommerferien in Mecklenburg-Vorpommern 2027?",
+      answer:
+        `Die Sommerferien in Mecklenburg-Vorpommern 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien in Mecklenburg-Vorpommern 2027?",
+      answer:
+        `Die Herbstferien im Schuljahr 2027/28 dauern vom ${rangeText(autumn)}.`,
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien in Mecklenburg-Vorpommern 2027?",
+      answer:
+        `Die Weihnachtsferien beginnen am ${christmas ? formatDate(christmas.startDate) : "nicht angegeben"} und enden am ${christmas ? formatDate(christmas.endDate) : "nicht angegeben"}.`,
+    },
+    {
+      question:
+        "Gelten diese Termine auch für berufliche Schulen?",
+      answer:
+        "Nein. Mecklenburg-Vorpommern veröffentlicht für berufliche Schulen eigene Ferientermine. Diese Gold Page und der landesweite Standarddatensatz von Schulferienklar beziehen sich auf allgemein bildende Schulen.",
+    },
+    {
+      question:
+        "Was bedeutet zusätzlicher feststehender Ferientag?",
+      answer:
+        "Neben den regulären Ferienzeiträumen gibt es in Mecklenburg-Vorpommern zusätzliche landesweit festgelegte Ferientage für allgemein bildende Schulen. Im Schuljahr 2026/27 ist Freitag, der 7. Mai 2027, als solcher ausgewiesen.",
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen Ferienzeitraum um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Termine beruflicher Schulen oder andere schulartspezifische Abweichungen werden nicht automatisch eingerechnet.",
+    },
+  ];
+}
+
+function mecklenburgVorpommern2027SpecialSectionHtml() {
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Wichtig für Mecklenburg-Vorpommern
+          </p>
+
+          <h2>
+            Zusätzlicher Ferientag und unterschiedliche Schularten
+          </h2>
+
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>
+                7. Mai: zusätzlicher feststehender Ferientag
+              </h3>
+
+              <p>
+                Für allgemein bildende Schulen ist
+                <strong>Freitag, der
+                7. Mai 2027</strong>,
+                als zusätzlicher feststehender
+                Ferientag ausgewiesen.
+              </p>
+
+              <p>
+                Zusammen mit Christi Himmelfahrt am
+                Donnerstag und dem anschließenden
+                Wochenende entstehen
+                <strong>4 freie Tage vom
+                6. bis 9. Mai 2027</strong>.
+              </p>
+            </div>
+
+            <div>
+              <h3>
+                Allgemein bildende und berufliche Schulen
+              </h3>
+
+              <p>
+                Mecklenburg-Vorpommern veröffentlicht
+                <strong>getrennte Ferienpläne</strong>
+                für allgemein bildende und berufliche
+                Schulen.
+              </p>
+
+              <p>
+                Diese Seite zeigt die Termine der
+                <strong>allgemein bildenden
+                Schulen</strong>.
+                Die teilweise abweichenden Ferien der
+                beruflichen Schulen werden hier nicht
+                automatisch eingerechnet.
+              </p>
+            </div>
+          </div>
+
+          <p class="gold-source-note">
+            <strong>Pfingsten 2027:</strong>
+            Die Pfingstferien dauern vom
+            <strong>14. bis 18. Mai 2027</strong>.
+            Da der Zeitraum Wochenende und
+            Pfingstmontag bereits einschließt,
+            ergeben sich
+            <strong>5 zusammenhängende
+            Kalendertage</strong>.
+          </p>
+        </section>`;
+}
+
+function mecklenburgVorpommern2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-mecklenburg-vorpommern-2026.html",
+      label:
+        "Schulferien Mecklenburg-Vorpommern 2026",
+    },
+    {
+      href:
+        "/schulferien-mecklenburg-vorpommern-2028.html",
+      label:
+        "Schulferien Mecklenburg-Vorpommern 2028",
+    },
+    {
+      href:
+        "/schulferien-mecklenburg-vorpommern.html",
+      label:
+        "Alle Jahre für Mecklenburg-Vorpommern",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-schleswig-holstein-2027.html",
+      label:
+        "Schleswig-Holstein 2027",
+    },
+    {
+      href:
+        "/schulferien-hamburg-2027.html",
+      label:
+        "Hamburg 2027",
+    },
+    {
+      href:
+        "/schulferien-brandenburg-2027.html",
+      label:
+        "Brandenburg 2027",
+    },
+    {
+      href:
+        "/schulferien-berlin-2027.html",
+      label:
+        "Berlin 2027",
+    },
+  ]);
+}
+
+function mecklenburgVorpommern2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createMecklenburgVorpommern2027FaqItems(
+      events,
+    );
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      "Schulferien Mecklenburg-Vorpommern 2027: Termine und freie Tage",
+    description:
+      "Schulferien Mecklenburg-Vorpommern 2027 mit Winterferien, Osterferien, zusätzlichem Ferientag, Pfingstferien, Sommerferien, PDF, ICS und offizieller Quelle.",
+    marker:
+      "mecklenburg-vorpommern-2027",
+    eyebrow:
+      "Mecklenburg-Vorpommern · Kalenderjahr 2027",
+    h1:
+      "Schulferien Mecklenburg-Vorpommern 2027",
+    introText:
+      `Hier stehen zuerst die landesweit festgelegten
+Ferientermine für allgemein bildende Schulen.
+Zusätzlich zeigt Schulferienklar, wie lange die
+freie Zeit direkt am Stück dauert, wenn Wochenenden
+oder landesweite Feiertage unmittelbar anschließen.`,
+    specialNavLabel:
+      "MV-Hinweise",
+    termHeadingText:
+      "Alle Ferienzeiten und schulfreien Tage in Mecklenburg-Vorpommern 2027",
+    termIntroText:
+      `Die Liste berücksichtigt auch Weihnachtsferien,
+die aus 2026 in das Kalenderjahr 2027 hineinreichen
+oder bis 2028 dauern. Zusätzlich enthält sie den
+feststehenden Ferientag am 7. Mai 2027. Die Termine
+beziehen sich auf allgemein bildende Schulen.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+          getDisplayName:
+            getMecklenburgVorpommern2027DisplayName,
+          getPeriodNote:
+            getMecklenburgVorpommern2027PeriodNote,
+        });
+      },
+    officialPeriodText:
+      `Exakt der vom Ministerium für Bildung und
+Kindertagesförderung veröffentlichte Beginn und das
+veröffentlichte Ende des jeweiligen Ferienzeitraums
+beziehungsweise des zusätzlichen feststehenden
+Ferientages für allgemein bildende Schulen.`,
+    connectedPeriodText:
+      `Der offizielle Zeitraum plus direkt
+anschließende Samstage, Sonntage und landesweit
+geltende gesetzliche Feiertage.`,
+    calculationNoteText:
+      `Angegeben werden Kalendertage, nicht die Zahl
+der ausgefallenen Unterrichtstage. Die teilweise
+abweichenden Ferientermine beruflicher Schulen und
+andere schulartspezifische Abweichungen werden nicht
+automatisch eingerechnet.`,
+    specialSectionHtml:
+      mecklenburgVorpommern2027SpecialSectionHtml(),
+    sourceLinkLabel:
+      "Allgemeine Ferienverordnung Mecklenburg-Vorpommern",
+    secondaryLinkLabel:
+      "Ferientermine des Bildungsministeriums",
+    faqItems,
+    relatedLinksHtml:
+      mecklenburgVorpommern2027RelatedLinksHtml(),
+    buttonText:
+      "Mecklenburg-Vorpommern 2027 im Kalender öffnen",
+  });
+}
+
+
 function sharedSeoStyles() {
   return `    <link rel="stylesheet" href="/seo-pages.css" />
     <script defer src="/privacy-analytics.js"></script>`;
@@ -5878,6 +6273,10 @@ const GOLD_PAGE_TEMPLATES = new Map([
   [
     "HB-2027",
     bremen2027GoldPageTemplate,
+  ],
+  [
+    "MV-2027",
+    mecklenburgVorpommern2027GoldPageTemplate,
   ],
   [
     "HH-2027",

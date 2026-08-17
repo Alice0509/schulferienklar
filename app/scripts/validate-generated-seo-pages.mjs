@@ -391,6 +391,89 @@ const commonGoldPageChecks = [
 const goldPageValidations = [
   {
     file:
+      "schulferien-mecklenburg-vorpommern-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="mecklenburg-vorpommern-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Winterferien",
+        /Winterferien/,
+      ],
+      [
+        "Osterferien",
+        /Osterferien/,
+      ],
+      [
+        "additional fixed holiday",
+        /zusätzlicher feststehender Ferientag/i,
+      ],
+      [
+        "7 May fixed holiday",
+        /7\. Mai 2027/,
+      ],
+      [
+        "Himmelfahrt connected period",
+        /6\. bis 9\. Mai 2027/,
+      ],
+      [
+        "Pfingstferien",
+        /Pfingstferien/,
+      ],
+      [
+        "Pentecost period",
+        /14\. bis 18\. Mai 2027/,
+      ],
+      [
+        "five connected Pentecost days",
+        /5 zusammenhängende[\s\S]*Kalendertage/,
+      ],
+      [
+        "Sommerferien",
+        /Sommerferien/,
+      ],
+      [
+        "Herbstferien",
+        /Herbstferien/,
+      ],
+      [
+        "general schools scope",
+        /allgemein bildende[n]? Schulen/i,
+      ],
+      [
+        "vocational school distinction",
+        /berufliche[n]? Schulen/i,
+      ],
+      [
+        "vocational exclusion",
+        /berufliche[n]? Schulen[\s\S]*nicht[\s\S]*automatisch/i,
+      ],
+      [
+        "official MV ministry",
+        /Ministerium für Bildung und Kindertagesförderung/,
+      ],
+      [
+        "official MV source link",
+        /regierung-mv\.de/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-mecklenburg-vorpommern-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-mecklenburg-vorpommern-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-mecklenburg-vorpommern-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
       "schulferien-bremen-2027.html",
     checks: [
       [
