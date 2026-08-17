@@ -7045,6 +7045,7 @@ function widgetPromoHtml({ code, name }) {
 const GOLD_PAGE_READY_YEARS =
   new Set([
     2028,
+    2029,
   ]);
 
 
