@@ -3,6 +3,28 @@
   "version": "0.4",
   "createdAt": "2026-05-24",
   "dataPolicy": "Official Bundesland-level Schulferien only. School-specific dates are excluded.",
+  "goldPagePolicy": {
+    "navLabel": "Berlin-Hinweise",
+    "eyebrow": "Wichtig für Berlin",
+    "heading": "Landesweite schulfreie Tage und Schul-Ausnahmen",
+    "intro": "Die Standardübersicht enthält die in der Berliner Ferienordnung landesweit festgelegten Ferien und schulfreien Tage.",
+    "calculationNote": "Angegeben werden Kalendertage. Schulbezogene Sonderkalender und nicht landesweit geltende Abweichungen werden nicht automatisch eingerechnet.",
+    "highlights": [
+      {
+        "title": "Landesweit festgelegte schulfreie Tage",
+        "paragraphs": [
+          "Unterrichtsfreie Tage, die ausdrücklich in der Berliner Ferienordnung landesweit festgelegt sind, werden im Standardkalender als schulfreie Tage berücksichtigt."
+        ]
+      },
+      {
+        "title": "Besondere Schulkalender",
+        "paragraphs": [
+          "Schulspezifische Termine sowie besondere Ferienkalender einzelner Schulen oder Schularten sind nicht Bestandteil der landesweiten Standardübersicht."
+        ]
+      }
+    ],
+    "footerNote": "Für Schulen mit ausdrücklich abweichender Ferienregelung ist der jeweilige schulische Ferienkalender maßgeblich."
+  },
   "notes": [
     "endDate is inclusive for app display.",
     "When generating ICS, convert endDate to DTEND as the following day.",

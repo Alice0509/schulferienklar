@@ -3,6 +3,28 @@
   "version": "0.4",
   "createdAt": "2026-05-24",
   "dataPolicy": "Official Bundesland-level Schulferien for allgemein bildende Schulen only. Berufliche Schulen and school-specific deviations are excluded.",
+  "goldPagePolicy": {
+    "navLabel": "MV-Hinweise",
+    "eyebrow": "Wichtig für Mecklenburg-Vorpommern",
+    "heading": "Zusätzliche feste Ferientage und Schularten",
+    "intro": "Die Standardübersicht gilt für die landesweit erfassten Termine der allgemein bildenden Schulen.",
+    "calculationNote": "Angegeben werden Kalendertage. Zusätzliche landesweit feststehende schulfreie Tage werden berücksichtigt; abweichende Ferienregelungen anderer Schularten werden nicht automatisch eingerechnet.",
+    "highlights": [
+      {
+        "title": "Zusätzliche feststehende Ferientage",
+        "paragraphs": [
+          "Zusätzliche schulfreie Tage, die in der Ferienverordnung landesweit festgelegt sind, werden im Standardkalender als eigene Termine berücksichtigt."
+        ]
+      },
+      {
+        "title": "Berufliche Schulen",
+        "paragraphs": [
+          "Für berufliche Schulen bestehen eigene Ferienregelungen. Diese Termine sind nicht Bestandteil des Standarddatensatzes für allgemein bildende Schulen."
+        ]
+      }
+    ],
+    "footerNote": "Die landesweite Standardseite bildet deshalb nicht automatisch jeden Ferienplan jeder Schulart in Mecklenburg-Vorpommern ab."
+  },
   "notes": [
     "endDate is inclusive for app display.",
     "When generating ICS, convert endDate to DTEND as the following day.",

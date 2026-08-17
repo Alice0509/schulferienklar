@@ -3,6 +3,29 @@
   "version": "0.4",
   "createdAt": "2026-05-24",
   "dataPolicy": "Official Bundesland-level Schulferien only. School-specific dates are excluded.",
+  "goldPagePolicy": {
+    "navLabel": "Bremen-Hinweise",
+    "eyebrow": "Wichtig für Bremen",
+    "heading": "Feste und bewegliche Ferientage",
+    "intro": "Die Standardübersicht enthält die in der Bremer Ferienverordnung festgelegten landesweiten Ferientermine und ausdrücklich feststehenden schulfreien Tage.",
+    "calculationNote": "Angegeben werden Kalendertage. Bewegliche Ferientage, unterrichtsfreie Samstage und schulartspezifische Abweichungen werden nicht automatisch eingerechnet.",
+    "highlights": [
+      {
+        "title": "Feste Ferientage",
+        "paragraphs": [
+          "Fest in der Ferienverordnung vorgegebene Ferientage werden als landesweite Termine berücksichtigt."
+        ]
+      },
+      {
+        "title": "Bewegliche Ferientage",
+        "paragraphs": [
+          "Bewegliche Ferientage werden von der Schulkonferenz festgelegt und sind deshalb nicht als allgemeine landesweite Termine eingetragen.",
+          "Auch in der Verordnung genannte Ersatz- oder Auffangtermine werden nicht automatisch als landesweit gültige Ferientage behandelt."
+        ]
+      }
+    ],
+    "footerNote": "Unterrichtsfreie Samstage sowie Abweichungen für einzelne Schularten, insbesondere berufliche Schulen, gehören nicht zur landesweiten Standardübersicht."
+  },
   "notes": [
     "endDate is inclusive for app display.",
     "When generating ICS, convert endDate to DTEND as the following day.",
