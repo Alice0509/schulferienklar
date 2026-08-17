@@ -764,7 +764,8 @@ function stateYearGoldSourceHtml({
                 ${escapeHtml(sourceLinkLabel)}
               </a>
               ${
-                source.secondarySourceUrl
+                source.secondarySourceUrl &&
+                secondaryLinkLabel
                   ? `<a href="${escapeHtml(source.secondarySourceUrl)}">${escapeHtml(secondaryLinkLabel)}</a>`
                   : ""
               }
@@ -6463,6 +6464,416 @@ eingerechnet.`,
 }
 
 
+
+function getSchleswigHolstein2027DisplayName(
+  event,
+) {
+  if (
+    event.category ===
+      "state_school_free_day" &&
+    event.type === "ascension"
+  ) {
+    return "Himmelfahrt (Ferientag am 7. Mai)";
+  }
+
+  return getHolidayName(event);
+}
+
+function getSchleswigHolstein2027PeriodNote(
+  event,
+) {
+  const crossingNote =
+    getStateYearCrossingNote(
+      event,
+      2027,
+    );
+
+  if (crossingNote) {
+    return crossingNote;
+  }
+
+  if (
+    event.category ===
+      "state_school_free_day" &&
+    event.type === "ascension"
+  ) {
+    return (
+      "Der offizielle Ferientag liegt am " +
+      "Freitag nach Christi Himmelfahrt."
+    );
+  }
+
+  if (event.type === "easter") {
+    return (
+      "Die offizielle Bezeichnung lautet " +
+      "Frühjahr/Ostern."
+    );
+  }
+
+  return "";
+}
+
+function findSchleswigHolstein2027SchoolFreeDay(
+  events,
+) {
+  return events.find((event) => {
+    return (
+      event.category ===
+        "state_school_free_day" &&
+      event.startDate === "2027-05-07"
+    );
+  });
+}
+
+function createSchleswigHolstein2027FaqItems(
+  events,
+) {
+  const easter =
+    findStateYearGoldEvent(
+      events,
+      "easter",
+      2027,
+    );
+
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    events.find((event) => {
+      return (
+        event.type === "christmas" &&
+        event.startDate.startsWith("2027-")
+      );
+    });
+
+  const schoolFree =
+    findSchleswigHolstein2027SchoolFreeDay(
+      events,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return "aktuell kein Eintrag";
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Wann sind die Osterferien in Schleswig-Holstein 2027?",
+      answer:
+        `Die offiziell als Frühjahr/Ostern bezeichneten Ferien dauern 2027 vom ${rangeText(easter)}.`,
+    },
+    {
+      question:
+        "Warum heißt der Ferienzeitraum Frühjahr/Ostern?",
+      answer:
+        "Schleswig-Holstein verwendet in der offiziellen Ferienverordnung die Bezeichnung Frühjahr/Ostern. Schulferienklar übernimmt diese Bezeichnung.",
+    },
+    {
+      question:
+        "Ist der 7. Mai 2027 in Schleswig-Holstein schulfrei?",
+      answer:
+        schoolFree
+          ? "Ja. Freitag, der 07.05.2027, ist in der Ferienverordnung unter Himmelfahrt als Ferientag aufgeführt. Zusammen mit Christi Himmelfahrt am Donnerstag und dem Wochenende entstehen vier zusammenhängende freie Tage."
+          : "Für den 7. Mai 2027 liegt aktuell kein landesweiter Eintrag vor.",
+    },
+    {
+      question:
+        "Wann sind die Sommerferien in Schleswig-Holstein 2027?",
+      answer:
+        `Die landesweiten Standardtermine der Sommerferien dauern vom ${rangeText(summer)}. Für Sylt, Föhr, Amrum, Helgoland und die Halligen gelten abweichende Regelungen.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien in Schleswig-Holstein 2027?",
+      answer:
+        `Die landesweiten Standardtermine der Herbstferien dauern vom ${rangeText(autumn)}. Auf Sylt, Föhr, Amrum, Helgoland und den Halligen beginnen die Herbstferien eine Woche früher.`,
+    },
+    {
+      question:
+        "Welche Ferienregelung gilt auf Sylt, Föhr, Amrum, Helgoland und den Halligen?",
+      answer:
+        "Dort enden die Sommerferien grundsätzlich eine Woche früher und die Herbstferien beginnen eine Woche früher als nach der landesweiten Standardtabelle. Diese regionalen Abweichungen werden im Standardkalender von Schulferienklar nicht automatisch eingerechnet.",
+    },
+    {
+      question:
+        "Wie viele bewegliche Ferientage gibt es in Schleswig-Holstein?",
+      answer:
+        "Im Schuljahr 2026/27 gibt es zwei bewegliche Ferientage und im Schuljahr 2027/28 einen. Die konkreten Termine werden grundsätzlich von der Schulkonferenz nach Abstimmung festgelegt.",
+    },
+    {
+      question:
+        "Sind der 1. und 2. Februar 2027 automatisch schulfrei?",
+      answer:
+        "Nein. Der 1. und 2. Februar 2027 sind nur die in der Ferienverordnung vorgesehenen Ersatztermine für die zwei beweglichen Ferientage des Schuljahres 2026/27, falls keine rechtzeitige Einigung über andere Termine erzielt wird. Deshalb werden sie nicht als landesweite Standardtermine eingetragen.",
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien in Schleswig-Holstein 2027?",
+      answer:
+        `Die Weihnachtsferien des Schuljahres 2027/28 dauern vom ${rangeText(christmas)}.`,
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen landesweiten Ferienzeitraum um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Regionale Insel- und Hallig-Regelungen, bewegliche Ferientage sowie schulbezogene Abweichungen werden nicht automatisch eingerechnet.",
+    },
+  ];
+}
+
+function schleswigHolstein2027SpecialSectionHtml() {
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Wichtig für Schleswig-Holstein
+          </p>
+
+          <h2>
+            Himmelfahrt, Inselregelungen und bewegliche Ferientage
+          </h2>
+
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>
+                7. Mai 2027: Ferientag zu Himmelfahrt
+              </h3>
+
+              <p>
+                In der offiziellen Ferienverordnung
+                steht für
+                <strong>Freitag, den 7. Mai 2027</strong>,
+                ein Ferientag unter
+                <strong>Himmelfahrt</strong>.
+              </p>
+
+              <p>
+                Christi Himmelfahrt ist bereits
+                Donnerstag, der 6. Mai.
+                Zusammen mit Freitag und Wochenende
+                entstehen dadurch
+                <strong>4 freie Tage vom
+                6. bis 9. Mai 2027</strong>.
+              </p>
+            </div>
+
+            <div>
+              <h3>
+                Sonderregelung für Inseln und Halligen
+              </h3>
+
+              <p>
+                Für
+                <strong>Sylt, Föhr, Amrum,
+                Helgoland und die Halligen</strong>
+                gilt eine abweichende Ferienregelung.
+              </p>
+
+              <p>
+                Dort enden die Sommerferien
+                grundsätzlich
+                <strong>eine Woche früher</strong>
+                und die Herbstferien beginnen
+                <strong>eine Woche früher</strong>.
+                Diese regionalen Termine werden
+                im landesweiten Standardkalender
+                nicht automatisch eingerechnet.
+              </p>
+            </div>
+          </div>
+
+          <p class="gold-source-note">
+            <strong>Bewegliche Ferientage:</strong>
+            Im Schuljahr 2026/27 gibt es zwei,
+            im Schuljahr 2027/28 einen.
+            Die Schulkonferenz legt die konkreten
+            Termine nach Abstimmung fest.
+            Nur wenn keine rechtzeitige Einigung
+            zustande kommt, sieht die Verordnung
+            für 2026/27 den
+            <strong>1. und 2. Februar 2027</strong>
+            als Ersatztermine vor.
+            Sie werden deshalb nicht als
+            landesweit feste Ferientage
+            in Schulferienklar eingetragen.
+          </p>
+
+          <p class="gold-source-note">
+            <strong>Weitere schulbezogene Abweichungen:</strong>
+            Für berufsbildende Schulen und
+            Landesförderzentren mit Internat können
+            durch Beschluss der Schulkonferenz
+            abweichende Ferien festgelegt werden.
+            Diese Seite zeigt die landesweite
+            Standardregelung.
+          </p>
+        </section>`;
+}
+
+function schleswigHolstein2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-schleswig-holstein-2026.html",
+      label:
+        "Schulferien Schleswig-Holstein 2026",
+    },
+    {
+      href:
+        "/schulferien-schleswig-holstein-2028.html",
+      label:
+        "Schulferien Schleswig-Holstein 2028",
+    },
+    {
+      href:
+        "/schulferien-schleswig-holstein.html",
+      label:
+        "Alle Jahre für Schleswig-Holstein",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-hamburg-2027.html",
+      label:
+        "Hamburg 2027",
+    },
+    {
+      href:
+        "/schulferien-mecklenburg-vorpommern-2027.html",
+      label:
+        "Mecklenburg-Vorpommern 2027",
+    },
+    {
+      href:
+        "/schulferien-niedersachsen-2027.html",
+      label:
+        "Niedersachsen 2027",
+    },
+    {
+      href:
+        "/schulferien-bremen-2027.html",
+      label:
+        "Bremen 2027",
+    },
+  ]);
+}
+
+function schleswigHolstein2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createSchleswigHolstein2027FaqItems(
+      events,
+    );
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      "Schulferien Schleswig-Holstein 2027: Termine und freie Tage",
+    description:
+      "Schulferien Schleswig-Holstein 2027 mit Frühjahr/Ostern, Himmelfahrt, Sommerferien, Inselregelungen, PDF, ICS und offizieller Quelle.",
+    marker:
+      "schleswig-holstein-2027",
+    eyebrow:
+      "Schleswig-Holstein · Kalenderjahr 2027",
+    h1:
+      "Schulferien Schleswig-Holstein 2027",
+    introText:
+      `Hier stehen zuerst die landesweit geltenden
+Standardtermine Schleswig-Holsteins. Zusätzlich zeigt
+Schulferienklar die zusammenhängende freie Zeit direkt
+um Ferien, Wochenenden und landesweite Feiertage.
+Regionale Sonderregeln und schulabhängige Termine
+werden getrennt erklärt.`,
+    specialNavLabel:
+      "SH-Hinweise",
+    termHeadingText:
+      "Alle Ferien- und schulfreien Zeiten 2027",
+    termIntroText:
+      `Die Liste berücksichtigt die Weihnachtsferien
+2026/27, Frühjahr/Ostern, den Ferientag zu Himmelfahrt,
+Sommer- und Herbstferien sowie die Weihnachtsferien
+2027/28. Die besonderen Regelungen für Sylt, Föhr,
+Amrum, Helgoland und die Halligen sowie bewegliche
+Ferientage sind nicht Teil der landesweiten
+Standardtermine.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+          getDisplayName:
+            getSchleswigHolstein2027DisplayName,
+          getPeriodNote:
+            getSchleswigHolstein2027PeriodNote,
+        });
+      },
+    officialPeriodText:
+      `Exakt der in der Ferienverordnung
+veröffentlichte erste und letzte Ferientag
+der landesweiten Standardregelung.`,
+    connectedPeriodText:
+      `Der offizielle Zeitraum plus direkt
+anschließende Samstage, Sonntage und
+landesweit geltende gesetzliche Feiertage.`,
+    calculationNoteText:
+      `Angegeben werden Kalendertage.
+Regionale Insel- und Hallig-Regelungen,
+bewegliche Ferientage und schulbezogene
+Abweichungen werden nicht automatisch
+eingerechnet.`,
+    specialSectionHtml:
+      schleswigHolstein2027SpecialSectionHtml(),
+    sourceLinkLabel:
+      "Ferientermine und Ferienverordnung Schleswig-Holstein",
+    secondaryLinkLabel:
+      "",
+    faqItems,
+    relatedLinksHtml:
+      schleswigHolstein2027RelatedLinksHtml(),
+    buttonText:
+      "Schleswig-Holstein 2027 im Kalender öffnen",
+  });
+}
+
+
 function sharedSeoStyles() {
   return `    <link rel="stylesheet" href="/seo-pages.css" />
     <script defer src="/privacy-analytics.js"></script>`;
@@ -6631,6 +7042,10 @@ const GOLD_PAGE_TEMPLATES = new Map([
   [
     "SL-2027",
     saarland2027GoldPageTemplate,
+  ],
+  [
+    "SH-2027",
+    schleswigHolstein2027GoldPageTemplate,
   ],
   [
     "HH-2027",
