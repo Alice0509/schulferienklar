@@ -391,6 +391,101 @@ const commonGoldPageChecks = [
 const goldPageValidations = [
   {
     file:
+      "schulferien-schleswig-holstein-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="schleswig-holstein-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Frühjahr/Ostern",
+        /Frühjahr\/Ostern/,
+      ],
+      [
+        "Himmelfahrt school-free day",
+        /7\. Mai 2027/,
+      ],
+      [
+        "Himmelfahrt connected period",
+        /6\. bis 9\. Mai 2027/,
+      ],
+      [
+        "four connected Himmelfahrt days",
+        /4 freie Tage/,
+      ],
+      [
+        "Sommerferien",
+        /Sommerferien/,
+      ],
+      [
+        "Herbstferien",
+        /Herbstferien/,
+      ],
+      [
+        "Weihnachtsferien",
+        /Weihnachtsferien/,
+      ],
+      [
+        "island locations",
+        /Sylt[\s\S]*Föhr[\s\S]*Amrum[\s\S]*Helgoland[\s\S]*Halligen/,
+      ],
+      [
+        "summer ends one week earlier",
+        /Sommerferien[\s\S]*eine Woche früher/,
+      ],
+      [
+        "autumn begins one week earlier",
+        /Herbstferien[\s\S]*eine Woche früher/,
+      ],
+      [
+        "two movable days 2026/27",
+        /2026\/27[\s\S]*zwei/,
+      ],
+      [
+        "one movable day 2027/28",
+        /2027\/28[\s\S]*einen/,
+      ],
+      [
+        "fallback February dates",
+        /1\. und 2\. Februar 2027/,
+      ],
+      [
+        "fallback is conditional",
+        /Nur wenn keine rechtzeitige Einigung/,
+      ],
+      [
+        "movable days excluded",
+        /bewegliche Ferientage[\s\S]*nicht automatisch/,
+      ],
+      [
+        "vocational school deviations",
+        /berufsbildende Schulen/,
+      ],
+      [
+        "official Schleswig-Holstein ministry",
+        /Ministerium für Allgemeine und Berufliche Bildung/,
+      ],
+      [
+        "official Schleswig-Holstein source",
+        /schleswig-holstein\.de/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-schleswig-holstein-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-schleswig-holstein-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-schleswig-holstein-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
       "schulferien-saarland-2027.html",
     checks: [
       [
