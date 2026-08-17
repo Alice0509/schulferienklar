@@ -391,6 +391,89 @@ const commonGoldPageChecks = [
 const goldPageValidations = [
   {
     file:
+      "schulferien-saarland-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="saarland-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Fastnachtsferien",
+        /Fastnachtsferien/,
+      ],
+      [
+        "Fastnacht period",
+        /8\. bis 12\. Februar/,
+      ],
+      [
+        "nine connected Fastnacht days",
+        /9 zusammenhängende[\s\S]*Kalendertage/,
+      ],
+      [
+        "Osterferien",
+        /Osterferien/,
+      ],
+      [
+        "no Pentecost holidays",
+        /Keine eigenen Pfingstferien 2027/i,
+      ],
+      [
+        "Sommerferien",
+        /Sommerferien/,
+      ],
+      [
+        "Herbstferien",
+        /Herbstferien/,
+      ],
+      [
+        "Weihnachtsferien",
+        /Weihnachtsferien/,
+      ],
+      [
+        "two movable days",
+        /2026\/27[\s\S]*zwei[\s\S]*bewegliche Ferientage/i,
+      ],
+      [
+        "one movable day",
+        /2027\/28[\s\S]*einen[\s\S]*beweglichen Ferientag/i,
+      ],
+      [
+        "movable days are school-specific",
+        /schulabhängig/i,
+      ],
+      [
+        "movable days excluded",
+        /bewegliche Ferientage[\s\S]*nicht automatisch/i,
+      ],
+      [
+        "official Saarland ministry",
+        /Ministerium für Bildung und Kultur/,
+      ],
+      [
+        "official Saarland source",
+        /saarland\.de/,
+      ],
+      [
+        "KMK source",
+        /kmk\.org/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-saarland-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-saarland-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-saarland-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
       "schulferien-mecklenburg-vorpommern-2027.html",
     checks: [
       [

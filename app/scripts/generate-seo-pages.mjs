@@ -6113,6 +6113,356 @@ automatisch eingerechnet.`,
 }
 
 
+
+function getSaarland2027PeriodNote(event) {
+  const crossingNote =
+    getStateYearCrossingNote(
+      event,
+      2027,
+    );
+
+  if (crossingNote) {
+    return crossingNote;
+  }
+
+  if (event.type === "winter") {
+    return (
+      "Die offizielle Bezeichnung im Saarland " +
+      "lautet Fastnachtsferien."
+    );
+  }
+
+  return "";
+}
+
+function createSaarland2027FaqItems(
+  events,
+) {
+  const winter =
+    findStateYearGoldEvent(
+      events,
+      "winter",
+      2027,
+    );
+
+  const easter =
+    findStateYearGoldEvent(
+      events,
+      "easter",
+      2027,
+    );
+
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    findStateYearGoldEvent(
+      events,
+      "christmas",
+      2027,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return "aktuell kein Eintrag";
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Wann sind die Fastnachtsferien im Saarland 2027?",
+      answer:
+        `Die Fastnachtsferien im Saarland 2027 dauern vom ${rangeText(winter)}.`,
+    },
+    {
+      question:
+        "Warum heißen die Winterferien im Saarland Fastnachtsferien?",
+      answer:
+        "Das Saarland führt diesen Ferienabschnitt in seiner Ferienordnung als Fastnachtsferien. Schulferienklar übernimmt diese offizielle Bezeichnung.",
+    },
+    {
+      question:
+        "Wann sind die Osterferien im Saarland 2027?",
+      answer:
+        `Die Osterferien im Saarland 2027 dauern vom ${rangeText(easter)}.`,
+    },
+    {
+      question:
+        "Gibt es im Saarland 2027 Pfingstferien?",
+      answer:
+        "Nein. Für die Schuljahre 2026/27 und 2027/28 sind im Saarland keine eigenen Pfingstferien ausgewiesen. Gesetzliche Feiertage wie Pfingstmontag bleiben davon unberührt.",
+    },
+    {
+      question:
+        "Wann sind die Sommerferien im Saarland 2027?",
+      answer:
+        `Die Sommerferien im Saarland 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien im Saarland 2027?",
+      answer:
+        `Die Herbstferien im Schuljahr 2027/28 dauern vom ${rangeText(autumn)}.`,
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien im Saarland 2027?",
+      answer:
+        `Die Weihnachtsferien im Schuljahr 2027/28 dauern vom ${rangeText(christmas)}.`,
+    },
+    {
+      question:
+        "Wie viele bewegliche Ferientage gibt es im Saarland?",
+      answer:
+        "Im Schuljahr 2026/27 stehen zwei bewegliche Ferientage zur Verfügung, im Schuljahr 2027/28 einer. Die konkreten Termine werden von der jeweiligen Schule beziehungsweise Schulkonferenz festgelegt und deshalb von Schulferienklar nicht automatisch in den landesweiten Standardkalender aufgenommen.",
+    },
+    {
+      question:
+        "Sind die beweglichen Ferientage in dieser Übersicht enthalten?",
+      answer:
+        "Nein. Da die konkreten Daten schulabhängig sind, zeigt diese Seite nur die landesweit festgelegten Ferienzeiten. Für bewegliche Ferientage ist die eigene Schule maßgeblich.",
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen Ferienzeitraum um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Schulabhängige bewegliche Ferientage werden nicht automatisch eingerechnet.",
+    },
+  ];
+}
+
+function saarland2027SpecialSectionHtml() {
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Wichtig für das Saarland
+          </p>
+
+          <h2>
+            Fastnachtsferien und bewegliche Ferientage 2027
+          </h2>
+
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>
+                Fastnachtsferien statt Winterferien
+              </h3>
+
+              <p>
+                Der Ferienabschnitt im Februar heißt
+                im Saarland offiziell
+                <strong>Fastnachtsferien</strong>.
+                2027 dauern sie vom
+                <strong>8. bis 12. Februar</strong>.
+              </p>
+
+              <p>
+                Mit den angrenzenden Wochenenden
+                ergeben sich nach der
+                Schulferienklar-Standardberechnung
+                <strong>9 zusammenhängende freie
+                Kalendertage vom 6. bis
+                14. Februar 2027</strong>.
+              </p>
+            </div>
+
+            <div>
+              <h3>
+                Bewegliche Ferientage sind schulabhängig
+              </h3>
+
+              <p>
+                Im Schuljahr
+                <strong>2026/27 gibt es zwei</strong>
+                bewegliche Ferientage.
+                Im Schuljahr
+                <strong>2027/28 gibt es einen</strong>.
+              </p>
+
+              <p>
+                Die konkreten Termine werden
+                schulbezogen festgelegt.
+                Deshalb werden sie im landesweiten
+                Standardkalender von Schulferienklar
+                <strong>nicht automatisch
+                eingerechnet</strong>.
+              </p>
+            </div>
+          </div>
+
+          <p class="gold-source-note">
+            <strong>Keine eigenen Pfingstferien 2027:</strong>
+            Für die Schuljahre 2026/27 und 2027/28
+            ist im Saarland kein eigener
+            Pfingstferien-Zeitraum ausgewiesen.
+            Gesetzliche Feiertage wie Christi Himmelfahrt,
+            Pfingstmontag und Fronleichnam werden bei der
+            Berechnung angrenzender freier Tage weiterhin
+            berücksichtigt.
+          </p>
+        </section>`;
+}
+
+function saarland2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-saarland-2026.html",
+      label:
+        "Schulferien Saarland 2026",
+    },
+    {
+      href:
+        "/schulferien-saarland-2028.html",
+      label:
+        "Schulferien Saarland 2028",
+    },
+    {
+      href:
+        "/schulferien-saarland.html",
+      label:
+        "Alle Jahre für das Saarland",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-rheinland-pfalz-2027.html",
+      label:
+        "Rheinland-Pfalz 2027",
+    },
+    {
+      href:
+        "/schulferien-hessen-2027.html",
+      label:
+        "Hessen 2027",
+    },
+    {
+      href:
+        "/schulferien-baden-wuerttemberg-2027.html",
+      label:
+        "Baden-Württemberg 2027",
+    },
+    {
+      href:
+        "/schulferien-nordrhein-westfalen-2027.html",
+      label:
+        "Nordrhein-Westfalen 2027",
+    },
+  ]);
+}
+
+function saarland2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createSaarland2027FaqItems(
+      events,
+    );
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      "Schulferien Saarland 2027: Termine und freie Tage",
+    description:
+      "Schulferien Saarland 2027 mit Fastnachtsferien, Osterferien, Sommerferien, beweglichen Ferientagen, PDF, ICS und offizieller Quelle.",
+    marker:
+      "saarland-2027",
+    eyebrow:
+      "Saarland · Kalenderjahr 2027",
+    h1:
+      "Schulferien Saarland 2027",
+    introText:
+      `Hier stehen zuerst die landesweit festgelegten
+Ferientermine des Saarlandes. Zusätzlich zeigt
+Schulferienklar, wie lange die freie Zeit direkt am
+Stück dauert, wenn Wochenenden oder landesweite
+Feiertage unmittelbar anschließen.`,
+    specialNavLabel:
+      "Saarland-Hinweise",
+    termHeadingText:
+      "Alle Ferienzeiten im Saarland 2027",
+    termIntroText:
+      `Die Liste zeigt die landesweit festgelegten
+Ferienzeiten, die in das Kalenderjahr 2027 fallen.
+Dazu gehören auch die Herbst- und Weihnachtsferien
+des Schuljahres 2027/28. Schulabhängige bewegliche
+Ferientage werden nicht als landesweit feste Termine
+eingetragen.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+          getPeriodNote:
+            getSaarland2027PeriodNote,
+        });
+      },
+    officialPeriodText:
+      `Exakt der vom Ministerium für Bildung und Kultur
+veröffentlichte Beginn und das veröffentlichte Ende
+des jeweiligen landesweit festgelegten
+Ferienzeitraums.`,
+    connectedPeriodText:
+      `Der offizielle Zeitraum plus direkt
+anschließende Samstage, Sonntage und landesweit
+geltende gesetzliche Feiertage.`,
+    calculationNoteText:
+      `Angegeben werden Kalendertage, nicht die Zahl
+der ausgefallenen Unterrichtstage. Schulabhängige
+bewegliche Ferientage werden nicht automatisch
+eingerechnet.`,
+    specialSectionHtml:
+      saarland2027SpecialSectionHtml(),
+    sourceLinkLabel:
+      "Ferienordnung des Ministeriums für Bildung und Kultur",
+    secondaryLinkLabel:
+      "Ferienübersicht der Kultusministerkonferenz",
+    faqItems,
+    relatedLinksHtml:
+      saarland2027RelatedLinksHtml(),
+    buttonText:
+      "Saarland 2027 im Kalender öffnen",
+  });
+}
+
+
 function sharedSeoStyles() {
   return `    <link rel="stylesheet" href="/seo-pages.css" />
     <script defer src="/privacy-analytics.js"></script>`;
@@ -6277,6 +6627,10 @@ const GOLD_PAGE_TEMPLATES = new Map([
   [
     "MV-2027",
     mecklenburgVorpommern2027GoldPageTemplate,
+  ],
+  [
+    "SL-2027",
+    saarland2027GoldPageTemplate,
   ],
   [
     "HH-2027",
