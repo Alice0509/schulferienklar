@@ -391,6 +391,97 @@ const commonGoldPageChecks = [
 const goldPageValidations = [
   {
     file:
+      "schulferien-bremen-2027.html",
+    checks: [
+      [
+        "Gold Page marker",
+        /data-gold-page="bremen-2027"/,
+      ],
+      ...commonGoldPageChecks,
+      [
+        "Halbjahresferien",
+        /Halbjahresferien/,
+      ],
+      [
+        "Osterferien",
+        /Osterferien/,
+      ],
+      [
+        "Tag nach Himmelfahrt",
+        /Tag nach Himmelfahrt/,
+      ],
+      [
+        "7 May date",
+        /7\. Mai 2027/,
+      ],
+      [
+        "Pfingsten",
+        /Pfingsten/,
+      ],
+      [
+        "18 May date",
+        /18\. Mai 2027/,
+      ],
+      [
+        "Sommerferien",
+        /Sommerferien/,
+      ],
+      [
+        "Herbstferien",
+        /Herbstferien/,
+      ],
+      [
+        "movable holiday",
+        /beweglichen? Ferientag/,
+      ],
+      [
+        "school conference",
+        /Schulkonferenz/,
+      ],
+      [
+        "movable holiday fallback",
+        /fehlender fristgerechter[\s\S]*7\. Mai 2027/,
+      ],
+      [
+        "school-specific exclusion",
+        /schulabhängiger[\s\S]*nicht automatisch/,
+      ],
+      [
+        "school-free Saturdays",
+        /unterrichtsfreie[\s\S]*Samstage/i,
+      ],
+      [
+        "vocational schools",
+        /berufsbildende Schulen/i,
+      ],
+      [
+        "official Bremen source",
+        /Der Senator für Kinder und Bildung Bremen/,
+      ],
+      [
+        "Bremen transparency source link",
+        /transparenz\.bremen\.de/,
+      ],
+      [
+        "Bremen education source link",
+        /bildung\.bremen\.de/,
+      ],
+      [
+        "Jahreskalender preview link",
+        /downloads\/jahreskalender-bremen-2027\.html/,
+      ],
+      [
+        "Jahreskalender PDF link",
+        /downloads\/schulferien-bremen-2027\.pdf/,
+      ],
+      [
+        "Jahreskalender ICS link",
+        /downloads\/schulferien-bremen-2027\.ics/,
+      ],
+    ],
+  },
+  {
+    file:
       "schulferien-brandenburg-2027.html",
     checks: [
       [

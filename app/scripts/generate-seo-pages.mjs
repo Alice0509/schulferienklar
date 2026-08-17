@@ -5302,6 +5302,422 @@ ${seoFooterHtml()}    </main>
 </html>`;
 }
 
+
+function getBremen2027PeriodNote(event) {
+  const crossingNote =
+    getStateYearCrossingNote(
+      event,
+      2027,
+    );
+
+  if (crossingNote) {
+    return crossingNote;
+  }
+
+  if (
+    event.category ===
+      "state_school_free_day" &&
+    event.startDate ===
+      "2027-05-07"
+  ) {
+    return (
+      "Die zentrale Bremer Ferienübersicht führt " +
+      "Freitag, den 7. Mai 2027, als Tag nach " +
+      "Himmelfahrt."
+    );
+  }
+
+  if (event.type === "winter") {
+    return (
+      "Die offizielle Bezeichnung in Bremen lautet " +
+      "Halbjahresferien."
+    );
+  }
+
+  if (event.type === "pentecost") {
+    return (
+      "Die Ferienübersicht nennt Dienstag, " +
+      "den 18. Mai 2027."
+    );
+  }
+
+  return "";
+}
+
+function findBremen2027SchoolFreeDay(events) {
+  return events.find((event) => {
+    return (
+      event.category ===
+        "state_school_free_day" &&
+      event.startDate ===
+        "2027-05-07"
+    );
+  });
+}
+
+function createBremen2027FaqItems(events) {
+  const winter =
+    findStateYearGoldEvent(
+      events,
+      "winter",
+      2027,
+    );
+
+  const easter =
+    findStateYearGoldEvent(
+      events,
+      "easter",
+      2027,
+    );
+
+  const pentecost =
+    findStateYearGoldEvent(
+      events,
+      "pentecost",
+      2027,
+    );
+
+  const summer =
+    findStateYearGoldEvent(
+      events,
+      "summer",
+      2027,
+    );
+
+  const autumn =
+    findStateYearGoldEvent(
+      events,
+      "autumn",
+      2027,
+    );
+
+  const christmas =
+    findStateYearGoldEvent(
+      events,
+      "christmas",
+      2027,
+    );
+
+  const schoolFreeDay =
+    findBremen2027SchoolFreeDay(
+      events,
+    );
+
+  const rangeText = (event) => {
+    if (!event) {
+      return (
+        "Für diesen Zeitraum liegt " +
+        "aktuell kein Eintrag vor."
+      );
+    }
+
+    return (
+      `${formatDate(event.startDate)} bis ` +
+      `${formatDate(event.endDate)}`
+    );
+  };
+
+  return [
+    {
+      question:
+        "Wann sind die Halbjahresferien in Bremen 2027?",
+      answer:
+        `Die Halbjahresferien in Bremen 2027 dauern vom ${rangeText(winter)}.`,
+    },
+    {
+      question:
+        "Wann sind die Osterferien in Bremen 2027?",
+      answer:
+        `Die Osterferien in Bremen 2027 dauern vom ${rangeText(easter)}.`,
+    },
+    {
+      question:
+        "Ist der 7. Mai 2027 in Bremen schulfrei?",
+      answer:
+        `Die zentrale Ferienübersicht des Landes Bremen führt Freitag, den ${schoolFreeDay ? formatDate(schoolFreeDay.startDate) : "07.05.2027"}, als „Tag nach Himmelfahrt“. Zusätzlich regelt § 2 der Ferienverordnung den beweglichen Ferientag der jeweiligen Schule. Bei einer abweichenden schulischen Festlegung sollte deshalb die eigene Schule geprüft werden.`,
+    },
+    {
+      question:
+        "Gibt es Pfingstferien in Bremen 2027?",
+      answer:
+        `Die offizielle Ferienübersicht nennt Dienstag, den ${pentecost ? formatDate(pentecost.startDate) : "18.05.2027"}, als Ferientag zu Pfingsten. Der veröffentlichte Zeitraum umfasst einen Tag.`,
+    },
+    {
+      question:
+        "Wann sind die Sommerferien in Bremen 2027?",
+      answer:
+        `Die Sommerferien in Bremen 2027 dauern vom ${rangeText(summer)}.`,
+    },
+    {
+      question:
+        "Wann sind die Herbstferien in Bremen 2027?",
+      answer:
+        `Die Herbstferien in Bremen 2027 dauern vom ${rangeText(autumn)}.`,
+    },
+    {
+      question:
+        "Wann sind die Weihnachtsferien in Bremen 2027?",
+      answer:
+        `Die Weihnachtsferien beginnen am ${christmas ? formatDate(christmas.startDate) : "nicht angegeben"} und enden am ${christmas ? formatDate(christmas.endDate) : "nicht angegeben"}.`,
+    },
+    {
+      question:
+        "Wie wird der bewegliche Ferientag in Bremen festgelegt?",
+      answer:
+        "Im Schuljahr 2026/27 gibt es einen beweglichen Ferientag. Die Schulkonferenz legt den Termin vor Beginn des Schuljahres für die jeweilige Schule fest. Erfolgt keine fristgerechte Festlegung, gilt laut Ferienverordnung Freitag, der 7. Mai 2027. Schulabhängige Alternativtermine werden von Schulferienklar nicht automatisch zusätzlich eingerechnet.",
+    },
+    {
+      question:
+        "Sind die unterrichtsfreien Samstage in Bremen enthalten?",
+      answer:
+        "Die Bremer Ferienverordnung führt unterrichtsfreie Samstage gesondert auf. Sie sind nicht als eigene Ferienereignisse im landesweiten Standarddatensatz enthalten. Für die bundesweit vergleichbare Berechnung behandelt Schulferienklar Samstag und Sonntag grundsätzlich als Wochenende; der konkrete Schulrhythmus kann deshalb abweichen.",
+    },
+    {
+      question:
+        "Können berufsbildende Schulen in Bremen abweichen?",
+      answer:
+        "Ja. Die Ferienverordnung erlaubt für berufsbildende Schulen oder einzelne berufliche Bildungsgänge Abweichungen bei den Halbjahresferien und beweglichen Ferientagen. Maßgeblich ist deshalb im Einzelfall die eigene Schule.",
+    },
+    {
+      question:
+        "Wie berechnet Schulferienklar die zusammenhängende freie Zeit?",
+      answer:
+        "Schulferienklar erweitert einen offiziellen Ferienzeitraum in der Standardberechnung um direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Schul- oder schulartspezifische Abweichungen werden nicht automatisch eingerechnet.",
+    },
+  ];
+}
+
+function bremen2027SpecialSectionHtml() {
+  return `        <section
+          id="besonderheiten"
+          class="gold-section"
+        >
+          <p class="eyebrow">
+            Wichtig für Bremen
+          </p>
+
+          <h2>
+            Beweglicher Ferientag und Bremer Sonderregeln 2027
+          </h2>
+
+          <div class="gold-terminology-grid">
+            <div>
+              <h3>7. Mai und beweglicher Ferientag</h3>
+
+              <p>
+                Die zentrale Bremer Ferienübersicht
+                führt
+                <strong>Freitag, den
+                7. Mai 2027</strong>,
+                als
+                <strong>Tag nach Himmelfahrt</strong>.
+              </p>
+
+              <p>
+                Gleichzeitig bestimmt § 2 der
+                Ferienverordnung für das Schuljahr
+                2026/27
+                <strong>einen beweglichen
+                Ferientag</strong>.
+                Den konkreten Termin legt die
+                Schulkonferenz der jeweiligen Schule
+                fest. Bei fehlender fristgerechter
+                Festlegung gilt der 7. Mai 2027.
+              </p>
+
+              <p>
+                Ein abweichender schulabhängiger
+                Termin wird deshalb nicht automatisch
+                zusätzlich in die landesweite
+                Standardübersicht eingerechnet.
+              </p>
+            </div>
+
+            <div>
+              <h3>
+                Unterrichtsfreie Samstage und
+                berufliche Schulen
+              </h3>
+
+              <p>
+                Die Bremer Ferienverordnung führt in
+                § 3 zusätzlich konkrete
+                <strong>unterrichtsfreie
+                Samstage</strong>.
+                Sie sind im Standarddatensatz nicht
+                als eigene Ferienereignisse enthalten.
+              </p>
+
+              <p>
+                Außerdem können
+                <strong>berufsbildende Schulen</strong>
+                nach § 6 bei Halbjahresferien und
+                beweglichen Ferientagen abweichende
+                Termine festlegen.
+              </p>
+
+              <p>
+                Für einen konkreten Schulplan bleibt
+                deshalb die Information der eigenen
+                Schule maßgeblich.
+              </p>
+            </div>
+          </div>
+
+          <p class="gold-source-note">
+            <strong>Pfingsten 2027:</strong>
+            Die offizielle Ferienübersicht nennt
+            Dienstag, den
+            <strong>18. Mai 2027</strong>,
+            als Ferientag zu Pfingsten.
+          </p>
+        </section>`;
+}
+
+function bremen2027RelatedLinksHtml() {
+  return stateYearGoldRelatedLinksHtml([
+    {
+      href:
+        "/schulferien-bremen-2026.html",
+      label:
+        "Schulferien Bremen 2026",
+    },
+    {
+      href:
+        "/schulferien-bremen-2028.html",
+      label:
+        "Schulferien Bremen 2028",
+    },
+    {
+      href:
+        "/schulferien-bremen.html",
+      label:
+        "Alle Jahre für Bremen",
+    },
+    {
+      href:
+        "/schulferien-2027.html",
+      label:
+        "Alle Bundesländer 2027",
+    },
+    {
+      href:
+        "/schulferien-niedersachsen-2027.html",
+      label:
+        "Niedersachsen 2027",
+    },
+    {
+      href:
+        "/schulferien-hamburg-2027.html",
+      label:
+        "Hamburg 2027",
+    },
+    {
+      href:
+        "/schulferien-schleswig-holstein-2027.html",
+      label:
+        "Schleswig-Holstein 2027",
+    },
+    {
+      href:
+        "/schulferien-mecklenburg-vorpommern-2027.html",
+      label:
+        "Mecklenburg-Vorpommern 2027",
+    },
+  ]);
+}
+
+function bremen2027GoldPageTemplate({
+  slug,
+  name,
+  code,
+  year,
+  events,
+}) {
+  const faqItems =
+    createBremen2027FaqItems(
+      events,
+    );
+
+  return stateYearGoldPageTemplate({
+    slug,
+    name,
+    code,
+    year,
+    events,
+    title:
+      "Schulferien Bremen 2027: Termine und freie Tage",
+    description:
+      "Schulferien Bremen 2027 mit Halbjahresferien, Osterferien, Himmelfahrt, Pfingsten, Sommerferien, beweglichen Ferientagen, PDF, ICS und offizieller Quelle.",
+    marker:
+      "bremen-2027",
+    eyebrow:
+      "Bremen · Kalenderjahr 2027",
+    h1:
+      "Schulferien Bremen 2027",
+    introText:
+      `Hier stehen zuerst die in der Bremer
+Ferienübersicht veröffentlichten Termine. Zusätzlich
+zeigt Schulferienklar, wie lange die freie Zeit in der
+bundesweiten Standardberechnung direkt am Stück
+dauert, wenn Wochenenden oder landesweite Feiertage
+unmittelbar anschließen.`,
+    specialNavLabel:
+      "Bremen-Hinweise",
+    termHeadingText:
+      "Alle Ferienzeiten und schulfreien Tage in Bremen 2027",
+    termIntroText:
+      `Die Liste berücksichtigt auch Weihnachtsferien,
+die aus 2026 in das Kalenderjahr 2027 hineinreichen
+oder bis 2028 dauern. Außerdem sind die
+Halbjahresferien, der Tag nach Himmelfahrt und der
+einzelne Ferientag zu Pfingsten aufgeführt.`,
+    renderPeriodRows:
+      ({
+        events,
+        publicHolidays,
+        year,
+      }) => {
+        return stateYearGoldPeriodRowsHtml({
+          events,
+          publicHolidays,
+          year,
+          getPeriodNote:
+            getBremen2027PeriodNote,
+        });
+      },
+    officialPeriodText:
+      `Exakt der im hinterlegten Bremer Datensatz
+veröffentlichte Beginn und das veröffentlichte Ende
+des jeweiligen Ferienzeitraums beziehungsweise des
+aufgeführten schulfreien Tages.`,
+    connectedPeriodText:
+      `Für die bundesweit einheitliche
+Vergleichsberechnung wird der offizielle Zeitraum
+um direkt anschließende Samstage, Sonntage und
+landesweit geltende gesetzliche Feiertage erweitert.`,
+    calculationNoteText:
+      `Angegeben werden Kalendertage, nicht die Zahl
+der ausgefallenen Unterrichtstage. Die Bremer
+Ferienverordnung führt zusätzlich unterrichtsfreie
+Samstage sowie schul- und schulartspezifische
+Abweichungen auf. Diese werden in der
+Standardberechnung nicht gesondert modelliert.`,
+    specialSectionHtml:
+      bremen2027SpecialSectionHtml(),
+    sourceLinkLabel:
+      "Ferienverordnung im Transparenzportal Bremen",
+    secondaryLinkLabel:
+      "Ferientermine des Senators für Kinder und Bildung",
+    faqItems,
+    relatedLinksHtml:
+      bremen2027RelatedLinksHtml(),
+    buttonText:
+      "Bremen 2027 im Kalender öffnen",
+  });
+}
+
+
 function sharedSeoStyles() {
   return `    <link rel="stylesheet" href="/seo-pages.css" />
     <script defer src="/privacy-analytics.js"></script>`;
@@ -5458,6 +5874,10 @@ const GOLD_PAGE_TEMPLATES = new Map([
   [
     "BB-2027",
     brandenburg2027GoldPageTemplate,
+  ],
+  [
+    "HB-2027",
+    bremen2027GoldPageTemplate,
   ],
   [
     "HH-2027",
