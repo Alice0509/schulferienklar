@@ -8,6 +8,9 @@ import {
   STATES as states,
   YEARS as years,
 } from "./lib/site-config.mjs";
+import {
+  GOLD_PAGE_READY_YEARS,
+} from "./lib/gold-page-config.mjs";
 
 const outputDir = path.resolve("public");
 
@@ -7042,11 +7045,7 @@ function widgetPromoHtml({ code, name }) {
 
 
 
-const GOLD_PAGE_READY_YEARS =
-  new Set([
-    2028,
-    2029,
-  ]);
+
 
 
 function getDefaultGoldMarker({
