@@ -9,7 +9,7 @@
     "The official Sachsen page states that first and last holiday days are shown.",
     "The official Sachsen page states the unterrichtsfreier Tag is set by the Kultusministerium; these dates are included as state_school_free_day.",
     "Frei bewegliche Ferientage are excluded because the official page states that each school can set them in coordination with school administration.",
-    "For 2025/26, the official page currently lists only Sommerferien and one unterrichtsfreier Tag; this year is marked partial."
+    "For 2025/26, the complete statewide holiday schedule is verified against the official VwV Bedarf und Schuljahresablauf 2025/2026 in REVOSax. The current Sachsen school overview page only displays Sommerferien and the unterrichtsfreier Tag for that school year."
   ],
   "sources": [
     {
@@ -31,10 +31,94 @@
         "2029/30"
       ],
       "lastCheckedAt": "2026-05-24",
-      "notes": "Official Sachsen page lists Ferientermine through school year 2029/2030. For 2025/26, the official page currently lists Sommerferien and one unterrichtsfreier Tag only; this school year is therefore marked partial in this dataset. Unterrichtsfreier Tag is included as state_school_free_day because the page states it is set by the Kultusministerium. Frei bewegliche Ferientage are excluded because the page states each school may set them in coordination with school administration."
+      "notes": "Official Sachsen sources cover school years 2025/26 through 2029/30. The current Schuljahrestermine overview only displays Sommerferien and the unterrichtsfreier Tag for 2025/26; the complete statewide 2025/26 Ferienregelung is verified against the official VwV Bedarf und Schuljahresablauf 2025/2026 in REVOSax. Unterrichtsfreier Tag is included as state_school_free_day because it is set by the Kultusministerium. Frei bewegliche Ferientage remain excluded because each school sets them locally."
     }
   ],
   "holidays": [
+    {
+      "id": "sn-autumn-2025-26",
+      "bundeslandCode": "SN",
+      "bundeslandName": "Sachsen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "autumn",
+      "name": {
+        "de": "Herbstferien",
+        "en": "Autumn holidays"
+      },
+      "startDate": "2025-10-06",
+      "endDate": "2025-10-18",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Sächsisches Staatsministerium für Kultus",
+      "sourceUrl": "https://www.revosax.sachsen.de/vorschrift/21219-VwV-Bedarf-und-Schuljahresablauf-2025-2026",
+      "lastCheckedAt": "2026-08-18",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Verified against the official VwV Bedarf und Schuljahresablauf 2025/2026 in REVOSax."
+    },
+    {
+      "id": "sn-christmas-2025-26",
+      "bundeslandCode": "SN",
+      "bundeslandName": "Sachsen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "christmas",
+      "name": {
+        "de": "Weihnachtsferien",
+        "en": "Christmas holidays"
+      },
+      "startDate": "2025-12-22",
+      "endDate": "2026-01-02",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Sächsisches Staatsministerium für Kultus",
+      "sourceUrl": "https://www.revosax.sachsen.de/vorschrift/21219-VwV-Bedarf-und-Schuljahresablauf-2025-2026",
+      "lastCheckedAt": "2026-08-18",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Verified against the official VwV Bedarf und Schuljahresablauf 2025/2026 in REVOSax."
+    },
+    {
+      "id": "sn-winter-2025-26",
+      "bundeslandCode": "SN",
+      "bundeslandName": "Sachsen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "winter",
+      "name": {
+        "de": "Winterferien",
+        "en": "Winter holidays"
+      },
+      "startDate": "2026-02-09",
+      "endDate": "2026-02-21",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Sächsisches Staatsministerium für Kultus",
+      "sourceUrl": "https://www.revosax.sachsen.de/vorschrift/21219-VwV-Bedarf-und-Schuljahresablauf-2025-2026",
+      "lastCheckedAt": "2026-08-18",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Verified against the official VwV Bedarf und Schuljahresablauf 2025/2026 in REVOSax."
+    },
+    {
+      "id": "sn-easter-2025-26",
+      "bundeslandCode": "SN",
+      "bundeslandName": "Sachsen",
+      "schoolYear": "2025/26",
+      "category": "school_holiday",
+      "type": "easter",
+      "name": {
+        "de": "Osterferien",
+        "en": "Easter holidays"
+      },
+      "startDate": "2026-04-03",
+      "endDate": "2026-04-10",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Sächsisches Staatsministerium für Kultus",
+      "sourceUrl": "https://www.revosax.sachsen.de/vorschrift/21219-VwV-Bedarf-und-Schuljahresablauf-2025-2026",
+      "lastCheckedAt": "2026-08-18",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Verified against the official VwV Bedarf und Schuljahresablauf 2025/2026 in REVOSax."
+    },
     {
       "id": "sn-summer-2025-26",
       "bundeslandCode": "SN",
@@ -50,11 +134,11 @@
       "endDate": "2026-08-14",
       "dateSemantics": "inclusive_end_date",
       "sourceName": "Sächsisches Staatsministerium für Kultus",
-      "sourceUrl": "https://www.schule.sachsen.de/schuljahrestermine-4793.html",
-      "lastCheckedAt": "2026-05-24",
-      "status": "partial",
+      "sourceUrl": "https://www.revosax.sachsen.de/vorschrift/21219-VwV-Bedarf-und-Schuljahresablauf-2025-2026",
+      "lastCheckedAt": "2026-08-18",
+      "status": "verified",
       "includeInDefaultCalendar": true,
-      "notes": "Official page currently lists Sommerferien and one unterrichtsfreier Tag for 2025/26 only."
+      "notes": "Verified against the official VwV Bedarf und Schuljahresablauf 2025/2026 in REVOSax."
     },
     {
       "id": "sn-school-free-2026-05-15",
@@ -71,11 +155,11 @@
       "endDate": "2026-05-15",
       "dateSemantics": "inclusive_end_date",
       "sourceName": "Sächsisches Staatsministerium für Kultus",
-      "sourceUrl": "https://www.schule.sachsen.de/schuljahrestermine-4793.html",
-      "lastCheckedAt": "2026-05-24",
+      "sourceUrl": "https://www.revosax.sachsen.de/vorschrift/21219-VwV-Bedarf-und-Schuljahresablauf-2025-2026",
+      "lastCheckedAt": "2026-08-18",
       "status": "verified",
       "includeInDefaultCalendar": true,
-      "notes": "Included because Sachsen states the unterrichtsfreier Tag is set by the Kultusministerium."
+      "notes": "Verified against the official VwV Bedarf und Schuljahresablauf 2025/2026 in REVOSax; included because the unterrichtsfreier Tag is set statewide by the Kultusministerium."
     },
     {
       "id": "sn-autumn-2026-27",
