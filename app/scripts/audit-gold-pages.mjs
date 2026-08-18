@@ -2,10 +2,19 @@ import fs from "node:fs";
 import path from "node:path";
 
 import {
+  GOLD_PAGE_READY_YEARS,
+} from "./lib/gold-page-config.mjs";
+
+import {
   STATES,
 } from "./lib/site-config.mjs";
 
 const YEAR = Number(process.argv[2]);
+
+const enforceDatasetPolicy =
+  GOLD_PAGE_READY_YEARS.has(
+    YEAR,
+  );
 
 if (
   !Number.isInteger(YEAR) ||
@@ -715,7 +724,10 @@ for (
     const policy =
       dataset.goldPagePolicy;
 
-    if (policy) {
+    if (
+      policy &&
+      enforceDatasetPolicy
+    ) {
       if (
         policy.navLabel &&
         !html.includes(
