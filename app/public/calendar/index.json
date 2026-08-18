@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generatedAt": "2026-05-25",
+  "generatedAt": "2026-08-18",
   "totalStates": 16,
   "coverage": {
     "startYear": 2026,
@@ -197,10 +197,10 @@
         "startYear": 2026,
         "endYear": 2030
       },
-      "updatedAt": "2026-05-25",
-      "schoolEventCount": 29,
+      "updatedAt": "2026-08-18",
+      "schoolEventCount": 32,
       "publicHolidayCount": 55,
-      "eventCount": 84
+      "eventCount": 87
     },
     {
       "bundeslandCode": "ST",

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-05-25",
+  "generatedAt": "2026-08-18",
   "years": [
     2026,
     2027,
@@ -794,12 +794,12 @@
       "stateSlug": "sachsen",
       "stateName": "Sachsen",
       "year": 2026,
-      "checkedAt": "2026-05-25",
+      "checkedAt": "2026-08-18",
       "htmlUrl": "/downloads/jahreskalender-sachsen-2026.html",
       "pdfUrl": "/downloads/schulferien-sachsen-2026.pdf",
       "icsUrl": "/downloads/schulferien-sachsen-2026.ics",
       "subscriptionUrl": "/calendar/sn.ics",
-      "schoolEventCount": 4,
+      "schoolEventCount": 7,
       "publicHolidayCount": 11
     },
     {
