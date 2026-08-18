@@ -12,8 +12,8 @@
     "generate:seo": "node scripts/generate-seo-pages.mjs && npm run generate:urlaubsplaner",
     "build:seo": "npm run generate:jahreskalender && npm run generate:jahreskalender-pdfs && npm run generate:seo && npm run generate:api && npm run generate:subscriptions && vite build",
     "validate:data": "cd .. && node scripts/validate-holidays.mjs && node scripts/validate-public-holidays.mjs",
-    "generate:seo:checked": "npm run validate:data && npm run generate:jahreskalender && npm run generate:jahreskalender-pdfs && npm run generate:seo && npm run generate:api && npm run generate:subscriptions && npm run validate:seo-pages && npm run validate:jahreskalender && npm run validate:api && npm run validate:subscriptions && npm run validate:regional-parity",
-    "build:seo:checked": "npm run validate:data && npm run generate:jahreskalender && npm run generate:jahreskalender-pdfs && npm run generate:seo && npm run generate:api && npm run generate:subscriptions && npm run validate:seo-pages && npm run validate:jahreskalender && npm run validate:api && npm run validate:subscriptions && npm run validate:regional-parity && vite build",
+    "generate:seo:checked": "npm run validate:data && npm run audit:gold-ready-years && npm run generate:jahreskalender && npm run generate:jahreskalender-pdfs && npm run generate:seo && npm run generate:api && npm run generate:subscriptions && npm run validate:seo-pages && npm run validate:jahreskalender && npm run validate:api && npm run validate:subscriptions && npm run validate:regional-parity",
+    "build:seo:checked": "npm run validate:data && npm run audit:gold-ready-years && npm run generate:jahreskalender && npm run generate:jahreskalender-pdfs && npm run generate:seo && npm run generate:api && npm run generate:subscriptions && npm run validate:seo-pages && npm run validate:jahreskalender && npm run validate:api && npm run validate:subscriptions && npm run validate:regional-parity && vite build",
     "validate:seo-pages": "node scripts/validate-generated-seo-pages.mjs",
     "audit:gold-pages": "node scripts/audit-gold-pages.mjs",
     "audit:gold-readiness": "node scripts/audit-gold-readiness.mjs",
@@ -26,7 +26,8 @@
     "validate:subscriptions": "node scripts/validate-subscription-calendars.mjs",
     "generate:jahreskalender-pdfs": "node scripts/generate-jahreskalender-pdfs.mjs",
     "validate:jahreskalender": "node scripts/validate-jahreskalender.mjs",
-    "validate:regional-parity": "node scripts/audit-regional-parity.mjs"
+    "validate:regional-parity": "node scripts/audit-regional-parity.mjs",
+    "audit:gold-ready-years": "node scripts/audit-gold-ready-years.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
