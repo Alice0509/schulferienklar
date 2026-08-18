@@ -4881,7 +4881,7 @@ function niedersachsen2027GoldPageTemplate({
     title:
       "Schulferien Niedersachsen 2027: Termine und freie Tage",
     description:
-      "Schulferien Niedersachsen 2027 mit Halbjahresferien, Osterferien, Tag nach Himmelfahrt, Pfingsten, Sommerferien, Herbstferien, Weihnachtsferien, PDF und offizieller Quelle.",
+      "Schulferien Niedersachsen 2027: Halbjahresferien, Osterferien, Tag nach Himmelfahrt, Pfingsten, Sommer-, Herbst- und Weihnachtsferien, offizielle Quelle.",
     marker:
       "ni-2027",
     eyebrow:
