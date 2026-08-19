@@ -824,6 +824,15 @@ ${items}
         </section>`;
 }
 
+function goldUrlaubsplanerLinkHtml(year) {
+  return `        <p>
+          <a href="/urlaubsplaner-${year}.html">
+            Urlaubsplaner ${year} – Ferien und freie Tage vergleichen
+          </a>
+        </p>`;
+}
+
+
 function getNrw2027DisplayName(event) {
   if (event.type === "pentecost") {
     return "Pfingsten (ein Ferientag)";
@@ -2743,6 +2752,7 @@ ${widgetPromoHtml({ code, name })}
 ${bayern2027SourceHtml(source)}
 ${bayern2027FaqHtml(faqItems)}
 ${bayern2027RelatedLinksHtml()}
+${goldUrlaubsplanerLinkHtml(year)}
 
         <a class="button" href="/?state=${code}&year=${year}">
           Bayern 2027 im Kalender öffnen
@@ -3061,6 +3071,7 @@ ${stateYearGoldFaqHtml({
 })}
 
 ${relatedLinksHtml}
+${goldUrlaubsplanerLinkHtml(year)}
 
         <a
           class="button"
@@ -5315,6 +5326,7 @@ ${stateYearGoldFaqHtml({
 })}
 
 ${bw2027RelatedLinksHtml()}
+${goldUrlaubsplanerLinkHtml(year)}
 
         <a
           class="button"

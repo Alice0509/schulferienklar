@@ -588,6 +588,7 @@ for (
     `/downloads/jahreskalender-${slug}-${YEAR}.html`,
     `/downloads/schulferien-${slug}-${YEAR}.pdf`,
     `/downloads/schulferien-${slug}-${YEAR}.ics`,
+    `/urlaubsplaner-${YEAR}.html`,
   ];
 
   for (
