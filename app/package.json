@@ -17,6 +17,7 @@
     "validate:seo-pages": "node scripts/validate-generated-seo-pages.mjs",
     "audit:gold-pages": "node scripts/audit-gold-pages.mjs",
     "audit:gold-readiness": "node scripts/audit-gold-readiness.mjs",
+    "report:gold-readiness": "node scripts/report-gold-readiness.mjs",
     "audit:gold-pages:2027": "node scripts/audit-gold-pages.mjs 2027",
     "generate:jahreskalender": "node scripts/generate-jahreskalender.mjs",
     "generate:api": "node scripts/generate-static-api.mjs",
