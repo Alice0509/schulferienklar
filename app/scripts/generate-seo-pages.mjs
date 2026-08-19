@@ -7890,6 +7890,12 @@ ${schulferienklarIntroCardHtml({
           Brückentagen und wichtigen Ferienzeiten wie Sommerferien, Osterferien, Herbstferien und Weihnachtsferien.
         </p>
 
+        <p>
+          Möchtest du Feiertage und Urlaubstage kombinieren?
+          Im <a href="/urlaubsplaner-${year}.html">Urlaubsplaner ${year} für Brückentage und freie Tage</a>
+          kannst du passende Kombinationen für alle 16 Bundesländer vergleichen.
+        </p>
+
         <h2>Übersicht der Bundesländer ${year}</h2>
         <p>
           Die folgenden Übersichten zeigen, wie viele Ferienzeiträume je
