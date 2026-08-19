@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generatedAt": "2026-08-18",
+  "generatedAt": "2026-08-19",
   "totalStates": 16,
   "coverage": {
     "startYear": 2026,
@@ -227,10 +227,10 @@
         "startYear": 2026,
         "endYear": 2030
       },
-      "updatedAt": "2026-05-25",
-      "schoolEventCount": 23,
+      "updatedAt": "2026-08-19",
+      "schoolEventCount": 26,
       "publicHolidayCount": 50,
-      "eventCount": 73
+      "eventCount": 76
     },
     {
       "bundeslandCode": "TH",
