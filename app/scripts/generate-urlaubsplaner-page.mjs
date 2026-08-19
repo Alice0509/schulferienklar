@@ -400,10 +400,6 @@ function pageTemplate({
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${title}</title>
     <meta name="description" content="${description}" />
-    <meta
-      name="keywords"
-      content="Urlaubsplaner ${YEAR}, Brückentage ${YEAR}, Urlaubstage optimieren ${YEAR}, Feiertage ${YEAR}, freie Tage ${YEAR}"
-    />
     <link
       rel="canonical"
       href="https://www.schulferienklar.de/urlaubsplaner-${YEAR}.html"
@@ -440,7 +436,7 @@ function pageTemplate({
 
       <section class="planner-hero">
         <p class="eyebrow">Urlaubstage clever einsetzen</p>
-        <h1>Urlaubsplaner ${YEAR}</h1>
+        <h1>Urlaubsplaner ${YEAR}: Brückentage und freie Tage</h1>
         <p class="planner-lead">
           Vergleiche Brückentage und lange freie Zeiträume für alle
           Bundesländer. Der Rechner verbindet Wochenenden, landesweite
@@ -475,7 +471,7 @@ ${budgetExamplesHtml(states, YEAR)}
 
       <section class="planner-section" id="bundeslaender">
         <p class="eyebrow">Alle 16 Bundesländer</p>
-        <h2>Urlaubstage ${YEAR} nach Bundesland planen</h2>
+        <h2>Brückentage ${YEAR} nach Bundesland planen</h2>
         <p>
           Als schnelle Orientierung zeigt jede Karte eine gute Kombination
           mit höchstens vier Urlaubstagen. Öffne anschließend den Rechner,
