@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-05-24",
+  "generatedAt": "2026-08-19",
   "totalBundeslaender": 16,
-  "totalEvents": 486,
+  "totalEvents": 495,
   "datasets": [
     {
       "bundeslandCode": "BW",
@@ -283,7 +283,7 @@
       "version": "0.4",
       "jsonFile": "sachsen_v0_4.json",
       "csvFile": "sachsen_v0_4.csv",
-      "eventCount": 29,
+      "eventCount": 33,
       "schoolYears": [
         "2025/26",
         "2026/27",
@@ -292,11 +292,10 @@
         "2029/30"
       ],
       "dateRange": {
-        "startDate": "2026-05-15",
+        "startDate": "2025-10-06",
         "endDate": "2030-08-23"
       },
       "statuses": [
-        "partial",
         "verified"
       ]
     },
@@ -328,17 +327,18 @@
       "version": "0.4",
       "jsonFile": "schleswig_holstein_v0_4.json",
       "csvFile": "schleswig_holstein_v0_4.csv",
-      "eventCount": 24,
+      "eventCount": 29,
       "schoolYears": [
         "2025/26",
         "2026/27",
         "2027/28",
         "2028/29",
-        "2029/30"
+        "2029/30",
+        "2030/31"
       ],
       "dateRange": {
         "startDate": "2025-10-20",
-        "endDate": "2030-05-31"
+        "endDate": "2031-05-23"
       },
       "statuses": [
         "verified"

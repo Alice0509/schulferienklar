@@ -141,6 +141,21 @@ STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:school-sh-summer-2030-31@schulferienklar.de
+DTSTAMP:20260819T000000Z
+LAST-MODIFIED:20260819T000000Z
+SEQUENCE:20260819
+DTSTART;VALUE=DATE:20300708
+DTEND;VALUE=DATE:20300818
+SUMMARY:Sommerferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Schleswig-Holstein · Quelle:
+  Ministerium für Allgemeine und Berufliche Bildung\, Wissenschaft\, Forsc
+ hung und Kultur Schleswig-Holstein
+URL:https://www.schulferienklar.de/schulferien-schleswig-holstein-2030.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:public-sh-public-2030-german-unity@schulferienklar.de
 DTSTAMP:20260525T000000Z
 LAST-MODIFIED:20260525T000000Z
@@ -155,6 +170,21 @@ STATUS:CONFIRMED
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:school-sh-autumn-2030-31@schulferienklar.de
+DTSTAMP:20260819T000000Z
+LAST-MODIFIED:20260819T000000Z
+SEQUENCE:20260819
+DTSTART;VALUE=DATE:20301014
+DTEND;VALUE=DATE:20301026
+SUMMARY:Herbstferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Schleswig-Holstein · Quelle:
+  Ministerium für Allgemeine und Berufliche Bildung\, Wissenschaft\, Forsc
+ hung und Kultur Schleswig-Holstein
+URL:https://www.schulferienklar.de/schulferien-schleswig-holstein-2030.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:public-sh-public-2030-reformation-day@schulferienklar.de
 DTSTAMP:20260525T000000Z
 LAST-MODIFIED:20260525T000000Z
@@ -164,6 +194,21 @@ DTEND;VALUE=DATE:20301101
 SUMMARY:Reformationstag (Feiertag)
 DESCRIPTION:Schulferienklar · Gesetzlicher Feiertag · Schleswig-Holstein 
  · landesweit
+URL:https://www.schulferienklar.de/schulferien-schleswig-holstein-2030.html
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:school-sh-christmas-2030-31@schulferienklar.de
+DTSTAMP:20260819T000000Z
+LAST-MODIFIED:20260819T000000Z
+SEQUENCE:20260819
+DTSTART;VALUE=DATE:20301220
+DTEND;VALUE=DATE:20310107
+SUMMARY:Weihnachtsferien (Schulferien)
+DESCRIPTION:Schulferienklar · Schulferien · Schleswig-Holstein · Quelle:
+  Ministerium für Allgemeine und Berufliche Bildung\, Wissenschaft\, Forsc
+ hung und Kultur Schleswig-Holstein
 URL:https://www.schulferienklar.de/schulferien-schleswig-holstein-2030.html
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT
