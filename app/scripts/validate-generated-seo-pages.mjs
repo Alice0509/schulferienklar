@@ -38,6 +38,61 @@ const htmlFiles = fs
 
 const errors = [];
 
+const staticCanonicalPages = [
+  [
+    "datenquellen.html",
+    "https://www.schulferienklar.de/datenquellen.html",
+  ],
+  [
+    "datenschutz.html",
+    "https://www.schulferienklar.de/datenschutz.html",
+  ],
+  [
+    "impressum.html",
+    "https://www.schulferienklar.de/impressum.html",
+  ],
+  [
+    "support.html",
+    "https://www.schulferienklar.de/support.html",
+  ],
+  [
+    "ueber-uns.html",
+    "https://www.schulferienklar.de/ueber-uns.html",
+  ],
+];
+
+for (const [
+  file,
+  canonical,
+] of staticCanonicalPages) {
+  const fullPath = path.join(
+    publicDir,
+    file,
+  );
+
+  if (!fs.existsSync(fullPath)) {
+    errors.push(
+      `Missing static page: ${file}`,
+    );
+    continue;
+  }
+
+  const html = fs.readFileSync(
+    fullPath,
+    "utf8",
+  );
+
+  const canonicalTag =
+    `<link rel="canonical" href="${canonical}" />`;
+
+  if (!html.includes(canonicalTag)) {
+    errors.push(
+      `${file}: missing self-canonical`,
+    );
+  }
+}
+
+
 for (const file of requiredFiles) {
   const fullPath = path.join(publicDir, file);
   if (!fs.existsSync(fullPath)) {
