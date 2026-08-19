@@ -105,6 +105,37 @@ for (const file of schoolHolidayHtmlFiles) {
 }
 
 
+for (const year of YEARS) {
+  const yearHubFile = `schulferien-${year}.html`;
+  const yearHubPath = path.join(
+    publicDir,
+    yearHubFile,
+  );
+
+  if (!fs.existsSync(yearHubPath)) {
+    continue;
+  }
+
+  const yearHubHtml = fs.readFileSync(
+    yearHubPath,
+    "utf8",
+  );
+
+  const plannerHref =
+    `/urlaubsplaner-${year}.html`;
+
+  if (
+    !yearHubHtml.includes(
+      `href="${plannerHref}"`,
+    )
+  ) {
+    errors.push(
+      `${yearHubFile}: missing Urlaubsplaner link`,
+    );
+  }
+}
+
+
 for (const year of plannerYears) {
   const plannerFile = `urlaubsplaner-${year}.html`;
   const plannerPath = path.join(
