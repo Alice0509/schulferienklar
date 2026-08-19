@@ -7917,19 +7917,17 @@ ${seoFooterHtml()}    </main>
 }
 
 
-function sitemapEntry(url, { changefreq = "monthly", priority = "0.7", lastmod } = {}) {
-  const lastmodTag = lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : "";
-
+function sitemapEntry(url, { changefreq = "monthly", priority = "0.7" } = {}) {
   return `  <url>
-    <loc>https://www.schulferienklar.de${url}</loc>${lastmodTag}
+    <loc>https://www.schulferienklar.de${url}</loc>
     <changefreq>${changefreq}</changefreq>
     <priority>${priority}</priority>
   </url>`;
 }
 
 function writeSitemap() {
-  const generatedAt = new Date().toISOString().slice(0, 10);
-
+  // Do not use the generation date as <lastmod>.
+  // Add per-URL lastmod values only when they reflect significant changes.
   const staticPages = [
     ["/", "weekly", "1.0"],
     ["/widget.html", "monthly", "0.7"],
@@ -7968,7 +7966,7 @@ function writeSitemap() {
     ...stateYearPages,
   ]
     .map(([url, changefreq, priority]) => {
-      return sitemapEntry(url, { changefreq, priority, lastmod: generatedAt });
+      return sitemapEntry(url, { changefreq, priority });
     })
     .join("\n");
 
