@@ -118,7 +118,7 @@ function buildMailtoUrl(
   body,
 ) {
   return (
-    "mailto:joan.app.dd@gmail.com" +
+    "mailto:hello@schulferienklar.de" +
     `?subject=${encodeURIComponent(subject)}` +
     `&body=${encodeURIComponent(body)}`
   );
