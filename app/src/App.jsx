@@ -1558,7 +1558,14 @@ export default function App() {
       <section className={`hero hero-${pattern}`}>
         <nav className="topbar">
           <a className="brand" href="/" aria-label="Schulferienklar Startseite">
-            <span className="brand-mark">S</span>
+            <img
+              className="brand-mark"
+              src="/brand-mark.png"
+              alt=""
+              aria-hidden="true"
+              width="36"
+              height="36"
+            />
             <span>Schulferienklar</span>
           </a>
 
