@@ -67,15 +67,12 @@ main {
 }
 
 .static-brand-mark {
-  display: grid;
+  display: block;
   flex: 0 0 auto;
   width: 36px;
   height: 36px;
-  place-items: center;
   border-radius: 8px;
-  color: #ffffff;
-  background: #176f64;
-  font-weight: 900;
+  object-fit: cover;
 }
 
 .back {

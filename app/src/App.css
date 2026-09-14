@@ -101,14 +101,13 @@ button {
 }
 
 .brand-mark {
-  display: grid;
+  display: block;
+  flex: 0 0 auto;
   width: 34px;
   height: 34px;
-  place-items: center;
-  border-radius: 12px;
-  color: white;
-  background: #1f6f64;
-  box-shadow: 0 10px 24px rgba(31, 111, 100, 0.22);
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: none;
 }
 
 .badge,
