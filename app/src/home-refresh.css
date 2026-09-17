@@ -441,3 +441,80 @@ body {
     transition: none;
   }
 }
+
+/* iOS App Store launch promo */
+.ios-app-promo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  max-width: 610px;
+  margin-top: 20px;
+  padding: 15px 16px;
+  border: 1px solid #cfe1dd;
+  border-top: 4px solid #ffcf38;
+  border-radius: 10px;
+  background: #f4f9f8;
+}
+
+.ios-app-promo-copy {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+}
+
+.ios-app-promo-kicker {
+  justify-self: start;
+  padding: 4px 8px;
+  border-radius: 6px;
+  color: #172033;
+  background: #ffcf38;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+
+.ios-app-promo-copy strong {
+  color: #172033;
+  font-size: 0.98rem;
+}
+
+.ios-app-promo-copy > span:last-child {
+  color: #5a6876;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.ios-app-promo-link {
+  flex: 0 0 auto;
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 13px;
+  border: 1px solid #176f64;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #176f64;
+  text-decoration: none;
+  font-size: 0.86rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.ios-app-promo-link:hover {
+  background: #115d54;
+}
+
+@media (max-width: 640px) {
+  .ios-app-promo {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .ios-app-promo-link {
+    width: 100%;
+  }
+}
