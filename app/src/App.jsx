@@ -1676,6 +1676,25 @@ export default function App() {
               Bundesland – übersichtlich und kostenlos im Kalender.
             </p>
 
+            <div className="ios-app-promo" aria-label="Schulferienklar iPhone-App">
+              <div className="ios-app-promo-copy">
+                <span className="ios-app-promo-kicker">Neu · iPhone-App</span>
+                <strong>Schulferienklar jetzt im App Store</strong>
+                <span>
+                  Ferien, Feiertage und Bundesländer vergleichen – mit
+                  Home-Screen-Widget.
+                </span>
+              </div>
+              <a
+                className="ios-app-promo-link"
+                href="https://apps.apple.com/de/app/schulferienklar/id6811993088"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Im App Store ansehen
+              </a>
+            </div>
+
             <div className="selector-card" id="bundesland-auswahl">
               <label htmlFor="bundesland">Bundesland auswählen</label>
               <div className="state-select-wrapper">
