@@ -341,6 +341,14 @@
     injectStyles();
     addSettingsButton();
 
+    // The interactive homepage can mount after this script initializes.
+    // Keep the settings control when React replaces the initial HTML overview.
+    const root = document.getElementById("root");
+    if (root) {
+      const observer = new MutationObserver(addSettingsButton);
+      observer.observe(root, { childList: true });
+    }
+
     const consent = getConsent();
 
     if (consent === ACCEPTED) {
