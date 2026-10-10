@@ -21,141 +21,261 @@
         <a class="back" href="/">← Zurück zu Schulferienklar</a>
       </header>
 
-<section class="card">
+      <section class="card">
         <h1>Datenquellen</h1>
-
         <p>
-          Schulferienklar zeigt Schulferien, gesetzliche Feiertage und zusammenhängende
-          freie Zeiten für deutsche Bundesländer. Die Daten werden als strukturierte
-          JSON-Dateien gepflegt und vor der Veröffentlichung automatisch validiert.
+          Hier kannst du die offiziellen Ferienquellen für dein Bundesland öffnen,
+          den Umfang unserer Daten prüfen und nachvollziehen, wie Schulferienklar
+          zusammenhängende freie Zeiten berechnet.
         </p>
+        <nav class="button-row" aria-label="Abschnitte der Datenquellen">
+          <a href="#datenumfang">Datenumfang</a>
+          <a href="#ferienquellen">Ferienquellen</a>
+          <a href="#feiertage">Feiertage</a>
+          <a href="#berechnung">Berechnung</a>
+          <a href="#pruefung">Prüfung &amp; Korrekturen</a>
+        </nav>
 
         <div class="note">
-          <strong>Hinweis:</strong>
-          Schulferienklar ist ein Informationsangebot. Für verbindliche Auskünfte sind
-          die offiziellen Veröffentlichungen der jeweiligen Bundesländer maßgeblich.
+          <strong>Offizielle Termine und eigene Berechnungen:</strong>
+          Die Ferien werden aus den Veröffentlichungen der Länder übernommen.
+          „Zusammenhängend frei“ und Brückentage sind eigene Planungshilfen.
+          Für verbindliche Termine ist die jeweilige amtliche Veröffentlichung
+          maßgeblich; schulbezogene Abweichungen klärst du mit deiner Schule.
         </div>
 
-        <h2>Schulferien</h2>
-        <p>
-          Die Schulferien-Daten liegen im Repository unter <code>data/holidays</code>.
-          Sie enthalten Datensätze für alle 16 Bundesländer.
-        </p>
-
-        <ul>
-          <li>alle 16 deutschen Bundesländer</li>
-          <li>Ferien, unterrichtsfreie Tage und landesspezifische Besonderheiten</li>
-          <li>JSON- und CSV-Dateien pro Bundesland</li>
-          <li>zusätzliche Validierungsnotizen je Datensatz</li>
-        </ul>
-
-        <h2>Feiertage</h2>
-        <p>
-          Die Feiertags-Daten liegen unter <code>data/public-holidays</code>.
-          Sie werden nach Bundesland und Jahr gepflegt.
-        </p>
-
-        <ul>
-          <li>alle 16 deutschen Bundesländer</li>
-          <li>Jahre 2026 bis 2030</li>
-          <li>landesweite, regionale und lokale Feiertage</li>
-          <li>automatisch erzeugte Index-Datei für die App</li>
-        </ul>
-
-        <h2>Regionale und lokale Feiertage</h2>
-        <p>
-          Nicht jeder Feiertag gilt automatisch für ein gesamtes Bundesland. Einige
-          Feiertage gelten nur regional oder lokal, zum Beispiel in bestimmten Gemeinden
-          oder Städten.
-        </p>
-
-        <p>
-          Solche Feiertage sind in den Daten enthalten, werden aber in der
-          Standard-Kalenderansicht nicht automatisch als Feiertag markiert, wenn sie
-          nicht für das gesamte Bundesland gelten.
-        </p>
-
-        <p>Beispiele:</p>
+        <h2 id="datenumfang">Welche Jahre sind erfasst?</h2>
         <ul>
           <li>
-            <strong>Mariä Himmelfahrt in Bayern:</strong> regional, abhängig von der
-            Gemeinde.
+            <strong>2026 bis 2029:</strong> Für alle 16 Bundesländer sind die
+            Ferien der beiden Schuljahre erfasst, die das jeweilige Kalenderjahr
+            berühren. Die Jahresseiten zeigen Termine, landesspezifische Hinweise,
+            Quellen und berechnete freie Zeiten.
           </li>
           <li>
-            <strong>Augsburger Friedensfest:</strong> lokal, nur in Augsburg.
-          </li>
-          <li>
-            <strong>Fronleichnam in Teilen von Sachsen und Thüringen:</strong> regional.
+            <strong>2030:</strong> Für
+            <a href="/schulferien-schleswig-holstein-2030.html">Schleswig-Holstein</a>
+            sind beide Schuljahre erfasst. Die anderen 15 Bundesländer sind
+            Teilübersichten: Noch nicht alle Ferien des Kalenderjahres sind im
+            Datensatz erfasst und geprüft.
           </li>
         </ul>
-
-        <h2>Freie Zeit rund um Ferien</h2>
         <p>
-          Schulferienklar unterscheidet zwischen offiziellen Ferien und tatsächlich
-          zusammenhängenden freien Zeiten. Wochenenden und gesetzliche Feiertage, die
-          direkt an Ferien angrenzen, können deshalb zusätzlich als freie Zeit sichtbar
-          gemacht werden.
+          Fehlende Termine bedeuten nicht, dass keine Ferien stattfinden.
+          PDF, ICS und Kalenderansicht verwenden denselben erfassten Datenstand;
+          ein Download ergänzt keine fehlenden Ferien. Den Umfang für dein
+          Bundesland findest du auf der jeweiligen
+          <a href="/schulferien-2030.html">Jahresseite</a>.
         </p>
 
+        <h2 id="ferienquellen">Offizielle Ferienquellen der 16 Bundesländer</h2>
         <p>
-          Diese Darstellung soll bei der praktischen Planung helfen, ersetzt aber nicht
-          die offiziellen Ferien- oder Feiertagsregelungen.
+          Die folgenden Links führen zu den zuständigen Landesbehörden oder ihren
+          amtlichen Ferienordnungen. Die
+          <a href="https://www.kmk.org/service/ferienregelung.html">Kultusministerkonferenz</a>
+          bietet außerdem Ferienkalender und die langfristige Sommerferienregelung.
         </p>
-
-        <h2>Validierung</h2>
         <p>
-          Vor der Veröffentlichung werden die Daten mit Validierungsskripten geprüft.
-          Dabei werden unter anderem Pflichtfelder, Datumsformate, Bundesland-Codes,
-          Duplikate und erlaubte Statuswerte kontrolliert.
+          Die Prüfstände stammen aus den gespeicherten Quellenangaben der
+          Ferien-Datensätze. Sie bezeichnen keine neue Prüfung bei jedem
+          Seitenaufruf oder jeder Seitenaktualisierung. Einzelne Termine können
+          einen anderen dokumentierten Prüfstand haben.
         </p>
+        <div class="holiday-guide-grid">
+          <article>
+            <h3><a href="/schulferien-baden-wuerttemberg.html">Baden-Württemberg</a></h3>
+            <p>Ministerium für Kultus, Jugend und Sport Baden-Württemberg</p>
+            <p><a href="https://km.baden-wuerttemberg.de/de/service/ferien">Offizielle Ferientermine</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-bayern.html">Bayern</a></h3>
+            <p>Bayerisches Staatsministerium für Unterricht und Kultus / Bayern.Recht</p>
+            <p><a href="https://www.gesetze-bayern.de/Content/Document/BayVV_2230_1_1_0_K_13479/true">Offizielle Ferientermine</a> · <a href="https://www.km.bayern.de/termine/ferien-und-feiertage">Offizielle Übersicht</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-berlin.html">Berlin</a></h3>
+            <p>Senatsverwaltung für Bildung, Jugend und Familie Berlin</p>
+            <p><a href="https://www.berlin.de/sen/bjf/service/kalender/ferien/ferienordnung-des-landes-berlin-2024_2025-bis-2029_2030.pdf?ts=1778499519">Offizielle Ferientermine</a> · <a href="https://www.berlin.de/sen/bjf/service/kalender/ferien/termine/">Offizielle Übersicht</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-brandenburg.html">Brandenburg</a></h3>
+            <p>Ministerium für Bildung, Jugend und Sport des Landes Brandenburg</p>
+            <p><a href="https://bravors.brandenburg.de/sixcms/media.php/66/VV-Schulbetrieb-Anlage-1.pdf">Offizielle Ferientermine</a> · <a href="https://mbjs.brandenburg.de/bildung/weitere-themen/schulferien-brandenburg.html">Offizielle Übersicht</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-bremen.html">Bremen</a></h3>
+            <p>Der Senator für Kinder und Bildung Bremen / Transparenzportal Bremen</p>
+            <p><a href="https://www.transparenz.bremen.de/metainformationen/verordnung-ueber-die-ferien-fuer-die-schulender-stadtgemeinden-bremen-und-bremerhaven-fuer-die-schuljahre-2024-2025-bis-2029-2030-vom-1-november-2022-186886?template=20_gp_ifg_meta_detail_d">Offizielle Ferientermine</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-hamburg.html">Hamburg</a></h3>
+            <p>Behörde für Schule, Familie und Berufsbildung Hamburg</p>
+            <p><a href="https://www.hamburg.de/resource/blob/134372/5bc131bdd36a604f67b361d21f7df37e/ferienordnung-hamburg-2024-2030-data.pdf">Offizielle Ferientermine</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-hessen.html">Hessen</a></h3>
+            <p>Hessisches Ministerium für Kultus, Bildung und Chancen</p>
+            <p><a href="https://kultus.hessen.de/schulsystem/ferien/ferientermine">Offizielle Ferientermine</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-mecklenburg-vorpommern.html">Mecklenburg-Vorpommern</a></h3>
+            <p>Ministerium für Bildung und Kindertagesförderung Mecklenburg-Vorpommern</p>
+            <p><a href="https://mecklenburg-vorpommern.de/seite/ferientermine">Aktuelle offizielle Ferienübersicht</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-niedersachsen.html">Niedersachsen</a></h3>
+            <p>Niedersächsisches Kultusministerium</p>
+            <p><a href="https://www.mk.niedersachsen.de/download/97935/Ferienordnung_fuer_die_Schuljahre_2024_25_bis_2029_30.pdf">Offizielle Ferientermine</a> · <a href="https://www.mk.niedersachsen.de/startseite/service/ferientermine/schulferien-und-religiose-feiertage-6491.html">Offizielle Übersicht</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-nordrhein-westfalen.html">Nordrhein-Westfalen</a></h3>
+            <p>Ministerium für Schule und Bildung des Landes Nordrhein-Westfalen</p>
+            <p><a href="https://www.schulministerium.nrw/ferienordnung-fuer-nordrhein-westfalen-fuer-die-schuljahre-bis-202930">Offizielle Ferientermine</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-rheinland-pfalz.html">Rheinland-Pfalz</a></h3>
+            <p>Ministerium für Bildung Rheinland-Pfalz</p>
+            <p><a href="https://bm.rlp.de/service/ferientermine">Offizielle Ferientermine</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-saarland.html">Saarland</a></h3>
+            <p>Ministerium für Bildung und Kultur Saarland</p>
+            <p><a href="https://www.saarland.de/mbk/DE/aktuelles/medieninformationen/2022/11/221110-PM-ferientermine">Offizielle Ferientermine</a> · <a href="https://www.kmk.org/service/ferienregelung.html">KMK-Ferienkalender</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-sachsen.html">Sachsen</a></h3>
+            <p>Sächsisches Staatsministerium für Kultus</p>
+            <p><a href="https://www.schule.sachsen.de/schuljahrestermine-4793.html">Offizielle Ferientermine</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-sachsen-anhalt.html">Sachsen-Anhalt</a></h3>
+            <p>Ministerium für Bildung des Landes Sachsen-Anhalt</p>
+            <p><a href="https://mb.sachsen-anhalt.de/api/media/Ferientermine_2024_bis_2030.pdf?collection=document">Offizielle Ferientermine</a> · <a href="https://mb.sachsen-anhalt.de/service/page/ferientermine">Offizielle Übersicht</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-schleswig-holstein.html">Schleswig-Holstein</a></h3>
+            <p>Ministerium für Allgemeine und Berufliche Bildung, Wissenschaft, Forschung und Kultur Schleswig-Holstein</p>
+            <p><a href="https://www.schleswig-holstein.de/DE/landesregierung/themen/bildung-hochschulen/ferientermine">Offizielle Ferientermine</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-08-19">19.08.2026</time></p>
+          </article>
+          <article>
+            <h3><a href="/schulferien-thueringen.html">Thüringen</a></h3>
+            <p>Thüringer Ministerium für Bildung, Wissenschaft und Kultur</p>
+            <p><a href="https://bildung.thueringen.de/schule/schulwesen/ferien">Offizielle Ferientermine</a></p>
+            <p class="muted">Prüfstand im Datensatz: <time datetime="2026-05-24">24.05.2026</time></p>
+          </article>
+        </div>
 
-        <p>Verwendete Prüfskripte:</p>
+        <h2 id="feiertage">Feiertage und ihre Referenzquellen</h2>
+        <p>
+          Die Feiertags-Datensätze decken 2026 bis 2030 für alle 16 Bundesländer ab.
+          Die Termine werden aus fest hinterlegten Datums- und Bundesland-Zuordnungen
+          erzeugt. Die gespeicherten Quellen sind Referenzübersichten, keine
+          amtlichen Veröffentlichungen der Landesbehörden. Die Datensätze sind
+          keine direkte Übernahme aller Landes-Feiertagsgesetze.
+        </p>
+        <p>In den Datensätzen sind folgende Referenzangebote genannt:</p>
         <ul>
-          <li><code>scripts/validate-holidays.mjs</code></li>
-          <li><code>scripts/validate-public-holidays.mjs</code></li>
-          <li><code>app/scripts/validate-generated-seo-pages.mjs</code></li>
+          <li>
+            Feiertage Deutschland:
+            <a href="https://www.feiertage-deutschland.de/2026/">2026</a>,
+            <a href="https://www.feiertage-deutschland.de/2027/">2027</a>,
+            <a href="https://www.feiertage-deutschland.de/2028/">2028</a> und
+            <a href="https://www.feiertage-deutschland.de/2029/">2029</a>
+          </li>
+          <li><a href="https://www.dgb.de/service/ratgeber/feiertage/">DGB: Feiertagsübersicht</a></li>
+          <li><a href="https://www.schulferien.org/deutschland/feiertage/2027/">Schulferien.org: Feiertage 2027</a></li>
+          <li><a href="https://ferien-deutschland.com/feiertage-2029/">Ferien Deutschland: Feiertage 2029</a></li>
+          <li><a href="https://date.nager.at/PublicHoliday/Germany/2030">Nager.Date: Feiertage 2030</a></li>
         </ul>
-
         <p>
-          Zusätzlich werden die generierten SEO-Seiten geprüft. Dabei wird kontrolliert,
-          ob wichtige Seitenelemente wie Titel, Meta-Beschreibung, Canonical-Link,
-          Hauptüberschrift und Sitemap-Verweise vorhanden sind.
+          Gespeicherter Quellen-Prüfstand der Feiertags-Datensätze:
+          <time datetime="2026-05-25">25.05.2026</time>.
+          Ob ein Feiertag landesweit, regional oder lokal gilt, wird getrennt
+          gekennzeichnet. In die Standardberechnung fließen nur landesweit
+          geltende Feiertage ein.
+        </p>
+        <p>
+          Beispiele für begrenzte Geltung sind Mariä Himmelfahrt in Bayern,
+          das Augsburger Friedensfest und Fronleichnam in Teilen von Sachsen und
+          Thüringen. Für die örtliche Geltung prüfe die Informationen deiner
+          Gemeinde oder die geltende Landesregelung.
         </p>
 
+        <h2 id="berechnung">Wie werden freie Zeiten berechnet?</h2>
+        <ul>
+          <li>
+            <strong>Offizielle Ferien:</strong> Angezeigt werden der erste und der
+            letzte veröffentlichte Ferientag. Der letzte Tag zählt mit.
+            Landesweit ausdrücklich festgelegte schulfreie Tage werden gesondert
+            berücksichtigt; bewegliche oder schulinterne Termine werden nicht
+            automatisch ergänzt.
+          </li>
+          <li>
+            <strong>Zusammenhängend frei:</strong> Vom erfassten Ferienzeitraum
+            aus prüft die Berechnung die unmittelbar benachbarten Tage.
+            Samstage, Sonntage und landesweit geltende Feiertage verlängern den
+            Zeitraum, bis ein Tag folgt, der weder Wochenende noch landesweiter
+            Feiertag ist.
+            Gezählt werden Kalendertage, keine ausgefallenen Unterrichtstage.
+          </li>
+          <li>
+            <strong>Bundesland-Vergleich:</strong> Der Vergleich berechnet
+            Überschneidungen der erfassten Ferienzeiträume von mindestens zwei
+            ausgewählten Ländern. Im laufenden Jahr zeigt er die Zeiträume ab heute.
+            Nicht erfasste Ferien und schulspezifische Abweichungen kann er nicht
+            berücksichtigen.
+          </li>
+          <li>
+            <strong>Brückentage und Urlaubsplaner:</strong> Die Planung geht von
+            einer Arbeitswoche Montag bis Freitag aus. Wochenenden und landesweite
+            Feiertage zählen als frei; andere Wochentage benötigen Urlaubstage.
+            Schulferien machen einen Arbeitstag nicht automatisch arbeitsfrei.
+          </li>
+        </ul>
         <p>
-          Der geprüfte SEO-Build kombiniert Datenvalidierung, Seitengenerierung,
-          Prüfung der erzeugten HTML-Seiten und den Produktions-Build der App.
+          Mit Schichtarbeit, einer anderen Arbeitswoche oder örtlichen Feiertagen
+          kann deine persönliche Planung abweichen. Die berechneten Zeiträume
+          verändern die offiziellen Ferientermine nicht und füllen Datenlücken
+          nicht auf.
+        </p>
+        <p>
+          <a href="/">Kalender und Bundesland-Vergleich öffnen</a> ·
+          <a href="/urlaubsplaner-2027.html">Urlaubsplaner 2027</a>
         </p>
 
-        <h2>Aktualisierung und Zeitraum</h2>
+        <h2 id="pruefung">Prüfung, Aktualisierung und Korrekturen</h2>
         <p>
-          Die App ist aktuell auf Ferien- und Feiertagsdaten von 2026 bis 2030
-          ausgelegt. Neue Jahre können ergänzt werden, sobald belastbare Daten
-          vorliegen und die Validierung erfolgreich durchläuft.
+          Vor der Veröffentlichung prüfen wir die Daten automatisch auf
+          Pflichtfelder, gültige Datumsformate, Bundesland-Zuordnungen, Duplikate
+          und erlaubte Statuswerte. Weitere Prüfungen vergleichen die Ausgaben
+          der Jahresseiten, Kalender, PDF, ICS und API.
         </p>
-
         <p>
-          Das Datum der letzten Datengenerierung wird auf den automatisch erzeugten
-          Ferienseiten angezeigt. Die Sitemap enthält zusätzlich ein
-          <code>lastmod</code>-Datum für die generierten Seiten.
+          Diese technischen Prüfungen ersetzen keinen Abgleich mit einer neuen
+          amtlichen Veröffentlichung. Das Datum einer Seitengenerierung oder
+          einer Sitemap-Aktualisierung ist deshalb kein Nachweis dafür, dass alle
+          Termine an diesem Tag erneut geprüft wurden.
         </p>
-
-        <h2>Fehler melden</h2>
         <p>
-          Wenn ein Datum fehlt oder falsch wirkt, kann ein Hinweis über die
-          <a href="/support.html">Support-Seite</a>
-          gesendet werden.
+          Wenn du einen Fehler bemerkst, melde uns über die
+          <a href="/support.html">Support-Seite</a> bitte Bundesland, Jahr,
+          betroffenen Termin und möglichst den Link zur amtlichen Quelle.
         </p>
-
-        <h2>English note</h2>
-
-        <p>
-          Schulferienklar provides German school holiday and public holiday data by
-          federal state. Regional and local public holidays may be included in the data,
-          but they are not shown as statewide holidays by default if they do not apply
-          to the entire Bundesland.
-        </p>
-
       </section>
 
       <footer class="static-footer" aria-label="Weitere Informationen">
