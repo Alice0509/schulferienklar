@@ -5,6 +5,12 @@ import {
   STATES,
   YEARS,
 } from "./lib/site-config.mjs";
+import {
+  evaluateGoldReadiness,
+} from "./lib/gold-readiness.mjs";
+import {
+  nodeHolidayRepository,
+} from "./lib/node-data-repository.mjs";
 
 const publicDir = path.join(process.cwd(), "public");
 const sitemapPath = path.join(publicDir, "sitemap.xml");
@@ -318,7 +324,17 @@ for (const [
     const normalizedCode =
       code.toLowerCase();
 
+    const canonicalTag = html.match(/<link\b(?=[^>]*\brel="canonical")[^>]*>/)?.[0];
+    const canonicalUrl = canonicalTag?.match(/\bhref="([^"]+)"/)?.[1];
+    if (canonicalUrl !== `https://www.schulferienklar.de/${file}`) {
+      errors.push(`${file}: missing or incorrect self-canonical`);
+    }
+
     const checks = [
+      ["official periods", "Offizieller Zeitraum"],
+      ["calculated free periods", "Zusammenhängend frei"],
+      ["official source section", 'id="quelle"'],
+      ["source review date", "Zuletzt im Datensatz geprüft"],
       [
         "Jahreskalender section",
         'id="jahreskalender"',
@@ -370,6 +386,40 @@ for (const [
         errors.push(
           `${file}: missing ${label}`,
         );
+      }
+    }
+
+    // The fallback must expose its actual data scope, even outside Gold years.
+    if (!html.includes('data-gold-page="')) {
+      const report = evaluateGoldReadiness(year, {
+        states: STATES.filter((state) => state[3] === code),
+      });
+      const coverage = report.isReady ? "complete" : "partial";
+      if (!html.includes(`data-year-coverage="${coverage}"`)) {
+        errors.push(`${file}: incorrect or missing year coverage (${coverage})`);
+      }
+      if (
+        !report.isReady &&
+        !html.includes("Fehlende Termine bedeuten nicht")
+      ) {
+        errors.push(`${file}: missing explanation of incomplete data`);
+      }
+      if (!html.includes("PDF, ICS und Kalenderansicht verwenden denselben erfassten Datenstand")) {
+        errors.push(`${file}: missing download data-scope explanation`);
+      }
+      const dataset = nodeHolidayRepository.loadSchoolHolidayDataset(code);
+      const events = (dataset.holidays || dataset.events || []).filter((event) => {
+        return event.startDate <= `${year}-12-31` && event.endDate >= `${year}-01-01`;
+      });
+      const periodCount = (html.match(/class="gold-period-row"/g) || []).length;
+      if (periodCount !== events.length) {
+        errors.push(`${file}: expected ${events.length} calculated periods, got ${periodCount}`);
+      }
+      if (events.some((event) => event.status === "partial") && !html.includes("Teilstand des Schuljahres")) {
+        errors.push(`${file}: missing partial-school-year explanation`);
+      }
+      if (html.includes("gehören zu den wichtigsten Ferienzeiträumen")) {
+        errors.push(`${file}: contains legacy filler instead of planning details`);
       }
     }
   }
