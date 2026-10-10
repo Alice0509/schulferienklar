@@ -48,7 +48,14 @@ The official PDF also contains informational dates such as Einschulungstermin, U
 ## Source
 
 Official Sachsen-Anhalt Ferienregelung PDF:
-https://mb.sachsen-anhalt.de/fileadmin/Bibliothek/Landesjournal/Bildung_und_Wissenschaft/Erlasse/Ferienregelung_2024_bis_2030.pdf
+https://mb.sachsen-anhalt.de/api/media/Ferientermine_2024_bis_2030.pdf?collection=document
 
 Official overview page:
-https://mb.sachsen-anhalt.de/service/ferientermine
+https://mb.sachsen-anhalt.de/service/page/ferientermine
+
+## Source link repair (2026-10-10)
+
+The former PDF asset URL returns HTTP 404. The current official overview links
+to the replacement PDF above. All 33 existing event date ranges were compared
+with that PDF and match. Only source URLs were changed; dates, event IDs,
+inclusion rules and stored data review dates were preserved.
