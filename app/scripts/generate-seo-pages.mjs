@@ -11,6 +11,9 @@ import {
 import {
   GOLD_PAGE_READY_YEARS,
 } from "./lib/gold-page-config.mjs";
+import {
+  evaluateGoldReadiness,
+} from "./lib/gold-readiness.mjs";
 
 const outputDir = path.resolve("public");
 
@@ -223,65 +226,6 @@ function getConnectedFreePeriod(event, publicHolidays) {
     endDate,
     dayCount: daysInclusive(startDate, endDate),
   };
-}
-
-function stateYearQuickSummaryHtml(events, name, year) {
-  if (events.length === 0) {
-    return "";
-  }
-
-  const items = events
-    .slice(0, 7)
-    .map((event) => {
-      return `          <li>
-            <span>${escapeHtml(getHolidayName(event))}</span>
-            <strong>${formatDate(event.startDate)} – ${formatDate(event.endDate)}</strong>
-          </li>`;
-    })
-    .join("\n");
-
-  return `        <div class="quick-summary" aria-label="Kurzübersicht Schulferien ${escapeHtml(name)} ${year}">
-          <div>
-            <p class="quick-summary-label">Kurzübersicht</p>
-            <h2>Wichtige Ferien ${escapeHtml(name)} ${year}</h2>
-          </div>
-          <ul>
-${items}
-          </ul>
-          <p class="quick-summary-note">
-            Im Kalender kannst du Ferien, Feiertage und freie Zeiten für ${escapeHtml(name)} ${year} genauer prüfen.
-            <a href="/?state=${events[0]?.bundeslandCode || ""}&year=${year}">Kalender ${escapeHtml(name)} ${year} öffnen</a>
-          </p>
-        </div>
-`;
-}
-
-function stateYearQueryIntroHtml(name, year, events) {
-  const hasSummerHoliday = events.some((event) => {
-    const label = String(event.name?.de || event.name || event.type || "").toLowerCase();
-    const type = String(event.type || "").toLowerCase();
-
-    return label.includes("sommerferien") || type.includes("summer");
-  });
-
-  return `
-        <h2>Ferien ${escapeHtml(name)} ${year} im Überblick</h2>
-        <p>
-          Hier findest du die Schulferien ${escapeHtml(name)} ${year} mit allen wichtigen Ferienterminen.
-          Der Kalender hilft dir, Ferien ${escapeHtml(name)} ${year}, gesetzliche Feiertage und mögliche Brückentage schneller zu prüfen.
-        </p>
-        <p>
-          Die Übersicht eignet sich für Familien, Schüler:innen, Reiseplanung und alle, die freie Tage im Jahr ${year} besser vergleichen möchten.
-        </p>
-        ${
-          hasSummerHoliday
-            ? `<h2>Sommerferien ${escapeHtml(name)} ${year}</h2>
-        <p>
-          Die Sommerferien ${escapeHtml(name)} ${year} gehören zu den wichtigsten Ferienzeiträumen für Urlaub, Betreuung und Reiseplanung.
-          Auf dieser Seite siehst du die offiziellen Daten im Kalender und kannst angrenzende Feiertage oder freie Zeiträume leichter einordnen.
-        </p>`
-            : ""
-        }`;
 }
 
 function holidaySummaryHtml(events, name, year) {
@@ -2522,6 +2466,7 @@ function jahreskalenderHtml({
   name,
   code,
   year,
+  viewDescription = "Öffne die vollständige Jahresansicht mit",
 }) {
   const calendarCode =
     String(code).toLowerCase();
@@ -2546,7 +2491,7 @@ function jahreskalenderHtml({
             Jahreskalender ${escapeHtml(name)} ${year}
           </h2>
           <p>
-            Öffne die vollständige Jahresansicht mit
+            ${viewDescription}
             Kalenderwochen, Schulferien, Feiertagen und
             direkt zusammenhängender freier Zeit.
           </p>
@@ -7614,10 +7559,61 @@ const GOLD_PAGE_TEMPLATES = new Map([
   ],
 ]);
 
+function stateYearDataCoverageHtml({ code, name, year }) {
+  const report = evaluateGoldReadiness(year, {
+    states: states.filter((state) => state[3] === code),
+  });
+  const complete = report.isReady;
+
+  return `        <section id="datenstand" class="gold-section" data-year-coverage="${complete ? "complete" : "partial"}">
+          <h2>Datenstand für ${escapeHtml(name)} ${year}</h2>
+          <p>${
+            complete
+              ? `Für beide Schuljahre, die das Kalenderjahr ${year} berühren, sind Quellen und Ferientermine im Datensatz erfasst.`
+              : `Diese Seite ist eine Teilübersicht: Im Datensatz sind noch nicht alle Ferien des Kalenderjahres ${year} vollständig erfasst und geprüft. Fehlende Termine bedeuten nicht, dass in diesem Zeitraum keine Ferien stattfinden.`
+          }</p>
+          <p>PDF, ICS und Kalenderansicht verwenden denselben erfassten Datenstand. Für verbindliche Auskünfte prüfe die <a href="#quelle">offiziellen Quellen</a>.</p>
+        </section>`;
+}
+
+function stateYearPlanningDetailsHtml({ code, name, year, events }) {
+  const publicHolidays = getPublicHolidaysAroundYear({
+    publicHolidayIndex,
+    code,
+    year,
+  });
+  const rows = stateYearGoldPeriodRowsHtml({
+    events,
+    publicHolidays,
+    year,
+    getPeriodNote: (event) => {
+      return [
+        getStateYearCrossingNote(event, year),
+        event.status === "partial"
+          ? "Teilstand des Schuljahres; weitere Ferientermine sind noch nicht vollständig erfasst."
+          : "",
+      ].filter(Boolean).join(" ");
+    },
+  });
+
+  return `        <section id="termine" class="gold-section">
+          <h2>Erfasste Ferien und freie Zeiten ${escapeHtml(name)} ${year}</h2>
+          ${
+            events.length
+              ? `<ul class="gold-period-list">\n${rows}\n          </ul>`
+              : "<p>Für dieses Jahr sind im Datensatz noch keine Ferientermine erfasst.</p>"
+          }
+        </section>
+        <section id="berechnung" class="gold-section">
+          <h2>Was „zusammenhängend frei“ bedeutet</h2>
+          <p>Zum erfassten offiziellen Ferienzeitraum addiert Schulferienklar nur direkt angrenzende Samstage, Sonntage und landesweit geltende gesetzliche Feiertage. Die Zahl zeigt Kalendertage, nicht ausgefallene Unterrichtstage.</p>
+          <p>Regionale Feiertage, bewegliche Ferientage und schulspezifische Abweichungen werden nicht automatisch eingerechnet. Die Berechnung ergänzt keine fehlenden Ferien.</p>
+        </section>`;
+}
+
 function pageTemplate({
   slug,
   name,
-  englishName,
   code,
   year,
   events,
@@ -7652,7 +7648,12 @@ function pageTemplate({
   }
 
   const title = `Schulferien ${name} ${year} – Schulferienklar`;
-  const description = `Schulferien ${name} ${year}: Ferien, Feiertage und freie Zeiten im Kalender sehen. School holidays ${englishName} ${year}.`;
+  const description = `Schulferien ${name} ${year}: erfasste Termine, zusammenhängende freie Tage, offizieller Datenstand und Jahreskalender mit PDF und ICS.`;
+  const source = getSchoolHolidaySourceForState({ holidayIndex, code });
+  // Link to the authority's overview rather than a fragile PDF asset URL.
+  const pageSource = source?.sourceUrl?.endsWith(".pdf") && source.secondarySourceUrl
+    ? { ...source, sourceUrl: source.secondarySourceUrl, secondarySourceUrl: null }
+    : source;
 
   return `<!doctype html>
 <html lang="de">
@@ -7661,10 +7662,6 @@ function pageTemplate({
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>${title}</title>
     <meta name="description" content="${description}" />
-    <meta
-      name="keywords"
-      content="Schulferien ${name} ${year}, Ferien ${name} ${year}, Feiertage ${name} ${year}, school holidays ${englishName} ${year}, school holidays Germany ${year}"
-    />
     <link rel="canonical" href="https://www.schulferienklar.de/schulferien-${slug}-${year}.html" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
@@ -7682,49 +7679,31 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
         <h1>Schulferien ${name} ${year}</h1>
 
         <p>
-          Schulferienklar zeigt Schulferien, gesetzliche Feiertage und freie Zeiten
-          für ${name} übersichtlich im Kalender.
+          Vergleiche die erfassten Ferientermine für ${name} ${year}
+          mit der direkt anschließenden freien Zeit. Der Datenstand unten
+          zeigt, ob die Übersicht bereits das ganze Jahr abdeckt.
         </p>
 
+${stateYearDataCoverageHtml({ code, name, year })}
 ${schulferienklarIntroCardHtml({
   appHref: `/?state=${code}&year=${year}`,
 })}
-${stateYearQuickSummaryHtml(events, name, year)}
-${stateYearQueryIntroHtml(name, year, events)}
+${stateYearPlanningDetailsHtml({ code, name, year, events })}
 
-        <h2>Kalender ${name} ${year}</h2>
-        <p>
-          Der kostenlose Kalender zeigt Schulferien, Feiertage und freie Zeiten
-          für ${name} ${year}. So kannst du Ferien, Brückentage und längere
-          freie Zeiträume schneller vergleichen.
-        </p>
-
-        <p>
-          Die App hilft Familien, Schüler:innen und allen, die Betreuung, Reisen,
-          Lernzeiten oder freie Tage rund um die Schulferien planen möchten.
-        </p>
-
-${jahreskalenderHtml({ slug, name, code, year })}
+${jahreskalenderHtml({
+  slug, name, code, year,
+  viewDescription: "Öffne die Jahresansicht mit dem erfassten Datenstand:",
+})}
 ${widgetPromoHtml({ code, name })}
+${stateYearGoldSourceHtml({
+  source: pageSource,
+  name,
+  sourceLinkLabel: `Offizielle Ferientermine ${name}`,
+  secondaryLinkLabel: "Weitere offizielle Quelle",
+})}
 ${stateYearInternalLinksHtml({ slug, name, year })}
 
-        <h2>School holidays ${englishName} ${year}</h2>
-        <p>
-          English note: Schulferienklar helps international residents in Germany
-          check school holidays, public holidays and connected free days by federal state.
-        </p>
-        <p>
-          Planning a trip to Germany? School holidays and public holidays can affect
-          trains, hotels and popular attractions, especially during busy family travel periods.
-        </p>
-        <p>
-          <a href="/germany-travel-checker.html">Check your Germany travel dates</a>
-          before booking your trip.
-        </p>
-
         <a class="button" href="/?state=${code}&year=${year}">Kalender öffnen</a>
-
-${dataTrustNoteHtml()}
       </section>
 ${seoFooterHtml()}    </main>
   </body>
