@@ -22,6 +22,7 @@ import {
   getTravelPeriodMatches,
 } from "./domain/travel-check.js";
 import { holidayRepository } from "./data/holiday-repository.js";
+import { getSchoolHolidayYearCoverage } from "./domain/school-holiday-coverage.js";
 import { downloadIcsFile, generateIcsCalendar } from "./utils/ics";
 
 const STORAGE_KEYS = {
@@ -1054,6 +1055,17 @@ export default function App() {
       : [];
   }, [dataset]);
 
+  const selectedYearCoverage = useMemo(() => {
+    if (
+      datasetLoading ||
+      dataset?.sources?.[0]?.bundeslandCode !== selectedCode
+    ) {
+      return null;
+    }
+
+    return getSchoolHolidayYearCoverage(dataset, selectedYear);
+  }, [dataset, datasetLoading, selectedCode, selectedYear]);
+
   const nextHoliday = useMemo(() => getNextHoliday(holidays), [holidays]);
 
   const upcomingHolidays = useMemo(() => {
@@ -1953,6 +1965,27 @@ export default function App() {
               </div>
             </div>
           </div>
+
+          {selectedYearCoverage?.isReady === false && (
+            <aside
+              className="calendar-coverage-note"
+              data-calendar-coverage="partial"
+              aria-live="polite"
+            >
+              <strong>
+                Teilübersicht: Schulferien {selectedMeta?.bundeslandName}{" "}
+                {selectedYear} sind noch nicht vollständig erfasst und geprüft.
+              </strong>
+              <p>
+                Der Jahreskalender, PDF und ICS zeigen nur die erfassten Termine.
+                Fehlende Ferienmarkierungen bedeuten nicht, dass Unterricht
+                stattfindet.
+              </p>
+              <a href={`/schulferien-${selectedStateSlug}-${selectedYear}.html`}>
+                Datenstand und Quellen für {selectedYear} ansehen
+              </a>
+            </aside>
+          )}
 
           {viewMode === "list" ? (
             <div className="holiday-list">
