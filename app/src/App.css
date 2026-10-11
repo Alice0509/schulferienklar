@@ -3260,7 +3260,8 @@ button.current-year-link {
   color: rgba(23, 32, 51, 0.72);
 }
 
-.travel-check-result.has-matches {
+.travel-check-result.has-matches,
+.travel-check-result.incomplete {
   background: rgba(244, 171, 91, 0.14);
 }
 
