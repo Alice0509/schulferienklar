@@ -769,8 +769,8 @@ const goldPageValidations = [
         /Ministerium für Bildung und Kindertagesförderung/,
       ],
       [
-        "official MV source link",
-        /regierung-mv\.de/,
+        "official MV regulation link",
+        /href="https:\/\/www\.landesrecht-mv\.de\/bsmv\/document\/jlr-NNLMV0000718C"/,
       ],
       [
         "Jahreskalender preview link",

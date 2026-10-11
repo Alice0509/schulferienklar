@@ -45,8 +45,16 @@ For 2027/28, the regulation footnote grants Friday, 18 February 2028 as a school
 
 ## Sources
 
-Official amendment PDF:
-https://www.regierung-mv.de/serviceassistent/download?id=1681582
+Official consolidated regulation (HTML; last amendment 6 August 2025):
+https://www.landesrecht-mv.de/bsmv/document/jlr-NNLMV0000718C
 
 Official overview page:
-https://www.regierung-mv.de/Landesregierung/bm/Schule/Schulorganisation/Ferientermine/
+https://mecklenburg-vorpommern.de/seite/ferientermine
+
+## Source-link audit: 2026-10-10
+
+- The former amendment download redirects to the government portal homepage as HTML, not a PDF. The former overview redirects to the ministry landing page.
+- The current ministry overview links to the official consolidated regulation at Landesrecht M-V. Its current full text incorporates the amendment of 6 August 2025.
+- All 44 stored general-school events were compared with that full text: 30 holiday periods, 13 additional fixed days and the school-free bridge day on 18 February 2028. School years, event types and inclusive start/end dates match; vocational-school tables were excluded.
+- The current ministry overview shows 2026/27 and 2027/28; it is a supplementary source, not the full source for all five stored school years.
+- Event IDs, dates, statuses and original `lastCheckedAt` values remain unchanged. This audit date records the new source-link check and comparison separately.
