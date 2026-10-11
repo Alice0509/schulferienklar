@@ -1212,6 +1212,24 @@ export default function App() {
     travelPeriodMatches.schoolHolidayMatches.length > 0 ||
     travelPeriodMatches.publicHolidayMatches.length > 0;
 
+  const travelSchoolHolidayCoverage = useMemo(() => {
+    if (
+      travelDataLoading ||
+      travelDataset?.sources?.[0]?.bundeslandCode !== travelCheckCode
+    ) {
+      return null;
+    }
+
+    return getSchoolHolidayYearCoverage(travelDataset, travelCheckYear);
+  }, [travelDataset, travelCheckCode, travelCheckYear, travelDataLoading]);
+
+  const hasTravelCheckData = Boolean(
+    travelSchoolHolidayCoverage &&
+      travelPublicHolidayDataset?.bundeslandCode === travelCheckCode &&
+      travelPublicHolidayDataset?.year === travelCheckYear,
+  );
+  const isTravelCoveragePartial = travelSchoolHolidayCoverage?.isReady === false;
+
   useEffect(() => {
     let isCancelled = false;
 
@@ -2182,14 +2200,60 @@ export default function App() {
 
           {hasTravelPeriodInput &&
             !isTravelPeriodInvalid &&
-            !travelDataLoading && (
+            !travelDataLoading &&
+            !hasTravelCheckData && (
+              <p
+                className="travel-check-message warning"
+                data-travel-coverage="unavailable"
+                role="status"
+              >
+                Die Prüfung ist derzeit nicht möglich, weil die Daten für das
+                Startjahr {travelCheckYear} nicht vollständig geladen werden
+                konnten. Bitte prüfe den{" "}
+                <a href="/datenquellen.html">Datenstand und die Quellen</a>.
+              </p>
+            )}
+
+          {hasTravelPeriodInput &&
+            !isTravelPeriodInvalid &&
+            !travelDataLoading &&
+            hasTravelCheckData &&
+            isTravelCoveragePartial && (
+              <aside
+                className="calendar-coverage-note"
+                data-travel-coverage="partial"
+                aria-live="polite"
+              >
+                <strong>
+                  Teilprüfung: Schulferien{" "}
+                  {travelDataset.sources[0].bundeslandName} {travelCheckYear} sind
+                  noch nicht vollständig erfasst und geprüft.
+                </strong>
+                <p>
+                  Die Ergebnisse enthalten nur hinterlegte Termine. Ein fehlender
+                  Treffer bestätigt keinen ferienfreien Reisezeitraum.
+                </p>
+                <a
+                  href={`/schulferien-${STATE_DOWNLOAD_SLUGS[travelCheckCode]}-${travelCheckYear}.html`}
+                >
+                  Datenstand und Quellen für {travelCheckYear} ansehen
+                </a>
+              </aside>
+            )}
+
+          {hasTravelPeriodInput &&
+            !isTravelPeriodInvalid &&
+            !travelDataLoading &&
+            hasTravelCheckData && (
               <div
-                className={`travel-check-result ${hasTravelPeriodMatches ? "has-matches" : "quiet"}`}
+                className={`travel-check-result ${hasTravelPeriodMatches ? "has-matches" : isTravelCoveragePartial ? "incomplete" : "quiet"}`}
               >
                 <strong>
                   {hasTravelPeriodMatches
                     ? "Schulferien oder Feiertage im Zeitraum"
-                    : "Keine Schulferien oder Feiertage gefunden"}
+                    : isTravelCoveragePartial
+                      ? "Keine Treffer in den bisher erfassten Terminen"
+                      : "Keine Schulferien oder Feiertage gefunden"}
                 </strong>
                 <p>
                   {hasTravelPeriodMatches
