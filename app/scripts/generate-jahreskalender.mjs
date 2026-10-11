@@ -19,7 +19,11 @@ import {
 } from "./lib/node-data-repository.mjs";
 import {
   getStateYearCombinations,
+  STATES,
 } from "./lib/site-config.mjs";
+import {
+  evaluateGoldReadiness,
+} from "./lib/gold-readiness.mjs";
 
 const publicDir = path.resolve("public");
 const downloadsDir = path.join(
@@ -625,6 +629,22 @@ function generateHtml({
     source?.sourceName ||
     `Offizielle Ferienquelle ${state.name}`;
 
+  const complete = evaluateGoldReadiness(year, {
+    states: STATES.filter((item) => item[3] === state.code),
+  }).isReady;
+
+  const introHtml = complete
+    ? `          <p class="intro">
+            Zwölf Monate mit offiziellen Schulferien,
+            landesweiten Feiertagen, unterrichtsfreien
+            Tagen und direkt zusammenhängender freier Zeit.
+          </p>`
+    : `          <p class="intro" data-year-coverage="partial">
+            <strong>Teilübersicht: Schulferien ${year} sind noch nicht vollständig erfasst und geprüft.</strong>
+            Gezeigt werden erfasste Schulferien, landesweite Feiertage und direkt zusammenhängende freie Zeit.
+            Fehlende Ferienmarkierungen bedeuten nicht, dass Unterricht stattfindet.
+          </p>`;
+
   return clean(`<!doctype html>
 <html lang="de">
   <head>
@@ -675,11 +695,7 @@ function generateHtml({
               state.name,
             )} ${year}
           </h1>
-          <p class="intro">
-            Zwölf Monate mit offiziellen Schulferien,
-            landesweiten Feiertagen, unterrichtsfreien
-            Tagen und direkt zusammenhängender freier Zeit.
-          </p>
+${introHtml}
         </div>
 
         <div class="actions">

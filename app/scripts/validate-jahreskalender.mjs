@@ -4,6 +4,12 @@ import path from "node:path";
 import {
   PDFDocument,
 } from "pdf-lib";
+import {
+  evaluateGoldReadiness,
+} from "./lib/gold-readiness.mjs";
+import {
+  STATES,
+} from "./lib/site-config.mjs";
 
 const publicDir = path.resolve("public");
 const downloadsDir = path.join(
@@ -141,6 +147,25 @@ for (const calendar of calendars) {
       htmlPath,
       "utf8",
     );
+
+    const complete = evaluateGoldReadiness(calendar.year, {
+      states: STATES.filter((item) => item[3] === calendar.stateCode),
+    }).isReady;
+    const partialMarker = 'data-year-coverage="partial"';
+
+    if (!complete) {
+      for (const value of [
+        partialMarker,
+        `Teilübersicht: Schulferien ${calendar.year} sind noch nicht vollständig erfasst und geprüft.`,
+        "Fehlende Ferienmarkierungen bedeuten nicht, dass Unterricht stattfindet.",
+      ]) {
+        if (!html.includes(value)) {
+          fail(`${calendar.htmlUrl}: unvollständiger Datenstand nicht erklärt (${value})`);
+        }
+      }
+    } else if (html.includes(partialMarker)) {
+      fail(`${calendar.htmlUrl}: vollständiger Datenstand fälschlich als Teilübersicht markiert`);
+    }
 
     const checks = [
       [
