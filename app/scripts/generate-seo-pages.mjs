@@ -7711,6 +7711,27 @@ ${seoFooterHtml()}    </main>
 }
 
 
+function stateYearIsReady(code, year) {
+  return evaluateGoldReadiness(year, {
+    states: states.filter((state) => state[3] === code),
+  }).isReady;
+}
+
+function partialYearSummaryHtml(code, year) {
+  return stateYearIsReady(code, year)
+    ? ""
+    : '\n            <small data-year-coverage="partial">Teilübersicht: Ferien noch nicht vollständig erfasst und geprüft.</small>';
+}
+
+function overviewDataCoverageHtml(hasPartialCoverage) {
+  return hasPartialCoverage
+    ? `        <p data-hub-coverage="partial">
+          Als „Teilübersicht“ markierte Einträge decken das jeweilige Kalenderjahr noch nicht vollständig ab.
+          Fehlende Termine bedeuten nicht, dass keine Ferien stattfinden.
+        </p>\n`
+    : "";
+}
+
 function stateHubTemplate({ holidayIndex, slug, name, englishName, code }) {
   const title = `Schulferien ${name} – Termine, Feiertage und Kalender`;
   const description = `Schulferien in ${name}: aktuelle Ferientermine, Feiertage und freie Tage für die nächsten Jahre übersichtlich im Kalender.`;
@@ -7727,7 +7748,7 @@ function stateHubTemplate({ holidayIndex, slug, name, englishName, code }) {
 
       return `          <li>
             <strong><a href="/schulferien-${slug}-${year}.html">Schulferien ${escapeHtml(name)} ${year}</a></strong>
-            <span>${events.length} Ferienzeiträume · ${firstEventText}</span>
+            <span>${events.length} Ferienzeiträume · ${firstEventText}</span>${partialYearSummaryHtml(code, year)}
           </li>`;
     })
     .join("\n");
@@ -7772,13 +7793,12 @@ ${schulferienklarIntroCardHtml({
         <h2>Schulferien ${escapeHtml(name)} nach Jahr</h2>
         <p>
           Wähle ein Jahr, um die Schulferien ${escapeHtml(name)} ${years[0]} bis ${years[years.length - 1]} einzeln zu prüfen.
-          Besonders gesucht sind Jahresübersichten wie Ferien ${escapeHtml(name)} ${years[1]}, Schulferien ${escapeHtml(name)} ${years[1]} und Kalender ${escapeHtml(name)} ${years[1]}.
         </p>
         <p>
           Die Jahresseiten zeigen auch wichtige Ferienzeiten wie Sommerferien ${escapeHtml(name)}, Osterferien, Pfingstferien, Herbstferien und Weihnachtsferien, soweit sie für das jeweilige Jahr verfügbar sind.
         </p>
 
-        <ul class="holiday-summary-list">
+${overviewDataCoverageHtml(years.some((year) => !stateYearIsReady(code, year)))}        <ul class="holiday-summary-list">
 ${yearSummaryCards}
         </ul>
 
@@ -7822,7 +7842,7 @@ function yearHubTemplate({ holidayIndex, year }) {
 
       return `          <li>
             <strong><a href="/schulferien-${slug}-${year}.html">Schulferien ${escapeHtml(name)} ${year}</a></strong>
-            <span>${events.length} Ferienzeiträume · ${firstEventText}</span>
+            <span>${events.length} Ferienzeiträume · ${firstEventText}</span>${partialYearSummaryHtml(code, year)}
           </li>`;
     })
     .join("\n");
@@ -7861,8 +7881,6 @@ ${schulferienklarIntroCardHtml({
         <h2>Schulferien ${year} nach Bundesland</h2>
         <p>
           Diese Übersicht hilft dir, die Ferien ${year} in Deutschland nach Bundesland zu vergleichen.
-          Besonders häufig gesucht werden Jahreskalender wie Ferien Bayern ${year}, Schulferien Hamburg ${year}
-          oder Ferien Sachsen-Anhalt ${year}.
         </p>
         <p>
           Über die Detailseiten findest du Kalender ${year} mit Schulferien, gesetzlichen Feiertagen,
@@ -7882,7 +7900,7 @@ ${schulferienklarIntroCardHtml({
           im Jahr beginnt.
         </p>
 
-        <ul class="holiday-summary-list">
+${overviewDataCoverageHtml(!evaluateGoldReadiness(year).isReady)}        <ul class="holiday-summary-list">
 ${stateSummaryCards}
         </ul>
 
