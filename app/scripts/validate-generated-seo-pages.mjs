@@ -166,6 +166,64 @@ for (const file of schoolHolidayHtmlFiles) {
 }
 
 
+function validateOverviewCoverage(file, combinations) {
+  const fullPath = path.join(publicDir, file);
+  if (!fs.existsSync(fullPath)) {
+    errors.push(`Missing overview: ${file}`);
+    return;
+  }
+
+  const html = fs.readFileSync(fullPath, "utf8");
+  const rows = html.match(/<li\b[^>]*>[\s\S]*?<\/li>/g) || [];
+  let partialCount = 0;
+
+  for (const { slug, code, year } of combinations) {
+    const href = `href="/schulferien-${slug}-${year}.html"`;
+    const matchingRows = rows.filter((row) => row.includes(href));
+    if (matchingRows.length !== 1) {
+      errors.push(`${file}: expected one overview row for ${code} ${year}`);
+      continue;
+    }
+
+    const partial = !evaluateGoldReadiness(year, {
+      states: STATES.filter((state) => state[3] === code),
+    }).isReady;
+    partialCount += Number(partial);
+    const row = matchingRows[0];
+    if (partial) {
+      if (!row.includes('data-year-coverage="partial"') ||
+          !row.includes("Teilübersicht: Ferien noch nicht vollständig erfasst und geprüft.")) {
+        errors.push(`${file}: partial coverage not explained for ${code} ${year}`);
+      }
+    } else if (row.includes('data-year-coverage="partial"')) {
+      errors.push(`${file}: complete coverage incorrectly marked partial for ${code} ${year}`);
+    }
+  }
+
+  if (partialCount > 0) {
+    if (!html.includes('data-hub-coverage="partial"') ||
+        !html.includes("Fehlende Termine bedeuten nicht, dass keine Ferien stattfinden.")) {
+      errors.push(`${file}: missing overview coverage explanation`);
+    }
+  } else if (html.includes('data-hub-coverage="partial"')) {
+    errors.push(`${file}: complete overview incorrectly marked partial`);
+  }
+
+  if (/Besonders (?:häufig gesucht|gesucht)/.test(html)) {
+    errors.push(`${file}: search-query filler in overview`);
+  }
+}
+
+for (const [slug, , , code] of STATES) {
+  validateOverviewCoverage(`schulferien-${slug}.html`,
+    YEARS.map((year) => ({ slug, code, year })));
+}
+
+for (const year of YEARS) {
+  validateOverviewCoverage(`schulferien-${year}.html`,
+    STATES.map(([slug, , , code]) => ({ slug, code, year })));
+}
+
 for (const year of YEARS) {
   const yearHubFile = `schulferien-${year}.html`;
   const yearHubPath = path.join(
