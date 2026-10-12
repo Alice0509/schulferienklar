@@ -44,6 +44,19 @@ const baseHolidays = [
 
 const regionalRules = [
   {
+    slug: "uprising-anniversary",
+    nameDe: "75. Jahrestag des Aufstandes vom 17. Juni 1953",
+    nameEn: "75th anniversary of the uprising of 17 June 1953",
+    date: "2028-06-17",
+    states: ["BE"],
+    scope: "statewide",
+    includeInDefaultCalendar: true,
+    notes: "One-off statutory holiday in Berlin for 2028 only. Falls on Saturday.",
+    sourceName: "Gesetz- und Verordnungsblatt für Berlin 2024, S. 460",
+    sourceUrl: "https://www.berlin.de/sen/justiz/service/gesetze-und-verordnungen/2024/ausgabe-nr-28-vom-2072024-s-457-484.pdf",
+    lastCheckedAt: "2026-10-12",
+  },
+  {
     slug: "epiphany",
     nameDe: "Heilige Drei Könige",
     nameEn: "Epiphany",
@@ -174,6 +187,9 @@ function makeHoliday(code, slug, nameDe, nameEn, date, options = {}) {
     scope: options.scope || "statewide",
     includeInDefaultCalendar: options.includeInDefaultCalendar ?? true,
     ...(options.notes ? { notes: options.notes } : {}),
+    ...(options.sourceName ? { sourceName: options.sourceName } : {}),
+    ...(options.sourceUrl ? { sourceUrl: options.sourceUrl } : {}),
+    ...(options.lastCheckedAt ? { lastCheckedAt: options.lastCheckedAt } : {}),
   };
 }
 
@@ -192,6 +208,9 @@ for (const [code, name, fileStem] of states) {
         scope: rule.scope,
         includeInDefaultCalendar: rule.includeInDefaultCalendar,
         notes: rule.notes,
+        sourceName: rule.sourceName,
+        sourceUrl: rule.sourceUrl,
+        lastCheckedAt: rule.lastCheckedAt,
       })
     );
   }

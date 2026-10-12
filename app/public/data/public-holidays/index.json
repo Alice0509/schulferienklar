@@ -1,7 +1,7 @@
 {
   "generatedAt": "2026-05-25",
   "totalDatasets": 80,
-  "totalEvents": 890,
+  "totalEvents": 891,
   "datasets": [
     {
       "bundeslandCode": "BW",
@@ -163,8 +163,8 @@
       "year": 2028,
       "version": "0.1",
       "jsonFile": "berlin_2028.json",
-      "eventCount": 10,
-      "defaultCalendarEventCount": 10,
+      "eventCount": 11,
+      "defaultCalendarEventCount": 11,
       "scopes": [
         "statewide"
       ]
