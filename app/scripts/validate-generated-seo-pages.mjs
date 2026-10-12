@@ -146,11 +146,41 @@ const schoolHolidayHtmlFiles = htmlFiles.filter((file) => {
   return file.startsWith("schulferien-");
 });
 
+const stateYearPages = new Map(STATES.flatMap(([slug, , , code]) =>
+  YEARS.map((year) => [`schulferien-${slug}-${year}.html`, { slug, code, year }]),
+));
+
 for (const file of schoolHolidayHtmlFiles) {
   const html = fs.readFileSync(
     path.join(publicDir, file),
     "utf8",
   );
+
+  const stateYear = stateYearPages.get(file);
+  if (stateYear) {
+    const { slug, code, year } = stateYear;
+    const marker = `data-state-year-actions="${code}-${year}"`;
+    if (html.split(marker).length - 1 !== 1) {
+      errors.push(`${file}: expected one calendar/download navigation`);
+    }
+    const actions = html.match(/<nav\b[^>]*data-state-year-actions="[^"]+"[^>]*>[\s\S]*?<\/nav>/)?.[0] || "";
+    for (const href of [
+      `/?state=${code}&year=${year}`,
+      `/downloads/schulferien-${slug}-${year}.pdf`,
+      `/downloads/schulferien-${slug}-${year}.ics`,
+    ]) {
+      if (!actions.includes(`href="${href}"`)) {
+        errors.push(`${file}: missing direct action ${href}`);
+      }
+      if (href.startsWith("/downloads/") && !fs.existsSync(path.join(publicDir, href.slice(1)))) {
+        errors.push(`${file}: unavailable download ${href}`);
+      }
+    }
+    if (html.includes('class="intro-card intro-card-visual"')) {
+      errors.push(`${file}: generic promo precedes state/year planning content`);
+    }
+    continue;
+  }
 
   if (!html.includes('class="intro-card intro-card-visual"')) {
     errors.push(`${file}: missing calendar promo card`);
