@@ -1,1 +1,2 @@
-app/public/calendar/*.ics -text
+app/public/calendar/*.ics -text whitespace=cr-at-eol
+app/public/downloads/*.ics -text whitespace=cr-at-eol

@@ -95,6 +95,21 @@
       "includeInDefaultCalendar": true
     },
     {
+      "id": "be-public-2028-uprising-anniversary",
+      "name": {
+        "de": "75. Jahrestag des Aufstandes vom 17. Juni 1953",
+        "en": "75th anniversary of the uprising of 17 June 1953"
+      },
+      "date": "2028-06-17",
+      "type": "public_holiday",
+      "scope": "statewide",
+      "includeInDefaultCalendar": true,
+      "notes": "One-off statutory holiday in Berlin for 2028 only. Falls on Saturday.",
+      "sourceName": "Gesetz- und Verordnungsblatt für Berlin 2024, S. 460",
+      "sourceUrl": "https://www.berlin.de/sen/justiz/service/gesetze-und-verordnungen/2024/ausgabe-nr-28-vom-2072024-s-457-484.pdf",
+      "lastCheckedAt": "2026-10-12"
+    },
+    {
       "id": "be-public-2028-german-unity",
       "name": {
         "de": "Tag der Deutschen Einheit",

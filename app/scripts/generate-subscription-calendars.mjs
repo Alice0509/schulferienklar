@@ -101,6 +101,8 @@ function loadPublicHolidayEvents({
         holiday.name ||
         "Gesetzlicher Feiertag";
 
+      revisions.push(holiday.lastCheckedAt);
+
       events.push({
         uid:
           `${holiday.id || `${code}-${holiday.date}`}` +
@@ -108,7 +110,7 @@ function loadPublicHolidayEvents({
         title: `${name} (Feiertag)`,
         startDate: holiday.date,
         endDate: holiday.date,
-        updatedAt: revision,
+        updatedAt: holiday.lastCheckedAt || revision,
         description:
           `Schulferienklar · Gesetzlicher Feiertag · ` +
           `${stateName} · landesweit`,

@@ -537,7 +537,7 @@ function createIcsEvents({
           title: `${name} (Feiertag)`,
           startDate: holiday.date,
           endDate: holiday.date,
-          updatedAt: publicRevision,
+          updatedAt: holiday.lastCheckedAt || publicRevision,
           description:
             "Schulferienklar · " +
             "Gesetzlicher Feiertag · " +
