@@ -1088,6 +1088,12 @@ export default function App() {
     );
   }, [nextHoliday, publicHolidayDataset]);
 
+  const bridgeDayDataReady =
+    !bridgeDayLoading &&
+    bridgeDayPublicHolidayDataset?.bundeslandCode === bridgeDayCode &&
+    bridgeDayPublicHolidayDataset?.year === bridgeDayYear &&
+    Array.isArray(bridgeDayPublicHolidayDataset?.holidays);
+
   const bridgeDaySuggestions = useMemo(() => {
     return getBridgeDaySuggestions(
       bridgeDayPublicHolidayDataset?.holidays || [],
@@ -2437,12 +2443,31 @@ export default function App() {
         </div>
 
         {bridgeDayLoading && (
-          <p className="travel-check-message">
+          <p
+            className="travel-check-message"
+            data-vacation-data="loading"
+            role="status"
+          >
             Urlaubsmöglichkeiten werden geladen …
           </p>
         )}
 
-        {!bridgeDayLoading && vacationOptimizerSuggestions.length > 0 && (
+        {!bridgeDayLoading && !bridgeDayDataReady && (
+          <p
+            className="calendar-coverage-note"
+            data-vacation-data="unavailable"
+            role="status"
+          >
+            Feiertagsdaten für{" "}
+            {travelCheckStates.find((item) => item.code === bridgeDayCode)?.name ||
+              bridgeDayCode}{" "}
+            {bridgeDayYear} sind derzeit nicht verfügbar. Urlaubsmöglichkeiten und Brückentage
+            können deshalb nicht berechnet werden. Bitte versuche es später
+            erneut oder wähle ein anderes Bundesland oder Jahr.
+          </p>
+        )}
+
+        {bridgeDayDataReady && vacationOptimizerSuggestions.length > 0 && (
           <div className="vacation-optimizer-block">
             <div className="vacation-results-heading">
               <div>
@@ -2539,7 +2564,7 @@ export default function App() {
           </div>
         )}
 
-        {!bridgeDayLoading && vacationOptimizerSuggestions.length === 0 && (
+        {bridgeDayDataReady && vacationOptimizerSuggestions.length === 0 && (
           <p className="bridge-day-empty">
             Für diese Auswahl wurden keine passenden längeren freien Zeiträume
             gefunden.
@@ -2552,7 +2577,7 @@ export default function App() {
             <p>Einfache Empfehlungen rund um einzelne Feiertage.</p>
           </div>
 
-          {!bridgeDayLoading && bridgeDaySuggestions.length > 0 ? (
+          {bridgeDayDataReady && bridgeDaySuggestions.length > 0 ? (
             <>
               <div className="bridge-day-list">
                 {bridgeDaySuggestions.map((item) => (
@@ -2585,7 +2610,7 @@ export default function App() {
               </p>
             </>
           ) : (
-            !bridgeDayLoading && (
+            bridgeDayDataReady && (
               <p className="bridge-day-empty">
                 Für {bridgeDayYear} wurden keine klassischen Brückentage mit
                 wenigen Urlaubstagen gefunden.
