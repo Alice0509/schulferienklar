@@ -2617,9 +2617,7 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
           anschließen.
         </p>
 
-${schulferienklarIntroCardHtml({
-  appHref: `/?state=${code}&year=${year}`,
-})}
+${stateYearQuickActionsHtml({ slug, name, code, year })}
 
         <nav class="gold-page-nav" aria-label="Inhalt dieser Seite">
           <a href="#termine">Alle Termine</a>
@@ -2905,10 +2903,7 @@ ${indentGoldText(
 )}
         </p>
 
-${schulferienklarIntroCardHtml({
-  appHref:
-    `/?state=${code}&year=${year}`,
-})}
+${stateYearQuickActionsHtml({ slug, name, code, year })}
 
         <nav
           class="gold-page-nav"
@@ -5121,10 +5116,7 @@ ${seoTopNavHtml({
           landesweite schulfreie Tage direkt anschließen.
         </p>
 
-${schulferienklarIntroCardHtml({
-  appHref:
-    `/?state=${code}&year=${year}`,
-})}
+${stateYearQuickActionsHtml({ slug, name, code, year })}
 
         <nav
           class="gold-page-nav"
@@ -6938,6 +6930,16 @@ function seoFooterHtml() {
 }
 
 
+function stateYearQuickActionsHtml({ slug, name, code, year }) {
+  return `        <nav class="gold-page-nav" data-state-year-actions="${code}-${year}" aria-label="Kalender und Downloads für ${escapeHtml(name)} ${year}">
+          <a href="/?state=${code}&year=${year}">Kalender öffnen</a>
+          <a href="/downloads/schulferien-${slug}-${year}.pdf">PDF speichern</a>
+          <a href="/downloads/schulferien-${slug}-${year}.ics">ICS herunterladen</a>
+        </nav>
+
+`;
+}
+
 function schulferienklarIntroCardHtml({ appHref }) {
   return `        <section class="intro-card intro-card-visual" aria-label="Schulferienklar kurz erklärt">
           <a class="intro-card-image-link" href="${appHref}" aria-label="Kalender öffnen">
@@ -7685,9 +7687,7 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
         </p>
 
 ${stateYearDataCoverageHtml({ code, name, year })}
-${schulferienklarIntroCardHtml({
-  appHref: `/?state=${code}&year=${year}`,
-})}
+${stateYearQuickActionsHtml({ slug, name, code, year })}
 ${stateYearPlanningDetailsHtml({ code, name, year, events })}
 
 ${jahreskalenderHtml({
