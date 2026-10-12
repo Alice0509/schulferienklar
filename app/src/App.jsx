@@ -1333,6 +1333,32 @@ export default function App() {
       .filter(Boolean);
   }, [comparisonCodes, comparisonDatasets, comparisonYear, index]);
 
+  const comparisonCoverage = useMemo(() => {
+    return comparisonSummaries.map((summary) => {
+      const stateDataset = comparisonDatasets[summary.code];
+      const coverage =
+        stateDataset?.sources?.[0]?.bundeslandCode === summary.code
+          ? getSchoolHolidayYearCoverage(stateDataset, comparisonYear)
+          : null;
+
+      return {
+        ...summary,
+        coverage,
+        isLoading: stateDataset === undefined,
+      };
+    });
+  }, [comparisonSummaries, comparisonDatasets, comparisonYear]);
+
+  const comparisonDataLoading = comparisonCoverage.some((item) => item.isLoading);
+  const unavailableComparisonStates = comparisonCoverage.filter(
+    (item) => !item.isLoading && !item.coverage,
+  );
+  const partialComparisonStates = comparisonCoverage.filter(
+    (item) => item.coverage?.isReady === false,
+  );
+  const canShowComparisonResults =
+    !comparisonDataLoading && unavailableComparisonStates.length === 0;
+
   const comparisonOverlapData = useMemo(() => {
     return getComparisonOverlapData(comparisonSummaries, comparisonYear, TODAY);
   }, [comparisonSummaries, comparisonYear]);
@@ -2697,7 +2723,59 @@ export default function App() {
               ausgewählten Bundesländern.
             </p>
 
-            {activeOverlapMonthKey &&
+            {comparisonDataLoading && (
+              <p data-comparison-coverage="loading" role="status">
+                Vergleichsdaten werden geladen …
+              </p>
+            )}
+
+            {!comparisonDataLoading && unavailableComparisonStates.length > 0 && (
+              <aside
+                className="calendar-coverage-note"
+                data-comparison-coverage="unavailable"
+                role="status"
+              >
+                <strong>Der Vergleich ist derzeit nicht möglich.</strong>
+                <p>
+                  Für {unavailableComparisonStates.map((item) => item.name).join(", ")}{" "}
+                  fehlen geladene Schulferiendaten. Bitte prüfe den{" "}
+                  <a href="/datenquellen.html">Datenstand und die Quellen</a>.
+                </p>
+              </aside>
+            )}
+
+            {canShowComparisonResults && partialComparisonStates.length > 0 && (
+              <aside
+                className="calendar-coverage-note"
+                data-comparison-coverage="partial"
+                aria-live="polite"
+              >
+                <strong>
+                  Teilvergleich: Schulferien {comparisonYear} sind für{" "}
+                  {partialComparisonStates.map((item) => item.name).join(", ")}{" "}
+                  noch nicht vollständig erfasst und geprüft.
+                </strong>
+                <p>
+                  Die Überschneidungen enthalten nur hinterlegte Termine.
+                  Fehlende Markierungen bestätigen keine ferienfreien Tage.
+                </p>
+                <p>
+                  Datenstand und Quellen:{" "}
+                  {partialComparisonStates.map((item, index) => (
+                    <span key={item.code}>
+                      {index > 0 && ", "}
+                      <a
+                        href={`/schulferien-${STATE_DOWNLOAD_SLUGS[item.code]}-${comparisonYear}.html`}
+                      >
+                        {item.name} {comparisonYear}
+                      </a>
+                    </span>
+                  ))}
+                </p>
+              </aside>
+            )}
+
+            {canShowComparisonResults && activeOverlapMonthKey &&
               (() => {
                 const [yearValue, monthValue] = activeOverlapMonthKey
                   .split("-")
@@ -2800,7 +2878,7 @@ export default function App() {
                 );
               })()}
 
-            {comparisonOverlapPeriods.length > 0 ? (
+            {!canShowComparisonResults ? null : comparisonOverlapPeriods.length > 0 ? (
               <div className="overlap-details">
                 <button
                   className="overlap-details-toggle"
