@@ -7934,6 +7934,7 @@ function writeSitemap() {
       "0.85",
     ]),
     ["/datenquellen.html", "monthly", "0.7"],
+    ["/ferienplanung.html", "monthly", "0.7"],
     ["/ueber-uns.html", "monthly", "0.6"],
     ["/impressum.html", "yearly", "0.3"],
     ["/datenschutz.html", "yearly", "0.3"],

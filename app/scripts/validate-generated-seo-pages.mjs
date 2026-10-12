@@ -45,6 +45,7 @@ const htmlFiles = fs
 const errors = [];
 
 const staticCanonicalPages = [
+  ["ferienplanung.html", "https://www.schulferienklar.de/ferienplanung.html"],
   [
     "datenquellen.html",
     "https://www.schulferienklar.de/datenquellen.html",

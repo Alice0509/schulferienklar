@@ -3063,6 +3063,7 @@ export default function App() {
           className="footer-links"
           aria-label="Rechtliche und weitere Informationen"
         >
+          <a href="/ferienplanung.html">Ferienplanung: Anleitung</a>
           <a href="/datenquellen.html">Datenquellen</a>
           <a href="/datenschutz.html">Datenschutz</a>
           <a href="/impressum.html">Impressum</a>
