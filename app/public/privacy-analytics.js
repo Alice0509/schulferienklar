@@ -227,11 +227,20 @@
         background: #176f64;
       }
 
+      .sf-footer-settings {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+      }
+
       .sf-privacy-settings,
       .sf-google-privacy-settings {
-        min-height: auto;
-        margin-left: auto;
-        padding: 4px 8px;
+        min-height: 36px;
+        margin: 0;
+        padding: 6px 10px;
         font-size: 0.78rem;
       }
 
@@ -284,13 +293,25 @@
     document.body.appendChild(layer);
   }
 
+  function getFooterSettingsContainer() {
+    const footer = document.querySelector("footer.site-footer");
+    if (!footer) return null;
+    let container = footer.querySelector?.(".sf-footer-settings");
+    if (!container) {
+      container = document.createElement("div");
+      container.className = "sf-footer-settings";
+      footer.appendChild(container);
+    }
+    return container;
+  }
+
   function addSettingsButton() {
     if (document.querySelector(".sf-privacy-settings")) {
       return;
     }
 
-    const footer = document.querySelector("footer");
-    if (!footer) {
+    const container = getFooterSettingsContainer();
+    if (!container) {
       return;
     }
 
@@ -299,7 +320,7 @@
     button.className = "sf-privacy-settings";
     button.textContent = "Datenschutz-Einstellungen";
     button.addEventListener("click", openBanner);
-    footer.appendChild(button);
+    container.appendChild(button);
   }
 
   // The Google-certified CMP manages advertising consent separately from Clarity.
@@ -312,8 +333,8 @@
       return;
     }
 
-    const footer = document.querySelector("footer");
-    if (!footer) {
+    const container = getFooterSettingsContainer();
+    if (!container) {
       return;
     }
 
@@ -324,7 +345,7 @@
     button.addEventListener("click", () => {
       window.googlefc?.showRevocationMessage?.();
     });
-    footer.appendChild(button);
+    container.appendChild(button);
   }
 
   function addSettingsButtons() {

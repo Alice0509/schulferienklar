@@ -120,6 +120,61 @@ function SchulferienklarInContentAd() {
   );
 }
 
+
+function SchulferienklarCalendarSidebarAd() {
+  const adRef = useRef(null);
+
+  useEffect(() => {
+    const requestAd = () => {
+      const ad = adRef.current;
+      // Keep the second ad away from narrow columns and every mobile layout.
+      if (!ad || window.innerWidth < 1160 || ad.dataset.schulferienklarRequested) {
+        return;
+      }
+      ad.dataset.schulferienklarRequested = "true";
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch {
+        // Ad blockers must not affect the calendar.
+      }
+    };
+    requestAd();
+    window.addEventListener("resize", requestAd);
+    return () => window.removeEventListener("resize", requestAd);
+  }, []);
+
+  return (
+    <div className="schulferienklar-calendar-sidebar-ad" aria-label="Werbung">
+      <span className="schulferienklar-in-content-label">Anzeige</span>
+      <style>{`
+        .schulferienklar-calendar-sidebar-ad {
+          display: grid;
+          justify-items: center;
+          gap: 6px;
+          min-width: 0;
+          margin-top: 22px;
+          border-top: 1px solid #dfe5e8;
+          padding-top: 22px;
+        }
+        .schulferienklar-calendar-sidebar-slot {
+          display: block;
+          width: 300px;
+          height: 250px;
+        }
+        @media (max-width: 1159px) {
+          .schulferienklar-calendar-sidebar-ad { display: none; }
+        }
+      `}</style>
+      <ins
+        ref={adRef}
+        className="adsbygoogle schulferienklar-calendar-sidebar-slot"
+        data-ad-client="ca-pub-8336348698974993"
+        data-ad-slot={IN_CONTENT_AD_SLOT}
+      />
+    </div>
+  );
+}
+
 function getFreePeriodStatus(holiday, publicHolidays = []) {
   const period = getEffectiveFreePeriod(holiday, publicHolidays);
 
@@ -784,6 +839,7 @@ export default function App() {
   const [showAllStates, setShowAllStates] = useState(false);
   const [isStateMenuOpen, setIsStateMenuOpen] = useState(false);
   const [isSiteMenuOpen, setIsSiteMenuOpen] = useState(false);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
   const [isTravelSectionOpen, setIsTravelSectionOpen] = useState(false);
   const [isBridgeControlsOpen, setIsBridgeControlsOpen] = useState(false);
   const [isComparisonSectionOpen, setIsComparisonSectionOpen] = useState(false);
@@ -870,6 +926,19 @@ export default function App() {
       ? storedYear
       : TODAY.getFullYear();
   });
+
+  useEffect(() => {
+    // The fixed mobile menu must not cover the footer's consent controls
+    // or the Google-managed privacy strip at the bottom of the viewport.
+    if (!("IntersectionObserver" in window)) return;
+    const footer = document.querySelector("footer.site-footer");
+    if (!footer) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsFooterVisible(Boolean(entry?.isIntersecting));
+    });
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.bundesland, selectedCode);
@@ -1659,7 +1728,7 @@ export default function App() {
   return (
     <main className="page">
       <button
-        className={`floating-site-menu-button ${isSiteMenuOpen ? "is-open" : ""}`}
+        className={`floating-site-menu-button ${isSiteMenuOpen ? "is-open" : ""} ${isFooterVisible && !isSiteMenuOpen ? "is-footer-visible" : ""}`}
         type="button"
         aria-expanded={isSiteMenuOpen}
         aria-controls="site-menu"
@@ -2209,6 +2278,7 @@ export default function App() {
             <span>✓ Ferien und Feiertage nach Bundesland</span>
             <span>✓ Kalenderexport und Planung</span>
           </div>
+          <SchulferienklarCalendarSidebarAd />
         </aside>
       </section>
 

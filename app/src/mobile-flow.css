@@ -281,8 +281,13 @@
     bottom: 14px;
   }
 
+  .floating-site-menu-button.is-footer-visible {
+    opacity: 0;
+    pointer-events: none;
+  }
+
   .site-footer {
-    padding-bottom: 78px;
+    padding-bottom: 32px;
   }
 }
 
