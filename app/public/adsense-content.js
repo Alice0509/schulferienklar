@@ -79,6 +79,7 @@
     );
 
     const debug = new URLSearchParams(window.location.search).get("ads_debug") === "1";
+    if (debug) wrapper.classList.add("sf-content-ad-debug");
     let requestError = "";
     let requestState = "not-started";
     let report = () => {};
