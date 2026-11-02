@@ -131,6 +131,9 @@ test("homepage uses one bounded in-content ad and one desktop-only calendar side
   assert.equal(app.split("<SchulferienklarInContentAd />").length - 1, 1);
   assert.ok(app.includes("data-ad-slot={IN_CONTENT_AD_SLOT}"));
   assert.ok(app.includes('IN_CONTENT_AD_SLOT = "9291651091"'));
+  assert.ok(app.includes('CALENDAR_SIDEBAR_AD_SLOT = "9134196439"'));
+  assert.equal(app.split("data-ad-slot={IN_CONTENT_AD_SLOT}").length - 1, 1);
+  assert.equal(app.split("data-ad-slot={CALENDAR_SIDEBAR_AD_SLOT}").length - 1, 1);
   assert.equal(app.split("<SchulferienklarCalendarSidebarAd />").length - 1, 1);
   assert.ok(app.includes("window.innerWidth < 1160"));
   assert.ok(app.includes("width: 300px;"));
