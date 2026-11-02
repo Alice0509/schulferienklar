@@ -2866,7 +2866,7 @@ function stateYearVisualCalendarHtml({ events, name, year, locale = "de" }) {
     return '<article class="sf-month" id="sf-month-' + year + '-' +
       month + '" aria-label="' + label + ' ' + year + '">' +
       '<header><strong>' + label + '</strong><small>' +
-      (marked ? marked + (en ? ' marked dates' : ' markierte Tage') : (en ? 'No recorded holidays' : 'Keine erfassten Ferien')) +
+      (marked ? marked + (en ? ' marked dates' : ' markierte Tage') : (en ? 'No recorded school breaks' : 'Keine erfassten Schulferien')) +
       '</small></header>' +
       '<div class="sf-month-grid" aria-hidden="true">' +
       weekDays.map((day) => '<span class="sf-weekday">' + day + '</span>').join("") +
@@ -2884,16 +2884,17 @@ function stateYearVisualCalendarHtml({ events, name, year, locale = "de" }) {
     '<p class="eyebrow">' + (en ? 'Your year at a glance' : 'Dein Jahr im Blick') + '</p>' +
     '<h2>' + (en ? 'When are the school holidays in ' : 'Wo liegen die Ferien ') + year + '?</h2></div>' +
     '<a href="#termine">' + (en ? 'See all dates' : 'Alle Ferientermine ansehen') + '</a></div>' +
-    '<div class="sf-year-key"><span class="sf-key-ferie"></span> ' + (en ? 'School holidays' : 'Schulfreie Zeit') + ' ' +
+    '<div class="sf-year-key"><span class="sf-key-ferie"></span> ' + (en ? 'Recorded school-free days' : 'Erfasste schulfreie Tage') + ' ' +
     '<span class="sf-key-weekend"></span> ' + (en ? 'Weekend' : 'Wochenende') + '</div>' +
-    '<p class="sf-year-hint">' + (en ? 'Swipe through months. Tap highlighted dates for details.' : 'Monate seitlich durchblättern. Markierte Tage führen direkt zu den Terminen.') + '</p>' +
+    '<p class="sf-year-hint sf-hint-desktop">' + (en ? 'Select a highlighted date to view the corresponding school break below.' : 'Markierte Tage auswählen, um die zugehörigen Ferientermine weiter unten zu sehen.') + '</p>' +
+    '<p class="sf-year-hint sf-hint-mobile">' + (en ? 'Swipe between months; tap highlighted dates for details.' : 'Monate seitlich wischen; markierte Tage öffnen die Ferientermine.') + '</p>' +
     '<nav class="sf-month-jump" aria-label="' +
       (en ? 'Jump to a month' : 'Monat auswählen') + '">' +
       months.map((label, index) => '<a href="#sf-month-' + year + '-' +
         (index + 1) + '" aria-label="' + label + ' ' + year + '">' +
         label.slice(0, 3) + '</a>').join("") + '</nav>' +
     '<div class="sf-year-rail" tabindex="0" role="region" ' +
-    '' + (en ? 'aria-label="Swipe through 12 months"' : 'aria-label="Zwölf Monate horizontal durchblättern"') + '>' +
+    '' + (en ? 'aria-label="Twelve-month school holiday calendar"' : 'aria-label="Schulferienkalender mit zwölf Monaten"') + '>' +
     monthHtml + '</div>' + partialWarning + '</section>';
 }
 
