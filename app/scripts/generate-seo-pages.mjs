@@ -2877,8 +2877,8 @@ function stateYearVisualCalendarHtml({ events, name, year, locale = "de" }) {
     ? (en ? '<p class="sf-year-incomplete">2030: Only currently published and checked dates are highlighted. Unmarked days do not automatically mean school is open.</p>' : '<p class="sf-year-incomplete">2030: Nur bisher veröffentlichte und geprüfte Termine sind markiert. Nicht markierte Tage sind nicht automatisch Unterrichtstage.</p>')
     : "";
 
-  return '<section class="sf-year-visual" aria-label="Calendar for ' +
-    escapeHtml(name) + ' ' + year + '">' +
+  return '<section class="sf-year-visual" aria-label="' +
+    (en ? "Calendar for " : "Jahreskalender ") + escapeHtml(name) + ' ' + year + '">' +
     '<div class="sf-year-visual-heading"><div>' +
     '<p class="eyebrow">' + (en ? 'Your year at a glance' : 'Dein Jahr im Blick') + '</p>' +
     '<h2>' + (en ? 'When are the school holidays in ' : 'Wo liegen die Ferien ') + year + '?</h2></div>' +
@@ -8116,7 +8116,8 @@ function englishStateYearPage({ slug, name, englishName, code, year, events }) {
     '<meta property="og:description" content="' + escapeHtml(description) + '">' +
     '<meta property="og:url" content="' + base + enUrl + '">' +
     '<link rel="icon" href="/favicon.svg" type="image/svg+xml">' +
-    sharedSeoStyles() +
+    '<link rel="stylesheet" href="/seo-pages.css">' +
+    '<script defer src="/privacy-analytics.js"></script>' +
     '</head><body class="seo-page sf-english-page"><main>' +
     '<nav class="seo-top-nav" aria-label="Main navigation">' +
     '<a class="seo-brand" href="/">Schulferienklar</a>' +
@@ -8268,7 +8269,14 @@ for (const year of years) {
     const bilingualGermanPage = germanPage.replace(canonical,
       canonical + '\n    <link rel="alternate" hreflang="de" href="' +
       germanUrl + '" />\n    <link rel="alternate" hreflang="en" href="' +
-      englishUrl + '" />');
+      englishUrl + '" />').replace(
+      '          <a href="/">' + 'Startseite</a>',
+      '          <a href="/">' + 'Startseite</a>'
+    ).replace(
+      '        </div>\n      </nav>',
+      '          <a class="sf-lang-switch" href="' + englishUrl +
+      '" lang="en" hreflang="en">English</a>\n        </div>\n      </nav>'
+    );
 
     fs.writeFileSync(path.join(outputDir, fileName),
       cleanGeneratedHtml(bilingualGermanPage), "utf8");
