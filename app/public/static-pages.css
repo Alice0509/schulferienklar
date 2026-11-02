@@ -440,8 +440,8 @@ code {
   display: block;
   max-width: 100%;
 }
-.sf-content-ad:has(.sf-content-ad-unit[data-ad-status="unfilled"]),
-.sf-content-ad:has(.sf-content-ad-unit[data-ad-status="unfill-optimized"]) {
+.sf-content-ad:not(.sf-content-ad-debug):has(.sf-content-ad-unit[data-ad-status="unfilled"]),
+.sf-content-ad:not(.sf-content-ad-debug):has(.sf-content-ad-unit[data-ad-status="unfill-optimized"]) {
   display: none;
 }
 
