@@ -99,7 +99,7 @@ function SchulferienklarInContentAd() {
         .schulferienklar-in-content-slot {
           display: block;
           width: 320px;
-          height: 100px;
+          height: 50px;
         }
         .schulferienklar-in-content-ad:has(.schulferienklar-in-content-slot[data-ad-status="unfilled"]) {
           display: none;
