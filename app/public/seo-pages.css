@@ -973,3 +973,24 @@ p {
   }
 }
 
+/* One manual ad after the primary holiday information, never inside controls. */
+.sf-content-ad {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  margin: 28px auto;
+}
+.sf-content-ad-label {
+  color: #697581;
+  font-size: 0.75rem;
+  line-height: 1.25;
+}
+.sf-content-ad-unit {
+  max-width: 100%;
+}
+/* Google explicitly identifies unfilled units with data-ad-status. */
+.sf-content-ad:has(.sf-content-ad-unit[data-ad-status="unfilled"]) {
+  display: none;
+}
