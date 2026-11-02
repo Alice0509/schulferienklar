@@ -365,11 +365,10 @@
         });
       });
     };
+    // Wait for the actual consent decision. CONSENT_MODE_DATA_READY can fire
+    // earlier, before the user dismisses Google's EU consent message.
     window.googlefc.callbackQueue.push({
       CONSENT_DATA_READY: showClarityAfterGoogle,
-    });
-    window.googlefc.callbackQueue.push({
-      CONSENT_MODE_DATA_READY: showClarityAfterGoogle,
     });
     return true;
   }
