@@ -229,3 +229,46 @@ test("mobile home does not mount a hidden desktop ad before the visible one", as
     app.indexOf("<SchulferienklarInContentAd />"),
     "Sidebar precedes in-content in DOM order, so it must not exist on mobile");
 });
+
+
+test("additional mobile ads mount lazily after finished tools without affecting desktop", async () => {
+  const [app, home] = await Promise.all([
+    read("../src/App.jsx"),
+    read("../index.html"),
+  ]);
+  const mobileStart = app.indexOf("function SchulferienklarMobileExtraAd({ placement })");
+  const mobileEnd = app.indexOf("function getFreePeriodStatus(", mobileStart);
+  assert.ok(mobileStart > 0 && mobileEnd > mobileStart, "Mobile ad component exists");
+  const mobile = app.slice(mobileStart, mobileEnd);
+
+  assert.equal(app.split('<SchulferienklarMobileExtraAd placement=').length - 1, 2);
+  assert.equal(app.split('<SchulferienklarMobileExtraAd placement="after-planner" />').length - 1, 1);
+  assert.equal(app.split('<SchulferienklarMobileExtraAd placement="after-states" />').length - 1, 1);
+  assert.ok(
+    app.indexOf('<SchulferienklarMobileExtraAd placement="after-planner" />') >
+      app.indexOf('id="brueckentage"') &&
+    app.indexOf('<SchulferienklarMobileExtraAd placement="after-planner" />') <
+      app.indexOf('id="vergleich"'),
+    "First additional ad follows the planner, before the comparison controls",
+  );
+  assert.ok(
+    app.indexOf('<SchulferienklarMobileExtraAd placement="after-states" />') >
+      app.indexOf('id="bundeslaender"') &&
+    app.indexOf('<SchulferienklarMobileExtraAd placement="after-states" />') <
+      app.indexOf('className="panel widget-discovery"'),
+    "Second additional ad follows the state list",
+  );
+
+  assert.match(mobile, /matchMedia\("\(min-width: 360px\) and \(max-width: 760px\)"\)/);
+  assert.match(mobile, /if \(!isMobile\) return null;/);
+  assert.match(mobile, /IntersectionObserver/);
+  assert.match(mobile, /rootMargin: "500px 0px"/);
+  assert.match(mobile, /\{isNearViewport && \(/);
+  assert.match(mobile, /window\.requestAnimationFrame/);
+  assert.match(mobile, /ad\.dataset\.schulferienklarRequested/);
+  assert.match(mobile, /data-ad-slot=\{MOBILE_EXTRA_AD_SLOT\}/);
+  assert.match(mobile, /data-ad-status="unfilled"/);
+  assert.match(app, /MOBILE_EXTRA_AD_SLOT = IN_CONTENT_AD_SLOT/);
+  assert.doesNotMatch(mobile, /pagead2\.googlesyndication\.com/);
+  assert.equal(home.split('data-schulferienklar-adsense="true"').length - 1, 1);
+});
