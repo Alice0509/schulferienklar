@@ -171,3 +171,28 @@ test("privacy and ad consent settings share a compact footer row", async () => {
   assert.match(mobileCss, /\.floating-site-menu-button\.is-footer-visible/);
   assert.match(await read("../src/App.jsx"), /new IntersectionObserver/);
 });
+
+
+test("static holiday and yearly-planner pages request one ad after useful content", async () => {
+  const [seoGenerator, plannerGenerator, placement, stylesheet, legalPage] = await Promise.all([
+    read("../scripts/generate-seo-pages.mjs"),
+    read("../scripts/generate-urlaubsplaner-page.mjs"),
+    read("../public/adsense-content.js"),
+    read("../public/seo-pages.css"),
+    read("../public/datenschutz.html"),
+  ]);
+
+  for (const generator of [seoGenerator, plannerGenerator]) {
+    assert.match(generator, /<script defer src="\/adsense-content\.js"><\/script>/);
+    assert.equal(generator.split('data-schulferienklar-adsense="true"').length - 1, 1);
+  }
+  assert.match(placement, /const SLOT = "9291651091"/);
+  assert.match(placement, /mainCard\.querySelector\("#termine"\)/);
+  assert.match(placement, /mainCard\.querySelector\("\.holiday-summary-list"\)/);
+  assert.match(placement, /\.planner-page #beispiele/);
+  assert.match(placement, /availableWidth < 320/);
+  assert.match(placement, /document\.querySelector\("\.sf-content-ad"\)/);
+  assert.match(placement, /window\.adsbygoogle/);
+  assert.match(stylesheet, /data-ad-status="unfilled"/);
+  assert.doesNotMatch(legalPage, /adsense-content\.js/);
+});
