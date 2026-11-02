@@ -119,3 +119,27 @@ test("Clarity never opens over Google's consent UI", async () => {
   consentListener({ eventStatus: "useractioncomplete" }, true);
   assert.equal(timers.length, 1);
 });
+
+test("manual homepage ad is single, bounded, and does not duplicate the AdSense loader", async () => {
+  const [app, home] = await Promise.all([
+    read("../src/App.jsx"),
+    read("../index.html"),
+  ]);
+
+  assert.ok(home.includes('data-schulferienklar-adsense="true"'));
+  assert.equal(app.split("<SchulferienklarInContentAd />").length - 1, 1);
+  assert.ok(app.includes("data-ad-slot={IN_CONTENT_AD_SLOT}"));
+  assert.ok(app.includes('IN_CONTENT_AD_SLOT = "9291651091"'));
+  assert.ok(app.includes("@media (min-width: 800px)"));
+  assert.ok(app.includes("width: 728px; height: 90px"));
+  assert.ok(app.includes("width: 320px;"));
+  assert.ok(app.includes("height: 100px;"));
+  assert.ok(!app.includes("pagead2.googlesyndication.com"));
+  assert.ok(!app.includes('data-ad-format="auto"'));
+  assert.ok(!app.includes('data-full-width-responsive="true"'));
+  assert.ok(
+    app.indexOf("<SchulferienklarInContentAd />") > app.indexOf('id="reisezeit"') &&
+    app.indexOf("<SchulferienklarInContentAd />") < app.indexOf('id="brueckentage"'),
+    "Ad belongs after travel checker and before vacation planner",
+  );
+});
