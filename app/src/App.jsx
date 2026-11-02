@@ -81,7 +81,8 @@ function SchulferienklarInContentAd() {
       const adStatus = ad.getAttribute("data-ad-status") || "pending";
       const processing = ad.getAttribute("data-adsbygoogle-status") || "pending";
       const dimensions = `${Math.round(rect.width)}×${Math.round(rect.height)}px`;
-      setAdDiagnostic(`Ad: ${adStatus} · Processing: ${processing} · Size: ${dimensions}${requestError ? ` · Error: ${requestError}` : ""}`);
+      const slotCount = document.querySelectorAll("ins.adsbygoogle").length;
+      setAdDiagnostic(`Ad: ${adStatus} · Processing: ${processing} · Size: ${dimensions} · Slots: ${slotCount}${requestError ? ` · Error: ${requestError}` : ""}`);
     };
 
     let observer;
@@ -162,25 +163,44 @@ function SchulferienklarInContentAd() {
 
 function SchulferienklarCalendarSidebarAd() {
   const adRef = useRef(null);
+  const [isWideDesktop, setIsWideDesktop] = useState(
+    () => window.matchMedia("(min-width: 1160px)").matches
+  );
 
   useEffect(() => {
-    const requestAd = () => {
-      const ad = adRef.current;
-      // Keep the second ad away from narrow columns and every mobile layout.
-      if (!ad || window.innerWidth < 1160 || ad.dataset.schulferienklarRequested) {
-        return;
-      }
+    const desktopQuery = window.matchMedia("(min-width: 1160px)");
+    const syncDesktop = () => setIsWideDesktop(desktopQuery.matches);
+    desktopQuery.addEventListener("change", syncDesktop);
+    syncDesktop();
+    return () => desktopQuery.removeEventListener("change", syncDesktop);
+  }, []);
+
+  useEffect(() => {
+    // Crucial: on mobile, the sidebar <ins class="adsbygoogle"> must
+    // not exist in the DOM at all. A CSS-hidden preceding ad can intercept
+    // the single adsbygoogle.push() intended for the visible homepage ad.
+    if (!isWideDesktop) return;
+
+    const ad = adRef.current;
+    if (!ad || ad.dataset.schulferienklarRequested) return;
+
+    // After browser layout, request only if the desktop slot is visible.
+    // Scheduling here also handles React StrictMode effect replay safely.
+    const frame = window.requestAnimationFrame(() => {
+      if (!ad.isConnected || !ad.getClientRects().length ||
+          ad.dataset.schulferienklarRequested) return;
       ad.dataset.schulferienklarRequested = "true";
       try {
         (window.adsbygoogle = window.adsbygoogle || []).push({});
       } catch {
-        // Ad blockers must not affect the calendar.
+        // An ad blocker or rejected request must never break the calendar.
       }
-    };
-    requestAd();
-    window.addEventListener("resize", requestAd);
-    return () => window.removeEventListener("resize", requestAd);
-  }, []);
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [isWideDesktop]);
+
+  // Do not render even an uninitialized <ins> on mobile or small desktops.
+  if (!isWideDesktop) return null;
 
   return (
     <div className="schulferienklar-calendar-sidebar-ad" aria-label="Werbung">
@@ -199,9 +219,6 @@ function SchulferienklarCalendarSidebarAd() {
           display: block;
           width: 300px;
           height: 250px;
-        }
-        @media (max-width: 1159px) {
-          .schulferienklar-calendar-sidebar-ad { display: none; }
         }
       `}</style>
       <ins

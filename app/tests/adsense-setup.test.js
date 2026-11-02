@@ -135,7 +135,14 @@ test("homepage uses one bounded in-content ad and one desktop-only calendar side
   assert.equal(app.split("data-ad-slot={IN_CONTENT_AD_SLOT}").length - 1, 1);
   assert.equal(app.split("data-ad-slot={CALENDAR_SIDEBAR_AD_SLOT}").length - 1, 1);
   assert.equal(app.split("<SchulferienklarCalendarSidebarAd />").length - 1, 1);
-  assert.ok(app.includes("window.innerWidth < 1160"));
+  assert.ok(app.includes('window.matchMedia("(min-width: 1160px)")'));
+  assert.ok(app.includes("if (!isWideDesktop) return null;"));
+  assert.ok(app.includes("if (!isWideDesktop) return;"));
+  assert.ok(app.includes("desktopQuery.addEventListener"));
+  assert.ok(app.includes("window.requestAnimationFrame"));
+  assert.ok(app.includes("ad.isConnected"));
+  assert.ok(app.includes('document.querySelectorAll("ins.adsbygoogle").length'));
+  assert.ok(!app.includes("@media (max-width: 1159px)"));
   assert.ok(app.includes("width: 300px;"));
   assert.ok(app.includes("height: 250px;"));
   assert.ok(
@@ -203,4 +210,22 @@ test("static holiday and yearly-planner pages request one ad after useful conten
   assert.match(placement, /window\.adsbygoogle/);
   assert.match(stylesheet, /data-ad-status="unfilled"/);
   assert.doesNotMatch(legalPage, /adsense-content\.js/);
+});
+
+test("mobile home does not mount a hidden desktop ad before the visible one", async () => {
+  const app = await read("../src/App.jsx");
+  const sidebar = app.slice(
+    app.indexOf("function SchulferienklarCalendarSidebarAd() {"),
+    app.indexOf("function getFreePeriodStatus(")
+  );
+  assert.ok(sidebar.includes('window.matchMedia("(min-width: 1160px)")'));
+  assert.ok(sidebar.includes("if (!isWideDesktop) return null;"));
+  assert.ok(sidebar.indexOf("if (!isWideDesktop) return null;") <
+    sidebar.indexOf('<ins\n        ref={adRef}'), "Sidebar ad markup is conditionally omitted");
+  assert.ok(!sidebar.includes('window.innerWidth < 1160'));
+  assert.ok(!sidebar.includes("@media (max-width: 1159px)"));
+  assert.ok(sidebar.includes("requestAnimationFrame"));
+  assert.ok(app.indexOf("<SchulferienklarCalendarSidebarAd />") <
+    app.indexOf("<SchulferienklarInContentAd />"),
+    "Sidebar precedes in-content in DOM order, so it must not exist on mobile");
 });
