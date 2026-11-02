@@ -59,6 +59,7 @@ const WEEKDAYS = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
 const IN_CONTENT_AD_SLOT = "9291651091";
 const CALENDAR_SIDEBAR_AD_SLOT = "9134196439";
+const MOBILE_EXTRA_AD_SLOT = IN_CONTENT_AD_SLOT; // Reuse the existing approved display unit.
 
 // The shared AdSense loader is already present in index.html.
 // Only create the ad unit here, once, without a second loader.
@@ -228,6 +229,106 @@ function SchulferienklarCalendarSidebarAd() {
         data-ad-slot={CALENDAR_SIDEBAR_AD_SLOT}
       />
     </div>
+  );
+}
+
+// Mobile-only additional units are mounted near the viewport, never as
+// hidden <ins> tags. This avoids the earlier unprocessed-ad collision.
+function SchulferienklarMobileExtraAd({ placement }) {
+  const [isMobile, setIsMobile] = useState(
+    () => window.matchMedia("(min-width: 360px) and (max-width: 760px)").matches
+  );
+  const [isNearViewport, setIsNearViewport] = useState(false);
+  const containerRef = useRef(null);
+  const adRef = useRef(null);
+
+  useEffect(() => {
+    const query = window.matchMedia("(min-width: 360px) and (max-width: 760px)");
+    const update = () => setIsMobile(query.matches);
+    query.addEventListener("change", update);
+    update();
+    return () => query.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile || isNearViewport) return;
+    const container = containerRef.current;
+    if (!container) return;
+    if (!("IntersectionObserver" in window)) {
+      setIsNearViewport(true);
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setIsNearViewport(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: "500px 0px" });
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [isMobile, isNearViewport]);
+
+  useEffect(() => {
+    if (!isMobile || !isNearViewport) return;
+    const ad = adRef.current;
+    if (!ad || ad.dataset.schulferienklarRequested) return;
+    const frame = window.requestAnimationFrame(() => {
+      // The node must be genuinely mounted and laid out before asking AdSense.
+      if (!ad.isConnected || !ad.getClientRects().length ||
+          ad.dataset.schulferienklarRequested) return;
+      ad.dataset.schulferienklarRequested = "true";
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch {
+        // Never block calendar navigation if an ad is rejected or blocked.
+      }
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [isMobile, isNearViewport]);
+
+  // Critical: desktop must not contain any of these mobile-only <ins> nodes.
+  if (!isMobile) return null;
+
+  return (
+    <aside
+      ref={containerRef}
+      className="schulferienklar-mobile-extra-ad"
+      data-ad-placement={placement}
+      aria-label="Werbung"
+      aria-hidden={!isNearViewport}
+    >
+      <style>{`
+        .schulferienklar-mobile-extra-ad {
+          display: grid;
+          justify-items: center;
+          align-content: center;
+          min-width: 0;
+          min-height: 1px;
+          margin: 24px auto;
+          gap: 6px;
+        }
+        .schulferienklar-mobile-extra-slot {
+          display: block;
+          width: 320px;
+          height: 100px;
+        }
+        .schulferienklar-mobile-extra-ad:has(.schulferienklar-mobile-extra-slot[data-ad-status="unfilled"]),
+        .schulferienklar-mobile-extra-ad:has(.schulferienklar-mobile-extra-slot[data-ad-status="unfill-optimized"]) {
+          display: none;
+        }
+      `}</style>
+      {isNearViewport && (
+        <>
+          <span className="schulferienklar-in-content-label">Anzeige</span>
+          <ins
+            ref={adRef}
+            className="adsbygoogle schulferienklar-mobile-extra-slot"
+            data-ad-client="ca-pub-8336348698974993"
+            data-ad-slot={MOBILE_EXTRA_AD_SLOT}
+          />
+        </>
+      )}
+    </aside>
   );
 }
 
@@ -2811,6 +2912,8 @@ export default function App() {
         </div>
       </section>
 
+      <SchulferienklarMobileExtraAd placement="after-planner" />
+
       <section
         className={`comparison-section mobile-disclosure ${
           isComparisonSectionOpen ? "is-mobile-open" : ""
@@ -3202,6 +3305,8 @@ export default function App() {
             : "Alle Bundesländer anzeigen"}
         </button>
       </section>
+
+      <SchulferienklarMobileExtraAd placement="after-states" />
 
       <section
         className="panel widget-discovery"
