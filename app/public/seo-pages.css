@@ -1363,3 +1363,15 @@ p {
   .sf-hint-desktop { display: none; }
   .sf-hint-mobile { display: block; }
 }
+
+/* Weekend beige stays visually dominant even during school breaks. */
+.sf-day.sf-day-holiday.sf-day-weekend {
+  background: #f2eee7;
+  color: #7f7770;
+  box-shadow: none;
+}
+.sf-day.sf-day-holiday.sf-day-weekend:hover,
+.sf-day.sf-day-holiday.sf-day-weekend:focus-visible {
+  background: #e6ded2;
+  color: #453f39;
+}
