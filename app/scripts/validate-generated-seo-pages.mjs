@@ -410,6 +410,74 @@ for (const [
       "utf8",
     );
 
+
+    // Visual calendar and English are generated from the same event index.
+    const monthBlocks = html.match(/<article class="sf-month"/g) || [];
+    if (monthBlocks.length !== 12) {
+      errors.push(file + ": expected exactly 12 calendar months");
+    }
+    const markedTargets = [
+      ...html.matchAll(/class="sf-day sf-day-holiday" href="#(termin-[^"]+)"/g)
+    ].map((match) => match[1]);
+    for (const target of new Set(markedTargets)) {
+      if (!html.includes('id="' + target + '"')) {
+        errors.push(file + ": broken calendar day link #" + target);
+      }
+    }
+    if (markedTargets.length > 0 && !html.includes('class="sf-year-visual"')) {
+      errors.push(file + ": calendar summary missing");
+    }
+
+    const englishName = STATES.find((state) => state[0] === slug)?.[2];
+    const englishSlug = String(englishName).toLowerCase().normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+    const englishFileName = "school-holidays-" + englishSlug + "-" + year + ".html";
+    const englishUrl = "https://www.schulferienklar.de/en/" + englishFileName;
+    const germanUrl = "https://www.schulferienklar.de/" + file;
+    const englishPath = path.join(publicDir, "en", englishFileName);
+    if (!fs.existsSync(englishPath)) {
+      errors.push(englishFileName + ": missing English page");
+    } else {
+      const englishHtml = fs.readFileSync(englishPath, "utf8");
+      const required = [
+        '<html lang="en">',
+        'rel="canonical" href="' + englishUrl + '"',
+        'hreflang="en" href="' + englishUrl + '"',
+        'hreflang="de" href="' + germanUrl + '"',
+        'id="termine"',
+        'id="source"',
+        'class="sf-year-visual"',
+        'Germany Travel Checker',
+        'School holiday dates',
+      ];
+      for (const item of required) {
+        if (!englishHtml.includes(item)) {
+          errors.push(englishFileName + ": missing " + item);
+        }
+      }
+      const englishMonths = englishHtml.match(/<article class="sf-month"/g) || [];
+      if (englishMonths.length !== 12) {
+        errors.push(englishFileName + ": expected 12 English calendar months");
+      }
+      const enTargets = [
+        ...englishHtml.matchAll(/class="sf-day sf-day-holiday" href="#(termin-[^"]+)"/g)
+      ].map((match) => match[1]);
+      for (const target of new Set(enTargets)) {
+        if (!englishHtml.includes('id="' + target + '"')) {
+          errors.push(englishFileName + ": broken English day link #" + target);
+        }
+      }
+      if (year === 2030 && !englishHtml.includes("Partial coverage")) {
+        errors.push(englishFileName + ": incomplete 2030 data warning missing");
+      }
+    }
+    if (!html.includes('hreflang="en" href="' + englishUrl + '"') ||
+        !html.includes('hreflang="de" href="' + germanUrl + '"') ||
+        !html.includes('class="sf-lang-switch"')) {
+      errors.push(file + ": missing reciprocal English language switch");
+    }
+
     const normalizedCode =
       code.toLowerCase();
 
