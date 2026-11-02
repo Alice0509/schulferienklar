@@ -221,7 +221,7 @@ test("mobile home does not mount a hidden desktop ad before the visible one", as
   assert.ok(sidebar.includes('window.matchMedia("(min-width: 1160px)")'));
   assert.ok(sidebar.includes("if (!isWideDesktop) return null;"));
   assert.ok(sidebar.indexOf("if (!isWideDesktop) return null;") <
-    sidebar.indexOf('<ins'), "Sidebar ad markup is conditionally omitted");
+    sidebar.indexOf('<ins\n        ref={adRef}'), "Sidebar ad markup is conditionally omitted");
   assert.ok(!sidebar.includes('window.innerWidth < 1160'));
   assert.ok(!sidebar.includes("@media (max-width: 1159px)"));
   assert.ok(sidebar.includes("requestAnimationFrame"));
