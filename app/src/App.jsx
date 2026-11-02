@@ -57,6 +57,69 @@ TODAY.setHours(0, 0, 0, 0);
 
 const WEEKDAYS = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
+const IN_CONTENT_AD_SLOT = "9291651091";
+
+// The shared AdSense loader is already present in index.html.
+// Only create the ad unit here, once, without a second loader.
+function SchulferienklarInContentAd() {
+  const adRef = useRef(null);
+
+  useEffect(() => {
+    const ad = adRef.current;
+    // The homepage is too narrow for a 320px horizontal ad below 360px.
+    if (!ad || window.innerWidth < 360 || ad.dataset.schulferienklarRequested) {
+      return;
+    }
+
+    // Prevent duplicate requests during React StrictMode effect replay.
+    ad.dataset.schulferienklarRequested = "true";
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch {
+      // Ad blockers or rejected ad requests must never interrupt the planner.
+    }
+  }, []);
+
+  return (
+    <aside className="schulferienklar-in-content-ad" aria-label="Werbung">
+      <span className="schulferienklar-in-content-label">Anzeige</span>
+      <style>{`
+        .schulferienklar-in-content-ad {
+          display: grid;
+          justify-items: center;
+          gap: 6px;
+          margin: 24px auto;
+          min-width: 0;
+        }
+        .schulferienklar-in-content-label {
+          font-size: 0.75rem;
+          color: #66727d;
+        }
+        .schulferienklar-in-content-slot {
+          display: block;
+          width: 320px;
+          height: 100px;
+        }
+        @media (max-width: 359px) {
+          .schulferienklar-in-content-ad { display: none; }
+        }
+        @media (min-width: 560px) {
+          .schulferienklar-in-content-slot { width: 468px; height: 60px; }
+        }
+        @media (min-width: 800px) {
+          .schulferienklar-in-content-slot { width: 728px; height: 90px; }
+        }
+      `}</style>
+      <ins
+        ref={adRef}
+        className="adsbygoogle schulferienklar-in-content-slot"
+        data-ad-client="ca-pub-8336348698974993"
+        data-ad-slot={IN_CONTENT_AD_SLOT}
+      />
+    </aside>
+  );
+}
+
 function getFreePeriodStatus(holiday, publicHolidays = []) {
   const period = getEffectiveFreePeriod(holiday, publicHolidays);
 
@@ -2344,6 +2407,8 @@ export default function App() {
             )}
         </div>
       </section>
+
+      <SchulferienklarInContentAd />
 
       <section className="panel bridge-days-section" id="brueckentage">
         <div className="section-header bridge-days-header">
