@@ -1037,3 +1037,146 @@ p {
   outline: 2px solid #176f64;
   outline-offset: 2px;
 }
+
+
+/* Data-first calendar, shared by every Bundesland and publication year. */
+.sf-year-visual {
+  margin: 24px -10px 28px;
+  border: 1px solid #d9e9e4;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f2faf6 0%, #fffdf8 100%);
+  padding: clamp(15px, 3vw, 25px);
+  overflow: hidden;
+}
+.sf-year-visual-heading {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+}
+.sf-year-visual-heading h2 {
+  margin: 0;
+  color: #172033;
+  font-size: clamp(1.32rem, 3vw, 1.9rem);
+}
+.sf-year-visual-heading a {
+  display: inline-block;
+  font-size: 0.86rem;
+}
+.sf-year-key {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 17px;
+  color: #576a71;
+  font-size: 0.8rem;
+}
+.sf-key-ferie, .sf-key-weekend {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 5px;
+  background: #c5eadd;
+}
+.sf-key-weekend { margin-left: 8px; background: #f1ece2; }
+.sf-year-hint {
+  margin: 5px 0 13px;
+  color: #667982;
+  font-size: 0.8rem;
+}
+.sf-year-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(230px, 29%);
+  gap: 12px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 4px;
+  padding: 2px 3px 14px;
+  scrollbar-color: #a9d5c6 transparent;
+}
+.sf-month {
+  min-width: 0;
+  scroll-snap-align: start;
+  border: 1px solid #dce8e4;
+  border-radius: 13px;
+  background: #fff;
+  padding: 14px 12px;
+}
+.sf-month header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 5px;
+  min-height: 33px;
+}
+.sf-month header strong { color: #152d32; font-size: 1rem; }
+.sf-month header small {
+  color: #61747a;
+  text-align: right;
+  font-size: 0.65rem;
+}
+.sf-month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 3px;
+  text-align: center;
+}
+.sf-weekday {
+  padding: 3px 0 5px;
+  color: #738188;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+.sf-day {
+  display: grid;
+  min-width: 0;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 7px;
+  color: #253942;
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 550;
+}
+.sf-day-empty { visibility: hidden; }
+.sf-day-weekend { background: #f6f1e9; color: #7f7770; }
+.sf-day-holiday {
+  color: #155d51;
+  background: #c8ecdd;
+  font-weight: 850;
+}
+.sf-day-holiday:hover, .sf-day-holiday:focus-visible {
+  background: #176f64;
+  color: #fff;
+  outline: 2px solid #135e53;
+  outline-offset: 1px;
+}
+.sf-year-incomplete {
+  margin: 10px 0 0;
+  border-left: 3px solid #c88939;
+  padding-left: 10px;
+  color: #685739;
+  font-size: 0.86rem;
+}
+.gold-period-row[id] { scroll-margin-top: 18px; }
+.gold-period-row:target {
+  border-color: #176f64;
+  box-shadow: 0 0 0 3px #cce9df;
+}
+@media (max-width: 640px) {
+  .sf-year-visual {
+    margin: 20px -8px 23px;
+    border-radius: 15px;
+    padding: 15px 11px;
+  }
+  .sf-year-rail { grid-auto-columns: minmax(235px, 86%); }
+  .sf-month { padding: 12px; }
+  .sf-day { font-size: 0.82rem; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sf-day-holiday { transition: background-color .15s, color .15s; }
+}
