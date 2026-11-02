@@ -78,6 +78,7 @@ test("Clarity never opens over Google's consent UI", async () => {
     createElement() {
       return {
         dataset: {},
+        appendChild() {},
         addEventListener() {},
         querySelector() { return { addEventListener() {} }; },
       };
@@ -120,7 +121,7 @@ test("Clarity never opens over Google's consent UI", async () => {
   assert.equal(timers.length, 1);
 });
 
-test("manual homepage ad is single, bounded, and does not duplicate the AdSense loader", async () => {
+test("homepage uses one bounded in-content ad and one desktop-only calendar sidebar ad", async () => {
   const [app, home] = await Promise.all([
     read("../src/App.jsx"),
     read("../index.html"),
@@ -130,6 +131,15 @@ test("manual homepage ad is single, bounded, and does not duplicate the AdSense 
   assert.equal(app.split("<SchulferienklarInContentAd />").length - 1, 1);
   assert.ok(app.includes("data-ad-slot={IN_CONTENT_AD_SLOT}"));
   assert.ok(app.includes('IN_CONTENT_AD_SLOT = "9291651091"'));
+  assert.equal(app.split("<SchulferienklarCalendarSidebarAd />").length - 1, 1);
+  assert.ok(app.includes("window.innerWidth < 1160"));
+  assert.ok(app.includes("width: 300px;"));
+  assert.ok(app.includes("height: 250px;"));
+  assert.ok(
+    app.indexOf("<SchulferienklarCalendarSidebarAd />") > app.indexOf('<aside className="panel side-panel">') &&
+    app.indexOf("<SchulferienklarCalendarSidebarAd />") < app.indexOf('id="reisezeit"'),
+    "Second ad belongs below sidebar information, alongside the calendar",
+  );
   assert.ok(app.includes("@media (min-width: 800px)"));
   assert.ok(app.includes("width: 728px; height: 90px"));
   assert.ok(app.includes("width: 320px;"));
@@ -142,4 +152,17 @@ test("manual homepage ad is single, bounded, and does not duplicate the AdSense 
     app.indexOf("<SchulferienklarInContentAd />") < app.indexOf('id="brueckentage"'),
     "Ad belongs after travel checker and before vacation planner",
   );
+});
+
+test("privacy and ad consent settings share a compact footer row", async () => {
+  const [consent, css, mobileCss] = await Promise.all([
+    read("../public/privacy-analytics.js"),
+    read("../src/App.css"),
+    read("../src/mobile-flow.css"),
+  ]);
+  assert.match(consent, /function getFooterSettingsContainer\(\)/);
+  assert.match(consent, /className = "sf-footer-settings"/);
+  assert.match(consent, /\.sf-footer-settings \{/);
+  assert.match(css, /padding-bottom: 20px/);
+  assert.match(mobileCss, /\.site-footer \{\s*padding-bottom: 32px;/);
 });
