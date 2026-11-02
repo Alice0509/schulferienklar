@@ -64,25 +64,50 @@ const CALENDAR_SIDEBAR_AD_SLOT = "9134196439";
 // Only create the ad unit here, once, without a second loader.
 function SchulferienklarInContentAd() {
   const adRef = useRef(null);
+  const [adDiagnostic, setAdDiagnostic] = useState("");
+  const isAdDebug = new URLSearchParams(window.location.search).get("ads_debug") === "1";
 
   useEffect(() => {
     const ad = adRef.current;
-    // The homepage is too narrow for a 320px horizontal ad below 360px.
     if (!ad || window.innerWidth < 360 || ad.dataset.schulferienklarRequested) {
       return;
     }
 
-    // Prevent duplicate requests during React StrictMode effect replay.
+    let requestError = "";
+    // On-device diagnostics are visible only with ?ads_debug=1.
+    const reportStatus = () => {
+      if (!isAdDebug) return;
+      const rect = ad.getBoundingClientRect();
+      const adStatus = ad.getAttribute("data-ad-status") || "pending";
+      const processing = ad.getAttribute("data-adsbygoogle-status") || "pending";
+      const dimensions = `${Math.round(rect.width)}×${Math.round(rect.height)}px`;
+      setAdDiagnostic(`Ad: ${adStatus} · Processing: ${processing} · Size: ${dimensions}${requestError ? ` · Error: ${requestError}` : ""}`);
+    };
+
+    let observer;
+    if (isAdDebug) {
+      observer = new MutationObserver(reportStatus);
+      observer.observe(ad, { attributes: true, attributeFilter: ["data-ad-status", "data-adsbygoogle-status", "style"] });
+    }
+
+    // Never request the same unit twice, including React StrictMode replay.
     ad.dataset.schulferienklarRequested = "true";
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch {
-      // Ad blockers or rejected ad requests must never interrupt the planner.
+    } catch (error) {
+      // Do not interrupt the calendar; surface the error only in debug mode.
+      requestError = String(error?.message || error).slice(0, 150);
     }
-  }, []);
+    reportStatus();
+    const followUp = isAdDebug ? window.setTimeout(reportStatus, 6000) : null;
+    return () => {
+      observer?.disconnect();
+      if (followUp !== null) window.clearTimeout(followUp);
+    };
+  }, [isAdDebug]);
 
   return (
-    <aside className="schulferienklar-in-content-ad" aria-label="Werbung">
+    <aside className={`schulferienklar-in-content-ad${isAdDebug ? " is-ad-debug" : ""}`} aria-label="Werbung">
       <span className="schulferienklar-in-content-label">Anzeige</span>
       <style>{`
         .schulferienklar-in-content-ad {
@@ -99,10 +124,20 @@ function SchulferienklarInContentAd() {
         .schulferienklar-in-content-slot {
           display: block;
           width: 320px;
-          height: 50px;
+          height: 100px;
         }
-        .schulferienklar-in-content-ad:has(.schulferienklar-in-content-slot[data-ad-status="unfilled"]) {
+        .schulferienklar-in-content-ad:not(.is-ad-debug):has(.schulferienklar-in-content-slot[data-ad-status="unfilled"]),
+        .schulferienklar-in-content-ad:not(.is-ad-debug):has(.schulferienklar-in-content-slot[data-ad-status="unfill-optimized"]) {
           display: none;
+        }
+        .schulferienklar-ad-diagnostic {
+          max-width: 100%;
+          color: #405564;
+          background: #eef3f6;
+          font: 12px/1.5 ui-monospace, monospace;
+          overflow-wrap: anywhere;
+          padding: 6px 8px;
+          border-radius: 5px;
         }
         @media (max-width: 359px) {
           .schulferienklar-in-content-ad { display: none; }
@@ -120,10 +155,10 @@ function SchulferienklarInContentAd() {
         data-ad-client="ca-pub-8336348698974993"
         data-ad-slot={IN_CONTENT_AD_SLOT}
       />
+      {isAdDebug && <code className="schulferienklar-ad-diagnostic" role="status">{adDiagnostic || "Checking AdSense status…"}</code>}
     </aside>
   );
 }
-
 
 function SchulferienklarCalendarSidebarAd() {
   const adRef = useRef(null);
