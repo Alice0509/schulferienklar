@@ -78,10 +78,68 @@
       anchor.hasAttribute("data-sf-ad-before") ? "beforebegin" : "afterend", wrapper
     );
 
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch {
-      // No ad fill or an ad blocker must not interrupt holiday information.
+    const debug = new URLSearchParams(window.location.search).get("ads_debug") === "1";
+    let requestError = "";
+    let requestState = "not-started";
+    let report = () => {};
+
+    if (debug) {
+      const diagnostic = document.createElement("code");
+      diagnostic.className = "sf-ad-diagnostic";
+      diagnostic.setAttribute("role", "status");
+      diagnostic.textContent = "Checking AdSense…";
+      wrapper.appendChild(diagnostic);
+
+      report = () => {
+        const rect = unit.getBoundingClientRect();
+        const processing = unit.getAttribute("data-adsbygoogle-status") || "pending";
+        const status = unit.getAttribute("data-ad-status") || "pending";
+        const loader = document.querySelector('script[data-schulferienklar-adsense="true"]');
+        const api = typeof window.adsbygoogle === "undefined" ? "not-loaded" : "available";
+        diagnostic.textContent =
+          `Ad: ${status} · Processing: ${processing} · Request: ${requestState} · ` +
+          `Size: ${Math.round(rect.width)}×${Math.round(rect.height)}px · ` +
+          `Loader: ${loader ? "present" : "missing"} · API: ${api}` +
+          (requestError ? ` · Error: ${requestError}` : "");
+      };
+
+      const observer = new MutationObserver(report);
+      observer.observe(unit, {
+        attributes: true,
+        attributeFilter: ["data-ad-status", "data-adsbygoogle-status", "style"],
+      });
+      const loader = document.querySelector('script[data-schulferienklar-adsense="true"]');
+      loader?.addEventListener("load", report, { once: true });
+      loader?.addEventListener("error", () => {
+        requestError = "AdSense loader failed";
+        report();
+      }, { once: true });
+      window.setTimeout(report, 6000);
+      window.setTimeout(report, 14000);
+    }
+
+    const request = () => {
+      if (!unit.isConnected || !unit.getClientRects().length) {
+        requestState = "no-visible-layout";
+        report();
+        return;
+      }
+      requestState = "submitted";
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch (error) {
+        requestError = String(error?.message || error).slice(0, 160);
+      }
+      report();
+    };
+
+    // An injected static-page ad must be laid out before being submitted to
+    // AdSense. The older immediate push could happen before the browser had
+    // calculated its display size. Existing SEO-page behavior stays unchanged.
+    if (document.body.classList.contains("static-page")) {
+      window.requestAnimationFrame(request);
+    } else {
+      request();
     }
 
     // A second opportunity only exists on long, substantive pages.
