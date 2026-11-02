@@ -126,16 +126,17 @@ test("manual homepage ad is single, bounded, and does not duplicate the AdSense 
     read("../index.html"),
   ]);
 
-  assert.match(home, /data-schulferienklar-adsense="true"/);
-  assert.equal((app.match(/<SchulferienklarInContentAd \\/>/g) || []).length, 1);
-  assert.match(app, /data-ad-slot=\\{IN_CONTENT_AD_SLOT\\}/);
-  assert.match(app, /IN_CONTENT_AD_SLOT = "9291651091"/);
-  assert.match(app, /@media \\(min-width: 800px\\)/);
-  assert.match(app, /width: 728px; height: 90px/);
-  assert.match(app, /width: 320px;\\s*height: 100px/);
-  assert.doesNotMatch(app, /pagead2\\.googlesyndication\\.com/);
-  assert.doesNotMatch(app, /data-ad-format="auto"/);
-  assert.doesNotMatch(app, /data-full-width-responsive="true"/);
+  assert.ok(home.includes('data-schulferienklar-adsense="true"'));
+  assert.equal(app.split("<SchulferienklarInContentAd />").length - 1, 1);
+  assert.ok(app.includes("data-ad-slot={IN_CONTENT_AD_SLOT}"));
+  assert.ok(app.includes('IN_CONTENT_AD_SLOT = "9291651091"'));
+  assert.ok(app.includes("@media (min-width: 800px)"));
+  assert.ok(app.includes("width: 728px; height: 90px"));
+  assert.ok(app.includes("width: 320px;"));
+  assert.ok(app.includes("height: 100px;"));
+  assert.ok(!app.includes("pagead2.googlesyndication.com"));
+  assert.ok(!app.includes('data-ad-format="auto"'));
+  assert.ok(!app.includes('data-full-width-responsive="true"'));
   assert.ok(
     app.indexOf("<SchulferienklarInContentAd />") > app.indexOf('id="reisezeit"') &&
     app.indexOf("<SchulferienklarInContentAd />") < app.indexOf('id="brueckentage"'),
