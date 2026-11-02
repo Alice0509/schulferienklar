@@ -2816,13 +2816,16 @@ function indentGoldText(
 }
 
 
-function stateYearVisualCalendarHtml({ events, name, year }) {
+function stateYearVisualCalendarHtml({ events, name, year, locale = "de" }) {
   // Only use published dataset events; do not fabricate missing dates.
-  const months = [
-    "Januar", "Februar", "März", "April", "Mai", "Juni",
-    "Juli", "August", "September", "Oktober", "November", "Dezember",
-  ];
-  const weekDays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+  const en = locale === "en";
+  const months = en
+    ? ["January", "February", "March", "April", "May", "June",
+       "July", "August", "September", "October", "November", "December"]
+    : ["Januar", "Februar", "März", "April", "Mai", "Juni",
+       "Juli", "August", "September", "Oktober", "November", "Dezember"];
+  const weekDays = en ? ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
+    : ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
   const relevantEvents = events.filter((event) =>
     event.startDate <= year + "-12-31" && event.endDate >= year + "-01-01"
   );
@@ -2845,12 +2848,13 @@ function stateYearVisualCalendarHtml({ events, name, year }) {
       const weekday = new Date(Date.UTC(year, index, day)).getUTCDay();
       if (event) {
         marked++;
+        const holidayLabel = en ? (event.name?.en || getHolidayName(event)) : getHolidayName(event);
         const target = "termin-" + String(event.id || event.type)
           .toLowerCase().replace(/[^a-z0-9-]+/g, "-");
         return '<a class="sf-day sf-day-holiday" href="#' + target +
-          '" title="' + escapeHtml(getHolidayName(event)) +
+          '" title="' + escapeHtml(holidayLabel) +
           '" aria-label="' + day + '. ' + label + ' ' + year +
-          ': ' + escapeHtml(getHolidayName(event)) + '">' + day + '</a>';
+          ': ' + escapeHtml(holidayLabel) + '">' + day + '</a>';
       }
       return '<span class="sf-day' +
         (weekday === 0 || weekday === 6 ? ' sf-day-weekend' : '') +
@@ -2861,7 +2865,7 @@ function stateYearVisualCalendarHtml({ events, name, year }) {
     return '<article class="sf-month" id="sf-month-' + year + '-' +
       month + '" aria-label="' + label + ' ' + year + '">' +
       '<header><strong>' + label + '</strong><small>' +
-      (marked ? marked + ' markierte Tage' : 'Keine erfassten Ferien') +
+      (marked ? marked + (en ? ' marked dates' : ' markierte Tage') : (en ? 'No recorded holidays' : 'Keine erfassten Ferien')) +
       '</small></header>' +
       '<div class="sf-month-grid" aria-hidden="true">' +
       weekDays.map((day) => '<span class="sf-weekday">' + day + '</span>').join("") +
@@ -2870,21 +2874,20 @@ function stateYearVisualCalendarHtml({ events, name, year }) {
   }).join("\n");
 
   const partialWarning = year === 2030
-    ? '<p class="sf-year-incomplete">2030: Nur bisher veröffentlichte und geprüfte Termine sind markiert. Nicht markierte Tage sind nicht automatisch Unterrichtstage.</p>'
+    ? (en ? '<p class="sf-year-incomplete">2030: Only currently published and checked dates are highlighted. Unmarked days do not automatically mean school is open.</p>' : '<p class="sf-year-incomplete">2030: Nur bisher veröffentlichte und geprüfte Termine sind markiert. Nicht markierte Tage sind nicht automatisch Unterrichtstage.</p>')
     : "";
 
-  return '<section class="sf-year-visual" aria-label="Jahreskalender ' +
+  return '<section class="sf-year-visual" aria-label="Calendar for ' +
     escapeHtml(name) + ' ' + year + '">' +
     '<div class="sf-year-visual-heading"><div>' +
-    '<p class="eyebrow">Dein Jahr im Blick</p>' +
-    '<h2>Wo liegen die Ferien ' + year + '?</h2></div>' +
-    '<a href="#termine">Alle Ferientermine ansehen</a></div>' +
-    '<div class="sf-year-key"><span class="sf-key-ferie"></span> Schulfreie Zeit ' +
-    '<span class="sf-key-weekend"></span> Wochenende</div>' +
-    '<p class="sf-year-hint">Monate seitlich durchblättern. ' +
-    'Markierte Tage führen direkt zu den Terminen.</p>' +
+    '<p class="eyebrow">' + (en ? 'Your year at a glance' : 'Dein Jahr im Blick') + '</p>' +
+    '<h2>' + (en ? 'When are the school holidays in ' : 'Wo liegen die Ferien ') + year + '?</h2></div>' +
+    '<a href="#termine">' + (en ? 'See all dates' : 'Alle Ferientermine ansehen') + '</a></div>' +
+    '<div class="sf-year-key"><span class="sf-key-ferie"></span> ' + (en ? 'School holidays' : 'Schulfreie Zeit') + ' ' +
+    '<span class="sf-key-weekend"></span> ' + (en ? 'Weekend' : 'Wochenende') + '</div>' +
+    '<p class="sf-year-hint">' + (en ? 'Swipe through months. Tap highlighted dates for details.' : 'Monate seitlich durchblättern. Markierte Tage führen direkt zu den Terminen.') + '</p>' +
     '<div class="sf-year-rail" tabindex="0" role="region" ' +
-    'aria-label="Zwölf Monate horizontal durchblättern">' +
+    '' + (en ? 'aria-label="Swipe through 12 months"' : 'aria-label="Zwölf Monate horizontal durchblättern"') + '>' +
     monthHtml + '</div>' + partialWarning + '</section>';
 }
 
