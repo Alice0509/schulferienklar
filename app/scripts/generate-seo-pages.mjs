@@ -2610,6 +2610,8 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
         <p class="eyebrow">Bayern · Kalenderjahr 2027</p>
         <h1>Schulferien Bayern 2027</h1>
 
+${stateYearVisualCalendarHtml({ events, name, year })}
+
         <p class="gold-page-intro">
           Hier stehen zuerst die offiziellen Ferientermine. Zusätzlich zeigt
           Schulferienklar, wie lange die freie Zeit direkt am Stück dauert,
@@ -2814,6 +2816,87 @@ function indentGoldText(
     .join("\n");
 }
 
+
+function stateYearVisualCalendarHtml({ events, name, year, locale = "de" }) {
+  // Only use published dataset events; do not fabricate missing dates.
+  const en = locale === "en";
+  const months = en
+    ? ["January", "February", "March", "April", "May", "June",
+       "July", "August", "September", "October", "November", "December"]
+    : ["Januar", "Februar", "März", "April", "Mai", "Juni",
+       "Juli", "August", "September", "Oktober", "November", "Dezember"];
+  const weekDays = en ? ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"]
+    : ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+  const relevantEvents = events.filter((event) =>
+    event.startDate <= year + "-12-31" && event.endDate >= year + "-01-01"
+  );
+
+  const monthHtml = months.map((label, index) => {
+    const month = index + 1;
+    const daysInMonth = new Date(Date.UTC(year, month, 0)).getUTCDate();
+    const offset = (new Date(Date.UTC(year, index, 1)).getUTCDay() + 6) % 7;
+    let marked = 0;
+    const padding = Array.from({ length: offset }, () =>
+      '<span class="sf-day sf-day-empty" aria-hidden="true"></span>'
+    ).join("");
+    const days = Array.from({ length: daysInMonth }, (_, dayIndex) => {
+      const day = dayIndex + 1;
+      const key = year + "-" + String(month).padStart(2, "0") +
+        "-" + String(day).padStart(2, "0");
+      const event = relevantEvents.find((entry) =>
+        entry.startDate <= key && entry.endDate >= key
+      );
+      const weekday = new Date(Date.UTC(year, index, day)).getUTCDay();
+      if (event) {
+        marked++;
+        const holidayLabel = en ? (event.name?.en || getHolidayName(event)) : getHolidayName(event);
+        const target = "termin-" + String(event.id || event.type)
+          .toLowerCase().replace(/[^a-z0-9-]+/g, "-");
+        return '<a class="sf-day sf-day-holiday" href="#' + target +
+          '" title="' + escapeHtml(holidayLabel) +
+          '" aria-label="' + day + '. ' + label + ' ' + year +
+          ': ' + escapeHtml(holidayLabel) + '">' + day + '</a>';
+      }
+      return '<span class="sf-day' +
+        (weekday === 0 || weekday === 6 ? ' sf-day-weekend' : '') +
+        '" aria-label="' + day + '. ' + label + ' ' + year +
+        '">' + day + '</span>';
+    }).join("");
+
+    return '<article class="sf-month" id="sf-month-' + year + '-' +
+      month + '" aria-label="' + label + ' ' + year + '">' +
+      '<header><strong>' + label + '</strong><small>' +
+      (marked ? marked + (en ? ' marked dates' : ' markierte Tage') : (en ? 'No recorded holidays' : 'Keine erfassten Ferien')) +
+      '</small></header>' +
+      '<div class="sf-month-grid" aria-hidden="true">' +
+      weekDays.map((day) => '<span class="sf-weekday">' + day + '</span>').join("") +
+      '</div><div class="sf-month-grid">' + padding + days +
+      '</div></article>';
+  }).join("\n");
+
+  const partialWarning = year === 2030
+    ? (en ? '<p class="sf-year-incomplete">2030: Only currently published and checked dates are highlighted. Unmarked days do not automatically mean school is open.</p>' : '<p class="sf-year-incomplete">2030: Nur bisher veröffentlichte und geprüfte Termine sind markiert. Nicht markierte Tage sind nicht automatisch Unterrichtstage.</p>')
+    : "";
+
+  return '<section class="sf-year-visual" aria-label="' +
+    (en ? "Calendar for " : "Jahreskalender ") + escapeHtml(name) + ' ' + year + '">' +
+    '<div class="sf-year-visual-heading"><div>' +
+    '<p class="eyebrow">' + (en ? 'Your year at a glance' : 'Dein Jahr im Blick') + '</p>' +
+    '<h2>' + (en ? 'When are the school holidays in ' : 'Wo liegen die Ferien ') + year + '?</h2></div>' +
+    '<a href="#termine">' + (en ? 'See all dates' : 'Alle Ferientermine ansehen') + '</a></div>' +
+    '<div class="sf-year-key"><span class="sf-key-ferie"></span> ' + (en ? 'School holidays' : 'Schulfreie Zeit') + ' ' +
+    '<span class="sf-key-weekend"></span> ' + (en ? 'Weekend' : 'Wochenende') + '</div>' +
+    '<p class="sf-year-hint">' + (en ? 'Swipe through months. Tap highlighted dates for details.' : 'Monate seitlich durchblättern. Markierte Tage führen direkt zu den Terminen.') + '</p>' +
+    '<nav class="sf-month-jump" aria-label="' +
+      (en ? 'Jump to a month' : 'Monat auswählen') + '">' +
+      months.map((label, index) => '<a href="#sf-month-' + year + '-' +
+        (index + 1) + '" aria-label="' + label + ' ' + year + '">' +
+        label.slice(0, 3) + '</a>').join("") + '</nav>' +
+    '<div class="sf-year-rail" tabindex="0" role="region" ' +
+    '' + (en ? 'aria-label="Swipe through 12 months"' : 'aria-label="Zwölf Monate horizontal durchblättern"') + '>' +
+    monthHtml + '</div>' + partialWarning + '</section>';
+}
+
 function stateYearSearchHighlightsHtml({ events, name, year }) {
   // Every Bundesland and every published year gets the same planning aid.
   // Display only official-data-backed events that actually exist for this
@@ -2934,6 +3017,8 @@ ${seoTopNavHtml({
           ${eyebrow}
         </p>
         <h1>${h1}</h1>
+
+${stateYearVisualCalendarHtml({ events, name, year })}
 
         <p class="gold-page-intro">
 ${indentGoldText(
@@ -5146,6 +5231,8 @@ ${seoTopNavHtml({
         <h1>
           Schulferien Baden-Württemberg 2027
         </h1>
+
+${stateYearVisualCalendarHtml({ events, name, year })}
 
         <p class="gold-page-intro">
           Hier stehen zuerst die landesweit
@@ -7722,6 +7809,8 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
         <p class="eyebrow">Schulferien ${year}</p>
         <h1>Schulferien ${name} ${year}</h1>
 
+${stateYearVisualCalendarHtml({ events, name, year })}
+
         <p>
           Vergleiche die erfassten Ferientermine für ${name} ${year}
           mit der direkt anschließenden freien Zeit. Der Datenstand unten
@@ -7957,6 +8046,186 @@ ${seoFooterHtml()}    </main>
 }
 
 
+
+function englishHolidaySlug(englishName) {
+  return englishName.toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+}
+
+function englishStateYearUrl(englishName, year) {
+  return "/en/school-holidays-" + englishHolidaySlug(englishName) + "-" + year + ".html";
+}
+
+function englishFormatDate(key) {
+  return new Intl.DateTimeFormat("en-GB", {
+    timeZone: "UTC", day: "numeric", month: "short", year: "numeric",
+  }).format(parseDateKey(key));
+}
+
+function englishStateYearPage({ slug, name, englishName, code, year, events }) {
+  const enUrl = englishStateYearUrl(englishName, year);
+  const deUrl = "/schulferien-" + slug + "-" + year + ".html";
+  const base = "https://www.schulferienklar.de";
+  const source = getSchoolHolidaySourceForState({ holidayIndex, code });
+  const publicHolidays = getPublicHolidaysAroundYear({
+    publicHolidayIndex, code, year,
+  });
+  const coverage = evaluateGoldReadiness(year, {
+    states: states.filter((state) => state[3] === code),
+  });
+  const incomplete = year === 2030 || !coverage.isReady ||
+    events.some((event) => event.status === "partial");
+  const title = "School holidays in " + englishName + " " + year + " | Schulferienklar";
+  const description = "Explore school holiday dates in " + englishName +
+    " for " + year + " on a visual calendar. Official state sources, " +
+    "connected weekends, dates and easy planning for visitors and families.";
+  const rows = events.map((event) => {
+    const label = escapeHtml(event.name?.en || "School-free period");
+    const target = "termin-" + String(event.id || event.type)
+      .toLowerCase().replace(/[^a-z0-9-]+/g, "-");
+    const connected = getConnectedFreePeriod(event, publicHolidays);
+    const dayCount = daysInclusive(event.startDate, event.endDate);
+    return '<li class="gold-period-row" id="' + target + '">' +
+      '<div class="gold-period-name"><strong>' + label + '</strong>' +
+      (event.status === "partial" ? '<small>Partial published data</small>' : '') +
+      '</div><div class="gold-period-value"><span>Official holiday dates</span>' +
+      '<strong>' + englishFormatDate(event.startDate) + ' – ' +
+      englishFormatDate(event.endDate) + '</strong>' +
+      '<small>' + dayCount + ' calendar days</small></div>' +
+      '<div class="gold-period-value gold-period-connected">' +
+      '<span>With adjacent days off</span><strong>' +
+      englishFormatDate(connected.startDate) + ' – ' +
+      englishFormatDate(connected.endDate) + '</strong>' +
+      '<small>' + connected.dayCount + ' calendar days</small></div></li>';
+  }).join("\n");
+  const otherStates = states.map(([otherSlug, otherName, otherEnglishName]) => {
+    const href = englishStateYearUrl(otherEnglishName, year);
+    return '<a href="' + href + '">' + escapeHtml(otherEnglishName) + '</a>';
+  }).join(" ");
+  const sourceLink = source?.sourceUrl
+    ? '<a href="' + escapeHtml(source.sourceUrl) +
+      '" rel="noopener noreferrer" target="_blank">Official state source</a>'
+    : '<a href="/datenquellen.html">Data sources (German)</a>';
+  const coverageMessage = incomplete
+    ? '<p class="sf-year-incomplete"><strong>Partial coverage:</strong> ' +
+      'Not all holiday dates for this calendar year may have been published or ' +
+      'verified. An unmarked date does not automatically mean school is open.</p>'
+    : '<p class="sf-year-coverage">Dates currently included in the official state dataset ' +
+      'for the relevant school years are listed below.</p>';
+
+  return '<!doctype html><html lang="en"><head>' +
+    '<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +
+    '<title>' + escapeHtml(title) + '</title>' +
+    '<meta name="description" content="' + escapeHtml(description) + '">' +
+    '<link rel="canonical" href="' + base + enUrl + '">' +
+    '<link rel="alternate" hreflang="en" href="' + base + enUrl + '">' +
+    '<link rel="alternate" hreflang="de" href="' + base + deUrl + '">' +
+    '<meta property="og:title" content="' + escapeHtml(title) + '">' +
+    '<meta property="og:description" content="' + escapeHtml(description) + '">' +
+    '<meta property="og:url" content="' + base + enUrl + '">' +
+    '<link rel="icon" href="/favicon.svg" type="image/svg+xml">' +
+    '<link rel="stylesheet" href="/seo-pages.css">' +
+    '<script defer src="/privacy-analytics.js"></script>' +
+    '</head><body class="seo-page sf-english-page"><main>' +
+    '<nav class="seo-top-nav" aria-label="Main navigation">' +
+    '<a class="seo-brand" href="/en/">Schulferienklar</a>' +
+    '<div class="seo-top-links"><a href="/en/">All states</a><a href="' + deUrl +
+    '" lang="de" hreflang="de">Deutsch</a>' +
+    '<a href="https://germanytravelchecker.com/" rel="noopener noreferrer">' +
+    'Germany Travel Checker</a></div></nav>' +
+    '<section class="card gold-page" data-english-state-year="' + code + '-' + year + '">' +
+    '<p class="eyebrow">Germany · ' + escapeHtml(englishName) + ' · ' + year + '</p>' +
+    '<h1>School holidays in ' + escapeHtml(englishName) + ' ' + year + '</h1>' +
+    stateYearVisualCalendarHtml({ events, name: englishName, year, locale: "en" }) +
+    '<p class="gold-page-intro">See when children are off school in ' +
+    escapeHtml(englishName) + ', check dates on a visual month-by-month calendar, ' +
+    'and plan around weekends. The source dates are kept separate from ' +
+    'extended calendar days off.</p>' +
+    '<nav class="gold-page-nav" aria-label="On this page">' +
+    '<a href="#termine">Holiday dates</a><a href="#how-it-works">How it works</a>' +
+    '<a href="#source">Official source</a><a href="#other-states">Other states</a></nav>' +
+    '<section id="termine" class="gold-section gold-answer-section">' +
+    '<p class="eyebrow">Published dates</p><h2>School holiday dates ' + year + '</h2>' +
+    coverageMessage +
+    (events.length ? '<ul class="gold-period-list">' + rows + '</ul>' :
+      '<p>No holiday dates have been recorded in this dataset for this year yet.</p>') +
+    '</section><section id="how-it-works" class="gold-section">' +
+    '<h2>What does “with adjacent days off” mean?</h2>' +
+    '<div class="gold-explanation-grid"><div><strong>Official dates</strong>' +
+    '<p>Start and end dates taken from the state-level school holiday source.</p></div>' +
+    '<div><strong>Connected days off</strong><p>Only directly adjoining Saturdays, ' +
+    'Sundays and public holidays valid statewide are added. These are calendar days, ' +
+    'not extra official school holiday dates.</p></div></div>' +
+    '<p>Individual school exceptions, locally observed public holidays and ' +
+    'movable school days are not included automatically. Confirm before booking.</p>' +
+    '<p><a class="button" href="/?state=' + code + '&amp;year=' + year +
+    '">Open the interactive calendar (German)</a></p></section>' +
+    '<section id="source" class="gold-section"><h2>Official source and data status</h2>' +
+    '<p>' + escapeHtml(source?.sourceName || 'Official regional school holiday calendar') +
+    '</p><p>' + sourceLink + '</p>' +
+    (source?.lastCheckedAt ? '<p>Source last checked: ' +
+      escapeHtml(source.lastCheckedAt) + '</p>' : '') +
+    '</section>' +
+    '<section class="gold-section"><h2>Planning a trip to Germany?</h2>' +
+    '<p>School holiday dates are one part of travel planning. ' +
+    'For Sunday closures, public holidays, railway disruptions and practical ' +
+    'travel checks, visit Germany Travel Checker.</p>' +
+    '<p><a class="button" href="https://germanytravelchecker.com/" ' +
+    'rel="noopener noreferrer">Open Germany Travel Checker</a></p></section>' +
+    '<section id="other-states" class="gold-section"><h2>All 16 German states in ' +
+    year + '</h2><div class="sf-english-state-links">' + otherStates +
+    '</div></section></section>' +
+    '<footer class="seo-footer"><a href="' + deUrl + '" lang="de">' +
+    'Deutsche Fassung</a><a href="/datenschutz.html">Privacy (German)</a>' +
+    '<a href="/impressum.html">Legal notice (German)</a>' +
+    '<a href="https://germanytravelchecker.com/">Germany Travel Checker</a>' +
+    '</footer></main></body></html>';
+}
+
+
+function englishIndexPage() {
+  const base = "https://www.schulferienklar.de";
+  const cards = states.map(([, , englishName]) => {
+    const links = years.map((year) =>
+      '<a href="' + englishStateYearUrl(englishName, year) + '">' +
+      year + '</a>'
+    ).join("");
+    return '<article class="sf-english-hub-card"><h2>' +
+      escapeHtml(englishName) + '</h2><div>' + links + '</div></article>';
+  }).join("\n");
+
+  return '<!doctype html><html lang="en"><head>' +
+    '<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +
+    '<title>Germany School Holidays 2026–2030 by State | Schulferienklar</title>' +
+    '<meta name="description" content="Browse school holidays in all 16 German states from 2026 to 2030. Official dates, visual monthly calendars and clear notes on data coverage.">' +
+    '<link rel="canonical" href="' + base + '/en/">' +
+    '<link rel="icon" href="/favicon.svg" type="image/svg+xml">' +
+    '<link rel="stylesheet" href="/seo-pages.css">' +
+    '</head><body class="seo-page sf-english-page"><main>' +
+    '<nav class="seo-top-nav" aria-label="Main navigation">' +
+    '<a class="seo-brand" href="/en/">Schulferienklar</a>' +
+    '<div class="seo-top-links"><a href="/" lang="de">Deutsch</a>' +
+    '<a href="https://germanytravelchecker.com/">Germany Travel Checker</a></div></nav>' +
+    '<section class="card gold-page"><p class="eyebrow">Germany · 16 federal states</p>' +
+    '<h1>School holidays in Germany</h1>' +
+    '<p class="gold-page-intro">Choose a German federal state and a year to see ' +
+    'the official school holiday periods on a visual calendar. Dates, weekends ' +
+    'and planned time off are clearly distinguished. Some 2030 calendars are ' +
+    'still incomplete, so always check the data coverage note.</p>' +
+    '<div class="sf-english-hub-grid">' + cards + '</div>' +
+    '<section class="gold-section"><h2>Holiday dates and travel planning</h2>' +
+    '<p>School holiday dates vary by federal state. For train disruptions, ' +
+    'Sunday closures, public holidays and day-to-day travel questions, use ' +
+    '<a href="https://germanytravelchecker.com/">Germany Travel Checker</a>. ' +
+    'For official school decisions and local exceptions, check the linked state source.</p>' +
+    '</section></section><footer class="seo-footer"><a href="/" lang="de">' +
+    'Deutsch</a><a href="/datenschutz.html">Privacy (German)</a>' +
+    '<a href="/impressum.html">Legal notice (German)</a></footer>' +
+    '</main></body></html>';
+}
+
 function sitemapEntry(url, { changefreq = "monthly", priority = "0.7" } = {}) {
   return `  <url>
     <loc>https://www.schulferienklar.de${url}</loc>
@@ -7970,6 +8239,7 @@ function writeSitemap() {
   // Add per-URL lastmod values only when they reflect significant changes.
   const staticPages = [
     ["/", "weekly", "1.0"],
+    ["/en/", "monthly", "0.8"],
     ["/widget.html", "monthly", "0.7"],
     ...years.map((year) => [
       `/urlaubsplaner-${year}.html`,
@@ -7994,6 +8264,12 @@ function writeSitemap() {
     return [`/schulferien-${year}.html`, "monthly", "0.75"];
   });
 
+  const englishStateYearPages = years.flatMap((year) =>
+    states.map(([, , englishName]) => [
+      englishStateYearUrl(englishName, year), "monthly", "0.75",
+    ])
+  );
+
   const stateYearPages = years.flatMap((year) => {
     return states.map(([slug]) => {
       return [`/schulferien-${slug}-${year}.html`, "monthly", "0.8"];
@@ -8005,6 +8281,7 @@ function writeSitemap() {
     ...stateHubPages,
     ...yearHubPages,
     ...stateYearPages,
+    ...englishStateYearPages,
   ]
     .map(([url, changefreq, priority]) => {
       return sitemapEntry(url, { changefreq, priority });
@@ -8033,13 +8310,38 @@ for (const year of years) {
     const fileName = `schulferien-${slug}-${year}.html`;
     const events = getEventsForStateAndYear({ holidayIndex, code, year });
 
-    fs.writeFileSync(
-      path.join(outputDir, fileName),
-      cleanGeneratedHtml(
-        pageTemplate({ slug, name, englishName, code, year, events })
-      ),
-      "utf8"
+    const germanUrl = "https://www.schulferienklar.de/schulferien-" +
+      slug + "-" + year + ".html";
+    const englishUrl = "https://www.schulferienklar.de" +
+      englishStateYearUrl(englishName, year);
+    const germanPage = pageTemplate({ slug, name, englishName, code, year, events });
+    // Some state-specific pages intentionally format the canonical tag
+    // over multiple lines. Match the HTML tag instead of one string layout.
+    const canonical = germanPage.match(
+      /<link\b(?=[^>]*\brel="canonical")[^>]*>/,
+    )?.[0];
+    if (!canonical || !canonical.includes('href="' + germanUrl + '"')) {
+      throw new Error("Missing German canonical for " + fileName);
+    }
+    const bilingualGermanPage = germanPage.replace(canonical,
+      canonical + '\n    <link rel="alternate" hreflang="de" href="' +
+      germanUrl + '" />\n    <link rel="alternate" hreflang="en" href="' +
+      englishUrl + '" />').replace(
+      '        </div>\n      </nav>',
+      '          <a class="sf-lang-switch" href="' + englishUrl +
+      '" lang="en" hreflang="en">English</a>\n        </div>\n      </nav>'
     );
+
+    fs.writeFileSync(path.join(outputDir, fileName),
+      cleanGeneratedHtml(bilingualGermanPage), "utf8");
+    const englishFileName = englishStateYearUrl(englishName, year).slice(4);
+    const englishDir = path.join(outputDir, "en");
+    fs.mkdirSync(englishDir, { recursive: true });
+    fs.writeFileSync(path.join(englishDir, englishFileName),
+      cleanGeneratedHtml(englishStateYearPage({
+        slug, name, englishName, code, year, events,
+      })), "utf8");
+    console.log("created en/" + englishFileName);
 
     console.log(`created ${fileName} (${events.length} entries)`);
   }
@@ -8070,5 +8372,8 @@ for (const year of years) {
 
   console.log(`created ${fileName}`);
 }
+
+fs.writeFileSync(path.join(outputDir, "en", "index.html"),
+  cleanGeneratedHtml(englishIndexPage()), "utf8");
 
 writeSitemap();
