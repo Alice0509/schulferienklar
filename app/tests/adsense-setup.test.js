@@ -48,7 +48,7 @@ test("ads.txt uses the same account, while embedded widgets and legal pages stay
 test("Clarity retains separate consent and defers its banner until the Google CMP is ready", async () => {
   const consentScript = await read("../public/privacy-analytics.js");
   assert.match(consentScript, /CONSENT_DATA_READY/);
-  assert.match(consentScript, /CONSENT_MODE_DATA_READY/);
+  assert.doesNotMatch(consentScript, /CONSENT_MODE_DATA_READY: showClarityAfterGoogle/);
   assert.match(consentScript, /CONSENT_API_READY/);
   assert.match(consentScript, /showRevocationMessage/);
   assert.match(consentScript, /!googleConsentActive/);
