@@ -275,26 +275,31 @@ test("additional mobile ads mount lazily after finished tools without affecting 
 
 
 test("editorial guides get exactly one nonintrusive ad, while legal, widget and print pages remain clear", async () => {
-  const [guide, travel, checker, privacy, impressum, widget, printCalendar, adCode, styles] =
+  const [guide, travel, checker, sources, privacy, impressum, support, about, widget, embeddedWidget, printCalendar, adCode, styles] =
     await Promise.all([
       read("../public/ferienplanung.html"),
       read("../public/travel-germany-school-holidays.html"),
       read("../public/germany-travel-checker.html"),
+      read("../public/datenquellen.html"),
       read("../public/datenschutz.html"),
       read("../public/impressum.html"),
+      read("../public/support.html"),
+      read("../public/ueber-uns.html"),
       read("../public/widget.html"),
+      read("../public/widgets/naechste-schulferien.html"),
       read("../public/downloads/jahreskalender-bayern-2027.html"),
       read("../public/adsense-content.js"),
       read("../public/static-pages.css"),
     ]);
 
-  for (const page of [guide, travel, checker]) {
+  for (const page of [guide, travel, checker, sources]) {
     assert.equal(page.split('data-sf-ad-before').length - 1, 1);
     assert.equal(page.split('src="/adsense-content.js?v=20261102-guide-1"').length - 1, 1);
     assert.equal(page.split('data-schulferienklar-adsense="true"').length - 1, 1);
     assert.match(page, /src="\/privacy-analytics\.js"/);
   }
-  for (const page of [privacy, impressum, widget, printCalendar]) {
+  assert.match(sources, /<h2 id="feiertage" data-sf-ad-before>/);
+  for (const page of [privacy, impressum, support, about, widget, embeddedWidget, printCalendar]) {
     assert.doesNotMatch(page, /src="\/adsense-content\.js"/);
     assert.doesNotMatch(page, /pagead2\.googlesyndication\.com/);
   }
