@@ -2852,7 +2852,9 @@ function stateYearVisualCalendarHtml({ events, name, year, locale = "de" }) {
         const holidayLabel = en ? (event.name?.en || getHolidayName(event)) : getHolidayName(event);
         const target = "termin-" + String(event.id || event.type)
           .toLowerCase().replace(/[^a-z0-9-]+/g, "-");
-        return '<a class="sf-day sf-day-holiday" href="#' + target +
+        return '<a class="sf-day sf-day-holiday' +
+          (weekday === 0 || weekday === 6 ? ' sf-day-weekend' : '') +
+          '" href="#' + target +
           '" title="' + escapeHtml(holidayLabel) +
           '" aria-label="' + day + '. ' + label + ' ' + year +
           ': ' + escapeHtml(holidayLabel) + '">' + day + '</a>';
