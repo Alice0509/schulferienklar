@@ -290,7 +290,7 @@ test("editorial guides get exactly one nonintrusive ad, while legal, widget and 
 
   for (const page of [guide, travel, checker]) {
     assert.equal(page.split('data-sf-ad-before').length - 1, 1);
-    assert.equal(page.split('src="/adsense-content.js"').length - 1, 1);
+    assert.equal(page.split('src="/adsense-content.js?v=20261102-guide-1"').length - 1, 1);
     assert.equal(page.split('data-schulferienklar-adsense="true"').length - 1, 1);
     assert.match(page, /src="\/privacy-analytics\.js"/);
   }
@@ -326,4 +326,25 @@ test("second ad on longer holiday pages waits for both scroll proximity and firs
   assert.match(script, /window\.requestAnimationFrame/);
   assert.match(script, /sentinel\.replaceWith\(wrapper\)/);
   assert.match(css, /data-ad-status="unfill-optimized"/);
+});
+
+
+test("editorial ad requests are laid out before submit and reveal opt-in status", async () => {
+  const [source, staticCss, seoCss] = await Promise.all([
+    read("../public/adsense-content.js"),
+    read("../public/static-pages.css"),
+    read("../public/seo-pages.css"),
+  ]);
+  assert.match(source, /new URLSearchParams\(window\.location\.search\)/);
+  assert.match(source, /get\("ads_debug"\) === "1"/);
+  assert.match(source, /wrapper\.classList\.add\("sf-content-ad-debug"\)/);
+  assert.match(source, /data-adsbygoogle-status/);
+  assert.match(source, /data-ad-status/);
+  assert.match(source, /Loader: /);
+  assert.match(source, /Request: /);
+  assert.match(source, /window\.requestAnimationFrame\(request\)/);
+  assert.match(source, /document\.body\.classList\.contains\("static-page"\)/);
+  assert.match(staticCss, /\.sf-ad-diagnostic/);
+  assert.match(staticCss, /:not\(\.sf-content-ad-debug\)/);
+  assert.match(seoCss, /:not\(\.sf-content-ad-debug\)/);
 });
