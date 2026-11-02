@@ -420,3 +420,27 @@ code {
   }
 }
 
+
+
+/* Information-page ads remain separate from headings, dates and controls. */
+.sf-content-ad {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+  margin: 28px auto;
+}
+.sf-content-ad-label {
+  color: #697581;
+  font-size: 0.75rem;
+  line-height: 1.25;
+}
+.sf-content-ad-unit {
+  display: block;
+  max-width: 100%;
+}
+.sf-content-ad:has(.sf-content-ad-unit[data-ad-status="unfilled"]),
+.sf-content-ad:has(.sf-content-ad-unit[data-ad-status="unfill-optimized"]) {
+  display: none;
+}
