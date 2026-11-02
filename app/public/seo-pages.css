@@ -1356,3 +1356,10 @@ p {
   .sf-year-key { margin-top: 9px; }
   .sf-year-hint { margin-bottom: 7px; }
 }
+
+/* Show the appropriate calendar navigation hint for the viewport. */
+.sf-hint-mobile { display: none; }
+@media (max-width: 740px) {
+  .sf-hint-desktop { display: none; }
+  .sf-hint-mobile { display: block; }
+}
