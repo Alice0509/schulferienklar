@@ -340,35 +340,51 @@
       return false;
     }
 
+    // Ad consent belongs to Google's certified CMP. Clarity remains strictly
+    // opt-in and its independent dialog must not appear while that CMP is open.
     window.googlefc = window.googlefc || {};
     window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
-    window.googlefc.callbackQueue.push({
-      CONSENT_API_READY: () => {
-        googlePrivacySettingsReady = true;
-        addGoogleSettingsButton();
-      },
-    });
 
-    // Google may return consent data from a previous visit immediately.
-    // A blocked CMP results in no automatic Clarity prompt, never in tracking.
     let clarityPromptQueued = false;
     const showClarityAfterGoogle = () => {
       if (clarityPromptQueued || getConsent() !== null) {
         return;
       }
       clarityPromptQueued = true;
-      window.requestAnimationFrame(() => {
-        window.requestAnimationFrame(() => {
-          if (getConsent() === null) {
-            openBanner();
+      // Let the Google dialog complete its close transition before prompting
+      // for separate Microsoft Clarity analytics consent.
+      window.setTimeout(() => {
+        if (getConsent() === null) {
+          openBanner();
+        }
+      }, 700);
+    };
+
+    window.googlefc.callbackQueue.push({
+      CONSENT_API_READY: () => {
+        googlePrivacySettingsReady = true;
+        addGoogleSettingsButton();
+
+        // CONSENT_DATA_READY can fire while a CMP dialog remains on screen.
+        // TCF distinguishes an open dialog ("cmpuishown") from the completed
+        // decision ("useractioncomplete"), or a previously saved choice
+        // ("tcloaded"). Never show Clarity on "cmpuishown".
+        if (typeof window.__tcfapi !== "function") {
+          // A missing/blocked CMP never starts analytics automatically.
+          // The independent footer privacy button remains available.
+          return;
+        }
+        window.__tcfapi("addEventListener", 2, (tcData, success) => {
+          if (
+            success &&
+            tcData &&
+            (tcData.eventStatus === "tcloaded" ||
+              tcData.eventStatus === "useractioncomplete")
+          ) {
+            showClarityAfterGoogle();
           }
         });
-      });
-    };
-    // Wait for the actual consent decision. CONSENT_MODE_DATA_READY can fire
-    // earlier, before the user dismisses Google's EU consent message.
-    window.googlefc.callbackQueue.push({
-      CONSENT_DATA_READY: showClarityAfterGoogle,
+      },
     });
     return true;
   }
