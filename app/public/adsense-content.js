@@ -36,9 +36,13 @@
       (parseFloat(style.paddingLeft) || 0) -
       (parseFloat(style.paddingRight) || 0);
 
-    // If a mobile card is too narrow, place a small banner after the card
-    // rather than overflowing the official holiday dates or controls.
-    if (availableWidth < 300) {
+    // A narrow editorial card must retain the intended placement between
+    // sections. Never hoist its ad above the whole article.
+    const isEditorial = document.body.classList.contains("static-page");
+    if (availableWidth < 250 && isEditorial) return;
+
+    // Generated date pages can still fall back outside a too-small card.
+    if (availableWidth < 300 && !isEditorial) {
       const card = anchor.closest("main > .card");
       if (!card || !card.parentElement) return;
       placementAnchor = card;
@@ -48,14 +52,16 @@
         (parseFloat(style.paddingLeft) || 0) -
         (parseFloat(style.paddingRight) || 0);
     }
-    if (availableWidth < 300) return;
+    if (availableWidth < 250) return;
     const size = availableWidth >= 728
       ? { width: 728, height: 90 }
       : availableWidth >= 468
         ? { width: 468, height: 60 }
         : availableWidth >= 320
           ? { width: 320, height: 100 }
-          : { width: 300, height: 50 };
+          : availableWidth >= 300
+            ? { width: 300, height: 50 }
+            : { width: 250, height: 250 };
 
     const wrapper = document.createElement("aside");
     wrapper.className = "sf-content-ad";
