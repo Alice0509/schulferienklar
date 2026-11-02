@@ -26,19 +26,33 @@
     const anchor = selectAnchor();
     if (!anchor || !anchor.parentElement) return;
 
-    const parent = anchor.parentElement;
-    const style = window.getComputedStyle(parent);
-    const availableWidth = parent.clientWidth -
+    let placementAnchor = anchor;
+    let parent = anchor.parentElement;
+    let style = window.getComputedStyle(parent);
+    let availableWidth = parent.clientWidth -
       (parseFloat(style.paddingLeft) || 0) -
       (parseFloat(style.paddingRight) || 0);
 
-    // Keep narrow screens and tightly constrained cards completely ad-free.
-    if (availableWidth < 320) return;
+    // If a mobile card is too narrow, place a small banner after the card
+    // rather than overflowing the official holiday dates or controls.
+    if (availableWidth < 300) {
+      const card = anchor.closest("main > .card");
+      if (!card || !card.parentElement) return;
+      placementAnchor = card;
+      parent = card.parentElement;
+      style = window.getComputedStyle(parent);
+      availableWidth = parent.clientWidth -
+        (parseFloat(style.paddingLeft) || 0) -
+        (parseFloat(style.paddingRight) || 0);
+    }
+    if (availableWidth < 300) return;
     const size = availableWidth >= 728
       ? { width: 728, height: 90 }
       : availableWidth >= 468
         ? { width: 468, height: 60 }
-        : { width: 320, height: 100 };
+        : availableWidth >= 320
+          ? { width: 320, height: 100 }
+          : { width: 300, height: 50 };
 
     const wrapper = document.createElement("aside");
     wrapper.className = "sf-content-ad";
@@ -57,7 +71,7 @@
     unit.setAttribute("data-ad-slot", SLOT);
 
     wrapper.append(label, unit);
-    anchor.insertAdjacentElement("afterend", wrapper);
+    placementAnchor.insertAdjacentElement("afterend", wrapper);
 
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
