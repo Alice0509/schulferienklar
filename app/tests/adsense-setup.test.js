@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { runInNewContext } from "node:vm";
 import test from "node:test";
 
 const read = (relativePath) =>
@@ -47,10 +48,74 @@ test("ads.txt uses the same account, while embedded widgets and legal pages stay
 
 test("Clarity retains separate consent and defers its banner until the Google CMP is ready", async () => {
   const consentScript = await read("../public/privacy-analytics.js");
-  assert.match(consentScript, /CONSENT_DATA_READY/);
+  assert.match(consentScript, /window\.__tcfapi\("addEventListener", 2/);
+  assert.match(consentScript, /tcData\.eventStatus === "useractioncomplete"/);
+  assert.match(consentScript, /tcData\.eventStatus === "tcloaded"/);
+  assert.doesNotMatch(consentScript, /CONSENT_DATA_READY: showClarityAfterGoogle/);
   assert.doesNotMatch(consentScript, /CONSENT_MODE_DATA_READY: showClarityAfterGoogle/);
   assert.match(consentScript, /CONSENT_API_READY/);
   assert.match(consentScript, /showRevocationMessage/);
   assert.match(consentScript, /!googleConsentActive/);
   assert.match(consentScript, /getConsent\(\) === null/);
+});
+
+test("Clarity never opens over Google's consent UI", async () => {
+  const source = await read("../public/privacy-analytics.js");
+  let consentListener;
+  const timers = [];
+  const appended = [];
+  const documentHandlers = new Map();
+
+  const footer = { appendChild() {} };
+  const document = {
+    querySelector(selector) {
+      if (selector === "footer") return footer;
+      if (selector === 'script[data-schulferienklar-adsense="true"]') return {};
+      return null;
+    },
+    getElementById() { return null; },
+    addEventListener(name, callback) { documentHandlers.set(name, callback); },
+    createElement() {
+      return {
+        dataset: {},
+        addEventListener() {},
+        querySelector() { return { addEventListener() {} }; },
+      };
+    },
+    head: { appendChild() {} },
+    body: { appendChild(element) { appended.push(element); } },
+  };
+  const window = {
+    googlefc: { callbackQueue: [] },
+    setTimeout(callback) { timers.push(callback); },
+    __tcfapi(command, version, callback) {
+      assert.equal(command, "addEventListener");
+      assert.equal(version, 2);
+      consentListener = callback;
+    },
+  };
+  const localStorage = { getItem() { return null; } };
+  runInNewContext(source, { document, window, localStorage });
+
+  documentHandlers.get("DOMContentLoaded")();
+  window.googlefc.callbackQueue.find((item) => item.CONSENT_API_READY)
+    .CONSENT_API_READY();
+  assert.equal(typeof consentListener, "function");
+
+  // Google consent UI is visible. We must not open the analytics dialog.
+  consentListener({ eventStatus: "cmpuishown" }, true);
+  assert.equal(timers.length, 0);
+  assert.equal(appended.length, 0);
+
+  // Only after a completed Google choice can Clarity request separate consent.
+  consentListener({ eventStatus: "useractioncomplete" }, true);
+  assert.equal(timers.length, 1);
+  assert.equal(appended.length, 0);
+  timers[0]();
+  assert.equal(appended.length, 1);
+  assert.equal(appended[0].className, "sf-consent-layer");
+
+  // Duplicate CMP events must not create repeated Clarity dialogs.
+  consentListener({ eventStatus: "useractioncomplete" }, true);
+  assert.equal(timers.length, 1);
 });
