@@ -272,3 +272,58 @@ test("additional mobile ads mount lazily after finished tools without affecting 
   assert.doesNotMatch(mobile, /pagead2\.googlesyndication\.com/);
   assert.equal(home.split('data-schulferienklar-adsense="true"').length - 1, 1);
 });
+
+
+test("editorial guides get exactly one nonintrusive ad, while legal, widget and print pages remain clear", async () => {
+  const [guide, travel, checker, privacy, impressum, widget, printCalendar, adCode, styles] =
+    await Promise.all([
+      read("../public/ferienplanung.html"),
+      read("../public/travel-germany-school-holidays.html"),
+      read("../public/germany-travel-checker.html"),
+      read("../public/datenschutz.html"),
+      read("../public/impressum.html"),
+      read("../public/widget.html"),
+      read("../public/downloads/jahreskalender-bayern-2027.html"),
+      read("../public/adsense-content.js"),
+      read("../public/static-pages.css"),
+    ]);
+
+  for (const page of [guide, travel, checker]) {
+    assert.equal(page.split('data-sf-ad-before').length - 1, 1);
+    assert.equal(page.split('src="/adsense-content.js"').length - 1, 1);
+    assert.equal(page.split('data-schulferienklar-adsense="true"').length - 1, 1);
+    assert.match(page, /src="\/privacy-analytics\.js"/);
+  }
+  for (const page of [privacy, impressum, widget, printCalendar]) {
+    assert.doesNotMatch(page, /src="\/adsense-content\.js"/);
+    assert.doesNotMatch(page, /pagead2\.googlesyndication\.com/);
+  }
+  assert.match(adCode, /document\.body\.classList\.contains\("static-page"\)/);
+  assert.match(adCode, /data-sf-ad-before/);
+  assert.match(adCode, /"beforebegin" : "afterend"/);
+  assert.match(styles, /data-ad-status="unfilled"/);
+  assert.match(styles, /data-ad-status="unfill-optimized"/);
+});
+
+test("second ad on longer holiday pages waits for both scroll proximity and first ad completion", async () => {
+  const [script, goldExample, plannerExample, css] = await Promise.all([
+    read("../public/adsense-content.js"),
+    read("../public/schulferien-bayern-2027.html"),
+    read("../public/urlaubsplaner-2027.html"),
+    read("../public/seo-pages.css"),
+  ]);
+
+  assert.match(goldExample, /data-gold-page="bayern-2027"/);
+  assert.match(goldExample, /id="berechnung"/);
+  assert.match(plannerExample, /id="bundeslaender"/);
+  assert.match(script, /main > \.card\[data-gold-page\] #berechnung/);
+  assert.match(script, /\.planner-page #bundeslaender/);
+  assert.match(script, /function setupLongPageAd\(firstUnit\)/);
+  assert.match(script, /firstUnit\.getAttribute\("data-adsbygoogle-status"\) !== "done"/);
+  assert.match(script, /new IntersectionObserver/);
+  assert.match(script, /new MutationObserver/);
+  assert.match(script, /rootMargin: "350px 0px"/);
+  assert.match(script, /window\.requestAnimationFrame/);
+  assert.match(script, /sentinel\.replaceWith\(wrapper\)/);
+  assert.match(css, /data-ad-status="unfill-optimized"/);
+});
