@@ -146,7 +146,7 @@ test("homepage uses one bounded in-content ad and one desktop-only calendar side
   assert.ok(app.includes("@media (min-width: 800px)"));
   assert.ok(app.includes("width: 728px; height: 90px"));
   assert.ok(app.includes("width: 320px;"));
-  assert.ok(app.includes("height: 100px;"));
+  assert.ok(app.includes("height: 50px;"));
   assert.ok(!app.includes("pagead2.googlesyndication.com"));
   assert.ok(!app.includes('data-ad-format="auto"'));
   assert.ok(!app.includes('data-full-width-responsive="true"'));
@@ -170,4 +170,31 @@ test("privacy and ad consent settings share a compact footer row", async () => {
   assert.match(mobileCss, /\.site-footer \{\s*padding-bottom: 32px;/);
   assert.match(mobileCss, /\.floating-site-menu-button\.is-footer-visible/);
   assert.match(await read("../src/App.jsx"), /new IntersectionObserver/);
+});
+
+
+test("static holiday and yearly-planner pages request one ad after useful content", async () => {
+  const [seoGenerator, plannerGenerator, placement, stylesheet, legalPage] = await Promise.all([
+    read("../scripts/generate-seo-pages.mjs"),
+    read("../scripts/generate-urlaubsplaner-page.mjs"),
+    read("../public/adsense-content.js"),
+    read("../public/seo-pages.css"),
+    read("../public/datenschutz.html"),
+  ]);
+
+  for (const generator of [seoGenerator, plannerGenerator]) {
+    assert.match(generator, /<script defer src="\/adsense-content\.js"><\/script>/);
+    assert.equal(generator.split('data-schulferienklar-adsense="true"').length - 1, 1);
+  }
+  assert.match(placement, /const SLOT = "9291651091"/);
+  assert.match(placement, /mainCard\.querySelector\("#termine"\)/);
+  assert.match(placement, /mainCard\.querySelector\("\.holiday-summary-list"\)/);
+  assert.match(placement, /\.planner-page #beispiele/);
+  assert.match(placement, /availableWidth < 300/);
+  assert.match(placement, /width: 300, height: 50/);
+  assert.match(placement, /anchor\.closest/);
+  assert.match(placement, /document\.querySelector\("\.sf-content-ad"\)/);
+  assert.match(placement, /window\.adsbygoogle/);
+  assert.match(stylesheet, /data-ad-status="unfilled"/);
+  assert.doesNotMatch(legalPage, /adsense-content\.js/);
 });

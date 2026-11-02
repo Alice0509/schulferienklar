@@ -6852,6 +6852,7 @@ eingerechnet.`,
 function sharedSeoStyles() {
   return `    <link rel="stylesheet" href="/seo-pages.css" />
     <script defer src="/privacy-analytics.js"></script>
+    <script defer src="/adsense-content.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8336348698974993" crossorigin="anonymous" data-schulferienklar-adsense="true"></script>`;
 }
 
