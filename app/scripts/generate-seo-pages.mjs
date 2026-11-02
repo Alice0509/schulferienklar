@@ -2813,6 +2813,28 @@ function indentGoldText(
     .join("\n");
 }
 
+function stateYearSearchHighlightsHtml({ events, name, year, types = [] }) {
+  const highlights = types
+    .map((type) => findStateYearGoldEvent(events, type, year))
+    .filter(Boolean);
+
+  if (!highlights.length) return "";
+
+  const links = highlights
+    .map((event) => {
+      const eventId = `termin-${String(event.id || event.type)
+        .toLowerCase().replace(/[^a-z0-9-]+/g, "-")}`;
+      const label = `${getHolidayName(event)} ${name} ${year}`;
+      return `            <a href="#${eventId}"><span>${escapeHtml(label)}</span><strong>${formatDate(event.startDate)} – ${formatDate(event.endDate)}</strong></a>`;
+    })
+    .join("\n");
+
+  return `        <nav class="gold-search-highlights" aria-label="Gesuchte Ferienzeiten direkt finden">
+          <p>Häufig gesucht · direkt zu den Terminen</p>
+${links}
+        </nav>`;
+}
+
 function stateYearGoldPageTemplate({
   slug,
   name,
@@ -2825,6 +2847,7 @@ function stateYearGoldPageTemplate({
   eyebrow,
   h1,
   introText,
+  searchHighlightTypes = [],
   specialNavLabel,
   termHeadingText,
   termIntroText,
@@ -2904,6 +2927,7 @@ ${indentGoldText(
         </p>
 
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
+${stateYearSearchHighlightsHtml({ events, name, year, types: searchHighlightTypes })}
 
         <nav
           class="gold-page-nav"
@@ -4435,11 +4459,12 @@ function sachsen2027GoldPageTemplate({
     year,
     events,
     title:
-      "Schulferien Sachsen 2027: Termine und freie Tage",
+      "Ferien Sachsen 2027: Schulferien, Kalender & PDF",
     description:
-      "Schulferien Sachsen 2027 mit Winterferien, Osterferien, Pfingstferien, unterrichtsfreiem Tag, beweglichem Ferientag, PDF, ICS und offizieller Quelle.",
+      "Ferien Sachsen 2027: alle Schulferien mit Winter-, Oster- und Sommerferien. Offizielle Termine, Jahreskalender, PDF und landesweiter schulfreier Tag.",
     marker:
       "sachsen-2027",
+    searchHighlightTypes: ["summer", "winter"],
     eyebrow:
       "Sachsen · Kalenderjahr 2027",
     h1:
@@ -4633,11 +4658,12 @@ function berlin2027GoldPageTemplate({
     year,
     events,
     title:
-      "Schulferien Berlin 2027: Termine und freie Tage",
+      "Ferien Berlin 2027: Schulferien, Kalender & PDF",
     description:
-      "Schulferien Berlin 2027 mit Winterferien, Osterferien, unterrichtsfreiem AZVO-Tag, Pfingstferien, Sommerferien, PDF, ICS und offizieller Quelle.",
+      "Ferien Berlin 2027: alle Schulferien mit Winter-, Sommer- und Herbstferien. Offizielle Termine, Jahreskalender, PDF und schulfreier Tag am 7. Mai.",
     marker:
       "berlin-2027",
+    searchHighlightTypes: ["autumn", "winter"],
     eyebrow:
       "Berlin · Kalenderjahr 2027",
     h1:
@@ -7429,11 +7455,17 @@ eingerechnet.`;
     year,
     events,
     title:
-      `Schulferien ${name} ${year}: Termine und freie Tage`,
+      code === "HE" && year === 2028
+        ? "Schulferien Hessen 2028: Termine, Kalender & PDF"
+        : `Schulferien ${name} ${year}: Termine und freie Tage`,
     description:
-      `Schulferien ${name} ${year} mit allen landesweit ` +
-      `erfassten Terminen, zusammenhängender freier Zeit, ` +
-      `Jahreskalender, PDF, ICS und offizieller Quelle.`,
+      code === "HE" && year === 2028
+        ? "Schulferien Hessen 2028: Sommerferien, Osterferien und Herbstferien mit offiziellen Terminen, Jahreskalender, PDF und zusammenhängender freier Zeit."
+        : `Schulferien ${name} ${year} mit allen landesweit ` +
+          `erfassten Terminen, zusammenhängender freier Zeit, ` +
+          `Jahreskalender, PDF, ICS und offizieller Quelle.`,
+    searchHighlightTypes:
+      code === "HE" && year === 2028 ? ["summer", "autumn"] : [],
     marker:
       getDefaultGoldMarker({
         slug,
