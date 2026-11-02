@@ -412,6 +412,17 @@ for (const [
 
 
     // Visual calendar and English are generated from the same event index.
+    const calendarPosition = html.indexOf('class="sf-year-visual"');
+    const introPosition = html.indexOf('class="gold-page-intro"');
+    const headingPosition = html.indexOf("<h1");
+    if (calendarPosition < headingPosition || calendarPosition < 0 ||
+        (introPosition >= 0 && calendarPosition > introPosition)) {
+      errors.push(file + ": calendar must be directly after the page heading and before long-form intro");
+    }
+    const monthJumpLinks = html.match(/href="#sf-month-[0-9]{4}-[0-9]{1,2}"/g) || [];
+    if (monthJumpLinks.length !== 12) {
+      errors.push(file + ": expected 12 accessible month-selection links");
+    }
     const monthBlocks = html.match(/<article class="sf-month"/g) || [];
     if (monthBlocks.length !== 12) {
       errors.push(file + ": expected exactly 12 calendar months");
@@ -455,6 +466,17 @@ for (const [
         if (!englishHtml.includes(item)) {
           errors.push(englishFileName + ": missing " + item);
         }
+      }
+      const englishCalendarPosition = englishHtml.indexOf('class="sf-year-visual"');
+      const englishHeadingPosition = englishHtml.indexOf("<h1");
+      const englishIntroPosition = englishHtml.indexOf('class="gold-page-intro"');
+      if (englishCalendarPosition < englishHeadingPosition ||
+          englishCalendarPosition < 0 || englishCalendarPosition > englishIntroPosition) {
+        errors.push(englishFileName + ": calendar is not the first content after heading");
+      }
+      const enMonthLinks = englishHtml.match(/href="#sf-month-[0-9]{4}-[0-9]{1,2}"/g) || [];
+      if (enMonthLinks.length !== 12) {
+        errors.push(englishFileName + ": expected 12 month-selection links");
       }
       const englishMonths = englishHtml.match(/<article class="sf-month"/g) || [];
       if (englishMonths.length !== 12) {
