@@ -440,7 +440,19 @@ code {
   display: block;
   max-width: 100%;
 }
-.sf-content-ad:has(.sf-content-ad-unit[data-ad-status="unfilled"]),
-.sf-content-ad:has(.sf-content-ad-unit[data-ad-status="unfill-optimized"]) {
+.sf-content-ad:not(.sf-content-ad-debug):has(.sf-content-ad-unit[data-ad-status="unfilled"]),
+.sf-content-ad:not(.sf-content-ad-debug):has(.sf-content-ad-unit[data-ad-status="unfill-optimized"]) {
   display: none;
+}
+
+/* Displayed only with ?ads_debug=1; absent on normal visits. */
+.sf-ad-diagnostic {
+  display: block;
+  max-width: 100%;
+  color: #405564;
+  background: #eef3f6;
+  font: 12px/1.5 ui-monospace, monospace;
+  overflow-wrap: anywhere;
+  padding: 6px 8px;
+  border-radius: 5px;
 }
