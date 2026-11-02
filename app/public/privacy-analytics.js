@@ -7,6 +7,7 @@
   const REJECTED = "denied";
 
   let clarityLoading = false;
+  let googlePrivacySettingsReady = false;
 
   function getConsent() {
     try {
@@ -207,7 +208,8 @@
       }
 
       .sf-consent-actions button,
-      .sf-privacy-settings {
+      .sf-privacy-settings,
+      .sf-google-privacy-settings {
         min-height: 42px;
         border: 1px solid #b9d0cc;
         border-radius: 8px;
@@ -225,7 +227,8 @@
         background: #176f64;
       }
 
-      .sf-privacy-settings {
+      .sf-privacy-settings,
+      .sf-google-privacy-settings {
         min-height: auto;
         margin-left: auto;
         padding: 4px 8px;
@@ -299,6 +302,78 @@
     footer.appendChild(button);
   }
 
+  // The Google-certified CMP manages advertising consent separately from Clarity.
+  // Keep the existing Clarity choice, but never layer its dialog over the CMP.
+  function addGoogleSettingsButton() {
+    if (
+      !googlePrivacySettingsReady ||
+      document.querySelector(".sf-google-privacy-settings")
+    ) {
+      return;
+    }
+
+    const footer = document.querySelector("footer");
+    if (!footer) {
+      return;
+    }
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "sf-google-privacy-settings";
+    button.textContent = "Werbe-Einstellungen";
+    button.addEventListener("click", () => {
+      window.googlefc?.showRevocationMessage?.();
+    });
+    footer.appendChild(button);
+  }
+
+  function addSettingsButtons() {
+    addSettingsButton();
+    addGoogleSettingsButton();
+  }
+
+  function setupGoogleConsentMessages() {
+    const hasAdsenseTag = document.querySelector(
+      'script[data-schulferienklar-adsense="true"]',
+    );
+    if (!hasAdsenseTag) {
+      return false;
+    }
+
+    window.googlefc = window.googlefc || {};
+    window.googlefc.callbackQueue = window.googlefc.callbackQueue || [];
+    window.googlefc.callbackQueue.push({
+      CONSENT_API_READY: () => {
+        googlePrivacySettingsReady = true;
+        addGoogleSettingsButton();
+      },
+    });
+
+    // Google may return consent data from a previous visit immediately.
+    // A blocked CMP results in no automatic Clarity prompt, never in tracking.
+    let clarityPromptQueued = false;
+    const showClarityAfterGoogle = () => {
+      if (clarityPromptQueued || getConsent() !== null) {
+        return;
+      }
+      clarityPromptQueued = true;
+      window.requestAnimationFrame(() => {
+        window.requestAnimationFrame(() => {
+          if (getConsent() === null) {
+            openBanner();
+          }
+        });
+      });
+    };
+    window.googlefc.callbackQueue.push({
+      CONSENT_DATA_READY: showClarityAfterGoogle,
+    });
+    window.googlefc.callbackQueue.push({
+      CONSENT_MODE_DATA_READY: showClarityAfterGoogle,
+    });
+    return true;
+  }
+
   function trackConsentAction(element) {
     const action =
       element.dataset.analyticsAction ||
@@ -339,21 +414,22 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     injectStyles();
-    addSettingsButton();
+    addSettingsButtons();
 
     // The interactive homepage can mount after this script initializes.
-    // Keep the settings control when React replaces the initial HTML overview.
+    // Reattach both privacy controls after React replaces the HTML overview.
     const root = document.getElementById("root");
     if (root) {
-      const observer = new MutationObserver(addSettingsButton);
+      const observer = new MutationObserver(addSettingsButtons);
       observer.observe(root, { childList: true });
     }
 
+    const googleConsentActive = setupGoogleConsentMessages();
     const consent = getConsent();
 
     if (consent === ACCEPTED) {
       loadClarity();
-    } else if (consent !== REJECTED) {
+    } else if (consent !== REJECTED && !googleConsentActive) {
       openBanner();
     }
   });

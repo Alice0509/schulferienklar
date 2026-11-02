@@ -409,6 +409,8 @@ function pageTemplate({
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="stylesheet" href="/seo-pages.css" />
     <link rel="stylesheet" href="/urlaubsplaner.css" />
+    <script defer src="/privacy-analytics.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8336348698974993" crossorigin="anonymous" data-schulferienklar-adsense="true"></script>
     <meta property="og:title" content="${title}" />
     <meta property="og:description" content="${description}" />
     <meta
