@@ -995,3 +995,45 @@ p {
 .sf-content-ad:not(.sf-content-ad-debug):has(.sf-content-ad-unit[data-ad-status="unfill-optimized"]) {
   display: none;
 }
+
+
+/* Data-backed seasonal shortcuts for every state's yearly holiday overview. */
+.gold-search-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 10px 0 22px;
+  border: 1px solid #c5dfd8;
+  border-radius: 10px;
+  background: #f3faf7;
+  padding: 12px;
+}
+.gold-search-highlights p {
+  flex-basis: 100%;
+  margin: 0 0 3px;
+  color: #25594f;
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+.gold-search-highlights a {
+  display: flex;
+  flex: 1 1 235px;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #fff;
+  color: #173f39;
+  text-decoration: none;
+}
+.gold-search-highlights a span {
+  font-size: 0.85rem;
+}
+.gold-search-highlights a strong {
+  font-size: 0.92rem;
+}
+.gold-search-highlights a:focus-visible,
+.gold-search-highlights a:hover {
+  outline: 2px solid #176f64;
+  outline-offset: 2px;
+}

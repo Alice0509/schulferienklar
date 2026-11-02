@@ -2618,6 +2618,7 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
         </p>
 
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
+${stateYearSearchHighlightsHtml({ events, name, year })}
 
         <nav class="gold-page-nav" aria-label="Inhalt dieser Seite">
           <a href="#termine">Alle Termine</a>
@@ -2813,6 +2814,44 @@ function indentGoldText(
     .join("\n");
 }
 
+function stateYearSearchHighlightsHtml({ events, name, year }) {
+  // Every Bundesland and every published year gets the same planning aid.
+  // Display only official-data-backed events that actually exist for this
+  // calendar year; do not fill partial years with invented future dates.
+  const seasonalTypes = [
+    "summer",
+    "autumn",
+    "easter",
+    "winter",
+    "pentecost",
+    "spring",
+  ];
+
+  const highlights = seasonalTypes
+    .map((type) => findStateYearGoldEvent(events, type, year))
+    .filter(Boolean)
+    .slice(0, 4);
+
+  if (!highlights.length) return "";
+
+  const links = highlights
+    .map((event) => {
+      // The target follows the same ID rule used by
+      // stateYearGoldPeriodRowsHtml (including the 2030 partial pages).
+      const eventId = `termin-${String(event.id || event.type)
+        .toLowerCase()
+        .replace(/[^a-z0-9-]+/g, "-")}`;
+      const label = getHolidayName(event);
+      return `            <a href="#${eventId}"><span>${escapeHtml(label)}</span><strong>${formatDate(event.startDate)} – ${formatDate(event.endDate)}</strong></a>`;
+    })
+    .join("\n");
+
+  return `        <nav class="gold-search-highlights" aria-label="Ferienzeiten im schnellen Überblick">
+          <p>Ferienzeiten ${escapeHtml(name)} ${year} auf einen Blick</p>
+${links}
+        </nav>`;
+}
+
 function stateYearGoldPageTemplate({
   slug,
   name,
@@ -2904,6 +2943,7 @@ ${indentGoldText(
         </p>
 
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
+${stateYearSearchHighlightsHtml({ events, name, year })}
 
         <nav
           class="gold-page-nav"
@@ -7690,6 +7730,7 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
 
 ${stateYearDataCoverageHtml({ code, name, year })}
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
+${stateYearSearchHighlightsHtml({ events, name, year })}
 ${stateYearPlanningDetailsHtml({ code, name, year, events })}
 
 ${jahreskalenderHtml({

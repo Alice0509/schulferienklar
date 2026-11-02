@@ -478,6 +478,31 @@ for (const [
       }
     }
 
+    // Every state's yearly page may have up to four data-driven seasonal
+    // shortcuts. Check the generated HTML itself to catch broken fragment
+    // targets, including custom Gold templates and partial 2030 pages.
+    const seasonalNav = html.match(
+      /<nav class="gold-search-highlights"[\s\S]*?<\/nav>/,
+    )?.[0] || "";
+    const seasonalTargets = [
+      ...seasonalNav.matchAll(/href="#(termin-[^"]+)"/g),
+    ].map((match) => match[1]);
+
+    if (seasonalTargets.length > 4) {
+      errors.push(`${file}: too many seasonal shortcuts`);
+    }
+    if (new Set(seasonalTargets).size !== seasonalTargets.length) {
+      errors.push(`${file}: duplicate seasonal shortcut anchors`);
+    }
+    for (const target of seasonalTargets) {
+      if (!html.includes(`id="${target}"`)) {
+        errors.push(`${file}: seasonal shortcut #${target} has no target`);
+      }
+    }
+    if (seasonalNav && !seasonalNav.includes(`Ferienzeiten ${name} ${year} auf einen Blick`)) {
+      errors.push(`${file}: seasonal shortcut heading names the wrong state or year`);
+    }
+
     // The fallback must expose its actual data scope, even outside Gold years.
     if (!html.includes('data-gold-page="')) {
       const report = evaluateGoldReadiness(year, {
