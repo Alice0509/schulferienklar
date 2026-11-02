@@ -8066,7 +8066,8 @@ function englishStateYearPage({ slug, name, englishName, code, year, events }) {
   const coverage = evaluateGoldReadiness(year, {
     states: states.filter((state) => state[3] === code),
   });
-  const incomplete = !coverage.isReady || events.some((event) => event.status === "partial");
+  const incomplete = year === 2030 || !coverage.isReady ||
+    events.some((event) => event.status === "partial");
   const title = "School holidays in " + englishName + " " + year + " | Schulferienklar";
   const description = "Explore school holiday dates in " + englishName +
     " for " + year + " on a visual calendar. Official state sources, " +
