@@ -997,7 +997,7 @@ p {
 }
 
 
-/* High-intent seasonal date shortcuts, only on selected landing pages. */
+/* Data-backed seasonal shortcuts for every state's yearly holiday overview. */
 .gold-search-highlights {
   display: flex;
   flex-wrap: wrap;
