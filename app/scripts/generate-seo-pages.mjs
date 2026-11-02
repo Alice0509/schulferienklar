@@ -2618,6 +2618,7 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
         </p>
 
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
+${stateYearSearchHighlightsHtml({ events, name, year })}
 
         <nav class="gold-page-nav" aria-label="Inhalt dieser Seite">
           <a href="#termine">Alle Termine</a>
@@ -2813,24 +2814,40 @@ function indentGoldText(
     .join("\n");
 }
 
-function stateYearSearchHighlightsHtml({ events, name, year, types = [] }) {
-  const highlights = types
+function stateYearSearchHighlightsHtml({ events, name, year }) {
+  // Every Bundesland and every published year gets the same planning aid.
+  // Display only official-data-backed events that actually exist for this
+  // calendar year; do not fill partial years with invented future dates.
+  const seasonalTypes = [
+    "summer",
+    "autumn",
+    "easter",
+    "winter",
+    "pentecost",
+    "spring",
+  ];
+
+  const highlights = seasonalTypes
     .map((type) => findStateYearGoldEvent(events, type, year))
-    .filter(Boolean);
+    .filter(Boolean)
+    .slice(0, 4);
 
   if (!highlights.length) return "";
 
   const links = highlights
     .map((event) => {
+      // The target follows the same ID rule used by
+      // stateYearGoldPeriodRowsHtml (including the 2030 partial pages).
       const eventId = `termin-${String(event.id || event.type)
-        .toLowerCase().replace(/[^a-z0-9-]+/g, "-")}`;
-      const label = `${getHolidayName(event)} ${name} ${year}`;
+        .toLowerCase()
+        .replace(/[^a-z0-9-]+/g, "-")}`;
+      const label = getHolidayName(event);
       return `            <a href="#${eventId}"><span>${escapeHtml(label)}</span><strong>${formatDate(event.startDate)} – ${formatDate(event.endDate)}</strong></a>`;
     })
     .join("\n");
 
-  return `        <nav class="gold-search-highlights" aria-label="Gesuchte Ferienzeiten direkt finden">
-          <p>Häufig gesucht · direkt zu den Terminen</p>
+  return `        <nav class="gold-search-highlights" aria-label="Ferienzeiten im schnellen Überblick">
+          <p>Ferienzeiten ${escapeHtml(name)} ${year} auf einen Blick</p>
 ${links}
         </nav>`;
 }
@@ -2847,7 +2864,6 @@ function stateYearGoldPageTemplate({
   eyebrow,
   h1,
   introText,
-  searchHighlightTypes = [],
   specialNavLabel,
   termHeadingText,
   termIntroText,
@@ -2927,7 +2943,7 @@ ${indentGoldText(
         </p>
 
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
-${stateYearSearchHighlightsHtml({ events, name, year, types: searchHighlightTypes })}
+${stateYearSearchHighlightsHtml({ events, name, year })}
 
         <nav
           class="gold-page-nav"
@@ -4459,12 +4475,11 @@ function sachsen2027GoldPageTemplate({
     year,
     events,
     title:
-      "Ferien Sachsen 2027: Schulferien, Kalender & PDF",
+      "Schulferien Sachsen 2027: Termine und freie Tage",
     description:
-      "Ferien Sachsen 2027: alle Schulferien mit Winter-, Oster- und Sommerferien. Offizielle Termine, Jahreskalender, PDF und landesweiter schulfreier Tag.",
+      "Schulferien Sachsen 2027 mit Winterferien, Osterferien, Pfingstferien, unterrichtsfreiem Tag, beweglichem Ferientag, PDF, ICS und offizieller Quelle.",
     marker:
       "sachsen-2027",
-    searchHighlightTypes: ["summer", "winter"],
     eyebrow:
       "Sachsen · Kalenderjahr 2027",
     h1:
@@ -4658,12 +4673,11 @@ function berlin2027GoldPageTemplate({
     year,
     events,
     title:
-      "Ferien Berlin 2027: Schulferien, Kalender & PDF",
+      "Schulferien Berlin 2027: Termine und freie Tage",
     description:
-      "Ferien Berlin 2027: alle Schulferien mit Winter-, Sommer- und Herbstferien. Offizielle Termine, Jahreskalender, PDF und schulfreier Tag am 7. Mai.",
+      "Schulferien Berlin 2027 mit Winterferien, Osterferien, unterrichtsfreiem AZVO-Tag, Pfingstferien, Sommerferien, PDF, ICS und offizieller Quelle.",
     marker:
       "berlin-2027",
-    searchHighlightTypes: ["autumn", "winter"],
     eyebrow:
       "Berlin · Kalenderjahr 2027",
     h1:
@@ -7455,17 +7469,11 @@ eingerechnet.`;
     year,
     events,
     title:
-      code === "HE" && year === 2028
-        ? "Schulferien Hessen 2028: Termine, Kalender & PDF"
-        : `Schulferien ${name} ${year}: Termine und freie Tage`,
+      `Schulferien ${name} ${year}: Termine und freie Tage`,
     description:
-      code === "HE" && year === 2028
-        ? "Schulferien Hessen 2028: Sommerferien, Osterferien und Herbstferien mit offiziellen Terminen, Jahreskalender, PDF und zusammenhängender freier Zeit."
-        : `Schulferien ${name} ${year} mit allen landesweit ` +
-          `erfassten Terminen, zusammenhängender freier Zeit, ` +
-          `Jahreskalender, PDF, ICS und offizieller Quelle.`,
-    searchHighlightTypes:
-      code === "HE" && year === 2028 ? ["summer", "autumn"] : [],
+      `Schulferien ${name} ${year} mit allen landesweit ` +
+      `erfassten Terminen, zusammenhängender freier Zeit, ` +
+      `Jahreskalender, PDF, ICS und offizieller Quelle.`,
     marker:
       getDefaultGoldMarker({
         slug,
@@ -7722,6 +7730,7 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
 
 ${stateYearDataCoverageHtml({ code, name, year })}
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
+${stateYearSearchHighlightsHtml({ events, name, year })}
 ${stateYearPlanningDetailsHtml({ code, name, year, events })}
 
 ${jahreskalenderHtml({
