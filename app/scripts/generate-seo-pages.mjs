@@ -2610,6 +2610,8 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
         <p class="eyebrow">Bayern · Kalenderjahr 2027</p>
         <h1>Schulferien Bayern 2027</h1>
 
+${stateYearVisualCalendarHtml({ events, name, year })}
+
         <p class="gold-page-intro">
           Hier stehen zuerst die offiziellen Ferientermine. Zusätzlich zeigt
           Schulferienklar, wie lange die freie Zeit direkt am Stück dauert,
@@ -2618,7 +2620,6 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
         </p>
 
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
-${stateYearVisualCalendarHtml({ events, name, year })}
 ${stateYearSearchHighlightsHtml({ events, name, year })}
 
         <nav class="gold-page-nav" aria-label="Inhalt dieser Seite">
@@ -3012,6 +3013,8 @@ ${seoTopNavHtml({
         </p>
         <h1>${h1}</h1>
 
+${stateYearVisualCalendarHtml({ events, name, year })}
+
         <p class="gold-page-intro">
 ${indentGoldText(
   introText,
@@ -3020,7 +3023,6 @@ ${indentGoldText(
         </p>
 
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
-${stateYearVisualCalendarHtml({ events, name, year })}
 ${stateYearSearchHighlightsHtml({ events, name, year })}
 
         <nav
@@ -5225,6 +5227,8 @@ ${seoTopNavHtml({
           Schulferien Baden-Württemberg 2027
         </h1>
 
+${stateYearVisualCalendarHtml({ events, name, year })}
+
         <p class="gold-page-intro">
           Hier stehen zuerst die landesweit
           veröffentlichten Ferien und schulfreien Tage.
@@ -5235,7 +5239,6 @@ ${seoTopNavHtml({
         </p>
 
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
-${stateYearVisualCalendarHtml({ events, name, year })}
 
         <nav
           class="gold-page-nav"
@@ -7801,6 +7804,8 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
         <p class="eyebrow">Schulferien ${year}</p>
         <h1>Schulferien ${name} ${year}</h1>
 
+${stateYearVisualCalendarHtml({ events, name, year })}
+
         <p>
           Vergleiche die erfassten Ferientermine für ${name} ${year}
           mit der direkt anschließenden freien Zeit. Der Datenstand unten
@@ -7809,7 +7814,6 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
 
 ${stateYearDataCoverageHtml({ code, name, year })}
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
-${stateYearVisualCalendarHtml({ events, name, year })}
 ${stateYearSearchHighlightsHtml({ events, name, year })}
 ${stateYearPlanningDetailsHtml({ code, name, year, events })}
 
@@ -8129,11 +8133,11 @@ function englishStateYearPage({ slug, name, englishName, code, year, events }) {
     '<section class="card gold-page" data-english-state-year="' + code + '-' + year + '">' +
     '<p class="eyebrow">Germany · ' + escapeHtml(englishName) + ' · ' + year + '</p>' +
     '<h1>School holidays in ' + escapeHtml(englishName) + ' ' + year + '</h1>' +
+    stateYearVisualCalendarHtml({ events, name: englishName, year, locale: "en" }) +
     '<p class="gold-page-intro">See when children are off school in ' +
     escapeHtml(englishName) + ', check dates on a visual month-by-month calendar, ' +
     'and plan around weekends. The source dates are kept separate from ' +
     'extended calendar days off.</p>' +
-    stateYearVisualCalendarHtml({ events, name: englishName, year, locale: "en" }) +
     '<nav class="gold-page-nav" aria-label="On this page">' +
     '<a href="#termine">Holiday dates</a><a href="#how-it-works">How it works</a>' +
     '<a href="#source">Official source</a><a href="#other-states">Other states</a></nav>' +
