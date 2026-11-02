@@ -8262,17 +8262,18 @@ for (const year of years) {
     const englishUrl = "https://www.schulferienklar.de" +
       englishStateYearUrl(englishName, year);
     const germanPage = pageTemplate({ slug, name, englishName, code, year, events });
-    const canonical = '<link rel="canonical" href="' + germanUrl + '" />';
-    if (!germanPage.includes(canonical)) {
+    // Some state-specific pages intentionally format the canonical tag
+    // over multiple lines. Match the HTML tag instead of one string layout.
+    const canonical = germanPage.match(
+      /<link\b(?=[^>]*\brel="canonical")[^>]*>/,
+    )?.[0];
+    if (!canonical || !canonical.includes('href="' + germanUrl + '"')) {
       throw new Error("Missing German canonical for " + fileName);
     }
     const bilingualGermanPage = germanPage.replace(canonical,
       canonical + '\n    <link rel="alternate" hreflang="de" href="' +
       germanUrl + '" />\n    <link rel="alternate" hreflang="en" href="' +
       englishUrl + '" />').replace(
-      '          <a href="/">' + 'Startseite</a>',
-      '          <a href="/">' + 'Startseite</a>'
-    ).replace(
       '        </div>\n      </nav>',
       '          <a class="sf-lang-switch" href="' + englishUrl +
       '" lang="en" hreflang="en">English</a>\n        </div>\n      </nav>'
