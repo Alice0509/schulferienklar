@@ -2618,6 +2618,7 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
         </p>
 
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
+${stateYearVisualCalendarHtml({ events, name, year })}
 ${stateYearSearchHighlightsHtml({ events, name, year })}
 
         <nav class="gold-page-nav" aria-label="Inhalt dieser Seite">
@@ -2814,6 +2815,79 @@ function indentGoldText(
     .join("\n");
 }
 
+
+function stateYearVisualCalendarHtml({ events, name, year }) {
+  // Only use published dataset events; do not fabricate missing dates.
+  const months = [
+    "Januar", "Februar", "März", "April", "Mai", "Juni",
+    "Juli", "August", "September", "Oktober", "November", "Dezember",
+  ];
+  const weekDays = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
+  const relevantEvents = events.filter((event) =>
+    event.startDate <= year + "-12-31" && event.endDate >= year + "-01-01"
+  );
+
+  const monthHtml = months.map((label, index) => {
+    const month = index + 1;
+    const daysInMonth = new Date(Date.UTC(year, month, 0)).getUTCDate();
+    const offset = (new Date(Date.UTC(year, index, 1)).getUTCDay() + 6) % 7;
+    let marked = 0;
+    const padding = Array.from({ length: offset }, () =>
+      '<span class="sf-day sf-day-empty" aria-hidden="true"></span>'
+    ).join("");
+    const days = Array.from({ length: daysInMonth }, (_, dayIndex) => {
+      const day = dayIndex + 1;
+      const key = year + "-" + String(month).padStart(2, "0") +
+        "-" + String(day).padStart(2, "0");
+      const event = relevantEvents.find((entry) =>
+        entry.startDate <= key && entry.endDate >= key
+      );
+      const weekday = new Date(Date.UTC(year, index, day)).getUTCDay();
+      if (event) {
+        marked++;
+        const target = "termin-" + String(event.id || event.type)
+          .toLowerCase().replace(/[^a-z0-9-]+/g, "-");
+        return '<a class="sf-day sf-day-holiday" href="#' + target +
+          '" title="' + escapeHtml(getHolidayName(event)) +
+          '" aria-label="' + day + '. ' + label + ' ' + year +
+          ': ' + escapeHtml(getHolidayName(event)) + '">' + day + '</a>';
+      }
+      return '<span class="sf-day' +
+        (weekday === 0 || weekday === 6 ? ' sf-day-weekend' : '') +
+        '" aria-label="' + day + '. ' + label + ' ' + year +
+        '">' + day + '</span>';
+    }).join("");
+
+    return '<article class="sf-month" id="sf-month-' + year + '-' +
+      month + '" aria-label="' + label + ' ' + year + '">' +
+      '<header><strong>' + label + '</strong><small>' +
+      (marked ? marked + ' markierte Tage' : 'Keine erfassten Ferien') +
+      '</small></header>' +
+      '<div class="sf-month-grid" aria-hidden="true">' +
+      weekDays.map((day) => '<span class="sf-weekday">' + day + '</span>').join("") +
+      '</div><div class="sf-month-grid">' + padding + days +
+      '</div></article>';
+  }).join("\n");
+
+  const partialWarning = year === 2030
+    ? '<p class="sf-year-incomplete">2030: Nur bisher veröffentlichte und geprüfte Termine sind markiert. Nicht markierte Tage sind nicht automatisch Unterrichtstage.</p>'
+    : "";
+
+  return '<section class="sf-year-visual" aria-label="Jahreskalender ' +
+    escapeHtml(name) + ' ' + year + '">' +
+    '<div class="sf-year-visual-heading"><div>' +
+    '<p class="eyebrow">Dein Jahr im Blick</p>' +
+    '<h2>Wo liegen die Ferien ' + year + '?</h2></div>' +
+    '<a href="#termine">Alle Ferientermine ansehen</a></div>' +
+    '<div class="sf-year-key"><span class="sf-key-ferie"></span> Schulfreie Zeit ' +
+    '<span class="sf-key-weekend"></span> Wochenende</div>' +
+    '<p class="sf-year-hint">Monate seitlich durchblättern. ' +
+    'Markierte Tage führen direkt zu den Terminen.</p>' +
+    '<div class="sf-year-rail" tabindex="0" role="region" ' +
+    'aria-label="Zwölf Monate horizontal durchblättern">' +
+    monthHtml + '</div>' + partialWarning + '</section>';
+}
+
 function stateYearSearchHighlightsHtml({ events, name, year }) {
   // Every Bundesland and every published year gets the same planning aid.
   // Display only official-data-backed events that actually exist for this
@@ -2943,6 +3017,7 @@ ${indentGoldText(
         </p>
 
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
+${stateYearVisualCalendarHtml({ events, name, year })}
 ${stateYearSearchHighlightsHtml({ events, name, year })}
 
         <nav
@@ -5157,6 +5232,7 @@ ${seoTopNavHtml({
         </p>
 
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
+${stateYearVisualCalendarHtml({ events, name, year })}
 
         <nav
           class="gold-page-nav"
@@ -7730,6 +7806,7 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
 
 ${stateYearDataCoverageHtml({ code, name, year })}
 ${stateYearQuickActionsHtml({ slug, name, code, year })}
+${stateYearVisualCalendarHtml({ events, name, year })}
 ${stateYearSearchHighlightsHtml({ events, name, year })}
 ${stateYearPlanningDetailsHtml({ code, name, year, events })}
 
