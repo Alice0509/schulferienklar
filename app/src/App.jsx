@@ -839,6 +839,7 @@ export default function App() {
   const [showAllStates, setShowAllStates] = useState(false);
   const [isStateMenuOpen, setIsStateMenuOpen] = useState(false);
   const [isSiteMenuOpen, setIsSiteMenuOpen] = useState(false);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
   const [isTravelSectionOpen, setIsTravelSectionOpen] = useState(false);
   const [isBridgeControlsOpen, setIsBridgeControlsOpen] = useState(false);
   const [isComparisonSectionOpen, setIsComparisonSectionOpen] = useState(false);
@@ -925,6 +926,19 @@ export default function App() {
       ? storedYear
       : TODAY.getFullYear();
   });
+
+  useEffect(() => {
+    // The fixed mobile menu must not cover the footer's consent controls
+    // or the Google-managed privacy strip at the bottom of the viewport.
+    if (!("IntersectionObserver" in window)) return;
+    const footer = document.querySelector("footer.site-footer");
+    if (!footer) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsFooterVisible(Boolean(entry?.isIntersecting));
+    });
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.bundesland, selectedCode);
@@ -1714,7 +1728,7 @@ export default function App() {
   return (
     <main className="page">
       <button
-        className={`floating-site-menu-button ${isSiteMenuOpen ? "is-open" : ""}`}
+        className={`floating-site-menu-button ${isSiteMenuOpen ? "is-open" : ""} ${isFooterVisible && !isSiteMenuOpen ? "is-footer-visible" : ""}`}
         type="button"
         aria-expanded={isSiteMenuOpen}
         aria-controls="site-menu"
