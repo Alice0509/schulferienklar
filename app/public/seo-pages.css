@@ -1180,3 +1180,31 @@ p {
 @media (prefers-reduced-motion: no-preference) {
   .sf-day-holiday { transition: background-color .15s, color .15s; }
 }
+
+
+.sf-english-page .gold-page-intro { max-width: 62ch; }
+.sf-english-page .gold-section { margin-top: 38px; }
+.sf-english-state-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.sf-english-state-links a {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #c9e0d8;
+  border-radius: 8px;
+  padding: 7px 12px;
+  background: #f4faf8;
+  font-size: .86rem;
+  text-decoration: none;
+}
+.sf-english-state-links a:hover, .sf-english-state-links a:focus-visible {
+  background: #cbe8df;
+}
+.sf-year-coverage { margin: 12px 0 18px; color: #4b6663; }
+@media (max-width: 640px) {
+  .sf-english-page .gold-section { margin-top: 27px; }
+  .sf-english-page .gold-page > .button { width: 100%; }
+}
