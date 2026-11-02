@@ -482,7 +482,7 @@ for (const [
     // shortcuts. Check the generated HTML itself to catch broken fragment
     // targets, including custom Gold templates and partial 2030 pages.
     const seasonalNav = html.match(
-      /<nav class="gold-search-highlights"[\\s\\S]*?<\\/nav>/,
+      /<nav class="gold-search-highlights"[\s\S]*?<\/nav>/,
     )?.[0] || "";
     const seasonalTargets = [
       ...seasonalNav.matchAll(/href="#(termin-[^"]+)"/g),
