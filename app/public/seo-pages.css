@@ -1257,3 +1257,102 @@ p {
 @media (max-width: 620px) {
   .sf-english-hub-grid { grid-template-columns: 1fr; }
 }
+
+
+/* Calendar-first page: the first meaningful content is a genuine calendar,
+   not a long introductory article or duplicated date tiles. */
+.seo-page main > section.card:has(> .sf-year-visual) > h1 {
+  font-size: clamp(2.15rem, 5vw, 3.35rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  margin-bottom: 14px;
+}
+.seo-page main > section.card:has(> .sf-year-visual) > .sf-year-visual {
+  margin-top: 6px;
+}
+.sf-year-visual {
+  border-color: #c8e0d8;
+  background: linear-gradient(150deg, #eff8f4, #fafdfb 68%, #fdf9f1);
+  box-shadow: 0 9px 30px rgba(23, 77, 69, 0.055);
+}
+.sf-year-visual-heading h2 {
+  font-size: clamp(1.35rem, 2.8vw, 1.75rem);
+}
+.sf-year-rail {
+  display: grid;
+  grid-auto-flow: row;
+  grid-auto-columns: auto;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow: visible;
+  scroll-snap-type: none;
+  gap: 13px;
+  padding: 2px;
+}
+.sf-month {
+  scroll-snap-align: none;
+  padding: 13px;
+  border-radius: 15px;
+  border-color: #d7e5df;
+  box-shadow: 0 2px 8px rgba(24, 66, 54, 0.035);
+}
+.sf-month header { margin-bottom: 7px; }
+.sf-month-grid { gap: 3px; }
+.sf-day {
+  border-radius: 8px;
+  font-variant-numeric: tabular-nums;
+}
+.sf-day-holiday {
+  color: #115f50;
+  background: #bae7d7;
+  box-shadow: inset 0 -2px 0 rgba(23, 114, 96, 0.17);
+}
+.sf-day-weekend { background: #f2eee7; }
+.sf-month-jump {
+  display: none;
+  overflow-x: auto;
+  gap: 6px;
+  padding: 5px 0 13px;
+  scrollbar-width: thin;
+}
+.sf-month-jump a {
+  flex: 0 0 auto;
+  border: 1px solid #bbd9ce;
+  border-radius: 9px;
+  padding: 7px 10px;
+  text-decoration: none;
+  background: #fff;
+  color: #20594f;
+  font-size: .83rem;
+  font-weight: 700;
+}
+.sf-month:target {
+  border-color: #167463;
+  box-shadow: 0 0 0 2px #bce5d6;
+}
+.sf-month:target header strong { color: #146e5e; }
+@media (min-width: 741px) and (max-width: 980px) {
+  .sf-year-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 740px) {
+  .sf-month-jump { display: flex; }
+  .sf-year-rail {
+    display: grid;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(250px, 90%);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 2px;
+    gap: 11px;
+    padding: 2px 3px 11px;
+  }
+  .sf-month {
+    scroll-snap-align: start;
+    scroll-margin-inline-start: 3px;
+    padding: 15px;
+  }
+  .sf-year-visual-heading a { font-size: .82rem; }
+  .sf-year-visual { padding: 16px 12px; }
+  .sf-year-key { margin-top: 9px; }
+  .sf-year-hint { margin-bottom: 7px; }
+}
