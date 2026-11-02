@@ -58,6 +58,7 @@ TODAY.setHours(0, 0, 0, 0);
 const WEEKDAYS = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"];
 
 const IN_CONTENT_AD_SLOT = "9291651091";
+const CALENDAR_SIDEBAR_AD_SLOT = "9134196439";
 
 // The shared AdSense loader is already present in index.html.
 // Only create the ad unit here, once, without a second loader.
@@ -169,7 +170,7 @@ function SchulferienklarCalendarSidebarAd() {
         ref={adRef}
         className="adsbygoogle schulferienklar-calendar-sidebar-slot"
         data-ad-client="ca-pub-8336348698974993"
-        data-ad-slot={IN_CONTENT_AD_SLOT}
+        data-ad-slot={CALENDAR_SIDEBAR_AD_SLOT}
       />
     </div>
   );
