@@ -146,7 +146,13 @@ test("homepage uses one bounded in-content ad and one desktop-only calendar side
   assert.ok(app.includes("@media (min-width: 800px)"));
   assert.ok(app.includes("width: 728px; height: 90px"));
   assert.ok(app.includes("width: 320px;"));
-  assert.ok(app.includes("height: 50px;"));
+  assert.ok(app.includes("height: 100px;"));
+  assert.ok(app.includes('get("ads_debug") === "1"'));
+  assert.ok(app.includes('data-ad-status="unfill-optimized"'));
+  assert.ok(app.includes("new MutationObserver(reportStatus)"));
+  assert.ok(app.includes("adDiagnostic ||"));
+  assert.ok(app.includes("window.setTimeout(reportStatus, 6000)"));
+  assert.equal(app.split("data-ad-slot={IN_CONTENT_AD_SLOT}").length - 1, 1);
   assert.ok(!app.includes("pagead2.googlesyndication.com"));
   assert.ok(!app.includes('data-ad-format="auto"'));
   assert.ok(!app.includes('data-full-width-responsive="true"'));
