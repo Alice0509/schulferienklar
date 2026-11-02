@@ -120,6 +120,61 @@ function SchulferienklarInContentAd() {
   );
 }
 
+
+function SchulferienklarCalendarSidebarAd() {
+  const adRef = useRef(null);
+
+  useEffect(() => {
+    const requestAd = () => {
+      const ad = adRef.current;
+      // Keep the second ad away from narrow columns and every mobile layout.
+      if (!ad || window.innerWidth < 1160 || ad.dataset.schulferienklarRequested) {
+        return;
+      }
+      ad.dataset.schulferienklarRequested = "true";
+      try {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      } catch {
+        // Ad blockers must not affect the calendar.
+      }
+    };
+    requestAd();
+    window.addEventListener("resize", requestAd);
+    return () => window.removeEventListener("resize", requestAd);
+  }, []);
+
+  return (
+    <div className="schulferienklar-calendar-sidebar-ad" aria-label="Werbung">
+      <span className="schulferienklar-in-content-label">Anzeige</span>
+      <style>{`
+        .schulferienklar-calendar-sidebar-ad {
+          display: grid;
+          justify-items: center;
+          gap: 6px;
+          min-width: 0;
+          margin-top: 22px;
+          border-top: 1px solid #dfe5e8;
+          padding-top: 22px;
+        }
+        .schulferienklar-calendar-sidebar-slot {
+          display: block;
+          width: 300px;
+          height: 250px;
+        }
+        @media (max-width: 1159px) {
+          .schulferienklar-calendar-sidebar-ad { display: none; }
+        }
+      `}</style>
+      <ins
+        ref={adRef}
+        className="adsbygoogle schulferienklar-calendar-sidebar-slot"
+        data-ad-client="ca-pub-8336348698974993"
+        data-ad-slot={IN_CONTENT_AD_SLOT}
+      />
+    </div>
+  );
+}
+
 function getFreePeriodStatus(holiday, publicHolidays = []) {
   const period = getEffectiveFreePeriod(holiday, publicHolidays);
 
@@ -2209,6 +2264,7 @@ export default function App() {
             <span>✓ Ferien und Feiertage nach Bundesland</span>
             <span>✓ Kalenderexport und Planung</span>
           </div>
+          <SchulferienklarCalendarSidebarAd />
         </aside>
       </section>
 
