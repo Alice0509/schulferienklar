@@ -343,6 +343,9 @@ test("editorial ad requests are laid out before submit and reveal opt-in status"
   assert.match(source, /Loader: /);
   assert.match(source, /Request: /);
   assert.match(source, /window\.requestAnimationFrame\(request\)/);
+  assert.match(source, /availableWidth < 300 && !isEditorial/);
+  assert.match(source, /width: 250, height: 250/);
+  assert.match(source, /availableWidth < 250 && isEditorial/);
   assert.match(source, /document\.body\.classList\.contains\("static-page"\)/);
   assert.match(staticCss, /\.sf-ad-diagnostic/);
   assert.match(staticCss, /:not\(\.sf-content-ad-debug\)/);
