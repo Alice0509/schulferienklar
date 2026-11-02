@@ -2887,6 +2887,11 @@ function stateYearVisualCalendarHtml({ events, name, year, locale = "de" }) {
     '<div class="sf-year-key"><span class="sf-key-ferie"></span> ' + (en ? 'School holidays' : 'Schulfreie Zeit') + ' ' +
     '<span class="sf-key-weekend"></span> ' + (en ? 'Weekend' : 'Wochenende') + '</div>' +
     '<p class="sf-year-hint">' + (en ? 'Swipe through months. Tap highlighted dates for details.' : 'Monate seitlich durchblättern. Markierte Tage führen direkt zu den Terminen.') + '</p>' +
+    '<nav class="sf-month-jump" aria-label="' +
+      (en ? 'Jump to a month' : 'Monat auswählen') + '">' +
+      months.map((label, index) => '<a href="#sf-month-' + year + '-' +
+        (index + 1) + '" aria-label="' + label + ' ' + year + '">' +
+        label.slice(0, 3) + '</a>').join("") + '</nav>' +
     '<div class="sf-year-rail" tabindex="0" role="region" ' +
     '' + (en ? 'aria-label="Swipe through 12 months"' : 'aria-label="Zwölf Monate horizontal durchblättern"') + '>' +
     monthHtml + '</div>' + partialWarning + '</section>';
