@@ -190,7 +190,9 @@ test("static holiday and yearly-planner pages request one ad after useful conten
   assert.match(placement, /mainCard\.querySelector\("#termine"\)/);
   assert.match(placement, /mainCard\.querySelector\("\.holiday-summary-list"\)/);
   assert.match(placement, /\.planner-page #beispiele/);
-  assert.match(placement, /availableWidth < 320/);
+  assert.match(placement, /availableWidth < 300/);
+  assert.match(placement, /width: 300, height: 50/);
+  assert.match(placement, /anchor\.closest/);
   assert.match(placement, /document\.querySelector\("\.sf-content-ad"\)/);
   assert.match(placement, /window\.adsbygoogle/);
   assert.match(stylesheet, /data-ad-status="unfilled"/);
