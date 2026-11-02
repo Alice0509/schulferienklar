@@ -34,8 +34,8 @@ test("date shortcuts use existing official events and their exact row IDs", asyn
   assert.ok(helper.includes("formatDate(event.endDate)"));
   assert.ok(helper.includes("String(event.id || event.type)"));
   assert.ok(helper.includes("if (!highlights.length) return"));
-  assert.match(css, /\\.gold-search-highlights \\{/);
-  assert.match(css, /\\.gold-search-highlights a:focus-visible/);
+  assert.match(css, /\.gold-search-highlights \{/);
+  assert.match(css, /\.gold-search-highlights a:focus-visible/);
 
   const context = {
     findStateYearGoldEvent: (events, type, year) =>
