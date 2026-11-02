@@ -165,4 +165,6 @@ test("privacy and ad consent settings share a compact footer row", async () => {
   assert.match(consent, /\.sf-footer-settings \{/);
   assert.match(css, /padding-bottom: 20px/);
   assert.match(mobileCss, /\.site-footer \{\s*padding-bottom: 32px;/);
+  assert.match(mobileCss, /\.floating-site-menu-button\.is-footer-visible/);
+  assert.match(await read("../src/App.jsx"), /new IntersectionObserver/);
 });
