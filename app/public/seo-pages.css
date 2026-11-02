@@ -1208,3 +1208,17 @@ p {
   .sf-english-page .gold-section { margin-top: 27px; }
   .sf-english-page .gold-page > .button { width: 100%; }
 }
+
+
+/* Keep the locale selector visible on iPhones; hide only the generic home link. */
+.sf-english-page .seo-top-links a:first-child { display: inline-flex; }
+.seo-top-links .sf-lang-switch {
+  border: 1px solid #b6d7cd;
+  border-radius: 9px;
+  background: #eff8f5;
+  padding: 7px 11px;
+}
+@media (max-width: 640px) {
+  .sf-english-page .seo-top-links a:first-child { display: inline-flex; }
+  .seo-top-links .sf-lang-switch { font-size: .84rem; }
+}
