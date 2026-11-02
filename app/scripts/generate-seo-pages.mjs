@@ -8120,8 +8120,8 @@ function englishStateYearPage({ slug, name, englishName, code, year, events }) {
     '<script defer src="/privacy-analytics.js"></script>' +
     '</head><body class="seo-page sf-english-page"><main>' +
     '<nav class="seo-top-nav" aria-label="Main navigation">' +
-    '<a class="seo-brand" href="/">Schulferienklar</a>' +
-    '<div class="seo-top-links"><a href="' + deUrl +
+    '<a class="seo-brand" href="/en/">Schulferienklar</a>' +
+    '<div class="seo-top-links"><a href="/en/">All states</a><a href="' + deUrl +
     '" lang="de" hreflang="de">Deutsch</a>' +
     '<a href="https://germanytravelchecker.com/" rel="noopener noreferrer">' +
     'Germany Travel Checker</a></div></nav>' +
@@ -8174,6 +8174,48 @@ function englishStateYearPage({ slug, name, englishName, code, year, events }) {
     '</footer></main></body></html>';
 }
 
+
+function englishIndexPage() {
+  const base = "https://www.schulferienklar.de";
+  const cards = states.map(([, , englishName]) => {
+    const links = years.map((year) =>
+      '<a href="' + englishStateYearUrl(englishName, year) + '">' +
+      year + '</a>'
+    ).join("");
+    return '<article class="sf-english-hub-card"><h2>' +
+      escapeHtml(englishName) + '</h2><div>' + links + '</div></article>';
+  }).join("\n");
+
+  return '<!doctype html><html lang="en"><head>' +
+    '<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +
+    '<title>Germany School Holidays 2026–2030 by State | Schulferienklar</title>' +
+    '<meta name="description" content="Browse school holidays in all 16 German states from 2026 to 2030. Official dates, visual monthly calendars and clear notes on data coverage.">' +
+    '<link rel="canonical" href="' + base + '/en/">' +
+    '<link rel="icon" href="/favicon.svg" type="image/svg+xml">' +
+    '<link rel="stylesheet" href="/seo-pages.css">' +
+    '</head><body class="seo-page sf-english-page"><main>' +
+    '<nav class="seo-top-nav" aria-label="Main navigation">' +
+    '<a class="seo-brand" href="/en/">Schulferienklar</a>' +
+    '<div class="seo-top-links"><a href="/" lang="de">Deutsch</a>' +
+    '<a href="https://germanytravelchecker.com/">Germany Travel Checker</a></div></nav>' +
+    '<section class="card gold-page"><p class="eyebrow">Germany · 16 federal states</p>' +
+    '<h1>School holidays in Germany</h1>' +
+    '<p class="gold-page-intro">Choose a German federal state and a year to see ' +
+    'the official school holiday periods on a visual calendar. Dates, weekends ' +
+    'and planned time off are clearly distinguished. Some 2030 calendars are ' +
+    'still incomplete, so always check the data coverage note.</p>' +
+    '<div class="sf-english-hub-grid">' + cards + '</div>' +
+    '<section class="gold-section"><h2>Holiday dates and travel planning</h2>' +
+    '<p>School holiday dates vary by federal state. For train disruptions, ' +
+    'Sunday closures, public holidays and day-to-day travel questions, use ' +
+    '<a href="https://germanytravelchecker.com/">Germany Travel Checker</a>. ' +
+    'For official school decisions and local exceptions, check the linked state source.</p>' +
+    '</section></section><footer class="seo-footer"><a href="/" lang="de">' +
+    'Deutsch</a><a href="/datenschutz.html">Privacy (German)</a>' +
+    '<a href="/impressum.html">Legal notice (German)</a></footer>' +
+    '</main></body></html>';
+}
+
 function sitemapEntry(url, { changefreq = "monthly", priority = "0.7" } = {}) {
   return `  <url>
     <loc>https://www.schulferienklar.de${url}</loc>
@@ -8187,6 +8229,7 @@ function writeSitemap() {
   // Add per-URL lastmod values only when they reflect significant changes.
   const staticPages = [
     ["/", "weekly", "1.0"],
+    ["/en/", "monthly", "0.8"],
     ["/widget.html", "monthly", "0.7"],
     ...years.map((year) => [
       `/urlaubsplaner-${year}.html`,
@@ -8319,5 +8362,8 @@ for (const year of years) {
 
   console.log(`created ${fileName}`);
 }
+
+fs.writeFileSync(path.join(outputDir, "en", "index.html"),
+  cleanGeneratedHtml(englishIndexPage()), "utf8");
 
 writeSitemap();
