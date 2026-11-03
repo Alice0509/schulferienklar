@@ -93,8 +93,8 @@ test("Preview parameters are conspicuously labeled, isolated and not official ho
     }
   }
   assert.equal(season(2026, 11, 3, "BY", "de", "unknown"), null);
-  assert.equal(getKlareeGreetingControls("de").open, "Gruß öffnen");
-  assert.equal(getKlareeGreetingControls("en").open, "Open greeting");
+  assert.equal(getKlareeGreetingControls("de").open, "Gruß ansehen");
+  assert.equal(getKlareeGreetingControls("en").open, "View greeting");
 });
 
 test("Only potential holiday months load additional calendar data", () => {
@@ -104,13 +104,20 @@ test("Only potential holiday months load additional calendar data", () => {
   assert.equal(couldHaveKlareeHoliday(null), false);
 });
 
-test("Greeting is inline, accessible, keyboard-usable and separate from ads", () => {
+test("Seasonal greeting uses a full-width banner and a user-opened accessible dialog", () => {
   const src = fs.readFileSync(path.join(process.cwd(), "src", "App.jsx"), "utf8");
   const css = fs.readFileSync(path.join(process.cwd(), "src", "klaree-seasonal.css"), "utf8");
-  assert.ok(src.includes('className="klaree-seasonal-trigger"'));
-  assert.ok(src.includes('aria-expanded={isKlareeGreetingOpen}'));
-  assert.ok(src.includes('aria-controls="klaree-seasonal-message"'));
-  assert.ok(src.includes('hidden={!isKlareeGreetingOpen}'));
+  assert.ok(src.includes("hero-grid--seasonal"), "Seasonal grid must span the homepage hero");
+  assert.ok(src.includes('className="klaree-event-cta"'), "Seasonal banner must have a button");
+  assert.ok(src.includes('className="klaree-event-dismiss"'), "Banner must be dismissible");
+  assert.ok(src.includes('aria-haspopup="dialog"'), "Greeting opens only by explicit click");
+  assert.ok(src.includes('aria-controls="klaree-seasonal-dialog"'));
+  assert.ok(src.includes('id="klaree-seasonal-dialog"'), "Native dialog is accessible");
+  assert.ok(src.includes("showModal()"), "Native modal must be opened by direct interaction");
+  assert.ok(css.includes("grid-area: event;"), "Seasonal banner is full width");
+  assert.ok(css.includes("grid-template-areas:"), "Seasonal layout must retain main form");
+  assert.ok(css.includes("klaree-greeting-dialog::backdrop"), "Greeting needs backdrop style");
+  assert.ok(!src.includes("Jetzt mitmachen"), "Unfinished Easter game must not be promoted");
   assert.ok(src.includes('getKlareeSeasonalMoment({'));
   assert.ok(src.includes('stateCode: selectedCode'));
   assert.ok(!src.includes("statutory holiday on 24 December"));
@@ -119,4 +126,11 @@ test("Greeting is inline, accessible, keyboard-usable and separate from ads", ()
   const image = fs.readFileSync(path.join(process.cwd(), "public", "klaree-christmas-2026.webp"));
   assert.equal(image.toString("ascii", 0, 4), "RIFF");
   assert.equal(image.toString("ascii", 8, 12), "WEBP");
+});
+
+test("Seasonal controls provide German and English labels for optional dismissal", () => {
+  for (const lang of ["de", "en"]) {
+    const c = getKlareeGreetingControls(lang);
+    assert.ok(c.open && c.close && c.later && c.dismiss, lang);
+  }
 });
