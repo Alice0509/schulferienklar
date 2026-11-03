@@ -54,7 +54,7 @@ const content = {
       title: "A little Easter surprise",
       kicker: "An Easter greeting from Klaree",
       hint: "Read Klaree’s greeting",
-      message: "Happy Easter! Klaree has hidden another treat. It's lovely to see you here!",
+      message: "Happy Easter! Klaree wishes you a lovely holiday. Perhaps there is still a little surprise to discover.",
       alt: "Klaree, your holiday companion, exploring spring",
     },
     holiday: {
