@@ -2925,9 +2925,13 @@ function stateYearSearchHighlightsHtml({ events, name, year }) {
     "spring",
   ];
 
+  // Choose the four earliest recorded seasonal breaks, not the first four
+  // entries in a fixed category priority list.
   const highlights = seasonalTypes
     .map((type) => findStateYearGoldEvent(events, type, year))
     .filter(Boolean)
+    .sort((a, b) => a.startDate.localeCompare(b.startDate) ||
+      a.endDate.localeCompare(b.endDate))
     .slice(0, 4);
 
   if (!highlights.length) return "";
