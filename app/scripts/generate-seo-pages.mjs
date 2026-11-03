@@ -2823,6 +2823,8 @@ function calendarSharePromptHtml({ locale = "de" } = {}) {
   return '<aside class="sf-share-prompt" aria-label="' +
     (en ? 'Share the calendar' : 'Kalender weiterempfehlen') + '">' +
     '<span class="sf-share-heart" aria-hidden="true">♥</span>' +
+    '<img class="sf-share-klaree" src="/klaree-rest.webp" width="75" height="61"' +
+    ' alt="" aria-hidden="true" loading="lazy" decoding="async" />' +
     '<div class="sf-share-copy"><strong>' +
     (en ? 'Found this helpful? Share Schulferienklar!' : 'Hilfreich? Teile Schulferienklar!') +
     '</strong><p>' +
@@ -2921,6 +2923,9 @@ function stateYearVisualCalendarHtml({ events, name, code, year, locale = "de" }
     '<div class="sf-year-visual-heading"><div>' +
     '<p class="eyebrow">' + (en ? 'Your year at a glance' : 'Dein Jahr im Blick') + '</p>' +
     '<h2>' + (en ? 'When are the school holidays in ' : 'Wo liegen die Ferien ') + year + '?</h2></div>' +
+    '<img class="sf-year-klaree-calendar" src="/klaree-calendar.webp" width="90" height="80"' +
+    ' loading="lazy" decoding="async" alt="' +
+    (en ? 'Klaree checking the school holiday calendar' : 'Klaree schaut in den Ferienkalender') + '" />' +
     '<a href="#termine">' + (en ? 'See all dates' : 'Alle Ferientermine ansehen') + '</a></div>' +
     '<div class="sf-year-key"><span class="sf-key-ferie"></span> ' + (en ? 'Recorded school-free days' : 'Erfasste schulfreie Tage') + ' ' +
     '<span class="sf-key-weekend"></span> ' + (en ? 'Weekend' : 'Wochenende') + ' ' +
