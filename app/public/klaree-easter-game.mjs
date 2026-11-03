@@ -37,7 +37,14 @@ const I18N = {
     instruction: "Tippe auf ein Versteck oder wähle es mit der Tastatur aus. Finde alle fünf Leckerlis.",
     none: "Hier liegt nichts. Weiter geht’s.",
     found: "Ein Leckerli gefunden!",
-    foundAt: (name) => `Ein Leckerli entdeckt! Klaree hat es bei ${name} gefunden.`,
+    foundAt: (name, count) => {
+      const story = count === 1
+        ? "Klaree wedelt fröhlich mit dem Schwanz."
+        : count === 3
+          ? "Mehr als die Hälfte ist geschafft. Klaree schnuppert neugierig weiter."
+          : "";
+      return `Ein Leckerli bei ${name} entdeckt! ${story}`.trim();
+    },
     emptyAt: (name) => `Bei ${name} ist nichts. Klaree sucht weiter.`,
     ready: "Klaree schaut sich im Garten um …",
     gardenLabel: "EIN GARTEN. NEUN VERSTECKE.",
@@ -73,7 +80,14 @@ const I18N = {
     instruction: "Tap a hiding place, or select it with your keyboard. Find all five treats.",
     none: "Nothing here. Keep looking.",
     found: "A treat found!",
-    foundAt: (name) => `A treat! Klaree found one at ${name}.`,
+    foundAt: (name, count) => {
+      const story = count === 1
+        ? "Klaree gives a happy little tail wag."
+        : count === 3
+          ? "More than halfway there! Klaree keeps sniffing for clues."
+          : "";
+      return `A treat at ${name}! ${story}`.trim();
+    },
     emptyAt: (name) => `Nothing at ${name}. Klaree keeps looking.`,
     ready: "Klaree is exploring the garden …",
     gardenLabel: "ONE GARDEN. NINE HIDING PLACES.",
@@ -171,7 +185,9 @@ export function mountKlareeEasterGame(doc = document) {
     slots.finish.hidden = true;
     for (const tile of tiles) {
       const name = text.locations[tile.dataset.spot];
-      tile.disabled = false;
+      // A checked button remains keyboard-focusable, so focus never vanishes
+      // after a click or Enter/Space. The round model ignores repeat searches.
+      tile.removeAttribute("aria-disabled");
       tile.removeAttribute("data-result");
       tile.setAttribute("aria-label", text.spot(name));
       tile.querySelector(".spot-result").textContent = "";
@@ -183,7 +199,7 @@ export function mountKlareeEasterGame(doc = document) {
       if (state.kind === "ignored") return;
       const name = text.locations[tile.dataset.spot];
       tile.dataset.result = state.kind;
-      tile.disabled = true;
+      tile.setAttribute("aria-disabled", "true");
       tile.querySelector(".spot-result").textContent = state.kind === "treat" ? text.tileFound : text.tileEmpty;
       tile.setAttribute("aria-label", state.kind === "treat" ? text.foundSpot(name) : text.emptySpot(name));
       slots.progress.value = state.found;
@@ -191,7 +207,7 @@ export function mountKlareeEasterGame(doc = document) {
       slots.count.textContent = text.current(state.found);
       slots.tokens.forEach((token, index) => token.classList.toggle("is-collected", index < state.found));
       slots.reset.hidden = false;
-      slots.status.textContent = state.kind === "treat" ? text.foundAt(name) : text.emptyAt(name);
+      slots.status.textContent = state.kind === "treat" ? text.foundAt(name, state.found) : text.emptyAt(name);
       slots.character.dataset.reaction = state.kind;
       slots.portrait.src = state.kind === "treat" ? "/klaree-mascot.webp" : "/klaree-walk.webp";
       // Only a brief, user-triggered acknowledgement; no idle or looping animation.
@@ -207,7 +223,11 @@ export function mountKlareeEasterGame(doc = document) {
         slots.finish.hidden = false;
         slots.finish.textContent = text.complete;
         slots.portrait.src = "/klaree-rest.webp";
-        for (const remaining of tiles) remaining.disabled = true;
+        // Keep the last activated hiding place focused for screen readers;
+        // mark the remaining spots unavailable without removing them from tab order.
+        for (const remaining of tiles) remaining.setAttribute("aria-disabled", "true");
+        // Keyboard players can restart without tabbing through the garden again.
+        if (tile.matches?.(":focus-visible")) slots.reset.focus();
       }
     });
   }
