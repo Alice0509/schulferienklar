@@ -481,6 +481,7 @@ for (const [
         'href="https://apps.apple.com/de/app/schulferienklar/id6811993088"',
         'Germany Travel Checker',
         'School holiday dates',
+        'href="/en/calendar.html?state=' + code + '&amp;year=' + year + '"',
       ];
       for (const item of required) {
         if (!englishHtml.includes(item)) {
