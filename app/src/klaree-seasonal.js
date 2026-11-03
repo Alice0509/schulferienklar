@@ -29,7 +29,7 @@ const content = {
       title: "Eine kleine Osterüberraschung",
       kicker: "Klarees Ostergruß",
       hint: "Klarees Gruß lesen",
-      message: "Frohe Ostern! Klaree hat schon wieder ein Leckerli versteckt. Schön, dass du vorbeischaust!",
+      message: "Frohe Ostern! Klaree wünscht dir schöne Feiertage. Vielleicht wartet ja noch eine kleine Überraschung auf dich.",
       alt: "Klaree, der Ferienbegleiter, erkundet den Frühling",
     },
     holiday: {
