@@ -177,6 +177,12 @@ for (const file of schoolHolidayHtmlFiles) {
         errors.push(`${file}: unavailable download ${href}`);
       }
     }
+    // Share prompts must be intentional, outside ad blocks, and localized.
+    if (html.split('class="sf-share-prompt"').length - 1 !== 1 ||
+        !html.includes('class="sf-share-button"') ||
+        !html.includes('src="/calendar-share.js"')) {
+      errors.push(`${file}: missing optional share control`);
+    }
     // Annual calendars must offer a reusable state-specific return URL.
     // A year-scoped page should never be presented as the permanent bookmark.
     if (html.split('class="sf-year-save"').length - 1 !== 1 ||
@@ -284,6 +290,12 @@ for (const year of YEARS) {
     yearHubPath,
     "utf8",
   );
+
+  // Nationwide hubs share their canonical year page, not a generic root.
+  if (!yearHubHtml.includes('class="sf-share-prompt"') ||
+      !yearHubHtml.includes('src="/calendar-share.js"')) {
+    errors.push(`${yearHubFile}: missing optional share control`);
+  }
 
   const plannerHref =
     `/urlaubsplaner-${year}.html`;
@@ -474,6 +486,9 @@ for (const [
         'id="source"',
         'class="sf-year-visual"',
         'class="sf-year-save"',
+        'class="sf-share-prompt"',
+        'Share calendar',
+        'src="/calendar-share.js"',
         'href="/?state=' + code + '"',
         'Come back to Schulferienklar',
         'class="sf-year-ios-link"',

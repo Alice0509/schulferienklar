@@ -2817,6 +2817,25 @@ function indentGoldText(
 }
 
 
+
+function calendarSharePromptHtml({ locale = "de" } = {}) {
+  const en = locale === "en";
+  return '<aside class="sf-share-prompt" aria-label="' +
+    (en ? 'Share the calendar' : 'Kalender weiterempfehlen') + '">' +
+    '<span class="sf-share-heart" aria-hidden="true">♥</span>' +
+    '<div class="sf-share-copy"><strong>' +
+    (en ? 'Found this helpful? Share Schulferienklar!' : 'Hilfreich? Teile Schulferienklar!') +
+    '</strong><p>' +
+    (en
+      ? 'A useful tip for family or friends helps others plan their holidays too.'
+      : 'Ein Tipp an Familie oder Freunde hilft auch anderen bei der Ferienplanung.') +
+    '</p></div>' +
+    '<div class="sf-share-action"><button type="button" class="sf-share-button">' +
+    (en ? 'Share calendar' : 'Kalender teilen') +
+    '</button><span class="sf-share-status" role="status" aria-live="polite"></span></div>' +
+    '</aside>';
+}
+
 function stateYearVisualCalendarHtml({ events, name, code, year, locale = "de" }) {
   const publicHolidays = getPublicHolidaysForStateAndYear({ publicHolidayIndex, code, year })
     .filter((holiday) => holiday.includeInDefaultCalendar === true && holiday.scope === "statewide");
@@ -2928,6 +2947,7 @@ function stateYearVisualCalendarHtml({ events, name, code, year, locale = "de" }
     ' target="_blank" rel="noopener noreferrer">' +
     (en ? 'iPhone app with home-screen widgets' : 'iPhone-App mit Home-Bildschirm-Widgets') +
     '</a></div>' +
+    calendarSharePromptHtml({ locale }) +
     '<aside class="sf-date-preview" popover="auto" aria-label="' +
     (en ? 'Selected school holiday' : 'Ausgewählter Ferientermin') + '">' +
     '<div class="sf-date-preview-head"><strong class="sf-preview-date"></strong>' +
@@ -2938,7 +2958,8 @@ function stateYearVisualCalendarHtml({ events, name, code, year, locale = "de" }
     '<a class="sf-preview-link" href="#termine">' +
     (en ? 'View the full holiday details' : 'Alle Details zum Ferientermin') +
     '</a></aside></section>' +
-    '<script defer src="/calendar-preview.js"></script>';
+    '<script defer src="/calendar-preview.js"></script>' +
+    '<script defer src="/calendar-share.js"></script>';
 }
 
 function stateYearSearchHighlightsHtml({ events, name, year }) {
@@ -8086,9 +8107,12 @@ ${stateSummaryCards}
 
         <a class="button" href="/?year=${year}">Kalender ${year} öffnen</a>
 
+${calendarSharePromptHtml()}
+
 ${dataTrustNoteHtml()}
       </section>
 ${seoFooterHtml()}    </main>
+    <script defer src="/calendar-share.js"></script>
   </body>
 </html>`;
 }
