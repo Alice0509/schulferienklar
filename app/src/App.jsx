@@ -2051,14 +2051,16 @@ export default function App() {
             </p>
 
             <div className="klaree-hero-appearance" data-klaree-moment={klareeMoment.key}>
-              <img
-                className="klaree-hero-figure"
-                src={klareeMoment.image}
-                width="100"
-                height="100"
-                decoding="async"
-                alt={klareeMoment.alt}
-              />
+              <span className="klaree-hero-stage">
+                <img
+                  className="klaree-hero-figure"
+                  src={klareeMoment.image}
+                  width="112"
+                  height="112"
+                  decoding="async"
+                  alt={klareeMoment.alt}
+                />
+              </span>
               <div className="klaree-hero-copy">
                 <strong className="klaree-hero-name">Klaree</strong>
                 <span className="klaree-hero-line">{klareeMoment.line}</span>

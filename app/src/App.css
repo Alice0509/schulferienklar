@@ -4271,51 +4271,121 @@ button.current-year-link {
   .klaree-bookmark-home:focus-within .klaree-bookmark-home-image { transform: none; }
 }
 
-/* Device-local time-of-day cameo. One pose per visit; never overlays an ad or date. */
+/* Klaree's one-time visit: one tiny moment of character, no persistent motion.
+   No layout overlap, click targets, ad positions or calendar date cells involved. */
 .klaree-hero-appearance {
+  --klaree-halo: #dcefe2;
+  --klaree-ground: #9cbdab;
   display: flex;
   align-items: center;
-  gap: 12px;
-  max-width: 430px;
-  margin: 8px 0 16px;
-  padding: 9px 13px 9px 9px;
-  border: 1px solid rgba(30, 110, 91, .17);
-  border-radius: 17px;
-  background: linear-gradient(110deg, #f0f9f3 0%, #fffaf1 100%);
-  color: #28675a;
+  gap: 14px;
+  width: min(100%, 460px);
+  min-height: 126px;
+  margin: 12px 0 19px;
+  padding: 8px 18px 8px 6px;
+  border: 1px solid rgba(30, 110, 91, .19);
+  border-radius: 22px;
+  background: linear-gradient(115deg, #f1f9f5 0%, #fffaf3 100%);
+  color: #285d52;
+  box-shadow: 0 10px 25px rgba(23, 58, 49, .05);
+}
+.klaree-hero-appearance[data-klaree-moment="evening"] {
+  --klaree-halo: #f3e9db;
+  --klaree-ground: #c5aa8d;
+  background: linear-gradient(115deg, #faf5eb 0%, #f3f8f2 100%);
+}
+.klaree-hero-appearance[data-klaree-moment="night"] {
+  --klaree-halo: #e4e8e5;
+  --klaree-ground: #b7c3b9;
+  background: linear-gradient(115deg, #f5f6f3 0%, #fffaf3 100%);
+}
+.klaree-hero-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 128px;
+  height: 108px;
+  flex: 0 0 128px;
+  isolation: isolate;
+}
+.klaree-hero-stage::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 8px;
+  left: 15px;
+  width: 95px;
+  height: 92px;
+  border-radius: 48% 52% 50% 50%;
+  background: var(--klaree-halo);
+  opacity: .65;
+}
+.klaree-hero-stage::after {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  left: 21px;
+  width: 86px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--klaree-ground);
+  opacity: .8;
 }
 .klaree-hero-figure {
   display: block;
-  width: clamp(76px, 10vw, 100px);
+  position: relative;
+  z-index: 1;
+  width: 112px;
   height: auto;
-  flex: none;
-  transform-origin: 50% 85%;
-  animation: klaree-arrival 850ms cubic-bezier(.2, .7, .2, 1) both;
+  transform-origin: 48% 82%;
+  animation: klaree-entrance 950ms cubic-bezier(.2, .75, .25, 1) both;
+}
+.klaree-hero-appearance[data-klaree-moment="night"] .klaree-hero-figure {
+  animation-name: klaree-night-entrance;
 }
 .klaree-hero-copy {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 5px;
 }
 .klaree-hero-name {
-  font-size: .93rem;
-  color: #165d50;
-  letter-spacing: .01em;
+  color: #155e50;
+  font-size: 1rem;
+  font-weight: 850;
+  line-height: 1.25;
+  letter-spacing: .045em;
 }
 .klaree-hero-line {
+  max-width: 240px;
   font-size: .88rem;
   line-height: 1.5;
   color: #405f57;
 }
-@keyframes klaree-arrival {
-  from { transform: translateX(-9px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+@keyframes klaree-entrance {
+  0% { opacity: 0; transform: translate(-26px, 7px) rotate(-5deg); }
+  70% { opacity: 1; transform: translate(2px, -1px) rotate(2deg); }
+  100% { opacity: 1; transform: translate(0, 0) rotate(0); }
+}
+@keyframes klaree-night-entrance {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 @media (max-width: 480px) {
-  .klaree-hero-appearance { gap: 9px; padding: 8px 10px 8px 5px; }
-  .klaree-hero-figure { width: 72px; }
+  .klaree-hero-appearance {
+    gap: 6px;
+    min-height: 100px;
+    margin: 10px 0 16px;
+    padding: 8px 12px 8px 3px;
+    border-radius: 18px;
+  }
+  .klaree-hero-stage { width: 96px; height: 84px; flex-basis: 96px; }
+  .klaree-hero-stage::before { top: 6px; left: 9px; width: 76px; height: 72px; }
+  .klaree-hero-stage::after { left: 16px; bottom: 5px; width: 65px; }
+  .klaree-hero-figure { width: 88px; }
+  .klaree-hero-name { font-size: .92rem; }
+  .klaree-hero-line { font-size: .82rem; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .klaree-hero-figure { animation: none; }
+  .klaree-hero-figure { animation: none !important; }
 }
