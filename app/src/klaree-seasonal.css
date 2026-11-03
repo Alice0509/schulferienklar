@@ -1,0 +1,118 @@
+/* Klaree's seasonal cameo lives in the SAME useful homepage position as
+   the everyday character. Not a sticky popup, ad CTA, modal or calendar overlay. */
+.klaree-hero-appearance.klaree-seasonal {
+  width: min(100%, 500px);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 8px 10px;
+  min-height: 0;
+  margin: 12px 0 18px;
+  gap: 0;
+  border: 1px solid #c9dfd2;
+  border-radius: 19px;
+  background: linear-gradient(112deg, #eff7f0, #fffaf2);
+}
+.klaree-hero-appearance.klaree-seasonal[data-klaree-moment="christmas"] {
+  border-color: #e5d8c9;
+  background: linear-gradient(115deg, #fff9ee, #f6f7f0);
+}
+.klaree-seasonal-trigger {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 112px;
+  margin: 0;
+  padding: 4px 8px 4px 1px;
+  background: transparent;
+  border: 0;
+  border-radius: 13px;
+  color: #263b36;
+  text-align: left;
+  cursor: pointer;
+}
+.klaree-seasonal-trigger:focus-visible {
+  outline: 3px solid #196e60;
+  outline-offset: 2px;
+}
+.klaree-seasonal-illustration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 158px;
+  min-width: 0;
+  flex: 0 0 158px;
+}
+.klaree-seasonal-illustration img {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: 110px;
+  object-fit: contain;
+  border-radius: 9px;
+  animation: klaree-seasonal-arrival 650ms ease-out both;
+}
+.klaree-seasonal-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+.klaree-seasonal-preview {
+  font-weight: 770;
+  font-size: .68rem;
+  line-height: 1.35;
+  color: #876953;
+}
+.klaree-seasonal-kicker {
+  color: #346c5c;
+  font-size: .68rem;
+  line-height: 1.25;
+  font-weight: 810;
+  letter-spacing: .075em;
+}
+.klaree-seasonal-title {
+  color: #174f44;
+  font-size: 1.03rem;
+  line-height: 1.24;
+  font-weight: 840;
+}
+.klaree-seasonal-link {
+  display: inline-block;
+  color: #176f64;
+  font-size: .78rem;
+  line-height: 1.3;
+  font-weight: 740;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.klaree-seasonal-message {
+  margin: 4px 7px 7px;
+  padding: 12px 14px;
+  border-top: 1px solid #d7e2d7;
+  background: rgba(255, 255, 255, .64);
+  border-radius: 11px;
+  color: #39584d;
+  font-size: .86rem;
+  line-height: 1.55;
+}
+.klaree-seasonal-message[hidden] { display: none; }
+@keyframes klaree-seasonal-arrival {
+  0% { opacity: 0; transform: translateY(6px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 520px) {
+  .klaree-hero-appearance.klaree-seasonal { margin: 10px 0 16px; padding: 6px 7px; }
+  .klaree-seasonal-trigger { min-height: 104px; gap: 7px; padding: 3px 5px 3px 0; }
+  .klaree-seasonal-illustration { width: 110px; flex-basis: 110px; }
+  .klaree-seasonal-illustration img { max-height: 94px; }
+  .klaree-seasonal-title { font-size: .94rem; }
+  .klaree-seasonal-kicker { font-size: .64rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .klaree-seasonal-illustration img { animation: none; }
+}
