@@ -45,6 +45,14 @@ const I18N = {
     emptySpot: (name) => `Kein Leckerli bei ${name}`,
     tileFound: "Gefunden",
     tileEmpty: "Leer",
+    calendar: "Kalender öffnen",
+    garden: "Garten mit neun Verstecken",
+    sidebar: "Spielfortschritt",
+    progressLabel: "Gefundene Leckerlis",
+    privacy: "Ohne Anmeldung. Ohne Werbung. Ohne Speicherung deiner Spielzüge.",
+    preview: "Vorschau für das Oster-Event 2027 · Diese Seite ist noch nicht auf der Startseite verlinkt.",
+    privacyLink: "Datenschutz",
+    imprintLink: "Impressum",
     portraitAlt: "Klaree, der Ferienbegleiter",
     locations: {
       flower:"Blumenbeet",hedge:"Hecke",stone:"Stein",bench:"Bank",tree:"Baum",
@@ -66,6 +74,14 @@ const I18N = {
     emptySpot: (name) => `No treat at ${name}`,
     tileFound: "Found",
     tileEmpty: "Empty",
+    calendar: "Open calendar",
+    garden: "Garden with nine hiding places",
+    sidebar: "Game progress",
+    progressLabel: "Treats found",
+    privacy: "No sign-up. No ads. No saving your game actions.",
+    preview: "Preview for Easter 2027 · This page is not yet linked from the homepage.",
+    privacyLink: "Privacy",
+    imprintLink: "Legal notice",
     portraitAlt: "Klaree, your school-holiday companion",
     locations: {
       flower:"Flower bed",hedge:"Hedge",stone:"Stone",bench:"Bench",tree:"Tree",
@@ -93,8 +109,19 @@ export function mountKlareeEasterGame(doc = document) {
     portrait: doc.getElementById("game-klaree"),
     toggle: doc.getElementById("language-toggle"),
     progress: doc.getElementById("game-progress"),
+    calendar: doc.getElementById("game-calendar-link"),
+    privacy: doc.getElementById("game-privacy"),
+    preview: doc.getElementById("game-preview"),
+    garden: doc.getElementById("game-garden"),
+    sidebar: doc.getElementById("game-sidebar"),
+    privacyLink: doc.getElementById("game-privacy-link"),
+    imprintLink: doc.getElementById("game-imprint-link"),
   };
   for (const key of ["kicker","headline","intro","instruction"]) slots[key].textContent = text[key];
+  for (const key of ["calendar","privacy","preview","privacyLink","imprintLink"]) slots[key].textContent = text[key];
+  slots.garden.setAttribute("aria-label", text.garden);
+  slots.sidebar.setAttribute("aria-label", text.sidebar);
+  slots.progress.setAttribute("aria-label", text.progressLabel);
   slots.reset.textContent = text.reset;
   slots.portrait.alt = text.portraitAlt;
   slots.toggle.textContent = locale === "de" ? "English" : "Deutsch";
