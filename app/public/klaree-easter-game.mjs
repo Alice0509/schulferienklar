@@ -46,6 +46,9 @@ const I18N = {
     tileFound: "Gefunden",
     tileEmpty: "Leer",
     calendar: "Kalender öffnen",
+    brandLabel: "Schulferienklar Startseite",
+    navigationLabel: "Seiten-Navigation",
+    legalLabel: "Rechtliches",
     garden: "Garten mit neun Verstecken",
     sidebar: "Spielfortschritt",
     progressLabel: "Gefundene Leckerlis",
@@ -75,6 +78,9 @@ const I18N = {
     tileFound: "Found",
     tileEmpty: "Empty",
     calendar: "Open calendar",
+    brandLabel: "Schulferienklar homepage",
+    navigationLabel: "Page navigation",
+    legalLabel: "Legal information",
     garden: "Garden with nine hiding places",
     sidebar: "Game progress",
     progressLabel: "Treats found",
@@ -116,9 +122,15 @@ export function mountKlareeEasterGame(doc = document) {
     sidebar: doc.getElementById("game-sidebar"),
     privacyLink: doc.getElementById("game-privacy-link"),
     imprintLink: doc.getElementById("game-imprint-link"),
+    brand: doc.getElementById("game-brand"),
+    navigation: doc.getElementById("game-navigation"),
+    legal: doc.getElementById("game-legal"),
   };
   for (const key of ["kicker","headline","intro","instruction"]) slots[key].textContent = text[key];
   for (const key of ["calendar","privacy","preview","privacyLink","imprintLink"]) slots[key].textContent = text[key];
+  slots.brand.setAttribute("aria-label", text.brandLabel);
+  slots.navigation.setAttribute("aria-label", text.navigationLabel);
+  slots.legal.setAttribute("aria-label", text.legalLabel);
   slots.garden.setAttribute("aria-label", text.garden);
   slots.sidebar.setAttribute("aria-label", text.sidebar);
   slots.progress.setAttribute("aria-label", text.progressLabel);
