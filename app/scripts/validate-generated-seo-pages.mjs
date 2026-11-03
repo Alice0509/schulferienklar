@@ -184,6 +184,13 @@ for (const file of schoolHolidayHtmlFiles) {
         !html.includes(`Schulferienklar für `)) {
       errors.push(`${file}: missing year-independent branded return link`);
     }
+    // Native iPhone widget discovery is a secondary action, not the
+    // separate embeddable website widget at /widget.html.
+    if (html.split('class="sf-year-ios-link"').length - 1 !== 1 ||
+        !html.includes('href="https://apps.apple.com/de/app/schulferienklar/id6811993088"') ||
+        !html.includes('iPhone-App mit Home-Bildschirm-Widgets')) {
+      errors.push(`${file}: missing native iPhone widget discovery link`);
+    }
     if (html.includes('class="intro-card intro-card-visual"')) {
       errors.push(`${file}: generic promo precedes state/year planning content`);
     }
@@ -469,6 +476,9 @@ for (const [
         'class="sf-year-save"',
         'href="/?state=' + code + '"',
         'Come back to Schulferienklar',
+        'class="sf-year-ios-link"',
+        'iPhone app with home-screen widgets',
+        'href="https://apps.apple.com/de/app/schulferienklar/id6811993088"',
         'Germany Travel Checker',
         'School holiday dates',
       ];
