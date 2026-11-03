@@ -26,7 +26,7 @@
   </svg>
   <header class="site-header">
     <a class="site-brand" href="/" aria-label="Schulferienklar Startseite"><img src="/favicon.svg" alt="" width="40" height="40"><span>Schulferienklar</span></a>
-    <nav aria-label="Seiten-Navigation"><a class="back-link" href="/">Kalender öffnen</a><a id="language-toggle" class="language-switch" href="?lang=en" lang="en">English</a></nav>
+    <nav aria-label="Seiten-Navigation"><a class="back-link" id="game-calendar-link" href="/">Kalender öffnen</a><a id="language-toggle" class="language-switch" href="?lang=en" lang="en">English</a></nav>
   </header>
   <main>
     <section class="intro" aria-labelledby="game-title">
@@ -37,7 +37,7 @@
       </div>
       <img id="game-klaree" class="klaree-portrait" src="/klaree-walk.webp" alt="Klaree, der Ferienbegleiter" width="180" height="180" decoding="async">
     </section>
-    <section class="game-layout" aria-label="Garten mit neun Verstecken">
+    <section class="game-layout" id="game-garden" aria-label="Garten mit neun Verstecken">
       <div class="garden-panel">
         <div class="garden-top"><span class="garden-label" aria-hidden="true">01 — 09</span><p id="game-instruction">Tippe auf ein Versteck oder wähle es mit der Tastatur aus. Finde alle fünf Leckerlis.</p></div>
         <div class="garden-board" id="garden-board">
@@ -79,18 +79,18 @@
             </button>
         </div>
       </div>
-      <aside class="game-sidebar" aria-label="Spielfortschritt">
+      <aside class="game-sidebar" id="game-sidebar" aria-label="Spielfortschritt">
         <div class="progress-head"><span class="eyebrow">KLAREE</span><span aria-hidden="true">✳</span></div>
         <p class="counter" id="game-count">0 von 5 Leckerlis gefunden</p>
         <progress id="game-progress" value="0" max="5" aria-label="Gefundene Leckerlis"></progress>
         <p id="game-status" class="game-status" role="status" aria-live="polite" aria-atomic="true"></p>
         <p id="game-finish" class="finish" hidden>Geschafft! Klaree hat alle fünf Leckerlis wiedergefunden.</p>
         <button type="button" id="game-reset" class="reset-button">Noch einmal suchen</button>
-        <p class="privacy-note">Ohne Anmeldung. Ohne Werbung. Ohne Speicherung deiner Spielzüge.</p>
+        <p class="privacy-note" id="game-privacy">Ohne Anmeldung. Ohne Werbung. Ohne Speicherung deiner Spielzüge.</p>
       </aside>
     </section>
-    <p class="preview-note">Vorschau für das Oster-Event 2027 · Diese Seite ist noch nicht auf der Startseite verlinkt.</p>
+    <p class="preview-note" id="game-preview">Vorschau für das Oster-Event 2027 · Diese Seite ist noch nicht auf der Startseite verlinkt.</p>
   </main>
-  <footer><span>© Schulferienklar</span><nav aria-label="Rechtliches"><a href="/datenschutz.html">Datenschutz</a><a href="/impressum.html">Impressum</a></nav></footer>
+  <footer><span>© Schulferienklar</span><nav aria-label="Rechtliches"><a id="game-privacy-link" href="/datenschutz.html">Datenschutz</a><a id="game-imprint-link" href="/impressum.html">Impressum</a></nav></footer>
 </body>
 </html>
