@@ -23,7 +23,7 @@ const season = (year, month, day, code = "BY", locale = "de", preview = null) =>
   });
 
 test("Outside seasonal windows, Klaree keeps her ordinary daily cameo", () => {
-  assert.equal(season(2026, 11, 3), null);
+  assert.equal(season(2026, 11, 16), null);
   assert.equal(season(2026, 11, 30), null);
   assert.equal(season(2027, 1, 7), null);
   assert.equal(season(2027, 3, 13), null);
@@ -91,9 +91,13 @@ test("State-specific holidays appear only where verified statewide, never on reg
   assert.equal(season(2026, 1, 6, "BE")?.kind, "christmas",
     "Berlin must not claim Epiphany is a public holiday, but the winter season still appears");
   assert.equal(season(2026, 10, 31, "SN")?.title, "Reformationstag");
-  assert.equal(season(2026, 10, 31, "BY"), null);
-  assert.equal(season(2026, 8, 15, "BY"), null, "Regional Mariä Himmelfahrt is not statewide");
-  assert.equal(season(2026, 8, 8, "BY"), null, "Augsburg-only holiday cannot be a Bavaria-wide claim");
+  assert.equal(season(2026, 10, 31, "BY")?.kind, "autumn");
+  assert.equal(season(2026, 8, 15, "BY")?.kind, "summer",
+    "Regional Mariä Himmelfahrt cannot replace a generic summer greeting");
+  assert.equal(season(2026, 8, 15, "BY")?.statutory, false);
+  assert.equal(season(2026, 8, 8, "BY")?.kind, "summer",
+    "Augsburg-only holiday cannot replace a Bavaria-wide summer greeting");
+  assert.equal(season(2026, 8, 8, "BY")?.statutory, false);
 });
 
 test("National unity holiday works across all 16 states with correct localization", () => {
@@ -109,17 +113,48 @@ test("National unity holiday works across all 16 states with correct localizatio
   }
 });
 
-test("Preview parameters are conspicuously labeled, isolated and not official holidays", () => {
+test("Summer and autumn last for seasonal windows without claiming school holidays", () => {
+  assert.equal(season(2026, 6, 20), null);
+  for (const [month, day] of [[6,21],[7,1],[8,31]]) {
+    for (const state of ["BY", "BE", "SN"]) {
+      const moment = season(2026, month, day, state);
+      assert.equal(moment?.kind, "summer", `${state} ${month}/${day}`);
+      assert.equal(moment?.statutory, false);
+      assert.equal(moment?.image, "/klaree-walk.webp");
+      assert.match(moment?.title, /Sommer/);
+      assert.ok(moment?.teaser);
+    }
+  }
+  assert.equal(season(2026, 9, 1), null);
+  assert.equal(season(2026, 9, 21), null);
+  for (const [month, day] of [[9,22],[10,15],[11,3],[11,15]]) {
+    const moment = season(2026, month, day);
+    assert.equal(moment?.kind, "autumn", `${month}/${day}`);
+    assert.equal(moment?.statutory, false);
+    assert.equal(moment?.image, "/klaree-rest.webp");
+  }
+  assert.equal(season(2026, 11, 16), null);
+  assert.equal(season(2026, 11, 1, "BY")?.title, "Allerheiligen",
+    "Verified statewide holiday supersedes the autumn scene in Bavaria");
+  assert.equal(season(2026, 11, 1, "BE")?.kind, "autumn",
+    "Berlin must not claim Bavaria's holiday as its own");
+});
+
+test("Preview parameters are bilingual, do not alter calendars and are explicitly non-current", () => {
   for (const language of ["de", "en"]) {
-    for (const preview of ["christmas", "easter"]) {
-      const demo = season(2026, 11, 3, "BY", language, preview);
+    for (const preview of ["christmas", "easter", "summer", "autumn"]) {
+      const demo = season(2026, 11, 16, "BY", language, preview);
       assert.equal(demo.kind, preview);
       assert.equal(demo.isPreview, true);
       assert.ok(demo.previewLabel);
       assert.equal(demo.statutory, false);
+      assert.ok(demo.message && demo.teaser && demo.alt && demo.image);
+      if (language === "de") assert.match(demo.previewLabel, /Vorschau/);
+      if (language === "en") assert.match(demo.previewLabel, /Preview/);
     }
   }
-  assert.equal(season(2026, 11, 3, "BY", "de", "unknown"), null);
+  assert.equal(season(2026, 11, 16, "BY", "de", "unknown"), null);
+  assert.notEqual(season(2026, 7, 1, "BY", "de")?.message, season(2026, 7, 1, "BY", "en")?.message);
   assert.equal(getKlareeGreetingControls("de").open, "Gruß ansehen");
   assert.equal(getKlareeGreetingControls("en").open, "View greeting");
 });
@@ -135,6 +170,11 @@ test("Seasonal greeting uses a full-width banner and a user-opened accessible di
   const src = fs.readFileSync(path.join(process.cwd(), "src", "App.jsx"), "utf8");
   const css = fs.readFileSync(path.join(process.cwd(), "src", "klaree-seasonal.css"), "utf8");
   assert.ok(src.includes("hero-grid--seasonal"), "Seasonal grid must span the homepage hero");
+  assert.ok(src.includes("klareeSeasonal.teaser"), "Seasonal teaser must match the selected language and type");
+  assert.ok(src.includes("klaree-event-sun"), "Summer scene must be rendered");
+  assert.ok(src.includes("klaree-event-leaf"), "Autumn scene must be rendered");
+  assert.ok(css.includes(".klaree-event-banner--summer"), "Summer scene must have distinct styling");
+  assert.ok(css.includes(".klaree-event-banner--autumn"), "Autumn scene must have distinct styling");
   assert.ok(src.includes('className="klaree-event-cta"'), "Seasonal banner must have a button");
   assert.ok(src.includes('className="klaree-event-dismiss"'), "Banner must be dismissible");
   assert.ok(src.includes('aria-haspopup="dialog"'), "Greeting opens only by explicit click");
