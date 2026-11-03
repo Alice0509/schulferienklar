@@ -986,7 +986,6 @@ export default function App() {
   // Take a one-time snapshot: Klaree never jumps between poses while someone plans.
   const [klareeArrival] = useState(() => new Date());
   const [seasonalPublicHolidayDataset, setSeasonalPublicHolidayDataset] = useState(null);
-  const [isKlareeGreetingOpen, setIsKlareeGreetingOpen] = useState(false);
   const [isKlareeBannerDismissed, setIsKlareeBannerDismissed] = useState(false);
   const klareeGreetingDialogRef = useRef(null);
   const [index, setIndex] = useState(null);
@@ -1738,7 +1737,6 @@ export default function App() {
   const selectBundesland = (nextCode) => {
     localStorage.setItem(STORAGE_KEYS.bundesland, nextCode);
     setSelectedCode(nextCode);
-    setIsKlareeGreetingOpen(false);
     setIsStateMenuOpen(false);
   };
 
@@ -1937,7 +1935,6 @@ export default function App() {
   const openKlareeGreeting = () => {
     if (!klareeGreetingDialogRef.current?.open) {
       klareeGreetingDialogRef.current?.showModal();
-      setIsKlareeGreetingOpen(true);
     }
   };
   const targetLanguage = locale === "en" ? "de" : "en";
@@ -2338,7 +2335,6 @@ export default function App() {
           className={`klaree-greeting-dialog klaree-greeting-dialog--${klareeSeasonal.kind}`}
           aria-labelledby="klaree-dialog-title"
           aria-describedby="klaree-dialog-message"
-          onClose={() => setIsKlareeGreetingOpen(false)}
           onClick={(event) => {
             if (event.target === klareeGreetingDialogRef.current) {
               klareeGreetingDialogRef.current?.close();
