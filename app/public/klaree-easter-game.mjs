@@ -37,6 +37,10 @@ const I18N = {
     instruction: "Tippe auf ein Versteck oder wähle es mit der Tastatur aus. Finde alle fünf Leckerlis.",
     none: "Hier liegt nichts. Weiter geht’s.",
     found: "Ein Leckerli gefunden!",
+    foundAt: (name) => `Ein Leckerli entdeckt! Klaree hat es bei ${name} gefunden.`,
+    emptyAt: (name) => `Bei ${name} ist nichts. Klaree sucht weiter.`,
+    ready: "Klaree schaut sich im Garten um …",
+    gardenLabel: "EIN GARTEN. NEUN VERSTECKE.",
     complete: "Geschafft! Klaree hat alle fünf Leckerlis wiedergefunden.",
     reset: "Noch einmal suchen",
     current: (n) => `${n} von 5 Leckerlis gefunden`,
@@ -69,6 +73,10 @@ const I18N = {
     instruction: "Tap a hiding place, or select it with your keyboard. Find all five treats.",
     none: "Nothing here. Keep looking.",
     found: "A treat found!",
+    foundAt: (name) => `A treat! Klaree found one at ${name}.`,
+    emptyAt: (name) => `Nothing at ${name}. Klaree keeps looking.`,
+    ready: "Klaree is exploring the garden …",
+    gardenLabel: "ONE GARDEN. NINE HIDING PLACES.",
     complete: "Found them all! Klaree has all five treats again.",
     reset: "Play again",
     current: (n) => `${n} of 5 treats found`,
@@ -115,6 +123,10 @@ export function mountKlareeEasterGame(doc = document) {
     portrait: doc.getElementById("game-klaree"),
     toggle: doc.getElementById("language-toggle"),
     progress: doc.getElementById("game-progress"),
+    progressSuffix: doc.getElementById("game-progress-suffix"),
+    tokens: [...doc.querySelectorAll(".treat-token")],
+    gardenLabel: doc.getElementById("game-garden-label"),
+    character: doc.getElementById("garden-character"),
     calendar: doc.getElementById("game-calendar-link"),
     privacy: doc.getElementById("game-privacy"),
     preview: doc.getElementById("game-preview"),
@@ -134,6 +146,7 @@ export function mountKlareeEasterGame(doc = document) {
   slots.garden.setAttribute("aria-label", text.garden);
   slots.sidebar.setAttribute("aria-label", text.sidebar);
   slots.progress.setAttribute("aria-label", text.progressLabel);
+  slots.gardenLabel.textContent = text.gardenLabel;
   slots.reset.textContent = text.reset;
   slots.portrait.alt = text.portraitAlt;
   slots.toggle.textContent = locale === "de" ? "English" : "Deutsch";
@@ -148,9 +161,13 @@ export function mountKlareeEasterGame(doc = document) {
   const begin = () => {
     round = createEasterRound();
     slots.portrait.src = "/klaree-walk.webp";
+    slots.character.removeAttribute("data-reaction");
     slots.progress.value = 0;
+    slots.progressSuffix.textContent = "0 / 5";
     slots.count.textContent = text.current(0);
-    slots.status.textContent = "";
+    slots.status.textContent = text.ready;
+    slots.reset.hidden = true;
+    slots.tokens.forEach((token) => token.classList.remove("is-collected"));
     slots.finish.hidden = true;
     for (const tile of tiles) {
       const name = text.locations[tile.dataset.spot];
@@ -170,8 +187,21 @@ export function mountKlareeEasterGame(doc = document) {
       tile.querySelector(".spot-result").textContent = state.kind === "treat" ? text.tileFound : text.tileEmpty;
       tile.setAttribute("aria-label", state.kind === "treat" ? text.foundSpot(name) : text.emptySpot(name));
       slots.progress.value = state.found;
+      slots.progressSuffix.textContent = `${state.found} / 5`;
       slots.count.textContent = text.current(state.found);
-      slots.status.textContent = state.kind === "treat" ? text.found : text.none;
+      slots.tokens.forEach((token, index) => token.classList.toggle("is-collected", index < state.found));
+      slots.reset.hidden = false;
+      slots.status.textContent = state.kind === "treat" ? text.foundAt(name) : text.emptyAt(name);
+      slots.character.dataset.reaction = state.kind;
+      slots.portrait.src = state.kind === "treat" ? "/klaree-mascot.webp" : "/klaree-walk.webp";
+      // Only a brief, user-triggered acknowledgement; no idle or looping animation.
+      const motionDisabled = doc.defaultView.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+      if (!motionDisabled && state.kind === "treat") {
+        slots.portrait.animate?.(
+          [{ transform: "translateY(3px) rotate(-3deg)" }, { transform: "translateY(0) rotate(0)" }],
+          { duration: 340, easing: "ease-out", iterations: 1 },
+        );
+      }
       if (state.complete) {
         slots.status.textContent = text.complete;
         slots.finish.hidden = false;
