@@ -109,3 +109,186 @@ footer nav { display: flex; gap: 20px; }
   .spot { transition: none; }
   .spot:not(:disabled):hover { transform: none; }
 }
+
+
+/* Illustrated garden v2: one landscape with nine genuine interactive hiding
+   places, instead of nine unrelated cards. Pure local SVG and CSS artwork. */
+.story-detail {
+  display: flex; align-items: center; gap: 11px; align-self: flex-end;
+  padding: 0 6px 20px 0; flex: none;
+}
+.story-detail span {
+  width: 21px; height: 15px;
+  background: #d5b58e; border: 2px solid #b18f6e;
+  border-radius: 38%; transform: rotate(-22deg);
+  position: relative; opacity: .72;
+}
+.story-detail span:nth-child(2) { transform: rotate(16deg); }
+.story-detail span:nth-child(3) { transform: rotate(-7deg); }
+.story-detail span:nth-child(4) { transform: rotate(19deg); }
+.story-detail span:nth-child(5) { transform: rotate(-13deg); }
+.story-detail span::after { content: ""; position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #b18f6e; left: 7px; top: 4px; }
+.game-layout { display: flex; flex-direction: column; gap: 14px; margin-top: 23px; }
+.garden-panel {
+  width: 100%; padding: clamp(12px, 2.5vw, 23px);
+  background: #f5f9f4; border-color: #d8e5d9;
+}
+.garden-top { justify-content: space-between; gap: 16px; padding: 0 6px 17px; }
+.garden-label { margin: 0 0 5px; color: #3b7362; font-size: .72rem; }
+.garden-top p:not(.garden-label) { max-width: 680px; font-size: .91rem; line-height: 1.5; }
+.garden-caption { flex: none; color: #a5b6a9; font-size: .7rem; font-weight: 850; letter-spacing: .1em; }
+.garden-board {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: clamp(485px, 59vw, 580px);
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid #d5e5d6;
+  border-radius: 22px;
+  background: #eaf3e9;
+}
+.garden-landscape {
+  position: absolute; z-index: 0;
+  width: 100%; height: 100%; inset: 0;
+  pointer-events: none;
+}
+.garden-board .spot {
+  position: absolute;
+  z-index: 3;
+  left: var(--x); top: var(--y);
+  width: clamp(96px, 14.5%, 142px);
+  min-height: 110px;
+  padding: 12px 7px;
+  gap: 6px;
+  border: 1px solid transparent;
+  border-radius: 50% 50% 20px 20px / 52% 52% 19px 19px;
+  background: transparent;
+  box-shadow: none;
+  color: #265d50;
+  transform: translate(-50%, -50%);
+  transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.garden-board .spot::before {
+  content: "";
+  position: absolute; z-index: -1;
+  width: 80%; height: 58%; left: 10%; top: 10%;
+  border-radius: 50%;
+  background: rgba(255,255,255,.38);
+  transition: background-color .2s ease;
+}
+.garden-board .spot:hover:not(:disabled),
+.garden-board .spot:focus-visible {
+  background: rgba(255, 255, 255, .56);
+  border-color: #9dbfaf;
+  transform: translate(-50%, -52%);
+}
+.garden-board .spot-sketch { width: 65px; height: 65px; stroke-width: 1.9; stroke: #2f7860; filter: drop-shadow(0 2px 0 rgba(31,70,43,.06)); }
+.garden-board .spot-name {
+  position: relative;
+  max-width: 100%;
+  background: rgba(255, 253, 247, .88);
+  border: 1px solid rgba(167, 191, 161, .55);
+  padding: 3px 9px;
+  border-radius: 100px;
+  font-size: .8rem;
+  line-height: 1.3;
+  font-weight: 770;
+}
+.garden-board .spot-result { position: absolute; top: -8px; right: -4px; min-height: 0; padding: 2px 5px; border-radius: 6px; background: #fff7e9; font-size: .7rem; }
+.garden-board .spot:not([data-result]) .spot-result { display: none; }
+.garden-board .spot[data-result="treat"] {
+  opacity: 1; border-color: rgba(140, 180, 146, .6);
+  background: rgba(233, 249, 227, .76);
+  animation: klaree-discovery 380ms cubic-bezier(.2,.7,.2,1) both;
+}
+.garden-board .spot[data-result="empty"] { background: rgba(245,246,241,.26); opacity: .5; }
+.garden-board .spot[data-result="treat"]::after {
+  content: ""; position: absolute; right: 3px; bottom: 13px;
+  width: 27px; height: 20px; border: 2px solid #b28a5c;
+  border-radius: 45%; transform: rotate(-22deg);
+  background: radial-gradient(circle at 30% 40%, #b28a5c 1px, transparent 2px),
+              radial-gradient(circle at 65% 55%, #b28a5c 1px, transparent 2px),
+              #f7dcb1;
+}
+.garden-character {
+  position: absolute; z-index: 2; left: 37%; top: 68%;
+  transform: translate(-50%, -50%); width: 118px;
+  display: flex; align-items: flex-end; flex-direction: column;
+  pointer-events: none;
+}
+.garden-character img { display: block; width: 118px; height: auto; position: relative; z-index: 1; }
+.garden-character-shadow { display: block; width: 70px; height: 6px; margin: -9px 17px 0 0; border-radius: 50%; background: rgba(91,133,91,.24); }
+@keyframes klaree-discovery {
+  from { opacity: .65; transform: translate(-50%, -50%) scale(.92); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+.game-sidebar {
+  display: grid; grid-template-columns: minmax(200px, 1.3fr) minmax(200px, 1fr) minmax(165px, .8fr);
+  align-items: center; gap: clamp(15px,3vw,34px);
+  border: 1px solid #e1e6d9; border-radius: 20px;
+  background: #fffaf2; padding: clamp(18px, 3vw, 25px);
+}
+.progress-head { margin-bottom: 9px; }
+.progress-suffix { color: #638674; font-size: .74rem; font-weight: 800; letter-spacing: .08em; }
+.counter { font-size: clamp(1.1rem,2.1vw,1.45rem); margin: 0 0 11px; }
+.game-sidebar progress { width: 100%; height: 6px; }
+.treat-ledger { display: flex; gap: 8px; padding-top: 13px; }
+.treat-token { width: 24px; height: 18px; border-radius: 40%; border: 2px solid #d0c9b6; background: #f4f2e8; transform: rotate(-16deg); }
+.treat-token:nth-child(even) { transform: rotate(13deg); }
+.treat-token.is-collected { background: #f5d39d; border-color: #b68e5f; }
+.feedback-block { min-width: 0; border-left: 1px solid #e3e6dc; padding-left: clamp(16px, 2.5vw, 30px); }
+.game-status { min-height: 0; margin: 0; color: #3d6256; font-size: .99rem; line-height: 1.5; }
+.finish { margin-bottom: 0; }
+.restart-block { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+.restart-block .reset-button { margin: 0; padding: 12px 15px; }
+.restart-block .privacy-note { margin: 0; font-size: .72rem; }
+@media (max-width: 740px) {
+  .garden-board { height: 525px; }
+  .garden-board .spot { width: 112px; min-height: 100px; }
+  .garden-board .spot-sketch { width: 55px; height: 55px; }
+  .garden-character { left: 39%; top: 65%; width: 105px; }
+  .garden-character img { width: 105px; }
+  .game-sidebar { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 17px; }
+  .progress-block { grid-column: 1 / 2; }
+  .feedback-block { grid-column: 2 / 3; padding-left: 15px; }
+  .restart-block { grid-column: 1 / -1; flex-direction: row; align-items: center; justify-content: space-between; }
+  .restart-block .reset-button { width: auto; flex: 0 0 auto; }
+  .restart-block .privacy-note { max-width: 230px; }
+}
+@media (max-width: 480px) {
+  .intro { min-height: 175px; }
+  .story-detail { display: none; }
+  .garden-board { height: 585px; border-radius: 16px; }
+  .garden-top { display: block; padding: 0 3px 13px; }
+  .garden-caption { display: none; }
+  .garden-top p:not(.garden-label) { font-size: .83rem; }
+  .garden-board .spot { width: 31%; min-height: 89px; gap: 1px; padding: 5px 2px; }
+  .garden-board .spot-sketch { width: 45px; height: 45px; }
+  .garden-board .spot-name { font-size: .66rem; padding: 3px 6px; }
+  .garden-board .spot-result { font-size: .59rem; right: 0; top: -6px; }
+  .garden-board .spot::after { bottom: 8px; }
+  .garden-board .spot[data-spot="flower"] { left: 16%; top: 16%; }
+  .garden-board .spot[data-spot="hedge"] { left: 50%; top: 16%; }
+  .garden-board .spot[data-spot="tree"] { left: 84%; top: 16%; }
+  .garden-board .spot[data-spot="bench"] { left: 16%; top: 44%; }
+  .garden-board .spot[data-spot="stone"] { left: 50%; top: 44%; }
+  .garden-board .spot[data-spot="watering"] { left: 84%; top: 44%; }
+  .garden-board .spot[data-spot="basket"] { left: 16%; top: 71%; }
+  .garden-board .spot[data-spot="fence"] { left: 50%; top: 71%; }
+  .garden-board .spot[data-spot="grass"] { left: 84%; top: 71%; }
+  .garden-character { left: 50%; top: 90%; width: 86px; }
+  .garden-character img { width: 86px; }
+  .garden-character-shadow { width: 56px; }
+  .game-sidebar { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; padding: 16px; }
+  .progress-block, .feedback-block, .restart-block { grid-column: 1; }
+  .feedback-block { border-left: 0; border-top: 1px solid #e3e6dc; padding: 12px 0 0; }
+  .restart-block { flex-direction: column; align-items: stretch; }
+  .restart-block .reset-button { width: 100%; }
+  .restart-block .privacy-note { max-width: none; }
+  .treat-ledger { gap: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .garden-board .spot { transition: none; animation: none !important; }
+  .garden-board .spot:hover:not(:disabled) { transform: translate(-50%, -50%); }
+}
