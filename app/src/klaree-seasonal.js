@@ -39,8 +39,10 @@ const content = {
       alt: "Klaree grüßt zum Feiertag",
     },
     preview: "Vorschau · nicht der heutige Feiertag",
-    open: "Gruß öffnen",
+    open: "Gruß ansehen",
     close: "Gruß schließen",
+    later: "Danke, Klaree!",
+    dismiss: "Saisonale Klaree-Karte ausblenden",
   },
   en: {
     christmas: {
@@ -64,8 +66,10 @@ const content = {
       alt: "Klaree greeting you on a public holiday",
     },
     preview: "Preview · not today’s holiday",
-    open: "Open greeting",
+    open: "View greeting",
     close: "Close greeting",
+    later: "Thanks, Klaree!",
+    dismiss: "Dismiss Klaree’s seasonal card",
   },
 };
 
@@ -148,5 +152,10 @@ export function getKlareeSeasonalMoment({
 
 export function getKlareeGreetingControls(locale) {
   const lang = locale === "en" ? "en" : "de";
-  return { open: content[lang].open, close: content[lang].close };
+  return {
+    open: content[lang].open,
+    close: content[lang].close,
+    later: content[lang].later,
+    dismiss: content[lang].dismiss,
+  };
 }
