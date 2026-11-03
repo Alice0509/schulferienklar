@@ -1929,7 +1929,7 @@ export default function App() {
           <a className="brand" href={locale === "en" ? "/en/calendar.html" : "/"} aria-label="Schulferienklar Startseite">
             <img
               className="brand-mark"
-              src="/brand-mark.png"
+              src="/favicon.svg"
               alt=""
               aria-hidden="true"
               width="36"

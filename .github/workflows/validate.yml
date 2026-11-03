@@ -34,6 +34,9 @@ jobs:
       - name: Check bilingual home translations
         run: node --test tests/home-language.test.js
 
+      - name: Check consistent Schulferienklar brand icon
+        run: node --test tests/brand-icon-consistency.test.js
+
       - name: Validate Klaree time-of-day character states
         run: node --test tests/klaree-time.test.js
 
