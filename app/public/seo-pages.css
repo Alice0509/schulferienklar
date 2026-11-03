@@ -1439,3 +1439,12 @@ p {
 .sf-year-save span { flex: 1 1 250px; }
 .sf-year-save a { font-weight: 750; color: #176f64; text-underline-offset: 2px; }
 .sf-year-save a:focus-visible { outline: 2px solid #176f64; outline-offset: 3px; }
+
+/* Secondary link to the existing iPhone app and native Home Screen widgets.
+   Keep the main bookmark path visually dominant; no extra banner or pop-up. */
+.sf-year-save .sf-year-ios-link {
+  color: #526d67;
+  font-size: .79rem;
+  font-weight: 600;
+}
+.sf-year-save .sf-year-ios-link:hover { color: #176f64; }
