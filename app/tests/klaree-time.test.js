@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import process from "node:process";
 import path from "node:path";
 import { getKlareeMoment } from "../src/klaree-time.js";
 
