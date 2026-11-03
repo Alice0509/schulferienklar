@@ -2610,7 +2610,7 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
         <p class="eyebrow">Bayern · Kalenderjahr 2027</p>
         <h1>Schulferien Bayern 2027</h1>
 
-${stateYearVisualCalendarHtml({ events, name, year })}
+${stateYearVisualCalendarHtml({ events, name, code, year })}
 
         <p class="gold-page-intro">
           Hier stehen zuerst die offiziellen Ferientermine. Zusätzlich zeigt
@@ -2817,7 +2817,9 @@ function indentGoldText(
 }
 
 
-function stateYearVisualCalendarHtml({ events, name, year, locale = "de" }) {
+function stateYearVisualCalendarHtml({ events, name, code, year, locale = "de" }) {
+  const publicHolidays = getPublicHolidaysForStateAndYear({ publicHolidayIndex, code, year })
+    .filter((holiday) => holiday.includeInDefaultCalendar === true && holiday.scope === "statewide");
   // Only use published dataset events; do not fabricate missing dates.
   const en = locale === "en";
   const months = en
@@ -2847,28 +2849,37 @@ function stateYearVisualCalendarHtml({ events, name, year, locale = "de" }) {
         entry.startDate <= key && entry.endDate >= key
       );
       const weekday = new Date(Date.UTC(year, index, day)).getUTCDay();
+      const publicHoliday = publicHolidays.find((holiday) => holiday.date === key);
+      const publicHolidayLabel = publicHoliday
+        ? (en ? (publicHoliday.name?.en || getHolidayName(publicHoliday)) : getHolidayName(publicHoliday))
+        : "";
+      const publicClass = publicHoliday ? " sf-day-public" : "";
+      const publicAria = publicHoliday
+        ? (en ? "; public holiday: " : "; Feiertag: ") + escapeHtml(publicHolidayLabel)
+        : "";
       if (event) {
         marked++;
         const holidayLabel = en ? (event.name?.en || getHolidayName(event)) : getHolidayName(event);
         const target = "termin-" + String(event.id || event.type)
           .toLowerCase().replace(/[^a-z0-9-]+/g, "-");
         return '<a class="sf-day sf-day-holiday' +
-          (weekday === 0 || weekday === 6 ? ' sf-day-weekend' : '') +
+          (weekday === 0 || weekday === 6 ? ' sf-day-weekend' : '') + publicClass +
           '" href="#' + target +
-          '" title="' + escapeHtml(holidayLabel) +
+          '" title="' + escapeHtml(holidayLabel) + (publicHoliday ? '; ' + escapeHtml(publicHolidayLabel) : '') +
           '" aria-label="' + day + '. ' + label + ' ' + year +
-          ': ' + escapeHtml(holidayLabel) + '">' + day + '</a>';
+          ': ' + escapeHtml(holidayLabel) + publicAria + '">' + day + '</a>';
       }
       return '<span class="sf-day' +
-        (weekday === 0 || weekday === 6 ? ' sf-day-weekend' : '') +
-        '" aria-label="' + day + '. ' + label + ' ' + year +
-        '">' + day + '</span>';
+        (weekday === 0 || weekday === 6 ? ' sf-day-weekend' : '') + publicClass +
+        '" aria-label="' + day + '. ' + label + ' ' + year + publicAria +
+        '"' + (publicHoliday ? ' title="' + escapeHtml(publicHolidayLabel) + '"' : '') +
+        '>' + day + '</span>';
     }).join("");
 
     return '<article class="sf-month" id="sf-month-' + year + '-' +
       month + '" aria-label="' + label + ' ' + year + '">' +
       '<header><strong>' + label + '</strong><small>' +
-      (marked ? marked + (en ? ' marked dates' : ' markierte Tage') : (en ? 'No recorded school breaks' : 'Keine erfassten Schulferien')) +
+      (marked ? marked + (en ? ' school-free days' : ' schulfreie Tage') : (en ? 'No recorded school breaks' : 'Keine erfassten Schulferien')) +
       '</small></header>' +
       '<div class="sf-month-grid" aria-hidden="true">' +
       weekDays.map((day) => '<span class="sf-weekday">' + day + '</span>').join("") +
@@ -2887,7 +2898,8 @@ function stateYearVisualCalendarHtml({ events, name, year, locale = "de" }) {
     '<h2>' + (en ? 'When are the school holidays in ' : 'Wo liegen die Ferien ') + year + '?</h2></div>' +
     '<a href="#termine">' + (en ? 'See all dates' : 'Alle Ferientermine ansehen') + '</a></div>' +
     '<div class="sf-year-key"><span class="sf-key-ferie"></span> ' + (en ? 'Recorded school-free days' : 'Erfasste schulfreie Tage') + ' ' +
-    '<span class="sf-key-weekend"></span> ' + (en ? 'Weekend' : 'Wochenende') + '</div>' +
+    '<span class="sf-key-weekend"></span> ' + (en ? 'Weekend' : 'Wochenende') + ' ' +
+    '<span class="sf-key-public"></span> ' + (en ? 'Statewide public holiday' : 'Landesweiter Feiertag') + '</div>' +
     '<p class="sf-year-hint sf-hint-desktop">' + (en ? 'Select a highlighted date to view the corresponding school break below.' : 'Markierte Tage auswählen, um die zugehörigen Ferientermine weiter unten zu sehen.') + '</p>' +
     '<p class="sf-year-hint sf-hint-mobile">' + (en ? 'Swipe between months; tap highlighted dates for details.' : 'Monate seitlich wischen; markierte Tage öffnen die Ferientermine.') + '</p>' +
     '<nav class="sf-month-jump" aria-label="' +
@@ -3021,7 +3033,7 @@ ${seoTopNavHtml({
         </p>
         <h1>${h1}</h1>
 
-${stateYearVisualCalendarHtml({ events, name, year })}
+${stateYearVisualCalendarHtml({ events, name, code, year })}
 
         <p class="gold-page-intro">
 ${indentGoldText(
@@ -5235,7 +5247,7 @@ ${seoTopNavHtml({
           Schulferien Baden-Württemberg 2027
         </h1>
 
-${stateYearVisualCalendarHtml({ events, name, year })}
+${stateYearVisualCalendarHtml({ events, name, code, year })}
 
         <p class="gold-page-intro">
           Hier stehen zuerst die landesweit
@@ -7812,7 +7824,7 @@ ${seoTopNavHtml({ appHref: `/?state=${code}&year=${year}` })}      <section clas
         <p class="eyebrow">Schulferien ${year}</p>
         <h1>Schulferien ${name} ${year}</h1>
 
-${stateYearVisualCalendarHtml({ events, name, year })}
+${stateYearVisualCalendarHtml({ events, name, code, year })}
 
         <p>
           Vergleiche die erfassten Ferientermine für ${name} ${year}
@@ -8141,7 +8153,7 @@ function englishStateYearPage({ slug, name, englishName, code, year, events }) {
     '<section class="card gold-page" data-english-state-year="' + code + '-' + year + '">' +
     '<p class="eyebrow">Germany · ' + escapeHtml(englishName) + ' · ' + year + '</p>' +
     '<h1>School holidays in ' + escapeHtml(englishName) + ' ' + year + '</h1>' +
-    stateYearVisualCalendarHtml({ events, name: englishName, year, locale: "en" }) +
+    stateYearVisualCalendarHtml({ events, name: englishName, code, year, locale: "en" }) +
     '<p class="gold-page-intro">See when children are off school in ' +
     escapeHtml(englishName) + ', check dates on a visual month-by-month calendar, ' +
     'and plan around weekends. The source dates are kept separate from ' +
