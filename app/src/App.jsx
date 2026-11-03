@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 import "./home-refresh.css";
 import "./mobile-flow.css";
+import { getUiLocale, localizeTree, translateText } from "./home-i18n.js";
 import {
   daysBetween,
   parseDateKey as parseDate,
@@ -372,7 +373,7 @@ function getFreePeriodStatus(holiday, publicHolidays = []) {
 }
 
 function formatDate(value) {
-  return new Intl.DateTimeFormat("de-DE", {
+  return new Intl.DateTimeFormat(getUiLocale() === "en" ? "en-GB" : "de-DE", {
     day: "2-digit",
     month: "short",
     year: "numeric",
@@ -386,22 +387,22 @@ function formatCompactDateRange(startValue, endValue) {
   const sameYear = startDate.getFullYear() === endDate.getFullYear();
 
   if (sameMonth && sameYear) {
-    const startDay = new Intl.DateTimeFormat("de-DE", {
+    const startDay = new Intl.DateTimeFormat(getUiLocale() === "en" ? "en-GB" : "de-DE", {
       day: "2-digit",
     }).format(startDate);
-    const endDateLabel = new Intl.DateTimeFormat("de-DE", {
+    const endDateLabel = new Intl.DateTimeFormat(getUiLocale() === "en" ? "en-GB" : "de-DE", {
       day: "2-digit",
       month: "short",
     }).format(endDate);
 
-    return `${startDay}.–${endDateLabel}`;
+    return getUiLocale() === "en" ? `${startDay}–${endDateLabel}` : `${startDay}.–${endDateLabel}`;
   }
 
   return `${formatDate(startValue)} – ${formatDate(endValue)}`;
 }
 
 function formatWeekdayDate(value) {
-  return new Intl.DateTimeFormat("de-DE", {
+  return new Intl.DateTimeFormat(getUiLocale() === "en" ? "en-GB" : "de-DE", {
     weekday: "short",
     day: "numeric",
     month: "short",
@@ -414,14 +415,14 @@ function formatWeekdayCompactDateRange(startValue, endValue) {
   const endDate = parseDate(endValue);
   const sameYear = startDate.getFullYear() === endDate.getFullYear();
 
-  const startLabel = new Intl.DateTimeFormat("de-DE", {
+  const startLabel = new Intl.DateTimeFormat(getUiLocale() === "en" ? "en-GB" : "de-DE", {
     weekday: "short",
     day: "numeric",
     month: "short",
     ...(sameYear ? {} : { year: "numeric" }),
   }).format(startDate);
 
-  const endLabel = new Intl.DateTimeFormat("de-DE", {
+  const endLabel = new Intl.DateTimeFormat(getUiLocale() === "en" ? "en-GB" : "de-DE", {
     weekday: "short",
     day: "numeric",
     month: "short",
@@ -432,7 +433,7 @@ function formatWeekdayCompactDateRange(startValue, endValue) {
 }
 
 function formatMonth(year, monthIndex) {
-  return new Intl.DateTimeFormat("de-DE", {
+  return new Intl.DateTimeFormat(getUiLocale() === "en" ? "en-GB" : "de-DE", {
     month: "long",
     year: "numeric",
   }).format(new Date(year, monthIndex, 1));
@@ -448,15 +449,23 @@ function getDaysUntil(holiday) {
   return daysBetween(TODAY, parseDate(holiday.startDate));
 }
 
-function formatDayCount(count, singular = "Tag", plural = "Tage") {
+function formatDayCount(count, singular = getUiLocale() === "en" ? "day" : "Tag", plural = getUiLocale() === "en" ? "days" : "Tage") {
   return `${count} ${count === 1 ? singular : plural}`;
 }
 
 function getHolidayLabel(holiday) {
+  if (getUiLocale() === "en") {
+    return holiday?.name?.en ||
+      translateText(holiday?.name?.de || holiday?.type || "Ferien", "en");
+  }
   return holiday?.name?.de || holiday?.type || "Ferien";
 }
 
 function getPublicHolidayName(holiday) {
+  if (getUiLocale() === "en") {
+    return holiday?.name?.en ||
+      translateText(holiday?.name?.de || holiday?.name || "Feiertag", "en");
+  }
   return holiday?.name?.de || holiday?.name || "Feiertag";
 }
 
@@ -487,7 +496,7 @@ function getCalendarHolidayLabel(holiday) {
     return label;
   }
 
-  return `${label} · ${getPublicHolidayScopeText(holiday)}`;
+  return `${label} · ${translateText(getPublicHolidayScopeText(holiday))}`;
 }
 
 function getNextHoliday(holidays) {
@@ -628,7 +637,7 @@ function HolidayCalendar({
     );
   }
 
-  return (
+  return localizeTree((
     <div className="calendar-view">
       {showLegend && (
         <div className="calendar-legend">
@@ -662,7 +671,7 @@ function HolidayCalendar({
               <h3>{formatMonth(year, monthIndex)}</h3>
 
               <div className="weekday-row">
-                {WEEKDAYS.map((day) => (
+                {(getUiLocale() === "en" ? ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"] : WEEKDAYS).map((day) => (
                   <span key={day}>{day}</span>
                 ))}
               </div>
@@ -760,7 +769,7 @@ function HolidayCalendar({
         </div>
       )}
     </div>
-  );
+  ), getUiLocale());
 }
 
 function MobileActiveMonthCalendar({
@@ -797,7 +806,7 @@ function MobileActiveMonthCalendar({
   const isCurrentYear = selectedYear === TODAY.getFullYear();
   const isViewingCurrentMonth =
     isCurrentYear && safeActiveMonthIndex === initialMonthIndex;
-  const currentYearUrl = `/?year=${TODAY.getFullYear()}#ferienkalender`;
+  const currentYearUrl = `${getUiLocale() === "en" ? "/en/calendar.html" : "/"}?year=${TODAY.getFullYear()}#ferienkalender`;
 
   const goToCurrentMonth = () => {
     setActiveMonthIndex(initialMonthIndex);
@@ -858,7 +867,7 @@ function MobileActiveMonthCalendar({
     pointerStartRef.current = null;
   };
 
-  return (
+  return localizeTree((
     <section
       className="panel mobile-active-month-calendar"
       aria-labelledby="mobile-month-title"
@@ -960,7 +969,7 @@ function MobileActiveMonthCalendar({
         showLegend={false}
       />
     </section>
-  );
+  ), getUiLocale());
 }
 
 function isStandaloneAppMode() {
@@ -1881,8 +1890,13 @@ export default function App() {
   };
 
   const pattern = getHeroPattern(selectedCode);
+  const locale = getUiLocale();
+  const targetLanguage = locale === "en" ? "de" : "en";
+  const languageUrl = (targetLanguage === "en" ? "/en/calendar.html" : "/") +
+    "?state=" + encodeURIComponent(selectedCode) +
+    "&year=" + encodeURIComponent(selectedYear);
 
-  return (
+  return localizeTree((
     <main className="page">
       <button
         className={`floating-site-menu-button ${isSiteMenuOpen ? "is-open" : ""} ${isFooterVisible && !isSiteMenuOpen ? "is-footer-visible" : ""}`}
@@ -1908,7 +1922,7 @@ export default function App() {
 
       <section className={`hero hero-${pattern}`}>
         <nav className="topbar">
-          <a className="brand" href="/" aria-label="Schulferienklar Startseite">
+          <a className="brand" href={locale === "en" ? "/en/calendar.html" : "/"} aria-label="Schulferienklar Startseite">
             <img
               className="brand-mark"
               src="/brand-mark.png"
@@ -1923,6 +1937,11 @@ export default function App() {
           <div className="topbar-actions">
             <a className="badge" href="/datenquellen.html">
               Datenquellen &amp; Prüfung
+            </a>
+            <a className="home-lang-switch" href={languageUrl}
+               lang={targetLanguage} hrefLang={targetLanguage}
+               aria-label={locale === "en" ? "Switch to German" : "Zur englischen Version wechseln"}>
+              {locale === "en" ? "Deutsch" : "English"}
             </a>
             <button
               className="site-menu-button"
@@ -3152,7 +3171,7 @@ export default function App() {
                       key={activeOverlapMonthKey}
                     >
                       <div className="overlap-weekdays">
-                        {WEEKDAYS.map((weekday) => (
+                        {(getUiLocale() === "en" ? ["Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"] : WEEKDAYS).map((weekday) => (
                           <span key={weekday}>{weekday}</span>
                         ))}
                       </div>
@@ -3376,5 +3395,5 @@ export default function App() {
         <p className="footer-credit">Gestaltung und Entwicklung: Joan.</p>
       </footer>
     </main>
-  );
+  ), locale);
 }

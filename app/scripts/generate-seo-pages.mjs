@@ -8179,7 +8179,8 @@ function englishStateYearPage({ slug, name, englishName, code, year, events }) {
     '</head><body class="seo-page sf-english-page"><main>' +
     '<nav class="seo-top-nav" aria-label="Main navigation">' +
     '<a class="seo-brand" href="/en/">Schulferienklar</a>' +
-    '<div class="seo-top-links"><a href="/en/">All states</a><a href="' + deUrl +
+    '<div class="seo-top-links"><a href="/en/">All states</a>' +
+    '<a href="/en/calendar.html?state=' + code + '&amp;year=' + year + '">Calendar</a><a href="' + deUrl +
     '" lang="de" hreflang="de">Deutsch</a>' +
     '<a href="https://germanytravelchecker.com/" rel="noopener noreferrer">' +
     'Germany Travel Checker</a></div></nav>' +
@@ -8208,8 +8209,8 @@ function englishStateYearPage({ slug, name, englishName, code, year, events }) {
     'not extra official school holiday dates.</p></div></div>' +
     '<p>Individual school exceptions, locally observed public holidays and ' +
     'movable school days are not included automatically. Confirm before booking.</p>' +
-    '<p><a class="button" href="/?state=' + code + '&amp;year=' + year +
-    '">Open the interactive calendar (German)</a></p></section>' +
+    '<p><a class="button" href="/en/calendar.html?state=' + code + '&amp;year=' + year +
+    '">Open the interactive calendar</a></p></section>' +
     '<section id="source" class="gold-section"><h2>Official source and data status</h2>' +
     '<p>' + escapeHtml(source?.sourceName || 'Official regional school holiday calendar') +
     '</p><p>' + sourceLink + '</p>' +
@@ -8262,6 +8263,7 @@ function englishIndexPage() {
     'the official school holiday periods on a visual calendar. Dates, weekends ' +
     'and planned time off are clearly distinguished. Some 2030 calendars are ' +
     'still incomplete, so always check the data coverage note.</p>' +
+    '<p><a class="button" href="/en/calendar.html">Open the interactive calendar and holiday planner</a></p>' +
     '<div class="sf-english-hub-grid">' + cards + '</div>' +
     '<section class="gold-section"><h2>Holiday dates and travel planning</h2>' +
     '<p>School holiday dates vary by federal state. For train disruptions, ' +
@@ -8288,6 +8290,7 @@ function writeSitemap() {
   const staticPages = [
     ["/", "weekly", "1.0"],
     ["/en/", "monthly", "0.8"],
+    ["/en/calendar.html", "weekly", "0.9"],
     ["/widget.html", "monthly", "0.7"],
     ...years.map((year) => [
       `/urlaubsplaner-${year}.html`,

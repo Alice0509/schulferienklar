@@ -31,8 +31,14 @@ jobs:
       - name: Lint
         run: npm run lint
 
+      - name: Check bilingual home translations
+        run: node --test tests/home-language.test.js
+
       - name: Check AdSense and CMP integration
         run: node --test tests/adsense-setup.test.js
 
       - name: Validate data and build SEO
         run: npm run build:seo:checked
+
+      - name: Validate English home output
+        run: node scripts/validate-home-languages.mjs
