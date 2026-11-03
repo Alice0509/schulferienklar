@@ -11,13 +11,16 @@
     const url = canonical || window.location.origin + window.location.pathname;
     const title = document.title;
     status.textContent = "";
+    prompt?.classList.remove("is-thanked");
     try {
       if (typeof navigator.share === "function") {
         await navigator.share({ title, url });
         status.textContent = isEnglish ? "Thanks for sharing!" : "Danke fürs Teilen!";
+        prompt?.classList.add("is-thanked");
       } else if (navigator.clipboard?.writeText) {
         await navigator.clipboard.writeText(url);
         status.textContent = isEnglish ? "Link copied!" : "Link kopiert!";
+        prompt?.classList.add("is-thanked");
       } else {
         status.textContent = url;
       }
