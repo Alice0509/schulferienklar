@@ -2119,11 +2119,14 @@ export default function App() {
                       </span>
                     </span>
                   </button>
-                  {isKlareeGreetingOpen && (
-                    <p id="klaree-seasonal-message" className="klaree-seasonal-message" role="status">
-                      {klareeSeasonal.message}
-                    </p>
-                  )}
+                  <p
+                    id="klaree-seasonal-message"
+                    className="klaree-seasonal-message"
+                    role="status"
+                    hidden={!isKlareeGreetingOpen}
+                  >
+                    {klareeSeasonal.message}
+                  </p>
                 </>
               ) : (
                 <>
