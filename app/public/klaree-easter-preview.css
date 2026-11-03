@@ -49,15 +49,15 @@ main { padding: 35px 0 40px; }
   border-radius: 17px; background: #fff; color: #205348;
   transition: background-color .17s ease, border-color .17s ease, transform .17s ease;
 }
-.spot:not(:disabled):hover { border-color: #6fac94; background: #f0faf4; transform: translateY(-2px); }
+.spot:not([aria-disabled="true"]):hover { border-color: #6fac94; background: #f0faf4; transform: translateY(-2px); }
 .spot-sketch { width: 50px; height: 50px; fill: none; stroke: #347b65; stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; }
 .spot-name { font-size: .9rem; font-weight: 770; text-align: center; }
 .spot-result { display: block; font-size: .7rem; font-weight: 800; min-height: 1em; color: #3d6f62; }
 .spot[data-result="treat"] { background: #e8f6ec; border-color: #80b69a; }
 .spot[data-result="treat"] .spot-sketch { stroke: #277258; }
 .spot[data-result="empty"] { background: #f7f7f4; opacity: .64; }
-.spot:disabled { cursor: default; }
-.spot:disabled:not([data-result]) { opacity: .56; }
+.spot[aria-disabled="true"] { cursor: default; }
+.spot[aria-disabled="true"]:not([data-result]) { opacity: .56; }
 .game-sidebar { border: 1px solid #e3e5d9; border-radius: 23px; background: #fffaf2; padding: 24px; }
 .progress-head { display: flex; justify-content: space-between; align-items: center; color: #bdad8e; }
 .counter { font-size: 1.4rem; font-weight: 800; letter-spacing: -.035em; line-height: 1.3; margin: 17px 0 10px; }
@@ -107,7 +107,7 @@ footer nav { display: flex; gap: 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .spot { transition: none; }
-  .spot:not(:disabled):hover { transform: none; }
+  .spot:not([aria-disabled="true"]):hover { transform: none; }
 }
 
 
@@ -177,7 +177,7 @@ footer nav { display: flex; gap: 20px; }
   background: rgba(255,255,255,.38);
   transition: background-color .2s ease;
 }
-.garden-board .spot:hover:not(:disabled),
+.garden-board .spot:hover:not([aria-disabled="true"]),
 .garden-board .spot:focus-visible {
   background: rgba(255, 255, 255, .56);
   border-color: #9dbfaf;
@@ -290,5 +290,5 @@ footer nav { display: flex; gap: 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .garden-board .spot { transition: none; animation: none !important; }
-  .garden-board .spot:hover:not(:disabled) { transform: translate(-50%, -50%); }
+  .garden-board .spot:hover:not([aria-disabled="true"]) { transform: translate(-50%, -50%); }
 }
