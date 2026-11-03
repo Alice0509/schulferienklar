@@ -20,6 +20,9 @@ const requiredFiles = [
   "sitemap.xml",
   "seo-pages.css",
   "klaree-mascot.webp",
+  "klaree-walk.webp",
+  "klaree-calendar.webp",
+  "klaree-rest.webp",
   "urlaubsplaner.css",
   "widget.html",
   "widget-demo.js",
@@ -179,6 +182,10 @@ for (const file of schoolHolidayHtmlFiles) {
       }
     }
     // Share prompts must be intentional, outside ad blocks, and localized.
+    if (html.split('class="sf-share-klaree"').length - 1 !== 1 ||
+        !html.includes('src="/klaree-rest.webp"')) {
+      errors.push(`${file}: missing voluntary share feedback art`);
+    }
     if (html.split('class="sf-share-prompt"').length - 1 !== 1 ||
         !html.includes('class="sf-share-button"') ||
         !html.includes('src="/calendar-share.js"')) {
@@ -190,6 +197,10 @@ for (const file of schoolHolidayHtmlFiles) {
         !html.includes(`href="/?state=${code}"`) ||
         !html.includes(`Schulferienklar für `)) {
       errors.push(`${file}: missing year-independent branded return link`);
+    }
+    if (html.split('class="sf-year-klaree-calendar"').length - 1 !== 1 ||
+        !html.includes('src="/klaree-calendar.webp"')) {
+      errors.push(`${file}: missing calendar-checking Klaree`);
     }
     if (html.split('class="sf-year-klaree"').length - 1 !== 1 ||
         !html.includes('src="/klaree-mascot.webp"') ||
@@ -493,11 +504,15 @@ for (const [
         'class="sf-year-visual"',
         'class="sf-year-save"',
         'class="sf-year-klaree"',
+        'class="sf-year-klaree-calendar"',
+        'src="/klaree-calendar.webp"',
         'Klaree, the school holiday companion',
         'Klaree’s tip:',
         'src="/klaree-mascot.webp"',
         'class="sf-share-prompt"',
         'Share calendar',
+        'class="sf-share-klaree"',
+        'src="/klaree-rest.webp"',
         'src="/calendar-share.js"',
         'href="/?state=' + code + '"',
         'Come back to Schulferienklar',
