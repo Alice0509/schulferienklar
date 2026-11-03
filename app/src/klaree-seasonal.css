@@ -1,118 +1,316 @@
-/* Klaree's seasonal cameo lives in the SAME useful homepage position as
-   the everyday character. Not a sticky popup, ad CTA, modal or calendar overlay. */
-.klaree-hero-appearance.klaree-seasonal {
-  width: min(100%, 500px);
+/* Seasonal Klaree, designed from the owner's wide-banner homepage mockups.
+   Ordinary days still use the original time-of-day cameo and existing layout.
+   Seasonal days move the hero heading and CTA into a wider, accessible composition. */
+.hero-grid.hero-grid--seasonal {
+  grid-template-columns: minmax(0, 1.12fr) minmax(300px, .88fr);
+  grid-template-areas:
+    "eyebrow eyebrow"
+    "title title"
+    "description description"
+    "event event"
+    "app next"
+    "selector next"
+    "actions next";
+  align-items: start;
+  column-gap: 32px;
+  row-gap: 0;
+}
+.hero-grid--seasonal > .hero-copy { display: contents; }
+.hero-grid--seasonal .hero-copy > .eyebrow { grid-area: eyebrow; }
+.hero-grid--seasonal .hero-copy > h1 { grid-area: title; max-width: 920px; }
+.hero-grid--seasonal .hero-copy > .hero-text {
+  grid-area: description;
+  max-width: 850px;
+  margin-bottom: 22px;
+}
+.hero-grid--seasonal .hero-copy > .klaree-event-banner { grid-area: event; }
+.hero-grid--seasonal .hero-copy > .ios-app-promo { grid-area: app; margin: 18px 0 0; max-width: 100%; }
+.hero-grid--seasonal .hero-copy > .selector-card { grid-area: selector; max-width: 100%; }
+.hero-grid--seasonal .hero-copy > .hero-actions { grid-area: actions; }
+.hero-grid--seasonal > .next-card { grid-area: next; margin-top: 18px; align-self: start; }
+.hero-grid--seasonal > .hero-mobile-calendar-preview { display: none; }
+
+/* The wide event is an actual landscape moment, not a 500px thumbnail CTA. */
+.klaree-event-banner {
+  --event-accent: #156e55;
+  position: relative;
+  z-index: 0;
   display: flex;
-  flex-direction: column;
   align-items: stretch;
-  padding: 8px 10px;
-  min-height: 0;
-  margin: 12px 0 18px;
-  gap: 0;
-  border: 1px solid #c9dfd2;
-  border-radius: 19px;
-  background: linear-gradient(112deg, #eff7f0, #fffaf2);
-}
-.klaree-hero-appearance.klaree-seasonal[data-klaree-moment="christmas"] {
-  border-color: #e5d8c9;
-  background: linear-gradient(115deg, #fff9ee, #f6f7f0);
-}
-.klaree-seasonal-trigger {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  isolation: isolate;
+  min-height: 240px;
   width: 100%;
-  min-height: 112px;
-  margin: 0;
-  padding: 4px 8px 4px 1px;
-  background: transparent;
-  border: 0;
-  border-radius: 13px;
-  color: #263b36;
-  text-align: left;
-  cursor: pointer;
+  border: 1px solid #d8e5d5;
+  border-radius: 26px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 83% 86%, rgba(174,205,151,.51), transparent 37%),
+    linear-gradient(115deg, #fff9ee 3%, #f3f8e9 68%, #e9f4e5 100%);
+  box-shadow: 0 7px 24px rgba(32,80,50,.045);
 }
-.klaree-seasonal-trigger:focus-visible {
-  outline: 3px solid #196e60;
-  outline-offset: 2px;
+.klaree-event-banner--christmas {
+  --event-accent: #196956;
+  border-color: #e7d9ce;
+  background:
+    radial-gradient(ellipse at 79% 92%, rgba(236,216,194,.56), transparent 42%),
+    linear-gradient(110deg, #fffaf1 0%, #f9f3ef 73%, #faf5e9 100%);
 }
-.klaree-seasonal-illustration {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 158px;
+.klaree-event-banner--holiday {
+  min-height: 194px;
+  background: linear-gradient(115deg, #eff8f1, #fff9f0);
+}
+.klaree-event-copy {
+  position: relative;
+  z-index: 2;
+  flex: 0 0 56%;
   min-width: 0;
-  flex: 0 0 158px;
-}
-.klaree-seasonal-illustration img {
-  display: block;
-  max-width: 100%;
-  width: auto;
-  height: auto;
-  max-height: 110px;
-  object-fit: contain;
-  border-radius: 9px;
-  animation: klaree-seasonal-arrival 650ms ease-out both;
-}
-.klaree-seasonal-copy {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
-  min-width: 0;
-  flex: 1;
+  justify-content: center;
+  padding: 26px 14px 25px clamp(21px, 4.5vw, 64px);
 }
-.klaree-seasonal-preview {
-  font-weight: 770;
-  font-size: .68rem;
+.klaree-event-kicker {
+  color: #376f5e;
+  font-size: .74rem;
+  font-weight: 850;
   line-height: 1.35;
-  color: #876953;
+  letter-spacing: .09em;
 }
-.klaree-seasonal-kicker {
-  color: #346c5c;
-  font-size: .68rem;
-  line-height: 1.25;
-  font-weight: 810;
-  letter-spacing: .075em;
-}
-.klaree-seasonal-title {
-  color: #174f44;
-  font-size: 1.03rem;
-  line-height: 1.24;
-  font-weight: 840;
-}
-.klaree-seasonal-link {
+.klaree-event-preview {
   display: inline-block;
-  color: #176f64;
-  font-size: .78rem;
+  max-width: 100%;
+  margin-bottom: 6px;
+  color: #8d6346;
+  font-size: .7rem;
+  font-weight: 790;
   line-height: 1.3;
-  font-weight: 740;
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
-.klaree-seasonal-message {
-  margin: 4px 7px 7px;
-  padding: 12px 14px;
-  border-top: 1px solid #d7e2d7;
-  background: rgba(255, 255, 255, .64);
-  border-radius: 11px;
-  color: #39584d;
-  font-size: .86rem;
-  line-height: 1.55;
+.klaree-event-copy h2 {
+  margin: 7px 0 10px;
+  color: #155846;
+  font-size: clamp(1.55rem, 3vw, 2.8rem);
+  font-weight: 860;
+  letter-spacing: -.04em;
+  line-height: 1.1;
 }
-.klaree-seasonal-message[hidden] { display: none; }
-@keyframes klaree-seasonal-arrival {
-  0% { opacity: 0; transform: translateY(6px); }
-  100% { opacity: 1; transform: translateY(0); }
+.klaree-event-copy p {
+  max-width: 440px;
+  margin: 0 0 16px;
+  color: #43564d;
+  line-height: 1.5;
+  font-size: clamp(.84rem, 1.2vw, 1.05rem);
+}
+.klaree-event-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 17px;
+  min-height: 45px;
+  border: 1px solid #176f64;
+  border-radius: 999px;
+  padding: 10px 22px;
+  background: #156e60;
+  color: #fff;
+  font: inherit;
+  font-size: .9rem;
+  font-weight: 790;
+  line-height: 1.3;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 3px 7px rgba(20, 80, 60, .1);
+}
+.klaree-event-cta:hover { background: #105a4c; }
+.klaree-event-cta:focus-visible,
+.klaree-event-dismiss:focus-visible,
+.klaree-dialog-close:focus-visible {
+  outline: 3px solid #126f60;
+  outline-offset: 3px;
+}
+.klaree-event-cta span[aria-hidden] { font-size: 1.4rem; line-height: .7; }
+.klaree-event-scene {
+  position: absolute;
+  inset: 0 0 0 43%;
+  z-index: 1;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  padding: 8px 38px 0 22px;
+  pointer-events: none;
+  overflow: hidden;
+}
+.klaree-event-banner--easter .klaree-event-scene::before,
+.klaree-event-banner--holiday .klaree-event-scene::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  bottom: -43px;
+  left: 4%;
+  width: 105%;
+  height: 160px;
+  border-radius: 50% 50% 0 0;
+  background: #dceac9;
+  transform: rotate(-2deg);
+  box-shadow: 0 -25px 0 rgba(230,241,217,.75);
+}
+.klaree-event-scene > img {
+  display: block;
+  position: relative;
+  z-index: 2;
+  max-width: min(100%, 420px);
+  width: auto;
+  height: auto;
+  max-height: 218px;
+  object-fit: contain;
+  object-position: center bottom;
+  filter: drop-shadow(0 4px 2px rgba(30,59,37,.06));
+  animation: klaree-scene-arrive 680ms cubic-bezier(.2,.7,.2,1) both;
+}
+.klaree-event-banner--christmas .klaree-event-scene > img {
+  max-width: min(100%, 490px);
+  max-height: 192px;
+  mix-blend-mode: multiply;
+}
+.klaree-event-egg {
+  position: absolute;
+  z-index: 3;
+  bottom: 18px;
+  width: 33px;
+  height: 43px;
+  border: 2px solid #e5b99d;
+  border-radius: 50% 50% 44% 44%;
+  background: repeating-linear-gradient(0deg, #f6ccbb 0 12px, #fff6ea 12px 17px);
+  transform: rotate(-20deg);
+  opacity: .9;
+}
+.klaree-event-egg--one { right: 25%; }
+.klaree-event-egg--two {
+  right: 17%; bottom: 12px;
+  background: repeating-linear-gradient(0deg, #eacb80 0 12px, #fff9ee 12px 17px);
+  transform: rotate(16deg);
+}
+.klaree-event-blossom {
+  position: absolute;
+  z-index: 1;
+  color: #eabb5c;
+  font-size: 49px;
+  opacity: .85;
+}
+.klaree-event-blossom--one { bottom: 20px; left: 6%; }
+.klaree-event-blossom--two { bottom: 83px; right: 5%; font-size: 31px; }
+.klaree-event-dismiss {
+  position: absolute;
+  z-index: 4;
+  top: 12px;
+  right: 13px;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  background: rgba(255,255,255,.83);
+  color: #455d56;
+  border: 1px solid #d8e1d7;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* Native dialog opens only after a user click. ESC and backdrop close work. */
+.klaree-greeting-dialog {
+  box-sizing: border-box;
+  width: min(430px, calc(100vw - 28px));
+  max-height: min(85vh, 690px);
+  margin: auto;
+  padding: 33px 32px 26px;
+  border: 1px solid #e5e4d8;
+  border-radius: 26px;
+  background: linear-gradient(145deg, #fffef8, #fff9ef);
+  color: #243e36;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(25,44,32,.20);
+}
+.klaree-greeting-dialog::backdrop {
+  background: rgba(15,32,29,.36);
+  backdrop-filter: blur(3px);
+}
+.klaree-dialog-close {
+  position: absolute;
+  top: 15px;
+  right: 17px;
+  border: 0;
+  background: transparent;
+  color: #51645a;
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+.klaree-dialog-illustration {
+  display: block;
+  max-width: min(280px,100%);
+  max-height: 200px;
+  width: auto;
+  height: auto;
+  margin: 2px auto 17px;
+  border-radius: 10px;
+  object-fit: contain;
+}
+.klaree-greeting-dialog .klaree-event-kicker { font-size: .7rem; }
+.klaree-greeting-dialog h2 {
+  margin: 10px 0 12px;
+  color: #135948;
+  font-size: clamp(1.8rem, 5vw, 2.3rem);
+  line-height: 1.12;
+}
+.klaree-greeting-dialog p:not(.klaree-event-preview):not(.klaree-event-kicker) {
+  color: #466259;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 auto 22px;
+}
+.klaree-dialog-done { margin: 0 auto; }
+@keyframes klaree-scene-arrive {
+  from { opacity: 0; transform: translateY(9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 900px) {
+  .hero-grid.hero-grid--seasonal {
+    grid-template-columns: minmax(0,1fr);
+    grid-template-areas:
+      "eyebrow"
+      "title"
+      "description"
+      "event"
+      "app"
+      "selector"
+      "actions"
+      "preview"
+      "next";
+  }
+  .hero-grid--seasonal > .hero-mobile-calendar-preview { display: none; }
+  .hero-grid--seasonal > .next-card { margin-top: 15px; }
+  .klaree-event-banner { min-height: 225px; }
+}
+@media (max-width: 720px) {
+  .hero-grid--seasonal > .hero-mobile-calendar-preview { display: block; grid-area: preview; margin-top: 20px; }
+  .hero-grid--seasonal .hero-copy > .hero-text { margin-bottom: 18px; }
 }
 @media (max-width: 520px) {
-  .klaree-hero-appearance.klaree-seasonal { margin: 10px 0 16px; padding: 6px 7px; }
-  .klaree-seasonal-trigger { min-height: 104px; gap: 7px; padding: 3px 5px 3px 0; }
-  .klaree-seasonal-illustration { width: 110px; flex-basis: 110px; }
-  .klaree-seasonal-illustration img { max-height: 94px; }
-  .klaree-seasonal-title { font-size: .94rem; }
-  .klaree-seasonal-kicker { font-size: .64rem; }
+  .klaree-event-banner { min-height: 248px; border-radius: 21px; }
+  .klaree-event-copy { flex-basis: 64%; padding: 20px 6px 20px 17px; }
+  .klaree-event-preview { font-size: .63rem; }
+  .klaree-event-kicker { font-size: .65rem; }
+  .klaree-event-copy h2 { font-size: clamp(1.35rem, 5.8vw, 1.8rem); margin: 7px 0; }
+  .klaree-event-copy p { font-size: .75rem; line-height: 1.45; margin-bottom: 12px; }
+  .klaree-event-cta { min-height: 41px; font-size: .78rem; gap: 10px; padding: 9px 13px; }
+  .klaree-event-scene { inset: 25px -9px 0 49%; padding: 7px 15px 0 0; align-items: flex-end; }
+  .klaree-event-scene > img { max-height: 159px; max-width: 100%; }
+  .klaree-event-banner--christmas .klaree-event-scene > img { max-height: 122px; }
+  .klaree-event-egg { width: 20px; height: 30px; bottom: 10px; }
+  .klaree-event-blossom { font-size: 25px; }
+  .klaree-event-dismiss { top: 7px; right: 7px; width: 28px; height: 28px; font-size: 1.2rem; }
+  .klaree-greeting-dialog { padding: 29px 21px 22px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .klaree-seasonal-illustration img { animation: none; }
+  .klaree-event-scene > img { animation: none; }
 }
