@@ -69,18 +69,14 @@ main {
 }
 
 .seo-brand::before {
-  content: "S";
-  display: inline-grid;
+  content: "";
+  display: inline-block;
   flex: 0 0 auto;
   width: 36px;
   height: 36px;
   margin-right: 10px;
-  place-items: center;
   border-radius: 8px;
-  color: #ffffff;
-  background: #176f64;
-  font-size: 0.92rem;
-  font-weight: 900;
+  background: url("/favicon.svg") center / contain no-repeat;
 }
 
 .seo-top-links {
