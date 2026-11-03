@@ -2936,17 +2936,21 @@ function stateYearVisualCalendarHtml({ events, name, code, year, locale = "de" }
     '' + (en ? 'aria-label="Twelve-month school holiday calendar"' : 'aria-label="Schulferienkalender mit zwölf Monaten"') + '>' +
     monthHtml + '</div>' + partialWarning +
     '<div class="sf-year-save">' +
+    '<img class="sf-year-klaree" src="/klaree-mascot.webp" alt="' +
+    (en ? 'Klaree, the school holiday companion' : 'Klaree, der Ferienbegleiter') +
+    '" width="105" height="100" loading="lazy" decoding="async" />' +
+    '<div class="sf-year-save-content">' +
     '<strong>' + (en ? 'Come back to Schulferienklar for ' : 'Schulferienklar für ') + escapeHtml(name) +
     (en ? '' : ' wiederfinden') + '</strong>' +
     '<span>' + (en
-      ? 'This state link opens the current year. Open it, then bookmark it in your browser.'
-      : 'Dieser Bundesland-Link öffnet immer das aktuelle Jahr. Öffnen und im Browser als Lesezeichen speichern.') +
+      ? 'Klaree’s tip: Open this state link and save it as a browser bookmark. It always opens the current year.'
+      : 'Klarees Tipp: Öffne diesen Bundesland-Link und speichere ihn als Lesezeichen. Er führt immer zum aktuellen Jahr.') +
     '</span><a href="/?state=' + encodeURIComponent(code) + '">' +
     (en ? 'Open permanent state calendar' : 'Dauerhaften Bundesland-Kalender öffnen') +
     '</a><a class="sf-year-ios-link" href="https://apps.apple.com/de/app/schulferienklar/id6811993088"' +
     ' target="_blank" rel="noopener noreferrer">' +
     (en ? 'iPhone app with home-screen widgets' : 'iPhone-App mit Home-Bildschirm-Widgets') +
-    '</a></div>' +
+    '</a></div></div>' +
     calendarSharePromptHtml({ locale }) +
     '<aside class="sf-date-preview" popover="auto" aria-label="' +
     (en ? 'Selected school holiday' : 'Ausgewählter Ferientermin') + '">' +

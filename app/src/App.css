@@ -4229,3 +4229,44 @@ button.current-year-link {
     text-align: left;
   }
 }
+
+/* Klaree reinforces the existing year-independent bookmark CTA on both home locales. */
+.klaree-bookmark-home {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-align: left;
+  max-width: 780px;
+  margin: 0 auto;
+}
+.klaree-bookmark-home-image {
+  width: clamp(82px, 14vw, 110px);
+  height: auto;
+  flex: none;
+  transform-origin: center bottom;
+  transition: transform .24s ease;
+}
+.klaree-bookmark-home:hover .klaree-bookmark-home-image,
+.klaree-bookmark-home:focus-within .klaree-bookmark-home-image { transform: rotate(-4deg); }
+.install-guide .klaree-bookmark-home-copy { flex: 1; min-width: 0; }
+.install-guide .klaree-bookmark-home-copy p { margin: 8px 0 0; }
+.install-guide .klaree-bookmark-home-copy .eyebrow { margin: 0 0 4px; }
+.klaree-bookmark-home-link {
+  display: inline-block;
+  margin-top: 11px;
+  color: #176f64;
+  font-weight: 750;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.klaree-bookmark-home-link:focus-visible { outline: 2px solid #176f64; outline-offset: 4px; }
+.install-guide .klaree-bookmark-home-copy .klaree-bookmark-home-footnote { font-size: .82rem; color: #5f6b75; }
+@media (max-width: 520px) {
+  .klaree-bookmark-home { align-items: flex-start; gap: 12px; }
+  .klaree-bookmark-home-image { width: 74px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .klaree-bookmark-home-image { transition: none; }
+  .klaree-bookmark-home:hover .klaree-bookmark-home-image,
+  .klaree-bookmark-home:focus-within .klaree-bookmark-home-image { transform: none; }
+}
