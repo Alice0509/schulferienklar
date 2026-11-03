@@ -4271,28 +4271,51 @@ button.current-year-link {
   .klaree-bookmark-home:focus-within .klaree-bookmark-home-image { transform: none; }
 }
 
-/* First small appearance; Klaree never covers the calendar or ad surfaces. */
+/* Device-local time-of-day cameo. One pose per visit; never overlays an ad or date. */
 .klaree-hero-appearance {
   display: flex;
   align-items: center;
-  gap: 10px;
-  max-width: 420px;
-  margin: 6px 0 14px;
+  gap: 12px;
+  max-width: 430px;
+  margin: 8px 0 16px;
+  padding: 9px 13px 9px 9px;
+  border: 1px solid rgba(30, 110, 91, .17);
+  border-radius: 17px;
+  background: linear-gradient(110deg, #f0f9f3 0%, #fffaf1 100%);
   color: #28675a;
-  font-size: .88rem;
-  line-height: 1.4;
 }
-.klaree-hero-walk {
-  width: clamp(68px, 10vw, 92px);
+.klaree-hero-figure {
+  display: block;
+  width: clamp(76px, 10vw, 100px);
   height: auto;
   flex: none;
   transform-origin: 50% 85%;
-  animation: klaree-walk-in 850ms ease-out both;
+  animation: klaree-arrival 850ms cubic-bezier(.2, .7, .2, 1) both;
 }
-@keyframes klaree-walk-in {
+.klaree-hero-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.klaree-hero-name {
+  font-size: .93rem;
+  color: #165d50;
+  letter-spacing: .01em;
+}
+.klaree-hero-line {
+  font-size: .88rem;
+  line-height: 1.5;
+  color: #405f57;
+}
+@keyframes klaree-arrival {
   from { transform: translateX(-9px); opacity: 0; }
   to { transform: translateX(0); opacity: 1; }
 }
+@media (max-width: 480px) {
+  .klaree-hero-appearance { gap: 9px; padding: 8px 10px 8px 5px; }
+  .klaree-hero-figure { width: 72px; }
+}
 @media (prefers-reduced-motion: reduce) {
-  .klaree-hero-walk { animation: none; }
+  .klaree-hero-figure { animation: none; }
 }

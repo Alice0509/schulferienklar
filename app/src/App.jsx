@@ -3,6 +3,7 @@ import "./App.css";
 import "./home-refresh.css";
 import "./mobile-flow.css";
 import { getUiLocale, localizeTree, translateText } from "./home-i18n.js";
+import { getKlareeMoment } from "./klaree-time.js";
 import {
   daysBetween,
   parseDateKey as parseDate,
@@ -980,6 +981,8 @@ function isStandaloneAppMode() {
 }
 
 export default function App() {
+  // Take a one-time snapshot: Klaree never jumps between poses while someone plans.
+  const [klareeArrivalHour] = useState(() => new Date().getHours());
   const [index, setIndex] = useState(null);
   const [selectedCode, setSelectedCode] = useState(() => {
     const params = new URLSearchParams(window.location.search);
@@ -1891,6 +1894,7 @@ export default function App() {
 
   const pattern = getHeroPattern(selectedCode);
   const locale = getUiLocale();
+  const klareeMoment = getKlareeMoment(klareeArrivalHour, locale);
   const targetLanguage = locale === "en" ? "de" : "en";
   const languageUrl = (targetLanguage === "en" ? "/en/calendar.html" : "/") +
     "?state=" + encodeURIComponent(selectedCode) +
@@ -2046,16 +2050,19 @@ export default function App() {
               Bundesland – übersichtlich und kostenlos im Kalender.
             </p>
 
-            <div className="klaree-hero-appearance" aria-label={locale === "en" ? "Klaree, your school holiday companion" : "Klaree, dein Ferienbegleiter"}>
+            <div className="klaree-hero-appearance" data-klaree-moment={klareeMoment.key}>
               <img
-                className="klaree-hero-walk"
-                src="/klaree-walk.webp"
-                width="92"
-                height="92"
+                className="klaree-hero-figure"
+                src={klareeMoment.image}
+                width="100"
+                height="100"
                 decoding="async"
-                alt={locale === "en" ? "Klaree walking towards the next school holiday" : "Klaree auf dem Weg zu den nächsten Ferien"}
+                alt={klareeMoment.alt}
               />
-              <span>{locale === "en" ? "Klaree is already looking for the next school break." : "Klaree hält schon Ausschau nach den nächsten Ferien."}</span>
+              <div className="klaree-hero-copy">
+                <strong className="klaree-hero-name">Klaree</strong>
+                <span className="klaree-hero-line">{klareeMoment.line}</span>
+              </div>
             </div>
 
             <div className="ios-app-promo" aria-label="Schulferienklar iPhone-App">
