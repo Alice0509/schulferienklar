@@ -20,7 +20,7 @@ const content = {
   de: {
     christmas: {
       title: "Frohe Weihnachten!",
-      teaser: "Ein kleiner Gruß zur Weihnachtszeit."
+      teaser: "Ein kleiner Gruß zur Weihnachtszeit.",
       kicker: "Klarees Weihnachtsgruß",
       hint: "Klarees Gruß lesen",
       message: "Klaree wünscht dir eine schöne, ruhige Weihnachtszeit. Danke, dass du Schulferienklar besuchst!",
@@ -28,7 +28,7 @@ const content = {
     },
     easter: {
       title: "Eine kleine Osterüberraschung",
-      teaser: "Eine kleine Osterüberraschung von Klaree."
+      teaser: "Eine kleine Osterüberraschung von Klaree.",
       kicker: "Klarees Ostergruß",
       hint: "Klarees Gruß lesen",
       message: "Frohe Ostern! Klaree wünscht dir schöne Feiertage. Vielleicht wartet ja noch eine kleine Überraschung auf dich.",
@@ -66,7 +66,7 @@ const content = {
   en: {
     christmas: {
       title: "Merry Christmas!",
-      teaser: "A little Christmas-season greeting for you."
+      teaser: "A little Christmas-season greeting for you.",
       kicker: "A Christmas greeting from Klaree",
       hint: "Read Klaree’s greeting",
       message: "Klaree wishes you a peaceful, lovely Christmas. Thanks for visiting Schulferienklar!",
@@ -74,7 +74,7 @@ const content = {
     },
     easter: {
       title: "A little Easter surprise",
-      teaser: "A little seasonal surprise from Klaree."
+      teaser: "A little seasonal surprise from Klaree.",
       kicker: "An Easter greeting from Klaree",
       hint: "Read Klaree’s greeting",
       message: "Happy Easter! Klaree wishes you a lovely holiday. Perhaps there is still a little surprise to discover.",
