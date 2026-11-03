@@ -589,6 +589,19 @@ for (const [
         errors.push(`${file}: seasonal shortcut #${target} has no target`);
       }
     }
+    // Seasonal shortcuts must follow calendar order across every state/year.
+    // Compare actual generated German dates, not type names or DOM layout.
+    const shortcutStarts = [...seasonalNav.matchAll(
+      /<strong>(\\d{2})\\.(\\d{2})\\.(\\d{4})\\s*[–-]/g,
+    )].map((match) => `${match[3]}-${match[2]}-${match[1]}`);
+    if (shortcutStarts.length !== seasonalTargets.length) {
+      errors.push(`${file}: missing or unparsable seasonal shortcut dates`);
+    }
+    if (shortcutStarts.some((start, index) =>
+      index > 0 && start < shortcutStarts[index - 1]
+    )) {
+      errors.push(`${file}: seasonal shortcuts are not chronological`);
+    }
     if (seasonalNav && !seasonalNav.includes(`Ferienzeiten ${name} ${year} auf einen Blick`)) {
       errors.push(`${file}: seasonal shortcut heading names the wrong state or year`);
     }
