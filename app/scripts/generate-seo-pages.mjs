@@ -2924,6 +2924,9 @@ function stateYearVisualCalendarHtml({ events, name, code, year, locale = "de" }
       : 'Dieser Bundesland-Link öffnet immer das aktuelle Jahr. Öffnen und im Browser als Lesezeichen speichern.') +
     '</span><a href="/?state=' + encodeURIComponent(code) + '">' +
     (en ? 'Open permanent state calendar' : 'Dauerhaften Bundesland-Kalender öffnen') +
+    '</a><a class="sf-year-ios-link" href="https://apps.apple.com/de/app/schulferienklar/id6811993088"' +
+    ' target="_blank" rel="noopener noreferrer">' +
+    (en ? 'iPhone app with home-screen widgets' : 'iPhone-App mit Home-Bildschirm-Widgets') +
     '</a></div>' +
     '<aside class="sf-date-preview" popover="auto" aria-label="' +
     (en ? 'Selected school holiday' : 'Ausgewählter Ferientermin') + '">' +
