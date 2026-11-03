@@ -1375,3 +1375,26 @@ p {
   background: #e6ded2;
   color: #453f39;
 }
+
+/* Public holidays are marked with a small dot, never a replacement fill.
+   Weekend beige keeps priority, including school-break/public-holiday overlaps. */
+.sf-day.sf-day-public { position: relative; }
+.sf-day.sf-day-public::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #bd6a30;
+  pointer-events: none;
+}
+.sf-key-public {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-left: 8px;
+  border-radius: 50%;
+  background: #bd6a30;
+}
