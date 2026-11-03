@@ -87,11 +87,40 @@ test("Illustrated garden keeps nine distinct accessible targets and Klaree in th
   assert.ok(game.includes('slots.tokens.forEach'), "Treat progress must update after each find");
 });
 
-test("Scene story text is localized in both languages", () => {
-  for (const lang of [getEasterCopy("de"), getEasterCopy("en")]) {
+test("Klaree reacts with localized story beats at the first and third finds", () => {
+  const de = getEasterCopy("de");
+  const en = getEasterCopy("en");
+  for (const lang of [de, en]) {
     assert.ok(lang.gardenLabel);
     assert.ok(lang.ready);
-    assert.ok(lang.foundAt("bench"));
+    assert.ok(lang.foundAt("bench", 1));
     assert.ok(lang.emptyAt("bench"));
+    assert.notEqual(lang.foundAt("bench", 1), lang.foundAt("bench", 2));
+    assert.notEqual(lang.foundAt("bench", 2), lang.foundAt("bench", 3));
   }
+  assert.match(de.foundAt("Bank", 1), /Schwanz/);
+  assert.match(de.foundAt("Bank", 3), /Hälfte/);
+  assert.match(en.foundAt("Bench", 1), /tail wag/);
+  assert.match(en.foundAt("Bench", 3), /halfway/);
+  assert.equal(de.foundAt("Bank", 2).includes("Mehr als die Hälfte"), false);
+});
+
+test("Checked hiding places stay keyboard focusable but cannot be searched twice", () => {
+  const game = fs.readFileSync(path.join(process.cwd(), "public/klaree-easter-game.mjs"), "utf8");
+  const css = fs.readFileSync(path.join(process.cwd(), "public/klaree-easter-preview.css"), "utf8");
+  assert.ok(game.includes('tile.setAttribute("aria-disabled", "true")'));
+  assert.ok(game.includes('tile.removeAttribute("aria-disabled")'));
+  assert.ok(game.includes('remaining.setAttribute("aria-disabled", "true")'));
+  assert.ok(game.includes('tile.matches?.(":focus-visible")'), "Keyboard players can focus restart when finished");
+  assert.ok(!game.includes("tile.disabled = true"), "Native disabled buttons lose keyboard focus");
+  assert.ok(!game.includes("tile.disabled = false"));
+  assert.ok(css.includes('.spot[aria-disabled="true"]'));
+  assert.ok(css.includes(':not([aria-disabled="true"])'));
+  const round = createEasterRound(() => 0.25);
+  for (const spot of SPOTS) {
+    const first = round.check(spot);
+    assert.equal(round.check(spot).kind, "ignored");
+    assert.ok(["treat", "empty", "ignored"].includes(first.kind));
+  }
+  assert.equal(round.found, TREAT_COUNT);
 });
