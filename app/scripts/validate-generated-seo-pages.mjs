@@ -19,6 +19,7 @@ const plannerYears = YEARS;
 const requiredFiles = [
   "sitemap.xml",
   "seo-pages.css",
+  "klaree-mascot.webp",
   "urlaubsplaner.css",
   "widget.html",
   "widget-demo.js",
@@ -189,6 +190,11 @@ for (const file of schoolHolidayHtmlFiles) {
         !html.includes(`href="/?state=${code}"`) ||
         !html.includes(`Schulferienklar für `)) {
       errors.push(`${file}: missing year-independent branded return link`);
+    }
+    if (html.split('class="sf-year-klaree"').length - 1 !== 1 ||
+        !html.includes('src="/klaree-mascot.webp"') ||
+        !html.includes('Klarees Tipp:')) {
+      errors.push(`${file}: missing Klaree bookmark companion`);
     }
     // Native iPhone widget discovery is a secondary action, not the
     // separate embeddable website widget at /widget.html.
@@ -486,6 +492,10 @@ for (const [
         'id="source"',
         'class="sf-year-visual"',
         'class="sf-year-save"',
+        'class="sf-year-klaree"',
+        'Klaree, the school holiday companion',
+        'Klaree’s tip:',
+        'src="/klaree-mascot.webp"',
         'class="sf-share-prompt"',
         'Share calendar',
         'src="/calendar-share.js"',
