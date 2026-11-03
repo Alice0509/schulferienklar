@@ -2916,6 +2916,15 @@ function stateYearVisualCalendarHtml({ events, name, code, year, locale = "de" }
     '<div class="sf-year-rail" tabindex="0" role="region" ' +
     '' + (en ? 'aria-label="Twelve-month school holiday calendar"' : 'aria-label="Schulferienkalender mit zwölf Monaten"') + '>' +
     monthHtml + '</div>' + partialWarning +
+    '<div class="sf-year-save">' +
+    '<strong>' + (en ? 'Come back to Schulferienklar for ' : 'Schulferienklar für ') + escapeHtml(name) +
+    (en ? '' : ' wiederfinden') + '</strong>' +
+    '<span>' + (en
+      ? 'This state link opens the current year. Open it, then bookmark it in your browser.'
+      : 'Dieser Bundesland-Link öffnet immer das aktuelle Jahr. Öffnen und im Browser als Lesezeichen speichern.') +
+    '</span><a href="/?state=' + encodeURIComponent(code) + '">' +
+    (en ? 'Open permanent state calendar' : 'Dauerhaften Bundesland-Kalender öffnen') +
+    '</a></div>' +
     '<aside class="sf-date-preview" popover="auto" aria-label="' +
     (en ? 'Selected school holiday' : 'Ausgewählter Ferientermin') + '">' +
     '<div class="sf-date-preview-head"><strong class="sf-preview-date"></strong>' +

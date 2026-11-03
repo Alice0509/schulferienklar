@@ -177,6 +177,13 @@ for (const file of schoolHolidayHtmlFiles) {
         errors.push(`${file}: unavailable download ${href}`);
       }
     }
+    // Annual calendars must offer a reusable state-specific return URL.
+    // A year-scoped page should never be presented as the permanent bookmark.
+    if (html.split('class="sf-year-save"').length - 1 !== 1 ||
+        !html.includes(`href="/?state=${code}"`) ||
+        !html.includes(`Schulferienklar für `)) {
+      errors.push(`${file}: missing year-independent branded return link`);
+    }
     if (html.includes('class="intro-card intro-card-visual"')) {
       errors.push(`${file}: generic promo precedes state/year planning content`);
     }
@@ -459,6 +466,9 @@ for (const [
         'id="termine"',
         'id="source"',
         'class="sf-year-visual"',
+        'class="sf-year-save"',
+        'href="/?state=' + code + '"',
+        'Come back to Schulferienklar',
         'Germany Travel Checker',
         'School holiday dates',
       ];
