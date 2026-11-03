@@ -40,6 +40,9 @@ jobs:
       - name: Validate Klaree time-of-day character states
         run: node --test tests/klaree-time.test.js
 
+      - name: Validate state-aware Klaree holiday greetings
+        run: node --test tests/klaree-seasonal.test.js
+
       - name: Validate Klaree Easter preview and noindex safeguards
         run: node --test tests/klaree-easter-preview.test.js
 
