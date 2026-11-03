@@ -55,6 +55,20 @@
     radial-gradient(ellipse at 79% 92%, rgba(236,216,194,.56), transparent 42%),
     linear-gradient(110deg, #fffaf1 0%, #f9f3ef 73%, #faf5e9 100%);
 }
+/* Two editorial seasons, distinct from verified one-day public holidays. */
+.klaree-event-banner--summer {
+  border-color: #e5e4c7;
+  background:
+    radial-gradient(ellipse at 80% 19%, rgba(253,230,157,.35), transparent 36%),
+    linear-gradient(110deg, #fffaf0 0%, #fbf9e9 57%, #e6f2e5 100%);
+}
+.klaree-event-banner--autumn {
+  border-color: #e8d8c9;
+  background:
+    radial-gradient(ellipse at 83% 86%, rgba(230,172,106,.23), transparent 42%),
+    linear-gradient(110deg, #fffaf1 0%, #faf0e2 57%, #f3e4d4 100%);
+}
+
 .klaree-event-banner--holiday {
   min-height: 194px;
   background: linear-gradient(115deg, #eff8f1, #fff9f0);
@@ -153,6 +167,63 @@
   transform: rotate(-2deg);
   box-shadow: 0 -25px 0 rgba(230,241,217,.75);
 }
+/* The scenery is CSS-only and never makes a misleading weather claim. */
+.klaree-event-banner--summer .klaree-event-scene::before,
+.klaree-event-banner--autumn .klaree-event-scene::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  bottom: -38px;
+  left: 3%;
+  width: 108%;
+  height: 148px;
+  border-radius: 50% 50% 0 0;
+  transform: rotate(-2deg);
+}
+.klaree-event-banner--summer .klaree-event-scene::before {
+  background: #d9eac8;
+  box-shadow: 0 -23px 0 rgba(231,241,213,.68);
+}
+.klaree-event-banner--autumn .klaree-event-scene::before {
+  background: #e6d0ac;
+  box-shadow: 0 -22px 0 rgba(243,221,193,.73);
+}
+.klaree-event-sun {
+  position: absolute;
+  top: 23px;
+  right: 21%;
+  z-index: 0;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 34% 32%, #fff9d5, #efcf78 77%);
+  box-shadow: 0 0 0 13px rgba(250,218,139,.22),
+    0 0 0 29px rgba(250,218,139,.10);
+}
+.klaree-event-summer-bloom {
+  position: absolute;
+  z-index: 3;
+  color: #e4a54c;
+  font-size: 36px;
+  line-height: 1;
+  opacity: .86;
+}
+.klaree-event-summer-bloom--one { left: 11%; bottom: 18px; }
+.klaree-event-summer-bloom--two { right: 11%; bottom: 35px; font-size: 29px; }
+.klaree-event-leaf {
+  position: absolute;
+  z-index: 3;
+  width: 23px;
+  height: 35px;
+  border-radius: 5% 78% 6% 78%;
+  background: #d59a5d;
+  transform: rotate(36deg);
+  opacity: .86;
+}
+.klaree-event-leaf--one { left: 13%; bottom: 29px; transform: rotate(20deg); background: #c98255; }
+.klaree-event-leaf--two { right: 21%; bottom: 38px; transform: rotate(-35deg); background: #e4b66e; }
+.klaree-event-leaf--three { right: 11%; top: 38px; transform: rotate(69deg); background: #bc875c; }
+
 .klaree-event-scene > img {
   display: block;
   position: relative;
@@ -306,6 +377,10 @@
   .klaree-event-scene { inset: 25px -9px 0 49%; padding: 7px 15px 0 0; align-items: flex-end; }
   .klaree-event-scene > img { max-height: 159px; max-width: 100%; }
   .klaree-event-banner--christmas .klaree-event-scene > img { max-height: 122px; }
+  .klaree-event-sun { top: 35px; right: 17%; width: 47px; height: 47px; }
+  .klaree-event-summer-bloom { font-size: 23px; }
+  .klaree-event-summer-bloom--two { font-size: 18px; }
+  .klaree-event-leaf { width: 14px; height: 23px; }
   .klaree-event-egg { width: 20px; height: 30px; bottom: 10px; }
   .klaree-event-blossom { font-size: 25px; }
   .klaree-event-dismiss { top: 7px; right: 7px; width: 28px; height: 28px; font-size: 1.2rem; }

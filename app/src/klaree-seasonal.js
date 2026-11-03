@@ -20,6 +20,7 @@ const content = {
   de: {
     christmas: {
       title: "Frohe Weihnachten!",
+      teaser: "Ein kleiner Gruß zur Weihnachtszeit.",
       kicker: "Klarees Weihnachtsgruß",
       hint: "Klarees Gruß lesen",
       message: "Klaree wünscht dir eine schöne, ruhige Weihnachtszeit. Danke, dass du Schulferienklar besuchst!",
@@ -27,18 +28,36 @@ const content = {
     },
     easter: {
       title: "Eine kleine Osterüberraschung",
+      teaser: "Eine kleine Osterüberraschung von Klaree.",
       kicker: "Klarees Ostergruß",
       hint: "Klarees Gruß lesen",
       message: "Frohe Ostern! Klaree wünscht dir schöne Feiertage. Vielleicht wartet ja noch eine kleine Überraschung auf dich.",
       alt: "Klaree, der Ferienbegleiter, erkundet den Frühling",
     },
+    summer: {
+      title: "Ein Sommergruß von Klaree",
+      teaser: "Ein kleiner Sommermoment zum Durchatmen.",
+      kicker: "Klarees Sommerzeit",
+      hint: "Klarees Gruß lesen",
+      message: "Klaree wünscht dir einen schönen Sommer – mit Zeit für kleine Entdeckungen und entspannte Pausen. Viel Freude bei deinen Ferienplänen!",
+      alt: "Klaree erkundet einen sonnigen Sommergarten",
+    },
+    autumn: {
+      title: "Ein bunter Herbstgruß",
+      teaser: "Klaree begrüßt den Herbst mit dir.",
+      kicker: "Klarees Herbstzeit",
+      hint: "Klarees Gruß lesen",
+      message: "Bunte Blätter, klare Luft und kleine Pausen: Klaree wünscht dir einen schönen, gemütlichen Herbst. Nimm dir Zeit für das, was dir guttut!",
+      alt: "Klaree ruht sich zwischen herbstlichen Blättern aus",
+    },
     holiday: {
       kicker: "Klaree zum Feiertag",
+      teaser: "Ein kleiner Feiertagsgruß für dich.",
       hint: "Klarees Gruß lesen",
       message: (name) => `Heute ist ${name}. Klaree wünscht dir einen schönen Tag!`,
       alt: "Klaree grüßt zum Feiertag",
     },
-    preview: "Vorschau · nicht der heutige Feiertag",
+    preview: "Vorschau · derzeit nicht die Saison",
     open: "Gruß ansehen",
     close: "Gruß schließen",
     later: "Danke, Klaree!",
@@ -47,6 +66,7 @@ const content = {
   en: {
     christmas: {
       title: "Merry Christmas!",
+      teaser: "A little Christmas-season greeting for you.",
       kicker: "A Christmas greeting from Klaree",
       hint: "Read Klaree’s greeting",
       message: "Klaree wishes you a peaceful, lovely Christmas. Thanks for visiting Schulferienklar!",
@@ -54,18 +74,36 @@ const content = {
     },
     easter: {
       title: "A little Easter surprise",
+      teaser: "A little seasonal surprise from Klaree.",
       kicker: "An Easter greeting from Klaree",
       hint: "Read Klaree’s greeting",
       message: "Happy Easter! Klaree wishes you a lovely holiday. Perhaps there is still a little surprise to discover.",
       alt: "Klaree, your holiday companion, exploring spring",
     },
+    summer: {
+      title: "A summer hello from Klaree",
+      teaser: "A little summer moment to slow down.",
+      kicker: "Summer with Klaree",
+      hint: "Read Klaree’s greeting",
+      message: "Klaree wishes you a lovely summer, full of little discoveries and relaxing moments. Enjoy making your holiday plans!",
+      alt: "Klaree exploring a sunny summer garden",
+    },
+    autumn: {
+      title: "A colorful autumn hello",
+      teaser: "Klaree welcomes autumn with you.",
+      kicker: "Autumn with Klaree",
+      hint: "Read Klaree’s greeting",
+      message: "Colorful leaves, crisp air and quiet moments: Klaree wishes you a cozy, lovely autumn. Make room for the things you enjoy!",
+      alt: "Klaree resting among autumn leaves",
+    },
     holiday: {
       kicker: "A holiday hello from Klaree",
+      teaser: "A little holiday greeting for you.",
       hint: "Read Klaree’s greeting",
       message: (name) => `Today is ${name}. Klaree hopes you have a lovely day!`,
       alt: "Klaree greeting you on a public holiday",
     },
-    preview: "Preview · not today’s holiday",
+    preview: "Preview · not currently in season",
     open: "View greeting",
     close: "Close greeting",
     later: "Thanks, Klaree!",
@@ -96,25 +134,27 @@ export function getKlareeSeasonalMoment({
   const copy = content[lang];
   const stateHolidays = validStateHolidays(holidayDataset, stateCode, year);
 
-  const makeChristmas = (isPreview = false) => ({
-    id: `christmas-${date.getMonth() === 0 ? year - 1 : year}`, kind: "christmas", isPreview,
-    title: copy.christmas.title, kicker: copy.christmas.kicker,
-    message: copy.christmas.message, hint: copy.christmas.hint, alt: copy.christmas.alt,
-    image: "/klaree-christmas-2026.webp", previewLabel: isPreview ? copy.preview : "",
-    statutory: false,
-  });
-  const makeEaster = (isPreview = false) => ({
-    id: `easter-${year}`, kind: "easter", isPreview,
-    title: copy.easter.title, kicker: copy.easter.kicker,
-    message: copy.easter.message, hint: copy.easter.hint, alt: copy.easter.alt,
-    image: "/klaree-walk.webp", previewLabel: isPreview ? copy.preview : "",
+  // Keep the approved Klaree poses; each season gets its own landscape scene.
+  // Seasonal greetings are editorial artwork, not statutory holiday claims.
+  const seasonalArt = {
+    christmas: "/klaree-christmas-2026.webp",
+    easter: "/klaree-walk.webp",
+    summer: "/klaree-walk.webp",
+    autumn: "/klaree-rest.webp",
+  };
+  const makeSeason = (kind, isPreview = false) => ({
+    id: `${kind}-${kind === "christmas" && date.getMonth() === 0 ? year - 1 : year}`,
+    kind, isPreview,
+    title: copy[kind].title, kicker: copy[kind].kicker,
+    teaser: copy[kind].teaser,
+    message: copy[kind].message, hint: copy[kind].hint, alt: copy[kind].alt,
+    image: seasonalArt[kind], previewLabel: isPreview ? copy.preview : "",
     statutory: false,
   });
 
-  // Unlisted visual QA links; visibly marked as previews, never described
-  // as actual public holidays or used to alter the calendar.
-  if (preview === "christmas") return makeChristmas(true);
-  if (preview === "easter") return makeEaster(true);
+  // Unlisted visual QA links; visibly marked as previews and not
+  // used to alter any holiday or school-calendar data.
+  if (Object.hasOwn(seasonalArt, preview)) return makeSeason(preview, true);
 
   // Official, verified statewide holidays take priority over the broad
   // seasonal artwork. These one-day greetings are not presented as seasons.
@@ -128,6 +168,7 @@ export function getKlareeSeasonalMoment({
         kind: "holiday", isPreview: false, statutory: true,
         title: name,
         kicker: copy.holiday.kicker,
+        teaser: copy.holiday.teaser,
         message: copy.holiday.message(name),
         hint: copy.holiday.hint,
         alt: copy.holiday.alt,
@@ -141,7 +182,7 @@ export function getKlareeSeasonalMoment({
   // This is a friendly Christmas-season greeting, never a statutory
   // holiday claim (especially on December 24).
   const monthDay = key.slice(5);
-  if (monthDay >= "12-01" || monthDay <= "01-06") return makeChristmas();
+  if (monthDay >= "12-01" || monthDay <= "01-06") return makeSeason("christmas");
 
   // Easter season: 14 days before Easter Sunday through 7 days after.
   // Derive Easter Sunday from the verified current-year Good Friday and
@@ -156,9 +197,15 @@ export function getKlareeSeasonalMoment({
     if (todayOrd !== null && fridayOrd !== null && sundayOrd !== null &&
         fridayOrd === sundayOrd - 2 &&
         todayOrd >= sundayOrd - 14 && todayOrd <= sundayOrd + 7) {
-      return makeEaster();
+      return makeSeason("easter");
     }
   }
+
+  // These are *seasonal* greetings rather than announcements of a
+  // state's summer holidays. Those dates differ across German states.
+  // Leave a quiet gap after each season for Klaree's time-of-day cameo.
+  if (monthDay >= "06-21" && monthDay <= "08-31") return makeSeason("summer");
+  if (monthDay >= "09-22" && monthDay <= "11-15") return makeSeason("autumn");
 
   return null;
 }
