@@ -4270,3 +4270,29 @@ button.current-year-link {
   .klaree-bookmark-home:hover .klaree-bookmark-home-image,
   .klaree-bookmark-home:focus-within .klaree-bookmark-home-image { transform: none; }
 }
+
+/* First small appearance; Klaree never covers the calendar or ad surfaces. */
+.klaree-hero-appearance {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 420px;
+  margin: 6px 0 14px;
+  color: #28675a;
+  font-size: .88rem;
+  line-height: 1.4;
+}
+.klaree-hero-walk {
+  width: clamp(68px, 10vw, 92px);
+  height: auto;
+  flex: none;
+  transform-origin: 50% 85%;
+  animation: klaree-walk-in 850ms ease-out both;
+}
+@keyframes klaree-walk-in {
+  from { transform: translateX(-9px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .klaree-hero-walk { animation: none; }
+}
