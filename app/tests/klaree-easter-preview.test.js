@@ -37,6 +37,11 @@ test("Both languages cover every garden location and key responses", () => {
     for (const key of ["headline","intro","instruction","found","none","complete","reset"]) assert.ok(lang[key]);
   }
   assert.notEqual(de.headline, en.headline);
+  for (const lang of [de, en]) {
+    for (const key of ["calendar","garden","sidebar","progressLabel","privacy","preview","privacyLink","imprintLink"]) {
+      assert.ok(lang[key], `Missing translation: ${key}`);
+    }
+  }
   assert.equal(getEasterCopy("fr"), de);
 });
 
