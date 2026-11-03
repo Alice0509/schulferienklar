@@ -428,7 +428,7 @@ function pageTemplate({
     <main class="planner-page">
       <nav class="planner-nav" aria-label="Hauptnavigation">
         <a class="planner-brand" href="/">
-          <span aria-hidden="true">✓</span>
+          <img src="/favicon.svg" alt="" aria-hidden="true" width="30" height="30" />
           Schulferienklar
         </a>
         <div>
