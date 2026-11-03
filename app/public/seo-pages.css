@@ -1421,3 +1421,21 @@ p {
 @media (max-width: 740px) {
   .sf-date-preview[popover] { margin: auto auto 12px; }
 }
+
+/* A discreet, year-independent return path reinforces brand recall without
+   interfering with the calendar's first viewport or established date colors. */
+.sf-year-save {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 5px 12px;
+  margin: 15px 0 0;
+  padding: 11px 0 0;
+  border-top: 1px solid #d7e7df;
+  color: #4b6560;
+  font-size: .82rem;
+}
+.sf-year-save strong { color: #1b5f54; }
+.sf-year-save span { flex: 1 1 250px; }
+.sf-year-save a { font-weight: 750; color: #176f64; text-underline-offset: 2px; }
+.sf-year-save a:focus-visible { outline: 2px solid #176f64; outline-offset: 3px; }
