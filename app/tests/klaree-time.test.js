@@ -59,5 +59,7 @@ test("Homepage cameo stays one-shot, visible and motion-accessible", () => {
   assert.ok(css.includes("animation: none !important"));
   assert.ok(!css.includes("infinite") || !css.slice(css.indexOf("/* Klaree's one-time visit:")).includes("infinite"));
   assert.ok(jsx.includes('className="klaree-hero-stage"'));
-  assert.ok(jsx.includes("data-klaree-moment={klareeSeasonal?.kind || klareeMoment.key}"));
+  assert.ok(jsx.includes("data-klaree-moment={klareeMoment.key}"));
+  assert.ok(jsx.includes("showKlareeSeasonal ? ("));
+  assert.ok(jsx.includes("klaree-hero-figure"));
 });

@@ -986,7 +986,8 @@ export default function App() {
   // Take a one-time snapshot: Klaree never jumps between poses while someone plans.
   const [klareeArrival] = useState(() => new Date());
   const [seasonalPublicHolidayDataset, setSeasonalPublicHolidayDataset] = useState(null);
-  const [isKlareeGreetingOpen, setIsKlareeGreetingOpen] = useState(false);
+  const [isKlareeBannerDismissed, setIsKlareeBannerDismissed] = useState(false);
+  const klareeGreetingDialogRef = useRef(null);
   const [index, setIndex] = useState(null);
   const [selectedCode, setSelectedCode] = useState(() => {
     const params = new URLSearchParams(window.location.search);
@@ -1736,7 +1737,6 @@ export default function App() {
   const selectBundesland = (nextCode) => {
     localStorage.setItem(STORAGE_KEYS.bundesland, nextCode);
     setSelectedCode(nextCode);
-    setIsKlareeGreetingOpen(false);
     setIsStateMenuOpen(false);
   };
 
@@ -1931,6 +1931,12 @@ export default function App() {
     preview: klareeSeasonalPreview,
   });
   const klareeControls = getKlareeGreetingControls(locale);
+  const showKlareeSeasonal = Boolean(klareeSeasonal && !isKlareeBannerDismissed);
+  const openKlareeGreeting = () => {
+    if (!klareeGreetingDialogRef.current?.open) {
+      klareeGreetingDialogRef.current?.showModal();
+    }
+  };
   const targetLanguage = locale === "en" ? "de" : "en";
   const languageUrl = (targetLanguage === "en" ? "/en/calendar.html" : "/") +
     "?state=" + encodeURIComponent(selectedCode) +
@@ -2077,7 +2083,7 @@ export default function App() {
           </>
         )}
 
-        <div className="hero-grid">
+        <div className={`hero-grid${showKlareeSeasonal ? " hero-grid--seasonal" : ""}`}>
           <div className="hero-copy">
             <p className="eyebrow">Schulferien in Deutschland</p>
             <h1>Schulferien auf einen Blick.</h1>
@@ -2086,67 +2092,70 @@ export default function App() {
               Bundesland – übersichtlich und kostenlos im Kalender.
             </p>
 
-            <div
-              className={`klaree-hero-appearance${klareeSeasonal ? " klaree-seasonal" : ""}`}
-              data-klaree-moment={klareeSeasonal?.kind || klareeMoment.key}
-            >
-              {klareeSeasonal ? (
-                <>
+            {showKlareeSeasonal ? (
+              <section
+                className={`klaree-event-banner klaree-event-banner--${klareeSeasonal.kind}`}
+                aria-labelledby="klaree-event-title"
+              >
+                <div className="klaree-event-copy">
+                  {klareeSeasonal.isPreview && (
+                    <span className="klaree-event-preview">{klareeSeasonal.previewLabel}</span>
+                  )}
+                  <span className="klaree-event-kicker">{klareeSeasonal.kicker}</span>
+                  <h2 id="klaree-event-title">{klareeSeasonal.title}</h2>
+                  <p>{klareeSeasonal.kind === "easter"
+                    ? (locale === "en" ? "A little seasonal surprise from Klaree." : "Eine kleine Osterüberraschung von Klaree.")
+                    : (locale === "en" ? "A little holiday greeting for you." : "Ein kleiner Feiertagsgruß für dich.")}</p>
                   <button
                     type="button"
-                    className="klaree-seasonal-trigger"
-                    aria-expanded={isKlareeGreetingOpen}
-                    aria-controls="klaree-seasonal-message"
-                    onClick={() => setIsKlareeGreetingOpen((open) => !open)}
+                    className="klaree-event-cta"
+                    aria-haspopup="dialog"
+                    aria-controls="klaree-seasonal-dialog"
+                    onClick={openKlareeGreeting}
                   >
-                    <span className="klaree-seasonal-illustration">
-                      <img
-                        src={klareeSeasonal.image}
-                        width={klareeSeasonal.kind === "christmas" ? 300 : 112}
-                        height={klareeSeasonal.kind === "christmas" ? 115 : 112}
-                        alt={klareeSeasonal.alt}
-                        decoding="async"
-                      />
-                    </span>
-                    <span className="klaree-seasonal-copy">
-                      {klareeSeasonal.isPreview && (
-                        <span className="klaree-seasonal-preview">{klareeSeasonal.previewLabel}</span>
-                      )}
-                      <span className="klaree-seasonal-kicker">{klareeSeasonal.kicker}</span>
-                      <strong className="klaree-seasonal-title">{klareeSeasonal.title}</strong>
-                      <span className="klaree-seasonal-link">
-                        {isKlareeGreetingOpen ? klareeControls.close : klareeControls.open}
-                      </span>
-                    </span>
+                    {klareeControls.open}
+                    <span aria-hidden="true">›</span>
                   </button>
-                  <p
-                    id="klaree-seasonal-message"
-                    className="klaree-seasonal-message"
-                    role="status"
-                    hidden={!isKlareeGreetingOpen}
-                  >
-                    {klareeSeasonal.message}
-                  </p>
-                </>
-              ) : (
-                <>
-                  <span className="klaree-hero-stage">
-                    <img
-                      className="klaree-hero-figure"
-                      src={klareeMoment.image}
-                      width="112"
-                      height="112"
-                      decoding="async"
-                      alt={klareeMoment.alt}
-                    />
-                  </span>
-                  <div className="klaree-hero-copy">
-                    <strong className="klaree-hero-name">Klaree</strong>
-                    <span className="klaree-hero-line">{klareeMoment.line}</span>
-                  </div>
-                </>
-              )}
-            </div>
+                </div>
+                <div className="klaree-event-scene" aria-hidden="true">
+                  {klareeSeasonal.kind === "easter" && (
+                    <>
+                      <span className="klaree-event-egg klaree-event-egg--one" />
+                      <span className="klaree-event-egg klaree-event-egg--two" />
+                      <span className="klaree-event-blossom klaree-event-blossom--one">✿</span>
+                      <span className="klaree-event-blossom klaree-event-blossom--two">✿</span>
+                    </>
+                  )}
+                  <img src={klareeSeasonal.image} alt="" decoding="async" width="320" height="170" />
+                </div>
+                <button
+                  type="button"
+                  className="klaree-event-dismiss"
+                  aria-label={klareeControls.dismiss}
+                  title={klareeControls.dismiss}
+                  onClick={() => setIsKlareeBannerDismissed(true)}
+                >
+                  ×
+                </button>
+              </section>
+            ) : (
+              <div className="klaree-hero-appearance" data-klaree-moment={klareeMoment.key}>
+                <span className="klaree-hero-stage">
+                  <img
+                    className="klaree-hero-figure"
+                    src={klareeMoment.image}
+                    width="112"
+                    height="112"
+                    decoding="async"
+                    alt={klareeMoment.alt}
+                  />
+                </span>
+                <div className="klaree-hero-copy">
+                  <strong className="klaree-hero-name">Klaree</strong>
+                  <span className="klaree-hero-line">{klareeMoment.line}</span>
+                </div>
+              </div>
+            )}
 
             <div className="ios-app-promo" aria-label="Schulferienklar iPhone-App">
               <div className="ios-app-promo-copy">
@@ -2318,6 +2327,38 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {klareeSeasonal && (
+        <dialog
+          id="klaree-seasonal-dialog"
+          ref={klareeGreetingDialogRef}
+          className={`klaree-greeting-dialog klaree-greeting-dialog--${klareeSeasonal.kind}`}
+          aria-labelledby="klaree-dialog-title"
+          aria-describedby="klaree-dialog-message"
+          onClick={(event) => {
+            if (event.target === klareeGreetingDialogRef.current) {
+              klareeGreetingDialogRef.current?.close();
+            }
+          }}
+        >
+          <button
+            type="button"
+            className="klaree-dialog-close"
+            aria-label={klareeControls.close}
+            onClick={() => klareeGreetingDialogRef.current?.close()}
+          >×</button>
+          <img className="klaree-dialog-illustration" src={klareeSeasonal.image} alt={klareeSeasonal.alt} width="320" height="170" />
+          {klareeSeasonal.isPreview && <p className="klaree-event-preview">{klareeSeasonal.previewLabel}</p>}
+          <p className="klaree-event-kicker">{klareeSeasonal.kicker}</p>
+          <h2 id="klaree-dialog-title">{klareeSeasonal.title}</h2>
+          <p id="klaree-dialog-message">{klareeSeasonal.message}</p>
+          <button
+            type="button"
+            className="klaree-event-cta klaree-dialog-done"
+            onClick={() => klareeGreetingDialogRef.current?.close()}
+          >{klareeControls.later}</button>
+        </dialog>
+      )}
 
       {error && <div className="error">{error}</div>}
 
