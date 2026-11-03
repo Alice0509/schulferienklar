@@ -1448,3 +1448,38 @@ p {
   font-weight: 600;
 }
 .sf-year-save .sf-year-ios-link:hover { color: #176f64; }
+
+/* Optional recommendation — never linked to ad units and never animated in
+   the vicinity of ads. The heart reacts only to deliberate interaction. */
+.sf-share-prompt {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  padding: 13px 14px;
+  margin: 16px 0 0;
+  border: 1px solid #d3e5df;
+  border-radius: 12px;
+  background: #f8fcfa;
+  color: #264b43;
+}
+.sf-share-heart {
+  color: #247a6a;
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: transform .2s ease;
+}
+.sf-share-prompt:hover .sf-share-heart,
+.sf-share-prompt:focus-within .sf-share-heart { transform: scale(1.16) rotate(-5deg); }
+.sf-share-copy { flex: 1 1 230px; }
+.sf-share-copy strong { font-size: .92rem; }
+.sf-share-copy p { margin: 3px 0 0; font-size: .82rem; color: #526860; }
+.sf-share-action { display: flex; align-items: flex-start; flex-direction: column; gap: 3px; }
+.sf-share-button { font: inherit; font-weight: 700; font-size: .86rem; border-radius: 8px; border: 1px solid #afcec4; background: #fff; color: #17675d; padding: 8px 12px; cursor: pointer; }
+.sf-share-button:hover, .sf-share-button:focus-visible { background: #e8f5ef; }
+.sf-share-status { font-size: .77rem; max-width: 270px; overflow-wrap: anywhere; }
+@media (prefers-reduced-motion: reduce) {
+  .sf-share-heart { transition: none; }
+  .sf-share-prompt:hover .sf-share-heart,
+  .sf-share-prompt:focus-within .sf-share-heart { transform: none; }
+}
