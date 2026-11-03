@@ -2862,9 +2862,15 @@ function stateYearVisualCalendarHtml({ events, name, code, year, locale = "de" }
         const holidayLabel = en ? (event.name?.en || getHolidayName(event)) : getHolidayName(event);
         const target = "termin-" + String(event.id || event.type)
           .toLowerCase().replace(/[^a-z0-9-]+/g, "-");
+        const dateLabel = day + '. ' + label + ' ' + year;
+        const dateRange = formatDate(event.startDate) + ' – ' + formatDate(event.endDate);
         return '<a class="sf-day sf-day-holiday' +
           (weekday === 0 || weekday === 6 ? ' sf-day-weekend' : '') + publicClass +
           '" href="#' + target +
+          '" data-sf-preview-date="' + escapeHtml(dateLabel) +
+          '" data-sf-preview-name="' + escapeHtml(holidayLabel) +
+          '" data-sf-preview-range="' + escapeHtml(dateRange) +
+          '" data-sf-preview-public="' + escapeHtml(publicHolidayLabel) +
           '" title="' + escapeHtml(holidayLabel) + (publicHoliday ? '; ' + escapeHtml(publicHolidayLabel) : '') +
           '" aria-label="' + day + '. ' + label + ' ' + year +
           ': ' + escapeHtml(holidayLabel) + publicAria + '">' + day + '</a>';
@@ -2900,8 +2906,8 @@ function stateYearVisualCalendarHtml({ events, name, code, year, locale = "de" }
     '<div class="sf-year-key"><span class="sf-key-ferie"></span> ' + (en ? 'Recorded school-free days' : 'Erfasste schulfreie Tage') + ' ' +
     '<span class="sf-key-weekend"></span> ' + (en ? 'Weekend' : 'Wochenende') + ' ' +
     '<span class="sf-key-public"></span> ' + (en ? 'Statewide public holiday' : 'Landesweiter Feiertag') + '</div>' +
-    '<p class="sf-year-hint sf-hint-desktop">' + (en ? 'Select a highlighted date to view the corresponding school break below.' : 'Markierte Tage auswählen, um die zugehörigen Ferientermine weiter unten zu sehen.') + '</p>' +
-    '<p class="sf-year-hint sf-hint-mobile">' + (en ? 'Swipe between months; tap highlighted dates for details.' : 'Monate seitlich wischen; markierte Tage öffnen die Ferientermine.') + '</p>' +
+    '<p class="sf-year-hint sf-hint-desktop">' + (en ? 'Select a highlighted date to preview the school break.' : 'Markierte Tage auswählen, um Ferientermine direkt anzusehen.') + '</p>' +
+    '<p class="sf-year-hint sf-hint-mobile">' + (en ? 'Swipe through months; tap a highlighted date for a preview.' : 'Monate seitlich wischen; markierte Tage zeigen die Ferientermine.') + '</p>' +
     '<nav class="sf-month-jump" aria-label="' +
       (en ? 'Jump to a month' : 'Monat auswählen') + '">' +
       months.map((label, index) => '<a href="#sf-month-' + year + '-' +
@@ -2909,7 +2915,18 @@ function stateYearVisualCalendarHtml({ events, name, code, year, locale = "de" }
         label.slice(0, 3) + '</a>').join("") + '</nav>' +
     '<div class="sf-year-rail" tabindex="0" role="region" ' +
     '' + (en ? 'aria-label="Twelve-month school holiday calendar"' : 'aria-label="Schulferienkalender mit zwölf Monaten"') + '>' +
-    monthHtml + '</div>' + partialWarning + '</section>';
+    monthHtml + '</div>' + partialWarning +
+    '<aside class="sf-date-preview" popover="auto" aria-label="' +
+    (en ? 'Selected school holiday' : 'Ausgewählter Ferientermin') + '">' +
+    '<div class="sf-date-preview-head"><strong class="sf-preview-date"></strong>' +
+    '<button type="button" class="sf-preview-close" aria-label="' +
+    (en ? 'Close' : 'Schließen') + '">×</button></div>' +
+    '<p class="sf-preview-name"></p><p class="sf-preview-range"></p>' +
+    '<p class="sf-preview-public" hidden></p>' +
+    '<a class="sf-preview-link" href="#termine">' +
+    (en ? 'View the full holiday details' : 'Alle Details zum Ferientermin') +
+    '</a></aside></section>' +
+    '<script defer src="/calendar-preview.js"></script>';
 }
 
 function stateYearSearchHighlightsHtml({ events, name, year }) {

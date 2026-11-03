@@ -1398,3 +1398,26 @@ p {
   border-radius: 50%;
   background: #bd6a30;
 }
+
+/* Optional date preview; date anchors remain functional without JavaScript. */
+.sf-date-preview[popover] {
+  width: min(360px, calc(100vw - 28px));
+  max-height: min(75vh, 460px);
+  overflow: auto;
+  margin: auto 18px 18px auto;
+  border: 1px solid #b9d8cc;
+  border-radius: 15px;
+  padding: 17px;
+  background: #fff;
+  color: #1b2934;
+  box-shadow: 0 12px 34px rgba(24, 56, 49, 0.21);
+}
+.sf-date-preview-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.sf-preview-close { border: 1px solid #cadbd5; border-radius: 8px; background: #fff; color: #1b544a; font-size: 1.2rem; cursor: pointer; padding: 2px 9px; }
+.sf-preview-name { font-size: 1.15rem; font-weight: 750; margin: 12px 0 4px; }
+.sf-preview-range { margin: 0 0 9px; }
+.sf-preview-public { font-size: .88rem; color: #8a4c20; }
+.sf-preview-link { display: inline-block; font-weight: 700; margin-top: 8px; color: #176f64; }
+@media (max-width: 740px) {
+  .sf-date-preview[popover] { margin: auto auto 12px; }
+}
