@@ -592,7 +592,7 @@ for (const [
     // Seasonal shortcuts must follow calendar order across every state/year.
     // Compare actual generated German dates, not type names or DOM layout.
     const shortcutStarts = [...seasonalNav.matchAll(
-      /<strong>(\\d{2})\\.(\\d{2})\\.(\\d{4})\\s*[–-]/g,
+      /<strong>(\d{2})\.(\d{2})\.(\d{4})\s*[–-]/g,
     )].map((match) => `${match[3]}-${match[2]}-${match[1]}`);
     if (shortcutStarts.length !== seasonalTargets.length) {
       errors.push(`${file}: missing or unparsable seasonal shortcut dates`);
