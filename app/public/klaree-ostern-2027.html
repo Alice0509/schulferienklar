@@ -35,54 +35,79 @@
         <h1 id="game-title">Klarees Leckerli-Suche</h1>
         <p id="game-intro">Klaree hat fünf Leckerlis im Garten versteckt. Jetzt weiß sie nicht mehr, wo. Hilfst du ihr beim Suchen?</p>
       </div>
-      <img id="game-klaree" class="klaree-portrait" src="/klaree-walk.webp" alt="Klaree, der Ferienbegleiter" width="180" height="180" decoding="async">
+      <div class="story-detail" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
     </section>
     <section class="game-layout" id="game-garden" aria-label="Garten mit neun Verstecken">
       <div class="garden-panel">
-        <div class="garden-top"><span class="garden-label" aria-hidden="true">01 — 09</span><p id="game-instruction">Tippe auf ein Versteck oder wähle es mit der Tastatur aus. Finde alle fünf Leckerlis.</p></div>
+        <div class="garden-top"><div><p class="garden-label" id="game-garden-label">EIN GARTEN. NEUN VERSTECKE.</p><p id="game-instruction">Tippe auf ein Versteck oder wähle es mit der Tastatur aus. Finde alle fünf Leckerlis.</p></div><span class="garden-caption" aria-hidden="true">KLAREE · 2027</span></div>
         <div class="garden-board" id="garden-board">
-            <button type="button" class="spot" data-spot="flower" aria-label="Versteck untersuchen: Blumenbeet">
+          <svg class="garden-landscape" viewBox="0 0 960 560" preserveAspectRatio="none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="garden-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f9fdf8"/><stop offset="100%" stop-color="#e7f1e7"/></linearGradient>
+              <linearGradient id="garden-earth" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8f0e4"/><stop offset="100%" stop-color="#dce9d9"/></linearGradient>
+            </defs>
+            <rect width="960" height="560" rx="22" fill="url(#garden-sky)"/>
+            <path d="M0 230C156 171 220 215 331 197S568 149 670 194 849 228 960 179V560H0Z" fill="#eff6e9"/>
+            <path d="M0 369C147 316 261 365 408 308S691 320 960 279V560H0Z" fill="url(#garden-earth)"/>
+            <path d="M0 484C178 419 266 461 417 400S731 377 960 403V560H0Z" fill="#d9e8d8" opacity=".6"/>
+            <path d="M-30 540C163 502 179 406 324 413S594 470 691 383 839 353 1000 318" fill="none" stroke="#f6eedf" stroke-width="90" stroke-linecap="round" opacity=".83"/>
+            <path d="M-30 540C163 502 179 406 324 413S594 470 691 383 839 353 1000 318" fill="none" stroke="#d4d8bd" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 13" opacity=".65"/>
+            <g fill="none" stroke="#88af99" stroke-width="2" stroke-linecap="round" opacity=".6">
+              <path d="M0 195c81-18 107-18 162-5M720 159c58-8 113 5 155-12M31 375c59-20 91-17 144-6M705 511c71-22 143-15 236-35"/>
+              <path d="M58 268l3-17 8 9 8-16M355 254l-3-15 10 10 8-17M592 277l4-20 6 12 9-14M832 263l2-19 10 9 7-15"/>
+              <path d="M200 539l-4-16 12 9 4-17M549 522l-3-17 11 7 8-16M891 529l3-13 9 7 8-13"/>
+            </g>
+            <g fill="#f5e8d5" opacity=".73"><circle cx="58" cy="442" r="7"/><circle cx="342" cy="489" r="5"/><circle cx="593" cy="412" r="7"/><circle cx="890" cy="425" r="5"/></g>
+          </svg>
+          <div class="garden-character" id="garden-character">
+            <img id="game-klaree" src="/klaree-walk.webp" alt="Klaree, der Ferienbegleiter" width="128" height="128" decoding="async">
+            <span class="garden-character-shadow" aria-hidden="true"></span>
+          </div>
+            <button type="button" class="spot" data-spot="flower" style="--x:13%; --y:21%" aria-label="Versteck untersuchen: Blumenbeet">
               <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-flower"></use></svg>
               <span class="spot-name">Blumenbeet</span><span class="spot-result" aria-hidden="true"></span>
             </button>
-            <button type="button" class="spot" data-spot="hedge" aria-label="Versteck untersuchen: Hecke">
+            <button type="button" class="spot" data-spot="hedge" style="--x:45%; --y:15%" aria-label="Versteck untersuchen: Hecke">
               <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-hedge"></use></svg>
               <span class="spot-name">Hecke</span><span class="spot-result" aria-hidden="true"></span>
             </button>
-            <button type="button" class="spot" data-spot="stone" aria-label="Versteck untersuchen: Stein">
+            <button type="button" class="spot" data-spot="stone" style="--x:67%; --y:45%" aria-label="Versteck untersuchen: Stein">
               <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-stone"></use></svg>
               <span class="spot-name">Stein</span><span class="spot-result" aria-hidden="true"></span>
             </button>
-            <button type="button" class="spot" data-spot="bench" aria-label="Versteck untersuchen: Bank">
+            <button type="button" class="spot" data-spot="bench" style="--x:27%; --y:49%" aria-label="Versteck untersuchen: Bank">
               <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-bench"></use></svg>
               <span class="spot-name">Bank</span><span class="spot-result" aria-hidden="true"></span>
             </button>
-            <button type="button" class="spot" data-spot="tree" aria-label="Versteck untersuchen: Baum">
+            <button type="button" class="spot" data-spot="tree" style="--x:83%; --y:19%" aria-label="Versteck untersuchen: Baum">
               <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-tree"></use></svg>
               <span class="spot-name">Baum</span><span class="spot-result" aria-hidden="true"></span>
             </button>
-            <button type="button" class="spot" data-spot="watering" aria-label="Versteck untersuchen: Gießkanne">
+            <button type="button" class="spot" data-spot="watering" style="--x:86%; --y:51%" aria-label="Versteck untersuchen: Gießkanne">
               <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-watering"></use></svg>
               <span class="spot-name">Gießkanne</span><span class="spot-result" aria-hidden="true"></span>
             </button>
-            <button type="button" class="spot" data-spot="basket" aria-label="Versteck untersuchen: Korb">
+            <button type="button" class="spot" data-spot="basket" style="--x:15%; --y:79%" aria-label="Versteck untersuchen: Korb">
               <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-basket"></use></svg>
               <span class="spot-name">Korb</span><span class="spot-result" aria-hidden="true"></span>
             </button>
-            <button type="button" class="spot" data-spot="fence" aria-label="Versteck untersuchen: Zaun">
+            <button type="button" class="spot" data-spot="fence" style="--x:49%; --y:80%" aria-label="Versteck untersuchen: Zaun">
               <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-fence"></use></svg>
               <span class="spot-name">Zaun</span><span class="spot-result" aria-hidden="true"></span>
             </button>
-            <button type="button" class="spot" data-spot="grass" aria-label="Versteck untersuchen: Wiese">
+            <button type="button" class="spot" data-spot="grass" style="--x:82%; --y:80%" aria-label="Versteck untersuchen: Wiese">
               <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-grass"></use></svg>
               <span class="spot-name">Wiese</span><span class="spot-result" aria-hidden="true"></span>
             </button>
         </div>
       </div>
       <aside class="game-sidebar" id="game-sidebar" aria-label="Spielfortschritt">
-        <div class="progress-head"><span class="eyebrow">KLAREE</span><span aria-hidden="true">✳</span></div>
+        <div class="progress-head"><span class="eyebrow">KLAREE</span><span class="progress-suffix" id="game-progress-suffix" aria-hidden="true">01 / 05</span></div>
         <p class="counter" id="game-count">0 von 5 Leckerlis gefunden</p>
         <progress id="game-progress" value="0" max="5" aria-label="Gefundene Leckerlis"></progress>
+        <div class="treat-ledger" aria-hidden="true">
+          <span class="treat-token"></span><span class="treat-token"></span><span class="treat-token"></span><span class="treat-token"></span><span class="treat-token"></span>
+        </div>
         <p id="game-status" class="game-status" role="status" aria-live="polite" aria-atomic="true"></p>
         <p id="game-finish" class="finish" hidden>Geschafft! Klaree hat alle fünf Leckerlis wiedergefunden.</p>
         <button type="button" id="game-reset" class="reset-button">Noch einmal suchen</button>
