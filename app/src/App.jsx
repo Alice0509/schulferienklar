@@ -2046,6 +2046,18 @@ export default function App() {
               Bundesland – übersichtlich und kostenlos im Kalender.
             </p>
 
+            <div className="klaree-hero-appearance" aria-label={locale === "en" ? "Klaree, your school holiday companion" : "Klaree, dein Ferienbegleiter"}>
+              <img
+                className="klaree-hero-walk"
+                src="/klaree-walk.webp"
+                width="92"
+                height="92"
+                decoding="async"
+                alt={locale === "en" ? "Klaree walking towards the next school holiday" : "Klaree auf dem Weg zu den nächsten Ferien"}
+              />
+              <span>{locale === "en" ? "Klaree is already looking for the next school break." : "Klaree hält schon Ausschau nach den nächsten Ferien."}</span>
+            </div>
+
             <div className="ios-app-promo" aria-label="Schulferienklar iPhone-App">
               <div className="ios-app-promo-copy">
                 <span className="ios-app-promo-kicker">Neu · iPhone-App</span>
