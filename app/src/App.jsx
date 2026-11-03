@@ -2103,9 +2103,7 @@ export default function App() {
                   )}
                   <span className="klaree-event-kicker">{klareeSeasonal.kicker}</span>
                   <h2 id="klaree-event-title">{klareeSeasonal.title}</h2>
-                  <p>{klareeSeasonal.kind === "easter"
-                    ? (locale === "en" ? "A little seasonal surprise from Klaree." : "Eine kleine Osterüberraschung von Klaree.")
-                    : (locale === "en" ? "A little holiday greeting for you." : "Ein kleiner Feiertagsgruß für dich.")}</p>
+                  <p>{klareeSeasonal.teaser}</p>
                   <button
                     type="button"
                     className="klaree-event-cta"
@@ -2124,6 +2122,20 @@ export default function App() {
                       <span className="klaree-event-egg klaree-event-egg--two" />
                       <span className="klaree-event-blossom klaree-event-blossom--one">✿</span>
                       <span className="klaree-event-blossom klaree-event-blossom--two">✿</span>
+                    </>
+                  )}
+                  {klareeSeasonal.kind === "summer" && (
+                    <>
+                      <span className="klaree-event-sun" />
+                      <span className="klaree-event-summer-bloom klaree-event-summer-bloom--one">✿</span>
+                      <span className="klaree-event-summer-bloom klaree-event-summer-bloom--two">✿</span>
+                    </>
+                  )}
+                  {klareeSeasonal.kind === "autumn" && (
+                    <>
+                      <span className="klaree-event-leaf klaree-event-leaf--one" />
+                      <span className="klaree-event-leaf klaree-event-leaf--two" />
+                      <span className="klaree-event-leaf klaree-event-leaf--three" />
                     </>
                   )}
                   <img src={klareeSeasonal.image} alt="" decoding="async" width="320" height="170" />
