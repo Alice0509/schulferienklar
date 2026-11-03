@@ -1508,3 +1508,28 @@ p {
   .sf-year-save:hover .sf-year-klaree,
   .sf-year-save:focus-within .sf-year-klaree { transform: none; }
 }
+
+/* New Klaree story scene at the calendar's title, not inside date cells. */
+.sf-year-klaree-calendar {
+  width: clamp(64px, 9vw, 90px);
+  height: auto;
+  flex: none;
+  transform-origin: center bottom;
+  transition: transform .25s ease;
+}
+.sf-year-visual-heading:hover .sf-year-klaree-calendar,
+.sf-year-visual-heading:focus-within .sf-year-klaree-calendar {
+  transform: rotate(-5deg);
+}
+/* Sleep pose is only revealed after a successful, voluntary share or copy. */
+.sf-share-klaree { display: none; width: 75px; height: auto; flex: none; }
+.sf-share-prompt.is-thanked .sf-share-klaree { display: block; }
+.sf-share-prompt.is-thanked .sf-share-heart { display: none; }
+@media (max-width: 550px) {
+  .sf-year-klaree-calendar { width: 65px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sf-year-klaree-calendar { transition: none; }
+  .sf-year-visual-heading:hover .sf-year-klaree-calendar,
+  .sf-year-visual-heading:focus-within .sf-year-klaree-calendar { transform: none; }
+}
