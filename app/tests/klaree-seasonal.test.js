@@ -22,37 +22,63 @@ const season = (year, month, day, code = "BY", locale = "de", preview = null) =>
     locale, preview,
   });
 
-test("Ordinary days remain a quiet day-of-week/time-of-day Klaree", () => {
+test("Outside seasonal windows, Klaree keeps her ordinary daily cameo", () => {
   assert.equal(season(2026, 11, 3), null);
-  assert.equal(season(2026, 12, 23), null);
-  assert.equal(season(2026, 12, 27), null);
-  assert.equal(season(2027, 3, 23), null);
-  assert.equal(season(2027, 3, 30), null);
+  assert.equal(season(2026, 11, 30), null);
+  assert.equal(season(2027, 1, 7), null);
+  assert.equal(season(2027, 3, 13), null);
+  assert.equal(season(2027, 4, 5), null);
+  assert.equal(season(2026, 3, 21), null);
+  assert.equal(season(2026, 4, 13), null);
 });
 
-test("Christmas is a seasonal greeting with a red cape, never an inaccurate December 24 public holiday label", () => {
-  for (const day of [24, 25, 26]) {
+test("Christmas greeting lasts from December 1 through January 6, across the year boundary", () => {
+  for (const day of [1, 6, 23, 24, 25, 26, 27, 31]) {
     const moment = season(2026, 12, day);
-    assert.equal(moment?.kind, "christmas");
+    assert.equal(moment?.kind, "christmas", `December ${day}`);
     assert.equal(moment.image, "/klaree-christmas-2026.webp");
-    assert.equal(moment.statutory, false);
+    assert.equal(moment.statutory, false, "Christmas artwork cannot claim every day is a public holiday");
     assert.match(moment.title, /Weihnachten/);
+    assert.equal(moment.id, "christmas-2026");
   }
-  const withoutData = getKlareeSeasonalMoment({ date: localDate(2026, 12, 24), stateCode: "BY" });
+  for (const day of [2, 5, 6]) {
+    const moment = season(2027, 1, day, "BE");
+    assert.equal(moment?.kind, "christmas", `January ${day}`);
+    assert.equal(moment?.id, "christmas-2026", "One Christmas season keeps a stable ID");
+  }
+  assert.equal(season(2027, 1, 7, "BE"), null);
+  assert.equal(season(2027, 1, 1, "BE")?.kind, "holiday",
+    "Verified New Year's Day should take priority over the seasonal artwork");
+  assert.equal(season(2027, 1, 6, "BY")?.title, "Heilige Drei Könige",
+    "Statewide Epiphany should take priority in Bavaria");
+  const withoutData = getKlareeSeasonalMoment({ date: localDate(2026, 12, 1), stateCode: "BY" });
   assert.equal(withoutData.kind, "christmas");
   assert.equal(withoutData.statutory, false);
 });
 
-test("Easter range comes from the selected state's CURRENT-year dataset, not a hardcoded date", () => {
-  for (const day of [24, 25, 26, 27, 28, 29]) {
+test("Easter season runs from 14 days before through 7 days after Easter Sunday, using current-year state data", () => {
+  for (const day of [14, 15, 23, 24, 25, 26, 27, 28, 29, 30, 31]) {
     assert.equal(season(2027, 3, day)?.kind, "easter", `2027-03-${day}`);
   }
-  for (const day of [1, 2, 3, 4, 5, 6]) {
+  for (const day of [1, 2, 3, 4]) {
+    assert.equal(season(2027, 4, day)?.kind, "easter", `2027-04-${day}`);
+  }
+  assert.equal(season(2027, 3, 13), null);
+  assert.equal(season(2027, 4, 5), null);
+  for (const day of [22, 23, 31]) {
+    assert.equal(season(2026, 3, day)?.kind, "easter", `2026-03-${day}`);
+  }
+  for (const day of [1, 2, 3, 4, 5, 6, 12]) {
     assert.equal(season(2026, 4, day)?.kind, "easter", `2026-04-${day}`);
   }
+  assert.equal(season(2026, 3, 21), null);
+  assert.equal(season(2026, 4, 13), null);
   assert.equal(getKlareeSeasonalMoment({
     date: localDate(2027, 3, 28), stateCode: "BY", holidayDataset: holidayData("BY", 2026),
   }), null, "Planning another year must not alter today's Klaree");
+  assert.equal(getKlareeSeasonalMoment({
+    date: localDate(2027, 3, 28), stateCode: "BY",
+  }), null, "No Easter claims without a matching verified holiday dataset");
 });
 
 test("State-specific holidays appear only where verified statewide, never on regional/local exceptions", () => {
@@ -62,7 +88,8 @@ test("State-specific holidays appear only where verified statewide, never on reg
   assert.equal(inBerlin?.statutory, true);
   assert.equal(inBavaria, null);
   assert.equal(season(2026, 1, 6, "BY")?.title, "Heilige Drei Könige");
-  assert.equal(season(2026, 1, 6, "BE"), null);
+  assert.equal(season(2026, 1, 6, "BE")?.kind, "christmas",
+    "Berlin must not claim Epiphany is a public holiday, but the winter season still appears");
   assert.equal(season(2026, 10, 31, "SN")?.title, "Reformationstag");
   assert.equal(season(2026, 10, 31, "BY"), null);
   assert.equal(season(2026, 8, 15, "BY"), null, "Regional Mariä Himmelfahrt is not statewide");

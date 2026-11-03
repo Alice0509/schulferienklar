@@ -97,7 +97,7 @@ export function getKlareeSeasonalMoment({
   const stateHolidays = validStateHolidays(holidayDataset, stateCode, year);
 
   const makeChristmas = (isPreview = false) => ({
-    id: `christmas-${year}`, kind: "christmas", isPreview,
+    id: `christmas-${date.getMonth() === 0 ? year - 1 : year}`, kind: "christmas", isPreview,
     title: copy.christmas.title, kicker: copy.christmas.kicker,
     message: copy.christmas.message, hint: copy.christmas.hint, alt: copy.christmas.alt,
     image: "/klaree-christmas-2026.webp", previewLabel: isPreview ? copy.preview : "",
@@ -116,38 +116,51 @@ export function getKlareeSeasonalMoment({
   if (preview === "christmas") return makeChristmas(true);
   if (preview === "easter") return makeEaster(true);
 
-  // Christmas Eve is a seasonal greeting, not a claim that 24 December
-  // is a statutory public holiday.
-  if (key.slice(5) >= "12-24" && key.slice(5) <= "12-26") return makeChristmas();
+  // Official, verified statewide holidays take priority over the broad
+  // seasonal artwork. These one-day greetings are not presented as seasons.
+  const holiday = stateHolidays.find((item) =>
+    item.date === key && [...HIGHLIGHTED_IDS].some((id) => item.id?.endsWith(`-${id}`)));
+  if (holiday) {
+    const name = holiday.name?.[lang] || holiday.name?.de;
+    if (name) {
+      return {
+        id: `holiday-${stateCode}-${holiday.date}-${holiday.id}`,
+        kind: "holiday", isPreview: false, statutory: true,
+        title: name,
+        kicker: copy.holiday.kicker,
+        message: copy.holiday.message(name),
+        hint: copy.holiday.hint,
+        alt: copy.holiday.alt,
+        image: "/klaree-mascot.webp",
+        previewLabel: "",
+      };
+    }
+  }
 
-  // Derive actual Easter dates from this state's current-year holiday data
-  // rather than hardcoding a date or using the planner's selected year.
+  // Advent through Epiphany is a season, not just December 24–26.
+  // This is a friendly Christmas-season greeting, never a statutory
+  // holiday claim (especially on December 24).
+  const monthDay = key.slice(5);
+  if (monthDay >= "12-01" || monthDay <= "01-06") return makeChristmas();
+
+  // Easter season: 14 days before Easter Sunday through 7 days after.
+  // Derive Easter Sunday from the verified current-year Good Friday and
+  // Easter Monday records of the selected state, not the planner's year.
   const goodFriday = stateHolidays.find((item) => item.id?.endsWith("-good-friday"));
   const easterMonday = stateHolidays.find((item) => item.id?.endsWith("-easter-monday"));
   if (goodFriday && easterMonday) {
     const todayOrd = ordinal(key);
-    const startOrd = ordinal(goodFriday.date);
-    const endOrd = ordinal(easterMonday.date);
-    if (todayOrd !== null && startOrd !== null && endOrd !== null &&
-        todayOrd >= startOrd - 2 && todayOrd <= endOrd) return makeEaster();
+    const fridayOrd = ordinal(goodFriday.date);
+    const mondayOrd = ordinal(easterMonday.date);
+    const sundayOrd = mondayOrd === null ? null : mondayOrd - 1;
+    if (todayOrd !== null && fridayOrd !== null && sundayOrd !== null &&
+        fridayOrd === sundayOrd - 2 &&
+        todayOrd >= sundayOrd - 14 && todayOrd <= sundayOrd + 7) {
+      return makeEaster();
+    }
   }
 
-  const holiday = stateHolidays.find((item) =>
-    item.date === key && [...HIGHLIGHTED_IDS].some((id) => item.id?.endsWith(`-${id}`)));
-  if (!holiday) return null;
-  const name = holiday.name?.[lang] || holiday.name?.de;
-  if (!name) return null;
-  return {
-    id: `holiday-${stateCode}-${holiday.date}-${holiday.id}`,
-    kind: "holiday", isPreview: false, statutory: true,
-    title: name,
-    kicker: copy.holiday.kicker,
-    message: copy.holiday.message(name),
-    hint: copy.holiday.hint,
-    alt: copy.holiday.alt,
-    image: "/klaree-mascot.webp",
-    previewLabel: "",
-  };
+  return null;
 }
 
 export function getKlareeGreetingControls(locale) {
