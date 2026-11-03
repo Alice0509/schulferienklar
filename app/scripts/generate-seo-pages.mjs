@@ -8208,8 +8208,8 @@ function englishStateYearPage({ slug, name, englishName, code, year, events }) {
     'not extra official school holiday dates.</p></div></div>' +
     '<p>Individual school exceptions, locally observed public holidays and ' +
     'movable school days are not included automatically. Confirm before booking.</p>' +
-    '<p><a class="button" href="/?state=' + code + '&amp;year=' + year +
-    '">Open the interactive calendar (German)</a></p></section>' +
+    '<p><a class="button" href="/en/calendar.html?state=' + code + '&amp;year=' + year +
+    '">Open the interactive calendar</a></p></section>' +
     '<section id="source" class="gold-section"><h2>Official source and data status</h2>' +
     '<p>' + escapeHtml(source?.sourceName || 'Official regional school holiday calendar') +
     '</p><p>' + sourceLink + '</p>' +
