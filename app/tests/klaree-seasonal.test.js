@@ -88,7 +88,8 @@ test("State-specific holidays appear only where verified statewide, never on reg
   assert.equal(inBerlin?.statutory, true);
   assert.equal(inBavaria, null);
   assert.equal(season(2026, 1, 6, "BY")?.title, "Heilige Drei Könige");
-  assert.equal(season(2026, 1, 6, "BE"), null);
+  assert.equal(season(2026, 1, 6, "BE")?.kind, "christmas",
+    "Berlin must not claim Epiphany is a public holiday, but the winter season still appears");
   assert.equal(season(2026, 10, 31, "SN")?.title, "Reformationstag");
   assert.equal(season(2026, 10, 31, "BY"), null);
   assert.equal(season(2026, 8, 15, "BY"), null, "Regional Mariä Himmelfahrt is not statewide");
