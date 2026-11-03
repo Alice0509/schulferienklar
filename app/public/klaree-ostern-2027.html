@@ -102,16 +102,20 @@
         </div>
       </div>
       <aside class="game-sidebar" id="game-sidebar" aria-label="Spielfortschritt">
-        <div class="progress-head"><span class="eyebrow">KLAREE</span><span class="progress-suffix" id="game-progress-suffix" aria-hidden="true">01 / 05</span></div>
-        <p class="counter" id="game-count">0 von 5 Leckerlis gefunden</p>
-        <progress id="game-progress" value="0" max="5" aria-label="Gefundene Leckerlis"></progress>
-        <div class="treat-ledger" aria-hidden="true">
-          <span class="treat-token"></span><span class="treat-token"></span><span class="treat-token"></span><span class="treat-token"></span><span class="treat-token"></span>
+        <div class="progress-block">
+          <div class="progress-head"><span class="eyebrow">KLAREE</span><span class="progress-suffix" id="game-progress-suffix" aria-hidden="true">0 / 5</span></div>
+          <p class="counter" id="game-count">0 von 5 Leckerlis gefunden</p>
+          <progress id="game-progress" value="0" max="5" aria-label="Gefundene Leckerlis"></progress>
+          <div class="treat-ledger" aria-hidden="true"><span class="treat-token"></span><span class="treat-token"></span><span class="treat-token"></span><span class="treat-token"></span><span class="treat-token"></span></div>
         </div>
-        <p id="game-status" class="game-status" role="status" aria-live="polite" aria-atomic="true"></p>
-        <p id="game-finish" class="finish" hidden>Geschafft! Klaree hat alle fünf Leckerlis wiedergefunden.</p>
-        <button type="button" id="game-reset" class="reset-button">Noch einmal suchen</button>
-        <p class="privacy-note" id="game-privacy">Ohne Anmeldung. Ohne Werbung. Ohne Speicherung deiner Spielzüge.</p>
+        <div class="feedback-block">
+          <p id="game-status" class="game-status" role="status" aria-live="polite" aria-atomic="true">Klaree schaut sich um …</p>
+          <p id="game-finish" class="finish" hidden>Geschafft! Klaree hat alle fünf Leckerlis wiedergefunden.</p>
+        </div>
+        <div class="restart-block">
+          <button type="button" id="game-reset" class="reset-button" hidden>Noch einmal suchen</button>
+          <p class="privacy-note" id="game-privacy">Ohne Anmeldung. Ohne Werbung. Ohne Speicherung deiner Spielzüge.</p>
+        </div>
       </aside>
     </section>
     <p class="preview-note" id="game-preview">Vorschau für das Oster-Event 2027 · Diese Seite ist noch nicht auf der Startseite verlinkt.</p>
