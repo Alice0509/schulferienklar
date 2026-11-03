@@ -4,6 +4,8 @@ import "./home-refresh.css";
 import "./mobile-flow.css";
 import { getUiLocale, localizeTree, translateText } from "./home-i18n.js";
 import { getKlareeMoment } from "./klaree-time.js";
+import { couldHaveKlareeHoliday, getKlareeSeasonalMoment, getKlareeGreetingControls } from "./klaree-seasonal.js";
+import "./klaree-seasonal.css";
 import {
   daysBetween,
   parseDateKey as parseDate,
@@ -982,7 +984,9 @@ function isStandaloneAppMode() {
 
 export default function App() {
   // Take a one-time snapshot: Klaree never jumps between poses while someone plans.
-  const [klareeArrivalHour] = useState(() => new Date().getHours());
+  const [klareeArrival] = useState(() => new Date());
+  const [seasonalPublicHolidayDataset, setSeasonalPublicHolidayDataset] = useState(null);
+  const [isKlareeGreetingOpen, setIsKlareeGreetingOpen] = useState(false);
   const [index, setIndex] = useState(null);
   const [selectedCode, setSelectedCode] = useState(() => {
     const params = new URLSearchParams(window.location.search);
@@ -1348,6 +1352,28 @@ export default function App() {
     loadPublicHolidays();
   }, [selectedCode, selectedYear]);
 
+  // The main planner can show a future year. Holiday greetings must use the
+  // visitor's actual date and the currently selected STATE, never selectedYear.
+  useEffect(() => {
+    let isCancelled = false;
+    if (!couldHaveKlareeHoliday(klareeArrival)) return undefined;
+
+    async function loadGreetingCalendar() {
+      try {
+        const listing = await holidayRepository.loadPublicHolidayIndex();
+        const matchingMeta = listing.datasets?.find((item) =>
+          item.bundeslandCode === selectedCode && item.year === klareeArrival.getFullYear());
+        if (!matchingMeta) return;
+        const value = await holidayRepository.loadPublicHolidayDatasetByMeta(matchingMeta);
+        if (!isCancelled) setSeasonalPublicHolidayDataset(value);
+      } catch {
+        if (!isCancelled) setSeasonalPublicHolidayDataset(null);
+      }
+    }
+    loadGreetingCalendar();
+    return () => { isCancelled = true; };
+  }, [selectedCode, klareeArrival]);
+
   const holidays = useMemo(() => {
     return dataset?.holidays
       ? [...dataset.holidays].sort(
@@ -1710,6 +1736,7 @@ export default function App() {
   const selectBundesland = (nextCode) => {
     localStorage.setItem(STORAGE_KEYS.bundesland, nextCode);
     setSelectedCode(nextCode);
+    setIsKlareeGreetingOpen(false);
     setIsStateMenuOpen(false);
   };
 
@@ -1894,7 +1921,16 @@ export default function App() {
 
   const pattern = getHeroPattern(selectedCode);
   const locale = getUiLocale();
-  const klareeMoment = getKlareeMoment(klareeArrivalHour, locale);
+  const klareeMoment = getKlareeMoment(klareeArrival.getHours(), locale);
+  const klareeSeasonalPreview = new URLSearchParams(window.location.search).get("klaree-preview");
+  const klareeSeasonal = getKlareeSeasonalMoment({
+    date: klareeArrival,
+    stateCode: selectedCode,
+    holidayDataset: seasonalPublicHolidayDataset,
+    locale,
+    preview: klareeSeasonalPreview,
+  });
+  const klareeControls = getKlareeGreetingControls(locale);
   const targetLanguage = locale === "en" ? "de" : "en";
   const languageUrl = (targetLanguage === "en" ? "/en/calendar.html" : "/") +
     "?state=" + encodeURIComponent(selectedCode) +
@@ -2050,21 +2086,63 @@ export default function App() {
               Bundesland – übersichtlich und kostenlos im Kalender.
             </p>
 
-            <div className="klaree-hero-appearance" data-klaree-moment={klareeMoment.key}>
-              <span className="klaree-hero-stage">
-                <img
-                  className="klaree-hero-figure"
-                  src={klareeMoment.image}
-                  width="112"
-                  height="112"
-                  decoding="async"
-                  alt={klareeMoment.alt}
-                />
-              </span>
-              <div className="klaree-hero-copy">
-                <strong className="klaree-hero-name">Klaree</strong>
-                <span className="klaree-hero-line">{klareeMoment.line}</span>
-              </div>
+            <div
+              className={`klaree-hero-appearance${klareeSeasonal ? " klaree-seasonal" : ""}`}
+              data-klaree-moment={klareeSeasonal?.kind || klareeMoment.key}
+            >
+              {klareeSeasonal ? (
+                <>
+                  <button
+                    type="button"
+                    className="klaree-seasonal-trigger"
+                    aria-expanded={isKlareeGreetingOpen}
+                    aria-controls="klaree-seasonal-message"
+                    onClick={() => setIsKlareeGreetingOpen((open) => !open)}
+                  >
+                    <span className="klaree-seasonal-illustration">
+                      <img
+                        src={klareeSeasonal.image}
+                        width={klareeSeasonal.kind === "christmas" ? 300 : 112}
+                        height={klareeSeasonal.kind === "christmas" ? 115 : 112}
+                        alt={klareeSeasonal.alt}
+                        decoding="async"
+                      />
+                    </span>
+                    <span className="klaree-seasonal-copy">
+                      {klareeSeasonal.isPreview && (
+                        <span className="klaree-seasonal-preview">{klareeSeasonal.previewLabel}</span>
+                      )}
+                      <span className="klaree-seasonal-kicker">{klareeSeasonal.kicker}</span>
+                      <strong className="klaree-seasonal-title">{klareeSeasonal.title}</strong>
+                      <span className="klaree-seasonal-link">
+                        {isKlareeGreetingOpen ? klareeControls.close : klareeControls.open}
+                      </span>
+                    </span>
+                  </button>
+                  {isKlareeGreetingOpen && (
+                    <p id="klaree-seasonal-message" className="klaree-seasonal-message" role="status">
+                      {klareeSeasonal.message}
+                    </p>
+                  )}
+                </>
+              ) : (
+                <>
+                  <span className="klaree-hero-stage">
+                    <img
+                      className="klaree-hero-figure"
+                      src={klareeMoment.image}
+                      width="112"
+                      height="112"
+                      decoding="async"
+                      alt={klareeMoment.alt}
+                    />
+                  </span>
+                  <div className="klaree-hero-copy">
+                    <strong className="klaree-hero-name">Klaree</strong>
+                    <span className="klaree-hero-line">{klareeMoment.line}</span>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="ios-app-promo" aria-label="Schulferienklar iPhone-App">
