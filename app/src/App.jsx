@@ -3361,12 +3361,34 @@ export default function App() {
         id="app-speichern"
         aria-labelledby="install-guide-title"
       >
-        <p className="eyebrow">Schneller wiederfinden</p>
-        <h2 id="install-guide-title">Schulferienklar als App speichern</h2>
-        <p>
-          iPhone: Teilen → „Zum Home-Bildschirm“. Android/Computer: Browser-Menü
-          → „App installieren“ oder „Zum Startbildschirm hinzufügen“.
-        </p>
+        <div className="klaree-bookmark-home">
+          <img
+            className="klaree-bookmark-home-image"
+            src="/klaree-mascot.webp"
+            width="110"
+            height="105"
+            loading="lazy"
+            decoding="async"
+            alt={locale === "en" ? "Klaree, the school holiday companion" : "Klaree, der Ferienbegleiter"}
+          />
+          <div className="klaree-bookmark-home-copy">
+            <p className="eyebrow">{locale === "en" ? "Klaree's tip" : "Klarees Tipp"}</p>
+            <h2 id="install-guide-title">{locale === "en" ? "Save your calendar for next time" : "Deinen Kalender fürs nächste Mal merken"}</h2>
+            <p>
+              {locale === "en"
+                ? "Open your state's permanent calendar, then bookmark it in your browser. It always opens the current year."
+                : "Öffne den dauerhaften Bundesland-Kalender und speichere ihn als Lesezeichen. So landest du immer beim aktuellen Jahr."}
+            </p>
+            <a className="klaree-bookmark-home-link" href={`${locale === "en" ? "/en/calendar.html" : "/"}?state=${selectedCode}`}>
+              {locale === "en" ? "Open permanent state calendar" : "Dauerhaften Bundesland-Kalender öffnen"}
+            </a>
+            <p className="klaree-bookmark-home-footnote">
+              {locale === "en"
+                ? "On iPhone: Share → Add Bookmark or Add to Home Screen. On desktop: use your browser's bookmark function."
+                : "iPhone: Teilen → „Lesezeichen hinzufügen“ oder „Zum Home-Bildschirm“. Am Computer: Lesezeichen-Funktion des Browsers."}
+            </p>
+          </div>
+        </div>
       </section>
 
       <footer className="footer site-footer">
