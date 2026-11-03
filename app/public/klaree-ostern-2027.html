@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="theme-color" content="#f5f8f4">
+  <meta name="description" content="Klarees Leckerli-Suche: eine kleine, kostenlose Ostergeschichte zum Mitmachen.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+  <link rel="stylesheet" href="/klaree-easter-preview.css">
+  <title>Klarees Leckerli-Suche · Schulferienklar</title>
+  <script type="module" src="/klaree-easter-game.mjs"></script>
+</head>
+<body>
+  <svg class="symbol-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <symbol id="sketch-flower" viewBox="0 0 48 48"><circle cx="24" cy="24" r="4"/><path d="M24 11c4 3 5 6 0 9-5-3-4-6 0-9Zm0 26c4-3 5-6 0-9-5 3-4 6 0 9ZM11 24c3-4 6-5 9 0-3 5-6 4-9 0Zm26 0c-3-4-6-5-9 0 3 5 6 4 9 0Z"/></symbol>
+      <symbol id="sketch-hedge" viewBox="0 0 48 48"><path d="M9 31c-3-11 2-20 10-18 5-7 14-4 15 4 9-2 13 8 6 15M13 31h24M24 31v9"/></symbol>
+      <symbol id="sketch-stone" viewBox="0 0 48 48"><path d="M8 32c-2-8 8-17 15-19 9-3 19 8 17 18-1 5-25 7-32 1Z"/><path d="M17 20l-3 6"/></symbol>
+      <symbol id="sketch-bench" viewBox="0 0 48 48"><path d="M10 12h29M10 20h29M12 31h27M15 32l-3 7M35 32l3 7M15 24v9M35 24v9"/></symbol>
+      <symbol id="sketch-tree" viewBox="0 0 48 48"><path d="M24 41V27m-7 6 7-5 7 4M11 27c-5-7 0-14 6-15 3-8 16-7 17 0 9-1 14 9 9 15-5 7-25 9-32 0Z"/></symbol>
+      <symbol id="sketch-watering" viewBox="0 0 48 48"><path d="M12 17h23l-3 20H16l-4-20ZM11 21c-10-7-9-12-3-13l5 8M34 19c13-4 13 12 1 12M19 11h12"/></symbol>
+      <symbol id="sketch-basket" viewBox="0 0 48 48"><path d="M9 21h30l-4 17H13L9 21ZM17 21c0-15 14-15 14 0M17 27l2 8m7-8v8m7-8-2 8"/></symbol>
+      <symbol id="sketch-fence" viewBox="0 0 48 48"><path d="M8 16h32M8 32h32M13 9l-3 34M25 9v34M37 9l3 34"/></symbol>
+      <symbol id="sketch-grass" viewBox="0 0 48 48"><path d="M8 37c6-13 9-18 9-25m7 25c-1-17-2-23 1-29m9 29c1-13 4-19 9-25M7 38h36"/></symbol>
+  </svg>
+  <header class="site-header">
+    <a class="site-brand" id="game-brand" href="/" aria-label="Schulferienklar Startseite"><img src="/favicon.svg" alt="" width="40" height="40"><span>Schulferienklar</span></a>
+    <nav id="game-navigation" aria-label="Seiten-Navigation"><a class="back-link" id="game-calendar-link" href="/">Kalender öffnen</a><a id="language-toggle" class="language-switch" href="?lang=en" lang="en">English</a></nav>
+  </header>
+  <main>
+    <section class="intro" aria-labelledby="game-title">
+      <div class="intro-copy">
+        <p class="eyebrow" id="game-kicker">Kleine Geschichten mit Klaree</p>
+        <h1 id="game-title">Klarees Leckerli-Suche</h1>
+        <p id="game-intro">Klaree hat fünf Leckerlis im Garten versteckt. Jetzt weiß sie nicht mehr, wo. Hilfst du ihr beim Suchen?</p>
+      </div>
+      <img id="game-klaree" class="klaree-portrait" src="/klaree-walk.webp" alt="Klaree, der Ferienbegleiter" width="180" height="180" decoding="async">
+    </section>
+    <section class="game-layout" id="game-garden" aria-label="Garten mit neun Verstecken">
+      <div class="garden-panel">
+        <div class="garden-top"><span class="garden-label" aria-hidden="true">01 — 09</span><p id="game-instruction">Tippe auf ein Versteck oder wähle es mit der Tastatur aus. Finde alle fünf Leckerlis.</p></div>
+        <div class="garden-board" id="garden-board">
+            <button type="button" class="spot" data-spot="flower" aria-label="Versteck untersuchen: Blumenbeet">
+              <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-flower"></use></svg>
+              <span class="spot-name">Blumenbeet</span><span class="spot-result" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="spot" data-spot="hedge" aria-label="Versteck untersuchen: Hecke">
+              <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-hedge"></use></svg>
+              <span class="spot-name">Hecke</span><span class="spot-result" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="spot" data-spot="stone" aria-label="Versteck untersuchen: Stein">
+              <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-stone"></use></svg>
+              <span class="spot-name">Stein</span><span class="spot-result" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="spot" data-spot="bench" aria-label="Versteck untersuchen: Bank">
+              <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-bench"></use></svg>
+              <span class="spot-name">Bank</span><span class="spot-result" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="spot" data-spot="tree" aria-label="Versteck untersuchen: Baum">
+              <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-tree"></use></svg>
+              <span class="spot-name">Baum</span><span class="spot-result" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="spot" data-spot="watering" aria-label="Versteck untersuchen: Gießkanne">
+              <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-watering"></use></svg>
+              <span class="spot-name">Gießkanne</span><span class="spot-result" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="spot" data-spot="basket" aria-label="Versteck untersuchen: Korb">
+              <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-basket"></use></svg>
+              <span class="spot-name">Korb</span><span class="spot-result" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="spot" data-spot="fence" aria-label="Versteck untersuchen: Zaun">
+              <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-fence"></use></svg>
+              <span class="spot-name">Zaun</span><span class="spot-result" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="spot" data-spot="grass" aria-label="Versteck untersuchen: Wiese">
+              <svg class="spot-sketch" aria-hidden="true" viewBox="0 0 48 48"><use href="#sketch-grass"></use></svg>
+              <span class="spot-name">Wiese</span><span class="spot-result" aria-hidden="true"></span>
+            </button>
+        </div>
+      </div>
+      <aside class="game-sidebar" id="game-sidebar" aria-label="Spielfortschritt">
+        <div class="progress-head"><span class="eyebrow">KLAREE</span><span aria-hidden="true">✳</span></div>
+        <p class="counter" id="game-count">0 von 5 Leckerlis gefunden</p>
+        <progress id="game-progress" value="0" max="5" aria-label="Gefundene Leckerlis"></progress>
+        <p id="game-status" class="game-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        <p id="game-finish" class="finish" hidden>Geschafft! Klaree hat alle fünf Leckerlis wiedergefunden.</p>
+        <button type="button" id="game-reset" class="reset-button">Noch einmal suchen</button>
+        <p class="privacy-note" id="game-privacy">Ohne Anmeldung. Ohne Werbung. Ohne Speicherung deiner Spielzüge.</p>
+      </aside>
+    </section>
+    <p class="preview-note" id="game-preview">Vorschau für das Oster-Event 2027 · Diese Seite ist noch nicht auf der Startseite verlinkt.</p>
+  </main>
+  <footer><span>© Schulferienklar</span><nav id="game-legal" aria-label="Rechtliches"><a id="game-privacy-link" href="/datenschutz.html">Datenschutz</a><a id="game-imprint-link" href="/impressum.html">Impressum</a></nav></footer>
+</body>
+</html>
