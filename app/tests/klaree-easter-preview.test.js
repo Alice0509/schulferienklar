@@ -66,3 +66,32 @@ test("Preview stays unlinked, unindexed, ad-free and accessible", () => {
   assert.ok(css.includes(":focus-visible"));
   assert.ok(css.includes("prefers-reduced-motion: reduce"));
 });
+
+test("Illustrated garden keeps nine distinct accessible targets and Klaree in the scene", () => {
+  const read = (name) => fs.readFileSync(path.join(process.cwd(), name), "utf8");
+  const html = read("public/klaree-ostern-2027.html");
+  const css = read("public/klaree-easter-preview.css");
+  const game = read("public/klaree-easter-game.mjs");
+  assert.ok(html.includes('class="garden-landscape"'));
+  assert.ok(html.includes('id="garden-character"'));
+  assert.ok(html.includes('id="game-klaree"'));
+  assert.ok(html.includes('id="game-garden-label"'));
+  assert.ok(html.includes('class="treat-ledger"'));
+  assert.equal((html.match(/class="treat-token"/g) || []).length, TREAT_COUNT);
+  assert.equal((html.match(/style="--x:/g) || []).length, SPOTS.length);
+  assert.ok(css.includes('.garden-board .spot'));
+  assert.ok(css.includes('@media (max-width: 480px)'));
+  assert.ok(css.includes('prefers-reduced-motion: reduce'));
+  assert.ok(game.includes('slots.reset.hidden = true'), "Restart must not be shown before interaction");
+  assert.ok(game.includes('slots.reset.hidden = false'), "Restart must become available after interaction");
+  assert.ok(game.includes('slots.tokens.forEach'), "Treat progress must update after each find");
+});
+
+test("Scene story text is localized in both languages", () => {
+  for (const lang of [getEasterCopy("de"), getEasterCopy("en")]) {
+    assert.ok(lang.gardenLabel);
+    assert.ok(lang.ready);
+    assert.ok(lang.foundAt("bench"));
+    assert.ok(lang.emptyAt("bench"));
+  }
+});
