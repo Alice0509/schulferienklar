@@ -52,7 +52,7 @@ const content = {
     },
     holiday: {
       kicker: "Klaree zum Feiertag",
-      teaser: "Ein kleiner Feiertagsgruß für dich."
+      teaser: "Ein kleiner Feiertagsgruß für dich.",
       hint: "Klarees Gruß lesen",
       message: (name) => `Heute ist ${name}. Klaree wünscht dir einen schönen Tag!`,
       alt: "Klaree grüßt zum Feiertag",
@@ -98,7 +98,7 @@ const content = {
     },
     holiday: {
       kicker: "A holiday hello from Klaree",
-      teaser: "A little holiday greeting for you."
+      teaser: "A little holiday greeting for you.",
       hint: "Read Klaree’s greeting",
       message: (name) => `Today is ${name}. Klaree hopes you have a lovely day!`,
       alt: "Klaree greeting you on a public holiday",
