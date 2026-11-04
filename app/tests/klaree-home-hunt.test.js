@@ -74,7 +74,10 @@ test("Easter encounter is on the homepage, never a forced popup or redirect", ()
   const css = read("src/klaree-home-hunt.css");
   assert.ok(home.includes('import KlareeHomeHunt'));
   assert.ok(home.includes('klaree-hunt-preview'));
-  assert.ok(home.includes('klareeSeasonal?.kind === "easter"'));
+  assert.ok(home.includes("const showKlareeHomeHunt = klareeHuntPreview;"),
+    "Unapproved experience must run only behind the preview query");
+  assert.ok(!home.includes('klareeSeasonal?.kind === "easter" && !klareeSeasonal.isPreview'),
+    "Public Easter activation requires a separate launch PR");
   assert.ok(home.includes('<KlareeHomeHunt locale={locale} preview={klareeHuntPreview} />'));
   assert.ok(widget.includes("window.setTimeout"), "Auto appearance must use a scoped, cancellable timer");
   assert.ok(widget.includes("window.clearTimeout"), "Timers must be cleaned up");
