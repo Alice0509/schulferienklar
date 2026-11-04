@@ -66,7 +66,7 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
 
     let hideTimer;
     const showTimer = window.setTimeout(() => {
-      if (document.querySelector("dialog[open], .site-menu.is-open")) {
+      if (document.querySelector("dialog[open], .site-menu")) {
         setTurn((current) => current + 1);
         return;
       }
@@ -115,7 +115,7 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
   }, [peek]);
 
   const summon = () => {
-    if (hidden || found === HUNT_GOAL) return;
+    if (hidden || found === HUNT_GOAL || peek) return;
     keyboardSummon.current = true;
     immediate.current = true;
     setPeek(null);
@@ -174,7 +174,7 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
           {found === HUNT_GOAL ? (
             <button type="button" className="klaree-hunt-summon" onClick={restart}>{text.again}</button>
           ) : (
-            <button ref={summonRef} type="button" className="klaree-hunt-summon" onClick={summon} disabled={Boolean(peek)}>
+            <button ref={summonRef} type="button" className="klaree-hunt-summon" onClick={summon} aria-disabled={Boolean(peek)}>
               {text.summon}
             </button>
           )}
@@ -204,7 +204,13 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
             }
           }}
         >
-          <img src="/klaree-walk.webp" alt="" width="85" height="85" decoding="async" />
+          <img
+            src={found % 3 === 0 ? "/klaree-walk.webp" : found % 3 === 1 ? "/klaree-mascot.webp" : "/klaree-rest.webp"}
+            alt=""
+            width="85"
+            height="85"
+            decoding="async"
+          />
           <span className="klaree-home-peek-egg" aria-hidden="true" />
           <span className="klaree-home-peek-name">Klaree!</span>
         </button>
