@@ -185,6 +185,66 @@
   from { opacity: 0; transform: translateY(7px) scale(.97); }
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+/* A brief, non-interactive thank-you. The dog makes one happy hop and
+   leaves an Easter egg behind; the whole scene fades away in 3.2s. */
+.klaree-home-discovery {
+  position: fixed;
+  z-index: 29;
+  width: 108px;
+  height: 128px;
+  pointer-events: none;
+  isolation: isolate;
+}
+.klaree-home-discovery-dog {
+  position: absolute;
+  top: 10px;
+  left: 11px;
+  display: block;
+  width: 85px;
+  height: 85px;
+  object-fit: contain;
+  transform-origin: center bottom;
+  animation: klaree-home-joy 1.35s ease-in-out both;
+}
+.klaree-home-discovery-egg {
+  position: absolute;
+  left: 43px;
+  bottom: 15px;
+  display: block;
+  width: 24px;
+  height: 32px;
+  border: 1.5px solid #bd997d;
+  border-radius: 51% 51% 47% 47%;
+  background:
+    radial-gradient(ellipse at 50% 41%, #fff9f1 0 3px, transparent 4px),
+    repeating-linear-gradient(0deg, #f0b8a2 0 9px, #fae7c8 9px 15px);
+  box-shadow: 0 3px 9px rgba(68, 93, 69, .12);
+  animation: klaree-home-egg-remains 3.2s ease-in-out both;
+}
+.klaree-home-discovery[data-egg="1"] .klaree-home-discovery-egg {
+  border-color: #8eaa9b;
+  background: repeating-linear-gradient(0deg, #add5bd 0 9px, #ffefc8 9px 15px);
+}
+.klaree-home-discovery[data-egg="2"] .klaree-home-discovery-egg {
+  border-color: #b6a1c4;
+  background: repeating-linear-gradient(0deg, #d6c7eb 0 9px, #ffe7d1 9px 15px);
+}
+@keyframes klaree-home-joy {
+  0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+  19% { opacity: 1; transform: translateY(-7px) rotate(-5deg); }
+  42% { opacity: 1; transform: translateY(0) rotate(4deg); }
+  65% { opacity: 1; transform: translateY(-3px) rotate(0deg); }
+  80% { opacity: 1; transform: translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(2px) rotate(0deg); }
+}
+@keyframes klaree-home-egg-remains {
+  0%, 24% { opacity: 0; transform: translateY(7px) rotate(-13deg) scale(.85); }
+  40% { opacity: 1; transform: translateY(0) rotate(-9deg) scale(1); }
+  76% { opacity: 1; transform: translateY(0) rotate(-9deg) scale(1); }
+  100% { opacity: 0; transform: translateY(3px) rotate(-9deg) scale(.96); }
+}
+
 @media (max-width: 600px) {
   .klaree-home-hunt { gap: 9px; flex-wrap: wrap; padding: 11px 12px; border-radius: 17px; }
   .klaree-home-hunt-avatar { flex-basis: 36px; width: 36px; height: 36px; }
@@ -195,7 +255,12 @@
   .klaree-home-peek > img { width: 68px; height: 69px; }
   .klaree-home-peek-name { font-size: .69rem; }
   .klaree-home-peek-egg { width: 16px; height: 22px; bottom: 22px; }
+  .klaree-home-discovery { width: 88px; height: 108px; }
+  .klaree-home-discovery-dog { top: 7px; left: 10px; width: 68px; height: 69px; }
+  .klaree-home-discovery-egg { bottom: 13px; left: 34px; width: 20px; height: 27px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .klaree-home-peek { animation: none; }
+  .klaree-home-discovery-dog { animation: none; }
+  .klaree-home-discovery-egg { animation: none; opacity: 1; transform: rotate(-9deg); }
 }

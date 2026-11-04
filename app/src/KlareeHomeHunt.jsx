@@ -29,6 +29,9 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
   const text = getHomeHuntCopy(locale);
   const [found, setFound] = useState(0);
   const [peek, setPeek] = useState(null);
+  // Purely decorative, time-limited celebration after a successful find.
+  // The live status announces the discovery; this visual never traps focus.
+  const [discovery, setDiscovery] = useState(null);
   const [notice, setNotice] = useState("");
   const [hidden, setHidden] = useState(false);
   const [turn, setTurn] = useState(0);
@@ -38,6 +41,8 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
   const keyboardSummon = useRef(false);
   const peekRef = useRef(null);
   const summonRef = useRef(null);
+  const restartRef = useRef(null);
+  const focusRestartOnWin = useRef(false);
 
   useEffect(() => {
     const onVisibility = () => {
@@ -47,6 +52,7 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
         // Clear a live peek while the tab is hidden so the resumed tab
         // doesn't keep an un-timed, stale Klaree button on screen.
         setPeek(null);
+        setDiscovery(null);
         setTurn((current) => current + 1);
       }
     };
@@ -55,7 +61,7 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
   }, []);
 
   useEffect(() => {
-    if (hidden || found === HUNT_GOAL || !pageVisible) return undefined;
+    if (hidden || found === HUNT_GOAL || !pageVisible || discovery) return undefined;
 
     const summoned = immediate.current;
     immediate.current = false;
@@ -102,13 +108,27 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
       window.clearTimeout(showTimer);
       window.clearTimeout(hideTimer);
     };
-  }, [hidden, found, pageVisible, preview, turn]);
+  }, [hidden, found, pageVisible, preview, turn, discovery]);
+
+  // Keep the little joy-and-egg moment on screen briefly, then restart
+  // the usual 15–30s interval. Clear the timer on dismissal or navigation.
+  useEffect(() => {
+    if (!discovery) return undefined;
+    const timeout = window.setTimeout(() => setDiscovery(null), 3200);
+    return () => window.clearTimeout(timeout);
+  }, [discovery]);
 
   useEffect(() => {
     if (!peek || !keyboardSummon.current) return;
     peekRef.current?.focus();
     keyboardSummon.current = false;
   }, [peek]);
+
+  useEffect(() => {
+    if (found !== HUNT_GOAL || !focusRestartOnWin.current) return;
+    restartRef.current?.focus();
+    focusRestartOnWin.current = false;
+  }, [found]);
 
   // Scroll used to dismiss Klaree instantly. Instead, let her stay as long
   // as the current viewport spot is safe. Reposition only if a control/ad
@@ -151,7 +171,7 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
   }, [peek]);
 
   const summon = () => {
-    if (hidden || found === HUNT_GOAL || peek) return;
+    if (hidden || found === HUNT_GOAL || peek || discovery) return;
     keyboardSummon.current = true;
     immediate.current = true;
     setPeek(null);
@@ -159,9 +179,15 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
   };
 
   const discover = () => {
-    if (!peek || hidden || found >= HUNT_GOAL) return;
+    if (!peek || hidden || found >= HUNT_GOAL || discovery) return;
     const next = found + 1;
-    if (peekRef.current === document.activeElement) summonRef.current?.focus();
+    // Show a tiny thank-you at the same safe spot rather than a modal
+    // or a second button covering the calendar.
+    setDiscovery({ ...peek, count: next });
+    if (peekRef.current === document.activeElement) {
+      if (next === HUNT_GOAL) focusRestartOnWin.current = true;
+      else summonRef.current?.focus();
+    }
     setPeek(null);
     setFound(next);
     setNotice(text.found(next));
@@ -170,9 +196,11 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
   const restart = () => {
     lastPlacement.current = null;
     keyboardSummon.current = false;
+    focusRestartOnWin.current = false;
     immediate.current = false;
     setFound(0);
     setPeek(null);
+    setDiscovery(null);
     setNotice("");
     setTurn(0);
   };
@@ -206,9 +234,9 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
         </div>
         <div className="klaree-home-hunt-actions">
           {found === HUNT_GOAL ? (
-            <button type="button" className="klaree-hunt-summon" onClick={restart}>{text.again}</button>
+            <button ref={restartRef} type="button" className="klaree-hunt-summon" onClick={restart}>{text.again}</button>
           ) : (
-            <button ref={summonRef} type="button" className="klaree-hunt-summon" onClick={summon} aria-disabled={Boolean(peek)}>
+            <button ref={summonRef} type="button" className="klaree-hunt-summon" onClick={summon} aria-disabled={Boolean(peek || discovery)}>
               {text.summon}
             </button>
           )}
@@ -217,10 +245,28 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
             className="klaree-hunt-close"
             aria-label={text.hide}
             title={text.hide}
-            onClick={() => { setHidden(true); setPeek(null); }}
+            onClick={() => { setHidden(true); setPeek(null); setDiscovery(null); }}
           >×</button>
         </div>
       </section>
+      {discovery && (
+        <div
+          className="klaree-home-discovery"
+          style={{ left: discovery.left, top: discovery.top }}
+          data-egg={discovery.count % 3}
+          aria-hidden="true"
+        >
+          <img
+            className="klaree-home-discovery-dog"
+            src="/klaree-mascot.webp"
+            alt=""
+            width="85"
+            height="85"
+            decoding="async"
+          />
+          <span className="klaree-home-discovery-egg" />
+        </div>
+      )}
       {peek && (
         <button
           ref={peekRef}
