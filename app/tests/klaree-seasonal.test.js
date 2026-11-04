@@ -249,3 +249,22 @@ test("Future years without verified holiday datasets still get an Easter greetin
     assert.equal(moment?.isPreview, false);
   }
 });
+
+test("Calculated Easter matches verified Good Friday and Easter Monday across published state datasets", () => {
+  const known = index.datasets.filter(({ year }) => year >= 2026 && year <= 2030);
+  assert.ok(known.length >= 16, "Expect at least one year's published statewide data");
+  for (const { bundeslandCode, year } of known) {
+    const data = holidayData(bundeslandCode, year);
+    const friday = data.holidays?.find((item) => item.id?.endsWith("-good-friday") &&
+      item.scope === "statewide" && item.type === "public_holiday");
+    const monday = data.holidays?.find((item) => item.id?.endsWith("-easter-monday") &&
+      item.scope === "statewide" && item.type === "public_holiday");
+    assert.ok(friday && monday, `${bundeslandCode} ${year} needs Good Friday and Easter Monday`);
+    const { sunday } = getKlareeEasterWindow(year);
+    const sundayUTC = Date.parse(`${sunday}T00:00:00Z`);
+    assert.equal(friday.date, new Date(sundayUTC - 2 * 86400000).toISOString().slice(0, 10),
+      `${bundeslandCode} ${year} Good Friday`);
+    assert.equal(monday.date, new Date(sundayUTC + 86400000).toISOString().slice(0, 10),
+      `${bundeslandCode} ${year} Easter Monday`);
+  }
+});
