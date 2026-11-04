@@ -245,6 +245,191 @@
   100% { opacity: 0; transform: translateY(3px) rotate(-9deg) scale(.96); }
 }
 
+/* Distinct reactions: hopping, a playful head tilt, then a little wiggle.
+   No extra image requests, no sound, and the original Klaree art stays intact. */
+.klaree-home-discovery-dog { animation-duration: 2.45s; }
+.klaree-home-discovery[data-mood="2"] .klaree-home-discovery-dog {
+  animation-name: klaree-home-tilt;
+}
+.klaree-home-discovery[data-mood="0"] .klaree-home-discovery-dog {
+  animation-name: klaree-home-wiggle;
+}
+.klaree-home-discovery-sparkle {
+  position: absolute;
+  top: 13px;
+  right: 9px;
+  width: 11px;
+  height: 11px;
+  z-index: 2;
+  transform: rotate(45deg);
+  background: #d5b76d;
+  border-radius: 2px;
+  animation: klaree-home-sparkle 2.8s ease-out both;
+}
+.klaree-home-discovery-sparkle--two {
+  right: auto;
+  left: 3px;
+  top: 40px;
+  width: 7px;
+  height: 7px;
+  background: #97bda9;
+  animation-delay: 190ms;
+}
+@keyframes klaree-home-tilt {
+  0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+  20% { opacity: 1; transform: translateY(-3px) rotate(8deg) scale(1.04); }
+  38% { opacity: 1; transform: translateY(0) rotate(-9deg) scale(1.02); }
+  62% { opacity: 1; transform: translateY(-4px) rotate(3deg) scale(1); }
+  80% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+  100% { opacity: 0; transform: translateY(2px) rotate(0deg) scale(.97); }
+}
+@keyframes klaree-home-wiggle {
+  0% { opacity: 1; transform: translateX(0) rotate(0deg); }
+  20% { opacity: 1; transform: translateX(-5px) rotate(-7deg); }
+  39% { opacity: 1; transform: translateX(5px) rotate(6deg); }
+  65% { opacity: 1; transform: translateX(-2px) rotate(-3deg); }
+  81% { opacity: 1; transform: translateX(0) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(2px) rotate(0deg); }
+}
+@keyframes klaree-home-sparkle {
+  0% { opacity: 0; transform: rotate(45deg) scale(.3); }
+  25%, 60% { opacity: .9; transform: rotate(45deg) scale(1); }
+  100% { opacity: 0; transform: rotate(45deg) scale(.35); }
+}
+/* Fifth find: keep a small on-site celebration for 6.5 seconds.
+   Its dimensions stay inside the same safe placement as the peek button. */
+.klaree-home-discovery[data-finale="true"] .klaree-home-discovery-dog {
+  animation: klaree-home-final-cheer 6.5s ease-out both;
+}
+.klaree-home-discovery[data-finale="true"] .klaree-home-discovery-sparkle {
+  animation-duration: 6.5s;
+}
+.klaree-home-discovery-final-eggs {
+  display: flex;
+  gap: 2px;
+  position: absolute;
+  left: 6px;
+  bottom: 11px;
+  pointer-events: none;
+  animation: klaree-home-final-eggs-in 6.5s ease-out both;
+}
+.klaree-home-discovery-final-eggs span {
+  display: block;
+  flex: none;
+  width: 16px;
+  height: 23px;
+  border: 1px solid rgba(126, 113, 107, .35);
+  border-radius: 51% 51% 46% 46%;
+  background: linear-gradient(160deg, #f2b8a5 0 48%, #fff4d5 48% 65%, #f2b8a5 65%);
+  transform: rotate(-14deg);
+  box-shadow: 0 2px 3px rgba(57, 80, 62, .12);
+}
+.klaree-home-discovery-final-eggs span:nth-child(2) {
+  background: linear-gradient(160deg, #bad6c4 0 48%, #fff4d5 48% 65%, #bad6c4 65%);
+  transform: rotate(-6deg) translateY(-5px);
+}
+.klaree-home-discovery-final-eggs span:nth-child(3) {
+  background: linear-gradient(160deg, #e5c4de 0 48%, #fff4d5 48% 65%, #e5c4de 65%);
+  transform: translateY(-7px);
+}
+.klaree-home-discovery-final-eggs span:nth-child(4) {
+  background: linear-gradient(160deg, #f0d188 0 48%, #fff4d5 48% 65%, #f0d188 65%);
+  transform: rotate(7deg) translateY(-5px);
+}
+.klaree-home-discovery-final-eggs span:nth-child(5) {
+  background: linear-gradient(160deg, #c0c5ec 0 48%, #fff4d5 48% 65%, #c0c5ec 65%);
+  transform: rotate(14deg);
+}
+@keyframes klaree-home-final-cheer {
+  0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+  12% { opacity: 1; transform: translateY(-12px) rotate(-7deg) scale(1.06); }
+  25% { opacity: 1; transform: translateY(0) rotate(6deg) scale(1.03); }
+  40% { opacity: 1; transform: translateY(-7px) rotate(-5deg) scale(1.05); }
+  60%, 84% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+  100% { opacity: 0; transform: translateY(2px) scale(.98); }
+}
+@keyframes klaree-home-final-eggs-in {
+  0%, 16% { opacity: 0; transform: translateY(9px) scale(.7); }
+  29%, 85% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(2px) scale(.97); }
+}
+
+/* A lasting, in-page reward: no popup, no confetti over the calendar.
+   Five drawn eggs make completing the hunt visibly different from 4/5. */
+.klaree-home-hunt-finale {
+  display: flex;
+  align-items: center;
+  gap: clamp(13px, 2.5vw, 25px);
+  padding: clamp(17px, 3vw, 27px);
+  margin: 0 0 18px;
+  border: 1px solid #e7d9b5;
+  border-radius: 22px;
+  background: linear-gradient(115deg, #fff3db, #f6f8ec 56%, #edf7f1);
+  box-shadow: 0 8px 25px rgba(74, 73, 46, .07);
+  color: #365b4f;
+}
+.klaree-home-hunt-finale-portrait {
+  display: block;
+  flex: 0 0 clamp(78px, 10vw, 112px);
+  width: clamp(78px, 10vw, 112px);
+  height: auto;
+  object-fit: contain;
+}
+.klaree-home-hunt-finale-content { min-width: 0; flex: 1; }
+.klaree-home-hunt-finale-kicker {
+  display: block;
+  margin-bottom: 4px;
+  color: #98754e;
+  font-size: .72rem;
+  font-weight: 840;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.klaree-home-hunt-finale-content h3 {
+  margin: 0 0 7px;
+  font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+  font-weight: 850;
+  line-height: 1.2;
+  color: #1d6753;
+}
+.klaree-home-hunt-finale-content p {
+  margin: 0;
+  font-size: clamp(.84rem, 1.6vw, .96rem);
+  line-height: 1.45;
+}
+.klaree-home-hunt-finale-eggs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 15px;
+}
+.klaree-home-hunt-finale-egg {
+  display: inline-block;
+  width: 29px;
+  height: 37px;
+  border: 1px solid rgba(127, 108, 89, .35);
+  border-radius: 51% 51% 47% 47%;
+  box-shadow: 0 2px 5px rgba(61, 67, 42, .09);
+  transform: rotate(-12deg);
+  background: repeating-linear-gradient(0deg, #efbba6 0 11px, #fff0d8 11px 16px);
+}
+.klaree-home-hunt-finale-egg--2 {
+  background: repeating-linear-gradient(0deg, #b6d8c6 0 11px, #fff0d8 11px 16px);
+  transform: rotate(7deg) translateY(-3px);
+}
+.klaree-home-hunt-finale-egg--3 {
+  background: repeating-linear-gradient(0deg, #d9c6e8 0 11px, #fff0d8 11px 16px);
+  transform: rotate(-4deg);
+}
+.klaree-home-hunt-finale-egg--4 {
+  background: repeating-linear-gradient(0deg, #f1d58f 0 11px, #fff0d8 11px 16px);
+  transform: rotate(13deg) translateY(-3px);
+}
+.klaree-home-hunt-finale-egg--5 {
+  background: repeating-linear-gradient(0deg, #b9cceb 0 11px, #fff0d8 11px 16px);
+  transform: rotate(-7deg);
+}
+
 @media (max-width: 600px) {
   .klaree-home-hunt { gap: 9px; flex-wrap: wrap; padding: 11px 12px; border-radius: 17px; }
   .klaree-home-hunt-avatar { flex-basis: 36px; width: 36px; height: 36px; }
@@ -258,9 +443,22 @@
   .klaree-home-discovery { width: 88px; height: 108px; }
   .klaree-home-discovery-dog { top: 7px; left: 10px; width: 68px; height: 69px; }
   .klaree-home-discovery-egg { bottom: 13px; left: 34px; width: 20px; height: 27px; }
+  .klaree-home-discovery-final-eggs { left: 5px; bottom: 10px; gap: 1px; }
+  .klaree-home-discovery-final-eggs span { width: 13px; height: 19px; }
+  .klaree-home-hunt-finale { padding: 16px 12px; gap: 10px; align-items: flex-start; }
+  .klaree-home-hunt-finale-portrait { flex-basis: 73px; width: 73px; }
+  .klaree-home-hunt-finale-eggs { gap: 6px; }
+  .klaree-home-hunt-finale-egg { width: 24px; height: 31px; }
+
 }
 @media (prefers-reduced-motion: reduce) {
   .klaree-home-peek { animation: none; }
   .klaree-home-discovery-dog { animation: none; }
   .klaree-home-discovery-egg { animation: none; opacity: 1; transform: rotate(-9deg); }
+  .klaree-home-discovery[data-finale="true"] .klaree-home-discovery-dog {
+    animation: none; opacity: 1; transform: none;
+  }
+  .klaree-home-discovery-sparkle { animation: none; opacity: .8; }
+  .klaree-home-discovery-final-eggs { animation: none; opacity: 1; transform: none; }
+
 }
