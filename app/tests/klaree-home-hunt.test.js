@@ -112,3 +112,39 @@ test("Easter encounter is on the homepage, never a forced popup or redirect", ()
   }
   assert.ok(!read("public/klaree-ostern-2027.html").includes("adsbygoogle"));
 });
+
+test("Every successful discovery leaves a short, non-interactive Easter egg keepsake", () => {
+  const widget = read("src/KlareeHomeHunt.jsx");
+  const css = read("src/klaree-home-hunt.css");
+  const de = getHomeHuntCopy("de");
+  const en = getHomeHuntCopy("en");
+
+  for (const n of [1, 2, 3, 4, 5]) {
+    assert.match(de.found(n), /Osterei/, `German greeting ${n}`);
+    assert.match(en.found(n), /Easter egg/, `English greeting ${n}`);
+  }
+  assert.ok(widget.includes("setDiscovery({ ...peek, count: next })"),
+    "Celebration must remain at the just-discovered location");
+  assert.ok(widget.includes("setDiscovery(null), 3200"),
+    "Egg scene should clear after a brief 3.2-second moment");
+  assert.ok(widget.includes("if (hidden || found === HUNT_GOAL || !pageVisible || discovery)"),
+    "Next timer must not start while the Easter egg is displayed");
+  assert.ok(widget.includes('className="klaree-home-discovery"'));
+  assert.ok(widget.includes('className="klaree-home-discovery-dog"'));
+  assert.ok(widget.includes('className="klaree-home-discovery-egg"'));
+  assert.ok(widget.includes('aria-hidden="true"'), "Visual reaction must not duplicate screen reader announcements");
+  assert.ok(widget.includes("restartRef.current?.focus()"),
+    "Keyboard players should land on the restart control after finishing");
+  assert.ok(css.includes(".klaree-home-discovery"));
+  assert.ok(css.includes("pointer-events: none"), "Celebration must never intercept calendar or ad clicks");
+  assert.ok(css.includes("@keyframes klaree-home-joy"));
+  assert.ok(css.includes("@keyframes klaree-home-egg-remains"));
+  assert.ok(css.includes('.klaree-home-discovery[data-egg="1"]'));
+  assert.ok(css.includes('.klaree-home-discovery[data-egg="2"]'));
+  assert.ok(css.includes("@media (prefers-reduced-motion: reduce)"));
+  assert.ok(css.includes(".klaree-home-discovery-dog { animation: none; }"));
+  assert.ok(css.includes(".klaree-home-discovery-egg { animation: none;"),
+    "Reduced-motion users must still see the egg, without motion");
+  assert.ok(!widget.includes("new Audio("));
+  assert.ok(!widget.includes("showModal()"));
+});
