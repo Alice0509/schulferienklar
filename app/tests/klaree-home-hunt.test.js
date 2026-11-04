@@ -13,7 +13,8 @@ const read = (name) => fs.readFileSync(path.join(process.cwd(), name), "utf8");
 test("Easter encounters arrive no faster than 15s and no slower than 30s", () => {
   assert.equal(HUNT_GOAL, 5);
   assert.equal(FIRST_PEEK_MS, 15000);
-  assert.ok(PEEK_VISIBLE_MS > 5000 && PEEK_VISIBLE_MS < 15000);
+  assert.equal(PEEK_VISIBLE_MS, 25000,
+    "Klaree stays visible long enough to find, including while the page scrolls");
   assert.equal(nextPeekInterval(() => 0), PEEK_INTERVAL_MIN_MS);
   assert.equal(nextPeekInterval(() => .999999999), PEEK_INTERVAL_MAX_MS);
   assert.equal(nextPeekInterval(() => .5), 22500);
@@ -84,6 +85,18 @@ test("Easter encounter is on the homepage, never a forced popup or redirect", ()
   assert.ok(widget.includes('document.addEventListener("visibilitychange"'), "Background tabs must be paused");
   assert.ok(widget.includes("prefers-reduced-motion: reduce"));
   assert.ok(widget.includes("viewportObstacles(document)"));
+  assert.ok(widget.includes("viewportObstacles(document, peekRef.current)"),
+    "Rechecking a visible cameo must exclude its own button from obstacles");
+  assert.ok(widget.includes('window.addEventListener("scroll", onViewportChange'),
+    "Scroll must recheck safety rather than immediately dismiss Klaree");
+  assert.ok(widget.includes('window.addEventListener("resize", onViewportChange'),
+    "Resizing must reposition Klaree if the old spot becomes unsafe");
+  assert.ok(widget.includes("if (!tooClose && !outOfView) return"),
+    "Klaree stays at the same spot when it is still clear");
+  assert.ok(!widget.includes("Math.max(3000, nextPeekInterval() - PEEK_VISIBLE_MS)"),
+    "The next appearance delay starts only after Klaree disappears");
+  assert.ok(!widget.includes('const onScroll = () => {'),
+    "Even a tiny scroll must not instantly dismiss the cameo");
   assert.ok(widget.includes("setHidden(true)"));
   assert.ok(widget.includes("keyboardSummon.current"));
   assert.ok(widget.includes("role=\"status\" aria-live=\"polite\""));

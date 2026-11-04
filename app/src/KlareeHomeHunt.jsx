@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  FIRST_PEEK_MS, HUNT_GOAL, PEEK_VISIBLE_MS, findSafePeek,
+  FIRST_PEEK_MS, HUNT_GOAL, PEEK_VISIBLE_MS, findSafePeek, intersectsBox,
   getHomeHuntCopy, nextPeekInterval,
 } from "./klaree-home-hunt.js";
 import "./klaree-home-hunt.css";
@@ -14,9 +14,10 @@ const OBSTACLE_SELECTOR = [
   '[id*="google_ads"]',
 ].join(", ");
 
-function viewportObstacles(doc) {
+function viewportObstacles(doc, excluded = null) {
   const viewportHeight = doc.defaultView.innerHeight;
   return [...doc.querySelectorAll(OBSTACLE_SELECTOR)].flatMap((el) => {
+    if (el === excluded) return [];
     const rect = el.getBoundingClientRect();
     if (rect.width < 1 || rect.height < 1 ||
         rect.bottom < 0 || rect.top > viewportHeight) return [];
@@ -34,13 +35,21 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
   const [pageVisible, setPageVisible] = useState(() => !document.hidden);
   const lastPlacement = useRef(null);
   const immediate = useRef(false);
-  const fromClick = useRef(false);
   const keyboardSummon = useRef(false);
   const peekRef = useRef(null);
   const summonRef = useRef(null);
 
   useEffect(() => {
-    const onVisibility = () => setPageVisible(!document.hidden);
+    const onVisibility = () => {
+      const isVisible = !document.hidden;
+      setPageVisible(isVisible);
+      if (!isVisible) {
+        // Clear a live peek while the tab is hidden so the resumed tab
+        // doesn't keep an un-timed, stale Klaree button on screen.
+        setPeek(null);
+        setTurn((current) => current + 1);
+      }
+    };
     document.addEventListener("visibilitychange", onVisibility);
     return () => document.removeEventListener("visibilitychange", onVisibility);
   }, []);
@@ -49,9 +58,7 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
     if (hidden || found === HUNT_GOAL || !pageVisible) return undefined;
 
     const summoned = immediate.current;
-    const afterClick = fromClick.current;
     immediate.current = false;
-    fromClick.current = false;
 
     // Respect reduced-motion users: they can still summon Klaree manually.
     if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches && !summoned) {
@@ -59,10 +66,11 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
     }
 
     const first = turn === 0 && found === 0;
+    // A visit stays visible long enough to discover; the next 15–30s
+    // countdown begins AFTER it disappears, not while Klaree is still here.
     const delay = summoned ? 0
       : first ? (preview ? 300 : FIRST_PEEK_MS)
-        : afterClick ? nextPeekInterval()
-          : Math.max(3000, nextPeekInterval() - PEEK_VISIBLE_MS);
+        : nextPeekInterval();
 
     let hideTimer;
     const showTimer = window.setTimeout(() => {
@@ -102,16 +110,44 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
     keyboardSummon.current = false;
   }, [peek]);
 
-  // A user scrolling through holiday data should not be followed by a button.
+  // Scroll used to dismiss Klaree instantly. Instead, let her stay as long
+  // as the current viewport spot is safe. Reposition only if a control/ad
+  // scrolls beneath her, and skip the peek only when no free space exists.
   useEffect(() => {
     if (!peek) return undefined;
-    const onScroll = () => {
+    let frame = null;
+    const recheckPlacement = () => {
+      frame = null;
+      const obstacles = viewportObstacles(document, peekRef.current);
+      const tooClose = obstacles.some((obstacle) => intersectsBox(peek, obstacle, 9));
+      const outOfView = peek.right > window.innerWidth || peek.bottom > window.innerHeight - 75;
+      if (!tooClose && !outOfView) return;
+      const replacement = findSafePeek({
+        width: window.innerWidth,
+        height: window.innerHeight,
+        obstacles,
+        previousId: peek.id,
+      });
+      if (replacement) {
+        lastPlacement.current = replacement.id;
+        setPeek(replacement);
+        return;
+      }
+      // Accessibility and ad protection take priority over an impossible spot.
       if (peekRef.current === document.activeElement) summonRef.current?.focus();
       setPeek(null);
       setTurn((current) => current + 1);
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const onViewportChange = () => {
+      if (frame === null) frame = window.requestAnimationFrame(recheckPlacement);
+    };
+    window.addEventListener("scroll", onViewportChange, { passive: true });
+    window.addEventListener("resize", onViewportChange);
+    return () => {
+      window.removeEventListener("scroll", onViewportChange);
+      window.removeEventListener("resize", onViewportChange);
+      if (frame !== null) window.cancelAnimationFrame(frame);
+    };
   }, [peek]);
 
   const summon = () => {
@@ -126,7 +162,6 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
     if (!peek || hidden || found >= HUNT_GOAL) return;
     const next = found + 1;
     if (peekRef.current === document.activeElement) summonRef.current?.focus();
-    fromClick.current = true;
     setPeek(null);
     setFound(next);
     setNotice(text.found(next));
@@ -136,7 +171,6 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
     lastPlacement.current = null;
     keyboardSummon.current = false;
     immediate.current = false;
-    fromClick.current = false;
     setFound(0);
     setPeek(null);
     setNotice("");

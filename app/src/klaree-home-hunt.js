@@ -1,7 +1,7 @@
 // A small, opt-out-friendly Easter encounter on the homepage, separate from
 // the unlisted garden preview. No state storage, ads, user tracking or modal.
 export const HUNT_GOAL = 5;
-export const PEEK_VISIBLE_MS = 8500;
+export const PEEK_VISIBLE_MS = 25000;
 export const FIRST_PEEK_MS = 15000;
 export const PEEK_INTERVAL_MIN_MS = 15000;
 export const PEEK_INTERVAL_MAX_MS = 30000;
