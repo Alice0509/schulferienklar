@@ -6,6 +6,7 @@ import { getUiLocale, localizeTree, translateText } from "./home-i18n.js";
 import { getKlareeMoment } from "./klaree-time.js";
 import { couldHaveKlareeHoliday, getKlareeSeasonalMoment, getKlareeGreetingControls } from "./klaree-seasonal.js";
 import "./klaree-seasonal.css";
+import KlareeHomeHunt from "./KlareeHomeHunt.jsx";
 import {
   daysBetween,
   parseDateKey as parseDate,
@@ -1930,6 +1931,12 @@ export default function App() {
     locale,
     preview: klareeSeasonalPreview,
   });
+  // New Easter homepage encounters remain preview-only until the owner
+  // approves their timing and visual placement. A separate launch PR will
+  // enable them automatically during Easter; this does not affect the
+  // established seasonal greeting banner.
+  const klareeHuntPreview = new URLSearchParams(window.location.search).get("klaree-hunt-preview") === "1";
+  const showKlareeHomeHunt = klareeHuntPreview;
   const klareeControls = getKlareeGreetingControls(locale);
   const showKlareeSeasonal = Boolean(klareeSeasonal && !isKlareeBannerDismissed);
   const openKlareeGreeting = () => {
@@ -2339,6 +2346,10 @@ export default function App() {
           </div>
         </div>
       </section>
+
+      {showKlareeHomeHunt && (
+        <KlareeHomeHunt locale={locale} preview={klareeHuntPreview} />
+      )}
 
       {klareeSeasonal && (
         <dialog
