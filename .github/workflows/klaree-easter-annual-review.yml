@@ -1,0 +1,79 @@
+name: Klaree Easter annual review
+
+# Easter moves each year. Review early enough for even a March 22 Easter.
+# 08:00 UTC on February 1 is 09:00 in Berlin in winter.
+on:
+  schedule:
+    - cron: "0 8 1 2 *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  annual-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Check recurring Easter dates and Klaree accessibility
+        id: calendar-tests
+        working-directory: app
+        run: node --test tests/klaree-seasonal.test.js tests/klaree-home-hunt.test.js
+
+      # A GitHub issue is deliberately a human QA request, never a claim
+      # that the animation, ad placement or live mobile layout was reviewed.
+      - name: Create yearly visual QA issue
+        if: ${{ always() && github.event_name == 'schedule' }}
+        uses: actions/github-script@v7
+        env:
+          CALENDAR_TEST_RESULT: ${{ steps.calendar-tests.outcome }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const year = new Date().getUTCFullYear();
+            const { getKlareeEasterWindow } = await import(
+              "file://" + process.env.GITHUB_WORKSPACE + "/app/src/klaree-seasonal.js"
+            );
+            const { sunday, start, end } = getKlareeEasterWindow(year);
+            const { owner, repo } = context.repo;
+            const title = "Klaree Ostern " + year + " — jährlicher QA-Check";
+            const issues = await github.paginate(github.rest.issues.listForRepo, {
+              owner, repo, state: "all", per_page: 100,
+            });
+            if (issues.some((issue) => !issue.pull_request && issue.title === title)) {
+              core.info("Yearly QA issue already exists: " + title);
+              return;
+            }
+            const body = [
+              "## Klaree Easter season " + year,
+              "",
+              "- Ostersonntag: **" + sunday + "**",
+              "- Automatischer Event-Zeitraum: **" + start + " bis " + end + "** (einschließlich)",
+              "- GitHub Easter + homepage tests: **" + process.env.CALENDAR_TEST_RESULT + "**",
+              "",
+              "## Vor der Veröffentlichung manuell prüfen",
+              "",
+              "- [ ] DE und EN: Start, 1–5 Begegnungen, Abschlusskarte, Neustart, Schließen",
+              "- [ ] Mobile Safari auf iPhone + Android-Browser: schmale Displays, Touch-Ziele und Orientierung",
+              "- [ ] Desktop: keine Überlappung mit Kalender, Buttons, Anzeigen oder Cookie-Einwilligung",
+              "- [ ] 15–30 s Pausen, 25 s Sichtbarkeit, Scroll/Resize, Fokus, Escape, Reduced Motion",
+              "- [ ] Feiertags- und Ferienangaben bleiben korrekt und unabhängig vom Planner-Jahr",
+              "- [ ] Die Vorschau bleibt außerhalb der Saison separat erreichbar",
+              "- [ ] Falls nötig: Fehler vor dem Start per eigenem PR beheben",
+              "",
+              "Preview: https://www.schulferienklar.de/?klaree-hunt-preview=1&klaree-preview=easter",
+              "",
+              "_Die Tests bestätigen Code-Eigenschaften, nicht die tatsächliche visuelle Darstellung._",
+            ].join("\n");
+            const result = await github.rest.issues.create({
+              owner, repo, title, body, assignees: [owner],
+            });
+            core.info("Created annual Klaree QA issue: " + result.data.html_url);
