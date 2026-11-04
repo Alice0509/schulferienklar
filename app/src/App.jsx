@@ -1931,11 +1931,12 @@ export default function App() {
     locale,
     preview: klareeSeasonalPreview,
   });
-  // A separate, in-page Easter surprise. For review outside Easter use
-  // ?klaree-hunt-preview=1; no public menu or SEO link is added.
+  // New Easter homepage encounters remain preview-only until the owner
+  // approves their timing and visual placement. A separate launch PR will
+  // enable them automatically during Easter; this does not affect the
+  // established seasonal greeting banner.
   const klareeHuntPreview = new URLSearchParams(window.location.search).get("klaree-hunt-preview") === "1";
-  const showKlareeHomeHunt = klareeHuntPreview ||
-    (klareeSeasonal?.kind === "easter" && !klareeSeasonal.isPreview);
+  const showKlareeHomeHunt = klareeHuntPreview;
   const klareeControls = getKlareeGreetingControls(locale);
   const showKlareeSeasonal = Boolean(klareeSeasonal && !isKlareeBannerDismissed);
   const openKlareeGreeting = () => {
