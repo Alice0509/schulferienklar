@@ -40,7 +40,16 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
   const summonRef = useRef(null);
 
   useEffect(() => {
-    const onVisibility = () => setPageVisible(!document.hidden);
+    const onVisibility = () => {
+      const isVisible = !document.hidden;
+      setPageVisible(isVisible);
+      if (!isVisible) {
+        // Clear a live peek while the tab is hidden so the resumed tab
+        // doesn't keep an un-timed, stale Klaree button on screen.
+        setPeek(null);
+        setTurn((current) => current + 1);
+      }
+    };
     document.addEventListener("visibilitychange", onVisibility);
     return () => document.removeEventListener("visibilitychange", onVisibility);
   }, []);
