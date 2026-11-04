@@ -41,6 +41,8 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
   const keyboardSummon = useRef(false);
   const peekRef = useRef(null);
   const summonRef = useRef(null);
+  const restartRef = useRef(null);
+  const focusRestartOnWin = useRef(false);
 
   useEffect(() => {
     const onVisibility = () => {
@@ -122,6 +124,12 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
     keyboardSummon.current = false;
   }, [peek]);
 
+  useEffect(() => {
+    if (found !== HUNT_GOAL || !focusRestartOnWin.current) return;
+    restartRef.current?.focus();
+    focusRestartOnWin.current = false;
+  }, [found]);
+
   // Scroll used to dismiss Klaree instantly. Instead, let her stay as long
   // as the current viewport spot is safe. Reposition only if a control/ad
   // scrolls beneath her, and skip the peek only when no free space exists.
@@ -176,7 +184,10 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
     // Show a tiny thank-you at the same safe spot rather than a modal
     // or a second button covering the calendar.
     setDiscovery({ ...peek, count: next });
-    if (peekRef.current === document.activeElement) summonRef.current?.focus();
+    if (peekRef.current === document.activeElement) {
+      if (next === HUNT_GOAL) focusRestartOnWin.current = true;
+      else summonRef.current?.focus();
+    }
     setPeek(null);
     setFound(next);
     setNotice(text.found(next));
@@ -185,6 +196,7 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
   const restart = () => {
     lastPlacement.current = null;
     keyboardSummon.current = false;
+    focusRestartOnWin.current = false;
     immediate.current = false;
     setFound(0);
     setPeek(null);
@@ -222,7 +234,7 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
         </div>
         <div className="klaree-home-hunt-actions">
           {found === HUNT_GOAL ? (
-            <button type="button" className="klaree-hunt-summon" onClick={restart}>{text.again}</button>
+            <button ref={restartRef} type="button" className="klaree-hunt-summon" onClick={restart}>{text.again}</button>
           ) : (
             <button ref={summonRef} type="button" className="klaree-hunt-summon" onClick={summon} aria-disabled={Boolean(peek || discovery)}>
               {text.summon}
