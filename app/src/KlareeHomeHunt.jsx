@@ -29,8 +29,8 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
   const text = getHomeHuntCopy(locale);
   const [found, setFound] = useState(0);
   const [peek, setPeek] = useState(null);
-  // Purely decorative, time-limited celebration after a successful find.
-  // The live status announces the discovery; this visual never traps focus.
+  // A click changes Klaree's pose and leaves a short egg scene at the spot.
+  // The fifth discovery also gets a lasting reward in the page below.
   const [discovery, setDiscovery] = useState(null);
   const [notice, setNotice] = useState("");
   const [hidden, setHidden] = useState(false);
@@ -110,11 +110,12 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
     };
   }, [hidden, found, pageVisible, preview, turn, discovery]);
 
-  // Keep the little joy-and-egg moment on screen briefly, then restart
-  // the usual 15–30s interval. Clear the timer on dismissal or navigation.
+  // First four treats: a quick reaction. Fifth: a longer, one-off finale.
+  // The permanent thank-you card stays until restart or dismissal.
   useEffect(() => {
     if (!discovery) return undefined;
-    const timeout = window.setTimeout(() => setDiscovery(null), 3200);
+    const duration = discovery.count === HUNT_GOAL ? 6500 : 3200;
+    const timeout = window.setTimeout(() => setDiscovery(null), duration);
     return () => window.clearTimeout(timeout);
   }, [discovery]);
 
@@ -249,22 +250,55 @@ export default function KlareeHomeHunt({ locale = "de", preview = false }) {
           >×</button>
         </div>
       </section>
+      {found === HUNT_GOAL && (
+        <section className="klaree-home-hunt-finale" aria-labelledby="klaree-hunt-final-title">
+          <img
+            className="klaree-home-hunt-finale-portrait"
+            src="/klaree-walk.webp"
+            alt=""
+            width="112"
+            height="112"
+            decoding="async"
+          />
+          <div className="klaree-home-hunt-finale-content">
+            <span className="klaree-home-hunt-finale-kicker">{text.finalKicker}</span>
+            <h3 id="klaree-hunt-final-title">{text.finalTitle}</h3>
+            <p>{text.finalMessage}</p>
+            <div className="klaree-home-hunt-finale-eggs" aria-hidden="true">
+              {[0, 1, 2, 3, 4].map((egg) => (
+                <span key={egg} className={`klaree-home-hunt-finale-egg klaree-home-hunt-finale-egg--${egg + 1}`} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
       {discovery && (
         <div
           className="klaree-home-discovery"
           style={{ left: discovery.left, top: discovery.top }}
           data-egg={discovery.count % 3}
+          data-mood={discovery.count % 3}
+          data-finale={discovery.count === HUNT_GOAL ? "true" : undefined}
           aria-hidden="true"
         >
+          <span className="klaree-home-discovery-sparkle klaree-home-discovery-sparkle--one" />
+          <span className="klaree-home-discovery-sparkle klaree-home-discovery-sparkle--two" />
           <img
             className="klaree-home-discovery-dog"
-            src="/klaree-mascot.webp"
+            src={discovery.count === HUNT_GOAL ? "/klaree-walk.webp"
+              : discovery.count % 3 === 1 ? "/klaree-mascot.webp"
+                : discovery.count % 3 === 2 ? "/klaree-rest.webp"
+                  : "/klaree-walk.webp"}
             alt=""
             width="85"
             height="85"
             decoding="async"
           />
-          <span className="klaree-home-discovery-egg" />
+          {discovery.count === HUNT_GOAL ? (
+            <div className="klaree-home-discovery-final-eggs">
+              {[0, 1, 2, 3, 4].map((egg) => <span key={egg} />)}
+            </div>
+          ) : <span className="klaree-home-discovery-egg" />}
         </div>
       )}
       {peek && (

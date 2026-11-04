@@ -71,9 +71,12 @@ const I18N = {
           : count === 3
             ? "Schon drei Begegnungen! Klaree erkundet die Seite weiter."
             : "Klaree entdeckt! Mal sehen, wo sie als Nächstes auftaucht.";
-      return `${greeting} Ein buntes Osterei bleibt als Gruß zurück.`;
+      return `${greeting} ${count === HUNT_GOAL ? "Fünf bunte Ostereier warten auf dich!" : "Ein buntes Osterei bleibt als Gruß zurück."}`;
     },
     completed: "Geschafft! Du hast Klaree fünfmal entdeckt. Frohe Osterzeit!",
+    finalKicker: "Klarees Osterüberraschung · 5 von 5",
+    finalTitle: "Hurra, du hast alle fünf gefunden!",
+    finalMessage: "Klaree freut sich riesig! Sie hat dir fünf bunte Ostereier und einen kleinen Ostergruß dagelassen. Danke fürs Mitspielen!",
     again: "Noch einmal entdecken",
     waiting: "Klaree versteckt sich gerade. Du kannst sie auch rufen.",
   },
@@ -94,9 +97,12 @@ const I18N = {
           : count === 3
             ? "Three encounters already! Klaree keeps exploring."
             : "Klaree spotted! Where will she pop up next?";
-      return `${greeting} A little Easter egg is left behind for you.`;
+      return `${greeting} ${count === HUNT_GOAL ? "Five colorful Easter eggs are waiting for you!" : "A little Easter egg is left behind for you."}`;
     },
     completed: "You did it! You spotted Klaree five times. Happy Easter season!",
+    finalKicker: "Klaree’s Easter surprise · 5 of 5",
+    finalTitle: "Hooray! You found all five!",
+    finalMessage: "Klaree is delighted! She left you five colorful Easter eggs and a little springtime hello. Thanks for playing!",
     again: "Play again",
     waiting: "Klaree is hiding for now. You can call her over.",
   },
