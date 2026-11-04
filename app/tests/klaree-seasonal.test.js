@@ -5,6 +5,7 @@ import path from "node:path";
 import process from "node:process";
 import {
   couldHaveKlareeHoliday, getKlareeSeasonalMoment, getKlareeGreetingControls,
+  getKlareeEasterWindow, isKlareeEasterEventDate,
 } from "../src/klaree-seasonal.js";
 
 const publicDataRoot = path.join(process.cwd(), "public", "data", "public-holidays");
@@ -56,7 +57,7 @@ test("Christmas greeting lasts from December 1 through January 6, across the yea
   assert.equal(withoutData.statutory, false);
 });
 
-test("Easter season runs from 14 days before through 7 days after Easter Sunday, using current-year state data", () => {
+test("Easter greeting runs 14 days before through 7 days after Easter, independent of year selection", () => {
   for (const day of [14, 15, 23, 24, 25, 26, 27, 28, 29, 30, 31]) {
     assert.equal(season(2027, 3, day)?.kind, "easter", `2027-03-${day}`);
   }
@@ -73,12 +74,16 @@ test("Easter season runs from 14 days before through 7 days after Easter Sunday,
   }
   assert.equal(season(2026, 3, 21), null);
   assert.equal(season(2026, 4, 13), null);
-  assert.equal(getKlareeSeasonalMoment({
+  const withStaleData = getKlareeSeasonalMoment({
     date: localDate(2027, 3, 28), stateCode: "BY", holidayDataset: holidayData("BY", 2026),
-  }), null, "Planning another year must not alter today's Klaree");
-  assert.equal(getKlareeSeasonalMoment({
+  });
+  assert.equal(withStaleData?.kind, "easter", "Editorial season uses actual date, not the holiday-data publication year");
+  assert.equal(withStaleData?.statutory, false, "Without verified data there are no statutory claims");
+  const withoutData = getKlareeSeasonalMoment({
     date: localDate(2027, 3, 28), stateCode: "BY",
-  }), null, "No Easter claims without a matching verified holiday dataset");
+  });
+  assert.equal(withoutData?.kind, "easter", "Annual Easter artwork must continue beyond the published datasets");
+  assert.equal(withoutData?.statutory, false);
 });
 
 test("State-specific holidays appear only where verified statewide, never on regional/local exceptions", () => {
@@ -199,5 +204,48 @@ test("Seasonal controls provide German and English labels for optional dismissal
   for (const lang of ["de", "en"]) {
     const c = getKlareeGreetingControls(lang);
     assert.ok(c.open && c.close && c.later && c.dismiss, lang);
+  }
+});
+
+test("Recurring Easter dates match known 2026–2032 Sundays, and include both exact boundaries", () => {
+  const dates = [
+    [2026, "2026-04-05", "2026-03-22", "2026-04-12"],
+    [2027, "2027-03-28", "2027-03-14", "2027-04-04"],
+    [2028, "2028-04-16", "2028-04-02", "2028-04-23"],
+    [2029, "2029-04-01", "2029-03-18", "2029-04-08"],
+    [2030, "2030-04-21", "2030-04-07", "2030-04-28"],
+    [2031, "2031-04-13", "2031-03-30", "2031-04-20"],
+    [2032, "2032-03-28", "2032-03-14", "2032-04-04"],
+  ];
+  const asLocalDate = (key) => {
+    const [year, month, day] = key.split("-").map(Number);
+    return localDate(year, month, day);
+  };
+  for (const [year, sunday, start, end] of dates) {
+    assert.deepEqual(getKlareeEasterWindow(year), { year, sunday, start, end });
+    assert.equal(isKlareeEasterEventDate(asLocalDate(start)), true, `${year} first day`);
+    assert.equal(isKlareeEasterEventDate(asLocalDate(sunday)), true, `${year} Easter Sunday`);
+    assert.equal(isKlareeEasterEventDate(asLocalDate(end)), true, `${year} final day`);
+    const before = new Date(asLocalDate(start).getTime() - 86400000);
+    const after = new Date(asLocalDate(end).getTime() + 86400000);
+    assert.equal(isKlareeEasterEventDate(before), false, `${year} before window`);
+    assert.equal(isKlareeEasterEventDate(after), false, `${year} after window`);
+  }
+  assert.equal(getKlareeEasterWindow(2027.5), null);
+  assert.equal(getKlareeEasterWindow(0), null);
+  assert.equal(isKlareeEasterEventDate(null), false);
+  assert.equal(isKlareeEasterEventDate(new Date("invalid")), false);
+});
+
+test("Future years without verified holiday datasets still get an Easter greeting, but never holiday claims", () => {
+  for (const year of [2031, 2032, 2035]) {
+    const event = getKlareeEasterWindow(year);
+    const [y, m, d] = event.sunday.split("-").map(Number);
+    const moment = getKlareeSeasonalMoment({
+      date: localDate(y, m, d), stateCode: "BY",
+    });
+    assert.equal(moment?.kind, "easter");
+    assert.equal(moment?.statutory, false);
+    assert.equal(moment?.isPreview, false);
   }
 });
