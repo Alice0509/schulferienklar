@@ -11,10 +11,42 @@ function localDateKey(date) {
   return [date.getFullYear(), String(date.getMonth() + 1).padStart(2, "0"), String(date.getDate()).padStart(2, "0")].join("-");
 }
 
-const ordinal = (key) => {
-  const [y, m, d] = String(key).split("-").map(Number);
-  return Number.isFinite(Date.UTC(y, m - 1, d)) ? Date.UTC(y, m - 1, d) / 86400000 : null;
-};
+// Gregorian Easter Sunday (Meeus/Jones/Butcher algorithm). Easter is a
+// movable date, so never hard-code a specific year into an editorial event.
+// Use UTC calendar arithmetic to avoid DST shifts in March/April. This is
+// strictly for seasonal artwork/game timing, not statutory holiday claims.
+export function getKlareeEasterWindow(year) {
+  if (!Number.isInteger(year) || year < 1583 || year > 4099) return null;
+  const a = year % 19;
+  const b = Math.floor(year / 100);
+  const c = year % 100;
+  const d = Math.floor(b / 4);
+  const e = b % 4;
+  const f = Math.floor((b + 8) / 25);
+  const g = Math.floor((b - f + 1) / 3);
+  const h = (19 * a + b - d - g + 15) % 30;
+  const i = Math.floor(c / 4);
+  const k = c % 4;
+  const l = (32 + 2 * e + 2 * i - h - k + 7) % 7;
+  const m = Math.floor((a + 11 * h + 22 * l) / 451);
+  const month = Math.floor((h + l - 7 * m + 114) / 31);
+  const day = (h + l - 7 * m + 114) % 31 + 1;
+  const easterTime = Date.UTC(year, month - 1, day);
+  const isoDay = (offset) => new Date(easterTime + offset * 86400000).toISOString().slice(0, 10);
+  return Object.freeze({
+    year,
+    sunday: isoDay(0),
+    start: isoDay(-14),
+    end: isoDay(7),
+  });
+}
+
+export function isKlareeEasterEventDate(date) {
+  const key = localDateKey(date);
+  if (!key) return false;
+  const window = getKlareeEasterWindow(date.getFullYear());
+  return Boolean(window && key >= window.start && key <= window.end);
+}
 
 const content = {
   de: {
@@ -184,22 +216,11 @@ export function getKlareeSeasonalMoment({
   const monthDay = key.slice(5);
   if (monthDay >= "12-01" || monthDay <= "01-06") return makeSeason("christmas");
 
-  // Easter season: 14 days before Easter Sunday through 7 days after.
-  // Derive Easter Sunday from the verified current-year Good Friday and
-  // Easter Monday records of the selected state, not the planner's year.
-  const goodFriday = stateHolidays.find((item) => item.id?.endsWith("-good-friday"));
-  const easterMonday = stateHolidays.find((item) => item.id?.endsWith("-easter-monday"));
-  if (goodFriday && easterMonday) {
-    const todayOrd = ordinal(key);
-    const fridayOrd = ordinal(goodFriday.date);
-    const mondayOrd = ordinal(easterMonday.date);
-    const sundayOrd = mondayOrd === null ? null : mondayOrd - 1;
-    if (todayOrd !== null && fridayOrd !== null && sundayOrd !== null &&
-        fridayOrd === sundayOrd - 2 &&
-        todayOrd >= sundayOrd - 14 && todayOrd <= sundayOrd + 7) {
-      return makeSeason("easter");
-    }
-  }
+  // Editorial Easter greeting: 14 days before Easter Sunday through
+  // 7 days after, every year. Unlike official state holiday claims above,
+  // an illustrated seasonal greeting can use the Gregorian calendar
+  // calculation even before the next year's holiday dataset is published.
+  if (isKlareeEasterEventDate(date)) return makeSeason("easter");
 
   // These are *seasonal* greetings rather than announcements of a
   // state's summer holidays. Those dates differ across German states.

@@ -75,11 +75,14 @@ test("Easter encounter is on the homepage, never a forced popup or redirect", ()
   const css = read("src/klaree-home-hunt.css");
   assert.ok(home.includes('import KlareeHomeHunt'));
   assert.ok(home.includes('klaree-hunt-preview'));
-  assert.ok(home.includes("const showKlareeHomeHunt = klareeHuntPreview;"),
-    "Unapproved experience must run only behind the preview query");
+  assert.ok(home.includes("const isKlareeEasterSeason = isKlareeEasterEventDate(klareeArrival);"),
+    "Annual event must use the visitor's actual date, never their selected planner year");
+  assert.ok(home.includes("const showKlareeHomeHunt = klareeHuntPreview || isKlareeEasterSeason;"),
+    "The event runs every Easter or via an explicit year-round preview query");
   assert.ok(!home.includes('klareeSeasonal?.kind === "easter" && !klareeSeasonal.isPreview'),
-    "Public Easter activation requires a separate launch PR");
-  assert.ok(home.includes('<KlareeHomeHunt locale={locale} preview={klareeHuntPreview} />'));
+    "Statewide holiday banner precedence must not suppress Easter game on the actual date");
+  assert.ok(home.includes('<KlareeHomeHunt locale={locale} preview={klareeHuntPreview && !isKlareeEasterSeason} />'),
+    "A real Easter visitor must never see the out-of-season preview warning");
   assert.ok(widget.includes("window.setTimeout"), "Auto appearance must use a scoped, cancellable timer");
   assert.ok(widget.includes("window.clearTimeout"), "Timers must be cleaned up");
   assert.ok(widget.includes('document.addEventListener("visibilitychange"'), "Background tabs must be paused");
@@ -189,4 +192,29 @@ test("Completing all five gives an immediate special reaction AND a lasting East
   assert.ok(widget.includes('onClick={restart}'), "Reset action stays available");
   assert.ok(widget.includes('restartRef.current?.focus()'), "Keyboard end-state remains accessible");
   assert.ok(!widget.includes("showModal()"), "No forced popup is permitted");
+});
+
+test("Annual Easter event preserves DE/EN, mobile and accessibility controls", () => {
+  const home = read("src/App.jsx");
+  const widget = read("src/KlareeHomeHunt.jsx");
+  const css = read("src/klaree-home-hunt.css");
+  for (const locale of ["de", "en"]) {
+    const copy = getHomeHuntCopy(locale);
+    assert.ok(copy.title && copy.intro && copy.peek && copy.hide && copy.resume);
+    assert.ok(copy.completed && copy.finalTitle && copy.finalMessage && copy.again);
+    assert.ok(copy.found(5));
+  }
+  assert.ok(widget.includes('const text = getHomeHuntCopy(locale)'),
+    "The visible event text must use the chosen homepage language");
+  assert.ok(home.includes('locale={locale}'),
+    "The event must receive the shared site language");
+  assert.ok(css.includes("@media (max-width: 600px)"),
+    "Small-screen event must use mobile sizing");
+  assert.ok(css.includes(".klaree-home-hunt-finale"),
+    "The five-egg reward must remain responsive");
+  assert.ok(css.includes("@media (prefers-reduced-motion: reduce)"),
+    "Motion sensitivity settings must be honored");
+  assert.ok(widget.includes('aria-label={text.peek}'));
+  assert.ok(widget.includes('aria-labelledby="klaree-hunt-final-title"'));
+  assert.ok(widget.includes('onClick={() => { setHidden(true); setPeek(null); setDiscovery(null); }}'));
 });
