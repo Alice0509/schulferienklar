@@ -125,8 +125,8 @@ test("Every successful discovery leaves a short, non-interactive Easter egg keep
   }
   assert.ok(widget.includes("setDiscovery({ ...peek, count: next })"),
     "Celebration must remain at the just-discovered location");
-  assert.ok(widget.includes("setDiscovery(null), 3200"),
-    "Egg scene should clear after a brief 3.2-second moment");
+  assert.ok(widget.includes("discovery.count === HUNT_GOAL ? 6500 : 3200"),
+    "Regular discoveries last 3.2s, but the fifth must have a 6.5s celebration");
   assert.ok(widget.includes("if (hidden || found === HUNT_GOAL || !pageVisible || discovery)"),
     "Next timer must not start while the Easter egg is displayed");
   assert.ok(widget.includes('className="klaree-home-discovery"'));
@@ -147,4 +147,46 @@ test("Every successful discovery leaves a short, non-interactive Easter egg keep
     "Reduced-motion users must still see the egg, without motion");
   assert.ok(!widget.includes("new Audio("));
   assert.ok(!widget.includes("showModal()"));
+});
+
+test("Completing all five gives an immediate special reaction AND a lasting Easter reward", () => {
+  const widget = read("src/KlareeHomeHunt.jsx");
+  const css = read("src/klaree-home-hunt.css");
+
+  for (const locale of ["de", "en"]) {
+    const copy = getHomeHuntCopy(locale);
+    assert.ok(copy.finalKicker && copy.finalTitle && copy.finalMessage);
+    assert.ok(copy.finalKicker.includes("5"));
+    assert.ok(copy.finalMessage.length > 30);
+    assert.notEqual(copy.found(5), copy.found(4));
+  }
+  assert.ok(widget.includes("found === HUNT_GOAL && ("),
+    "Reward is only shown after the fifth discovery");
+  assert.ok(widget.includes('className="klaree-home-hunt-finale"'),
+    "Reward card must remain in the normal document, not a modal or a toast");
+  assert.ok(widget.includes('aria-labelledby="klaree-hunt-final-title"'));
+  assert.ok(widget.includes("text.finalTitle") && widget.includes("text.finalMessage"));
+  assert.ok(widget.includes("[0, 1, 2, 3, 4].map((egg)"),
+    "The reward card must display five collected eggs");
+  assert.ok(widget.includes('data-finale={discovery.count === HUNT_GOAL ? "true" : undefined}'),
+    "The final encounter gets a unique celebration at its discovery position");
+  assert.ok(widget.includes('className="klaree-home-discovery-final-eggs"'));
+  assert.ok(widget.includes('className="klaree-home-discovery"'));
+  assert.ok(widget.includes('data-mood={discovery.count % 3}'),
+    "Klaree should not make the exact same hop for every treat");
+  assert.ok(widget.includes('discovery.count % 3 === 2 ? "/klaree-rest.webp"'),
+    "Different discoveries must use different existing Klaree artwork");
+  assert.ok(css.includes('.klaree-home-discovery[data-finale="true"]'));
+  assert.ok(css.includes("@keyframes klaree-home-final-cheer"));
+  assert.ok(css.includes("@keyframes klaree-home-final-eggs-in"));
+  assert.ok(css.includes("@keyframes klaree-home-tilt"));
+  assert.ok(css.includes("@keyframes klaree-home-wiggle"));
+  assert.ok(css.includes(".klaree-home-hunt-finale"));
+  assert.ok(css.includes(".klaree-home-hunt-finale-eggs"));
+  assert.ok(css.includes(".klaree-home-hunt-finale-egg--5"));
+  assert.ok(css.includes(".klaree-home-discovery-final-eggs { animation: none;"),
+    "Reduced-motion users must have a static final five-egg celebration");
+  assert.ok(widget.includes('onClick={restart}'), "Reset action stays available");
+  assert.ok(widget.includes('restartRef.current?.focus()'), "Keyboard end-state remains accessible");
+  assert.ok(!widget.includes("showModal()"), "No forced popup is permitted");
 });
