@@ -63,13 +63,16 @@ const I18N = {
     hide: "Klarees Osterbesuche ausblenden",
     resume: "Klaree wieder einladen",
     peek: "Da ist Klaree! Antippen und entdecken.",
-    found: (count) => count === HUNT_GOAL
-      ? "Alle fünf Begegnungen entdeckt! Klaree schickt dir einen Frühlingsgruß."
-      : count === 1
-        ? "Da ist sie! Klaree freut sich, dass du sie gefunden hast."
-        : count === 3
-          ? "Schon drei Begegnungen! Klaree erkundet die Seite weiter."
-          : "Klaree entdeckt! Mal sehen, wo sie als Nächstes auftaucht.",
+    found: (count) => {
+      const greeting = count === HUNT_GOAL
+        ? "Alle fünf Begegnungen entdeckt! Klaree schickt dir einen Frühlingsgruß."
+        : count === 1
+          ? "Da ist sie! Klaree freut sich, dass du sie gefunden hast."
+          : count === 3
+            ? "Schon drei Begegnungen! Klaree erkundet die Seite weiter."
+            : "Klaree entdeckt! Mal sehen, wo sie als Nächstes auftaucht.";
+      return `${greeting} Ein buntes Osterei bleibt als Gruß zurück.`;
+    },
     completed: "Geschafft! Du hast Klaree fünfmal entdeckt. Frohe Osterzeit!",
     again: "Noch einmal entdecken",
     waiting: "Klaree versteckt sich gerade. Du kannst sie auch rufen.",
@@ -83,13 +86,16 @@ const I18N = {
     hide: "Hide Klaree’s Easter visits",
     resume: "Invite Klaree back",
     peek: "There’s Klaree! Tap to find her.",
-    found: (count) => count === HUNT_GOAL
-      ? "You spotted all five visits! Klaree sends you a springtime hello."
-      : count === 1
-        ? "There she is! Klaree is so happy you found her."
-        : count === 3
-          ? "Three encounters already! Klaree keeps exploring."
-          : "Klaree spotted! Where will she pop up next?",
+    found: (count) => {
+      const greeting = count === HUNT_GOAL
+        ? "You spotted all five visits! Klaree sends you a springtime hello."
+        : count === 1
+          ? "There she is! Klaree is so happy you found her."
+          : count === 3
+            ? "Three encounters already! Klaree keeps exploring."
+            : "Klaree spotted! Where will she pop up next?";
+      return `${greeting} A little Easter egg is left behind for you.`;
+    },
     completed: "You did it! You spotted Klaree five times. Happy Easter season!",
     again: "Play again",
     waiting: "Klaree is hiding for now. You can call her over.",
