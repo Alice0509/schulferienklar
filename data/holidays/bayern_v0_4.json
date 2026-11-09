@@ -2,12 +2,13 @@
   "datasetName": "schulferienklar_bayern_v0_4",
   "version": "0.4",
   "createdAt": "2026-05-24",
-  "dataPolicy": "Official Bundesland-level Schulferien only. School-specific dates are excluded.",
+  "dataPolicy": "Official statewide school holidays and statewide school-free days. School-specific dates are excluded.",
   "notes": [
     "endDate is inclusive for app display.",
     "When generating ICS, convert endDate to DTEND as the following day.",
     "Bayern 'unterrichtsfreie Tage um Allerheiligen' are included as state_school_free_day because they are published with concrete dates in the official state holiday regulation.",
-    "School-specific deviations for Berufsschulen, Heimschulen, schulfreie Samstage and other school-level dates are excluded from the default dataset."
+    "School-specific deviations for Berufsschulen, Heimschulen, schulfreie Samstage and other school-level dates are excluded from the default dataset.",
+    "Bayern's Buß- und Bettag is unterrichtsfrei under Art. 4 Nr. 3 Feiertagsgesetz, but is not a statutory public holiday."
   ],
   "sources": [
     {
@@ -34,8 +35,8 @@
       "longRangePartial": [
         "Sommerferien 2030"
       ],
-      "lastCheckedAt": "2026-05-24",
-      "notes": "Bayern official Ferienordnung includes concrete dates for 'unterrichtsfreie Tage um Allerheiligen'; these are included as state_school_free_day."
+      "lastCheckedAt": "2026-11-09",
+      "notes": "Bayern official Ferienordnung includes concrete dates for 'unterrichtsfreie Tage um Allerheiligen'; these are included as state_school_free_day. Buß- und Bettag is also included annually as statewide unterrichtsfrei under Art. 4 Nr. 3 Feiertagsgesetz."
     }
   ],
   "holidays": [
@@ -80,6 +81,27 @@
       "status": "verified",
       "includeInDefaultCalendar": true,
       "notes": "Included because Bayern publishes these as official state-level dates."
+    },
+    {
+      "id": "by-buss-und-bettag-2025",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2025/26",
+      "category": "state_school_free_day",
+      "type": "buss_und_bettag",
+      "name": {
+        "de": "Buß- und Bettag (unterrichtsfrei)",
+        "en": "Day of Repentance and Prayer (no classes)"
+      },
+      "startDate": "2025-11-19",
+      "endDate": "2025-11-19",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus",
+      "sourceUrl": "https://www.km.bayern.de/termine/ferien-und-feiertage",
+      "lastCheckedAt": "2026-11-09",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Statewide no-class day under Art. 4 Nr. 3 Bavarian Feiertagsgesetz. Not a statutory public holiday in Bavaria."
     },
     {
       "id": "by-christmas-2025-26",
@@ -208,6 +230,27 @@
       "notes": "Included because Bayern publishes these as official state-level dates."
     },
     {
+      "id": "by-buss-und-bettag-2026",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2026/27",
+      "category": "state_school_free_day",
+      "type": "buss_und_bettag",
+      "name": {
+        "de": "Buß- und Bettag (unterrichtsfrei)",
+        "en": "Day of Repentance and Prayer (no classes)"
+      },
+      "startDate": "2026-11-18",
+      "endDate": "2026-11-18",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus",
+      "sourceUrl": "https://www.km.bayern.de/termine/ferien-und-feiertage",
+      "lastCheckedAt": "2026-11-09",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Statewide no-class day under Art. 4 Nr. 3 Bavarian Feiertagsgesetz. Not a statutory public holiday in Bavaria."
+    },
+    {
       "id": "by-christmas-2026-27",
       "bundeslandCode": "BY",
       "bundeslandName": "Bayern",
@@ -332,6 +375,27 @@
       "status": "verified",
       "includeInDefaultCalendar": true,
       "notes": "Included because Bayern publishes these as official state-level dates."
+    },
+    {
+      "id": "by-buss-und-bettag-2027",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2027/28",
+      "category": "state_school_free_day",
+      "type": "buss_und_bettag",
+      "name": {
+        "de": "Buß- und Bettag (unterrichtsfrei)",
+        "en": "Day of Repentance and Prayer (no classes)"
+      },
+      "startDate": "2027-11-17",
+      "endDate": "2027-11-17",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus",
+      "sourceUrl": "https://www.km.bayern.de/termine/ferien-und-feiertage",
+      "lastCheckedAt": "2026-11-09",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Statewide no-class day under Art. 4 Nr. 3 Bavarian Feiertagsgesetz. Not a statutory public holiday in Bavaria."
     },
     {
       "id": "by-christmas-2027-28",
@@ -460,6 +524,27 @@
       "notes": "Included because Bayern publishes these as official state-level dates."
     },
     {
+      "id": "by-buss-und-bettag-2028",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2028/29",
+      "category": "state_school_free_day",
+      "type": "buss_und_bettag",
+      "name": {
+        "de": "Buß- und Bettag (unterrichtsfrei)",
+        "en": "Day of Repentance and Prayer (no classes)"
+      },
+      "startDate": "2028-11-22",
+      "endDate": "2028-11-22",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus",
+      "sourceUrl": "https://www.km.bayern.de/termine/ferien-und-feiertage",
+      "lastCheckedAt": "2026-11-09",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Statewide no-class day under Art. 4 Nr. 3 Bavarian Feiertagsgesetz. Not a statutory public holiday in Bavaria."
+    },
+    {
       "id": "by-christmas-2028-29",
       "bundeslandCode": "BY",
       "bundeslandName": "Bayern",
@@ -586,6 +671,27 @@
       "notes": "Included because Bayern publishes these as official state-level dates."
     },
     {
+      "id": "by-buss-und-bettag-2029",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2029/30",
+      "category": "state_school_free_day",
+      "type": "buss_und_bettag",
+      "name": {
+        "de": "Buß- und Bettag (unterrichtsfrei)",
+        "en": "Day of Repentance and Prayer (no classes)"
+      },
+      "startDate": "2029-11-21",
+      "endDate": "2029-11-21",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus",
+      "sourceUrl": "https://www.km.bayern.de/termine/ferien-und-feiertage",
+      "lastCheckedAt": "2026-11-09",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Statewide no-class day under Art. 4 Nr. 3 Bavarian Feiertagsgesetz. Not a statutory public holiday in Bavaria."
+    },
+    {
       "id": "by-christmas-2029-30",
       "bundeslandCode": "BY",
       "bundeslandName": "Bayern",
@@ -689,6 +795,27 @@
       "status": "partial",
       "includeInDefaultCalendar": true,
       "notes": "Sommerferien 2030 only; full 2030/31 school year is not included yet."
+    },
+    {
+      "id": "by-buss-und-bettag-2030",
+      "bundeslandCode": "BY",
+      "bundeslandName": "Bayern",
+      "schoolYear": "2030/31",
+      "category": "state_school_free_day",
+      "type": "buss_und_bettag",
+      "name": {
+        "de": "Buß- und Bettag (unterrichtsfrei)",
+        "en": "Day of Repentance and Prayer (no classes)"
+      },
+      "startDate": "2030-11-20",
+      "endDate": "2030-11-20",
+      "dateSemantics": "inclusive_end_date",
+      "sourceName": "Bayerisches Staatsministerium für Unterricht und Kultus",
+      "sourceUrl": "https://www.km.bayern.de/termine/ferien-und-feiertage",
+      "lastCheckedAt": "2026-11-09",
+      "status": "verified",
+      "includeInDefaultCalendar": true,
+      "notes": "Statewide no-class day under Art. 4 Nr. 3 Bavarian Feiertagsgesetz. Not a statutory public holiday in Bavaria."
     }
   ]
 }

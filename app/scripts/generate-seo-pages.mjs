@@ -74,7 +74,7 @@ function getHolidayName(holiday) {
 }
 
 function getCategoryLabel(category) {
-  if (category === "school_free") {
+  if (category === "school_free" || category === "state_school_free_day") {
     return "Unterrichtsfrei";
   }
 

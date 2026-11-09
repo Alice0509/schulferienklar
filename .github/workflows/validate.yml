@@ -52,6 +52,12 @@ jobs:
       - name: Check AdSense and CMP integration
         run: node --test tests/adsense-setup.test.js
 
+      - name: Validate Bavaria Buß- und Bettag school-free days
+        run: node --test tests/bayern-buss-und-bettag.test.js
+
+      - name: Audit school-free days across all 16 states
+        run: node --test tests/statewide-school-free-rules.test.js
+
       - name: Validate data and build SEO
         run: npm run build:seo:checked
 
