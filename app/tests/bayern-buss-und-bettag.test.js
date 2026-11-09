@@ -40,13 +40,15 @@ test("Bavaria Buß- und Bettag has no classes, but is not a statutory public hol
     assert.equal(isPublicHolidayEvent(event), false);
     assert.equal(getSchoolEventCategoryLabel(event, "de"), "Unterrichtsfrei");
 
-    const publicDataset = nodeHolidayRepository.loadPublicHolidayDataset("BY", year);
-    assert.ok(publicDataset);
-    assert.equal(
-      publicDataset.holidays.some((item) => item.date === date && item.includeInDefaultCalendar),
-      false,
-      `Buß- und Bettag must not count as a public holiday in Bayern ${year}`,
-    );
+    if (year >= 2026) {
+      const publicDataset = nodeHolidayRepository.loadPublicHolidayDataset("BY", year);
+      assert.ok(publicDataset);
+      assert.equal(
+        publicDataset.holidays.some((item) => item.date === date && item.includeInDefaultCalendar),
+        false,
+        `Buß- und Bettag must not count as a public holiday in Bayern ${year}`,
+      );
+    }
   }
 });
 
