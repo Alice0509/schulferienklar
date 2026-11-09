@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-08-19",
+  "generatedAt": "2026-11-09",
   "totalBundeslaender": 16,
-  "totalEvents": 495,
+  "totalEvents": 501,
   "datasets": [
     {
       "bundeslandCode": "BW",
@@ -33,7 +33,7 @@
       "version": "0.4",
       "jsonFile": "bayern_v0_4.json",
       "csvFile": "bayern_v0_4.csv",
-      "eventCount": 31,
+      "eventCount": 37,
       "schoolYears": [
         "2025/26",
         "2026/27",
@@ -44,7 +44,7 @@
       ],
       "dateRange": {
         "startDate": "2025-08-01",
-        "endDate": "2030-09-09"
+        "endDate": "2030-11-20"
       },
       "statuses": [
         "partial",
